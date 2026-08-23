@@ -227,6 +227,14 @@ function proposeColumns(text: string, warnings: ImportWarning[]): string[] {
     .map((line) => line.trim())
     .filter((line) => line !== "");
 
+  if (lines.length === 0) {
+    warnings.push({
+      field: "version.columns",
+      message: "aucun texte de calligraphie dans l'export : à compléter ou à retirer",
+    });
+    return [];
+  }
+
   return lines.map((line, index) => {
     const column = traditionalize(line, `version.columns.${index}`, warnings);
     if (/[A-Za-zÀ-ÿ]/.test(column)) {

@@ -137,6 +137,7 @@ pieces:
       relations: []
   # à arbitrer — title : converti du simplifié au traditionnel : « 《太上老君说常清静经》 » → « 《太上老君說常清靜經》 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: tai-shang-lao-jun-shuo-chang-qing-jing-jing
     title: 《太上老君說常清靜經》
     status: idea
@@ -155,6 +156,7 @@ pieces:
       relations: []
   # à arbitrer — title : converti du simplifié au traditionnel : « 方圆 » → « 方圓 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: fang-yuan
     title: 方圓
     status: idea
@@ -191,6 +193,7 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zhong-he-ji
     title: 中和集
     status: made
@@ -378,6 +381,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: jing-zhong-qiu-dong
     title: 靜中求動
     status: idea
@@ -395,6 +399,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: gua-xiang-lun
     title: 《卦象論》
     status: idea
@@ -486,6 +491,7 @@ pieces:
         - 石人斤歌
         - 题破山寺后禅院
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: yuan-dao-ge
     title: 《原道歌》
     status: idea
@@ -505,6 +511,7 @@ pieces:
       relations:
         - 中和集
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: lian-xu-ge
     title: 《鍊虛歌》
     status: idea
@@ -524,6 +531,7 @@ pieces:
       relations:
         - 中和集
   # à arbitrer — title : converti du simplifié au traditionnel : « 题破山寺后禅院 » → « 題破山寺後禪院 »
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: ti-po-shan-si-hou-shan-yuan
     title: 題破山寺後禪院
     status: made
@@ -543,6 +551,7 @@ pieces:
         - 看破红尘
   # à arbitrer — title : converti du simplifié au traditionnel : « 宝玉四首诗（原文 — 五言律诗） » → « 寶玉四首詩（原文 — 五言律詩） »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: bao-yu-si-shou-shi-yuan-wen-wu-yan-lu-shi
     title: 寶玉四首詩（原文 — 五言律詩）
     status: idea
@@ -625,6 +634,7 @@ pieces:
       relations:
         - 中和集
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: xuan-li-ge
     title: 《玄理歌》
     status: idea
@@ -692,6 +702,7 @@ pieces:
       relations:
         - 中和集
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: hui-jian
     title: 《慧劍》
     status: idea
@@ -710,6 +721,7 @@ pieces:
       url: ""
       relations:
         - 中和集
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: ri-yong
     title: 《日用》
     status: finished
@@ -728,6 +740,7 @@ pieces:
       url: ""
       relations:
         - 中和集
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: jiao-he
     title: 《交合》
     status: finished
@@ -748,6 +761,7 @@ pieces:
         - 中和集
   # à arbitrer — title : converti du simplifié au traditionnel : « 鑄劍 // 轻吹 » → « 鑄劍 // 輕吹 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zhu-jian-qing-chui
     title: 鑄劍 // 輕吹
     status: idea
@@ -830,6 +844,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zi-de-shen-xin-ding
     title: 自得身心定
     status: idea
@@ -872,6 +887,7 @@ pieces:
       relations: []
   # à arbitrer — title : converti du simplifié au traditionnel : « 竖横 《卓菴》 NPL » → « 豎橫 《卓菴》 NPL »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: shu-heng-zhuo-an-npl
     title: 豎橫 《卓菴》 NPL
     status: idea
@@ -893,6 +909,7 @@ pieces:
         - 方圆
   # à arbitrer — title : converti du simplifié au traditionnel : « 造化钟神秀, 阴阳割昏晓。杜甫《登泰山》 » → « 造化鍾神秀, 陰陽割昏曉。杜甫《登泰山》 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zao-hua-zhong-shen-xiu-yin-yang-ge-hun-xiao-du-fu-deng-tai
     title: 造化鍾神秀, 陰陽割昏曉。杜甫《登泰山》
     status: idea
@@ -956,6 +973,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: ji-jing-zhong-she-xin
     title: 寂靜中攝心
     status: made
@@ -973,6 +991,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: wei-er-bu-fan-he-er-bu-tong
     title: 威而不犯和而不同
     status: idea
@@ -1010,6 +1029,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: xin-nian-kuai-le-ma-dao-cheng-gong
     title: 新年快樂，馬到成功
     status: made
@@ -1026,6 +1046,7 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: tai-quan-zhu-shan-an
     title: 胎𫝑 / 泉注 / 山安
     status: made
@@ -1062,6 +1083,7 @@ pieces:
       relations: []
   # à arbitrer — title : converti du simplifié au traditionnel : « 修竹参差 » → « 修竹參差 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: xiu-zhu-can-cha
     title: 修竹參差
     status: idea
@@ -1099,6 +1121,7 @@ pieces:
       url: ""
       relations:
         - 五氣朝元 / 身心平衡
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: wu-qi-chao-yuan-shen-xin-ping-heng
     title: 五氣朝元 / 身心平衡
     status: finished
@@ -1118,6 +1141,7 @@ pieces:
         - 調身
   # à arbitrer — title : converti du simplifié au traditionnel : « 调息 » → « 調息 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: diao-xi
     title: 調息
     status: study
@@ -1155,6 +1179,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: diao-xin
     title: 調心
     status: study
@@ -1193,6 +1218,7 @@ pieces:
         - مشكاة • MESHKAH
   # à arbitrer — title : converti du simplifié au traditionnel : « 螃蟹讽刺 🦀 » → « 螃蟹諷刺 🦀 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: pang-xie-feng-ci
     title: 螃蟹諷刺 🦀
     status: idea
@@ -1257,6 +1283,7 @@ pieces:
       relations:
         - 太虚幻境红楼梦
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: tian-ren-di
     title: 天人地
     status: made
@@ -1274,6 +1301,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — title : converti du simplifié au traditionnel : « 磨砺〔﹣礪〕 » → « 磨礪〔﹣礪〕 »
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: mo-li-li
     title: 磨礪〔﹣礪〕
     status: study
@@ -1293,6 +1321,7 @@ pieces:
         - 易筋经
   # à arbitrer — title : converti du simplifié au traditionnel : « 易筋经 » → « 易筋經 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: yi-jin-jing
     title: 易筋經
     status: idea
@@ -1311,6 +1340,7 @@ pieces:
       relations:
         - 磨砺〔﹣礪〕
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: shen-yu
     title: 神遇
     status: study
@@ -1327,6 +1357,7 @@ pieces:
       status: Préparée
       url: ""
       relations: []
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: xing-qi-yu-pei-ming
     title: 📜 行氣玉佩銘
     status: study
@@ -1343,6 +1374,7 @@ pieces:
       status: Préparée
       url: ""
       relations: []
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: bai-zi-bei
     title: 📜 百字碑
     status: study
@@ -1378,6 +1410,7 @@ pieces:
       status: Préparée
       url: ""
       relations: []
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: tai-xi
     title: 胎息
     status: study
@@ -1415,6 +1448,7 @@ pieces:
       relations: []
   # à arbitrer — title : converti du simplifié au traditionnel : « 占花名儿 » → « 佔花名兒 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zhan-hua-ming-er
     title: 佔花名兒
     status: idea
@@ -1434,6 +1468,7 @@ pieces:
       relations:
         - 太虚幻境红楼梦
   # à arbitrer — title : converti du simplifié au traditionnel : « 胡思乱想 » → « 胡思亂想 »
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: hu-si-luan-xiang
     title: 胡思亂想
     status: study
@@ -1452,6 +1487,7 @@ pieces:
       url: ""
       relations:
         - 太虚幻境红楼梦
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: fang-xin-song-kua-bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren
     title: 放心鬆胯…不受苦中苦，難為人上人
     status: made
@@ -1469,6 +1505,7 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: tai-xu-huan-jing-ji-shi-zhen-ru-fu-di
     title: 太虛幻境即是真如福地
     status: idea
@@ -1487,6 +1524,7 @@ pieces:
       relations: []
   # à arbitrer — title : converti du simplifié au traditionnel : « 假作真时真亦假 » → « 假作真時真亦假 »
   # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: jia-zuo-zhen-shi-zhen-yi-jia
     title: 假作真時真亦假
     status: idea

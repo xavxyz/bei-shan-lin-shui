@@ -96,6 +96,13 @@ describe("proposeImport", () => {
     expect(warningsOn(piece!, "version.format")).not.toEqual([]);
   });
 
+  it("signale une pièce sans aucun texte de calligraphie", () => {
+    const [piece] = propose([page({ text: "" })]).pieces;
+
+    expect(piece?.version.columns).toEqual([]);
+    expect(warningsOn(piece!, "version.columns")).not.toEqual([]);
+  });
+
   it("retombe sur la modification puis sur aujourd'hui quand la création manque", () => {
     const [modifie] = propose([page({ createdAt: undefined })]).pieces;
     const [sansDate] = propose([page({ createdAt: undefined, editedAt: undefined })]).pieces;
