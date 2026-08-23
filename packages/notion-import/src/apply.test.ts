@@ -177,6 +177,35 @@ describe("applyImport", () => {
     expect(!result.ok && result.errors[0]?.path).toBe("pieces.0.variations.0.images.0.source");
   });
 
+  it("refuse un fichier joint que sharp ne sait pas décoder, sans rien écrire", async () => {
+    const root = await contentRoot();
+    const exportRoot = await writeExportTree({
+      "莫性急 abc/scan.heic": Buffer.from("ce n'est pas une image décodable"),
+    });
+    const arbitrated = plan();
+    arbitrated.pieces[0]!.variations = [
+      {
+        id: "v1a",
+        script: "xingshu",
+        status: "tried",
+        images: [
+          {
+            file: "v1a-01.jpg",
+            source: join(exportRoot, "莫性急 abc/scan.heic"),
+            featured: true,
+            kind: "work",
+          },
+        ],
+      },
+    ];
+
+    const result = await applyImport(arbitrated, { contentRoot: root });
+
+    expect(!result.ok && result.errors[0]?.path).toBe("pieces.0.variations.0.images.0.source");
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
+  });
+
   it("refuse deux pièces qui se disputent le même slug", async () => {
     const root = await contentRoot();
     const arbitrated = plan();

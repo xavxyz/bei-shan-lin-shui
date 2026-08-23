@@ -1,5 +1,14 @@
 import { Document, isCollection, parseDocument } from "yaml";
-import { IMAGE_KINDS, PIECE_STATUSES, SCRIPTS, THEMES, VARIATION_STATUSES, z } from "@bsls/schema";
+import {
+  imageSchema,
+  localIdSchema,
+  pieceFieldsSchema,
+  projectFileSchema,
+  slugSchema,
+  variationSchema,
+  versionSchema,
+  z,
+} from "@bsls/schema";
 import type { ImportPlan, ImportWarning } from "./propose.js";
 
 /**
@@ -9,50 +18,56 @@ import type { ImportPlan, ImportWarning } from "./propose.js";
  * commentaires : ils guident la relecture et disparaissent à l'application.
  */
 
-const slug = z
-  .string()
-  .regex(
-    /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-    "attendu : un slug en minuscules, mots séparés par des tirets",
-  );
+/*
+ * Le plan dérive du schéma : la forme du contenu se définit dans
+ * `packages/schema` et nulle part ailleurs. N'est redit ici que ce qui
+ * appartient en propre au plan — le fichier source d'une image, la version
+ * unique d'une pièce naissante, une date encore textuelle.
+ */
 
-const plannedImageSchema = z.object({
-  file: z.string().min(1),
+const plannedImageSchema = imageSchema.pick({ file: true, featured: true }).extend({
+  /** Chemin du fichier dans l'export, le temps de l'import. */
   source: z.string().min(1),
-  featured: z.boolean().default(false),
-  kind: z.enum(IMAGE_KINDS).default("work"),
+  kind: imageSchema.shape.kind.default("work"),
 });
 
-const plannedVariationSchema = z.object({
-  id: z.string().regex(/^v\d+[a-z]+$/, "attendu : un identifiant de variation, par exemple v1a"),
-  script: z.enum(SCRIPTS),
-  status: z.enum(VARIATION_STATUSES),
-  personal_note: z.string().min(1).optional(),
-  images: z.array(plannedImageSchema).default([]),
-});
+const plannedVariationSchema = variationSchema
+  .pick({ script: true, status: true, personal_note: true })
+  .extend({
+    id: localIdSchema.regex(
+      /^v\d+[a-z]+$/,
+      "attendu : un identifiant de variation, par exemple v1a",
+    ),
+    images: z.array(plannedImageSchema).default([]),
+  });
 
-const plannedPieceSchema = z.object({
-  slug,
-  title: z.string().min(1),
-  status: z.enum(PIECE_STATUSES),
-  projects: z.array(slug).default([]),
-  published: z.boolean().default(false),
-  version: z.object({
-    id: z.string().regex(/^v\d+$/, "attendu : un identifiant de version, par exemple v1"),
+/** Une pièce naissante ne porte qu'une version, et ses variations sont à plat. */
+const plannedVersionSchema = versionSchema
+  .pick({ format: true, columns: true, intention: true })
+  .extend({
+    id: localIdSchema.regex(/^v\d+$/, "attendu : un identifiant de version, par exemple v1"),
+    /** Le schéma coerce la date ; le plan la garde lisible et corrigeable à la main. */
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "attendu : une date au format AAAA-MM-JJ"),
-    format: z.string().min(1),
-    columns: z.array(z.string().min(1)).default([]),
-    intention: z.string().min(1).optional(),
-  }),
-  variations: z.array(plannedVariationSchema).default([]),
-  translation: z.string().min(1).optional(),
-});
+  });
 
-const plannedProjectSchema = z.object({
-  id: slug,
-  title: z.string().min(1),
+const plannedPieceSchema = pieceFieldsSchema
+  .pick({
+    slug: true,
+    title: true,
+    status: true,
+    projects: true,
+    published: true,
+    translation: true,
+  })
+  .extend({
+    version: plannedVersionSchema,
+    variations: z.array(plannedVariationSchema).default([]),
+  });
+
+const plannedProjectSchema = projectFileSchema.extend({
+  id: slugSchema,
+  /** Vide tant que le calligraphe ne l'a pas écrite ; `apply` la réclamera. */
   presentation: z.string(),
-  theme: z.enum(THEMES),
 });
 
 export const planFileSchema = z.object({

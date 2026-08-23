@@ -41,8 +41,8 @@ stockés en pinyin sans tons et **affichés en français**.
 L'import se fait en deux temps, et le calligraphe arbitre entre les deux :
 
 ```
-pnpm import:notion plan <export> --out notion-import.plan.yaml
-pnpm import:notion apply notion-import.plan.yaml
+pnpm import:notion plan <export> --out imports/notion-<date>.plan.yaml
+pnpm import:notion apply imports/notion-<date>.plan.yaml
 ```
 
 `<export>` est le dossier d'export Notion « Markdown & CSV », ou son seul
@@ -50,9 +50,14 @@ fichier CSV. L'étape `plan` n'écrit que le fichier de plan : chaque page devie
 une pièce à version initiale unique, avec un statut et un classement **proposés**,
 et un commentaire `# à arbitrer` partout où l'agent a tranché sans savoir. Les
 relations inter-pages de Notion ne sont pas reconduites : elles servent une
-dernière fois à repérer les projets, puis disparaissent. L'étape `apply` vérifie
-le plan en entier avant d'écrire quoi que ce soit, et n'écrase jamais une pièce
-existante.
+dernière fois à repérer les projets, puis disparaissent — la page-pôle elle-même
+devient un projet et n'appartient pas au projet qu'elle fait naître. L'étape
+`apply` vérifie le plan en entier — jusqu'à la lisibilité de chaque image — avant
+d'écrire quoi que ce soit, normalise les images à l'écart du contenu, et n'écrase
+jamais une pièce existante.
+
+Déposez l'export dans un dossier à lui : `plan` parcourt tout ce qui entoure le
+CSV pour retrouver les sous-pages et leurs fichiers.
 
 ## Tests
 

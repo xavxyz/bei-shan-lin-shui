@@ -1,7 +1,8 @@
-import { mkdir, stat, writeFile } from "node:fs/promises";
+import { mkdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import sharp from "sharp";
 import { stringify } from "yaml";
-import { PIECES_DIR, PROJECTS_DIR, pieceFile, pieceImageFile } from "@bsls/content";
+import { PIECES_DIR, pieceFile, pieceImageFile, projectFile } from "@bsls/content";
 import { RESERVED_PROJECT_ID, pieceFrontmatterSchema } from "@bsls/schema";
 import { normalizeImage } from "./normalize-image.js";
 import type { ArbitratedPlan, PlannedPiece, PlannedProject } from "./plan-file.js";
@@ -28,29 +29,72 @@ export async function applyImport(
   const errors = await checkPlan(plan, options.contentRoot);
   if (errors.length > 0) return { ok: false, errors };
 
-  const written: string[] = [];
+  const staging = join(options.contentRoot, STAGING_DIR);
 
-  for (const project of plan.projects) {
-    const file = `${PROJECTS_DIR}/${project.id}.yaml`;
-    await write(join(options.contentRoot, file), stringify(toProjectFile(project)));
-    written.push(file);
+  try {
+    /* Normaliser une image est la seule étape qui puisse encore échouer : on la
+       fait entièrement à l'écart, et le contenu n'est touché qu'ensuite. */
+    const staged = await stageImages(plan, staging);
+    if (!staged.ok) return staged;
+
+    const written: string[] = [];
+
+    for (const project of plan.projects) {
+      const file = projectFile(project.id);
+      await write(join(options.contentRoot, file), stringify(toProjectFile(project)));
+      written.push(file);
+    }
+
+    for (const piece of plan.pieces) {
+      const file = pieceFile(piece.slug);
+      await write(join(options.contentRoot, file), toMarkdown(piece));
+      written.push(file);
+    }
+
+    for (const image of staged.images) {
+      await moveInto(image.staged, join(options.contentRoot, image.target));
+      written.push(image.target);
+    }
+
+    return { ok: true, written };
+  } finally {
+    await rm(staging, { recursive: true, force: true });
   }
+}
 
-  for (const piece of plan.pieces) {
-    const file = pieceFile(piece.slug);
-    await write(join(options.contentRoot, file), toMarkdown(piece));
-    written.push(file);
+/** Dossier de transit, effacé quoi qu'il arrive : jamais un reste dans le contenu. */
+const STAGING_DIR = ".import-en-cours";
 
-    for (const variation of piece.variations) {
-      for (const image of variation.images) {
-        const target = pieceImageFile(piece.slug, image.file);
-        await normalizeImage(image.source, join(options.contentRoot, target));
-        written.push(target);
+type StagedImage = { target: string; staged: string };
+
+type StageResult = { ok: true; images: StagedImage[] } | { ok: false; errors: ApplyError[] };
+
+async function stageImages(plan: ArbitratedPlan, staging: string): Promise<StageResult> {
+  const images: StagedImage[] = [];
+  const errors: ApplyError[] = [];
+
+  for (const [index, piece] of plan.pieces.entries()) {
+    for (const [variationIndex, variation] of piece.variations.entries()) {
+      for (const [imageIndex, image] of variation.images.entries()) {
+        const staged = join(staging, piece.slug, image.file);
+        try {
+          await normalizeImage(image.source, staged);
+          images.push({ target: pieceImageFile(piece.slug, image.file), staged });
+        } catch (cause) {
+          errors.push({
+            path: `pieces.${index}.variations.${variationIndex}.images.${imageIndex}.source`,
+            message: `image impossible à normaliser : ${image.source} (${describe(cause)})`,
+          });
+        }
       }
     }
   }
 
-  return { ok: true, written };
+  return errors.length > 0 ? { ok: false, errors } : { ok: true, images };
+}
+
+function describe(cause: unknown): string {
+  return cause instanceof Error ? cause.message : String(cause);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -74,7 +118,7 @@ async function checkPlan(plan: ArbitratedPlan, root: string): Promise<ApplyError
         message: `identifiant réservé aux pièces sans projet : ${RESERVED_PROJECT_ID}`,
       });
     }
-    if (await exists(join(root, `${PROJECTS_DIR}/${project.id}.yaml`))) {
+    if (await exists(join(root, projectFile(project.id)))) {
       errors.push({
         path: `projects.${index}.id`,
         message: `un projet ${project.id} existe déjà : l'import n'écrase rien`,
@@ -102,7 +146,7 @@ async function checkPlan(plan: ArbitratedPlan, root: string): Promise<ApplyError
 
     for (const [projectIndex, id] of piece.projects.entries()) {
       if (projectIds.has(id)) continue;
-      if (await exists(join(root, `${PROJECTS_DIR}/${id}.yaml`))) continue;
+      if (await exists(join(root, projectFile(id)))) continue;
       errors.push({
         path: `pieces.${index}.projects.${projectIndex}`,
         message: `aucun projet ${id} dans le plan ni dans le contenu`,
@@ -111,11 +155,20 @@ async function checkPlan(plan: ArbitratedPlan, root: string): Promise<ApplyError
 
     for (const [variationIndex, variation] of piece.variations.entries()) {
       for (const [imageIndex, image] of variation.images.entries()) {
-        if (await exists(image.source)) continue;
-        errors.push({
-          path: `pieces.${index}.variations.${variationIndex}.images.${imageIndex}.source`,
-          message: `fichier absent de l'export : ${image.source}`,
-        });
+        const path = `pieces.${index}.variations.${variationIndex}.images.${imageIndex}.source`;
+        if (!(await exists(image.source))) {
+          errors.push({ path, message: `fichier absent de l'export : ${image.source}` });
+          continue;
+        }
+        /* Une extension ne fait pas une image lisible : le HEIC, par exemple,
+           n'est décodé que par un sharp compilé pour lui. Mieux vaut le savoir
+           avant d'écrire que devant une pièce à moitié importée. */
+        if (!(await isReadableImage(image.source))) {
+          errors.push({
+            path,
+            message: `image illisible, format non pris en charge : ${image.source}`,
+          });
+        }
       }
     }
 
@@ -200,9 +253,24 @@ async function write(path: string, contents: string): Promise<void> {
   await writeFile(path, contents, "utf8");
 }
 
+/** Le transit se fait dans le contenu même : le déplacement ne franchit aucun volume. */
+async function moveInto(staged: string, path: string): Promise<void> {
+  await mkdir(join(path, ".."), { recursive: true });
+  await rename(staged, path);
+}
+
 async function exists(path: string): Promise<boolean> {
   return stat(path).then(
     () => true,
     () => false,
   );
+}
+
+async function isReadableImage(path: string): Promise<boolean> {
+  return sharp(path)
+    .metadata()
+    .then(
+      () => true,
+      () => false,
+    );
 }

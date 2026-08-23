@@ -8,11 +8,13 @@
 
 projects:
   # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : rien dans l'export ne dit le thème : ink proposé, à choisir
   - id: zhong-he-ji
     title: 中和集
     presentation: ""
     theme: ink
   # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : rien dans l'export ne dit le thème : jade proposé, à choisir
   - id: tai-xu-huan-jing-hong-lou-meng
     title: 太虛幻境紅樓夢
     presentation: ""

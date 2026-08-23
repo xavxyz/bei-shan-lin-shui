@@ -137,6 +137,7 @@ describe("proposeImport", () => {
 
     const plan = propose(pages);
 
+    expect(warningsOn(plan.projects[0]!, "theme")).not.toEqual([]);
     expect(plan.projects.map((project) => project.id)).toEqual(["zhong-he-ji"]);
     expect(plan.projects[0]).toMatchObject({ title: "中和集", presentation: "" });
     expect(plan.pieces.map((piece) => piece.projects)).toEqual([
