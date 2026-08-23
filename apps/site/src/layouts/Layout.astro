@@ -1,0 +1,37 @@
+---
+import "../styles/global.css";
+import type { Theme } from "@bsls/schema";
+
+type Props = {
+  title: string;
+  theme?: Theme;
+};
+
+const { title, theme = "ink" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" data-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — 背山臨水</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <h1 class="site-header__title"><a href="/">背山臨水</a></h1>
+        <p class="site-header__tagline">Dos à la montagne, face à l'eau — carnet de calligraphie</p>
+      </header>
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

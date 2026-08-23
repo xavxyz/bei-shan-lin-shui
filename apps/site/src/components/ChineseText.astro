@@ -1,0 +1,14 @@
+---
+import type { ChineseText } from "@bsls/schema";
+
+type Props = {
+  /** Colonnes du texte, dans l'ordre de lecture. */
+  columns: ChineseText[];
+};
+
+const { columns } = Astro.props;
+---
+
+<div class="chinese-text" data-testid="chinese-text" lang="zh-Hant">
+  {columns.map((column) => <p class="chinese-text__column">{column.traditional}</p>)}
+</div>

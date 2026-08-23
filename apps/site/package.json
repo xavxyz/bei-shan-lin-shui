@@ -1,0 +1,33 @@
+{
+  "name": "@bsls/site",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "cosmos": "cosmos",
+    "cosmos:export": "cosmos-export",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.0",
+    "@bsls/content": "workspace:*",
+    "@bsls/schema": "workspace:*",
+    "astro": "^5.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@playwright/test": "^1.49.1",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "react-cosmos": "^6.2.0",
+    "react-cosmos-plugin-vite": "^6.2.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.7"
+  }
+}

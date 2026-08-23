@@ -1,0 +1,22 @@
+---
+import type { LoadedPiece } from "@bsls/schema";
+
+type Props = {
+  piece: LoadedPiece;
+  href: string;
+};
+
+const { piece, href } = Astro.props;
+---
+
+<li>
+  <a class="card" href={href} data-testid="piece-link">
+    {
+      piece.featuredImage ? (
+        <img class="card__thumbnail" src={piece.featuredImage.src} alt="" loading="lazy" />
+      ) : null
+    }
+    <h3 class="card__title card__title--cn" lang="zh-Hant">{piece.title.traditional}</h3>
+    <p class="card__meta">{piece.title.pinyin}</p>
+  </a>
+</li>

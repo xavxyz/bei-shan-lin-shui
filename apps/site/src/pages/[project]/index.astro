@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import PieceCard from "../../components/PieceCard.astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("projects");
+  const pieces = (await getCollection("pieces")).map((entry) => entry.data);
+
+  return projects.map((entry) => ({
+    params: { project: entry.data.id },
+    props: {
+      project: entry.data,
+      pieces: pieces.filter((piece) => piece.projects.includes(entry.data.id)),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project, pieces } = Astro.props;
+---
+
+<Layout title={project.title} theme={project.theme}>
+  <nav class="breadcrumb"><a href="/">Accueil</a></nav>
+  <h2>{project.title}</h2>
+  <p class="reading__body">{project.presentation}</p>
+
+  <ul class="card-list">
+    {pieces.map((piece) => <PieceCard piece={piece} href={`${project.href}/${piece.slug}`} />)}
+  </ul>
+</Layout>

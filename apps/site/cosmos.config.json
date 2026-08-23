@@ -1,0 +1,6 @@
+{
+  "plugins": ["react-cosmos-plugin-vite"],
+  "fixtureFileSuffix": "fixture",
+  "vite": { "indexPath": "src/cosmos-renderer.tsx" },
+  "watchDirs": ["src"]
+}

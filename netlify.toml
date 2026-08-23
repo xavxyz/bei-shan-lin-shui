@@ -1,0 +1,11 @@
+[build]
+  base = "/"
+  command = "pnpm --filter @bsls/site build"
+  publish = "apps/site/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "11"
+  ASTRO_TELEMETRY_DISABLED = "1"
+
+# Les deploy previews sur pull request sont activés par défaut côté Netlify.

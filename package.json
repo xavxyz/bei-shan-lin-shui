@@ -1,0 +1,26 @@
+{
+  "name": "bei-shan-lin-shui",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.22.0",
+  "scripts": {
+    "typecheck": "pnpm -r typecheck",
+    "test": "vitest run",
+    "test:e2e": "pnpm --filter @bsls/site test:e2e",
+    "build": "pnpm --filter @bsls/site build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate:content": "tsx packages/content/src/cli/validate.ts content",
+    "cosmos": "pnpm --filter @bsls/site cosmos",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "husky": "^9.1.7",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
