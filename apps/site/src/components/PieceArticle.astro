@@ -1,0 +1,118 @@
+---
+import type { LoadedPiece, LoadedProject } from "@bsls/schema";
+import { PIECE_STATUS_LABELS } from "@bsls/schema";
+import ChineseText from "./ChineseText.astro";
+import { ImageViewer } from "../islands/ImageViewer.js";
+
+type Props = {
+  piece: LoadedPiece;
+  /** Projets d'où la pièce est accessible, pour le fil d'Ariane. */
+  projects: LoadedProject[];
+};
+
+const { piece, projects } = Astro.props;
+const version = piece.latestVersion;
+const source = piece.source;
+const attribution = [source?.author, source?.work, source?.dynasty].filter(Boolean).join(" · ");
+---
+
+<article>
+  <nav class="breadcrumb">
+    <a href="/">Accueil</a>
+    {
+      projects.map((project) => (
+        <>
+          {" / "}
+          <a href={project.href}>{project.title}</a>
+        </>
+      ))
+    }
+  </nav>
+
+  <header class="piece__header">
+    <h2 class="piece__title" lang="zh-Hant">{piece.title.traditional}</h2>
+    <p class="piece__attribution">
+      <span class="pinyin">{piece.title.pinyin}</span>
+      {attribution ? ` — ${attribution}` : ""}
+    </p>
+  </header>
+
+  {
+    piece.gallery.length > 0 ? (
+      <div class="piece__work" data-testid="featured-work">
+        <ImageViewer client:load images={piece.gallery} title={piece.title.traditional} />
+      </div>
+    ) : null
+  }
+
+  <p class="piece__tags">
+    <span class="tag" data-testid="piece-status">{PIECE_STATUS_LABELS[piece.status]}</span>
+    {
+      piece.featuredScriptLabel ? (
+        <span class="tag" data-testid="script-label">
+          {piece.featuredScriptLabel}
+        </span>
+      ) : null
+    }
+    <span class="tag">{version.format}</span>
+  </p>
+
+  <div class="piece__reading">
+    {version.columns.length > 0 ? <ChineseText columns={version.columns} /> : <div />}
+
+    <div>
+      {
+        version.columns.length > 0 ? (
+          <div class="reading__block">
+            <p class="reading__label">Prononciation</p>
+            <p class="reading__body pinyin" data-testid="pinyin">
+              {version.columns.map((column) => column.pinyin).join(" / ")}
+            </p>
+          </div>
+        ) : null
+      }
+
+      {
+        version.columns.length > 0 ? (
+          <div class="reading__block">
+            <p class="reading__label">Simplifié</p>
+            <p class="reading__body" lang="zh-Hans" data-testid="simplified">
+              {version.columns.map((column) => column.simplified).join(" / ")}
+            </p>
+          </div>
+        ) : null
+      }
+
+      {
+        piece.translation ? (
+          <div class="reading__block">
+            <p class="reading__label">Traduction</p>
+            <p class="reading__body" data-testid="translation">
+              {piece.translation}
+            </p>
+          </div>
+        ) : null
+      }
+
+      {
+        version.intention ? (
+          <div class="reading__block">
+            <p class="reading__label">Intention</p>
+            <p class="reading__body">{version.intention}</p>
+          </div>
+        ) : null
+      }
+
+      {
+        source?.full_text ? (
+          <div class="reading__block">
+            <p class="reading__label">Texte intégral</p>
+            <p class="reading__body" lang="zh-Hant">
+              {source.full_text.traditional}
+            </p>
+          </div>
+        ) : null
+      }
+    </div>
+  </div>
+</article>

@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import PieceArticle from "../../components/PieceArticle.astro";
+
+/** Une pièce a une route sous chacun de ses projets : aucun n'est un propriétaire privilégié. */
+export const getStaticPaths = (async () => {
+  const projects = (await getCollection("projects")).map((entry) => entry.data);
+  const pieces = (await getCollection("pieces")).map((entry) => entry.data);
+
+  return pieces.flatMap((piece) =>
+    piece.projects.map((id) => {
+      const project = projects.find((each) => each.id === id)!;
+      return {
+        params: { project: id, piece: piece.slug },
+        props: {
+          piece,
+          project,
+          projects: projects.filter((each) => piece.projects.includes(each.id)),
+        },
+      };
+    }),
+  );
+}) satisfies GetStaticPaths;
+
+const { piece, project, projects } = Astro.props;
+---
+
+<Layout title={piece.title.traditional} theme={project.theme}>
+  <PieceArticle piece={piece} projects={projects} />
+</Layout>

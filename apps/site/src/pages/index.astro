@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import PieceCard from "../components/PieceCard.astro";
+
+const projects = (await getCollection("projects")).map((entry) => entry.data);
+const pieces = (await getCollection("pieces")).map((entry) => entry.data);
+const loose = pieces.filter((piece) => piece.projects.length === 0);
+---
+
+<Layout title="Projets">
+  <h2>Projets</h2>
+  <ul class="card-list">
+    {
+      projects.map((project) => (
+        <li>
+          <a class="card" href={project.href} data-testid="project-link">
+            <h3 class="card__title">{project.title}</h3>
+            <p class="card__meta">
+              {project.pieceSlugs.length} pièce{project.pieceSlugs.length > 1 ? "s" : ""}
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    loose.length > 0 ? (
+      <>
+        <h2>Pièces isolées</h2>
+        <ul class="card-list">
+          {loose.map((piece) => (
+            <PieceCard piece={piece} href={piece.href} />
+          ))}
+        </ul>
+      </>
+    ) : null
+  }
+</Layout>
