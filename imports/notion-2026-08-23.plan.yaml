@@ -1,0 +1,1505 @@
+# Plan d'import Notion — proposé par l'agent, arbitré par le calligraphe.
+
+# Relisez pièce par pièce : corrigez le statut, le classement, le texte, le
+# format. Rien n'est écrit dans le contenu avant `import:notion apply`.
+# Supprimez une pièce de ce fichier pour ne pas l'importer.
+
+# Les blocs `notion:` ne sont là que pour arbitrer : ils ne sont pas importés.
+
+projects:
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  - id: zhong-he-ji
+    title: 中和集
+    presentation: ""
+    theme: ink
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  - id: tai-xu-huan-jing-hong-lou-meng
+    title: 太虛幻境紅樓夢
+    presentation: ""
+    theme: jade
+pieces:
+  - slug: xi-you-ji
+    title: 西遊記
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2025-12-09
+      format: 9x7
+      columns:
+        - 大道升沉何杳冥
+        - 神魔聞之膽自驚
+        - 包羅宇宙無陰險
+        - 含吐乾坤有晦明
+        - 一粒寶珠光焰白
+        - 五方雲霧影縱橫
+        - 達人悟得長生理
+        - 海闊山遙任運行
+        - 西遊記八十八章
+    variations: []
+    notion:
+      title: 西遊記
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: deng-shan-ge-jue
+    title: 登山歌訣
+    status: in-progress
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2025-12-18
+      format: à préciser
+      columns:
+        - 登山歌訣
+        - 六龍騰岱六虎躍崑
+        - 慧劍斫伐誅龍斬虎
+        - 龍虎不鬭二天一流
+        - 降龍伏虎收拾身心
+        - 龍虎中和玄關一竅
+        - 戈蒙屯
+    variations: []
+    notion:
+      title: 登山歌訣
+      status: En cours
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 有心求柔，无意成刚 » → « 有心求柔，無意成剛 »
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 有心求柔无意成刚 » → « 有心求柔無意成剛 »
+  - slug: you-xin-qiu-rou-wu-yi-cheng-gang
+    title: 有心求柔，無意成剛
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2025-12-21
+      format: 1x8 + 38 + 老子/澤宇 + 道德經七十六章 + 2 竹
+      columns:
+        - 有心求柔無意成剛
+        - 人之生也柔弱其死
+        - 也堅強萬物草木之
+        - 生也柔脆其死也枯
+        - 槁故堅強者死之徒
+        - 柔弱者生之徒老子
+    variations: []
+    notion:
+      title: 有心求柔，无意成刚
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 莫性急平流缓進 » → « 莫性急平流緩進 »
+  - slug: mo-xing-ji
+    title: 莫性急
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2025-12-22
+      format: 2x7
+      columns:
+        - 莫性急平流緩進
+        - 墨行機兔起鶻落
+    variations: []
+    notion:
+      title: 莫性急
+      status: Mouvementée
+      url: ""
+      relations: []
+  - slug: wu-xin-wu-wei
+    title: 無心, 無為
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2025-12-23
+      format: 3x4 + 1x4 + 1x5 + 1x4 + 1x4 + 1x4 + 1x4
+      columns:
+        - 至人無己
+        - 神人無功
+        - 聖人無名
+        - 無心無為
+        - 佛面上刮金
+        - 行鬼頭事
+        - 焦芽敗種
+        - 坐井觀天
+        - 磨磚成鏡
+    variations: []
+    notion:
+      title: 無心, 無為
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 《太上老君说常清静经》 » → « 《太上老君說常清靜經》 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: tai-shang-lao-jun-shuo-chang-qing-jing-jing
+    title: 《太上老君說常清靜經》
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2025-12-23
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 《太上老君说常清静经》
+      status: Brute
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 方圆 » → « 方圓 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: fang-yuan
+    title: 方圓
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2025-12-30
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 方圆
+      status: Brute
+      url: ""
+      relations:
+        - 竖横 《卓菴》 NPL
+  # à arbitrer — title : converti du simplifié au traditionnel : « 吴宽《种竹诗卷》 » → « 吳寬《種竹詩卷》 »
+  - slug: wu-kuan-zhong-zhu-shi-juan
+    title: 吳寬《種竹詩卷》
+    status: finished
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2025-12-30
+      format: 4x5 + titre + bambous
+      columns:
+        - 種竹不須土，心空自成林。
+        - 夜深看獨立，數盡別燈陰。
+    variations: []
+    notion:
+      title: 吴宽《种竹诗卷》
+      status: Cadre imprimé
+      url: ""
+      relations: []
+  - slug: zhong-he-ji
+    title: 中和集
+    status: made
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2025-12-31
+      format: 🤯
+      columns: []
+    variations: []
+    notion:
+      title: 中和集
+      status: Mouvementée
+      url: ""
+      relations:
+        - 《卦象論》
+        - 龜蛇相交，水火既濟，真一乃定，中和乃成
+        - 《原道歌》
+        - 《鍊虛歌》
+        - 虚心實腹
+        - 《玄理歌》
+        - 《慧劍》
+        - 《日用》
+        - 《交合》
+        - 《龍虎歌》勉旃勉旃
+        - 北斗面南看
+        - 九三/二八（河圖）
+        - 自得身心定
+        - 竖横 《卓菴》 NPL
+        - （回光反照） 《破惑歌》
+  - slug: qi-huan-shu-hu-yi-mao-fen-xing
+    title: 奇幻儵忽，易貌分形
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-02
+      format: 4x2
+      columns:
+        - 奇幻儵忽
+        - 易貌分形
+    variations: []
+    notion:
+      title: 奇幻儵忽，易貌分形
+      status: Mouvementée
+      url: ""
+      relations:
+        - 儵忽混沌
+  # à arbitrer — status : « À refaire » n'a pas d'équivalent net dans le schéma : in-progress proposé
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 内三合 » → « 內三合 »
+  - slug: liu-he-fa
+    title: 六合法
+    status: in-progress
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-04
+      format: 3*(3x4)
+      columns:
+        - 內三合
+        - 心與意合
+        - 意與氣合
+        - 氣與勁合
+        - 外三合
+        - 手與腳合
+        - 肘與膝合
+        - 肩與胯合
+        - 六合法
+        - 一合無不合
+        - 一動無不動
+        - 與空氣結合
+    variations: []
+    notion:
+      title: 六合法
+      status: À refaire
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: jiao-xue
+    title: 教/學
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-04
+      format: à préciser
+      columns:
+        - 教學相長
+        - 教不嚴師之惰
+        - 學不精生之過
+    variations: []
+    notion:
+      title: 教/學
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns.5 : converti du simplifié au traditionnel : « 明朝《元阳洞》 » → « 明朝《元陽洞》 »
+  # à arbitrer — version.columns.9 : converti du simplifié au traditionnel : « 王陽明傳習錄卷上 » → « 王陽明傳習錄捲上 »
+  - slug: shu-hu-hun-dun
+    title: 儵忽混沌
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-05
+      format: à préciser
+      columns:
+        - 慎術
+        - 去巧
+        - 守渾
+        - 混沌遇儵忽
+        - 誤被鑿一竅
+        - 明朝《元陽洞》
+        - 學者須先立定心體
+        - 心未定而求明必流於妄
+        - 心定之後明自生焉
+        - 王陽明傳習錄捲上
+        - 傳不習乎
+        - 孔子《論語》
+        - 不慌不忙無心無為
+        - 戈澤宇早上練習        1  26
+        - 南海之帝為倏北海
+        - 之帝為忽中央之帝
+        - 為混沌倏😐與忽時
+        - 相與遇於混沌之地
+        - 混沌待之甚善倏與忽
+        - 謀報混沌之德曰人
+        - 皆有七竅以視聽食
+        - 息此獨無有嘗試鑿
+        - 之日鑿一竅七日而
+        - 混沌死莊子應帝王
+        - 戈澤宇小寒二十六
+    variations: []
+    notion:
+      title: 儵忽混沌
+      status: Mouvementée
+      url: ""
+      relations:
+        - 奇幻儵忽，易貌分形
+  - slug: gui-she-xiang-jiao-shui-huo-ji-ji-zhen-yi-nai-ding-zhong-he
+    title: 龜蛇相交，水火既濟，真一乃定，中和乃成
+    status: made
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-09
+      format: 4x4
+      columns:
+        - 龜蛇相交
+        - 水火既濟
+        - 真一乃定
+        - 中和乃成
+    variations: []
+    notion:
+      title: 龜蛇相交，水火既濟，真一乃定，中和乃成
+      status: Mouvementée
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 按指示做，聚精会神。注意放心，容忍鬆胯。 » → « 按指示做，聚精會神。注意放心，容忍鬆胯。 »
+  - slug: an-zhi-shi-zuo-zhu-yi-fang-xin
+    title: 按指示做 // 注意放心
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-10
+      format: 2* 2x4
+      columns:
+        - 按指示做，聚精會神。注意放心，容忍鬆胯。
+    variations: []
+    notion:
+      title: 按指示做 // 注意放心
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: jing-zhong-qiu-dong
+    title: 靜中求動
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-11
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 靜中求動
+      status: Brute
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: gua-xiang-lun
+    title: 《卦象論》
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-14
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 《卦象論》
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — title : converti du simplifié au traditionnel : « 太虚幻境红楼梦 » → « 太虛幻境紅樓夢 »
+  - slug: tai-xu-huan-jing-hong-lou-meng
+    title: 太虛幻境紅樓夢
+    status: made
+    projects:
+      - tai-xu-huan-jing-hong-lou-meng
+    published: false
+    version:
+      id: v1
+      date: 2026-01-15
+      format: 3x7
+      columns:
+        - 真作假時假亦真
+        - 無為有處有還無
+        - 太虛幻境紅樓夢
+    variations: []
+    notion:
+      title: 太虚幻境红楼梦
+      status: Mouvementée
+      url: ""
+      relations:
+        - 螃蟹讽刺 🦀
+        - （罗）羅 掠和 // 软烟罗
+        - 占花名儿
+        - 胡思乱想
+  # à arbitrer — title : converti du simplifié au traditionnel : « 换劲明暗 » → « 換勁明暗 »
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 外明而内暗 » → « 外明而內暗 »
+  - slug: huan-jin-ming-an
+    title: 換勁明暗
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-15
+      format: 1x5 + 1x3 + 1x2
+      columns:
+        - 外明而內暗
+        - 形意拳
+        - 換勁
+    variations: []
+    notion:
+      title: 换劲明暗
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 看破红尘 » → « 看破紅塵 »
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 石人斤戈澤宇朱砂 » → « 石人斤戈澤宇硃砂 »
+  # à arbitrer — version.columns.1 : converti du simplifié au traditionnel : « 斫伐歌劲看出心中 » → « 斫伐歌勁看出心中 »
+  # à arbitrer — version.columns.2 : converti du simplifié au traditionnel : « 碧眼番齋看破红尘 » → « 碧眼番齋看破紅塵 »
+  - slug: kan-po-hong-chen
+    title: 看破紅塵
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-15
+      format: 4x8
+      columns:
+        - 石人斤戈澤宇硃砂
+        - 斫伐歌勁看出心中
+        - 碧眼番齋看破紅塵
+        - 戈興奮蒙澤屯宇王
+    variations: []
+    notion:
+      title: 看破红尘
+      status: Mouvementée
+      url: ""
+      relations:
+        - 石人斤歌
+        - 题破山寺后禅院
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: yuan-dao-ge
+    title: 《原道歌》
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-17
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 《原道歌》
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: lian-xu-ge
+    title: 《鍊虛歌》
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-17
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 《鍊虛歌》
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — title : converti du simplifié au traditionnel : « 题破山寺后禅院 » → « 題破山寺後禪院 »
+  - slug: ti-po-shan-si-hou-shan-yuan
+    title: 題破山寺後禪院
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-18
+      format: 5x10 + [titre (7) + nom (2) + dynastie (1)]
+      columns: []
+    variations: []
+    notion:
+      title: 题破山寺后禅院
+      status: Mouvementée
+      url: ""
+      relations:
+        - 看破红尘
+  # à arbitrer — title : converti du simplifié au traditionnel : « 宝玉四首诗（原文 — 五言律诗） » → « 寶玉四首詩（原文 — 五言律詩） »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: bao-yu-si-shou-shi-yuan-wen-wu-yan-lu-shi
+    title: 寶玉四首詩（原文 — 五言律詩）
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-20
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 宝玉四首诗（原文 — 五言律诗）
+      status: Brute
+      url: ""
+      relations:
+        - 螃蟹讽刺 🦀
+  # à arbitrer — title : converti du simplifié au traditionnel : « 虚心實腹 » → « 虛心實腹 »
+  - slug: xu-xin-shi-fu
+    title: 虛心實腹
+    status: made
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-21
+      format: 3x7 （+ bambous）
+      columns:
+        - 虛心實腹道之基
+        - 虛心直節青青竹
+        - 箇是鍊虛第一機
+    variations: []
+    notion:
+      title: 虚心實腹
+      status: Mouvementée
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — version.columns.1 : converti du simplifié au traditionnel : « 冬小麦在 春季返青 » → « 冬小麥在 春季返青 »
+  - slug: shi-ren-jin-ge
+    title: 石人斤歌
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-22
+      format: 2*（4x4）
+      columns:
+        - 嚴寒刺骨 鑠石流金
+        - 冬小麥在 春季返青
+        - 燒丹田諷 煮海腹明
+        - 回光反照 石人斤歌
+    variations: []
+    notion:
+      title: 石人斤歌
+      status: Mouvementée
+      url: ""
+      relations:
+        - 看破红尘
+  - slug: hui-guang-fan-zhao-po-huo-ge
+    title: （回光反照） 《破惑歌》
+    status: made
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-22
+      format: 1x4 + 1x2
+      columns:
+        - 回光反照
+        - 破惑
+    variations: []
+    notion:
+      title: （回光反照） 《破惑歌》
+      status: Mouvementée
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: xuan-li-ge
+    title: 《玄理歌》
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-24
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 《玄理歌》
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — version.columns.6 : converti du simplifié au traditionnel : « 無泄真陽開六合 » → « 無洩真陽開六合 »
+  - slug: meshkah
+    title: مشكاة • MESHKAH
+    status: in-progress
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-01-24
+      format: 1x7 + 4*(2x7)
+      columns:
+        - 光龕武館啟蒙燈
+        - 虛靈頂勁就陵雲
+        - 鬆沈到家縱真陰
+        - 百會湧泉筒子裡
+        - 肉骨分離筋聯系
+        - 流逆水坎穴起勁
+        - 無洩真陽開六合
+        - 心音唱腔修中和
+        - 默默靜聽神根行
+    variations: []
+    notion:
+      title: مشكاة • MESHKAH
+      status: En cours
+      url: ""
+      relations:
+        - 過猶不及，方向堅定不移，方法因地制宜
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « énorme ……… 趙束齋者，古杭人也。幼為內… » → « énorme ……… 趙束齋者，古杭人也。幼為內… »
+  # à arbitrer — version.columns : « énorme ……… 趙束齋者，古杭人也。幼為內… » ressemble à une note plutôt qu'à une colonne
+  - slug: long-hu-ge-mian-zhan-mian-zhan
+    title: 《龍虎歌》勉旃勉旃
+    status: finished
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-26
+      format: 1x7 + 4*(2x7)
+      columns:
+        - énorme ……… 趙束齋者，古杭人也。幼為內侍，職任中官。因乾旋坤轉而勘破浮生，故棄利捐名，而參求道要。雖紅塵而混跡，實玄境以棲心，真脫略世事者也。意欲混合凝神，故留心於龍虎。一日攜是圖示予，求其贅語。予辭不可，於是乎著筆而塞責焉。告之曰：古人因道而設象，子今因象而立言。束齊者，貴在明加眼力，觀教端的，莫教錯認定盤星。苟能因言會意，觀圖得旨，便知道真龍真虎，不在紙上，而在自己也。至於言象兩忘，道德備矣。咦，真龍真虎不難尋，只要抽陽去補陰。四德運乾誠不息，潛飛見躍盡由心。雖然也是平地起，波濤青天轟霹靂。勉旃勉旃。歌曰： 真龍真虎元無象，誰為起模傳此樣。若於無象裹承當，又落斷常終莽蕩。 青青白白太分明，也是無風自起浪。時人要識真龍虎，不屬有無並子午。5休將二物混淪吞，但把五行顛倒數。根芽本是太玄宮，造化卻在朱陵府。雖然運用有主張，畢竟虛靈無處所。一條大道要心通，些子神機非目覩。忽然進開頂顧門，勘破木金同一母。高高絕頂天罡摧，耿耿銀河斗柄戽。興雲起霧仗丁公，掣電驅雷役玄武。瞬息之間天地交，剎那之頃坎離補。虎從水底起清風，龍在火中降甘雨。雷行雨施天下平，運乾龍德功周普。人言六龍以卸天，孰知一龍是真主。人言五虎透玄關，孰知一虎生真土。會得龍虎常合和，便知龜蛇互吞吐。聖人設象指蹄筌，象外明言便造言。言外更須窮祖意，元來太極本無○。得意忘象未為特，和意都忘為極則。稽首束齋趙隱居，徹底掀翻參學畢。… la dernière phrase, et la signature !!! つ◕ل͜◕)つ︵ ┻━┻
+    variations: []
+    notion:
+      title: 《龍虎歌》勉旃勉旃
+      status: Cadre imprimé
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: hui-jian
+    title: 《慧劍》
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-01-28
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 《慧劍》
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+  - slug: ri-yong
+    title: 《日用》
+    status: finished
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-02-03
+      format: 4*(2x7) + titre 2x4
+      columns: []
+    variations: []
+    notion:
+      title: 《日用》
+      status: Cadre imprimé
+      url: ""
+      relations:
+        - 中和集
+  - slug: jiao-he
+    title: 《交合》
+    status: finished
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-02-03
+      format: 4*(2x7) + titre 2x4
+      columns: []
+    variations: []
+    notion:
+      title: 《交合》
+      status: Cadre imprimé
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — title : converti du simplifié au traditionnel : « 鑄劍 // 轻吹 » → « 鑄劍 // 輕吹 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: zhu-jian-qing-chui
+    title: 鑄劍 // 輕吹
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-04
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 鑄劍 // 轻吹
+      status: Brute
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: bei-dou-mian-nan-kan
+    title: 北斗面南看
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-02-05
+      format: à préciser
+      columns:
+        - 做活 北斗面南看
+    variations: []
+    notion:
+      title: 北斗面南看
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns : « incroyable » ressemble à une note plutôt qu'à une colonne
+  - slug: jiu-san-er-ba-he-tu
+    title: 九三/二八（河圖）
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-02-06
+      format: à préciser
+      columns:
+        - incroyable
+    variations: []
+    notion:
+      title: 九三/二八（河圖）
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — title : converti du simplifié au traditionnel : « 一枝軒亿橤塗位 » → « 一枝軒億橤塗位 »
+  # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 一枝軒亿橤塗位 » → « 一枝軒億橤塗位 »
+  # à arbitrer — version.columns : « L’arche d’une haute bran… » ressemble à une note plutôt qu'à une colonne
+  # à arbitrer — version.columns : « Une branche courbe offre… » ressemble à une note plutôt qu'à une colonne
+  - slug: yi-zhi-xuan-yi-rui-tu-wei
+    title: 一枝軒億橤塗位
+    status: finished
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-08
+      format: à préciser
+      columns:
+        - 一枝軒億橤塗位
+        - L’arche d’une haute branche tapisse de pollen l’endroit
+        - Une branche courbe offre un abri, le sage aussi calme qu’une pierre se fond dans le printemps
+    variations: []
+    notion:
+      title: 一枝軒亿橤塗位
+      status: Cadre imprimé
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: zi-de-shen-xin-ding
+    title: 自得身心定
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-02-11
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 自得身心定
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+  # à arbitrer — title : converti du simplifié au traditionnel : « 自题相 » → « 自題相 »
+  # à arbitrer — version.columns.2 : converti du simplifié au traditionnel : « 勘破三千法，參同十七師。低頭叉手處，泄盡那些兒。 » → « 勘破三千法，參同十七師。低頭叉手處，洩盡那些兒。 »
+  - slug: zi-ti-xiang
+    title: 自題相
+    status: finished
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-11
+      format: 1x3 + 2*(4x5) + 1x3
+      columns:
+        - 自題相
+        - 面黃肌瘦子，看來有甚奇。分明喬眼孔，剛道絕聞知。
+        - 勘破三千法，參同十七師。低頭叉手處，洩盡那些兒。
+        - 中和集
+    variations: []
+    notion:
+      title: 自题相
+      status: Cadre imprimé
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 竖横 《卓菴》 NPL » → « 豎橫 《卓菴》 NPL »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: shu-heng-zhuo-an-npl
+    title: 豎橫 《卓菴》 NPL
+    status: idea
+    projects:
+      - zhong-he-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-02-11
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 竖横 《卓菴》 NPL
+      status: Brute
+      url: ""
+      relations:
+        - 中和集
+        - 方圆
+  # à arbitrer — title : converti du simplifié au traditionnel : « 造化钟神秀, 阴阳割昏晓。杜甫《登泰山》 » → « 造化鍾神秀, 陰陽割昏曉。杜甫《登泰山》 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: zao-hua-zhong-shen-xiu-yin-yang-ge-hun-xiao-du-fu-deng-tai
+    title: 造化鍾神秀, 陰陽割昏曉。杜甫《登泰山》
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-11
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 造化钟神秀, 阴阳割昏晓。杜甫《登泰山》
+      status: Brute
+      url: ""
+      relations: []
+  - slug: gong-fu-sheng-gong-fu
+    title: 工夫生功夫
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-12
+      format: 2*（2x4）
+      columns:
+        - 地中海齋
+        - 背山臨水
+        - 書法工夫
+        - 點畫功夫
+    variations: []
+    notion:
+      title: 工夫生功夫
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 点化 // 点画 » → « 點化 // 點畫 »
+  - slug: dian-hua-dian-hua
+    title: 點化 // 點畫
+    status: finished
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-15
+      format: 3x5 + 1x6 + 1x2 + 1x2 + 1x2 + 2x4
+      columns:
+        - 小和尚千里
+        - 來到這裡請
+        - 求大師點化
+        - 神握點畫
+        - 深淺吾筆
+        - 點雲
+        - 海書
+        - 畫風
+        - 三才二天一流
+    variations: []
+    notion:
+      title: 点化 // 点画
+      status: Cadre imprimé
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: ji-jing-zhong-she-xin
+    title: 寂靜中攝心
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-15
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 寂靜中攝心
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: wei-er-bu-fan-he-er-bu-tong
+    title: 威而不犯和而不同
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-16
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 威而不犯和而不同
+      status: Brute
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 蒙霁去巧，风月无边，没有隐语。 » → « 蒙霽去巧，風月無邊，沒有隱語。 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: meng-ji-qu-qiao-feng-yue-wu-bian-mei-you-yin-yu
+    title: 蒙霽去巧，風月無邊，沒有隱語。
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-17
+      format: à préciser
+      columns:
+        - 蒙霽去巧
+        - 風月無邊
+    variations: []
+    notion:
+      title: 蒙霁去巧，风月无边，没有隐语。
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: xin-nian-kuai-le-ma-dao-cheng-gong
+    title: 新年快樂，馬到成功
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-17
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 新年快樂，馬到成功
+      status: Mouvementée
+      url: ""
+      relations: []
+  - slug: tai-quan-zhu-shan-an
+    title: 胎𫝑 / 泉注 / 山安
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-24
+      format: 3x2
+      columns: []
+    variations: []
+    notion:
+      title: 胎𫝑 / 泉注 / 山安
+      status: Mouvementée
+      url: ""
+      relations: []
+  - slug: yi-shou-yi-dian-jin-gang-qi
+    title: 意守一點金剛氣
+    status: finished
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-27
+      format: 1x7 + 4x4
+      columns:
+        - 以意引氣，意守丹田。
+        - 虛靈頂勁，一點金剛。
+    variations: []
+    notion:
+      title: 意守一點金剛氣
+      status: Cadre imprimé
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 修竹参差 » → « 修竹參差 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: xiu-zhu-can-cha
+    title: 修竹參差
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-02-27
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 修竹参差
+      status: Brute
+      url: ""
+      relations: []
+  # à arbitrer — status : « À refaire » n'a pas d'équivalent net dans le schéma : in-progress proposé
+  - slug: diao-shen
+    title: 調身
+    status: in-progress
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-03
+      format: 3x7
+      columns:
+        - 形不正則氣不順
+        - 氣不順則意不寧
+        - 意不寧則氣散亂
+    variations: []
+    notion:
+      title: 調身
+      status: À refaire
+      url: ""
+      relations:
+        - 五氣朝元 / 身心平衡
+  - slug: wu-qi-chao-yuan-shen-xin-ping-heng
+    title: 五氣朝元 / 身心平衡
+    status: finished
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-03
+      format: 2x4
+      columns: []
+    variations: []
+    notion:
+      title: 五氣朝元 / 身心平衡
+      status: Cadre imprimé
+      url: ""
+      relations:
+        - 調身
+  # à arbitrer — title : converti du simplifié au traditionnel : « 调息 » → « 調息 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: diao-xi
+    title: 調息
+    status: study
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-04
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 调息
+      status: Préparée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: jing-xin-jing-yi-cheng-jian-jing
+    title: 靜 ⋯⋯ 心淨 意誠 兼靜
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-04
+      format: à préciser
+      columns:
+        - 靜
+        - 心淨 意誠 兼靜
+        - 丙午雨水末戈澤宇遇道靜讓
+    variations: []
+    notion:
+      title: 靜 ⋯⋯ 心淨 意誠 兼靜
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: diao-xin
+    title: 調心
+    status: study
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-05
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 調心
+      status: Préparée
+      url: ""
+      relations: []
+  - slug: guo-you-bu-ji-fang-xiang-jian-ding-bu-yi-fang-fa-yin-di-zhi
+    title: 過猶不及，方向堅定不移，方法因地制宜
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-10
+      format: 1x4 + 2x6 au dos de cadres 3x5
+      columns:
+        - 過猶不及
+        - 方向堅定不移
+        - 方法因地制宜
+    variations: []
+    notion:
+      title: 過猶不及，方向堅定不移，方法因地制宜
+      status: Mouvementée
+      url: ""
+      relations:
+        - مشكاة • MESHKAH
+  # à arbitrer — title : converti du simplifié au traditionnel : « 螃蟹讽刺 🦀 » → « 螃蟹諷刺 🦀 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: pang-xie-feng-ci
+    title: 螃蟹諷刺 🦀
+    status: idea
+    projects:
+      - tai-xu-huan-jing-hong-lou-meng
+    published: false
+    version:
+      id: v1
+      date: 2026-03-10
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 螃蟹讽刺 🦀
+      status: Brute
+      url: ""
+      relations:
+        - 宝玉四首诗（原文 — 五言律诗）
+        - 太虚幻境红楼梦
+  - slug: shuo-po
+    title: 說破
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-12
+      format: 2x7 central
+      columns:
+        - 大道不過三兩句
+        - 說破不值半文錢
+    variations: []
+    notion:
+      title: 說破
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « （罗）羅 掠和 // 软烟罗 » → « （羅）羅 掠和 // 軟煙羅 »
+  # à arbitrer — status : « À refaire » n'a pas d'équivalent net dans le schéma : in-progress proposé
+  # à arbitrer — version.format : aucun format dans l'export
+  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 罗 » → « 羅 »
+  # à arbitrer — version.columns.2 : converti du simplifié au traditionnel : « 軟煙 （= 软烟） » → « 軟煙 （= 軟煙） »
+  - slug: luo-luo-lue-he-ruan-yan-luo
+    title: （羅）羅 掠和 // 軟煙羅
+    status: in-progress
+    projects:
+      - tai-xu-huan-jing-hong-lou-meng
+    published: false
+    version:
+      id: v1
+      date: 2026-03-13
+      format: à préciser
+      columns:
+        - 羅
+        - 羅掠和
+        - 軟煙 （= 軟煙）
+    variations: []
+    notion:
+      title: （罗）羅 掠和 // 软烟罗
+      status: À refaire
+      url: ""
+      relations:
+        - 太虚幻境红楼梦
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: tian-ren-di
+    title: 天人地
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-15
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 天人地
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 磨砺〔﹣礪〕 » → « 磨礪〔﹣礪〕 »
+  - slug: mo-li-li
+    title: 磨礪〔﹣礪〕
+    status: study
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-23
+      format: 1x2 2x5
+      columns: []
+    variations: []
+    notion:
+      title: 磨砺〔﹣礪〕
+      status: Préparée
+      url: ""
+      relations:
+        - 易筋经
+  # à arbitrer — title : converti du simplifié au traditionnel : « 易筋经 » → « 易筋經 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: yi-jin-jing
+    title: 易筋經
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-23
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 易筋经
+      status: Brute
+      url: ""
+      relations:
+        - 磨砺〔﹣礪〕
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: shen-yu
+    title: 神遇
+    status: study
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-28
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 神遇
+      status: Préparée
+      url: ""
+      relations: []
+  - slug: xing-qi-yu-pei-ming
+    title: 📜 行氣玉佩銘
+    status: study
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-29
+      format: Grand (recouvrir 修真后内外火候图）
+      columns: []
+    variations: []
+    notion:
+      title: 📜 行氣玉佩銘
+      status: Préparée
+      url: ""
+      relations: []
+  - slug: bai-zi-bei
+    title: 📜 百字碑
+    status: study
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-03-29
+      format: 45x90 cm （couvrir 心性图）
+      columns: []
+    variations: []
+    notion:
+      title: 📜 百字碑
+      status: Préparée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: mo-si-wen-ke
+    title: 墨寺㞢文刻
+    status: study
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-04-05
+      format: à préciser
+      columns:
+        - 墨寺㞢文刻
+        - 血珠成鋒玄
+    variations: []
+    notion:
+      title: 墨寺㞢文刻
+      status: Préparée
+      url: ""
+      relations: []
+  - slug: tai-xi
+    title: 胎息
+    status: study
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-04-05
+      format: 2x5
+      columns: []
+    variations: []
+    notion:
+      title: 胎息
+      status: Préparée
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 四威仪 行住坐臥 » → « 四威儀 行住坐臥 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: si-wei-yi-xing-zhu-zuo-wo
+    title: 四威儀 行住坐臥
+    status: finished
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-04-08
+      format: à préciser
+      columns:
+        - 行住坐臥
+    variations: []
+    notion:
+      title: 四威仪 行住坐臥
+      status: Cadre imprimé
+      url: ""
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 占花名儿 » → « 佔花名兒 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: zhan-hua-ming-er
+    title: 佔花名兒
+    status: idea
+    projects:
+      - tai-xu-huan-jing-hong-lou-meng
+    published: false
+    version:
+      id: v1
+      date: 2026-04-19
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 占花名儿
+      status: Brute
+      url: ""
+      relations:
+        - 太虚幻境红楼梦
+  # à arbitrer — title : converti du simplifié au traditionnel : « 胡思乱想 » → « 胡思亂想 »
+  - slug: hu-si-luan-xiang
+    title: 胡思亂想
+    status: study
+    projects:
+      - tai-xu-huan-jing-hong-lou-meng
+    published: false
+    version:
+      id: v1
+      date: 2026-07-08
+      format: 4 + 2x7
+      columns: []
+    variations: []
+    notion:
+      title: 胡思乱想
+      status: Préparée
+      url: ""
+      relations:
+        - 太虚幻境红楼梦
+  - slug: fang-xin-song-kua-bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren
+    title: 放心鬆胯…不受苦中苦，難為人上人
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-07-12
+      format: 1x2 + 1x2 + 1x4 + 2x5
+      columns: []
+    variations: []
+    notion:
+      title: 放心鬆胯…不受苦中苦，難為人上人
+      status: Mouvementée
+      url: ""
+      relations: []
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: tai-xu-huan-jing-ji-shi-zhen-ru-fu-di
+    title: 太虛幻境即是真如福地
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-07-12
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 太虛幻境即是真如福地
+      status: Brute
+      url: https://claude.ai/share/5dc17005-056f-4406-bcb8-ff80e37b231a
+      relations: []
+  # à arbitrer — title : converti du simplifié au traditionnel : « 假作真时真亦假 » → « 假作真時真亦假 »
+  # à arbitrer — version.format : aucun format dans l'export
+  - slug: jia-zuo-zhen-shi-zhen-yi-jia
+    title: 假作真時真亦假
+    status: idea
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-07-12
+      format: à préciser
+      columns: []
+    variations: []
+    notion:
+      title: 假作真时真亦假
+      status: Brute
+      url: https://claude.ai/share/80883ea3-feeb-453c-80c5-26970fe1eba6
+      relations: []

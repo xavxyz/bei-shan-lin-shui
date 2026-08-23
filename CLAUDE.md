@@ -11,6 +11,8 @@ source de vérité : le contenu vit sur le disque, le site en est une projection
   branche ; rien ne redéfinit la forme du contenu ailleurs.
 - `packages/content` — le content layer : prend une racine de contenu, retourne
   projets et pièces validés et typés, ou des erreurs localisées.
+- `packages/notion-import` — l'import de l'existant depuis Notion : lit un
+  export, propose un classement, applique le plan arbitré.
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
 
 ## Règles qui tiennent le système
@@ -33,6 +35,24 @@ d'écriture, thèmes — par `packages/schema/src/vocabulary.ts`. Les styles son
 stockés en pinyin sans tons et **affichés en français**.
 
 `pnpm validate:content` valide `content/`, et tourne en pre-commit.
+
+## Importer depuis Notion
+
+L'import se fait en deux temps, et le calligraphe arbitre entre les deux :
+
+```
+pnpm import:notion plan <export> --out notion-import.plan.yaml
+pnpm import:notion apply notion-import.plan.yaml
+```
+
+`<export>` est le dossier d'export Notion « Markdown & CSV », ou son seul
+fichier CSV. L'étape `plan` n'écrit que le fichier de plan : chaque page devient
+une pièce à version initiale unique, avec un statut et un classement **proposés**,
+et un commentaire `# à arbitrer` partout où l'agent a tranché sans savoir. Les
+relations inter-pages de Notion ne sont pas reconduites : elles servent une
+dernière fois à repérer les projets, puis disparaissent. L'étape `apply` vérifie
+le plan en entier avant d'écrire quoi que ce soit, et n'écrase jamais une pièce
+existante.
 
 ## Tests
 
