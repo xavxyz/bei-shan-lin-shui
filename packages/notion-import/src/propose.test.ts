@@ -140,12 +140,24 @@ describe("proposeImport", () => {
     expect(plan.projects.map((project) => project.id)).toEqual(["zhong-he-ji"]);
     expect(plan.projects[0]).toMatchObject({ title: "中和集", presentation: "" });
     expect(plan.pieces.map((piece) => piece.projects)).toEqual([
-      ["zhong-he-ji"],
+      [],
       ["zhong-he-ji"],
       ["zhong-he-ji"],
       ["zhong-he-ji"],
       [],
     ]);
+  });
+
+  it("signale la page-pôle, qui est sans doute un échafaudage plutôt qu'une pièce", () => {
+    const plan = propose([
+      page({ title: "中和集", relations: ["莫性急", "虛心實腹", "自題相"] }),
+      page({ title: "莫性急", relations: ["中和集"] }),
+      page({ title: "虛心實腹", relations: ["中和集"] }),
+      page({ title: "自題相", relations: ["中和集"] }),
+    ]);
+
+    expect(warningsOn(plan.pieces[0]!, "projects")).not.toEqual([]);
+    expect(warningsOn(plan.pieces[1]!, "projects")).toEqual([]);
   });
 
   it("ne propose aucun projet autour d'une page trop peu reliée", () => {

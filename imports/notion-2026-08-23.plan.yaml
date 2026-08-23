@@ -193,12 +193,12 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
+  # à arbitrer — projects : cette page en reliait 15 autres et devient le projet zhong-he-ji : sans doute un échafaudage Notion plutôt qu'une pièce, à retirer
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zhong-he-ji
     title: 中和集
     status: made
-    projects:
-      - zhong-he-ji
+    projects: []
     published: false
     version:
       id: v1
@@ -419,11 +419,11 @@ pieces:
       relations:
         - 中和集
   # à arbitrer — title : converti du simplifié au traditionnel : « 太虚幻境红楼梦 » → « 太虛幻境紅樓夢 »
+  # à arbitrer — projects : cette page en reliait 4 autres et devient le projet tai-xu-huan-jing-hong-lou-meng : sans doute un échafaudage Notion plutôt qu'une pièce, à retirer
   - slug: tai-xu-huan-jing-hong-lou-meng
     title: 太虛幻境紅樓夢
     status: made
-    projects:
-      - tai-xu-huan-jing-hong-lou-meng
+    projects: []
     published: false
     version:
       id: v1

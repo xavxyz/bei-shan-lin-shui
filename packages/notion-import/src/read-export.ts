@@ -188,12 +188,17 @@ async function readPageFiles(
   const markdown = files.find(
     (file) => extname(file).toLowerCase() === ".md" && matches(titleKey(nameOf(file)), key),
   );
+  // Notion range les fichiers d'une page dans un dossier à son nom, sauf quand
+  // il n'y en a qu'un : il est alors posé à côté du .md, nommé comme la page.
+  // Le voisinage du .md est exigé — un fichier homonyme ailleurs dans
+  // l'arborescence n'est pas un fichier joint à la page.
+  const pageDirectory = markdown === undefined ? undefined : dirname(markdown);
   const attachments = files
-    .filter(
-      (file) =>
-        IMAGE_EXTENSIONS.has(extname(file).toLowerCase()) &&
-        matches(titleKey(basename(dirname(file))), key),
-    )
+    .filter((file) => {
+      if (!IMAGE_EXTENSIONS.has(extname(file).toLowerCase())) return false;
+      if (matches(titleKey(basename(dirname(file))), key)) return true;
+      return dirname(file) === pageDirectory && matches(titleKey(nameOf(file)), key);
+    })
     .sort();
 
   return {

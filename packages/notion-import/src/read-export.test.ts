@@ -86,6 +86,37 @@ describe("readNotionExport", () => {
     ]);
   });
 
+  it("rapatrie le fichier joint posé à côté de la sous-page, sans dossier", async () => {
+    const root = await writeExportTree({
+      "export.csv": CSV,
+      "莫性急 0f1e2d3c4b5a69788796a5b4c3d2e1f0.md": "# 莫性急\n",
+      "莫性急 0f1e2d3c4b5a69788796a5b4c3d2e1f0.png": Buffer.from("a"),
+      "中和集 1a2b3c4d5e6f70819283a4b5c6d7e8f9.md": "# 中和集\n",
+      "中和集 1a2b3c4d5e6f70819283a4b5c6d7e8f9.png": Buffer.from("b"),
+    });
+
+    const pages = await readNotionExport(root);
+
+    expect(pages[0]?.attachments.map((file) => file.replace(/^.*\//, ""))).toEqual([
+      "莫性急 0f1e2d3c4b5a69788796a5b4c3d2e1f0.png",
+    ]);
+    expect(pages[1]?.attachments.map((file) => file.replace(/^.*\//, ""))).toEqual([
+      "中和集 1a2b3c4d5e6f70819283a4b5c6d7e8f9.png",
+    ]);
+  });
+
+  it("n'attrape pas un fichier homonyme rangé ailleurs dans l'arborescence", async () => {
+    const root = await writeExportTree({
+      "export.csv": CSV,
+      "莫性急 0f1e2d3c4b5a69788796a5b4c3d2e1f0.md": "# 莫性急\n",
+      "Images/莫性急.jpeg": Buffer.from("a"),
+    });
+
+    const pages = await readNotionExport(root);
+
+    expect(pages[0]?.attachments).toEqual([]);
+  });
+
   it("échoue en désignant le chemin quand aucun CSV n'est trouvé", async () => {
     const root = await writeExportTree({ "lisez-moi.txt": "vide" });
 

@@ -114,7 +114,15 @@ export function proposeImport(pages: NotionPage[], options: ProposeOptions): Imp
   return { projects: projects.filter((project) => project.used).map(toProjectProposal), pieces };
 }
 
-type Hub = { id: string; title: string; theme: Theme; members: Set<string>; used: boolean };
+type Hub = {
+  id: string;
+  /** Titre Notion de la page-pôle, tel quel : c'est par lui que passent les relations. */
+  source: string;
+  title: string;
+  theme: Theme;
+  members: Set<string>;
+  used: boolean;
+};
 
 function proposePiece(
   page: NotionPage,
@@ -127,6 +135,14 @@ function proposePiece(
   const title = traditionalize(page.title, "title", warnings);
   const slug = proposeSlug(title, taken, warnings);
   taken.add(slug);
+
+  const hub = hubs.find((candidate) => candidate.source === page.title);
+  if (hub) {
+    warnings.push({
+      field: "projects",
+      message: `cette page en reliait ${hub.members.size} autres et devient le projet ${hub.id} : sans doute un échafaudage Notion plutôt qu'une pièce, à retirer`,
+    });
+  }
 
   return {
     slug,
@@ -328,8 +344,11 @@ function proposeProjects(pages: NotionPage[], threshold: number): Hub[] {
       taken.add(id);
       return {
         id,
+        source: page.title,
         title: toTraditional(page.title),
-        members: new Set([page.title, ...(neighbours.get(page.title) ?? [])]),
+        // La page-pôle n'appartient pas au projet qu'elle fait naître : elle
+        // serait son propre contenant.
+        members: new Set(neighbours.get(page.title) ?? []),
         used: false,
         theme: THEMES[index % THEMES.length]!,
       };
