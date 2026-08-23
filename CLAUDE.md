@@ -47,14 +47,3 @@ Le prior art est posé : on décrit un comportement observable de l'extérieur.
 - **Les îlots React** sont vérifiés en isolation sous react-cosmos, avec des
   fixtures typées par le schéma partagé.
 - On n'assère jamais sur des props ou de l'état interne.
-
-## Commandes
-
-| Commande                | Effet                                 |
-| ----------------------- | ------------------------------------- |
-| `pnpm typecheck`        | Typage de tous les paquets et du site |
-| `pnpm test`             | Tests unitaires (Vitest)              |
-| `pnpm test:e2e`         | Build sur fixtures puis Playwright    |
-| `pnpm validate:content` | Valide `content/`                     |
-| `pnpm cosmos`           | Atelier react-cosmos des îlots        |
-| `pnpm build`            | Build du site sur `content/`          |
