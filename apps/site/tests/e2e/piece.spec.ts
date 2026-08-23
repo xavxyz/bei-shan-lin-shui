@@ -22,6 +22,7 @@ test("la traduction française et le pinyin sont en regard du texte chinois", as
     "La lune claire brille entre les pins",
   );
   await expect(page.getByTestId("pinyin")).toContainText("míng yuè sōng jiān zhào");
+  await expect(page.getByTestId("simplified")).toContainText("明月松间照");
 });
 
 test("une surcharge manuelle de pinyin prime sur la valeur générée", async ({ page }) => {

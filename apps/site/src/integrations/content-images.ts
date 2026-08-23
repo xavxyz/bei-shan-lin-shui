@@ -1,9 +1,14 @@
-import { cp, mkdir, readdir } from "node:fs/promises";
+import { cp, mkdir } from "node:fs/promises";
 import { createReadStream } from "node:fs";
-import { extname, join, normalize } from "node:path";
+import { extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { AstroIntegration } from "astro";
-import { CONTENT_IMAGES_BASE, contentRoot } from "../content-root.js";
+import {
+  CONTENT_IMAGES_BASE,
+  contentImageDirectories,
+  resolveContentImagePath,
+} from "@bsls/content";
+import { contentRoot } from "../content-root.js";
 
 const MIME_TYPES: Record<string, string> = {
   ".jpg": "image/jpeg",
@@ -15,8 +20,9 @@ const MIME_TYPES: Record<string, string> = {
 
 /**
  * Les images vivent avec le contenu, hors du répertoire du site : cette
- * intégration les sert en développement et les copie dans le build, sous
- * `/content-images/<slug>/<fichier>`, l'URL que le content layer publie.
+ * intégration les sert en développement et les copie dans le build, sous les
+ * URL que le content layer publie. C'est lui, et non le site, qui sait où
+ * elles sont rangées sur le disque.
  */
 export function contentImages(): AstroIntegration {
   return {
@@ -30,7 +36,7 @@ export function contentImages(): AstroIntegration {
                 name: "bsls:serve-content-images",
                 configureServer(server) {
                   server.middlewares.use((req, res, next) => {
-                    const path = resolveImagePath(req.url ?? "");
+                    const path = resolveContentImagePath(contentRoot, req.url ?? "");
                     if (!path) return next();
                     res.setHeader(
                       "Content-Type",
@@ -51,41 +57,11 @@ export function contentImages(): AstroIntegration {
       },
       "astro:build:done": async ({ dir }) => {
         const target = join(fileURLToPath(dir), CONTENT_IMAGES_BASE.slice(1));
-        for (const slug of await pieceSlugs()) {
-          const images = join(contentRoot, "pieces", slug, "images");
-          if (!(await exists(images))) continue;
+        for (const { slug, directory } of await contentImageDirectories(contentRoot)) {
           await mkdir(join(target, slug), { recursive: true });
-          await cp(images, join(target, slug), { recursive: true });
+          await cp(directory, join(target, slug), { recursive: true }).catch(() => {});
         }
       },
     },
   };
-}
-
-/** Traduit une URL `/content-images/<slug>/<fichier>` en chemin disque, ou rien. */
-function resolveImagePath(url: string): string | undefined {
-  const pathname = url.split("?")[0] ?? "";
-  if (!pathname.startsWith(`${CONTENT_IMAGES_BASE}/`)) return undefined;
-
-  const relative = normalize(decodeURIComponent(pathname.slice(CONTENT_IMAGES_BASE.length + 1)));
-  if (relative.startsWith("..")) return undefined;
-
-  const [slug, ...rest] = relative.split("/");
-  if (!slug || rest.length !== 1) return undefined;
-
-  return join(contentRoot, "pieces", slug, "images", rest[0]!);
-}
-
-async function pieceSlugs(): Promise<string[]> {
-  const entries = await readdir(join(contentRoot, "pieces"), { withFileTypes: true }).catch(
-    () => [],
-  );
-  return entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name);
-}
-
-async function exists(path: string): Promise<boolean> {
-  return readdir(path).then(
-    () => true,
-    () => false,
-  );
 }

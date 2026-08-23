@@ -35,17 +35,6 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       <span class="pinyin">{piece.title.pinyin}</span>
       {attribution ? ` — ${attribution}` : ""}
     </p>
-    <p class="piece__attribution">
-      <span class="tag" data-testid="piece-status">{PIECE_STATUS_LABELS[piece.status]}</span>
-      {
-        piece.featuredScriptLabel ? (
-          <span class="tag" data-testid="script-label">
-            {piece.featuredScriptLabel}
-          </span>
-        ) : null
-      }
-      <span class="tag">{version.format}</span>
-    </p>
   </header>
 
   {
@@ -55,6 +44,18 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       </div>
     ) : null
   }
+
+  <p class="piece__tags">
+    <span class="tag" data-testid="piece-status">{PIECE_STATUS_LABELS[piece.status]}</span>
+    {
+      piece.featuredScriptLabel ? (
+        <span class="tag" data-testid="script-label">
+          {piece.featuredScriptLabel}
+        </span>
+      ) : null
+    }
+    <span class="tag">{version.format}</span>
+  </p>
 
   <div class="piece__reading">
     {version.columns.length > 0 ? <ChineseText columns={version.columns} /> : <div />}
@@ -66,6 +67,17 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
             <p class="reading__label">Prononciation</p>
             <p class="reading__body pinyin" data-testid="pinyin">
               {version.columns.map((column) => column.pinyin).join(" / ")}
+            </p>
+          </div>
+        ) : null
+      }
+
+      {
+        version.columns.length > 0 ? (
+          <div class="reading__block">
+            <p class="reading__label">Simplifié</p>
+            <p class="reading__body" lang="zh-Hans" data-testid="simplified">
+              {version.columns.map((column) => column.simplified).join(" / ")}
             </p>
           </div>
         ) : null

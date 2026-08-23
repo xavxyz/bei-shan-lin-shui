@@ -5,20 +5,14 @@ import { loadedPieceSchema, loadedProjectSchema } from "@bsls/schema";
 import { contentRoot } from "./content-root.js";
 
 /**
- * Le contenu n'est lu qu'une fois par build, quel que soit le nombre de
- * collections qui s'en alimentent.
+ * Le contenu est relu à chaque chargement de collection : en développement,
+ * une édition sur le disque doit se voir sans redémarrer le serveur.
  */
-let pending: Promise<Content> | undefined;
-
 async function readContent(): Promise<Content> {
-  pending ??= loadContent(contentRoot).then((result) => {
-    if (result.ok) return result.content;
-    // Un contenu invalide casse le build, jamais la production.
-    throw new Error(
-      `Contenu invalide sous ${contentRoot}\n\n${formatContentErrors(result.errors)}`,
-    );
-  });
-  return pending;
+  const result = await loadContent(contentRoot);
+  if (result.ok) return result.content;
+  // Un contenu invalide casse le build, jamais la production.
+  throw new Error(`Contenu invalide sous ${contentRoot}\n\n${formatContentErrors(result.errors)}`);
 }
 
 /** Alimente une collection depuis le content layer, seul point d'entrée du contenu. */
@@ -27,7 +21,6 @@ function contentLoader(name: string, select: (content: Content) => { id: string 
     name: `bsls:${name}`,
     load: async ({ store, parseData }) => {
       store.clear();
-      pending = undefined;
       for (const entry of select(await readContent())) {
         store.set({ id: entry.id, data: await parseData({ id: entry.id, data: entry }) });
       }

@@ -303,6 +303,25 @@ describe("dérivations linguistiques", () => {
     expect(content.pieces[0]!.source!.full_text!.simplified).toContain("空山新雨后");
   });
 
+  it("rejette une surcharge qui ne corrige aucun texte de la pièce", async () => {
+    const result = await loadTree({
+      ...wellFormedTree,
+      files: [],
+      pieces: {
+        "shan-ju-qiu-ming": {
+          ...shanJuQiuMing,
+          versions: bareVersions(),
+          pinyin_overrides: { 行行重行行: "háng háng chóng háng háng" },
+        },
+      },
+    });
+
+    expect(result.ok).toBe(false);
+    if (result.ok) return;
+    expect(result.errors[0]!.path).toBe("pinyin_overrides.行行重行行");
+    expect(result.errors[0]!.message).toContain("colonne");
+  });
+
   it("fait primer une surcharge manuelle de pinyin sur la valeur générée", async () => {
     const content = await loadValid({
       ...wellFormedTree,

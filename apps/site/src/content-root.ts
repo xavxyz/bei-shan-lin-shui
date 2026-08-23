@@ -6,6 +6,3 @@ import { fileURLToPath } from "node:url";
  */
 export const contentRoot =
   process.env.CONTENT_ROOT ?? fileURLToPath(new URL("../../../content", import.meta.url));
-
-/** Préfixe d'URL sous lequel les images du contenu sont servies. */
-export const CONTENT_IMAGES_BASE = "/content-images";

@@ -64,7 +64,6 @@ export const sourceSchema = z.object({
   work: z.string().min(1).optional(),
   dynasty: z.string().min(1).optional(),
   full_text: prose.optional(),
-  note: prose.optional(),
 });
 
 /**
@@ -74,7 +73,7 @@ export const sourceSchema = z.object({
  */
 export const pinyinOverridesSchema = z.record(z.string().min(1), z.string().min(1));
 
-const pieceObject = z.object({
+const pieceFields = z.object({
   title: z.string().min(1),
   slug,
   projects: z.array(slug).default([]),
@@ -90,7 +89,7 @@ const pieceObject = z.object({
  * Les identifiants locaux ancrent les URL et les noms de fichiers d'images :
  * un doublon rendrait une variation inatteignable.
  */
-export const pieceFrontmatterSchema = pieceObject.superRefine((piece, ctx) => {
+export const pieceFrontmatterSchema = pieceFields.superRefine((piece, ctx) => {
   reportDuplicates(
     piece.versions.map((version) => version.id),
     (index) => ["versions", index, "id"],
@@ -162,7 +161,7 @@ export const loadedVersionSchema = versionSchema.extend({
   variations: z.array(loadedVariationSchema),
 });
 
-export const loadedPieceSchema = pieceObject.extend({
+export const loadedPieceSchema = pieceFields.extend({
   title: chineseTextSchema,
   source: sourceSchema.extend({ full_text: chineseTextSchema.optional() }).optional(),
   versions: z.array(loadedVersionSchema),

@@ -16,6 +16,17 @@ import {
   type z,
 } from "@bsls/schema";
 import { deriveChineseText } from "./derive.js";
+import {
+  IMAGES_DIR,
+  PROJECTS_DIR,
+  PIECE_FILE,
+  PIECES_DIR,
+  contentImageUrl,
+  pieceFile,
+  pieceHref,
+  pieceImageFile,
+  projectHref,
+} from "./locations.js";
 
 /** Une erreur de contenu désigne le fichier, le chemin du champ et ce qui était attendu. */
 export type ContentError = {
@@ -37,11 +48,6 @@ export type LoadOptions = {
   /** Par défaut le contenu chargé est celui du site : les brouillons en sont absents. */
   includeUnpublished?: boolean;
 };
-
-const PIECES_DIR = "pieces";
-const PROJECTS_DIR = "projects";
-const PIECE_FILE = "piece.md";
-const IMAGES_DIR = "images";
 
 /**
  * Charge projets et pièces depuis la racine du contenu.
@@ -102,7 +108,7 @@ async function readProjects(root: string, errors: ContentError[]): Promise<Proje
       continue;
     }
 
-    projects.push({ ...parsed.data, id, href: `/${id}` });
+    projects.push({ ...parsed.data, id, href: projectHref(id) });
   }
 
   return projects.sort((a, b) => a.id.localeCompare(b.id));
@@ -119,7 +125,7 @@ async function readPieces(
     if (!entry.isDirectory()) continue;
 
     const slug = entry.name;
-    const file = `${PIECES_DIR}/${slug}/${PIECE_FILE}`;
+    const file = pieceFile(slug);
     const raw = await readFrontmatter(join(root, file), file, errors);
     if (raw === undefined) continue;
 
@@ -139,6 +145,7 @@ async function readPieces(
     }
     checkProjectsExist(parsed.data, projects, file, errors);
     await checkImagesExist(root, parsed.data, slug, file, errors);
+    checkOverridesApply(parsed.data, file, errors);
     if (errors.length > before) continue;
 
     pieces.push(toLoadedPiece(parsed.data));
@@ -173,8 +180,7 @@ async function checkImagesExist(
   for (const [versionIndex, version] of piece.versions.entries()) {
     for (const [variationIndex, variation] of version.variations.entries()) {
       for (const [imageIndex, image] of variation.images.entries()) {
-        const relative = `${PIECES_DIR}/${slug}/${IMAGES_DIR}/${image.file}`;
-        if (await isFile(join(root, relative))) continue;
+        if (await isFile(join(root, pieceImageFile(slug, image.file)))) continue;
         errors.push({
           file,
           path: `versions.${versionIndex}.variations.${variationIndex}.images.${imageIndex}.file`,
@@ -182,6 +188,30 @@ async function checkImagesExist(
         });
       }
     }
+  }
+}
+
+/**
+ * Une surcharge de pinyin est indexée par le texte traditionnel exact qu'elle
+ * corrige : une clé qui ne correspond à rien est une coquille, et laisserait
+ * passer en silence le pinyin généré qu'elle prétendait remplacer.
+ */
+function checkOverridesApply(piece: PieceFrontmatter, file: string, errors: ContentError[]): void {
+  const texts = new Set(
+    [
+      piece.title,
+      piece.source?.full_text,
+      ...piece.versions.flatMap((version) => version.columns),
+    ].filter((text): text is string => text !== undefined),
+  );
+
+  for (const key of Object.keys(piece.pinyin_overrides)) {
+    if (texts.has(key)) continue;
+    errors.push({
+      file,
+      path: `pinyin_overrides.${key}`,
+      message: "attendu : un texte présent dans le titre, une colonne ou le texte intégral",
+    });
   }
 }
 
@@ -193,20 +223,18 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
       ...version,
       date: toIsoDate(version.date),
       columns: version.columns.map((column) => deriveChineseText(column, overrides)),
-      variations: version.variations.map((variation): LoadedVariation => ({
-        ...variation,
-        scriptLabel: SCRIPT_LABELS[variation.script],
-        images: variation.images.map((image) => ({
+      variations: version.variations.map((variation): LoadedVariation => {
+        const images = variation.images.map((image) => ({
           ...image,
-          src: `/content-images/${piece.slug}/${image.file}`,
-        })),
-        featuredImage: pickFeaturedImage(
-          variation.images.map((image) => ({
-            ...image,
-            src: `/content-images/${piece.slug}/${image.file}`,
-          })),
-        ),
-      })),
+          src: contentImageUrl(piece.slug, image.file),
+        }));
+        return {
+          ...variation,
+          scriptLabel: SCRIPT_LABELS[variation.script],
+          images,
+          featuredImage: pickFeaturedImage(images),
+        };
+      }),
     }));
 
   const latestVersion = versions[versions.length - 1]!;
@@ -227,7 +255,7 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     featuredImage: featured?.featuredImage ?? null,
     gallery: featured ? withFeaturedFirst(featured) : [],
     featuredScriptLabel: featured?.scriptLabel ?? null,
-    href: project ? `/${project}/${piece.slug}` : `/${RESERVED_PROJECT_ID}/${piece.slug}`,
+    href: pieceHref(piece.slug, project),
   } satisfies LoadedPiece);
 }
 
