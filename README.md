@@ -1,6 +1,6 @@
 # 背山臨水
 
-Dos à la montagne, face à l'eau — carnet de calligraphie chinoise : suivi du
+Soutenu par le maître, je suis les vagues — carnet de calligraphie chinoise : suivi du
 travail sur le disque, site public bâti à partir du même contenu.
 
 ## Démarrer
