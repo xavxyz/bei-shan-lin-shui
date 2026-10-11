@@ -12,7 +12,7 @@
 # variation  : variation arbitrée, et où elle vit (plan ou après apply)
 
 scans:
-  - file: 2026-10-11_01_01.jpeg
+  - file: 2026-10-11_01_01.jpeg # à arbitrer
     read: [莫性急平流緩進, 墨行機兔起鶻落]
     match: mo-xing-ji
     confidence: high
@@ -22,7 +22,7 @@ scans:
     # « La patience et la constance dans la progression / La vivacité et la
     # précision dans l'action »
 
-  - file: 2026-10-11_01_02.jpeg
+  - file: 2026-10-11_01_02.jpeg # à arbitrer
     read: [莫性急平流緩進, 墨行機兔起鶻落]
     match: mo-xing-ji
     confidence: high
@@ -30,7 +30,7 @@ scans:
     variation: v1a # tried ; dans le plan
     # même texte, trait plus lourd ; annoté « Cookie Clicker », daté 3.1.26
 
-  - file: 2026-10-11_02_01.jpeg
+  - file: 2026-10-11_02_01.jpeg # à arbitrer
     read: [堅持注意, 忍受鬆胯, 水火既濟, 龍虎穴合]
     match: zhu-yi-song-kua # nouvelle pièce, projet tian-ren-di
     confidence: high
@@ -39,14 +39,14 @@ scans:
     # format 4x4 ; c'est le scan 11-10-2026_02 (« 龍虎穴合 ») de
     # scans-2026-10-11.match.yaml ; aucune pièce du plan n'a ce texte
 
-  - file: 2026-10-11_02_02.jpeg
+  - file: 2026-10-11_02_02.jpeg # à arbitrer
     read: []
     match: discarded
     confidence: medium
     # exercices de traits (verticaux, 土) ; on voit 02_01 par transparence :
     # probablement le verso de la même feuille
 
-  - file: 2026-10-11_03_01.jpeg
+  - file: 2026-10-11_03_01.jpeg # à arbitrer
     read: [奇幻儵忽, 易貌分形]
     match: qi-huan-shu-hu-yi-mao-fen-xing
     confidence: high
@@ -55,7 +55,7 @@ scans:
     # colonnes identiques au plan, format 4x2 sur grille imprimée ;
     # attribution 張衡《西京賦》
 
-  - file: 2026-10-11_04_01.jpeg
+  - file: 2026-10-11_04_01.jpeg # à arbitrer
     read: [蒙霽去巧, 風月無邊]
     match: meng-ji-qu-qiao-feng-yue-wu-bian-mei-you-yin-yu
     confidence: high
@@ -63,7 +63,7 @@ scans:
     variation: v1a # kept ; dans le plan
     # colonnes identiques au plan, 2x4 sur grille imprimée ; signé « NPL 丙午 起先 »
 
-  - file: 2026-10-11_05_01.jpeg
+  - file: 2026-10-11_05_01.jpeg # à arbitrer
     read: [眞作假時假亦眞, 無爲有處有還無, 太虛幻境紅樓夢]
     match: tai-xu-huan-jing-hong-lou-meng
     confidence: high
@@ -72,7 +72,7 @@ scans:
     # colonnes identiques au plan (眞/爲 en variantes graphiques), 3x7 ;
     # signé 丙午雨水 (vers le 18-02-2026), Notion dit 2026-01-15
 
-  - file: 2026-10-11_06_01.jpeg
+  - file: 2026-10-11_06_01.jpeg # à arbitrer
     read: [清晨入古寺初日照高林, 曲徑通幽處禪房花木深, 山光悅鳥性潭影空人心, 萬籟此俱寂惟餘鐘磬音, 題破山寺後禪院, 唐常建]
     match: ti-po-shan-si-hou-shan-yuan
     confidence: high
@@ -80,3 +80,1307 @@ scans:
     variation: v1a # kept ; dans le plan
     # 4x10 + titre (7) + 唐常建 (3) ; signé « 丙午雨水 地中海泡澡 » ;
     # 4e colonne : 俱, écrit en style libre (lu 負 à tort)
+
+  - file: 2026-10-11_07_01.jpeg # à arbitrer
+    read: [虛心實腹道之基, 虛心直節青青竹, 箇是鍊虛第一機]
+    match: xu-xin-shi-fu
+    confidence: high
+    script: kaishu
+    variation: v1a # kept ; dans le plan
+    # 3x7 sur grille imprimée, sans bambous ; attribution 中和集 ; signé
+    # 戈 (signature du calligraphe, en cursive) et 丙午雨水 ;
+    # 1re colonne : 道 écrit en style libre (lu 衡 à tort)
+
+  - file: 2026-10-11_08_01.jpeg # à arbitrer
+    read: [意守一點金剛氣]
+    match: yi-shou-yi-dian-jin-gang-qi
+    confidence: high
+    script: kaishu
+    variation: v1a # kept, image 1 mise en avant ; dans le plan
+    # feuille ①, 1x7 sur bande tracée ; forme avec 08_02 le 1x7 + 4x4 du plan
+
+  - file: 2026-10-11_08_02.jpeg # à arbitrer
+    read: [以意引氣, 意守丹田, 虛靈頂勁, 一點金剛]
+    match: yi-shou-yi-dian-jin-gang-qi
+    confidence: high
+    script: kaishu
+    variation: v1a # kept, image 2 ; dans le plan
+    # feuille ②, 4x4 sur grille imprimée
+
+  - file: 2026-10-11_08_03.jpeg # à arbitrer
+    read: [意守一點金剛氣, 意沒出來少一筆, 的筆者字不完, 戈說德衛不敵勁]
+    match: yi-shou-yi-dian-jin-gang-qi
+    confidence: high
+    script: xingshu
+    variation: v1b # tried ; dans le plan
+    # feuille ③ : la phrase en xingshu, puis un commentaire du calligraphe
+    # (« 戈說… », lecture incertaine) ; « ! » et flèche rouges sur 意 ; en marge :
+    # « L'erreur elle-même est une source d'apprentissage », paraphé ;
+    # signé 戈 en bas à gauche
+
+  - file: 2026-10-11_09_01.jpeg # à arbitrer
+    read: [流逆, 羅掠和, 軟煙, 羅]
+    match: luo-luo-lue-he-ruan-yan-luo # à arbitrer
+    confidence: high
+    script: kaishu
+    variation: v1a # tried ; à arbitrer
+    # feuille de travail, composition libre, chaque caractère annoté en pinyin ;
+    # 流逆 vient de 胎息 (tai-xi), exercice hors colonnes ; signé 戈, puis
+    # 憬(?)哲 (jǐng zhé) et « 26 » : à préciser ; colonnes du plan à nettoyer
+    # (« 軟煙 （= 軟煙） » → 軟煙) ; Notion : « À refaire »
+
+  - file: 2026-10-11_09_02.jpeg # à arbitrer
+    read: [字字, 守字字守, 字字]
+    match: discarded # à arbitrer
+    confidence: medium
+    # exercices de 字 / 守 / 宇 en cursive, répétés
+
+  - file: 2026-10-11_09_03.jpeg # à arbitrer
+    read: [墨寺㞢文刻, 墨寺㞢文刻, 墨寺]
+    match: mo-si-wen-ke # à arbitrer
+    confidence: high
+    script: kaishu
+    variation: v1a # tried ; à arbitrer
+    # deux colonnes sur grille imprimée, puis un grand 墨寺 ; la 2e colonne du
+    # plan (血珠成鋒玄) n'est pas sur la feuille ; pièce en study
+
+  - file: 2026-10-11_09_04.jpeg # à arbitrer
+    read: [丹田]
+    match: discarded # à arbitrer
+    confidence: medium
+    # bambous peints, 丹田 en petit ; essai pour xiu-zhu-can-cha ou pour les
+    # bambous de xu-xin-shi-fu ?
+
+  - file: 2026-10-11_09_05.jpeg # à arbitrer
+    read: [龍, 天人, 天人地, 天人]
+    match: tian-ren-di # à arbitrer
+    confidence: medium
+    script: kaishu
+    variation: v1a # tried ; à arbitrer
+    # composition libre, plutôt une recherche que la pièce ; le plan n'a pas de
+    # colonnes (proposer 天人地) ; le 龍 appartient-il à la pièce ? grands
+    # traits pâles visibles par transparence d'une autre feuille
+
+  - file: 2026-10-11_09_06.jpeg # à arbitrer
+    read: [市场骂骂哭, 问题帮助女, 松, 燕組]
+    match: discarded # à arbitrer
+    confidence: medium
+    # en simplifié, avec un bambou peint ; exercice de vocabulaire ?
+
+  - file: 2026-10-11_09_07.jpeg # à arbitrer
+    read: [騰, 肉]
+    match: discarded # à arbitrer
+    confidence: medium
+    # deux caractères isolés, exercice
+
+  - file: 2026-10-11_10_01.jpeg # à arbitrer
+    read: [市民水浒传, 坚持紫荆树, 遍遇大片破]
+    match: discarded # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer
+    # grille 3x5 tracée, en SIMPLIFIÉ : liste de mots (市民, 水浒传, 坚持, 紫荆,
+    # 树, 遍, 遇, 大片, 破), exercice de vocabulaire comme 09_06 ; aucune pièce
+    # du plan ni de content/pieces/ ne porte ces caractères
+    # c'est un des « cadres 3x5 » du format de guo-you-bu-ji-… : son dos est
+    # 10_02 (过犹不及, feuille ③) ; le ③ rouge transparaît en bas à gauche
+    # ni date ni signature
+    # question : recto à écarter, ou image (study) de la pièce 過猶不及 ?
+
+  - file: 2026-10-11_10_02.jpeg # à arbitrer
+    read: [过犹不及]
+    match: guo-you-bu-ji-fang-xiang-jian-ding-bu-yi-fang-fa-yin-di-zhi # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer
+    # feuille ③ (cerclée en rouge) : une colonne 1x4, écrite au dos de la grille
+    # 3x5 de 10_01 (visible par transparence) ; colle au format du plan
+    # « 1x4 + 2x6 au dos de cadres 3x5 » ; écrite en SIMPLIFIÉ (过犹), alors que
+    # la feuille ② (10_04) porte 過猶 et que le plan dit 過猶不及 ; deux points
+    # rouges sous 过, sans doute décalque des marques rouges de 10_04 ;
+    # ni date ni signature ici : 戈 et 10.3.26 sont sur la feuille ① (10_06),
+    # conformes au plan (2026-03-10) ; question : essai (attempt) en simplifié
+    # à côté de ②, ou variation à part ?
+
+  - file: 2026-10-11_10_03.jpeg # à arbitrer
+    read: [开会守浑掠, 中和乃成撇, 走变路慎术] # à arbitrer
+    match: discarded # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer ; 浑, 掠, 撇 et 和 plutôt en xingshu/caoshu
+    # cadre 3x5 imprimé, caractères d'exercice en simplifié ; c'est le recto de
+    # 10_04 (過猶不及, numéroté ②) : le « cadre 3x5 » du format du plan de
+    # guo-you-bu-ji-fang-xiang-jian-ding-bu-yi-fang-fa-yin-di-zhi
+    # (« 1x4 + 2x6 au dos de cadres 3x5 ») ; pas de date ni de signature sur
+    # cette face (la série est signée 戈 10.3.26 sur 10_06 = date du plan)
+    # 慎術 et 守渾 viennent de shu-hu-hun-dun, 中和乃成 de
+    # gui-she-xiang-jiao-shui-huo-ji-ji-zhen-yi-nai-ding-zhong-he ; 和 corrigé
+    # en rouge (lu d'abord 知) ; 1er caractère de la colonne 2 (中 ?) incertain
+    # question : discarded, ou image `context` de guo-you-bu-ji… pour montrer le
+    # dos des cadres ?
+
+  - file: 2026-10-11_10_04.jpeg # à arbitrer
+    read: [過猶不及]
+    match: guo-you-bu-ji-fang-xiang-jian-ding-bu-yi-fang-fa-yin-di-zhi # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; feuille ② de la pièce, dans le plan
+    # format 1x4, écrit au dos de la grille 3x5 de 10_03 (visible par
+    # transparence) : conforme au plan « 1x4 + 2x6 au dos de cadres 3x5 » ;
+    # numérotée ② en rouge ; 猶 écrit sans le 丷 de 酋, les deux traits ajoutés
+    # en rouge (correction) ; pas de date ni de signature sur cette feuille
+    # (10_06, numérotée ①, porte 方向堅定不移 / 方法因地制宜, signé 戈 10.3.26,
+    # comme Notion) ; 10_02 (③) reprend 过犹不及 en simplifié ; question :
+    # ① ② ③ sont-elles trois variations ou une œuvre en plusieurs feuilles ?
+
+  - file: 2026-10-11_10_05.jpeg # à arbitrer
+    read: [走夜路南方, 信入平出, 合逆入平出] # à arbitrer
+    match: discarded # à arbitrer ; ou guo-you-bu-ji-fang-xiang-jian-ding-bu-yi-fang-fa-yin-di-zhi
+    confidence: medium
+    script: kaishu # à arbitrer
+    # grille 3x5 (cadres imprimés) : c'est le recto de 10_06 (方向堅定不移 /
+    # 方法因地制宜, visible par transparence), le « cadre 3x5 » du format du plan
+    # « 1x4 + 2x6 au dos de cadres 3x5 » ; comme 10_01 et 10_03, une feuille de
+    # mots d'exercice (走夜路, 南方, 逆入平出), pas le texte de la pièce
+    # 2e colonne : un caractère barré d'un grand trait entre 信 et 入 (屯 ? 电 ?),
+    # puis la colonne est reprise à gauche avec 合逆入平出 ; 夜 sans le 亻 initial,
+    # comme sur 10_03 : style libre ?
+    # rond rouge en bas à gauche : le ① de 10_06 vu par transparence ;
+    # ni date ni signature ici (戈 et 10.3.26 sont sur 10_06)
+    # aucune pièce du plan ne porte 逆入平出, 夜路 ou 南方
+    # question : les grilles 3x5 au recto (10_01, 10_03, 10_05) font-elles partie
+    # de l'œuvre (images `work` ou `attempt`), ou sont-elles écartées ?
+
+  - file: 2026-10-11_10_06.jpeg # à arbitrer
+    read: [方向堅定不移, 方法因地制宜]
+    match: guo-you-bu-ji-fang-xiang-jian-ding-bu-yi-fang-fa-yin-di-zhi # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; image 1 mise en avant ? dans le plan
+    # feuille ① (cerclée de rouge), 2x6 au dos de la grille 3x5 de 10_05
+    # (合逆入平出 visible par transparence) : colle au format du plan
+    # « 1x4 + 2x6 au dos de cadres 3x5 » ; le 1x4 過猶不及 est sur 10_04 (②),
+    # 10_02 (③) le reprend en simplifié (过犹不及)
+    # colonnes 2 et 3 du plan identiques au caractère près
+    # date du papier : signé 戈 puis 10.3.26 = 2026-03-10, comme Notion
+    # 制 encadré au stylo, avec un petit caractère au stylo entre 制 et 宜
+    # (發 ? 致 ?) : correction, ou note du calligraphe ? à préciser
+
+  - file: 2026-10-11_11_01.jpeg # à arbitrer
+    read: [嚴寒刺骨, 鑠石流金, 冬小麥在, 春季返青]
+    match: shi-ren-jin-ge
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # kept, image 1 mise en avant ; dans le plan # à arbitrer
+    # feuille ① (cœur rouge et ① en bas à droite), 4x4 sur grille imprimée ;
+    # avec 11_02 (燒丹田諷, 煮海腹明, 回光反照, 石人斤歌) forme le 2*（4x4） du plan ;
+    # colonnes identiques au plan (qui les groupe deux par deux)
+    # 麥 écrit sous la forme simplifiée 麦 et 金 en cursive : style libre ?
+    # signé 戈 sous la grille, pas de date sur cette feuille ; 11_02 porte
+    # « 25 2 26 » → 2026-02-25 (Notion disait 2026-01-22) : à confirmer
+    # question : 11_01 et 11_02 = une seule variation à deux images, ou deux ?
+
+  - file: 2026-10-11_11_02.jpeg # à arbitrer
+    read: [燒丹田諷, 煮海腹明, 回光反照, 石人斤歌]
+    match: shi-ren-jin-ge # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # tried ou kept ; dans le plan, 2e image avec 11_01 ; à arbitrer
+    # feuille ② du format 2*(4x4), sur grille imprimée ; 11_01 (cœur rouge, ①)
+    # porte les deux premières colonnes du plan, celle-ci les deux dernières ;
+    # 回 écrit 囗 + forme proche de 目 (variante 囬 ?) : style libre ? à confirmer
+    # date du papier : signé 戈, daté 25 2 26 → 2026-02-25 (Notion disait 2026-01-22)
+    # question : une variation à deux images (work + work), ou deux variations ?
+
+  - file: 2026-10-11_12_01.jpeg # à arbitrer
+    read: [閃仚機] # à arbitrer
+    match: new # à arbitrer
+    confidence: low
+    script: lishu # à arbitrer
+    # une colonne de trois grands caractères, chacun sur 3x3 cases d'une grille
+    # imprimée 3x9 : format 1x3 ; points rouges au départ de certains traits
+    # 1er caractère : 門 garni d'un trait central ondulé et de deux courts,
+    # lu 閃 (門+人) mais peut-être 門+水 (閖) ou 門+川 : à confirmer
+    # 2e : 仚 (人 sur 山, variante de 仙) ; 3e : 機
+    # aucune séquence (閃仚, 仚機, 仙機, 山機) dans le plan ni dans content/pieces/
+    # sous la grille, un emblème : croix en X entre quatre chevrons — signature
+    # 戈 stylisée, ou motif de la pièce (豎橫 ? cf. shu-heng-zhuo-an-npl, sans
+    # colonnes dans le plan) ; date du papier : 29 3 26 → 2026-03-29, puis « N·PL »
+    # (même marque que sur 04_01) ; style entre lishu et kaishu, à fixer
+    # questions : quel caractère, quelle pièce (nouvelle ou shu-heng-zhuo-an-npl),
+    # quel slug et quel projet
+
+  - file: 2026-10-11_13_01.jpeg # à arbitrer
+    read: [流, 未干] # à arbitrer — 未 ou 末 ; en-tête 山川臨 (?) non compté
+    match: new # à arbitrer ; ou discarded avec 13_02-03 ; aucune pièce du plan n'a ce texte
+    confidence: low
+    script: ziyou # à arbitrer — grand 流 pâle en cursive (caoshu ?), 未干 en kaishu
+    # feuille 1 sur 3, scannée de travers : à lire tournée de 90° (format
+    # paysage) ; un grand 流 à l'encre diluée en cursive, et par-dessus, à
+    # l'encre noire sur une petite grille 3x3 imprimée, 未干 (« pas encore
+    # sec ») lu de droite à gauche — jeu sur l'encre sèche ? ; en tête à
+    # droite : 山川臨 (2e caractère 巾 ou 川, lecture incertaine ; 13_03 notait
+    # « 山門臨 ») puis la signature 戈澤宇 (戈 en cursive) ; à gauche : 丙午春分,
+    # et en rouge 29 3 26 → 2026-03-29 (23 possible ; 春分 tombe le 2026-03-20)
+    # grep 未干, 干, 流流, 山川 vides dans le plan et content/pieces/ ;
+    # 13_02-03 : 流 répété et tiges célestes (甲…癸), même étude autour de 流
+    # questions : 未 ou 末 ? 山川臨 ou 山門臨, et que copie-t-il ? pièce à
+    # part entière (13_01 œuvre, 13_02-03 attempt) ou étude à écarter ?
+
+  - file: 2026-10-11_13_02.jpeg # à arbitrer
+    read: [流流流流流, 源流滲止戊, 甲乙丙丁固] # à arbitrer
+    match: new # à arbitrer
+    confidence: low
+    script: kaishu # à arbitrer
+    # feuille 2 sur 3, 3x5 sur grille imprimée ; colonne de droite : 流 répété
+    # (le 3e plus ample, 流 en variation de forme) ; colonne centrale : 源 (原 et
+    # 氵 en points dispersés, lecture incertaine), 流, 滲 (?), 止, 戊 ; colonne
+    # de gauche : 甲乙丙丁 puis 固 (?), les troncs célestes que 13_03 poursuit
+    # (己庚辛壬癸) ; petit visage dessiné en rouge sous la colonne centrale ;
+    # ni attribution, ni signature 戈, ni date sur cette feuille : la date est
+    # sur 13_01 (丙午春分, en rouge 23 3 26 → 2026-03-23 ?) ; aucune séquence
+    # (流流, 源流, 甲乙, 滲) dans le plan ni dans content/pieces/ ;
+    # questions : pièce composée (13_01 page de titre, 13_02-03 corps) ou
+    # feuilles d'exercices à écarter (discarded) ? 固 en bas à gauche est-il un
+    # 戊 en style libre, le 戊 du centre appartenant alors à une autre suite ?
+
+  - file: 2026-10-11_13_03.jpeg # à arbitrer
+    read: [流流流流流, 介求書化澗, 己庚辛壬癸] # à arbitrer — 2e colonne incertaine (介 ? 書 ? 化 ? 澗 ?)
+    match: discarded # à arbitrer
+    confidence: low
+    script: kaishu # à arbitrer — les 流 alternent kaishu et xingshu
+    # grille 3x5 sur grille imprimée, sans date ni signature : feuille
+    # d'exercice. Colonne de droite : cinq 流 en styles variés ; colonne de
+    # gauche : 己庚辛壬癸, suite des tiges célestes commencées sur 13_02
+    # (甲乙丙丁…) ; trait rouge en marge près de 澗 (?)
+    # avec 13_01 (grand 流 pâle, en-tête « 山門臨… » à lire, daté 丙午春分 et
+    # 23.3.26 en rouge) et 13_02 (流 ×5, 源流滲止戊) : étude autour de 流
+    # aucune pièce du plan n'a ces colonnes ; piste : essai pour le 流 de
+    # « 二天一流 » (deng-shan-ge-jue, dian-hua-dian-hua) ?
+    # question : exercice à écarter, ou étude (attempt) rattachée à une pièce ?
+
+  - file: 2026-10-11_14_01.jpeg # à arbitrer
+    read: [背臨, 地支]
+    match: new # à arbitrer ; slug proposé di-zhi (地支), aucune pièce du plan n'a ce texte
+    confidence: medium
+    script: kaishu # à arbitrer ; 背臨 en tête d'un tracé plus archaïsant (ziyou ?)
+    variation: v1a # à arbitrer ; feuille 1/3 (titre), avec 14_02 et 14_03
+    # feuille de titre : 背臨 (« de mémoire ») en petit en tête, puis 地支 en
+    # grand dans une colonne de cercles au crayon (même gabarit que la marge de
+    # 14_02/14_03) ; 背 lu 北 stylisé + 月 : à confirmer
+    # signé « xav. » puis 戈澤宇 (戈 en cursive) ; daté 28.3.26 春分 丙午 →
+    # 2026-03-28 ; mais 春分 2026 tombe le 20 mars : quelle date retenir ?
+    # format : 3 feuilles (titre + 2x6 + 2x6) ; grep 地支, 子丑, 鼠牛, 背臨 vide
+    # dans le plan et content/pieces/
+    # questions : slug et projet (tian-ren-di, pour 地 ?) ; cette feuille est-elle
+    # une image de la variation (work) ou un context/detail ?
+
+  - file: 2026-10-11_14_02.jpeg # à arbitrer
+    read: [巳辰卯寅丑子, 蛇龍兔虎牛鼠]
+    match: new # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer
+    # feuille 2/3 de 地支 (titre sur 14_01) : les six premières branches
+    # terrestres et leurs animaux, 2x6 sur grille imprimée, à lire de bas en
+    # haut (子 en bas, heures 23→11 numérotées en marge) ; 14_03 porte 午→亥
+    # avec 馬羊猴鷄狗猪 ; trait horizontal marqué 7:35 (lever du soleil ?),
+    # 19:08 sur 14_03 ; date du papier sur 14_01 : 28.3.26 春分 丙午, signé
+    # 戈澤宇 ; aucune pièce du plan n'a ce texte (grep 地支, 子丑, 鼠牛, 蛇龍)
+    # questions : slug et projet de la pièce (tian-ren-di, avec 天人地 ?) ;
+    # les trois feuilles forment-elles une seule œuvre (variation v1a, 3 images) ?
+
+  - file: 2026-10-11_14_03.jpeg # à arbitrer
+    read: [亥戌酉申未午, 豬狗鷄猴羊馬]
+    match: new # à arbitrer ; slug proposé di-zhi (地支), aucune pièce du plan n'a ce texte
+    confidence: medium
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; feuille 3/3 de la pièce 14, avec 14_01 et 14_02
+    # 3e feuille de 地支 : les six branches de 午 à 亥 (colonne droite) et leurs
+    # animaux (colonne gauche), grille imprimée 2x6, lue de haut en bas ; heures
+    # au crayon de 11 à 23 en marge, repère « 19:08 » (coucher du soleil ?) ;
+    # 14_02 porte 子→巳 / 鼠→蛇 (heures 23 à 11, repère 7:35) ; 14_01 est le
+    # titre 地支, signé 戈澤宇, daté 28.3.26 春分 丙午 ; 豬 : lu à droite 豕 + 者,
+    # à confirmer (豬 ou 猪) ; 鷄 écrit 奚 + 鳥 ; questions : une pièce en trois
+    # feuilles (titre + 2 colonnes chacune) ou trois images d'une même variation ?
+    # projet tian-ren-di (地) ? date du papier 2026-03-28, format à fixer (3 feuilles,
+    # 2x6 + 2x6 + titre)
+
+  - file: 2026-10-11_15_01.jpeg # à arbitrer
+    read: [龍騰虎躍, 戈試越來越書] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: ziyou # à arbitrer
+    # format 1x4 dans un cadre au crayon, plus une colonne de commentaire en
+    # kaishu « 戈試越來越書 » (戈 essaie, de plus en plus, d'écrire) ;
+    # 龍 et 騰 très déformés (騰 en style libre ?), 虎躍 lisibles ; au crayon en
+    # haut à gauche « 眷勹 »(?) : étude de la forme de 騰 ? ; au crayon sous le
+    # cadre « 玄明 26 » et un petit 日(?) : date du papier à préciser ; cachet
+    # rouge rond en bas à droite ; plus proche dans le plan : deng-shan-ge-jue
+    # (colonne « 六龍騰岱六虎躍崑 »), mais 龍騰虎躍 n'y figure pas d'un bloc ;
+    # question : pièce nouvelle « 龍騰虎躍 », ou étude pour deng-shan-ge-jue ?
+
+  - file: 2026-10-11_16_01.jpeg # à arbitrer
+    read: [龍龍龍龍, 龍龍, 初九潛龍無用]
+    match: new # à arbitrer
+    confidence: medium
+    script: xingshu # à arbitrer
+    # feuille 一 (numéro rouge en bas à droite) d'une série de six : 龍 répété du
+    # régulier vers la cursive (4 + 2), puis la ligne 初九 du 乾卦 (易經) ;
+    # 16_02 : 龍 + 九二…利見大人, 16_03 : texte sur grille imprimée avec sceau
+    # rouge 龍, signé 丙午春分 戈澤宇, 16_04–06 : 騰, 五九…, 上九亢龍有悔 ;
+    # aucune pièce du plan ne porte ce texte (ni 潛龍, ni 初九, ni 騰)
+    # date du papier : signé 戈, daté 28 3 26 → 2026-03-28
+    # 無用 sur le papier, 勿用 dans le 易經 : variante voulue ou à corriger ?
+    # questions : une pièce « 龍騰 / 乾卦 » à six feuilles, ou des études
+    # (attempt) ? quel slug et quel projet ? style courant ou grand courant ?
+
+  - file: 2026-10-11_16_02.jpeg # à arbitrer
+    read: [龍龍龍龍, 龍龍, 龍] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: xingcao # à arbitrer
+    # feuille 二 (au rouge) d'une suite de six : le seul caractère 龍, de plus
+    # en plus cursif de colonne en colonne, sa partie gauche tirée du sceau
+    # (lue « 帝 » à tort) ; format libre 4/2/1, un grand 龍 à gauche ;
+    # inscription 二九利見大人 (見 écrit 貝/目), c'est le 九二 du 乾 (見龍在田，
+    # 利見大人) : 二九 inversé, voulu ? ; signé 戈, daté 29.3.26 (2026-03-29)
+    # aucune pièce du plan n'a 龍 seul ni le 乾 ; la suite : 01 龍 + 初九潛龍無用,
+    # 03 récit du 騰蛇 (鄧石如) sur grille + 龍 au sceau rouge, 04 騰 + 藏鋒斂銳,
+    # 05 騰 + 五九初見大人, 06 騰 + 上九亢龍有悔 : une pièce, ou un projet 乾 ?
+    # slug et projet à donner par le calligraphe ; variation ou attempt ?
+
+  - file: 2026-10-11_16_03.jpeg # à arbitrer
+    read: [很久以前奶奶的茶几上一, 直放着一本書書上我多次, 看見一個篆字看不懂它是, 什麼我就學完了這本書才, 明白我把騰蛇臨寫登石如, 右逸聞] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer
+    # feuille 三(?) d'une série de 6 sur 龍/騰 (16_01 潛龍, 16_02 見龍, 16_04-06 騰,
+    # 乾卦) ; ici un récit en prose 5x11 sur grille imprimée, une colonne vide,
+    # puis « 右逸聞 », et un grand 龍 en sigillaire rouge dans un cadre ; aucune
+    # séquence (騰蛇, 奶奶, 篆字, 逸聞) n'est dans le plan ni dans content/pieces/
+    # date du papier : signé 丙午春分 (vers le 2026-03-20) ; signature 戈 suivie
+    # de « 澤(?)字 » en rouge : lecture incertaine
+    # 看 écrit deux fois en composantes séparées (手目 / 目手) : style libre ?
+    # 多 écrit 夕夕 ; « 登石如 » : pour 鄧石如 (le sigillographe) ?
+    # questions : pièce à part (le récit du 龍 sigillaire) ou feuille d'un
+    # ensemble 16_01-06 ; slug et projet ; style du 龍 (zhuanshu hors vocabulaire)
+
+  - file: 2026-10-11_16_04.jpeg # à arbitrer
+    read: [騰騰騰, 騰騰, 藏鋒歛銳]
+    match: new # à arbitrer
+    confidence: medium
+    script: xingshu # à arbitrer
+    # feuille ④ (四 au tampon rouge) d'une série de six sur 龍 / 騰 : 01 龍 +
+    # 初九潛龍勿用, 02 龍 + 九二利見大人, 03 texte sur grille (很久以前奶奶的茶几…
+    # 把騰蛇臨寫…, 右逸聞, sceau 龍, 丙午春分 澤宇), 05 騰 + 九五利見大人, 06 騰 +
+    # 上九亢龍有悔 ; aucune pièce du plan n'a ces colonnes (seul 六龍騰岱 dans
+    # deng-shan-ge-jue, sans rapport)
+    # 騰 cinq fois, sans ligne du 乾 (le 九四 或躍在淵 manque à la série ?) ;
+    # note 藏鋒歛銳 (歛 pour 斂), flèche vers la signature 戈 : la signature
+    # écrite en 藏鋒 ? ; papier daté 5.4.26 → 2026-04-05
+    # questions : une seule pièce (乾卦, projet ?) pour les six feuilles, ou
+    # des essais (`attempt`) ? 騰 en kaishu ou xingshu ?
+
+  - file: 2026-10-11_16_05.jpeg # à arbitrer
+    read: [騰騰騰騰, 騰騰, 五九利見大人] # à arbitrer ; 利 lu aussi 初
+    match: new # à arbitrer
+    confidence: medium
+    script: xingshu # à arbitrer ; le 2e 騰 de la 2e colonne en grande cursive
+    # feuille 五 (au rouge, en bas à droite) de la suite de six 16_01–06 :
+    # 騰 quatre fois, puis deux, le dernier très cursif (月 en une boucle) ;
+    # inscription 五九利見大人 = le 九五 du 乾 (飛龍在天，利見大人), 九五 inversé
+    # comme 二九 sur 16_02 ; 飛龍在天 absent
+    # 3e caractère : 禾 + 刀, entre 利 (刂 écrit 刀 ?) et 初 : à confirmer ;
+    # 見 écrit avec 目 sur deux pieds, comme sur 16_02
+    # date du papier : signé 戈, daté 6.4.26 → 2026-04-06
+    # format libre 4/2 + inscription ; on voit par transparence une autre feuille
+    # (龍, date 7.4.26 ?)
+    # grep 騰騰, 見大人, 利見, 九五 vide dans le plan et content/pieces/
+    # questions : une pièce 乾 à six feuilles (variation ou attempt pour celle-ci) ?
+    # slug et projet ; 利 ou 初 ?
+
+  - file: 2026-10-11_16_06.jpeg # à arbitrer
+    read: [騰騰騰, 騰騰, 上九亢龍有悔]
+    match: new # à arbitrer
+    confidence: medium
+    script: xingshu # à arbitrer ; la 2e colonne glisse vers la cursive (caoshu ?)
+    # feuille 六 (numéro rouge en bas à droite), dernière d'une série de six sur
+    # 龍 / 騰 et le 乾卦 (易經) : 01 龍 + 初九, 02 龍 + 九二, 03 récit au sceau 龍,
+    # 04 騰 + 藏鋒歛銳, 05 騰 + 五九利見大人, 06 騰 + 上九亢龍有悔
+    # format : 騰 trois fois puis deux fois, en grand, et la ligne 上九 en petit ;
+    # ici 騰 est écrit avec 肉 en entier à gauche (au lieu de 月 sur 16_04/05) :
+    # variante voulue ? ; 亢 tracé comme 冗 : style libre ?
+    # au dos, par transparence : 潛龍無用 (16_01 ?)
+    # aucune séquence (亢龍, 有悔, 上九, 騰騰) dans le plan ni dans content/pieces/
+    # date du papier : signé 戈, daté 7 4 26 → 2026-04-07 (16_05 : 6.4.26)
+    # questions : une pièce « 乾卦 / 龍騰 » à six feuilles (images d'une même
+    # variation) ou des essais (`attempt`) ? slug et projet ? 騰 avec 肉 voulu ?
+
+  - file: 2026-10-11_17_01.jpeg # à arbitrer
+    read: [虎虎, 虎虎, 御] # à arbitrer — colonne de gauche en cursive (虎 ?), 御(?) en cursive au centre bas
+    match: new # à arbitrer ; ou unidentified
+    confidence: low
+    script: caoshu # à arbitrer — colonne de droite plus posée (kaishu/lishu), le reste en cursive
+    # format libre sans grille, 2 colonnes + un grand caractère ; note à droite
+    # « 橫豎履 » en petits caractères ; signature 戈 et 17.4.26 au crayon ;
+    # ① rouge en bas à droite (cercle) : feuille 1 d'une série de 3
+    # date du papier : 17.4.26 → 2026-04-17 ; 17_03 porte aussi 丙午清明
+    # ensemble 17_01-03 : 17_02 = 隸書 / 隶书 (note « 格守履 »), 17_03 = 躍(?)
+    # en plusieurs styles avec « 履隶(?)尾 » : piste 履虎尾 (卦 履, 易經),
+    # 虎 de cette feuille compris ; « 履 » revient dans chaque note
+    # aucune séquence (虎尾, 履虎, 橫豎, 格守, 隸書) n'est dans le plan ni
+    # dans content/pieces/
+    # questions : pièce unique en trois feuilles (履虎尾 ?) ou études de
+    # caractères à écarter ; lecture du 3e grand caractère et des notes en 履 ;
+    # slug et projet
+
+  - file: 2026-10-11_17_02.jpeg # à arbitrer
+    read: [肃書, 肃书] # à arbitrer — 肃 (forme simplifiée) ou une variante de 肅 ?
+    match: new # à arbitrer ; aucune pièce du plan ni de content/pieces/ n'a ce texte
+    confidence: low
+    script: kaishu # à arbitrer ; colonne de droite kaishu, colonne de gauche plus libre (xingshu ?)
+    variation: v1a # à arbitrer ; feuille 二 (en rouge) d'une série de 3 avec 17_01 et 17_03
+    # format 2x2, deux grandes colonnes ; en petit à gauche : 格守履 (pour 恪守 ?)
+    # signé 戈 en cursive, daté 17.4.26 → 2026-04-17
+    # avec 17_01 (虎虎 / deux 虎 cursifs + un caractère cursif, note 橫竪履, ○ rouge,
+    # feuille 一) et 17_03 (colonnes en sigillaire, note 履肃尾, signé 丙午清明 et
+    # 17.4.26, feuille 三) : étude autour de 履虎尾 (卦 履 du 易經) ?
+    # le colonne de droite en traditionnel (書) et celle de gauche en simplifié (书) :
+    # mise en regard volontaire des deux formes ?
+    # grep 肃書, 肃, 履虎, 虎尾, 履, 尾, 格守 vide dans le plan
+    # questions : pièce unique en 3 feuilles (slug, projet) ou essais ; 肃 ou 肅 ;
+    # date : 17.4.26 ou 丙午清明 (2026-04-05) écrit sur 17_03 ?
+
+  - file: 2026-10-11_17_03.jpeg # à arbitrer
+    read: [躍躍躍躍, 躍躍躍履虎尾, 躍躍] # à arbitrer — 虎 écrit en variante 乕 (丿 + 肀 + 巾)
+    match: new # à arbitrer ; piste : étude pour deng-shan-ge-jue (六虎躍崑)
+    confidence: low
+    script: xingshu # à arbitrer — 躍 du régulier vers la cursive (caoshu ?), 履虎尾 en kaishu
+    # feuille 三 d'une série de 3 : 17_01 虎 ×4 du régulier vers la cursive + 橫豎履,
+    # 17_02 乕書 / 乕书 (?) + 格守履, ici 躍 ×7 (3 réguliers en tête de colonne,
+    # dont un 𧾷 enveloppant comme 走, puis 4 cursifs) et l'inscription 履虎尾
+    # (易經, 履卦 : 履虎尾，不咥人) ; pendant de la série 16 (龍 / 騰 et 乾卦) :
+    # 16 + 17 = « 六龍騰岱 / 六虎躍崑 », 2e colonne de deng-shan-ge-jue
+    # date du papier : 丙午清明 (2026-04-05) et 戈 17.4.26 (2026-04-17), le « 4 »
+    # tracé comme 十 ; 17_01 et 17_02 portent aussi 17.4.26
+    # aucune pièce du plan ni de content/pieces/ n'a 躍 seul, 履虎尾 ou 乕
+    # questions : une pièce « 虎躍 / 履 » à trois feuilles, ou des études
+    # (attempt) de deng-shan-ge-jue avec la série 16 ; le 虎 en 乕 est-il voulu ?
+
+  - file: 2026-10-11_18_01.jpeg # à arbitrer
+    read: [心, 臨菓] # à arbitrer — 心 ou 以 (古文 㠯) ? 菓, 葉 ou 蕫 ?
+    match: new # à arbitrer — même pièce que 18_02 (水火調劑), feuille de tête ?
+    confidence: low
+    script: lishu # à arbitrer — mi-sceau, mi-lishu
+    # feuille 1 sur 4 ; portrait, grille imprimée pâle 3 colonnes x 6 rangées
+    # (même gabarit que 18_02), deux caractères de 2 cases dans la colonne
+    # centrale ; au-dessus, hors grille, un grand caractère en ㄥ + trait courbe
+    # (心 au sceau, ou 以 sous sa forme 㠯) ; dans la grille : 臨 (𠂉 et 臣
+    # en haut, 品 aplati en bas), puis 艹 (écrit 廿) sur 田 traversé d'un 木 :
+    # 菓 (艹+果) ou 蕫 (艹+東), 葉 moins probable (pas de 世)
+    # sous la grille, signature 戈 en cursive puis date 19 4 26 → 2026-04-19 ;
+    # « 8 » au rouge en bas à droite ; 18_02 (既 / 水火調劑 / 未) vu par
+    # transparence, non inversé : feuille posée sur 18_02, pas son verso
+    # 臨 est le 19e hexagramme, comme 既濟 / 未濟 (63, 64) sur 18_02 : lien voulu ?
+    # aucune séquence (臨菓, 臨葉, 心臨, 以臨) dans le plan ni dans content/pieces/ ;
+    # le plan n'a 臨 que dans 背山臨水
+    # questions : quels caractères (心 ou 以 ; 菓, 葉 ou 蕫) ? feuille de titre
+    # ou colophon de 水火調劑, ou pièce à part ? la date de 18_01 vaut-elle pour
+    # toute la pièce ?
+
+  - file: 2026-10-11_18_02.jpeg # à arbitrer
+    read: [未, 水火調劑, 既] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer
+    # feuille 2 sur 4 ; une colonne centrale 水火調劑 sur grille imprimée pâle
+    # (3 colonnes, 4 caractères de 2 cases), flanquée de 未 à droite et 既 à
+    # gauche : 既濟 / 未濟, les deux derniers hexagrammes, que 水火 « dose » ;
+    # 劑 en style libre (亠 + 氵 et 冂刂 au lieu de 齊刂) ; trait rouge sur le
+    # 土 du 周 de 調 : correction du calligraphe ? ; ni signature ni date ici :
+    # 18_01 (心 puis trois caractères mi-sceau à lire, 臨 ? 黃 ? 葉 ?) est signé
+    # 戈 et daté 19 4 26 → 2026-04-19 ? (8 au rouge dans le coin) ; 18_03 et
+    # 18_04 : 既 未 調 劑 劑 劑 sur grille 米 rouge, en kaishu puis xingcao —
+    # essais (attempt) ou exercices à écarter ?
+    # aucune séquence (水火調, 調劑, 未濟) dans le plan ni dans content/pieces/ ;
+    # proche de 水火既濟 (gui-she-xiang-jiao-…, zhu-yi-song-kua), projet
+    # zhong-he-ji ? questions : nouvelle pièce (slug, projet), format 1x4 ou
+    # 3 colonnes avec 既/未, et 18_01 en fait-il partie ?
+
+  - file: 2026-10-11_18_03.jpeg # à arbitrer
+    read: [調劑, 未劑, 既劑] # à arbitrer — rangée du haut 既未調, rangée du bas 劑 ×3 ; 劑 ou 齊 ?
+    match: new # à arbitrer ; même pièce que 18_02 (水火調劑), ou discarded si simple exercice
+    confidence: low
+    script: kaishu # à arbitrer
+    # feuille 3 sur 4, scannée de travers : à lire tournée de 90° (sens
+    # antihoraire), format paysage ; grille 米 rouge imprimée 3x2, un caractère
+    # par case : en haut 既 未 調 (調 au trait rouge sur le 土 du 周, comme sur
+    # 18_02 et 18_04), en bas trois fois 劑 dans la forme libre de 18_02
+    # (亠, 丫丫, puis 冂 garni de 二 et d'un crochet, sans 刂 séparé ; le
+    # 2e garni d'un « 灬 » plutôt que de 二) ; tout en kaishu
+    # ni attribution, ni signature 戈, ni date, ni note en français : la date
+    # est sur 18_01 (19 4 26 → 2026-04-19 ?)
+    # feuille de travail des caractères de 18_02 : 18_04 refait 未 調 既 et
+    # 劑 ×3 de plus en plus cursif (xingcao) ; grep 調劑, 水火調, 未濟, 未劑,
+    # 調齊 vides dans le plan et content/pieces/ (seul 水火既濟 :
+    # gui-she-xiang-jiao-…, zhu-yi-song-kua)
+    # questions : essai (attempt) de la pièce 水火調劑 ou exercice à écarter
+    # (discarded) ? 劑 écrit en style libre, ou 齊 (濟 sans 氵) voulu ?
+
+  - file: 2026-10-11_18_04.jpeg # à arbitrer
+    read: [未劑, 調劑, 既劑] # à arbitrer
+    match: new # à arbitrer — même pièce que 18_02 (水火調劑, flanqué de 未/既)
+    confidence: medium
+    script: xingshu # à arbitrer — progression kaishu → xingshu → caoshu d'une colonne à l'autre
+    variation: attempt # à arbitrer — essai pour 18_02, comme 18_03
+    # feuille 4 sur 4 ; papier tourné de 90° au scan (lire en tournant de 90°
+    # vers la gauche) ; grille 米 rouge imprimée 3x2 : format 3x2 ; rangée du
+    # haut 未 調 既 (既 en cursive, 旡 très lié), rangée du bas trois 劑 de plus
+    # en plus cursifs, 齊 tassé au-dessus de 冂刂 comme sur 18_02 (劑 en style
+    # libre) ; trait rouge sur le 土 du 周 de 調, comme sur 18_02 et 18_03
+    # 18_03 : même grille, 既 未 調 / 劑 劑 劑 en kaishu ; 04 en reprend les
+    # caractères dans un autre ordre (未 調 既) et un style plus cursif
+    # ni attribution, ni signature 戈, ni date ni note en français : la seule
+    # date de la pièce est sur 18_01 (19 4 26 → 2026-04-19 ?)
+    # aucune séquence (調劑, 水火調, 未濟) dans le plan ni dans content/pieces/
+    # questions : exercice à écarter (discarded) ou essai (attempt) de la pièce
+    # 水火調劑 ? le trait rouge sur 周 signale-t-il une correction du caractère ?
+
+  - file: 2026-10-11_19_01.jpeg # à arbitrer
+    read: [吐納] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer
+    # feuille 1 sur 2 (① au rouge) ; une colonne de deux grands caractères,
+    # chacun sur 2x2 cases d'une grille imprimée 3x6 : format 1x2 ; 糸 de 納
+    # aux traits détachés, ombre d'un essai précédent visible par transparence
+    # signé 戈 (cursive, encre pâle) ; date du papier : 18 4 26 → 2026-04-18
+    # ni attribution ni note en français ; aucune séquence (吐納, 吐纳, 納)
+    # dans le plan ni dans content/pieces/ (seul 含吐乾坤有晦明, autre texte)
+    # 19_02 (②) : même 吐納 en cursive (caoshu ?), sans date ni signature
+    # questions : slug et projet de cette pièce absente de Notion (piste :
+    # tian-ren-di, avec zhu-yi-song-kua ?) ; 19_01 et 19_02 sont-elles deux
+    # variations (kaishu / caoshu) ou l'une est-elle un essai (attempt) ?
+
+  - file: 2026-10-11_19_02.jpeg # à arbitrer
+    read: [吐納] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: caoshu # à arbitrer
+    # feuille ② (au rouge) ; une colonne de deux grands caractères sur grille
+    # imprimée 3x6 (chacun sur 3x3 cases) : format 1x2 ; 吐 en cursive (口 en
+    # boucle, 土 lié), 納 au 糸 cursif et 內 en crochet
+    # ni attribution, ni signature 戈, ni date sur cette feuille : la date et
+    # la signature visibles en bas sont celles de 19_01 vues par transparence
+    # (feuilles empilées) ; date du papier sur 19_01 : 18 4 26 → 2026-04-18
+    # 19_01 : même 吐納 en kaishu, signé 戈 (cursif) et daté
+    # aucune séquence (吐納, 吐纳, 吐, 納 seuls) en titre ou colonnes dans le plan
+    # ni dans content/pieces/ : pièce absente de Notion
+    # questions : slug et projet ? 19_01 (kaishu) et 19_02 (caoshu) sont-elles
+    # deux variations (v1a, v1b) d'une même version, ou 19_02 un attempt ?
+
+  - file: 2026-10-11_20_01.jpeg # à arbitrer
+    read: [煉丹] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer
+    # feuille ① : 煉丹 en grand, une colonne de deux caractères posée sur une
+    # petite grille imprimée 3x5 : format 1x2 ; dessous, signature 戈 en cursive
+    # et date du papier 18 4 26 → 2026-04-18 ; ni attribution ni note en français
+    # en transparence (non inversé) : la grille 3x5 de 20_02, feuille ② sous la
+    # même pièce : 修修修修修 / 養養養養養 / 虛虛虛虛虛, de plus en plus cursif
+    # (kaishu → xingshu → caoshu) d'une case à l'autre, sans date ni signature
+    # aucune séquence (煉丹, 鍊丹, 修養, 養虛) dans le plan ni dans content/pieces/ ;
+    # voisins : lian-xu-ge (《鍊虛歌》, idea, sans colonnes, projet zhong-he-ji)
+    # et xu-xin-shi-fu (箇是鍊虛第一機)
+    # questions : pièce nouvelle 煉丹 (slug lian-dan ?) avec 20_02 comme corps
+    # 修養虛, ou rattacher à lian-xu-ge ? quel projet (zhong-he-ji ?) ;
+    # 20_02 : variation, attempt ou exercice (discarded) ?
+
+  - file: 2026-10-11_20_02.jpeg # à arbitrer
+    read: [修修修修修, 養養養養養, 虛虛虛虛虛] # à arbitrer
+    match: new # à arbitrer
+    confidence: low
+    script: xingcao # à arbitrer — chaque colonne va du kaishu au caoshu
+    # feuille ② (au rouge) d'une suite de deux, 3x5 sur grille imprimée :
+    # chaque colonne répète un caractère, de plus en plus cursif vers le bas
+    # (le 5e 虛 en pur caoshu) ; ni attribution, ni signature, ni date ici
+    # 20_01 (①) : 煉丹 en grand kaishu, signé 戈, daté 18 4 26 → 2026-04-18 ;
+    # on y voit 修養虛 par transparence (feuilles superposées au scan)
+    # aucune séquence (修養, 養虛, 煉丹, 鍊丹) dans le plan ni dans content/pieces/ ;
+    # piste : lian-xu-ge (《鍊虛歌》, projet zhong-he-ji, sans colonnes) ?
+    # questions : une pièce 煉丹 / 修養虛 (01 titre, 02 corps), ou étude de
+    # styles à écarter (discarded) ? slug et projet à donner par le calligraphe
+
+  - file: 2026-10-11_21_01.jpeg # à arbitrer
+    read: [凝聚] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer
+    # feuille ① (au rouge) de deux : 凝 et 聚, une colonne, chacun sur 3x3 cases
+    # d'une grille imprimée 3x6 : format 1x2 ; 凝 au 冫 en deux points
+    # signé 戈 (cursive, avec un point), daté 13 4 26 → 2026-04-13 (ou 19 4 26 :
+    # le 2e chiffre est ambigu) ; ni attribution ni note en français
+    # la feuille ② (21_02) poursuit avec 聚精會神 sur grille 3 colonnes, de plus
+    # en plus cursive (會 en xingcao, 神 presque au sceau) ; on la voit ici par
+    # transparence : la pièce se lirait 凝聚 // 聚精會神, 聚 faisant charnière
+    # aucune séquence (凝聚, 凝神) dans le plan ni dans content/pieces/ ; 聚精會神
+    # n'apparaît que dans an-zhi-shi-zuo-zhu-yi-fang-xin (按指示做，聚精會神…,
+    # 2026-01-10), dont ce n'est pas le texte
+    # questions : pièce nouvelle (slug, projet ?) ou feuilles liées à
+    # an-zhi-shi-zuo-zhu-yi-fang-xin ; une pièce sur deux feuilles, ou deux
+    # pièces (凝聚 seul, 聚精會神 seul) ; date 13 ou 19 avril ?
+
+  - file: 2026-10-11_21_02.jpeg # à arbitrer
+    read: [聚精會神] # à arbitrer
+    match: new # à arbitrer
+    confidence: medium
+    script: xingshu # à arbitrer ; 聚 et 精 presque réguliers, 會 (曰 en spirale) et 神 (申 en boucle) en style libre
+    # feuille ② de deux, une colonne de quatre caractères, chacun sur 3x3 cases
+    # d'une grille imprimée de 3 cases de large : format 1x4 ; 聚 écrit 取 sur 乑
+    # pas de date ni de signature sur cette feuille : elles sont sur 21_01
+    # (凝聚, ① en rouge, signé 戈, daté 19 4 26 → 2026-04-19)
+    # 聚精會神 n'est dans le plan que comme fragment de an-zhi-shi-zuo-zhu-yi-fang-xin
+    # (按指示做，聚精會神。注意放心，容忍鬆胯。, 2* 2x4, 2026-01-10) : autre texte,
+    # autre format, autre date ; aucune séquence (凝聚, 精會, 會神) ailleurs
+    # questions : 凝聚 (21_01) + 聚精會神 (21_02) forment-ils une pièce nouvelle,
+    # 聚 servant de charnière ? slug et projet ; ou un essai pour an-zhi-shi-zuo… ?
+
+  - file: 2026-10-11_22_01.jpeg # à arbitrer
+    read: [醫王會] # à arbitrer ; légende écrite 医王会 (simplifié) en petit à gauche
+    match: new # à arbitrer
+    confidence: medium
+    script: caoshu # à arbitrer ; les trois grands caractères en cursive pure, la légende en kaishu
+    # feuille ① (au rouge, en bas à droite) d'une pièce à deux feuilles : 22_02
+    # (②) porte 禪指居 ? en grand (légende 禪指居, 3e caractère 居/压 à confirmer),
+    # même papier, même format, même inscription datée
+    # format : une colonne de 3 grands caractères, légende à gauche, inscription à droite
+    # inscription : « ?谷雨 » puis 戈 cursif ; 1er caractère (以 ? 丙午 abrégé ?)
+    # illisible ; date du papier : 谷雨 → 2026-04-20 si l'année est 丙午 ; au rouge
+    # 3 5 6 à côté : 3.5.26 (2026-05-03) ? à arbitrer
+    # grep 醫王, 医王, 王會, 禪指, 谷雨 vide dans le plan et content/pieces/
+    # questions : 醫王會 / 禪指居 forment-ils une pièce (deux feuilles = deux images
+    # d'une variation) ou deux pièces ? slug et projet ? quelle date retenir ?
+
+  - file: 2026-10-11_22_02.jpeg # à arbitrer
+    read: [禪指圧, 禪指圧] # à arbitrer ; grand 禪指圧 en cursive, puis 禪指圧 en petit kaishu (légende) ; 圧 (forme japonaise de 壓) lu aussi 压
+    match: new # à arbitrer ; aucune pièce du plan ni de content/pieces/ n'a ce texte
+    confidence: medium
+    script: caoshu # à arbitrer ; les trois grands caractères en cursive, légende en kaishu
+    # feuille ② (numéro rouge en bas à droite) d'une paire avec 22_01 (①) :
+    # 22_01 = 医王会 en grande cursive + légende kaishu 医王会 ; 22_02 = 禪指圧
+    # ensemble : 医王会 禅指圧 = Iokai, l'école de Zen Shiatsu de Masunaga
+    # (graphies japonaises 医/会/圧 ; traditionnel 醫王會 禪指壓)
+    # format : une colonne de trois grands caractères + légende de trois
+    # petits à droite, feuille A4 portrait sans grille
+    # date du papier : en bas à gauche 巳(已 ?)谷雨 suivi de la signature 戈
+    # (lue « 2五 ») ; 22_01 porte 巳谷雨 戈 et au rouge 3 5 6 (26 ?) →
+    # 2026-05-03 probable (谷雨 2026 tombe le 20-04) ; 1er caractère incertain
+    # grep 禪指, 指壓, 指压, 醫王, 医王, 王會, 王会 vides dans le plan
+    # questions : une pièce 醫王會禪指壓 à deux feuilles (images d'une même
+    # variation) ou deux pièces ? stocker le traditionnel 醫王會 禪指壓 ou
+    # garder les graphies japonaises écrites ? slug et projet ? 巳 ou 已 ?
+
+  - file: 2026-10-11_23.jpeg # à arbitrer ; nom hors format (→ 2026-10-11_23_01.jpeg ?)
+    read: [篤志力行, 專心警省] # à arbitrer — 專 écrit avec 車 en haut (style libre ?)
+    match: new # à arbitrer ; aucune pièce du plan n'a ce texte
+    confidence: medium
+    script: kaishu # à arbitrer
+    # feuille unique, format 2x4 (篤志力行 à droite, 專心警省 à gauche) ; sur
+    # chaque colonne, un dessin imprimé de quatre doigts (une main) au-dessus
+    # du texte — gabarit ou décor ?
+    # inscription entre les colonnes : ? 立夏 puis la signature 戈 en cursive ;
+    # 1er caractère incertain (丙 ou 午 abrégé ?) → 丙午立夏 = 2026-05-05 # à arbitrer
+    # grep 篤志, 志力, 專心, 心警, 警省, 笃志, 专心 vides dans le plan et content/pieces/
+    # questions : slug et projet ? lecture du caractère avant 立夏 ? les mains
+    # imprimées font-elles partie de l'œuvre ?
+
+  - file: 2026-10-11_24.jpeg # à arbitrer
+    read: [形不正則氣不順, 氣不順則意不寧, 意不寧則氣散亂, 調身] # à arbitrer ; 2e 氣 de la col. 3 en grande cursive
+    match: diao-shen # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer ; trait appuyé, 氣 de la col. 3 en cursive (style libre ?)
+    # colonnes identiques au plan au caractère près, format 3x7 sur grille
+    # imprimée = plan ; titre 調身 en grand à gauche, hors grille
+    # date du papier : « ? 立夏 ? » — 1er caractère cursif (丙 ?), dernier
+    # cursif (戈 ? même forme que le 氣 cursif de la col. 3) ; 丙午立夏 →
+    # 2026-05-05 (Notion disait 2026-03-03)
+    # Notion : statut « À refaire » ; ce scan daté 立夏 serait-il la reprise
+    # (v2 à faire) plutôt que la v1 du 2026-03-03 ?
+    # questions : v1a ou v2 ? lecture de la ligne de date et signature ?
+
+  - file: 2026-10-11_25_01.jpeg # à arbitrer
+    read: [龜蛇相交, 水火既濟, 眞一乃定, 中和乃成]
+    match: gui-she-xiang-jiao-shui-huo-ji-ji-zhen-yi-nai-ding-zhong-he # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer ; 龜 d'une forme archaïsante, le reste en kaishu
+    variation: v2a # à arbitrer ; hors plan (une seule version par pièce), à ajouter après apply
+    # format 4x4, comme le plan ; colonnes identiques, sauf 眞 (variante de 真)
+    # et 和 ajouté en petit entre 中 et 乃 : oubli corrigé après coup ?
+    # date du papier : signé 戈 (cursive), puis 立夏 → 2026-05-05 (Notion disait
+    # 2026-01-09) ; la date est coupée en bas du scan : année (丙午 ?) à confirmer
+    # 25_02 : même texte sur grille imprimée, plus cursif (水 en 氵, 火 en 灬,
+    # 成 cursif), sans signature visible ; 25_01 se voit par transparence
+    # questions : v2 (立夏) distincte du v1 de janvier, ou date du plan à
+    # corriger ? 25_02 = autre variation ou attempt ? 眞 voulu ?
+
+  - file: 2026-10-11_25_02.jpeg # à arbitrer
+    read: [龜蛇相交, 氵灬既濟, 真一乃定, 中和乃成] # à arbitrer ; 水火 abrégés en 氵 et 灬
+    match: gui-she-xiang-jiao-shui-huo-ji-ji-zhen-yi-nai-ding-zhong-he
+    confidence: high
+    script: xingshu # à arbitrer ; plus libre que 25_01 (kaishu) : 水 en 氵, 火 en 灬, 成 en cursive — ziyou ?
+    variation: v1b # à arbitrer ; 25_01 (kaishu, signée) serait v1a
+    # même texte que 25_01 et que le plan (氵灬 = 水火 abrégés) ; format 4x4 sur
+    # grille imprimée, 和 en petit comme sur 25_01 ; projet zhong-he-ji
+    # ni signature ni date sur cette feuille : le texte pâle en bas au centre est
+    # la signature de 25_01 décalquée à l'endroit (戈 + date, 立夏 ?), donc 25_01
+    # a été posée encore humide sur 25_02 ; plan : 2026-01-09
+    # questions : variation v1b ou essai (`attempt`) de v1 ? xingshu ou ziyou ?
+    # la date du papier de 25_01 vaut-elle pour cette feuille ?
+
+  - file: 2026-10-11_26_01.jpeg # à arbitrer
+    read: [戈謂之意] # à arbitrer — 謂 (言 en trait vertical, 胃 bouclé) ou 澤 / 得 ? 意 (立 net, 日心 en zigzag) ou 書 ?
+    match: tai-quan-zhu-shan-an # à arbitrer — feuille de tête ou de commentaire de la série 26, aucun de ses caractères n'est dans le texte du plan
+    confidence: low
+    script: caoshu # à arbitrer — 戈 en grand, appuyé, presque kaishu ; la suite en cursive très libre (ziyou ?)
+    # une colonne de quatre caractères qui déborde la grille imprimée 3x6 (la
+    # même que 26_02-07) : 戈 au-dessus, 謂 et 之 dans la grille, 意 dessous ;
+    # format 1x4 ; 胎勢 de 26_02 visible par transparence dans la grille
+    # au crayon : un grand triangle (montagne ? assise du corps ?) dont l'axe
+    # vertical descend le long de la colonne, un cercle sur le crochet de 之 et
+    # une horizontale à sa base : schéma de posture ou d'équilibre ?
+    # à gauche du bas, au crayon : 立夏 26 → 2026-05-05 (date du papier ;
+    # Notion disait 2026-02-24) ; à droite de 意, petit signe cursif isolé :
+    # la signature 戈 ; le grand 戈 du haut serait alors le sujet (« 戈 l'appelle 意 »,
+    # comme « 戈說 ») et non une signature
+    # grep 謂之, 之意, 謂, 立夏, 戈得 : vides dans le plan et content/pieces/
+    # questions : lecture (謂 ? 意 ?) ; cette feuille est-elle une image de la
+    # pièce (colophon, kind autre que work ?) ou une feuille à part, voire à
+    # écarter ? le 立夏 vaut-il pour toute la série 26 ?
+
+  - file: 2026-10-11_26_02.jpeg # à arbitrer
+    read: [胎勢] # à arbitrer — le plan écrit 𫝑 ; le papier montre 勢 (坴丸 sur 力)
+    match: tai-quan-zhu-shan-an # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; feuille régulière du premier couple, 26_03 (胎勢 cursif) en v1b ?
+    # format 1x2 : une colonne, chaque caractère sur 3x3 cases d'une grille
+    # imprimée de 3 cases de large ; 胎 au 月 tracé comme 肉 (traits croisés)
+    # ni date, ni signature, ni attribution, ni note en français sur cette feuille
+    # ensemble 26_01-08 : 26_02/03 胎勢 (régulier / cursif), 26_04/05 泉注,
+    # 26_06/07 山安, chaque texte en deux styles ; 26_01 (戈 … 之 …, triangle
+    # au crayon, daté 立夏) et 26_08 (… 合掌, notes « perdre ses moyens »)
+    # semblent être des feuilles de commentaire
+    # écarts avec le plan : columns vides (→ 胎勢 / 泉注 / 山安), format 3x2
+    # pour l'ensemble alors que chaque feuille est 1x2 ; 𫝑 contre 勢 ; date
+    # Notion 2026-02-24, peut-être remplacée par le 立夏 de 26_01 (2026-05-05)
+    # questions : 勢 ou 𫝑 dans le titre ; une variation par style (régulier
+    # 02/04/06, cursif 03/05/07) ou une par feuille ; 26_01 et 26_08 font-ils
+    # partie de la pièce ?
+
+  - file: 2026-10-11_26_03.jpeg # à arbitrer
+    read: [胎勢] # à arbitrer — cursive : 月 en deux traits, 台 en boucle ; 勢 au 力 en grande boucle
+    match: tai-quan-zhu-shan-an # à arbitrer
+    confidence: medium
+    script: caoshu # à arbitrer ; ou xingcao
+    variation: v1b # à arbitrer ; 26_02 (même texte en kaishu) serait v1a
+    # une colonne de deux caractères, chacun sur 3x2 cases d'une grille imprimée
+    # 3x6 : format 1x2 ; ni signature, ni date, ni note sur cette feuille
+    # le plan écrit 胎𫝑 ; le papier montre 勢 (en kaishu sur 26_02 : 執 sur 力)
+    # série 26 : 01 = 戈 en grand + cursive (胎勢 ?) sur grille, triangle au
+    # crayon, signé 立夏 (→ 2026-05-05 ; Notion disait 2026-02-24) ; 02 胎勢
+    # kaishu ; 04 泉注 kaishu, 05 泉注 cursif ; 06 山安 kaishu, 07 山安 cursif ;
+    # 08 拜(?) 合掌 avec notes « perdre ses moyens … ses deux mains jointes ! »
+    # le plan a format 3x2 et colonnes vides : à compléter par 胎勢 / 泉注 / 山安 ;
+    # 合掌 (08) absent du plan
+    # questions : chaque paire kaishu/cursive = variations v1a/v1b, ou la cursive
+    # en attempt ? une seule image par feuille ou une pièce par paire ?
+    # 勢 ou 𫝑 pour le titre ? date 立夏 pour toute la série ?
+
+  - file: 2026-10-11_26_04.jpeg # à arbitrer
+    read: [泉注]
+    match: tai-quan-zhu-shan-an # à arbitrer ; 2e couple du titre Notion « 胎𫝑 / 泉注 / 山安 »
+    confidence: medium
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; série kaishu 02 胎勢 / 04 泉注 / 06 山安, la série cursive 03 / 05 / 07 en v1b ?
+    # une colonne de deux grands caractères 泉 注, chacun dans un carré 3x3 de
+    # la grille imprimée (gabarit 3x6 au centre d'une feuille A4 portrait),
+    # trait appuyé, kaishu ; 05 refait 泉注 en cursive sur la même grille
+    # ni attribution, ni signature 戈, ni date, ni note en français ; on voit
+    # par transparence le 胎勢 d'une autre feuille ; la seule date de la pièce
+    # est sur 26_01 (立夏 → 2026-05-05 ?), Notion disait 2026-02-24
+    # écarts avec le plan : columns vide dans le plan (à remplir 胎勢 / 泉注 /
+    # 山安 d'après 02, 04, 06) ; format 3x2 du plan = trois couples de deux
+    # caractères, ici une feuille par couple ; Notion écrit 𫝑, le papier 勢
+    # (02, 03) ; 01 (戈… 立夏) et 08 (拜 合掌, notes « perdre ses moyens »)
+    # semblent d'autres pièces ou des essais
+    # questions : une variation par style (kaishu v1a, cursive v1b) avec trois
+    # images chacune, ou chaque feuille un essai (attempt) ? garder 勢 plutôt
+    # que 𫝑 ? la date de la pièce est-elle le 立夏 de 26_01 ?
+
+  - file: 2026-10-11_26_05.jpeg # à arbitrer
+    read: [泉注]
+    match: tai-quan-zhu-shan-an # à arbitrer — le 2e des trois binômes du titre Notion 胎𫝑 / 泉注 / 山安
+    confidence: medium
+    script: caoshu # à arbitrer — 泉 en cursive (白 bouclé, 水 en deux traits), 注 réduit à 氵 lié et à un zigzag
+    variation: v1b # à arbitrer — pendant cursif de 26_04 (泉注 en kaishu, v1a ?) ; ou 泉注 forme une variation à lui seul
+    # format : une colonne de 2 caractères sur grille imprimée 3x6 (chaque
+    # caractère couvre ~2x3 cases), comme 26_02 à 26_07 ; le plan dit 3x2
+    # (3 binômes de 2 ?) et columns: [] (à compléter : 胎勢 / 泉注 / 山安 ?)
+    # la pièce sur le Drive va par paires kaishu/caoshu : 02 胎勢 / 03 cursif,
+    # 04 泉注 / 05 cursif, 06 山安 / 07 cursif ; 01 (戈 ? 澤之言 ?, daté 立夏)
+    # et 08 (? 合掌, notes « perdre ses moyens ») semblent d'autres travaux
+    # ni attribution, ni signature 戈, ni date, ni note en français sur 05 :
+    # date du plan 2026-02-24 (Notion) faute de mieux ; 立夏 de 26_01 donnerait 2026-05-05
+    # grep 泉注 et 山安 : seul tai-quan-zhu-shan-an ; rien dans content/pieces/
+    # questions : une variation par style (kaishu v1a, caoshu v1b) avec trois
+    # images chacune, ou une variation par binôme ? 01 et 08 font-ils partie de la pièce ?
+
+  - file: 2026-10-11_26_06.jpeg # à arbitrer
+    read: [山安]
+    match: tai-quan-zhu-shan-an # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; feuille 山安 en kaishu, à côté de 26_02 (胎勢) et 26_04 (泉注)
+    # une colonne de deux grands caractères sur grille imprimée 3x6 (2 caractères
+    # par feuille ; le 3x2 du plan = trois feuilles de deux caractères ?)
+    # ni attribution, ni signature 戈, ni date, ni note en français ; la petite
+    # marque au bord droit revient sur 02-05 : défaut du papier ou du scan
+    # suite 26 : 01 grand titre cursif (戈 ? 澤 ?…, signé 立夏 + 戈 ?), 02/03 胎勢
+    # kaishu/cursif, 04/05 泉注 kaishu/cursif, 06/07 山安 kaishu/cursif, 08 拜 ?
+    # 合掌 avec notes au crayon (« perdre ses moyens », « ses deux mains jointes ! »)
+    # écarts avec le plan : titre 胎𫝑 (勢 sur le papier), colonnes vides
+    # (proposer 胎勢, 泉注, 山安), date 2026-02-24 contre 立夏 (2026-05-05 ?) sur 26_01
+    # questions : kaishu (02/04/06) et cursif (03/05/07) = deux variations v1a/v1b ?
+    # 26_01 et 26_08 appartiennent-ils à la même pièce ?
+
+  - file: 2026-10-11_26_07.jpeg # à arbitrer
+    read: [山安] # à arbitrer ; 山 réduit à une boucle, 安 en 宀 lié au 女 cursif
+    match: tai-quan-zhu-shan-an # à arbitrer ; 3e paire du titre 胎𫝑 / 泉注 / 山安
+    confidence: high
+    script: caoshu # à arbitrer
+    variation: v1b # à arbitrer ; jeu cursif (03 胎勢, 05 泉注, 07 山安), v1a = jeu kaishu (02, 04, 06)
+    # feuille 7 sur 8 ; grille imprimée 3x6 au centre, deux grands caractères
+    # en une colonne : format 1x2 par feuille (le plan dit 3x2, columns vides :
+    # 胎𫝑 / 泉注 / 山安 = trois colonnes de deux, sur six feuilles)
+    # 06 est le même 山安 en kaishu ; transparence d'une autre feuille (拜/手 de 08 ?)
+    # ni attribution, ni signature 戈, ni date, ni note en français ; la date
+    # est sur 01 (立夏 → 2026-05-05 ?, Notion disait 2026-02-24)
+    # 01 (戈?謂之… signé, 立夏) et 08 (?合掌, notes « perdre ses moyens »,
+    # « ses deux mains jointes ») semblent hors du texte du plan
+    # questions : 01 et 08 font-ils partie de la pièce ? deux variations
+    # (kaishu / caoshu) ou une variation et ses essais ? 𫝑 du plan ou 勢 du papier (02) ?
+
+  - file: 2026-10-11_26_08.jpeg # à arbitrer
+    read: [失合掌] # à arbitrer — 1er caractère en grande cursive hors grille : 乂 à gauche, 手 à droite (三 + crochet) : 失 ? 拜 ? 失手 ligaturé ? ; 合掌 net, dans la grille
+    match: tai-quan-zhu-shan-an # à arbitrer ; ou new : 合掌 n'est ni dans le titre ni dans le plan
+    confidence: low
+    script: caoshu # à arbitrer ; 1er caractère en caoshu, 合掌 plutôt xingshu (口 et 手 bouclés)
+    # feuille 8 sur 8, A4 portrait ; grille imprimée 3x6 comme 26_02 à 26_07,
+    # 合掌 dedans (chaque caractère ~3x3 cases), le 1er caractère au-dessus,
+    # hors grille, plus grand ; transparence visible sur 26_07
+    # notes au crayon, à droite : face au 1er caractère « = perdre ses moyens
+    # (sans force ni forme) » ; face à 合掌 « ≠ perdre ses moyens », « ses
+    # moyens » entouré, flèche vers « ses deux mains jointes ! » : jeu entre
+    # perdre la main (失 ? 失手 ?) et joindre les mains (合掌)
+    # ni attribution, ni signature 戈, ni date : la seule date de la série est
+    # le 立夏 de 26_01 (→ 2026-05-05 ? Notion disait 2026-02-24)
+    # grep 合掌, 掌, 失手, 拜 vides dans le plan et content/pieces/ ; le plan
+    # n'a que 胎𫝑 / 泉注 / 山安 (format 3x2, columns vides)
+    # questions : quel est le 1er caractère ? 合掌 est-il une 4e posture de la
+    # pièce (avec 胎勢, 泉注, 山安), une feuille de commentaire (attempt /
+    # context), ou une pièce à part (slug, projet) ?
+
+  - file: 2026-10-11_27.jpeg # à arbitrer
+    read: [飛鴻戲海, 雲鶴遊天]
+    match: new # à arbitrer ; grep 鴻, 鶴, 戲, 飛鴻, 雲鶴, 遊天 vides dans le plan et content/pieces/
+    confidence: medium
+    script: kaishu # à arbitrer ; kaishu appuyé, larges 撇/捺 (天, 戲)
+    # format 2x4 sur grille imprimée pâle, A4 portrait ; feuille unique
+    # texte proche de 梁武帝《古今書人優劣評》 sur 鍾繇 : « 如雲鶴遊天，群鴻戲海 »
+    # (ici 飛鴻 au lieu de 群鴻, et 戲海 avant 遊天)
+    # attribution à droite, au feutre : 代(仇 ?)崑作頁八 — lecture incertaine
+    # date du papier : à gauche 丙午小滿 → 2026-05-21, précédé d'un petit signe
+    # cursif (良 ?) : la signature 戈
+    # questions : pièce absente de Notion — slug et projet ? lecture de
+    # l'attribution ? 飛鴻 voulu plutôt que 群鴻 ?
+
+  - file: 2026-10-11_28.jpeg # à arbitrer
+    read: [有心求柔, 無意成剛] # à arbitrer ; lecture du grand cursif, guidée par le plan
+    match: you-xin-qiu-rou-wu-yi-cheng-gang # à arbitrer
+    confidence: medium
+    script: caoshu # à arbitrer ; cursive très liée (kuangcao ?)
+    # deux colonnes de 4 grands caractères, feuille A4 portrait pliée en deux,
+    # sans grille ; à droite, un long trait vertical isolé (一 vertical ? trait
+    # décoratif, tige de 竹 ?) hors des colonnes
+    # lecture : 有 boucle + crochet, 心 avec point, 求, 柔 (矛 sur 木 croisé) ;
+    # 無 grande boucle à longue queue, 意 avec point, 成, 剛 (刂 à droite)
+    # en haut au centre, petite ligne cursive (乙巳冬至 ? — 冬至 2025 = 2025-12-21,
+    # = date Notion) puis un signe plus appuyé : la signature 戈
+    # plan : 1re colonne de la v1 (format 1x8 + texte du 道德經 76 + 2 竹, statut
+    # made) ; ce scan ne montre que le titre en 2x4 : autre version, ou étude ?
+    # questions : lecture confirmée ? v1 ou v2 à faire ? sens du long trait ?
+    # ligne de date ?
+
+  - file: 2026-10-11_29.jpeg # à arbitrer
+    read: [造化鍾神, 秀陰陽割, 昏曉] # à arbitrer ; lu par rangées de droite à gauche, grande cursive : 造 (boucle en haut à droite), 神 (礻 en boucle + 申 en trois verticales), 陰 陽 au 阝, 割 au 刂 en deux longues verticales ; 化 et 鍾 incertains
+    match: zao-hua-zhong-shen-xiu-yin-yang-ge-hun-xiao-du-fu-deng-tai # à arbitrer
+    confidence: medium
+    script: caoshu # à arbitrer ; très libre, peut-être kuangcao ou ziyou
+    # 10 caractères = 造化鍾神秀 陰陽割昏曉 (杜甫《登泰山》) ; disposés en
+    # 4 / 4 / 2 sur A4 portrait sans grille, ni attribution, ni signature 戈,
+    # ni date, ni note en français ; format à proposer : 4+4+2 ou 2x5 ?
+    # le plan : status idea, format « à préciser », columns vides, date
+    # 2026-02-11 (Notion) : l'encre est posée → proposer made, columns
+    # [造化鍾神秀, 陰陽割昏曉] ; date du papier absente
+    # grep 陰陽, 神秀, 割昏 : seule cette pièce dans le plan, rien dans content/pieces/
+    # questions : bien 造化鍾神秀陰陽割昏曉 ? ordre de lecture (rangées ou
+    # colonnes) ? style caoshu, kuangcao ou ziyou ? variation v1a ou essai ?
+
+  - file: 2026-10-11_30_01.jpeg # à arbitrer
+    read: [宇八宇] # à arbitrer — 八 ou 小 au milieu (deux traits, sans axe vertical)
+    match: discarded # à arbitrer — exercice : 宇 deux fois, absent de 成人不自在 / 自在不成人 (30_02)
+    confidence: medium
+    script: kaishu # à arbitrer
+    # une colonne, trois grands caractères sans grille imprimée ; en gris, par
+    # transparence ou au verso, une trame de points 丶 (exercice de traits)
+    # en bas, au stylo et tête-bêche : 紅樓夢 第八十二回 (attribution de 30_02)
+    # et une date lue « 2 6 26 » ou « 21 6 26 » → 2026-06-21, le 夏至 de 30_02
+    # 宇 est le dernier caractère de 戈澤宇 (signatures du plan, ex. 戈澤宇小寒二十六)
+    # grep 宇八 / 八宇 / 宇小 : rien dans le plan ni dans content/pieces/
+    # questions : simple essai à écarter, ou feuille de la pièce 30 (attempt) ?
+    # 八 ou 小 ? pourquoi l'attribution de 30_02 y est-elle notée tête-bêche ?
+
+  - file: 2026-10-11_30_02.jpeg # à arbitrer
+    read: [成人不自在, 自在不成人]
+    match: new # à arbitrer ; slug proposé cheng-ren-bu-zi-zai, aucune pièce du plan n'a ce texte (grep 成人, 不自在, 自在不)
+    confidence: medium
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; seule feuille de la pièce 30 à porter le texte
+    # format 2x5, sans grille imprimée ; attribution 紅樓夢 第八十二回 ;
+    # signé 戈, daté 夏至 26 → 2026-06-21 (date du papier)
+    # 30_03 : traduction et notes au stylo : « Qui souhaite devenir vraiment un
+    # homme ne songe pas à se donner de l'aise ; qui ne songe qu'à se donner de
+    # l'aise ne deviendra jamais vraiment un homme », vieil adage cité au récit
+    # LXXXII, « premier jour de l'été », en plein orage
+    # 30_01 : 宇 八(?) 宇 sur une autre feuille, avec en miroir l'attribution
+    # de 30_02 (紅樓夢 第八十二回) : décalque de 30_02 posée humide ?
+    # questions : slug et projet (tai-xu-huan-jing-hong-lou-meng, le projet
+    # 紅樓夢 du plan ?) ; 30_01 fait-elle partie de la pièce ou est-elle à écarter ?
+
+  - file: 2026-10-11_30_03.jpeg # à arbitrer
+    read: [] # aucun caractère chinois : feuille de notes en français, au stylo
+    match: new # à arbitrer ; même pièce que 30_02 (成人不自在 / 自在不成人, slug proposé cheng-ren-bu-zi-zai), absente du plan (grep 成人不, 自在不, 不成人, 八十二 vides)
+    confidence: medium
+    script: kaishu # à arbitrer ; sans objet sur cette feuille, style de 30_02
+    variation: v1a # à arbitrer ; image `kind: context` de la variation de 30_02, plutôt que `work`
+    # feuille A4 portrait, sans grille ; traduction : « Qui souhaite devenir
+    # vraiment un homme ne songe pas à se donner de l'aise ; qui ne songe qu'à
+    # se donner de l'aise ne deviendra jamais vraiment un homme »
+    # « Vieil adage cité dans le récit LXXXII du Rêve dans le Pavillon Rouge de
+    # Cao Xueqin » (= 紅樓夢 第八十二回 de 30_02) ; « Pavillon » cerclé et
+    # glosé « gynécée », flèche vers « jeunes Demoiselles »
+    # « Recherché et calligraphié en écoutant les jeunes Demoiselles de la
+    # famille Féat-Lopez et leur Vénérable Mère Féat discuter de l'avenir du
+    # Vénérable Monsieur leur Père Lopez. Exécution innocente et bien réalisée
+    # en plein orage le premier jour de l'été (ou en son cœur, selon la culture). »
+    # ni signature 戈 ni date chiffrée ; « premier jour de l'été » concorde
+    # avec 夏至 26 de 30_02 → 2026-06-21
+    # questions : la traduction va-t-elle dans `translation` de la pièce (à
+    # recopier, écrite à la main) et le reste en note ? cette feuille est-elle
+    # publiée (image context) ou seulement source de texte ? projet
+    # tai-xu-huan-jing-hong-lou-meng ?
+
+  - file: 2026-10-11_31_01.jpeg # à arbitrer
+    read: [虛靈頂勁] # à arbitrer ; 虛 écrit avec 业 sous 虍 (forme 虚)
+    match: new # à arbitrer ; aucune pièce du plan ni de content/pieces/ n'a ce seul texte
+    confidence: medium
+    script: kaishu # à arbitrer
+    # format 1x4 : une colonne de quatre grands caractères, A4 portrait sans grille
+    # ni attribution, ni signature 戈, ni date, ni note en français ; date du dépôt
+    # 2026-10-11 faute de mieux
+    # 虛靈頂勁 (太極拳十要) figure déjà comme colonne dans meshkah (虛靈頂勁就陵雲)
+    # et yi-shou-yi-dian-jin-gang-qi (colonne 4), jamais seul
+    # pièce 31 : 31_03 reprend 虛靈頂勁 (plus fin, sur fond de taches d'encre
+    # décalquées) ; 31_02 = 宇 ×3 (exercice ?) ; 31_04 = 松胯 (鬆 écrit 松),
+    # gris clair ; l'ombre de 31_02 traverse cette feuille (recto-verso ?)
+    # questions : une pièce 虛靈頂勁 à part (slug xu-ling-ding-jin ? projet ?)
+    # dont 31_01 et 31_03 sont deux variations (v1a, v1b) ? 31_02 et 31_04
+    # appartiennent-ils à la même pièce ? 虚 voulu ou 虛 à stocker ?
+
+  - file: 2026-10-11_31_02.jpeg # à arbitrer
+    read: [字字字] # à arbitrer ; 宀 + 子 (乛, 亅, 一), aucun point de 寸 : 字 plutôt que 守
+    match: discarded # à arbitrer ; exercice de caractère, comme 09_02 (字 / 守 / 宇)
+    confidence: medium
+    script: xingshu # à arbitrer ; de plus en plus libre : 1er en kaishu appuyé, 3e en boucle cursive
+    # une colonne de trois grands 字, feuille A4 portrait sans grille
+    # ni attribution, ni signature 戈, ni date, ni note en français
+    # en fantôme à gauche : 虛靈頂勁 décalqué d'une feuille voisine (31_01 ou 31_03)
+    # pièce 31 : 31_01 et 31_03 = 虛靈頂勁 (kaishu), 31_04 = 松胯 (= 鬆胯 ?) ;
+    # 虛靈頂勁 est une colonne de yi-shou-yi-dian-jin-gang-qi et (虛靈頂勁就陵雲) de meshkah
+    # grep 字字, 守守 vides dans le plan et content/pieces/
+    # questions : exercice à écarter, ou feuille d'une pièce 字 / 守 avec le reste de 31 ?
+    # 字 ou 守 voulu (守 de 意守) ?
+
+  - file: 2026-10-11_31_03.jpeg # à arbitrer
+    read: [虛靈頂勁]
+    match: new # à arbitrer ; aucune pièce du plan n'a 虛靈頂勁 seul : il n'y est qu'en colonne de yi-shou-yi-dian-jin-gang-qi (4x4, déjà couverte par 08_02) et en début de colonne de meshkah (虛靈頂勁就陵雲)
+    confidence: low
+    script: kaishu # à arbitrer ; kaishu appuyé, 頂 et 勁 plus gras et plus contrastés que sur 31_01
+    variation: v1b # à arbitrer ; second essai du même texte après 31_01 (v1a ?), ou `attempt`
+    # format 1x4, A4 portrait, sans grille imprimée ; ni attribution, ni
+    # signature 戈, ni date, ni note en français : date du dépôt faute de mieux
+    # 虛 écrit avec 业 en bas (forme 虚) sur 31_01 comme ici
+    # fond : taches d'encre traversées d'une autre feuille (traits obliques
+    # en gouttes), non lisibles comme caractères
+    # pièce 31 : 01 虛靈頂勁 (même texte, plus léger), 02 宇 宇 宇 (?),
+    # 04 松胯 (pour 鬆胯 ?) : suite de principes du taiji plutôt qu'une pièce du plan
+    # questions : la pièce 31 est-elle une pièce (laquelle, slug, projet) ou des
+    # études rattachées à yi-shou-yi-dian-jin-gang-qi / meshkah ? 01 et 03 :
+    # deux variations ou un essai et une retenue ?
+
+  - file: 2026-10-11_31_04.jpeg # à arbitrer
+    read: [松胯] # à arbitrer — 松 (木公) sur le papier, le plan écrit 鬆 ; 胯 = 月 + 夸 (大 sur 亏)
+    match: fang-xin-song-kua-bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren # à arbitrer
+    confidence: low
+    script: kaishu # à arbitrer ; trait appuyé, 松 et 胯 légèrement décalés
+    # format 1x2 : une colonne de deux grands caractères, sans grille imprimée
+    # ni attribution, ni signature 戈, ni date, ni note en français ; les
+    # taches pâles sont le décalque d'une autre feuille posée humide
+    # ensemble 31_01-04 : 01 et 03 虛靈頂勁 (1x4, deux jets), 02 宇宇宇
+    # (exercice, cf. 09_02 et 30_01), 04 松胯 (1x2)
+    # piste : le format du plan « 1x2 + 1x2 + 1x4 + 2x5 » (放心 / 鬆胯 /
+    # 虛靈頂勁 ? / 不受苦中苦 難為人上人) ; columns vides, Notion 2026-07-12 ;
+    # 鬆胯 aussi dans zhu-yi-song-kua (4x4) et an-zhi-shi-zuo-zhu-yi-fang-xin,
+    # autres formats ; aucune autre séquence (松胯, 虛靈頂勁 seul) ailleurs
+    # questions : 31 est-elle une partie de fang-xin-song-kua… (où sont 放心
+    # et 不受苦中苦…) ou une pièce nouvelle 虛靈頂勁 / 松胯 ? 松 voulu ou 鬆 ?
+    # variation : 01/03/04 une variation, 02 à écarter ?
+
+  - file: 2026-10-11_32_01.jpeg # à arbitrer
+    read: [放心]
+    match: fang-xin-song-kua-bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer ; kaishu souple, 心 très délié (xingshu ?)
+    variation: v1a # à arbitrer ; première feuille (1x2 放心) d'une pièce en quatre feuilles
+    # une colonne de deux grands caractères sur grille imprimée 3x6 ; c'est le
+    # « 1x2 » initial du format du plan 1x2 + 1x2 + 1x4 + 2x5, qui colle aux
+    # quatre feuilles : 01 放心 (kaishu), 02 鬆胯 (kaishu), 03 放心鬆胯 (cursive),
+    # 04 不受苦中苦 / 難為人上人 (kaishu, signé 丙午處暑 戈化)
+    # sous les caractères, petit signe isolé (戈 en cursive ? 艮/良 ?) puis « 8 26 »
+    # date du papier : « 8 26 » = août 2026 ? cohérent avec le 丙午處暑 (2026-08-23)
+    # de 32_04 ; Notion disait 2026-07-12
+    # écarts avec le plan : columns vide (à remplir 放心 / 鬆胯 / 放心鬆胯 /
+    # 不受苦中苦 難為人上人) ; ni attribution, ni note en français
+    # questions : le signe sous 放心 est-il 戈, et « 8 26 » une date (laquelle) ?
+    # une variation à quatre images (01-04, kaishu + cursive en 03), ou 03 à part ?
+
+  - file: 2026-10-11_32_02.jpeg # à arbitrer
+    read: [鬆胯]
+    match: fang-xin-song-kua-bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; une seule variation pour les quatre feuilles (formats 1x2 + 1x2 + 1x4 + 2x5 du plan), 02 en 2e image
+    # feuille 2 sur 4 ; une colonne de 2 caractères sur grille imprimée 3x6 :
+    # le 2e « 1x2 » du format du plan, qui correspond feuille à feuille
+    # (01 放心 kaishu 1x2, 02 鬆胯 kaishu 1x2, 03 放心鬆胯 caoshu 1x4,
+    # 04 不受苦中苦 / 難為人上人 kaishu 2x5) ; columns: [] au plan, à compléter
+    # ni attribution, ni signature 戈, ni date, ni note en français sur 02 ;
+    # 01 porte un petit signe cursif (戈) et « 8 26 » ? ; 04 est signé
+    # 丙午處暑 戈作 → 2026-08-23 (Notion disait 2026-07-12)
+    # grep 鬆胯 : aussi zhu-yi-song-kua (忍受鬆胯) et an-zhi-shi-zuo-zhu-yi-fang-xin
+    # (容忍鬆胯), autres textes ; rien dans content/pieces/
+    # questions : date de la pièce, 處暑 (2026-08-23) de 04 ou « 8 26 » de 01 ?
+    # quatre images d'une variation, ou 03 (caoshu) en variation à part ?
+
+  - file: 2026-10-11_32_03.jpeg # à arbitrer
+    read: [放心鬆胯] # à arbitrer ; cursive : 放 (方 en boucle + 攵), 心 en crochet, 鬆 (髟 abrégé + 公), 胯 (月 + 夸) le plus lisible
+    match: fang-xin-song-kua-bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren # à arbitrer
+    confidence: high
+    script: caoshu # à arbitrer ; cursive très liée, xingshu possible
+    variation: v1a # à arbitrer ; 3e image de la même variation que 32_01, si les quatre feuilles n'en font qu'une
+    # une colonne de quatre caractères sur grille imprimée 3x8 : c'est le
+    # « 1x4 » du format du plan 1x2 + 1x2 + 1x4 + 2x5 (01 放心, 02 鬆胯,
+    # 03 放心鬆胯, 04 不受苦中苦 / 難為人上人)
+    # ni attribution, ni signature 戈, ni date, ni note en français ; par
+    # transparence, le 不受苦中苦 / 難為人上人 et 丙午處暑 de 32_04
+    # date de la pièce : 丙午處暑 sur 04 (2026-08-23 ?), Notion disait 2026-07-12
+    # écarts avec le plan : columns vide (à remplir d'après 01-04)
+    # questions : 03 en cursive est-elle une image de la même variation que les
+    # feuilles kaishu, une variation à part (v1b), ou un essai (attempt) ?
+
+  - file: 2026-10-11_32_04.jpeg # à arbitrer
+    read: [不受苦中苦, 難為人上人]
+    match: fang-xin-song-kua-bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren # à arbitrer
+    confidence: high
+    script: kaishu # à arbitrer ; kaishu au trait appuyé, 人 et 上 très ouverts
+    variation: v1a # à arbitrer ; 4e et dernière image de la variation de 32_01-03
+    # format 2x5 : deux colonnes de cinq caractères, à droite d'une feuille A4
+    # portrait, sur grille imprimée plus fine que 01-03 (6 colonnes de cases,
+    # un caractère sur environ 2x2 cases) ; c'est le « 2x5 » final du format
+    # du plan 1x2 + 1x2 + 1x4 + 2x5, qui colle aux quatre feuilles
+    # à gauche, colonne de date : 丙午處暑 (處 en forme cursive), puis 戈化
+    # (戈 = signature ; le 2e caractère se lit 化, 亻+ 匕, les autres entrées
+    # disent 戈作)
+    # date du papier : 丙午處暑 → 2026-08-23 (Notion disait 2026-07-12) ;
+    # cohérent avec le « 8 26 » de 32_01, visible ici par transparence sous la grille
+    # écarts avec le plan : columns vide (à remplir 放心 / 鬆胯 / 放心鬆胯 /
+    # 不受苦中苦 難為人上人) ; titre du plan identique au texte du papier ;
+    # ni attribution, ni note en français ; rien dans content/pieces/
+    # questions : 戈化 ou 戈作 ? date de la pièce 2026-08-23 (處暑) ? une
+    # variation à quatre images, ou 03 (caoshu) en variation à part ? image
+    # mise en avant : 04 ?
+
+  - file: 2026-10-11_33_01.jpeg # à arbitrer
+    read: [墨寺㞢文刻, 血珠玄鋒, 路此山岸] # à arbitrer ; 㞢 écrit 屮 sur 一
+    match: mo-si-wen-ke # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; feuille complète en kaishu, 33_09 la même en cursive (v1b ?)
+    # format 3 colonnes (5/4/4 caractères) sur grille imprimée, A4 portrait ;
+    # tache d'encre en haut au centre, commune aux feuilles 01-08
+    # signé 戈 澤宇, daté 30.8.26 (30 et 8 repris au rouge sur un 0) → 2026-08-30 ?
+    # (Notion disait 2026-04-05) ; aucune note en français, pas d'attribution
+    # écarts avec le plan : col. 1 identique (墨寺㞢文刻) ; col. 2 le plan dit
+    # 血珠成鋒玄, le papier 血珠玄鋒 (pas de 成, ordre 玄鋒) ; col. 3 路此山岸
+    # absente du plan ; format « à préciser » → 3x5 ?
+    # suite 33 : 02 玄鋒, 03 血珠, 04 文刻, 05 墨寺, 06 et 07 石夂 (?), 08 此山岸
+    # (grands caractères, deux par feuille), 09 le texte entier en cursive signé 戈
+    # questions : 血珠玄鋒 ou 血珠成鋒玄 ? 02-08 sont-ils des essais (attempt) ?
+    # que sont 06/07 (石 sur 夂 : composants de 路 ?) ? date 30.8.26 confirmée ?
+
+  - file: 2026-10-11_33_02.jpeg # à arbitrer
+    read: [玄鋒]
+    match: mo-si-wen-ke # à arbitrer ; grep 文刻 / 墨寺 / 血珠 → seule pièce du plan, 玄鋒 et 此岸 absents
+    confidence: medium
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; si les feuilles kaishu à deux caractères (02-08) forment un jeu, 01 (kaishu entier) et 09 (cursif entier) en v1b / v1c ?
+    # une colonne de deux grands caractères 玄 鋒 sur grille imprimée 3x6 au
+    # centre d'une A4 portrait (format 1x2 par feuille) ; tache d'eau en haut,
+    # commune à toute la pièce 33 ; transparence d'une autre feuille
+    # ni attribution, ni signature 戈, ni date, ni note en français
+    # suite 33 : 01 texte entier en kaishu (墨寺㞢文刻 / 血珠玄鋒 / 路此岸),
+    # signé 戈澤宇, date ambiguë au rouge « 30 8 » sur du noir « 3 2 6 » ;
+    # 02 玄鋒, 03 血珠, 04 文刻, 05 墨寺, 06 et 07 石夂 (?), 08 此山岸 (岸 coupé
+    # en 山 / 厈 ?) ; 09 texte entier en cursive, signé 戈澤宇
+    # écarts avec le plan : columns [墨寺㞢文刻, 血珠成鋒玄] contre le papier
+    # 血珠玄鋒 (ni 成, ordre 玄鋒) et une 3e colonne 路此岸 ; format « à préciser »
+    # (3 colonnes 5/4/3 sur 01) ; date du plan 2026-04-05, celle du papier à lire sur 01
+    # questions : la 2e colonne est-elle bien 血珠玄鋒 (le plan disait 血珠成鋒玄) ?
+    # 06/07 (石夂) sont-ils le 路 en morceaux ou une autre pièce ? quelle date
+    # lire sur 01 (30.8 ? 3.26 ?) ? une variation par feuille entière ou des essais ?
+
+  - file: 2026-10-11_33_03.jpeg # à arbitrer
+    read: [血珠]
+    match: mo-si-wen-ke # à arbitrer ; 血珠 est en tête de la 2e colonne du plan (血珠成鋒玄) et de 33_01
+    confidence: medium
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; feuille 血珠 en grand kaishu, une des études de 33_01 (à moins d'en faire un `attempt`)
+    # une colonne de deux grands caractères sur grille imprimée 3x6, A4 portrait ;
+    # tache d'encre en haut (commune à toute la pièce 33) ; ni attribution, ni
+    # signature 戈, ni date, ni note en français
+    # pièce 33 : 01 l'ensemble en kaishu, 墨寺㞢文刻 / 血珠玄鋒 / 路此山岸, signé
+    # 戈澤宇, daté au rouge 30.8.26 (sur un premier chiffre noir) ; 02 玄鋒,
+    # 03 血珠, 04 文刻, 05 墨寺, 06 et 07 石文 (?), 08 此山岸, 09 l'ensemble en cursive
+    # écarts avec le plan : 2e colonne 血珠玄鋒 sur le papier contre 血珠成鋒玄
+    # (pas de 成, ordre inversé) ; 3e colonne 路此山岸 absente du plan ; format
+    # « à préciser » ; date 2026-04-05 contre 30.8.26 (2026-08-30 ?) sur 33_01
+    # questions : 血珠玄鋒 ou 血珠成鋒玄 ? ajouter 路此山岸 ? les feuilles à deux
+    # caractères (02-08) : images d'une même variation kaishu, ou essais ?
+    # 06/07 石文 : quel caractère du texte (㞢文 ?) ?
+
+  - file: 2026-10-11_33_04.jpeg # à arbitrer
+    read: [文刻]
+    match: mo-si-wen-ke # à arbitrer ; 文刻 = fin de la colonne 1 du plan (墨寺㞢文刻)
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; étude partielle (attempt ?) de la variation de 33_01, plutôt qu'une variation à part
+    # format : une colonne de deux grands caractères sur une grille imprimée
+    # 3x6 (A4 portrait) ; ni attribution, ni signature 戈, ni date, ni note
+    # en français ; tache d'encre en haut, commune à toutes les feuilles 33
+    # par transparence : 墨寺 de 33_05
+    # pièce 33 : 33_01 (kaishu, signé 戈澤宇 + sceau rouge) et 33_08 (cursive)
+    # donnent le texte entier 墨寺㞢文刻 / 血珠玄鋒 / 路此岸 ; les feuilles
+    # 02, 03, 05, 06, 07 et 04 en sont les études, deux caractères chacune
+    # (06 et 07 : 石文 ?, absent du texte, peut-être une décomposition de 路 ?)
+    # écarts avec le plan : colonne 2 du plan 血珠成鋒玄, le papier dit 血珠玄鋒 ;
+    # colonne 3 路此岸 absente du plan ; format « à préciser »
+    # questions : ces feuilles à deux caractères sont-elles des essais
+    # (attempt) de la v1a de 33_01, ou à écarter ?
+
+  - file: 2026-10-11_33_05.jpeg # à arbitrer
+    read: [墨寺] # à arbitrer ; 墨 écrit 里 / 土 / 灬 (le 土 glissé entre 里 et 灬 au lieu d'être dessous) : style libre ?
+    match: mo-si-wen-ke # à arbitrer ; 墨寺 = début de la colonne 1 du plan (墨寺㞢文刻)
+    confidence: high
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; étude partielle (attempt ?) de la variation de 33_01, comme 33_04
+    # format : une colonne de deux grands caractères sur une grille imprimée
+    # 3x6 (A4 portrait) ; ni attribution, ni signature 戈, ni date, ni note
+    # en français ; tache d'encre en haut au centre, commune aux feuilles 33
+    # même construction de 墨 sur 33_01 et 33_09 : variante voulue, pas une faute
+    # écarts avec le plan : aucun sur ces deux caractères ; colonne 2 et 3 :
+    # voir 33_01 ; format « à préciser »
+    # questions : essai (attempt) de la v1a de 33_01, ou à écarter ? 墨 avec
+    # le 土 au milieu : à noter « 墨 écrit en style libre » ?
+
+  - file: 2026-10-11_33_06.jpeg # à arbitrer
+    read: [石夂] # à arbitrer : lecture incertaine, 路 en style libre ?
+    match: mo-si-wen-ke # à arbitrer
+    confidence: medium
+    script: ziyou # à arbitrer : kaishu si la forme est un caractère régulier
+    # grand caractère seul sur petite grille imprimée 3x6, au centre d'une feuille
+    # A4 ; sans signature ni date ni note ; même tache d'encre en haut que 33_01–09
+    # (même lot) ; 33_07 reprend la même forme
+    # 33_01 (signé 戈 澤宇, daté 30.8.26) porte [墨寺㞢文刻, 血珠玄鋒, 路此山岸] ;
+    # 33_02–05 et 08 isolent 玄鋒, 血珠, 文刻, 墨寺, 此山岸 : seul 路 (et 㞢) manque,
+    # d'où l'hypothèse 路 réagencé (口 au-dessus de 夂) ; 石 + 夂 n'est pas dans le texte
+    # écarts avec le plan : 2e colonne 血珠成鋒玄 au plan, 血珠玄鋒 sur 33_01 ;
+    # 3e colonne 路此山岸 absente du plan ; date 2026-04-05 au plan, 30.8.26 sur 33_01
+    # question : quel caractère est-ce ? étude (attempt) ou à écarter (discarded) ?
+
+  - file: 2026-10-11_33_07.jpeg # à arbitrer
+    read: [石夂] # à arbitrer ; 石 (一 crocheté, 丿, 口) sur 夂 (grande diagonale en 捺), forme absente du texte : 路 en style libre (足 réduit à 石, 各 à 夂) ?
+    match: mo-si-wen-ke # à arbitrer
+    confidence: medium
+    script: kaishu # à arbitrer ; ou ziyou si 石夂 est un 路 libre
+    variation: attempt # à arbitrer ; doublon de 33_06 (même 石夂), essai de détail plutôt qu'image de la variation
+    # une colonne de 2 caractères sur grille imprimée 3x6, A4 portrait ; ni
+    # attribution, ni signature 戈, ni date, ni note en français
+    # ensemble 33 : 01 l'œuvre en kaishu, 墨寺㞢文刻 / 血珠玄鋒 / 路此岸,
+    # signée 戈澤宇, datée en rouge 30 8 26 → 2026-08-30 (Notion disait
+    # 2026-04-05) ; 09 la même en cursive, signée ; 02 玄鋒, 03 血珠, 04 文刻,
+    # 05 墨寺, 06 et 07 石夂, 08 此山岸 : feuilles de détail
+    # écarts avec le plan : 2e colonne 血珠玄鋒 sur le papier (plan 血珠成鋒玄,
+    # 成 absent) ; 3e colonne 路此岸 absente du plan ; format à préciser →
+    # 5/4/3 sur 01 ; 08 écrit 此山岸, 01 et 09 路此岸
+    # grep 墨寺, 文刻, 血珠 : seule mo-si-wen-ke ; 石夂, 夂, 玄鋒, 此岸 : rien ;
+    # rien dans content/pieces/
+    # questions : que représente 石夂 (路 décomposé, autre caractère) ? 06/07
+    # à garder comme essais ou à écarter ? 路此岸 ou 此山岸 ?
+
+  - file: 2026-10-11_33_08.jpeg # à arbitrer
+    read: [此山岸] # à arbitrer ; 此 (止 + 匕 en grand crochet), 山, puis 厈 (厂 + 干) : 岸 étiré sur deux cases, ou 此岸 seul ?
+    match: mo-si-wen-ke # à arbitrer ; fin de la 3e colonne de 33_01 (路此山岸), absente du plan
+    confidence: medium
+    script: kaishu # à arbitrer
+    variation: v1a # à arbitrer ; feuille de détail de la variation de 33_01 (kind detail ou attempt ?)
+    # une colonne de trois unités dans la colonne centrale d'une grille
+    # imprimée 3x6, A4 portrait ; tache d'encre en haut, commune aux feuilles 33
+    # ni attribution, ni signature 戈, ni date, ni note en français
+    # par transparence : la version cursive de 33_09 (墨寺㞢文刻 / 血珠玄鋒 / 路此山岸)
+    # date de la pièce : 30.8.26 sur 33_01 → 2026-08-30 (Notion disait 2026-04-05)
+    # écarts avec le plan : 3e colonne 路此山岸 absente (columns du plan :
+    # 墨寺㞢文刻 / 血珠成鋒玄) ; 路 manque ici (06 et 07 石夂 en seraient l'étude ?)
+    # grep 此山, 山岸 : vides dans le plan et content/pieces/
+    # questions : 此山岸 ou 此岸 (le 山 est-il celui de 岸) ? image de la
+    # variation (detail) ou essai (attempt) ?
+
+  - file: 2026-10-11_33_09.jpeg # à arbitrer
+    read: [墨寺㞢文刻, 血珠玄鋒, 路此山岸] # à arbitrer ; col. 1 presque régulière (㞢 = 屮 + 一, comme sur 33_01), col. 2 : 玄 en boucle cursive (亠 + 幺), col. 3 : 路 très abrégé
+    match: mo-si-wen-ke # à arbitrer
+    confidence: medium
+    script: xingshu # à arbitrer ; col. 1 proche du kaishu, col. 2-3 en cursive liée (caoshu possible)
+    variation: v1b # à arbitrer ; même texte que 33_01 (kaishu, signé 戈澤宇 30.8.26), ici en cursive : variation à part plutôt qu'image de v1a
+    # trois colonnes 5 + 4 + 4 sur grille imprimée, feuille A4 portrait ; tache d'encre en haut
+    # signature en bas à gauche : 戈 + 澤 (宇 ?) en cursive, coupée par le bord du scan ; pas de date, ni attribution, ni note en français
+    # date de la pièce : 30.8.26 sur 33_01 (2026-08-30 ?), Notion disait 2026-04-05
+    # écarts avec le plan : col. 2 du plan 血珠成鋒玄 (5 car.) contre 血珠玄鋒 sur le papier (pas de 成) ; col. 3 路此山岸 absente du plan ; format « à préciser » → 5+4+4
+    # pièce 33 : 01 = texte entier en kaishu signé et daté ; 07 = 石文, 08 = 此山岸 seuls sur la grille (essais de caractères ?)
+    # questions : 成 retiré ou oublié ? 33_09 en cursive est-elle v1b, ou un essai (attempt) de v1a ?
