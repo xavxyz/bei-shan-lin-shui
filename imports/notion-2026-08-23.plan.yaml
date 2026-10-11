@@ -25,6 +25,18 @@ projects:
     title: 修竹參差
     presentation: ""
     theme: jade
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  - id: shu-hu-hun-dun
+    title: 儵忽混沌
+    presentation: ""
+    theme: ink
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  - id: tian-ren-di
+    title: 天人地
+    presentation: ""
+    theme: ink
 pieces:
   - slug: xi-you-ji
     title: 西遊記
@@ -100,6 +112,8 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 莫性急平流缓進 » → « 莫性急平流緩進 »
+  # v2 à faire : scan 2026-10-11_01_01.jpeg (attribution 苏東坡, notes en français), kaishu, kept
+  # date du papier : « 3.1.26 » sur le scan de la v1 (Notion disait 2025-12-22)
   - slug: mo-xing-ji
     title: 莫性急
     status: made
@@ -107,12 +121,19 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2025-12-22
+      date: 2026-01-03
       format: 2x7
       columns:
         - 莫性急平流緩進
         - 墨行機兔起鶻落
-    variations: []
+    variations:
+      - id: v1a
+        script: kaishu
+        status: tried
+        images:
+          - source: imports/scans/2026-10-11_01_02.jpeg
+            file: v1a.jpg
+            kind: work
     notion:
       title: 莫性急
       status: Mouvementée
@@ -242,7 +263,8 @@ pieces:
   - slug: qi-huan-shu-hu-yi-mao-fen-xing
     title: 奇幻儵忽，易貌分形
     status: made
-    projects: []
+    projects:
+      - shu-hu-hun-dun
     published: false
     version:
       id: v1
@@ -251,7 +273,15 @@ pieces:
       columns:
         - 奇幻儵忽
         - 易貌分形
-    variations: []
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_03_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
     notion:
       title: 奇幻儵忽，易貌分形
       status: Mouvementée
@@ -314,7 +344,8 @@ pieces:
   - slug: shu-hu-hun-dun
     title: 儵忽混沌
     status: made
-    projects: []
+    projects:
+      - shu-hu-hun-dun
     published: false
     version:
       id: v1
@@ -432,6 +463,7 @@ pieces:
       relations:
         - 中和集
   # à arbitrer — title : converti du simplifié au traditionnel : « 太虚幻境红楼梦 » → « 太虛幻境紅樓夢 »
+  # date du papier : signé 丙午雨水 (Notion disait 2026-01-15)
   - slug: tai-xu-huan-jing-hong-lou-meng
     title: 太虛幻境紅樓夢
     status: made
@@ -440,13 +472,21 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-01-15
+      date: 2026-02-18
       format: 3x7
       columns:
         - 真作假時假亦真
         - 無為有處有還無
         - 太虛幻境紅樓夢
-    variations: []
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_05_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
     notion:
       title: 太虚幻境红楼梦
       status: Mouvementée
@@ -544,7 +584,9 @@ pieces:
       relations:
         - 中和集
   # à arbitrer — title : converti du simplifié au traditionnel : « 题破山寺后禅院 » → « 題破山寺後禪院 »
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # date du papier : signé 丙午雨水 地中海泡澡 (Notion disait 2026-01-18)
+  # colonnes et format lus sur le scan 2026-10-11_06_01.jpeg
+  # 4e colonne : 俱 écrit en style libre
   - slug: ti-po-shan-si-hou-shan-yuan
     title: 題破山寺後禪院
     status: made
@@ -552,10 +594,24 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-01-18
-      format: 5x10 + [titre (7) + nom (2) + dynastie (1)]
-      columns: []
-    variations: []
+      date: 2026-02-18
+      format: 4x10 + 1x7 + 1x3
+      columns:
+        - 清晨入古寺初日照高林
+        - 曲徑通幽處禪房花木深
+        - 山光悅鳥性潭影空人心
+        - 萬籟此俱寂惟餘鐘磬音
+        - 題破山寺後禪院
+        - 唐常建
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_06_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
     notion:
       title: 题破山寺后禅院
       status: Mouvementée
@@ -1036,6 +1092,7 @@ pieces:
       relations: []
   # à arbitrer — title : converti du simplifié au traditionnel : « 蒙霁去巧，风月无边，没有隐语。 » → « 蒙霽去巧，風月無邊，沒有隱語。 »
   # à arbitrer — version.format : aucun format dans l'export
+  # 没有隐语
   - slug: meng-ji-qu-qiao-feng-yue-wu-bian-mei-you-yin-yu
     title: 蒙霽去巧，風月無邊，沒有隱語。
     status: made
@@ -1044,11 +1101,19 @@ pieces:
     version:
       id: v1
       date: 2026-02-17
-      format: à préciser
+      format: 2x4
       columns:
         - 蒙霽去巧
         - 風月無邊
-    variations: []
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_04_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
     notion:
       title: 蒙霁去巧，风月无边，没有隐语。
       status: Mouvementée
@@ -1315,7 +1380,8 @@ pieces:
   - slug: tian-ren-di
     title: 天人地
     status: made
-    projects: []
+    projects:
+      - tian-ren-di
     published: false
     version:
       id: v1
@@ -1569,3 +1635,29 @@ pieces:
       status: Brute
       url: https://claude.ai/share/80883ea3-feeb-453c-80c5-26970fe1eba6
       relations: []
+  # absente de Notion : identifiée sur le scan 2026-10-11_02_01.jpeg (registre imports/scans.yaml)
+  # à arbitrer — version.date : date inconnue ; celle du scan en attendant, à corriger
+  - slug: zhu-yi-song-kua
+    title: 注意鬆胯
+    status: made
+    projects:
+      - tian-ren-di
+    published: false
+    version:
+      id: v1
+      date: 2026-10-11
+      format: 4x4
+      columns:
+        - 堅持注意
+        - 忍受鬆胯
+        - 水火既濟
+        - 龍虎穴合
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_02_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
