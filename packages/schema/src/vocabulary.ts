@@ -20,7 +20,7 @@ export type PieceStatus = (typeof PIECE_STATUSES)[number];
 export const VARIATION_STATUSES = ["to-try", "tried", "kept", "set-aside"] as const;
 export type VariationStatus = (typeof VARIATION_STATUSES)[number];
 
-export const SCRIPTS = ["kaishu", "xingshu", "xingcao", "caoshu", "kuangcao"] as const;
+export const SCRIPTS = ["kaishu", "xingshu", "xingcao", "caoshu", "kuangcao", "ziyou"] as const;
 export type Script = (typeof SCRIPTS)[number];
 
 export const IMAGE_KINDS = ["work", "detail", "attempt", "context"] as const;
@@ -39,6 +39,7 @@ export const SCRIPT_LABELS: Record<Script, string> = {
   xingcao: "grand courant",
   caoshu: "cursif",
   kuangcao: "cursive folle",
+  ziyou: "libre",
 };
 
 export const SCRIPT_HANZI: Record<Script, string> = {
@@ -47,6 +48,7 @@ export const SCRIPT_HANZI: Record<Script, string> = {
   xingcao: "行草",
   caoshu: "草書",
   kuangcao: "狂草",
+  ziyou: "自由",
 };
 
 export const PIECE_STATUS_LABELS: Record<PieceStatus, string> = {

@@ -78,6 +78,20 @@ describe("une pièce bien formée", () => {
 
     expect(content.pieces[0]!.versions[0]!.variations[0]!.scriptLabel).toBe("courant");
   });
+
+  it("accepte le style libre et le nomme en français", async () => {
+    const content = await loadValid({
+      ...wellFormedTree,
+      files: [],
+      pieces: {
+        "shan-ju-qiu-ming": withVariations([{ ...variation("v1a"), script: "ziyou" }]),
+      },
+    });
+
+    const libre = content.pieces[0]!.versions[0]!.variations[0]!;
+    expect(libre.script).toBe("ziyou");
+    expect(libre.scriptLabel).toBe("libre");
+  });
 });
 
 describe("violations de schéma", () => {
