@@ -11,6 +11,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "validate:content": "tsx packages/content/src/cli/validate.ts content",
+    "import:notion": "tsx packages/notion-import/src/cli/import-notion.ts",
     "cosmos": "pnpm --filter @bsls/site cosmos",
     "prepare": "husky"
   },

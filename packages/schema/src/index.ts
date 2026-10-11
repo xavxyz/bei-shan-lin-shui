@@ -17,14 +17,14 @@ export { z };
  */
 export const RESERVED_PROJECT_ID = "pieces";
 
-const slug = z
+export const slugSchema = z
   .string()
   .regex(
     /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
     "attendu : un slug en minuscules, mots séparés par des tirets",
   );
 
-const localId = z
+export const localIdSchema = z
   .string()
   .regex(/^v\d+[a-z]*$/, "attendu : un identifiant local de la forme v1 ou v1a");
 
@@ -43,7 +43,7 @@ export const imageSchema = z.object({
 });
 
 export const variationSchema = z.object({
-  id: localId,
+  id: localIdSchema,
   script: z.enum(SCRIPTS),
   status: z.enum(VARIATION_STATUSES),
   personal_note: prose.optional(),
@@ -51,7 +51,7 @@ export const variationSchema = z.object({
 });
 
 export const versionSchema = z.object({
-  id: localId,
+  id: localIdSchema,
   date: z.coerce.date(),
   format: z.string().min(1),
   columns: z.array(z.string().min(1)).default([]),
@@ -73,10 +73,14 @@ export const sourceSchema = z.object({
  */
 export const pinyinOverridesSchema = z.record(z.string().min(1), z.string().min(1));
 
-const pieceFields = z.object({
+/**
+ * Les champs d'une pièce, sans la vérification des doublons : c'est la brique
+ * dont dérivent le frontmatter, la pièce chargée et le plan d'import.
+ */
+export const pieceFieldsSchema = z.object({
   title: z.string().min(1),
-  slug,
-  projects: z.array(slug).default([]),
+  slug: slugSchema,
+  projects: z.array(slugSchema).default([]),
   status: z.enum(PIECE_STATUSES),
   source: sourceSchema.optional(),
   versions: z.array(versionSchema).min(1, "attendu : au moins une version"),
@@ -89,7 +93,7 @@ const pieceFields = z.object({
  * Les identifiants locaux ancrent les URL et les noms de fichiers d'images :
  * un doublon rendrait une variation inatteignable.
  */
-export const pieceFrontmatterSchema = pieceFields.superRefine((piece, ctx) => {
+export const pieceFrontmatterSchema = pieceFieldsSchema.superRefine((piece, ctx) => {
   reportDuplicates(
     piece.versions.map((version) => version.id),
     (index) => ["versions", index, "id"],
@@ -161,7 +165,7 @@ export const loadedVersionSchema = versionSchema.extend({
   variations: z.array(loadedVariationSchema),
 });
 
-export const loadedPieceSchema = pieceFields.extend({
+export const loadedPieceSchema = pieceFieldsSchema.extend({
   title: chineseTextSchema,
   source: sourceSchema.extend({ full_text: chineseTextSchema.optional() }).optional(),
   versions: z.array(loadedVersionSchema),

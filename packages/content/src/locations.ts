@@ -19,6 +19,10 @@ export function pieceFile(slug: string): string {
   return `${PIECES_DIR}/${slug}/${PIECE_FILE}`;
 }
 
+export function projectFile(id: string): string {
+  return `${PROJECTS_DIR}/${id}.yaml`;
+}
+
 export function pieceImageFile(slug: string, file: string): string {
   return `${PIECES_DIR}/${slug}/${IMAGES_DIR}/${file}`;
 }

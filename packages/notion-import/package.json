@@ -1,0 +1,25 @@
+{
+  "name": "@bsls/notion-import",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@bsls/content": "workspace:*",
+    "@bsls/schema": "workspace:*",
+    "opencc-js": "^1.0.5",
+    "pinyin-pro": "^3.26.0",
+    "sharp": "^0.34.5",
+    "yaml": "^2.6.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/opencc-js": "^1.0.3"
+  }
+}
