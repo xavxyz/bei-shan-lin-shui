@@ -87,8 +87,7 @@ Fini quand le plan est valide, le scan copié et l'entrée arbitrée. Puis scan 
   remplacée : `# date du papier : signé 丙午雨水 (Notion disait 2026-01-15)`.
 - **Un caractère qui semble faux** est souvent écrit en style libre : poser la
   question, écrire le caractère confirmé, noter `# <caractère> écrit en style libre`.
-- **Le style** se propose, le calligraphe le fixe. `ziyou` (libre) n'existe dans
-  le vocabulaire qu'une fois la branche `feat/style-libre` fusionnée.
+- **Le style** se propose, le calligraphe le fixe.
 - **Une seule version par pièce dans le plan.** Le scan d'une version suivante
   va au registre et dans un commentaire `# v2 à faire : <fichier>, <style>, <statut>`
   au-dessus de la pièce ; il s'ajoute au contenu après `apply`.
