@@ -639,7 +639,10 @@ pieces:
       relations:
         - 螃蟹讽刺 🦀
   # à arbitrer — title : converti du simplifié au traditionnel : « 虚心實腹 » → « 虛心實腹 »
-  # scan attendu
+  # date du papier : signé 丙午雨水 (Notion disait 2026-01-21)
+  # format du scan 2026-10-11_07_01.jpeg : pas de bambous (Notion disait 3x7 （+ bambous）) ;
+  # attribution 中和集 hors colonnes
+  # 1re colonne : 道 écrit en style libre
   - slug: xu-xin-shi-fu
     title: 虛心實腹
     status: made
@@ -647,15 +650,24 @@ pieces:
       - zhong-he-ji
       - xiu-zhu-can-cha
     published: false
+    translation: Esprit vide, ventre plein, les fondamentaux de la voie
     version:
       id: v1
-      date: 2026-01-21
-      format: 3x7 （+ bambous）
+      date: 2026-02-18
+      format: 3x7
       columns:
         - 虛心實腹道之基
         - 虛心直節青青竹
         - 箇是鍊虛第一機
-    variations: []
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_07_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
     notion:
       title: 虚心實腹
       status: Mouvementée
@@ -1154,9 +1166,12 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
+  # statut : in-progress dans Notion, l'encre est posée sur les scans 2026-10-11_08_*
+  # colonnes lues sur les scans 08_01 (1x7) et 08_02 (4x4) (Notion disait
+  # « 以意引氣，意守丹田。 / 虛靈頂勁，一點金剛。 »)
   - slug: yi-shou-yi-dian-jin-gang-qi
     title: 意守一點金剛氣
-    status: in-progress
+    status: made
     projects: []
     published: false
     version:
@@ -1164,9 +1179,31 @@ pieces:
       date: 2026-02-27
       format: 1x7 + 4x4
       columns:
-        - 以意引氣，意守丹田。
-        - 虛靈頂勁，一點金剛。
-    variations: []
+        - 意守一點金剛氣
+        - 以意引氣
+        - 意守丹田
+        - 虛靈頂勁
+        - 一點金剛
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_08_01.jpeg
+            file: v1a-1.jpg
+            kind: work
+            featured: true
+          - source: imports/scans/2026-10-11_08_02.jpeg
+            file: v1a-2.jpg
+            kind: work
+      # feuille ③ : 意守一點金剛氣 en xingshu, suivi d'un commentaire signé 戈
+      - id: v1b
+        script: xingshu
+        status: tried
+        images:
+          - source: imports/scans/2026-10-11_08_03.jpeg
+            file: v1b.jpg
+            kind: work
     notion:
       title: 意守一點金剛氣
       status: Cadre imprimé

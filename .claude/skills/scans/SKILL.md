@@ -87,6 +87,9 @@ Fini quand le plan est valide, le scan copié et l'entrée arbitrée. Puis scan 
   remplacée : `# date du papier : signé 丙午雨水 (Notion disait 2026-01-15)`.
 - **Un caractère qui semble faux** est souvent écrit en style libre : poser la
   question, écrire le caractère confirmé, noter `# <caractère> écrit en style libre`.
+- **La signature du calligraphe est 戈**, souvent en cursive méconnaissable : un
+  petit signe isolé près de la date ou dans un coin, c'est elle. Dans un
+  commentaire, « 戈說 » ouvre ses propres mots.
 - **Le style** se propose, le calligraphe le fixe.
 - **Une seule version par pièce dans le plan.** Le scan d'une version suivante
   va au registre et dans un commentaire `# v2 à faire : <fichier>, <style>, <statut>`
