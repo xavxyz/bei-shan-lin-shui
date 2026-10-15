@@ -73,7 +73,15 @@ scans:
     # signé 丙午雨水 (vers le 18-02-2026), Notion dit 2026-01-15
 
   - file: 2026-10-11_06_01.jpeg # à arbitrer
-    read: [清晨入古寺初日照高林, 曲徑通幽處禪房花木深, 山光悅鳥性潭影空人心, 萬籟此俱寂惟餘鐘磬音, 題破山寺後禪院, 唐常建]
+    read:
+      [
+        清晨入古寺初日照高林,
+        曲徑通幽處禪房花木深,
+        山光悅鳥性潭影空人心,
+        萬籟此俱寂惟餘鐘磬音,
+        題破山寺後禪院,
+        唐常建,
+      ]
     match: ti-po-shan-si-hou-shan-yuan
     confidence: high
     script: kaishu
@@ -293,7 +301,7 @@ scans:
     read: [閃仚機] # à arbitrer
     match: new # à arbitrer
     confidence: low
-    script: lishu # à arbitrer
+    # à arbitrer — script proposé : lishu (隸書), absent de SCRIPTS
     # une colonne de trois grands caractères, chacun sur 3x3 cases d'une grille
     # imprimée 3x9 : format 1x3 ; points rouges au départ de certains traits
     # 1er caractère : 門 garni d'un trait central ondulé et de deux courts,
@@ -447,7 +455,14 @@ scans:
     # slug et projet à donner par le calligraphe ; variation ou attempt ?
 
   - file: 2026-10-11_16_03.jpeg # à arbitrer
-    read: [很久以前奶奶的茶几上一, 直放着一本書書上我多次, 看見一個篆字看不懂它是, 什麼我就學完了這本書才, 明白我把騰蛇臨寫登石如, 右逸聞] # à arbitrer
+    read: [
+        很久以前奶奶的茶几上一,
+        直放着一本書書上我多次,
+        看見一個篆字看不懂它是,
+        什麼我就學完了這本書才,
+        明白我把騰蛇臨寫登石如,
+        右逸聞,
+      ] # à arbitrer
     match: new # à arbitrer
     confidence: medium
     script: kaishu # à arbitrer
@@ -568,7 +583,7 @@ scans:
     read: [心, 臨菓] # à arbitrer — 心 ou 以 (古文 㠯) ? 菓, 葉 ou 蕫 ?
     match: new # à arbitrer — même pièce que 18_02 (水火調劑), feuille de tête ?
     confidence: low
-    script: lishu # à arbitrer — mi-sceau, mi-lishu
+    # à arbitrer — script proposé : lishu (隸書), absent de SCRIPTS ; mi-sceau, mi-lishu
     # feuille 1 sur 4 ; portrait, grille imprimée pâle 3 colonnes x 6 rangées
     # (même gabarit que 18_02), deux caractères de 2 cases dans la colonne
     # centrale ; au-dessus, hors grille, un grand caractère en ㄥ + trait courbe
@@ -629,7 +644,7 @@ scans:
     match: new # à arbitrer — même pièce que 18_02 (水火調劑, flanqué de 未/既)
     confidence: medium
     script: xingshu # à arbitrer — progression kaishu → xingshu → caoshu d'une colonne à l'autre
-    variation: attempt # à arbitrer — essai pour 18_02, comme 18_03
+    # à arbitrer — image kind: attempt plutôt qu'une variation ; essai pour 18_02, comme 18_03
     # feuille 4 sur 4 ; papier tourné de 90° au scan (lire en tournant de 90°
     # vers la gauche) ; grille 米 rouge imprimée 3x2 : format 3x2 ; rangée du
     # haut 未 調 既 (既 en cursive, 旡 très lié), rangée du bas trois 劑 de plus
@@ -1340,7 +1355,7 @@ scans:
     match: mo-si-wen-ke # à arbitrer
     confidence: medium
     script: kaishu # à arbitrer ; ou ziyou si 石夂 est un 路 libre
-    variation: attempt # à arbitrer ; doublon de 33_06 (même 石夂), essai de détail plutôt qu'image de la variation
+    # à arbitrer — image kind: attempt plutôt qu'une variation ; doublon de 33_06 (même 石夂), essai de détail plutôt qu'image de la variation
     # une colonne de 2 caractères sur grille imprimée 3x6, A4 portrait ; ni
     # attribution, ni signature 戈, ni date, ni note en français
     # ensemble 33 : 01 l'œuvre en kaishu, 墨寺㞢文刻 / 血珠玄鋒 / 路此岸,

@@ -31,13 +31,15 @@ const plannedImageSchema = imageSchema.pick({ file: true, featured: true }).exte
   kind: imageSchema.shape.kind.default("work"),
 });
 
+export const variationIdSchema = localIdSchema.regex(
+  /^v\d+[a-z]+$/,
+  "attendu : un identifiant de variation, par exemple v1a",
+);
+
 const plannedVariationSchema = variationSchema
   .pick({ script: true, status: true, personal_note: true })
   .extend({
-    id: localIdSchema.regex(
-      /^v\d+[a-z]+$/,
-      "attendu : un identifiant de variation, par exemple v1a",
-    ),
+    id: variationIdSchema,
     images: z.array(plannedImageSchema).default([]),
   });
 

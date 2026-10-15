@@ -6,12 +6,15 @@ y compris 01 à 08, déjà arbitrées une première fois : tout est à revoir au
 calme. Les entrées de 10_01 à 33_09 ont été écrites par des sous-agents,
 une par scan ; ce sont des propositions, pas des lectures confirmées.
 
-## Valeurs invalides dans le registre
+## Valeurs hors vocabulaire, passées en commentaire
 
-- `script: lishu` sur **12_01** et **18_01** : `lishu` n'est pas dans `SCRIPTS`
-  (kaishu, xingshu, xingcao, caoshu, kuangcao, ziyou).
-- `variation: attempt` sur **18_04** et **33_07** : `attempt` est un type
-  d'image, pas un identifiant de variation (`v1a`…).
+`pnpm validate:imports` les refuse ; elles attendent l'arbitrage en commentaire.
+
+- **12_01** et **18_01** : style proposé `lishu` (隸書), absent de `SCRIPTS`
+  (kaishu, xingshu, xingcao, caoshu, kuangcao, ziyou). Arbitré : lishu
+  n'entre pas au vocabulaire ; le style de ces deux scans est à reprendre.
+- **18_04** et **33_07** : variation proposée `attempt`, qui est un type
+  d'image et non un identifiant de variation (`v1a`…).
 
 ## Noms hors format
 
@@ -46,23 +49,23 @@ en kaishu, 03/05/07 en cursive). Une variation par style (v1a / v1b) ?
 
 Chacune attend un slug et un projet.
 
-| Scans | Texte lu | Pistes |
-|---|---|---|
-| 12_01 | 閃仚機 ? | lecture très incertaine ; `shu-heng-zhuo-an-npl` ? |
-| 13_01–03 | 流, 未干, 山川臨 ? | étude de 流 ? daté 丙午春分 / 23 ou 29.3.26 |
-| 14_01–03 | 地支 (12 branches et animaux) | `di-zhi`, projet tian-ren-di ? 28.3.26 alors que 春分 = 20 mars |
-| 15_01 | 龍騰虎躍, « 戈試越來越書 » | ou étude de `deng-shan-ge-jue` (六龍騰岱六虎躍崑) ? |
-| 16_01–06 | 龍 / 騰, lignes du 乾 (潛龍, 見龍, 亢龍…) | une pièce 乾 ou un projet ? 16_03 : récit en prose + sceau 龍 |
-| 17_01–03 | 虎, 肅書 ?, 躍, 履虎尾 | pièce 履虎尾 ou études de `deng-shan-ge-jue` ? |
-| 18_01–04 | 水火調劑 (未 / 既), 臨菓 ? | projet zhong-he-ji ? |
-| 19_01–02 | 吐納 (kaishu puis caoshu) | v1a / v1b ou essai ? |
-| 20_01–02 | 煉丹, 修養虛 | ou `lian-xu-ge` (鍊虛歌) ? |
-| 21_01–02 | 凝聚 / 聚精會神 | ou lié à `an-zhi-shi-zuo-zhu-yi-fang-xin` ? date 13 ou 19.4.26 |
-| 22_01–02 | 醫王會 / 禪指壓 (Iokai Shiatsu) | une pièce ou deux ? graphies japonaises (医/会/圧) ou traditionnel ? |
-| 23 | 篤志力行 / 專心警省 | daté ? 立夏 ; mains imprimées au-dessus des colonnes |
-| 27 | 飛鴻戲海 / 雲鶴遊天 | 飛鴻 ou 群鴻 (梁武帝 sur 鍾繇) ? 丙午小滿 |
-| 30_01–03 | 成人不自在 / 自在不成人 (紅樓夢 82) | projet `tai-xu-huan-jing-hong-lou-meng` ? 30_03 : traduction manuscrite |
-| 31_01–04 | 虛靈頂勁, 松胯 | pièce à part, ou études de `yi-shou-yi-dian-jin-gang-qi` / `meshkah` / `fang-xin-song-kua-…` ? |
+| Scans    | Texte lu                                  | Pistes                                                                                         |
+| -------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| 12_01    | 閃仚機 ?                                  | lecture très incertaine ; `shu-heng-zhuo-an-npl` ?                                             |
+| 13_01–03 | 流, 未干, 山川臨 ?                        | étude de 流 ? daté 丙午春分 / 23 ou 29.3.26                                                    |
+| 14_01–03 | 地支 (12 branches et animaux)             | `di-zhi`, projet tian-ren-di ? 28.3.26 alors que 春分 = 20 mars                                |
+| 15_01    | 龍騰虎躍, « 戈試越來越書 »                | ou étude de `deng-shan-ge-jue` (六龍騰岱六虎躍崑) ?                                            |
+| 16_01–06 | 龍 / 騰, lignes du 乾 (潛龍, 見龍, 亢龍…) | une pièce 乾 ou un projet ? 16_03 : récit en prose + sceau 龍                                  |
+| 17_01–03 | 虎, 肅書 ?, 躍, 履虎尾                    | pièce 履虎尾 ou études de `deng-shan-ge-jue` ?                                                 |
+| 18_01–04 | 水火調劑 (未 / 既), 臨菓 ?                | projet zhong-he-ji ?                                                                           |
+| 19_01–02 | 吐納 (kaishu puis caoshu)                 | v1a / v1b ou essai ?                                                                           |
+| 20_01–02 | 煉丹, 修養虛                              | ou `lian-xu-ge` (鍊虛歌) ?                                                                     |
+| 21_01–02 | 凝聚 / 聚精會神                           | ou lié à `an-zhi-shi-zuo-zhu-yi-fang-xin` ? date 13 ou 19.4.26                                 |
+| 22_01–02 | 醫王會 / 禪指壓 (Iokai Shiatsu)           | une pièce ou deux ? graphies japonaises (医/会/圧) ou traditionnel ?                           |
+| 23       | 篤志力行 / 專心警省                       | daté ? 立夏 ; mains imprimées au-dessus des colonnes                                           |
+| 27       | 飛鴻戲海 / 雲鶴遊天                       | 飛鴻 ou 群鴻 (梁武帝 sur 鍾繇) ? 丙午小滿                                                      |
+| 30_01–03 | 成人不自在 / 自在不成人 (紅樓夢 82)       | projet `tai-xu-huan-jing-hong-lou-meng` ? 30_03 : traduction manuscrite                        |
+| 31_01–04 | 虛靈頂勁, 松胯                            | pièce à part, ou études de `yi-shou-yi-dian-jin-gang-qi` / `meshkah` / `fang-xin-song-kua-…` ? |
 
 ### Le papier contredit le plan
 
