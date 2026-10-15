@@ -37,6 +37,13 @@ projects:
     title: 天人地
     presentation: ""
     theme: ink
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_24.jpeg (气功 → 氣功)
+  - id: qi-gong
+    title: 氣功
+    presentation: ""
+    theme: ink
 pieces:
   - slug: xi-you-ji
     title: 西遊記
@@ -111,14 +118,17 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 莫性急平流缓進 » → « 莫性急平流緩進 »
-  # v2 à faire : scan 2026-10-11_01_01.jpeg (attribution 苏東坡, notes en français), kaishu, kept
-  # date du papier : « 3.1.26 » sur le scan de la v1 (Notion disait 2025-12-22)
+  # 緩 en traditionnel sur les deux scans (Notion : 缓)
+  # v2 à faire : 2026-10-11_01_01.jpeg, kaishu, kept, image mise en avant de la pièce ;
+  # date du papier : 戈 立春 (丙午) → 2026-02-11 ; format 2x7 + 蘇東坡 (苏 écrit en simplifié)
+  # date du papier : 3.1.26 (Notion disait 2025-12-22)
+  # traduction écrite à la main sur le scan 2026-10-11_01_01.jpeg
   - slug: mo-xing-ji
     title: 莫性急
     status: made
     projects: []
     published: false
+    translation: La patience et la constance dans la progression. La vivacité et la précision dans l'action.
     version:
       id: v1
       date: 2026-01-03
@@ -260,6 +270,7 @@ pieces:
         - 自得身心定
         - 竖横 《卓菴》 NPL
         - （回光反照） 《破惑歌》
+  # date du papier : « 2 26 » (Notion disait 2026-01-02)
   - slug: qi-huan-shu-hu-yi-mao-fen-xing
     title: 奇幻儵忽，易貌分形
     status: made
@@ -268,7 +279,7 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-01-02
+      date: 2026-02-15 # jour absent du papier
       format: 4x2
       columns:
         - 奇幻儵忽
@@ -384,22 +395,40 @@ pieces:
       url: ""
       relations:
         - 奇幻儵忽，易貌分形
+  # date du papier : 戈 立夏, sans 日 (Notion disait 2026-01-09)
+  # 眞 dans le titre, comme sur le papier (Notion : 真)
   - slug: gui-she-xiang-jiao-shui-huo-ji-ji-zhen-yi-nai-ding-zhong-he
-    title: 龜蛇相交，水火既濟，真一乃定，中和乃成
+    title: 龜蛇相交，水火既濟，眞一乃定，中和乃成
     status: made
     projects:
       - zhong-he-ji
     published: false
     version:
       id: v1
-      date: 2026-01-09
+      date: 2026-05-13
       format: 4x4
       columns:
         - 龜蛇相交
         - 水火既濟
-        - 真一乃定
-        - 中和乃成
-    variations: []
+        - 眞一乃定 # 眞 confirmé par le calligraphe (真 sur 25_02)
+        - 中和乃成 # 中和 assemblés en une composition libre
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_25_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+      # 水火 écrits 氵 et 灬 ; sans signature propre, celle de 25_01 décalquée par contact
+      - id: v1b
+        script: ziyou
+        status: tried
+        images:
+          - source: imports/scans/2026-10-11_25_02.jpeg
+            file: v1b.jpg
+            kind: work
     notion:
       title: 龜蛇相交，水火既濟，真一乃定，中和乃成
       status: Mouvementée
@@ -462,8 +491,9 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — title : converti du simplifié au traditionnel : « 太虚幻境红楼梦 » → « 太虛幻境紅樓夢 »
+  # titre en traditionnel confirmé par le scan (Notion : 太虚幻境红楼梦)
   # date du papier : signé 丙午雨水 (Notion disait 2026-01-15)
+  # 真 et 無 en graphies changeantes (眞 pour le 1er 真), à la frontière du style libre ; 虛 écrit 虚
   - slug: tai-xu-huan-jing-hong-lou-meng
     title: 太虛幻境紅樓夢
     status: made
@@ -472,7 +502,7 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-02-18
+      date: 2026-02-25
       format: 3x7
       columns:
         - 真作假時假亦真
@@ -583,10 +613,10 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — title : converti du simplifié au traditionnel : « 题破山寺后禅院 » → « 題破山寺後禪院 »
-  # date du papier : signé 丙午雨水 地中海泡澡 (Notion disait 2026-01-18)
+  # titre en traditionnel confirmé par le scan (Notion : 题破山寺后禅院)
+  # date du papier : signé 丙午雨水 地中海泡澡, après un bain dans la Méditerranée (Notion disait 2026-01-18)
   # colonnes et format lus sur le scan 2026-10-11_06_01.jpeg
-  # 4e colonne : 俱 écrit en style libre
+  # 3e colonne : 性 écrit en style libre ; 4e colonne : 俱 écrit en style libre
   - slug: ti-po-shan-si-hou-shan-yuan
     title: 題破山寺後禪院
     status: made
@@ -594,7 +624,7 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-02-18
+      date: 2026-02-25
       format: 4x10 + 1x7 + 1x3
       columns:
         - 清晨入古寺初日照高林
@@ -605,7 +635,7 @@ pieces:
         - 唐常建
     variations:
       - id: v1a
-        script: kaishu
+        script: ziyou
         status: kept
         images:
           - source: imports/scans/2026-10-11_06_01.jpeg
@@ -642,7 +672,8 @@ pieces:
   # date du papier : signé 丙午雨水 (Notion disait 2026-01-21)
   # format du scan 2026-10-11_07_01.jpeg : pas de bambous (Notion disait 3x7 （+ bambous）) ;
   # attribution 中和集 hors colonnes
-  # 1re colonne : 道 écrit en style libre
+  # 1re colonne : 衜 pour 道 sur le papier
+  # les trois 虛 écrits chacun autrement, aucun pareil, à dessein
   - slug: xu-xin-shi-fu
     title: 虛心實腹
     status: made
@@ -653,7 +684,7 @@ pieces:
     translation: Esprit vide, ventre plein, les fondamentaux de la voie
     version:
       id: v1
-      date: 2026-02-18
+      date: 2026-02-25
       format: 3x7
       columns:
         - 虛心實腹道之基
@@ -661,7 +692,7 @@ pieces:
         - 箇是鍊虛第一機
     variations:
       - id: v1a
-        script: kaishu
+        script: ziyou
         status: kept
         images:
           - source: imports/scans/2026-10-11_07_01.jpeg
@@ -674,7 +705,8 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — version.columns.1 : converti du simplifié au traditionnel : « 冬小麦在 春季返青 » → « 冬小麥在 春季返青 »
+  # date du papier : 25 2 26 sur la feuille ② (Notion disait 2026-01-22)
+  # colonnes lues sur les scans 2026-10-11_11_01 et _02 (Notion les groupait deux par deux)
   - slug: shi-ren-jin-ge
     title: 石人斤歌
     status: made
@@ -682,14 +714,31 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-01-22
+      date: 2026-02-25
       format: 2*（4x4）
       columns:
-        - 嚴寒刺骨 鑠石流金
-        - 冬小麥在 春季返青
-        - 燒丹田諷 煮海腹明
-        - 回光反照 石人斤歌
-    variations: []
+        - 嚴寒刺骨
+        - 鑠石流金
+        - 冬小麥在 # 麦 écrit en simplifié ; 在 écrit sans son trait vertical, par erreur
+        - 春季返青
+        - 燒丹田諷
+        - 煮海腹明
+        - 回光反照 # 囬 pour 回 sur le papier
+        - 石人斤歌
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # feuille ① (cœur rouge) : les quatre premières colonnes, signée 戈
+          - source: imports/scans/2026-10-11_11_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # feuille ② : les quatre dernières colonnes, signée 戈, datée 25 2 26
+          - source: imports/scans/2026-10-11_11_02.jpeg
+            file: v1a-02.jpg
+            kind: work
     notion:
       title: 石人斤歌
       status: Mouvementée
@@ -1102,11 +1151,11 @@ pieces:
       status: Brute
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 蒙霁去巧，风月无边，没有隐语。 » → « 蒙霽去巧，風月無邊，沒有隱語。 »
-  # à arbitrer — version.format : aucun format dans l'export
-  # 没有隐语
-  - slug: meng-ji-qu-qiao-feng-yue-wu-bian-mei-you-yin-yu
-    title: 蒙霽去巧，風月無邊，沒有隱語。
+  # titre tiré du papier ; Notion ajoutait « 沒有隱語 » (没有隐语), retiré du titre
+  # format lu sur le scan 2026-10-11_04_01.jpeg (absent de l'export)
+  # date du papier : NPL 丙午 起先, premier jour de 丙午, écrit à Narbonne-Plage (Notion disait 2026-02-17)
+  - slug: meng-ji-qu-qiao-feng-yue-wu-bian
+    title: 蒙霽去巧，風月無邊
     status: made
     projects: []
     published: false
@@ -1167,8 +1216,9 @@ pieces:
       url: ""
       relations: []
   # statut : in-progress dans Notion, l'encre est posée sur les scans 2026-10-11_08_*
-  # colonnes lues sur les scans 08_01 (1x7) et 08_02 (4x4) (Notion disait
-  # « 以意引氣，意守丹田。 / 虛靈頂勁，一點金剛。 »)
+  # format et colonnes lus sur le scan 08_01 : la version est la seule ligne 1x7 ;
+  # le 4x4 de Notion (以意引氣 / 意守丹田 / 虛靈頂勁 / 一點金剛), écrit sur 08_02, en est une étude
+  # date du papier : 3.26 sur la feuille ③, valable pour les trois feuilles numérotées en rouge (Notion disait 2026-02-27)
   - slug: yi-shou-yi-dian-jin-gang-qi
     title: 意守一點金剛氣
     status: made
@@ -1176,34 +1226,28 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-02-27
-      format: 1x7 + 4x4
+      date: 2026-03-15 # jour absent du papier
+      format: 1x7
       columns:
-        - 意守一點金剛氣
-        - 以意引氣
-        - 意守丹田
-        - 虛靈頂勁
-        - 一點金剛
+        - 意守一點金剛氣 # 气 pour 氣 ; 剛 écrit en style libre
     variations:
       - id: v1a
-        script: kaishu
+        script: ziyou
         status: kept
         images:
           - source: imports/scans/2026-10-11_08_01.jpeg
-            file: v1a-1.jpg
+            file: v1a-01.jpg
             kind: work
             featured: true
+          # feuille ② : le 4x4 de Notion
           - source: imports/scans/2026-10-11_08_02.jpeg
-            file: v1a-2.jpg
-            kind: work
-      # feuille ③ : 意守一點金剛氣 en xingshu, suivi d'un commentaire signé 戈
-      - id: v1b
-        script: xingshu
-        status: tried
-        images:
+            file: v1a-02.jpg
+            kind: study
+          # feuille ③ : la ligne 1x7, 意 fautif annoté ; « 小一筆者紫不立，戈說德道不做到 » ;
+          # en marge : « L'erreur elle-même est source d'apprentissage »
           - source: imports/scans/2026-10-11_08_03.jpeg
-            file: v1b.jpg
-            kind: work
+            file: v1a-03.jpg
+            kind: study
     notion:
       title: 意守一點金剛氣
       status: Cadre imprimé
@@ -1231,20 +1275,30 @@ pieces:
       url: ""
       relations: []
   # à refaire
+  # date du papier : 戈 立夏 26 (Notion disait 2026-03-03)
+  # format du scan 2026-10-11_24.jpeg : titre 調身 hors grille (Notion disait 3x7)
   - slug: diao-shen
     title: 調身
     status: made
-    projects: []
+    projects:
+      - qi-gong
     published: false
     version:
       id: v1
-      date: 2026-03-03
-      format: 3x7
+      date: 2026-05-13
+      format: 3x7 + titre
       columns:
         - 形不正則氣不順
-        - 氣不順則意不寧
-        - 意不寧則氣散亂
-    variations: []
+        - 氣不順則意不寧 # 气 pour le 1er 氣 sur le papier
+        - 意不寧則氣散亂 # 氣 en grande cursive
+    variations:
+      - id: v1a
+        script: ziyou
+        status: tried
+        images:
+          - source: imports/scans/2026-10-11_24.jpeg
+            file: v1a.jpg
+            kind: work
     notion:
       title: 調身
       status: À refaire
@@ -1255,7 +1309,8 @@ pieces:
   - slug: wu-qi-chao-yuan-shen-xin-ping-heng
     title: 五氣朝元 / 身心平衡
     status: in-progress
-    projects: []
+    projects:
+      - qi-gong
     published: false
     version:
       id: v1
@@ -1326,6 +1381,8 @@ pieces:
       status: Préparée
       url: ""
       relations: []
+  # date du papier : 戈 10.3.26 sur la feuille ①, valable pour les trois feuilles numérotées en rouge
+  # format lu sur les scans 10_04 (1x4, ②) et 10_06 (2x6, ①), chacun au dos d'une grille 3x5 d'exercice
   - slug: guo-you-bu-ji-fang-xiang-jian-ding-bu-yi-fang-fa-yin-di-zhi
     title: 過猶不及，方向堅定不移，方法因地制宜
     status: made
@@ -1336,10 +1393,28 @@ pieces:
       date: 2026-03-10
       format: 1x4 + 2x6 au dos de cadres 3x5
       columns:
-        - 過猶不及
+        - 過猶不及 # 猶 corrigé en rouge sur le papier (丷 de 酋 ajouté)
         - 方向堅定不移
         - 方法因地制宜
-    variations: []
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          # feuille ② : 1x4 過猶不及, ouvre le texte
+          - source: imports/scans/2026-10-11_10_04.jpeg
+            file: v1a-01.jpg
+            kind: work
+          # feuille ① : 2x6, signée 戈 10.3.26 ; 制 encadré au stylo, 衣 ajouté au stylo
+          # dessous par 山山, le 師父
+          - source: imports/scans/2026-10-11_10_06.jpeg
+            file: v1a-02.jpg
+            kind: work
+            featured: true
+          # feuille ③ : 過猶不及 repris en simplifié (过犹)
+          - source: imports/scans/2026-10-11_10_02.jpeg
+            file: v1a-03.jpg
+            kind: study
     notion:
       title: 過猶不及，方向堅定不移，方法因地制宜
       status: Mouvementée
@@ -1618,18 +1693,41 @@ pieces:
       url: ""
       relations:
         - 太虚幻境红楼梦
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: fang-xin-song-kua-bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren
-    title: 放心鬆胯…不受苦中苦，難為人上人
+  # deux pièces du projet 天人地 réunies sous une page Notion : 不受苦中苦，難為人上人
+  # (feuille 2026-10-11_32_04) est scindée en bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren, en fin de plan
+  # (Notion disait « 放心鬆胯…不受苦中苦，難為人上人 », format 1x2 + 1x2 + 1x4 + 2x5)
+  # format et colonnes lus sur les scans 2026-10-11_32_01 à 03, une feuille par bloc
+  # date du papier : « 8 26 » sur 01, signé 戈 (Notion disait 2026-07-12)
+  - slug: fang-xin-song-kua
+    title: 放心鬆胯
     status: made
-    projects: []
+    projects:
+      - tian-ren-di
     published: false
     version:
       id: v1
-      date: 2026-07-12
-      format: 1x2 + 1x2 + 1x4 + 2x5
-      columns: []
-    variations: []
+      date: 2026-08-15 # jour absent du papier
+      format: 1x2 + 1x2 + 1x4
+      columns:
+        - 放心
+        - 鬆胯
+        - 放心鬆胯 # en cursive ; 松 pour 鬆 sur le papier
+    variations:
+      # le 1x4 (feuille 03) en cursive (caoshu)
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_32_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+          - source: imports/scans/2026-10-11_32_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+          - source: imports/scans/2026-10-11_32_03.jpeg
+            file: v1a-03.jpg
+            kind: work
+            featured: true
     notion:
       title: 放心鬆胯…不受苦中苦，難為人上人
       status: Mouvementée
@@ -1673,7 +1771,7 @@ pieces:
       url: https://claude.ai/share/80883ea3-feeb-453c-80c5-26970fe1eba6
       relations: []
   # absente de Notion : identifiée sur le scan 2026-10-11_02_01.jpeg (registre imports/scans.yaml)
-  # à arbitrer — version.date : date inconnue ; celle du scan en attendant, à corriger
+  # date du papier : 立春日 (乙巳年臘月, avant le Nouvel An 丙午)
   - slug: zhu-yi-song-kua
     title: 注意鬆胯
     status: made
@@ -1682,19 +1780,44 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-10-11
+      date: 2026-02-04
       format: 4x4
       columns:
-        - 堅持注意
-        - 忍受鬆胯
+        - 堅持注意 # 堅 écrit 坚 (simplifié), corrigé en 堅 dans le cartouche en tête
+        - 忍受鬆胯 # 胯 écrit en style libre
         - 水火既濟
-        - 龍虎穴合
+        - 龍虎穴合 # 合 écrit en style libre
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          - source: imports/scans/2026-10-11_02_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+  # absente de Notion : identifiée sur le scan 2026-10-11_32_04.jpeg (registre imports/scans.yaml),
+  # scindée de fang-xin-song-kua, dont la page Notion réunissait les deux pièces
+  # date du papier : 丙午處暑 戈化, sans 日 ; 戈化 voulu
+  - slug: bu-shou-ku-zhong-ku-nan-wei-ren-shang-ren
+    title: 不受苦中苦，難為人上人
+    status: made
+    projects:
+      - tian-ren-di
+    published: false
+    version:
+      id: v1
+      date: 2026-08-30
+      format: 2x5
+      columns:
+        - 不受苦中苦
+        - 難為人上人
     variations:
       - id: v1a
         script: kaishu
         status: kept
         images:
-          - source: imports/scans/2026-10-11_02_01.jpeg
+          - source: imports/scans/2026-10-11_32_04.jpeg
             file: v1a.jpg
             kind: work
             featured: true

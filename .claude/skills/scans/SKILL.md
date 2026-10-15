@@ -95,7 +95,9 @@ Fini quand `pnpm validate:imports` passe, les scans copiés et leurs entrées ar
 - **La date** : la date française du papier (`3.1.26` → 2026-01-03) est la date
   stockée ; mois et année seuls (`4.26`) → le 15, `# jour absent du papier`. Sans
   date française, la date chinoise (`丙午立夏`) donne le milieu du jieqi, à
-  mi-chemin entre ce terme et le suivant. La date du papier reste toujours en
+  mi-chemin entre ce terme et le suivant, arrondi au jour inférieur (雨水 le
+  18.2, 驚蟄 le 5.3 → le 25.2) ; suivie de 日 (`立春日`), c'est le jour même du
+  terme. La date du papier reste toujours en
   commentaire, sous sa forme d'origine :
   `# date du papier : 丙午立夏 (Notion disait 2026-01-15)`. La date chinoise se
   dérive de la date stockée : elle ne se stocke pas.
