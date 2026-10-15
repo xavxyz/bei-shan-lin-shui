@@ -72,3 +72,21 @@ Le prior art est posé : on décrit un comportement observable de l'extérieur.
 - **Les îlots React** sont vérifiés en isolation sous react-cosmos, avec des
   fixtures typées par le schéma partagé.
 - On n'assère jamais sur des props ou de l'état interne.
+
+## Agent skills
+
+### Issue tracker
+
+Les issues vivent dans les GitHub Issues du dépôt, via `gh`. Voir
+`docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Les cinq rôles canoniques, sous leurs noms par défaut (`needs-triage`,
+`needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). Voir
+`docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Un seul contexte : `GLOSSARY.md` à la racine, ADR dans `docs/adr/`. Voir
+`docs/agents/domain.md`.
