@@ -42,10 +42,31 @@ _À éviter_ : cadre, cadre imprimé
 
 ## Personnes
 
+**戈** :
+Le calligraphe, et sa signature. Sa part au sixième pas : mélanger les pas dans
+une même pièce. 戈 parle d'endurer le relâchement alors que l'épée nous
+transperce.
+
 **山山** :
 Le 師父 de calligraphie du calligraphe. Ses corrections et annotations, au
 stylo ou en rouge, se trouvent sur le papier à côté du texte.
 _À éviter_ : le maître, le professeur
+
+**鄧岱崑** :
+Le 師父 de 山山, qui enseigne les cinq pas. Son nom se lit en jeu de mots dans
+les textes du calligraphe (登 pour 鄧, 岱 et 崑 dans 六龍騰岱六虎躍崑).
+
+## Styles
+
+**Les cinq pas** :
+Les cinq styles d'écriture enseignés par 鄧岱崑, du plus posé au plus libre :
+régulier (楷書), courant (行書), grand courant (行草), cursif (草書), cursive
+folle (狂草).
+
+**Style libre** (自由) :
+Le sixième pas, créé par 山山 : l'écriture se transforme et reste lisible ; un
+caractère qui semble faux y est souvent seulement déplacé dans ses
+composantes. 山山 parle de danser sur la tête d'une aiguille.
 
 ## Lieux
 

@@ -44,6 +44,21 @@ projects:
     title: 氣功
     presentation: ""
     theme: ink
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_15_01.jpeg :
+  # 龍騰 (série 16, six feuilles) et 虎躍 (série 17, trois feuilles), autour de la pièce-pôle
+  - id: long-teng-hu-yue
+    title: 龍騰虎躍
+    presentation: ""
+    theme: ink
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  # projet désigné par le calligraphe à l'arbitrage des scans 2026-10-11_31_01 et 31_03
+  - id: yang-cheng-fu-zhi-tai-ji-quan-shi-yao
+    title: 楊澄甫之太極拳十要
+    presentation: ""
+    theme: ink
 pieces:
   - slug: xi-you-ji
     title: 西遊記
@@ -71,9 +86,11 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
+  # 戈說 : 登 pour 鄧 (鄧岱崑, le 師父 de 山山), 歌訣 pour 戈訣 (戈澤宇) ; pièce à faire,
+  # aucune réalisation (Notion disait En cours)
   - slug: deng-shan-ge-jue
     title: 登山歌訣
-    status: in-progress
+    status: idea
     projects: []
     published: false
     version:
@@ -1919,6 +1936,203 @@ pieces:
         images:
           # ni signature, ni date, ni note
           - source: imports/scans/2026-10-11_29.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # 鬆胯 en régulier, encre grise ; 松 pour 鬆 sur le papier ; ni signature ni date
+          - source: imports/scans/2026-10-11_31_04.jpeg
+            file: v1a-02.jpg
+            kind: study
+  # absente de Notion : identifiée sur le scan 2026-10-11_15_01.jpeg (registre imports/scans.yaml)
+  # pièce-pôle du projet long-teng-hu-yue : 龍騰 écrit à 春分, 虎躍 à 清明
+  - slug: long-teng-hu-yue
+    title: 龍騰虎躍
+    status: made
+    projects:
+      - long-teng-hu-yue
+    published: false
+    version:
+      id: v1
+      # date du papier : deux dates au crayon. 舂分 pour 龍騰 : 春 écrit 舂, premier
+      # trait coupé et 日 ouvert en 臼, « décortiqué » ; 分 en ziyou, 刀 écrit 刂
+      # (春分 → 2026-03-28). 玄明 26 pour 虎躍 : jeu sur 玄冥 / 玄明 / 清明
+      # (清明 → 2026-04-12). Date stockée : à mi-chemin des deux
+      date: 2026-04-04
+      format: 1x4
+      columns:
+        - 龍騰虎躍 # 龍 et 騰 en style libre
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # colonne de commentaire en kaishu : 戈試越來越書 ; une flèche au crayon la
+          # relie à 玄明 : écrite le même jour que 虎躍 ; 〇 rouge en bas à droite, le 0 de 2026
+          - source: imports/scans/2026-10-11_15_01.jpeg
             file: v1a.jpg
             kind: work
             featured: true
+  # absente de Notion : identifiée sur les scans 2026-10-11_17_01 à 17_03 (registre imports/scans.yaml)
+  # feuilles 一 二 三 : explorations du tigre, pendant de 龍騰 dans le projet long-teng-hu-yue ;
+  # sur chaque feuille, une note tirée du 履 (易經, 卦十) : 橫竪履, 格守履, 履乕尾
+  # 戈說 : l'expression de ma vanité, à présenter à 鄧岱崑 ce jour-même — je devais être en
+  # Chine, j'étais au studio de gong fu ; 山山 : trop décalé, il n'aurait pas accepté mes
+  # explications, « j'ai 研究 jusqu'à percer le mortier »
+  - slug: hu-yue
+    title: 虎躍
+    status: made
+    projects:
+      - long-teng-hu-yue
+    published: false
+    version:
+      id: v1
+      date: 2026-04-17 # date du papier : 17.4.26 sur les trois feuilles, 丙午清明 sur 17_03
+      format: 2x2 + 1x1 + 2x2 + 1x4 + 1x3 + 1x2
+      columns:
+        - 虎虎 # 17_01
+        - 虎虎
+        - 虎 # en cursive
+        - 虎書 # 17_02 ; 乕 pour 虎 : variante calligraphique du tigre recommandée par 山山
+        - 虎书 # 乕 pour 虎 ; 书 en simplifié, en regard de 書
+        - 躍躍躍躍 # 17_03 ; 履乕尾 en commentaire au milieu
+        - 躍躍躍
+        - 躍躍
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # feuille 一 : 虎 du régulier vers la cursive ; note 橫竪履 ; signé 戈, 17.4.26
+          - source: imports/scans/2026-10-11_17_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # feuille 二 : 乕書 / 乕书 ; note 格守履 ; signé 戈, 17.4.26
+          - source: imports/scans/2026-10-11_17_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+          # feuille 三 : 躍 du régulier vers la cursive ; 履乕尾 ; signé 戈, 丙午清明, 17.4.26
+          - source: imports/scans/2026-10-11_17_03.jpeg
+            file: v1a-03.jpg
+            kind: work
+  # absente de Notion : identifiée sur les scans 2026-10-11_20_01 et 20_02 (registre imports/scans.yaml)
+  # 煉 à la clé du feu sur le papier ; distincte de lian-xu-ge (《鍊虛歌》, colonnes vides)
+  # feuille ② : 修, 養, 虛, chacun par les cinq pas de 鄧岱崑, du régulier à la cursive folle
+  - slug: lian-dan
+    title: 煉丹
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-04-18 # date du papier : 18 4 26
+      format: 1x2 + 3x5
+      columns:
+        - 煉丹 # feuille ①, en régulier
+        - 修修修修修 # feuille ②, les cinq pas
+        - 養養養養養
+        - 虛虛虛虛虛
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # feuille ① : sur petite grille imprimée 3x5 ; signé 戈, daté 18 4 26
+          - source: imports/scans/2026-10-11_20_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # feuille ② : grille imprimée 3x5 ; ni signature ni date
+          - source: imports/scans/2026-10-11_20_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+  # absente de Notion : identifiée sur les scans 2026-10-11_21_01 et 21_02 (registre imports/scans.yaml)
+  # deux feuilles ① ②, 聚 en charnière ; 聚精會神 figure aussi dans an-zhi-shi-zuo-zhu-yi-fang-xin
+  - slug: ning-ju-ju-jing-hui-shen
+    title: 凝聚 // 聚精會神
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-04-19 # date du papier : 19 4 26
+      format: 1x2 + 1x4
+      columns:
+        - 凝聚 # feuille ①, en régulier ; 凝 au 冫 en deux points, 聚 écrit 取 sur 乑
+        - 聚精會神 # feuille ② ; 聚 écrit 取 sur 乑 ; 會 et 神 en style libre
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # feuille ① : grille imprimée 3x6 ; signé 戈, daté 19 4 26
+          - source: imports/scans/2026-10-11_21_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # feuille ② : du régulier (聚精) au style libre (會神) ; ni signature ni date
+          - source: imports/scans/2026-10-11_21_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+  # absente de Notion : identifiée sur le scan 2026-10-11_30_02.jpeg (registre imports/scans.yaml)
+  # source à reporter après apply : 紅樓夢 第八十二回, 曹雪芹 (le plan ne porte pas `source`)
+  # traduction écrite à la main sur le scan 2026-10-11_30_03.jpeg (« qu'à se se donner » sur le papier)
+  - slug: cheng-ren-bu-zi-zai-zi-zai-bu-cheng-ren
+    title: 成人不自在，自在不成人
+    status: made
+    projects:
+      - tai-xu-huan-jing-hong-lou-meng
+    published: false
+    translation: Qui souhaite devenir vraiment un homme ne songe pas à se donner de l'aise ; qui ne songe qu'à se donner de l'aise ne deviendra jamais vraiment un homme.
+    version:
+      id: v1
+      # date du papier : 戈 夏至 26 sur 30_02 ; 21 6 26 au stylo sur 30_01, et « le
+      # premier jour de l'été » sur 30_03
+      date: 2026-06-21
+      format: 2x5
+      columns:
+        - 成人不自在
+        - 自在不成人
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        personal_note: Recherché et calligraphié en écoutant les « jeunes Demoiselles » de la famille Féat-Lopez et leur Vénérable Mère Féat discuter de l'avenir du Vénérable Monsieur leur Père Lopez. Exécution innocente et bien réalisée en plein orage le premier jour de l'été (ou en son cœur, selon la culture).
+        images:
+          # sans grille ; attribution 第八十二回 紅樓夢 (樓 au 婁 abrégé) ; signé 戈 夏至 26
+          - source: imports/scans/2026-10-11_30_02.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+  # absente de Notion : identifiée sur les scans 2026-10-11_31_01 et 31_03 (registre imports/scans.yaml)
+  # premier des dix principes de 楊澄甫 ; deux jets du même texte, en régulier
+  - slug: xu-ling-ding-jin
+    title: 虛靈頂勁
+    status: made
+    projects:
+      - yang-cheng-fu-zhi-tai-ji-quan-shi-yao
+    published: false
+    version:
+      id: v1
+      date: 2026-06-21 # aucune date sur le papier : date donnée par le calligraphe
+      format: 1x4
+      columns:
+        - 虛靈頂勁 # 虚 pour 虛 sur le papier
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          # premier jet, trait plus léger ; A4 sans grille, ni signature ni date
+          - source: imports/scans/2026-10-11_31_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+      - id: v1b
+        script: kaishu
+        status: tried
+        images:
+          # second jet, plus serré, 頂 et 勁 plus appuyés ; fond de gouttes décalquées, comme 31_04
+          - source: imports/scans/2026-10-11_31_03.jpeg
+            file: v1b.jpg
+            kind: work
