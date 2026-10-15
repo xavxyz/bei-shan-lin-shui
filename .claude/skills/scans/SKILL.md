@@ -1,6 +1,6 @@
 ---
 name: scans
-description: Prendre les scans du Google Drive un par un, les identifier en lisant leurs caractères et les rattacher aux pièces, sous l'arbitrage du calligraphe.
+description: Prendre les scans du Google Drive un par un ou en lot, les identifier en lisant leurs caractères et les rattacher aux pièces, sous l'arbitrage du calligraphe.
 disable-model-invocation: true
 ---
 
@@ -20,7 +20,7 @@ niveau de confiance ; le calligraphe tranche, toujours. Lire `CLAUDE.md` et
   de la pièce dans le dépôt, numéro de la feuille.
 - **Registre** `imports/scans.yaml` : une entrée par fichier du Drive. Un scan
   est traité quand son entrée existe sans `# à arbitrer`. Son en-tête décrit les
-  champs.
+  champs. `pnpm validate:imports` le vérifie, avec le plan.
 - **Plan** `imports/notion-2026-08-23.plan.yaml`, tant qu'il n'est pas appliqué.
   Forme des variations et des images : `packages/notion-import/src/plan-file.ts`.
   Styles : `SCRIPTS` dans `packages/schema/src/vocabulary.ts`.
@@ -35,6 +35,9 @@ Lister le dossier du Drive et retirer les fichiers déjà au registre. Annoncer 
 nombre de scans en attente, et signaler tout nom hors format avec le renommage
 proposé (`11-12-2026_03.jpeg` → `2026-10-11_03_01.jpeg`).
 Fini quand chaque fichier du Drive est classé : au registre, en attente, ou à renommer.
+
+**Tous les scans d'un coup**, à la demande du calligraphe : suivre `lot.md`, à
+côté de ce fichier, à la place des étapes 2 et 3.
 
 ### 2. Un scan par message
 
@@ -71,12 +74,9 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 2. Modifier le plan : variation et image (`file: v1a.jpg`, `kind: work`), et
    chaque correction tirée du papier, avec son commentaire.
 3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`.
-4. Valider le plan :
-   ```
-   pnpm exec tsx -e 'import {readFileSync} from "node:fs"; import {parsePlan} from "./packages/notion-import/src/plan-file.ts"; const r=parsePlan(readFileSync("imports/notion-2026-08-23.plan.yaml","utf8")); console.log(r.ok ? "plan valide" : r.errors)'
-   ```
+4. Lancer `pnpm validate:imports`.
 
-Fini quand le plan est valide, le scan copié et l'entrée arbitrée. Puis scan suivant.
+Fini quand `pnpm validate:imports` passe, le scan copié et l'entrée arbitrée. Puis scan suivant.
 
 ## Règles arbitrées
 
