@@ -32,6 +32,9 @@ jobs:
       - name: Contenu du dépôt
         run: pnpm validate:content
 
+      - name: Plans et registre des scans
+        run: pnpm validate:imports
+
       - name: Tests unitaires
         run: pnpm test
 

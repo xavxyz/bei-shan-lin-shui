@@ -1,0 +1,22 @@
+# Correspondance scans → pièces — séance du 11-10-2026.
+#
+# Rassemblé à partir de la description du calligraphe, scans pas encore vus.
+# Sert plus tard à importer, ou à rapprocher du plan Notion
+# (imports/notion-2026-08-23.plan.yaml).
+
+scans:
+  - scan: 11-10-2026_01
+    date: 2026-10-11
+    theme: patience et constance dans la progression
+    match: null
+    # à arbitrer — texte chinois inconnu tant que le scan n'est pas lu
+    # à arbitrer — aucune pièce Notion ne parle explicitement de patience ou de constance
+
+  - scan: 11-10-2026_02
+    date: 2026-10-11
+    theme: poème
+    title: 龍虎穴合
+    format: 4x4
+    match: null
+    # à arbitrer — title : converti du simplifié au traditionnel : « 龙虎穴合 » → « 龍虎穴合 »
+    # à arbitrer — absent du plan Notion ; voisins par le thème 龍虎 : deng-shan-ge-jue (登山歌訣), 《龍虎歌》勉旃勉旃
