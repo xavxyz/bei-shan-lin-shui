@@ -40,6 +40,19 @@ Le gabarit des colonnes, imprimé sur le papier avant d'écrire. Une pièce dont
 la grille est imprimée est en cours.
 _À éviter_ : cadre, cadre imprimé
 
+## Personnes
+
+**山山** :
+Le 師父 de calligraphie du calligraphe. Ses corrections et annotations, au
+stylo ou en rouge, se trouvent sur le papier à côté du texte.
+_À éviter_ : le maître, le professeur
+
+## Lieux
+
+**NPL** :
+Narbonne-Plage : le studio et la terrasse de gong fu du calligraphe, face à
+la Méditerranée. Le sigle s'écrit sur le papier, près de la signature.
+
 ## Statuts d'une pièce
 
 **En cours** :
