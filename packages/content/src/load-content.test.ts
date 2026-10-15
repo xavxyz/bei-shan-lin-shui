@@ -397,7 +397,7 @@ describe("image mise en avant", () => {
   it("retombe sur la première œuvre entière quand aucune n'est mise en avant", async () => {
     const content = await loadValid(
       withImages([
-        { file: "v1a-01.jpg", kind: "attempt", capture: "photo" },
+        { file: "v1a-01.jpg", kind: "study", capture: "photo" },
         { file: "v1a-02.jpg", kind: "work", capture: "scan" },
       ]),
     );
@@ -407,7 +407,7 @@ describe("image mise en avant", () => {
 
   it("retombe sur la première image quand aucune n'est une œuvre entière", async () => {
     const content = await loadValid(
-      withImages([{ file: "v1a-01.jpg", kind: "attempt", capture: "photo" }]),
+      withImages([{ file: "v1a-01.jpg", kind: "study", capture: "photo" }]),
     );
 
     expect(content.pieces[0]!.featuredImage!.file).toBe("v1a-01.jpg");

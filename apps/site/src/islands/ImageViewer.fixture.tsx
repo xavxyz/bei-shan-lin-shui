@@ -26,14 +26,14 @@ const detail = image({
   kind: "detail",
   caption: "Détail de la troisième colonne.",
 });
-const attempt = image({ file: "v1a-03.jpg", src: placeholder(210, 297, "秋"), kind: "attempt" });
+const study = image({ file: "v1a-03.jpg", src: placeholder(210, 297, "秋"), kind: "study" });
 
 const title = "山居秋暝";
 
 export default {
   "une seule image": <ImageViewer title={title} images={[a4]} />,
 
-  "plusieurs images": <ImageViewer title={title} images={[a4, detail, attempt]} />,
+  "plusieurs images": <ImageViewer title={title} images={[a4, detail, study]} />,
 
   "portrait A4": <ImageViewer title={title} images={[a4]} />,
 

@@ -16,7 +16,7 @@ versions:
         status: kept
         images:
           - file: v1a.jpg
-            kind: work # work | detail | attempt | context
+            kind: work # work | detail | study | context
             capture: photo # scan | photo
             featured: true
             caption: Encre sur papier de riz.

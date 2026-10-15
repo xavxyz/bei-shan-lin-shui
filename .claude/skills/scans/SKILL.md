@@ -33,7 +33,8 @@ niveau de confiance ; le calligraphe tranche, toujours. Lire `CLAUDE.md` et
 
 Lister le dossier du Drive et retirer les fichiers déjà au registre. Annoncer le
 nombre de scans en attente, et signaler tout nom hors format avec le renommage
-proposé (`11-12-2026_03.jpeg` → `2026-10-11_03_01.jpeg`).
+proposé (`11-12-2026_03.jpeg` → `2026-10-11_03_01.jpeg`). Un nom sans numéro de
+feuille (`2026-10-11_23.jpeg`) vaut `_01` : il reste tel quel.
 Fini quand chaque fichier du Drive est classé : au registre, en attente, ou à renommer.
 
 **Tous les scans d'un coup**, à la demande du calligraphe : suivre `lot.md`, à
@@ -88,26 +89,47 @@ Fini quand `pnpm validate:imports` passe, les scans copiés et leurs entrées ar
 
 ## Règles arbitrées
 
-- **Le papier fait foi.** La date écrite sur la feuille remplace celle de Notion
-  (`丙午雨水` → la date du terme solaire ; `3.1.26` → 2026-01-03). Le format du
-  scan est le format final. Les colonnes se lisent sur le scan ; ce que le scan
-  ne montre pas reste `# colonnes à préciser`. Noter en commentaire la valeur
-  remplacée : `# date du papier : signé 丙午雨水 (Notion disait 2026-01-15)`.
-- **Un caractère qui semble faux** est souvent écrit en style libre : poser la
-  question, écrire le caractère confirmé, noter `# <caractère> écrit en style libre`.
+- **Le papier fait foi.** Le format du scan est le format final. Les colonnes se
+  lisent sur le scan ; ce que le scan ne montre pas reste `# colonnes à préciser`.
+  Noter en commentaire la valeur remplacée.
+- **La date** : la date française du papier (`3.1.26` → 2026-01-03) est la date
+  stockée ; mois et année seuls (`4.26`) → le 15, `# jour absent du papier`. Sans
+  date française, la date chinoise (`丙午立夏`) donne le milieu du jieqi, à
+  mi-chemin entre ce terme et le suivant. La date du papier reste toujours en
+  commentaire, sous sa forme d'origine :
+  `# date du papier : 丙午立夏 (Notion disait 2026-01-15)`. La date chinoise se
+  dérive de la date stockée : elle ne se stocke pas.
+- **Les graphies** sont traditionnelles, simplifiées ou libres ; jamais
+  japonaises. Les colonnes s'écrivent en traditionnel ; la forme du papier va en
+  commentaire (`# 麦 écrit en simplifié`, `# 松 pour 鬆 sur le papier`). Une
+  variante traditionnelle (眞, 勢) se garde si le calligraphe la confirme.
+- **Un caractère qui semble faux** est souvent écrit en style libre : ses
+  composantes changent de place, il reste lisible pour un calligraphe chinois.
+  Poser la question, écrire le caractère confirmé, noter
+  `# <caractère> écrit en style libre`.
 - **La signature du calligraphe est 戈**, souvent en cursive méconnaissable : un
   petit signe isolé près de la date ou dans un coin, c'est elle. Dans un
   commentaire, « 戈說 » ouvre ses propres mots.
 - **Le style** se propose, le calligraphe le fixe.
-- **Une seule version par pièce dans le plan.** Le scan d'une version suivante
-  va au registre et dans un commentaire `# v2 à faire : <fichier>, <style>, <statut>`
-  au-dessus de la pièce ; il s'ajoute au contenu après `apply`.
-- **Pièce absente de Notion** : le calligraphe donne le slug et le projet. Elle
-  s'ajoute en fin de plan avec `# absente de Notion : identifiée sur le scan <fichier>`.
-  Sans date sur le papier, prendre celle du dépôt avec `# à arbitrer`.
+- **Une feuille, quelle place** : le texte entier dans le format de la pièce,
+  c'est une variation (`v1a`, `v1b`…), et un autre style en est toujours une
+  autre. Des caractères tous pris au texte d'une pièce, dans n'importe quel
+  ordre, c'est une étude : image `kind: study` de la variation qu'elle prépare
+  (龍騰虎躍 est une étude de 六龍騰岱六虎躍崑). `detail` ne sert qu'au recadrage
+  de l'œuvre elle-même.
+- **Exercice sans rapport avec le texte d'une pièce** — rectos, grilles, traits :
+  `match: discarded` au registre, rien au plan.
+- **Une nouvelle version** suppose une réalisation antérieure attestée : un autre
+  scan à une autre date, ou une pièce `made` avec image dans Notion. Sinon le
+  papier corrige la v1. Une seule version par pièce dans le plan : le scan d'une
+  version suivante va au registre et dans un commentaire
+  `# v2 à faire : <fichier>, <style>, <statut>` au-dessus de la pièce ; il
+  s'ajoute au contenu après `apply`.
+- **Pièce absente de Notion** : l'agent propose le slug, pinyin du titre sans
+  tons ; le calligraphe le confirme. Pas de projet, sauf si le papier ou Notion
+  en désigne un. Elle s'ajoute en fin de plan avec
+  `# absente de Notion : identifiée sur le scan <fichier>`. Sans date sur le
+  papier, prendre celle du dépôt avec `# à arbitrer`.
 - **Nouveau projet** : une entrée dans `projects:` (présentation vide, thème
   proposé, `# à arbitrer` sur les deux) ; la pièce-pôle de même nom le rejoint.
 - **Pièce `in-progress`** qui arrive scannée : l'encre est posée, proposer `made`.
-- **Verso, exercices de traits** : `match: discarded` au registre, rien au plan.
-- **Plusieurs feuilles d'une même pièce** : variations distinctes ou essais
-  (`attempt`), la règle n'est pas encore fixée ; proposer au cas par cas.

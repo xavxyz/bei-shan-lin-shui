@@ -23,7 +23,7 @@ export type VariationStatus = (typeof VARIATION_STATUSES)[number];
 export const SCRIPTS = ["kaishu", "xingshu", "xingcao", "caoshu", "kuangcao", "ziyou"] as const;
 export type Script = (typeof SCRIPTS)[number];
 
-export const IMAGE_KINDS = ["work", "detail", "attempt", "context"] as const;
+export const IMAGE_KINDS = ["work", "detail", "study", "context"] as const;
 export type ImageKind = (typeof IMAGE_KINDS)[number];
 
 export const CAPTURE_MODES = ["scan", "photo"] as const;
@@ -71,6 +71,6 @@ export const VARIATION_STATUS_LABELS: Record<VariationStatus, string> = {
 export const IMAGE_KIND_LABELS: Record<ImageKind, string> = {
   work: "œuvre entière",
   detail: "détail",
-  attempt: "essai",
+  study: "étude",
   context: "contexte",
 };

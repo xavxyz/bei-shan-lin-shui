@@ -13,55 +13,53 @@ une par scan ; ce sont des propositions, pas des lectures confirmées.
 - **12_01** et **18_01** : style proposé `lishu` (隸書), absent de `SCRIPTS`
   (kaishu, xingshu, xingcao, caoshu, kuangcao, ziyou). Arbitré : lishu
   n'entre pas au vocabulaire ; le style de ces deux scans est à reprendre.
-- **18_04** et **33_07** : variation proposée `attempt`, qui est un type
-  d'image et non un identifiant de variation (`v1a`…).
+- **18_04** et **33_07** : variation proposée `attempt`, devenu `study`, qui
+  est un type d'image et non un identifiant de variation (`v1a`…).
 
-## Noms hors format
+## Cas à arbitrer à l'étape 2
 
-`2026-10-11_23.jpeg`, `_24`, `_27`, `_28` et `_29` n'ont pas de numéro de
-feuille. Renommage proposé : `_23_01.jpeg`, etc. Le registre garde le nom
-actuel du Drive.
-
-## Questions transverses
+Les questions transverses sont tranchées dans « Règles arbitrées » de
+`.claude/skills/scans/SKILL.md` (2026-10-15) : place d'une feuille (variation,
+étude ou `discarded`), version, dates, graphies, pièces absentes de Notion,
+noms sans numéro de feuille. Restent les cas, à revoir à leur lumière.
 
 ### Plusieurs feuilles d'une même pièce
 
-Variations distinctes, essais (`attempt`) ou images d'une seule variation ?
-La règle n'est pas fixée ; elle se pose pour 10, 11, 14, 16, 17, 18, 20, 21,
-22, 25, 26, 31, 32 et 33.
+10, 11, 14, 16, 17, 18, 20, 21, 22, 25, 26, 31, 32 et 33 : variation ou
+étude, feuille par feuille. 26, 32 et 33 alternent kaishu et cursive : une
+variation par style.
 
-Cas particulier : 26, 32 et 33 alternent kaishu et cursive (26 : 02/04/06
-en kaishu, 03/05/07 en cursive). Une variation par style (v1a / v1b) ?
-
-### Rectos et feuilles d'exercice
+### Études ou exercices
 
 - **10_01, 10_03, 10_05** : grilles 3x5 d'exercices en simplifié, au recto
-  de 過猶不及. Proposées `discarded` ; ou image `context` de la pièce ?
+  de 過猶不及 : `discarded`, sauf si leurs caractères sont ceux de la pièce.
 - **13_02, 13_03** : 流 répété et tiges célestes. Exercice ou pièce ?
 - **18_03, 18_04** : essais de 水火調劑 sur grille 米, ou à écarter ?
 - **20_02** : 修 / 養 / 虛 ×5, du kaishu au caoshu. Corps de 煉丹 ou étude ?
 - **30_01** : 宇八宇, essai sur 宇 (de 戈澤宇) ?
 - **31_02** : 字字字 (ou 守 ?), exercice ?
-- **33_02 à 33_08** : deux caractères par feuille, détails de 33_01.
-  Essais ou images `detail` ?
+- **15_01** : 龍騰虎躍, « 戈試越來越書 » : étude de `deng-shan-ge-jue`
+  (六龍騰岱六虎躍崑), arbitré.
+- **33_02 à 33_08** : deux caractères de 33_01 par feuille : études de la
+  variation de 33_01.
 
 ### Pièces absentes de Notion
 
-Chacune attend un slug et un projet.
+L'agent propose le slug, le calligraphe le confirme ; pas de projet sauf
+indication du papier ou de Notion.
 
 | Scans    | Texte lu                                  | Pistes                                                                                         |
 | -------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | 12_01    | 閃仚機 ?                                  | lecture très incertaine ; `shu-heng-zhuo-an-npl` ?                                             |
 | 13_01–03 | 流, 未干, 山川臨 ?                        | étude de 流 ? daté 丙午春分 / 23 ou 29.3.26                                                    |
 | 14_01–03 | 地支 (12 branches et animaux)             | `di-zhi`, projet tian-ren-di ? 28.3.26 alors que 春分 = 20 mars                                |
-| 15_01    | 龍騰虎躍, « 戈試越來越書 »                | ou étude de `deng-shan-ge-jue` (六龍騰岱六虎躍崑) ?                                            |
 | 16_01–06 | 龍 / 騰, lignes du 乾 (潛龍, 見龍, 亢龍…) | une pièce 乾 ou un projet ? 16_03 : récit en prose + sceau 龍                                  |
 | 17_01–03 | 虎, 肅書 ?, 躍, 履虎尾                    | pièce 履虎尾 ou études de `deng-shan-ge-jue` ?                                                 |
 | 18_01–04 | 水火調劑 (未 / 既), 臨菓 ?                | projet zhong-he-ji ?                                                                           |
-| 19_01–02 | 吐納 (kaishu puis caoshu)                 | v1a / v1b ou essai ?                                                                           |
+| 19_01–02 | 吐納 (kaishu puis caoshu)                 | v1a / v1b (un style par variation)                                                             |
 | 20_01–02 | 煉丹, 修養虛                              | ou `lian-xu-ge` (鍊虛歌) ?                                                                     |
 | 21_01–02 | 凝聚 / 聚精會神                           | ou lié à `an-zhi-shi-zuo-zhu-yi-fang-xin` ? date 13 ou 19.4.26                                 |
-| 22_01–02 | 醫王會 / 禪指壓 (Iokai Shiatsu)           | une pièce ou deux ? graphies japonaises (医/会/圧) ou traditionnel ?                           |
+| 22_01–02 | 醫王會 / 禪指壓 (Iokai Shiatsu)           | une pièce ou deux ? 医/会/圧 : simplifié ou libre, jamais japonais                             |
 | 23       | 篤志力行 / 專心警省                       | daté ? 立夏 ; mains imprimées au-dessus des colonnes                                           |
 | 27       | 飛鴻戲海 / 雲鶴遊天                       | 飛鴻 ou 群鴻 (梁武帝 sur 鍾繇) ? 丙午小滿                                                      |
 | 30_01–03 | 成人不自在 / 自在不成人 (紅樓夢 82)       | projet `tai-xu-huan-jing-hong-lou-meng` ? 30_03 : traduction manuscrite                        |
