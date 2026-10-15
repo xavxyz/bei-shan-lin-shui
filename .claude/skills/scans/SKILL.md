@@ -55,6 +55,9 @@ question du calligraphe sur le papier retourne au même sous-agent
 
 **Lire** le scan avec Read, colonne par colonne, de droite à gauche. Relever
 aussi ce qui entoure le texte : attribution, signature, date, notes en français.
+Vérifier d'abord le sens de la feuille : un scan peut être à l'envers, et sa
+lecture en sort fausse mais plausible. Le signaler, le calligraphe le fait
+retourner sur le Drive.
 
 **Chercher** la pièce : `grep` de deux ou trois séquences de 2 à 4 caractères
 dans le plan (titre, `columns`, `source.full_text`), et dans `content/pieces/`
