@@ -39,10 +39,18 @@ Fini quand chaque fichier du Drive est classé : au registre, en attente, ou à 
 **Tous les scans d'un coup**, à la demande du calligraphe : suivre `lot.md`, à
 côté de ce fichier, à la place des étapes 2 et 3.
 
-### 2. Un scan par message
+### 2. Une pièce par message
 
-Prendre le premier scan en attente, dans l'ordre pièce puis page. Regarder aussi
-les autres pages de la même pièce : elles se comprennent ensemble.
+Prendre la première pièce en attente, dans l'ordre des numéros, avec toutes ses
+feuilles : elles se comprennent ensemble.
+
+**Un sous-agent par pièce lit et cherche** ; la session principale ne lit
+aucune image. Lui confier les noms des feuilles, l'entrée du registre de chacune
+si elle existe (une proposition à revoir, pas un acquis), et le renvoyer à ce
+fichier : « Lire », « Chercher », « Proposer », « Règles arbitrées ». Il
+n'écrit rien et rend la proposition au format ci-dessous, prête à montrer. Une
+question du calligraphe sur le papier retourne au même sous-agent
+(SendMessage), qui a encore les images en tête.
 
 **Lire** le scan avec Read, colonne par colonne, de droite à gauche. Relever
 aussi ce qui entoure le texte : attribution, signature, date, notes en français.
@@ -70,13 +78,13 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 
 ### 3. Appliquer
 
-1. Copier le scan : `cp -n <drive>/<fichier> imports/scans/`.
+1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`.
 2. Modifier le plan : variation et image (`file: v1a.jpg`, `kind: work`), et
    chaque correction tirée du papier, avec son commentaire.
 3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`.
 4. Lancer `pnpm validate:imports`.
 
-Fini quand `pnpm validate:imports` passe, le scan copié et l'entrée arbitrée. Puis scan suivant.
+Fini quand `pnpm validate:imports` passe, les scans copiés et leurs entrées arbitrées. Puis pièce suivante.
 
 ## Règles arbitrées
 
