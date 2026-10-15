@@ -15,6 +15,21 @@ Une série de pièces conçues pour être montrées ensemble, avec une présenta
 et un thème. Un rapprochement fait après coup n'en est pas un.
 _À éviter_ : collection, dossier, page-pôle
 
+**Version** :
+Une réalisation de la pièce, avec sa date, son format et son texte. Refaire une
+pièce dont une réalisation existe déjà, c'est en ouvrir une nouvelle version.
+_À éviter_ : reprise, édition
+
+**Variation** :
+Une écriture complète d'une version, dans un style donné. Les variations d'une
+version coexistent ; changer de style, c'est changer de variation.
+_À éviter_ : essai, déclinaison
+
+**Étude** :
+Un morceau d'une pièce étudié séparément : quelques-uns de ses caractères,
+dans n'importe quel ordre, au service d'une variation.
+_À éviter_ : essai, exercice, détail
+
 **Scan** :
 La numérisation d'une calligraphie sur papier ; c'est aujourd'hui la seule
 manière dont une œuvre entre dans le système.

@@ -46,7 +46,7 @@ describe("registre des scans", () => {
     [
       "un type d'image à la place d'une variation",
       "variation: v1a",
-      "variation: attempt",
+      "variation: study",
       "variation",
     ],
     ["une lecture qui n'est pas du chinois", "墨行機兔起鶻落", "煮haii", "read.1"],
