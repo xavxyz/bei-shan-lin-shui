@@ -7,5 +7,7 @@
   NODE_VERSION = "22"
   PNPM_VERSION = "11"
   ASTRO_TELEMETRY_DISABLED = "1"
+  # Jamais BSLS_ADMIN ici : le mode admin, qui montre les pièces non publiées,
+  # est réservé au local.
 
 # Les deploy previews sur pull request sont activés par défaut côté Netlify.

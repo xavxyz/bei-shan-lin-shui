@@ -5,8 +5,9 @@
 #
 # file       : nom du fichier sur le Drive (AAAA-MM-JJ_<pièce>_<page>.jpeg)
 # read       : caractères lus sur le scan, colonne par colonne
-# match      : slug de la pièce du plan (imports/notion-2026-08-23.plan.yaml),
-#              `new` (absente de Notion), `unidentified` ou `discarded`
+# match      : slug de la pièce, du plan (imports/notion-2026-08-23.plan.yaml)
+#              ou du contenu (content/pieces/), `new` (absente de Notion),
+#              `unidentified` ou `discarded`
 # confidence : high | medium | low
 # script     : style proposé (vocabulaire SCRIPTS), décidé par le calligraphe
 # variation  : variation arbitrée, dans le plan

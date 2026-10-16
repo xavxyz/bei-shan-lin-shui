@@ -28,6 +28,17 @@ export const localIdSchema = z
   .string()
   .regex(/^v\d+[a-z]*$/, "attendu : un identifiant local de la forme v1 ou v1a");
 
+export const versionIdSchema = localIdSchema.regex(
+  /^v\d+$/,
+  "attendu : un identifiant de version, par exemple v1",
+);
+
+/** Une variation se nomme d'après sa version : `v2a`, `v2b`… dans `v2`. */
+export const variationIdSchema = localIdSchema.regex(
+  /^v\d+[a-z]+$/,
+  "attendu : un identifiant de variation, par exemple v1a",
+);
+
 const prose = z.string().min(1);
 
 /* -------------------------------------------------------------------------- */

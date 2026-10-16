@@ -60,6 +60,25 @@ describe("la validation des imports en pre-commit", () => {
     expect(output).toContain("imports valides : 1 plans, 1 scans au registre");
   });
 
+  it("accepte un scan rattaché à une pièce du contenu, hors de tout plan", async () => {
+    const { code, output } = await validate({
+      "scans.yaml": scans("yong-cao-shu"),
+      "content/pieces/yong-cao-shu/piece.md": `---
+title: 永草書
+slug: yong-cao-shu
+status: idea
+versions:
+  - id: v1
+    date: 2026-06-21
+    format: A4
+---
+`,
+    });
+
+    expect(code).toBe(0);
+    expect(output).toContain("imports valides : 0 plans, 1 scans au registre");
+  });
+
   it("échoue sur un scan rattaché à une pièce absente du plan", async () => {
     const { code, output } = await validate({
       "notion.plan.yaml": plan,

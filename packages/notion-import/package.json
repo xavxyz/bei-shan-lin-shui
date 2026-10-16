@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@bsls/content": "workspace:*",
+    "@bsls/scans": "workspace:*",
     "@bsls/schema": "workspace:*",
     "opencc-js": "^1.0.5",
     "pinyin-pro": "^3.26.0",

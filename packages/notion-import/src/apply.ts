@@ -4,7 +4,7 @@ import sharp from "sharp";
 import { stringify } from "yaml";
 import { PIECES_DIR, pieceFile, pieceImageFile, projectFile } from "@bsls/content";
 import { RESERVED_PROJECT_ID, pieceFrontmatterSchema } from "@bsls/schema";
-import { normalizeImage } from "./normalize-image.js";
+import { normalizeImage } from "@bsls/scans";
 import type { ArbitratedPlan, PlannedPiece, PlannedProject } from "./plan-file.js";
 
 /** Une erreur d'application désigne le champ du plan à corriger. */

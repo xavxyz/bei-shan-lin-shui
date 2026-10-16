@@ -3,7 +3,22 @@ import { fileURLToPath } from "node:url";
 
 const fixtureContent = fileURLToPath(new URL("./tests/fixtures/content", import.meta.url));
 // Surchargeable, pour faire tourner plusieurs worktrees côte à côte.
-const port = Number(process.env.E2E_PORT ?? 4321);
+const publicPort = Number(process.env.E2E_PORT ?? 4321);
+// Loin du port public : `astro preview` se rabat sur le port suivant quand le
+// sien est pris, et l'on servirait alors le site public à la place de l'admin.
+const adminPort = publicPort + 70;
+const adminSpecs = /admin\.spec\.ts$/;
+
+/** Un build réel des fixtures, servi tel quel ; `env` en fixe le mode. */
+function builtSite(port: number, env: Record<string, string> = {}) {
+  return {
+    command: `pnpm build && pnpm preview --port ${port}`,
+    url: `http://localhost:${port}`,
+    env: { CONTENT_ROOT: fixtureContent, ASTRO_TELEMETRY_DISABLED: "1", ...env },
+    reuseExistingServer: false,
+    timeout: 180_000,
+  };
+}
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -14,16 +29,21 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: `http://localhost:${port}`,
     trace: "on-first-retry",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
-  // Le site est vérifié sur un build réel, produit à partir des fixtures de contenu.
-  webServer: {
-    command: `pnpm build && pnpm preview --port ${port}`,
-    url: `http://localhost:${port}`,
-    env: { CONTENT_ROOT: fixtureContent, ASTRO_TELEMETRY_DISABLED: "1" },
-    reuseExistingServer: false,
-    timeout: 180_000,
-  },
+  // Deux sites, deux builds réels des mêmes fixtures : le site public, et le
+  // même en mode admin, qui montre aussi les pièces non publiées.
+  projects: [
+    {
+      name: "public",
+      testIgnore: adminSpecs,
+      use: { ...devices["Desktop Chrome"], baseURL: `http://localhost:${publicPort}` },
+    },
+    {
+      name: "admin",
+      testMatch: adminSpecs,
+      use: { ...devices["Desktop Chrome"], baseURL: `http://localhost:${adminPort}` },
+    },
+  ],
+  webServer: [builtSite(publicPort), builtSite(adminPort, { BSLS_ADMIN: "1" })],
 });
