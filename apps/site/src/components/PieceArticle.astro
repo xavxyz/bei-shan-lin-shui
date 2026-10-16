@@ -54,6 +54,13 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
   }
 
   <p class="piece__tags">
+    {
+      piece.published ? null : (
+        <span class="tag tag--unpublished" data-testid="unpublished">
+          non publiée
+        </span>
+      )
+    }
     <span class="tag" data-testid="piece-status">{PIECE_STATUS_LABELS[piece.status]}</span>
     {
       piece.featuredScriptLabel ? (

@@ -18,5 +18,6 @@ const { piece, href } = Astro.props;
     }
     <h3 class="card__title card__title--cn" lang="zh-Hant">{piece.title.traditional}</h3>
     <p class="card__meta">{piece.title.pinyin}</p>
+    {piece.published ? null : <span class="tag tag--unpublished">non publiée</span>}
   </a>
 </li>

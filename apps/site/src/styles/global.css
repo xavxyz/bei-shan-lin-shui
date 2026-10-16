@@ -232,6 +232,13 @@ a:hover {
   color: var(--muted);
 }
 
+/* En mode admin, une pièce non publiée doit se repérer d'un coup d'œil. */
+.tag--unpublished {
+  border-style: dashed;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* Les métadonnées viennent après l'œuvre : c'est l'image qui prime. */
 .piece__tags {
   display: flex;

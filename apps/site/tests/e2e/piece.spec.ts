@@ -75,10 +75,15 @@ test("une pièce non publiée n'a aucune page et n'apparaît dans aucune liste",
 }) => {
   expect((await request.get("/four-seasons/jing-ye-si")).status()).toBe(404);
   expect((await request.get("/pieces/jing-ye-si")).status()).toBe(404);
+  expect((await request.get("/pieces/chun-xiao")).status()).toBe(404);
 
   await page.goto("/four-seasons");
   await expect(page.getByText("靜夜思")).toHaveCount(0);
 
   await page.goto("/");
   await expect(page.getByText("靜夜思")).toHaveCount(0);
+  await expect(page.getByText("春曉")).toHaveCount(0);
+  await expect(page.getByText("non publiée")).toHaveCount(0);
+  // Le décompte du projet ne compte que ses pièces publiées.
+  await expect(page.getByRole("link", { name: /Quatre saisons/ })).toContainText("1 pièce");
 });

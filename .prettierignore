@@ -1,5 +1,6 @@
 pnpm-lock.yaml
 dist
+dist-admin
 .astro
 node_modules
 test-results

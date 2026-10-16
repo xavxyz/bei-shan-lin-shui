@@ -2,14 +2,16 @@ import { defineCollection } from "astro:content";
 import type { Loader } from "astro/loaders";
 import { formatContentErrors, loadContent, type Content } from "@bsls/content";
 import { loadedPieceSchema, loadedProjectSchema } from "@bsls/schema";
-import { contentRoot } from "./content-root.js";
+import { adminMode, contentRoot } from "./content-root.js";
 
 /**
  * Le contenu est relu à chaque chargement de collection : en développement,
  * une édition sur le disque doit se voir sans redémarrer le serveur.
  */
 async function readContent(): Promise<Content> {
-  const result = await loadContent(contentRoot);
+  // En mode admin, le content layer inclut les pièces non publiées : c'est le
+  // seul filtre, le site n'en ajoute aucun.
+  const result = await loadContent(contentRoot, { includeUnpublished: adminMode });
   if (result.ok) return result.content;
   // Un contenu invalide casse le build, jamais la production.
   throw new Error(`Contenu invalide sous ${contentRoot}\n\n${formatContentErrors(result.errors)}`);
