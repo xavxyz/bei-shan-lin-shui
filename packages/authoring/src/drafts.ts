@@ -28,10 +28,16 @@ export const versionWithVariationsDraftSchema = versionDraftSchema.extend({
   variations: variationDraftSchema.array().default([]),
 });
 
-/** Une pièce à faire naître, avec sa version initiale. */
+/**
+ * Une pièce à faire naître, avec sa version initiale. Sa publication est une
+ * réponse du calligraphe, jamais un défaut : le brouillon qui la tait est refusé.
+ */
 export const pieceDraftSchema = pieceFieldsSchema
   .pick({ title: true, source: true, translation: true, projects: true, pinyin_overrides: true })
-  .extend({ version: versionDraftSchema });
+  .extend({
+    version: versionDraftSchema,
+    published: pieceFieldsSchema.shape.published.removeDefault(),
+  });
 
 export type VersionDraft = z.input<typeof versionDraftSchema>;
 export type VariationDraft = z.input<typeof variationDraftSchema>;

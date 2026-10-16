@@ -13,6 +13,7 @@ const draft = {
     columns: ["空山新雨後", "天氣晚來秋"],
     intention: "Retrouver l'humidité\nde la montagne après la pluie.",
   },
+  published: false,
 };
 
 describe("createPiece", () => {
@@ -44,6 +45,40 @@ describe("createPiece", () => {
       "空山新雨後",
       "天氣晚來秋",
     ]);
+  });
+
+  it("écrit publiée la pièce dont la publication est demandée : le site la charge", async () => {
+    const root = await writeTree({});
+
+    const result = await createPiece(root, { ...draft, published: true });
+
+    expect(result).toMatchObject({ ok: true });
+    const loaded = await loadContent(root);
+    expect(loaded.ok && loaded.content.pieces).toMatchObject([
+      { slug: "shan-ju-qiu-ming", status: "idea", published: true, versions: [{ id: "v1" }] },
+    ]);
+  });
+
+  it("écrit non publiée la pièce dont la publication est refusée : le site ne la charge pas", async () => {
+    const root = await writeTree({});
+
+    const result = await createPiece(root, { ...draft, published: false });
+
+    expect(result).toMatchObject({ ok: true });
+    const loaded = await loadContent(root);
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
+  });
+
+  it("refuse sans rien écrire un brouillon qui ne dit pas si la pièce est publiée", async () => {
+    const root = await writeTree({});
+    const { published: _, ...withoutPublication } = draft;
+
+    const result = await createPiece(root, withoutPublication);
+
+    expect(result).toMatchObject({ ok: false });
+    expect(!result.ok && result.message).toMatch(/^published : /);
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
   });
 
   it("dérive le slug du titre chinois en pinyin sans tons", async () => {

@@ -26,7 +26,11 @@ describe("attachToProject", () => {
 
   it("rattache une pièce qui n'appartenait à aucun projet", async () => {
     const root = await writeTree({ "projects/ge-zhi-yan-jiu.yaml": PROJECT_FILE });
-    await createPiece(root, { title: "山居秋暝", version: { date: "2026-10-16", format: "A4" } });
+    await createPiece(root, {
+      title: "山居秋暝",
+      version: { date: "2026-10-16", format: "A4" },
+      published: false,
+    });
 
     const result = await attachToProject(root, "shan-ju-qiu-ming", "ge-zhi-yan-jiu");
 
