@@ -31,7 +31,7 @@ versions:
           - file: v1a-02.jpg
             kind: study
             capture: scan
-      - id: v1b # essai en régulier
+      - id: v1b # variation en régulier
         script: kaishu
         status: tried
 translation: |
@@ -144,7 +144,7 @@ describe("rattacher un scan à une pièce du contenu", () => {
 
     expect(result).toMatchObject({ ok: true });
     const text = await readPiece(root);
-    expect(text).toContain("- id: v1b # essai en régulier");
+    expect(text).toContain("- id: v1b # variation en régulier");
     expect(text).toContain("# une autre feuille, du même jour");
     expect(text).toContain("Notes du calligraphe : **ne pas** toucher.");
     const loaded = await loadContent(root, { includeUnpublished: true });
