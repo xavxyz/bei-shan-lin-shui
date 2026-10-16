@@ -1,0 +1,50 @@
+---
+import type { LoadedImage, LoadedVersion } from "@bsls/schema";
+import { IMAGE_KINDS, VARIATION_STATUS_LABELS } from "@bsls/schema";
+import { ImageViewer } from "../islands/ImageViewer.js";
+
+type Props = {
+  /** N'importe quelle version de la pièce, courante ou antérieure. */
+  version: LoadedVersion;
+  /** Titre de la pièce, pour décrire les images à qui ne les voit pas. */
+  title: string;
+};
+
+const { version, title } = Astro.props;
+
+/** Œuvre entière, détail, étude, contexte ; l'ordre du fichier pour un même type. */
+function byKind(images: LoadedImage[]): LoadedImage[] {
+  return [...images].sort((a, b) => IMAGE_KINDS.indexOf(a.kind) - IMAGE_KINDS.indexOf(b.kind));
+}
+---
+
+<section class="variations" id={version.id} aria-label="Variations">
+  <ol class="variations__list">
+    {
+      version.variations.map((variation) => (
+        <li class="variation" id={variation.id} data-testid="variation">
+          <p class="variation__tags">
+            <span class="tag" data-testid="variation-script">
+              {variation.scriptLabel}
+            </span>
+            <span class="tag" data-testid="variation-status">
+              {VARIATION_STATUS_LABELS[variation.status]}
+            </span>
+          </p>
+
+          {variation.personal_note ? (
+            <p class="variation__note" data-testid="variation-note">
+              {variation.personal_note.trim()}
+            </p>
+          ) : null}
+
+          {variation.images.length > 0 ? (
+            <div class="variation__images">
+              <ImageViewer client:load images={byKind(variation.images)} title={title} />
+            </div>
+          ) : null}
+        </li>
+      ))
+    }
+  </ol>
+</section>

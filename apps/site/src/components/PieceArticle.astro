@@ -2,6 +2,7 @@
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
 import { PIECE_STATUS_LABELS } from "@bsls/schema";
 import ChineseText from "./ChineseText.astro";
+import VersionVariations from "./VersionVariations.astro";
 import { ImageViewer } from "../islands/ImageViewer.js";
 
 type Props = {
@@ -115,4 +116,6 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       }
     </div>
   </div>
+
+  <VersionVariations version={version} title={piece.title.traditional} />
 </article>
