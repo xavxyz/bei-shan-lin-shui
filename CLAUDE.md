@@ -12,9 +12,15 @@ source de vérité : le contenu vit sur le disque, le site en est une projection
 - `packages/content` — le content layer : prend une racine de contenu, retourne
   projets et pièces validés et typés, ou des erreurs localisées.
 - `packages/notion-import` — l'import de l'existant depuis Notion : lit un
-  export, propose un classement, applique le plan arbitré.
+  export, propose un classement, applique le plan arbitré ; ses images passent
+  par la normalisation de `packages/scans`.
+- `packages/scans` — l'entrée des scans : registre des scans arbitrés,
+  normalisation des images (JPEG qualité 92, au plus A4 à 300 dpi), et
+  `attachScan`, qui rattache un scan à une pièce de `content/`
+  (`pnpm attach:scan`).
 - `packages/authoring` — les écritures des skills de saisie (`pnpm piece`) :
-  ajouts au texte des pièces sans resérialiser ce qu'ils ne visent pas.
+  ajouts au texte des pièces sans resérialiser ce qu'ils ne visent pas. C'est
+  la seule couture d'édition du frontmatter ; `packages/scans` s'y branche.
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
 
 ## Règles qui tiennent le système
