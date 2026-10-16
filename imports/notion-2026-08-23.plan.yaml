@@ -67,6 +67,22 @@ projects:
     theme: ink
   # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
   # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_26_01.jpeg :
+  # un projet sur son nom ; la pièce 戈澤宇 en est la pièce-pôle
+  - id: ge-ze-yu
+    title: 戈澤宇
+    presentation: ""
+    theme: ink
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_26_08.jpeg :
+  # un projet à développer autour des deux mains, le crayon à gauche, le pinceau à droite
+  - id: you-shou-he-zhang
+    title: 又手合掌
+    presentation: ""
+    theme: ink
 pieces:
   - slug: xi-you-ji
     title: 西遊記
@@ -1239,6 +1255,8 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 𫝑 confirmé par le calligraphe : le papier l'écrit ainsi, en régulier comme en cursive
+  # photo contextuelle à faire : la pièce assemblée en 3x2 ne se scanne pas
   - slug: tai-quan-zhu-shan-an
     title: 胎𫝑 / 泉注 / 山安
     status: made
@@ -1246,10 +1264,42 @@ pieces:
     published: false
     version:
       id: v1
-      date: 2026-02-24
+      date: 2026-05-13 # date du papier : 立夏 26 sur 26_01, empilée avec la série (Notion disait 2026-02-24)
       format: 3x2
-      columns: []
-    variations: []
+      columns: # une feuille par colonne, chaque colonne écrite en régulier puis en cursive
+        - 胎𫝑 # 26_02 et 26_03
+        - 泉注 # 26_04 et 26_05
+        - 山安 # 26_06 et 26_07
+    variations:
+      - id: v1a
+        script: ziyou # la pièce alterne régulier et cursif
+        status: kept
+        images:
+          # grille imprimée 3x6, une colonne de deux caractères ; 胎 au 月 tracé comme 肉
+          - source: imports/scans/2026-10-11_26_02.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # 胎𫝑 en cursive, 力 en grande boucle
+          - source: imports/scans/2026-10-11_26_03.jpeg
+            file: v1a-02.jpg
+            kind: work
+          # 泉注 en régulier
+          - source: imports/scans/2026-10-11_26_04.jpeg
+            file: v1a-03.jpg
+            kind: work
+          # 泉注 en cursive, 注 réduit à 氵 lié et à un zigzag
+          - source: imports/scans/2026-10-11_26_05.jpeg
+            file: v1a-04.jpg
+            kind: work
+          # 山安 en régulier
+          - source: imports/scans/2026-10-11_26_06.jpeg
+            file: v1a-05.jpg
+            kind: work
+          # 山安 en cursive, 山 en boucle, 安 lié
+          - source: imports/scans/2026-10-11_26_07.jpeg
+            file: v1a-06.jpg
+            kind: work
     notion:
       title: 胎𫝑 / 泉注 / 山安
       status: Mouvementée
@@ -2476,6 +2526,59 @@ pieces:
         images:
           # A4 sur grille imprimée pâle ; attribution 岱崑作頁 ; signé 戈 丙午小滿
           - source: imports/scans/2026-10-11_27.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+  # absente de Notion : identifiée sur le scan 2026-10-11_26_01.jpeg (registre imports/scans.yaml)
+  # pièce-pôle du projet ge-ze-yu, sur le nom du calligraphe ; 26_01 en est un brouillon
+  # au crayon, un grand triangle dont l'axe descend le long de la colonne, un cercle sur 宇
+  - slug: ge-ze-yu
+    title: 戈澤宇
+    status: study
+    projects:
+      - ge-ze-yu
+    published: false
+    version:
+      id: v1
+      date: 2026-05-13 # date du papier : 立夏 26, au crayon, milieu du jieqi
+      format: 1x3
+      columns:
+        - 戈澤宇 # déborde la grille imprimée 3x6 de tai-quan-zhu-shan-an
+    variations:
+      - id: v1a
+        script: ziyou
+        status: tried
+        images:
+          # brouillon sur grille imprimée 3x6 ; 胎𫝑 de 26_02 en transparence ; daté 立夏 26
+          - source: imports/scans/2026-10-11_26_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+  # absente de Notion : identifiée sur le scan 2026-10-11_26_08.jpeg (registre imports/scans.yaml)
+  # pièce-pôle du projet you-shou-he-zhang ; 戈說 : « mains jointes », 手 la main gauche et 又
+  # la main droite, fondus en un caractère inventé en style libre, une part écrite de chaque
+  # main : le stylo et le crayon à gauche, le pinceau à droite
+  # notes au crayon : « = perdre ses moyens (sans force ni forme) », « ≠ perdre ses moyens »,
+  # flèche vers « ses deux mains jointes ! »
+  - slug: you-shou-he-zhang
+    title: 又手合掌
+    status: study
+    projects:
+      - you-shou-he-zhang
+    published: false
+    version:
+      id: v1
+      date: 2026-05-13 # date du papier : 立夏 26 sur 26_01, empilée avec la série
+      format: 1x3 # 又手 compte pour un caractère
+      columns:
+        - 又手合掌 # 又手 : un seul caractère inventé, hors grille ; 合掌 dans la grille imprimée 3x6
+    variations:
+      - id: v1a
+        script: ziyou
+        status: tried
+        images:
+          # 又手 hors grille, plus grand ; 合掌 en courant dans la grille ; ni signature ni date
+          - source: imports/scans/2026-10-11_26_08.jpeg
             file: v1a.jpg
             kind: work
             featured: true
