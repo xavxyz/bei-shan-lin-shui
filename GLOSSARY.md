@@ -12,7 +12,9 @@ _À éviter_ : œuvre, page
 
 **Projet** :
 Une série de pièces conçues pour être montrées ensemble, avec une présentation
-et un thème. Un rapprochement fait après coup n'en est pas un.
+et un thème. Une pièce peut rejoindre un projet longtemps après sa création,
+si elle est reprise pour lui ; rapprocher après coup des pièces écrites sans
+lui n'en fait pas un projet.
 _À éviter_ : collection, dossier, page-pôle
 
 **Version** :
