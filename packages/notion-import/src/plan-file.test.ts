@@ -56,11 +56,11 @@ describe("plan d'import", () => {
   });
 
   it("accepte les corrections du calligraphe", () => {
-    const corrected = planFor().replace("status: made", "status: finished");
+    const corrected = planFor().replace("status: made", "status: on-hold");
 
     const result = parsePlan(corrected);
 
-    expect(result.ok && result.plan.pieces[0]?.status).toBe("finished");
+    expect(result.ok && result.plan.pieces[0]?.status).toBe("on-hold");
   });
 
   it("rejette un statut inconnu en désignant le champ", () => {

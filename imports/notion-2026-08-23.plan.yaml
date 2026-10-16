@@ -1376,7 +1376,7 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: diao-xi
     title: 調息
-    status: study
+    status: experiment
     projects: []
     published: false
     versions:
@@ -1414,7 +1414,7 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: diao-xin
     title: 調心
-    status: study
+    status: experiment
     projects: []
     published: false
     versions:
@@ -1566,7 +1566,7 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: mo-li-li
     title: 磨礪〔﹣礪〕
-    status: study
+    status: experiment
     projects: []
     published: false
     versions:
@@ -1605,7 +1605,7 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: shen-yu
     title: 神遇
-    status: study
+    status: experiment
     projects: []
     published: false
     versions:
@@ -1622,7 +1622,7 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: xing-qi-yu-pei-ming
     title: 📜 行氣玉佩銘
-    status: study
+    status: experiment
     projects: []
     published: false
     versions:
@@ -1639,7 +1639,7 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: bai-zi-bei
     title: 📜 百字碑
-    status: study
+    status: experiment
     projects: []
     published: false
     versions:
@@ -1657,7 +1657,7 @@ pieces:
   # colonnes lues sur les scans 2026-10-11_33_01 et _09
   - slug: mo-si-wen-ke
     title: 墨寺㞢文刻
-    status: study # 戈說 : à présenter à Luciano
+    status: experiment # 戈說 : à présenter à Luciano
     projects: []
     published: false
     versions:
@@ -1726,7 +1726,7 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: tai-xi
     title: 胎息
-    status: study
+    status: experiment
     projects: []
     published: false
     versions:
@@ -1784,7 +1784,7 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: hu-si-luan-xiang
     title: 胡思亂想
-    status: study
+    status: experiment
     projects:
       - tai-xu-huan-jing-hong-lou-meng
     published: false

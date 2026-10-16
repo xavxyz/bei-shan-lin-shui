@@ -2,7 +2,7 @@
 title: 行行重行行
 slug: xing-xing-zhong-xing-xing
 projects: []
-status: study
+status: experiment
 source:
   author: 佚名
   work: 古詩十九首

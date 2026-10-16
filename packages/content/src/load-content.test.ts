@@ -109,6 +109,19 @@ describe("violations de schéma", () => {
     expect(result.errors[0]!.message).toContain("idea");
   });
 
+  it("rejette le statut finished : l'encre sèche est le stade le plus avancé", async () => {
+    const result = await loadTree({
+      ...wellFormedTree,
+      pieces: { "shan-ju-qiu-ming": { ...shanJuQiuMing, status: "finished" } },
+    });
+
+    expect(result.ok).toBe(false);
+    if (result.ok) return;
+    expect(result.errors).toHaveLength(1);
+    expect(result.errors[0]!.file).toBe("pieces/shan-ju-qiu-ming/piece.md");
+    expect(result.errors[0]!.path).toBe("status");
+  });
+
   it("rejette un style d'écriture inconnu, en désignant la variation fautive", async () => {
     const result = await loadTree({
       ...wellFormedTree,

@@ -50,6 +50,18 @@ describe("la validation de contenu en pre-commit", () => {
     expect(output).toContain("1 erreur de contenu");
   });
 
+  it("refuse l'ancien statut « study », devenu « experiment »", async () => {
+    const root = await writeFixtureTree({
+      pieces: { "shan-ju-qiu-ming": { ...piece, status: "study" } },
+    });
+
+    const { code, output } = await validate(root);
+
+    expect(code).toBe(1);
+    expect(output).toContain("pieces/shan-ju-qiu-ming/piece.md");
+    expect(output).toContain("status");
+  });
+
   it("échoue aussi sur un brouillon non publié", async () => {
     const root = await writeFixtureTree({
       pieces: { "shan-ju-qiu-ming": { ...piece, published: false, status: "presque-fini" } },
