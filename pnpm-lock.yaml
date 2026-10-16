@@ -76,6 +76,18 @@ importers:
         specifier: ^6.0.7
         version: 6.4.3(@types/node@22.20.1)(tsx@4.23.12)(yaml@2.9.0)
 
+  packages/authoring:
+    dependencies:
+      '@bsls/content':
+        specifier: workspace:*
+        version: link:../content
+      '@bsls/schema':
+        specifier: workspace:*
+        version: link:../schema
+      yaml:
+        specifier: ^2.6.1
+        version: 2.9.0
+
   packages/content:
     dependencies:
       '@bsls/schema':

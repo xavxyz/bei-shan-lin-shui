@@ -13,6 +13,8 @@ source de vérité : le contenu vit sur le disque, le site en est une projection
   projets et pièces validés et typés, ou des erreurs localisées.
 - `packages/notion-import` — l'import de l'existant depuis Notion : lit un
   export, propose un classement, applique le plan arbitré.
+- `packages/authoring` — les écritures des skills de saisie (`pnpm piece`) :
+  ajouts au texte des pièces sans resérialiser ce qu'ils ne visent pas.
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
 
 ## Règles qui tiennent le système
@@ -35,6 +37,10 @@ d'écriture, thèmes — par `packages/schema/src/vocabulary.ts`. Les styles son
 stockés en pinyin sans tons et **affichés en français**.
 
 `pnpm validate:content` valide `content/`, et tourne en pre-commit.
+
+La saisie passe par les skills `nouvelle-piece`, `version-ou-variation`,
+`veille` et `scans`, en conversation avec le calligraphe. Elles écrivent par
+`pnpm piece`, qui n'écrase rien et refuse ce que le schéma refuse.
 
 ## Importer depuis Notion
 

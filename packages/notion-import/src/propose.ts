@@ -6,7 +6,7 @@ import {
   toProjectProposal,
   type Hub,
 } from "./propose-projects.js";
-import { deriveSlug, disambiguate } from "./slug.js";
+import { deriveSlug, disambiguate } from "@bsls/content";
 import type { NotionPage } from "./read-export.js";
 
 /**
