@@ -31,6 +31,12 @@ test("une surcharge manuelle de pinyin prime sur la valeur générée", async ({
   await expect(page.getByTestId("pinyin")).toContainText("háng háng chóng háng háng");
 });
 
+test("une pièce en expérimentation l'affiche en français", async ({ page }) => {
+  await page.goto("/pieces/xing-xing-zhong-xing-xing");
+
+  await expect(page.getByTestId("piece-status")).toHaveText("expérimentation");
+});
+
 test("les styles d'écriture sont affichés en français, jamais en pinyin", async ({ page }) => {
   await page.goto(piecePath);
 
