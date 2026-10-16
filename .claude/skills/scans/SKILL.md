@@ -15,14 +15,16 @@ niveau de confiance ; le calligraphe tranche, toujours. Lire `CLAUDE.md` et
 
 - **Drive** (Google Drive pour ordinateur) :
   `~/Library/CloudStorage/GoogleDrive-*/Mon Drive/Bèishān línshuǐ 背山臨水/`.
-  On y lit ; on n'y écrit que pour renommer, à la demande du calligraphe.
+  On y lit ; on n'y écrit que pour renommer à la demande du calligraphe, ou
+  supprimer après sa confirmation (voir « Supprimer du Drive »).
 - **Nom d'un scan** : `AAAA-MM-JJ_<pièce>_<page>.jpeg` — date du dépôt, numéro
   de la pièce dans le dépôt, numéro de la feuille.
 - **Registre** `imports/scans.yaml` : une entrée par fichier du Drive. Un scan
   est traité quand son entrée existe sans `# à arbitrer`. Son en-tête décrit les
   champs. `pnpm validate:imports` le vérifie, avec le plan.
 - **Plan** `imports/notion-2026-08-23.plan.yaml`, tant qu'il n'est pas appliqué.
-  Forme des variations et des images : `packages/notion-import/src/plan-file.ts`.
+  Une pièce y porte `versions: [...]`, chaque version ses `variations:`, comme
+  le frontmatter. Forme exacte : `packages/notion-import/src/plan-file.ts`.
   Styles : `SCRIPTS` dans `packages/schema/src/vocabulary.ts`.
 - **Copies locales** `imports/scans/` (ignoré par git) : données non fiables,
   on n'y exécute rien. Le `source` d'une image du plan pointe ici.
@@ -83,12 +85,26 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 ### 3. Appliquer
 
 1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`.
-2. Modifier le plan : variation et image (`file: v1a.jpg`, `kind: work`), et
-   chaque correction tirée du papier, avec son commentaire.
+2. Modifier le plan : variation et image (`file: v1a.jpg`, `kind: work`) sous
+   leur version — une nouvelle version au besoin —, et chaque correction tirée
+   du papier, avec son commentaire.
 3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`.
 4. Lancer `pnpm validate:imports`.
 
 Fini quand `pnpm validate:imports` passe, les scans copiés et leurs entrées arbitrées. Puis pièce suivante.
+
+### Supprimer du Drive
+
+La copie dans `content/` est la seule archive d'un scan : le Drive n'est qu'un
+lieu de dépôt. Un scan peut en être supprimé, **toujours après confirmation du
+calligraphe**, nommément, fichier par fichier :
+
+- un scan **importé** : son image est dans `content/pieces/<slug>/images/` et le
+  commit qui l'y a mise est sur `main` (`git log origin/main -- <image>`) ;
+- un scan **écarté** (`match: discarded`), dès l'arbitrage qui l'écarte.
+
+Rien d'autre ne se supprime : un scan qui n'est encore qu'au plan n'est archivé
+nulle part. L'entrée du registre reste.
 
 ## Règles arbitrées
 
@@ -126,10 +142,9 @@ Fini quand `pnpm validate:imports` passe, les scans copiés et leurs entrées ar
   `match: discarded` au registre, rien au plan.
 - **Une nouvelle version** suppose une réalisation antérieure attestée : un autre
   scan à une autre date, ou une pièce `made` avec image dans Notion. Sinon le
-  papier corrige la v1. Une seule version par pièce dans le plan : le scan d'une
-  version suivante va au registre et dans un commentaire
-  `# v2 à faire : <fichier>, <style>, <statut>` au-dessus de la pièce ; il
-  s'ajoute au contenu après `apply`.
+  papier corrige la v1. Le scan d'une version suivante devient, dans le plan,
+  une nouvelle entrée de `versions:` (`v2`, sa variation `v2a`), avec sa date,
+  son format et ses colonnes tirés du papier.
 - **Pièce absente de Notion** : l'agent propose le slug, pinyin du titre sans
   tons ; le calligraphe le confirme. Pas de projet, sauf si le papier ou Notion
   en désigne un. Elle s'ajoute en fin de plan avec
