@@ -603,158 +603,75 @@ scans:
     # 4x4 sur grille imprimée ; 水火 écrits 氵 et 灬 ; 中和 assemblés comme sur
     # 25_01 ; sans signature propre : celle de 25_01 décalquée par contact, même date
 
-  - file: 2026-10-11_26_01.jpeg # à arbitrer
-    read: [戈謂之意] # à arbitrer — 謂 (言 en trait vertical, 胃 bouclé) ou 澤 / 得 ? 意 (立 net, 日心 en zigzag) ou 書 ?
-    match: tai-quan-zhu-shan-an # à arbitrer — feuille de tête ou de commentaire de la série 26, aucun de ses caractères n'est dans le texte du plan
-    confidence: low
-    script: caoshu # à arbitrer — 戈 en grand, appuyé, presque kaishu ; la suite en cursive très libre (ziyou ?)
-    # une colonne de quatre caractères qui déborde la grille imprimée 3x6 (la
-    # même que 26_02-07) : 戈 au-dessus, 謂 et 之 dans la grille, 意 dessous ;
-    # format 1x4 ; 胎勢 de 26_02 visible par transparence dans la grille
-    # au crayon : un grand triangle (montagne ? assise du corps ?) dont l'axe
-    # vertical descend le long de la colonne, un cercle sur le crochet de 之 et
-    # une horizontale à sa base : schéma de posture ou d'équilibre ?
-    # à gauche du bas, au crayon : 立夏 26 → 2026-05-05 (date du papier ;
-    # Notion disait 2026-02-24) ; à droite de 意, petit signe cursif isolé :
-    # la signature 戈 ; le grand 戈 du haut serait alors le sujet (« 戈 l'appelle 意 »,
-    # comme « 戈說 ») et non une signature
-    # grep 謂之, 之意, 謂, 立夏, 戈得 : vides dans le plan et content/pieces/
-    # questions : lecture (謂 ? 意 ?) ; cette feuille est-elle une image de la
-    # pièce (colophon, kind autre que work ?) ou une feuille à part, voire à
-    # écarter ? le 立夏 vaut-il pour toute la série 26 ?
-
-  - file: 2026-10-11_26_02.jpeg # à arbitrer
-    read: [胎勢] # à arbitrer — le plan écrit 𫝑 ; le papier montre 勢 (坴丸 sur 力)
-    match: tai-quan-zhu-shan-an # à arbitrer
+  - file: 2026-10-11_26_01.jpeg
+    read: [戈澤宇]
+    match: ge-ze-yu # absente de Notion, pièce-pôle du projet ge-ze-yu
     confidence: high
-    script: kaishu # à arbitrer
-    variation: v1a # à arbitrer ; feuille régulière du premier couple, 26_03 (胎勢 cursif) en v1b ?
-    # format 1x2 : une colonne, chaque caractère sur 3x3 cases d'une grille
-    # imprimée de 3 cases de large ; 胎 au 月 tracé comme 肉 (traits croisés)
-    # ni date, ni signature, ni attribution, ni note en français sur cette feuille
-    # ensemble 26_01-08 : 26_02/03 胎勢 (régulier / cursif), 26_04/05 泉注,
-    # 26_06/07 山安, chaque texte en deux styles ; 26_01 (戈 … 之 …, triangle
-    # au crayon, daté 立夏) et 26_08 (… 合掌, notes « perdre ses moyens »)
-    # semblent être des feuilles de commentaire
-    # écarts avec le plan : columns vides (→ 胎勢 / 泉注 / 山安), format 3x2
-    # pour l'ensemble alors que chaque feuille est 1x2 ; 𫝑 contre 勢 ; date
-    # Notion 2026-02-24, peut-être remplacée par le 立夏 de 26_01 (2026-05-05)
-    # questions : 勢 ou 𫝑 dans le titre ; une variation par style (régulier
-    # 02/04/06, cursif 03/05/07) ou une par feuille ; 26_01 et 26_08 font-ils
-    # partie de la pièce ?
+    script: ziyou
+    variation: v1a # tried, brouillon, image mise en avant ; dans le plan
+    # une colonne qui déborde la grille imprimée 3x6 de la série 26 ; lu d'abord
+    # 戈謂之意 : le 4e « caractère » est la date au crayon, 立夏 26 → 2026-05-13 ;
+    # au crayon, un grand triangle et un cercle sur 宇 ; 胎𫝑 de 26_02 en transparence
 
-  - file: 2026-10-11_26_03.jpeg # à arbitrer
-    read: [胎勢] # à arbitrer — cursive : 月 en deux traits, 台 en boucle ; 勢 au 力 en grande boucle
-    match: tai-quan-zhu-shan-an # à arbitrer
-    confidence: medium
-    script: caoshu # à arbitrer ; ou xingcao
-    variation: v1b # à arbitrer ; 26_02 (même texte en kaishu) serait v1a
-    # une colonne de deux caractères, chacun sur 3x2 cases d'une grille imprimée
-    # 3x6 : format 1x2 ; ni signature, ni date, ni note sur cette feuille
-    # le plan écrit 胎𫝑 ; le papier montre 勢 (en kaishu sur 26_02 : 執 sur 力)
-    # série 26 : 01 = 戈 en grand + cursive (胎勢 ?) sur grille, triangle au
-    # crayon, signé 立夏 (→ 2026-05-05 ; Notion disait 2026-02-24) ; 02 胎勢
-    # kaishu ; 04 泉注 kaishu, 05 泉注 cursif ; 06 山安 kaishu, 07 山安 cursif ;
-    # 08 拜(?) 合掌 avec notes « perdre ses moyens … ses deux mains jointes ! »
-    # le plan a format 3x2 et colonnes vides : à compléter par 胎勢 / 泉注 / 山安 ;
-    # 合掌 (08) absent du plan
-    # questions : chaque paire kaishu/cursive = variations v1a/v1b, ou la cursive
-    # en attempt ? une seule image par feuille ou une pièce par paire ?
-    # 勢 ou 𫝑 pour le titre ? date 立夏 pour toute la série ?
+  - file: 2026-10-11_26_02.jpeg
+    read: [胎𫝑]
+    match: tai-quan-zhu-shan-an
+    confidence: high
+    script: kaishu
+    variation: v1a # kept, image mise en avant (v1a-01) ; dans le plan
+    # 1re colonne de la 3x2, en régulier ; 𫝑 sur le papier, confirmé ; 胎 au 月
+    # tracé comme 肉 ; ni signature ni date
 
-  - file: 2026-10-11_26_04.jpeg # à arbitrer
+  - file: 2026-10-11_26_03.jpeg
+    read: [胎𫝑]
+    match: tai-quan-zhu-shan-an
+    confidence: high
+    script: caoshu
+    variation: v1a # v1a-02 ; dans le plan
+    # 1re colonne en cursive ; la pièce alterne régulier et cursif (variation ziyou)
+
+  - file: 2026-10-11_26_04.jpeg
     read: [泉注]
-    match: tai-quan-zhu-shan-an # à arbitrer ; 2e couple du titre Notion « 胎𫝑 / 泉注 / 山安 »
-    confidence: medium
-    script: kaishu # à arbitrer
-    variation: v1a # à arbitrer ; série kaishu 02 胎勢 / 04 泉注 / 06 山安, la série cursive 03 / 05 / 07 en v1b ?
-    # une colonne de deux grands caractères 泉 注, chacun dans un carré 3x3 de
-    # la grille imprimée (gabarit 3x6 au centre d'une feuille A4 portrait),
-    # trait appuyé, kaishu ; 05 refait 泉注 en cursive sur la même grille
-    # ni attribution, ni signature 戈, ni date, ni note en français ; on voit
-    # par transparence le 胎勢 d'une autre feuille ; la seule date de la pièce
-    # est sur 26_01 (立夏 → 2026-05-05 ?), Notion disait 2026-02-24
-    # écarts avec le plan : columns vide dans le plan (à remplir 胎勢 / 泉注 /
-    # 山安 d'après 02, 04, 06) ; format 3x2 du plan = trois couples de deux
-    # caractères, ici une feuille par couple ; Notion écrit 𫝑, le papier 勢
-    # (02, 03) ; 01 (戈… 立夏) et 08 (拜 合掌, notes « perdre ses moyens »)
-    # semblent d'autres pièces ou des essais
-    # questions : une variation par style (kaishu v1a, cursive v1b) avec trois
-    # images chacune, ou chaque feuille un essai (attempt) ? garder 勢 plutôt
-    # que 𫝑 ? la date de la pièce est-elle le 立夏 de 26_01 ?
+    match: tai-quan-zhu-shan-an
+    confidence: high
+    script: kaishu
+    variation: v1a # v1a-03 ; dans le plan
+    # 2e colonne en régulier ; ni signature ni date
 
-  - file: 2026-10-11_26_05.jpeg # à arbitrer
+  - file: 2026-10-11_26_05.jpeg
     read: [泉注]
-    match: tai-quan-zhu-shan-an # à arbitrer — le 2e des trois binômes du titre Notion 胎𫝑 / 泉注 / 山安
-    confidence: medium
-    script: caoshu # à arbitrer — 泉 en cursive (白 bouclé, 水 en deux traits), 注 réduit à 氵 lié et à un zigzag
-    variation: v1b # à arbitrer — pendant cursif de 26_04 (泉注 en kaishu, v1a ?) ; ou 泉注 forme une variation à lui seul
-    # format : une colonne de 2 caractères sur grille imprimée 3x6 (chaque
-    # caractère couvre ~2x3 cases), comme 26_02 à 26_07 ; le plan dit 3x2
-    # (3 binômes de 2 ?) et columns: [] (à compléter : 胎勢 / 泉注 / 山安 ?)
-    # la pièce sur le Drive va par paires kaishu/caoshu : 02 胎勢 / 03 cursif,
-    # 04 泉注 / 05 cursif, 06 山安 / 07 cursif ; 01 (戈 ? 澤之言 ?, daté 立夏)
-    # et 08 (? 合掌, notes « perdre ses moyens ») semblent d'autres travaux
-    # ni attribution, ni signature 戈, ni date, ni note en français sur 05 :
-    # date du plan 2026-02-24 (Notion) faute de mieux ; 立夏 de 26_01 donnerait 2026-05-05
-    # grep 泉注 et 山安 : seul tai-quan-zhu-shan-an ; rien dans content/pieces/
-    # questions : une variation par style (kaishu v1a, caoshu v1b) avec trois
-    # images chacune, ou une variation par binôme ? 01 et 08 font-ils partie de la pièce ?
+    match: tai-quan-zhu-shan-an
+    confidence: high
+    script: caoshu
+    variation: v1a # v1a-04 ; dans le plan
+    # 2e colonne en cursive, 注 réduit à 氵 lié et à un zigzag
 
-  - file: 2026-10-11_26_06.jpeg # à arbitrer
+  - file: 2026-10-11_26_06.jpeg
     read: [山安]
-    match: tai-quan-zhu-shan-an # à arbitrer
+    match: tai-quan-zhu-shan-an
     confidence: high
-    script: kaishu # à arbitrer
-    variation: v1a # à arbitrer ; feuille 山安 en kaishu, à côté de 26_02 (胎勢) et 26_04 (泉注)
-    # une colonne de deux grands caractères sur grille imprimée 3x6 (2 caractères
-    # par feuille ; le 3x2 du plan = trois feuilles de deux caractères ?)
-    # ni attribution, ni signature 戈, ni date, ni note en français ; la petite
-    # marque au bord droit revient sur 02-05 : défaut du papier ou du scan
-    # suite 26 : 01 grand titre cursif (戈 ? 澤 ?…, signé 立夏 + 戈 ?), 02/03 胎勢
-    # kaishu/cursif, 04/05 泉注 kaishu/cursif, 06/07 山安 kaishu/cursif, 08 拜 ?
-    # 合掌 avec notes au crayon (« perdre ses moyens », « ses deux mains jointes ! »)
-    # écarts avec le plan : titre 胎𫝑 (勢 sur le papier), colonnes vides
-    # (proposer 胎勢, 泉注, 山安), date 2026-02-24 contre 立夏 (2026-05-05 ?) sur 26_01
-    # questions : kaishu (02/04/06) et cursif (03/05/07) = deux variations v1a/v1b ?
-    # 26_01 et 26_08 appartiennent-ils à la même pièce ?
+    script: kaishu
+    variation: v1a # v1a-05 ; dans le plan
+    # 3e colonne en régulier ; ni signature ni date
 
-  - file: 2026-10-11_26_07.jpeg # à arbitrer
-    read: [山安] # à arbitrer ; 山 réduit à une boucle, 安 en 宀 lié au 女 cursif
-    match: tai-quan-zhu-shan-an # à arbitrer ; 3e paire du titre 胎𫝑 / 泉注 / 山安
+  - file: 2026-10-11_26_07.jpeg
+    read: [山安]
+    match: tai-quan-zhu-shan-an
     confidence: high
-    script: caoshu # à arbitrer
-    variation: v1b # à arbitrer ; jeu cursif (03 胎勢, 05 泉注, 07 山安), v1a = jeu kaishu (02, 04, 06)
-    # feuille 7 sur 8 ; grille imprimée 3x6 au centre, deux grands caractères
-    # en une colonne : format 1x2 par feuille (le plan dit 3x2, columns vides :
-    # 胎𫝑 / 泉注 / 山安 = trois colonnes de deux, sur six feuilles)
-    # 06 est le même 山安 en kaishu ; transparence d'une autre feuille (拜/手 de 08 ?)
-    # ni attribution, ni signature 戈, ni date, ni note en français ; la date
-    # est sur 01 (立夏 → 2026-05-05 ?, Notion disait 2026-02-24)
-    # 01 (戈?謂之… signé, 立夏) et 08 (?合掌, notes « perdre ses moyens »,
-    # « ses deux mains jointes ») semblent hors du texte du plan
-    # questions : 01 et 08 font-ils partie de la pièce ? deux variations
-    # (kaishu / caoshu) ou une variation et ses essais ? 𫝑 du plan ou 勢 du papier (02) ?
+    script: caoshu
+    variation: v1a # v1a-06 ; dans le plan
+    # 3e colonne en cursive, 山 en boucle, 安 lié ; série datée 立夏 26 par 26_01 ; photo contextuelle de la
+    # pièce assemblée à faire, elle ne se scanne pas
 
-  - file: 2026-10-11_26_08.jpeg # à arbitrer
-    read: [失合掌] # à arbitrer — 1er caractère en grande cursive hors grille : 乂 à gauche, 手 à droite (三 + crochet) : 失 ? 拜 ? 失手 ligaturé ? ; 合掌 net, dans la grille
-    match: tai-quan-zhu-shan-an # à arbitrer ; ou new : 合掌 n'est ni dans le titre ni dans le plan
-    confidence: low
-    script: caoshu # à arbitrer ; 1er caractère en caoshu, 合掌 plutôt xingshu (口 et 手 bouclés)
-    # feuille 8 sur 8, A4 portrait ; grille imprimée 3x6 comme 26_02 à 26_07,
-    # 合掌 dedans (chaque caractère ~3x3 cases), le 1er caractère au-dessus,
-    # hors grille, plus grand ; transparence visible sur 26_07
-    # notes au crayon, à droite : face au 1er caractère « = perdre ses moyens
-    # (sans force ni forme) » ; face à 合掌 « ≠ perdre ses moyens », « ses
-    # moyens » entouré, flèche vers « ses deux mains jointes ! » : jeu entre
-    # perdre la main (失 ? 失手 ?) et joindre les mains (合掌)
-    # ni attribution, ni signature 戈, ni date : la seule date de la série est
-    # le 立夏 de 26_01 (→ 2026-05-05 ? Notion disait 2026-02-24)
-    # grep 合掌, 掌, 失手, 拜 vides dans le plan et content/pieces/ ; le plan
-    # n'a que 胎𫝑 / 泉注 / 山安 (format 3x2, columns vides)
-    # questions : quel est le 1er caractère ? 合掌 est-il une 4e posture de la
-    # pièce (avec 胎勢, 泉注, 山安), une feuille de commentaire (attempt /
-    # context), ou une pièce à part (slug, projet) ?
+  - file: 2026-10-11_26_08.jpeg
+    read: [又手合掌]
+    match: you-shou-he-zhang # absente de Notion, pièce-pôle du projet you-shou-he-zhang
+    confidence: high
+    script: ziyou
+    variation: v1a # tried, image mise en avant ; dans le plan
+    # 又手 : un caractère inventé, 手 main gauche et 又 main droite, une part
+    # écrite de chaque main (lu d'abord 失, 拜 ou 失手) ; 合掌 dans la grille ; daté 立夏 26 avec 26_01 ;
+    # notes au crayon « perdre ses moyens » / « ses deux mains jointes ! »
 
   - file: 2026-10-11_27.jpeg
     read: [飛鴻戲海, 雲鶴遊天]
