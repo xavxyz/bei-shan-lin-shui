@@ -112,7 +112,7 @@ describe("addVariation", () => {
     });
 
     expect(unknownVersion).toMatchObject({ ok: false, message: "version inconnue : v9" });
-    expect(unknownScript).toMatchObject({ ok: false });
+    expect(!unknownScript.ok && unknownScript.message).toMatch(/^script : /);
     expect(await readPieceFile(root, "yong-cao-shu")).toBe(YONG);
   });
 });

@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { parseDocument, stringify } from "yaml";
+import { parseDocument } from "yaml";
 import { pieceFile } from "@bsls/content";
 import { pieceFrontmatterSchema, type PieceFrontmatter, type z } from "@bsls/schema";
 
@@ -48,7 +48,11 @@ export async function writePiece(piece: PieceText): Promise<void> {
 
 /** La pièce telle que le schéma la lit, ou la raison de son refus. */
 export function checkPiece(frontmatter: string): Outcome<{ data: PieceFrontmatter }> {
-  const result = pieceFrontmatterSchema.safeParse(parseDocument(frontmatter).toJS());
+  const document = parseDocument(frontmatter);
+  if (document.errors.length > 0) {
+    return { ok: false, message: document.errors.map((error) => error.message).join("\n") };
+  }
+  const result = pieceFrontmatterSchema.safeParse(document.toJS());
   if (result.success) return { ok: true, data: result.data };
   return { ok: false, message: describeIssues(result.error) };
 }
@@ -59,25 +63,9 @@ export function describeIssues(error: z.ZodError): string {
     .join("\n");
 }
 
-/** Sérialisation des fragments écrits : texte long jamais replié, prose en bloc littéral. */
-export function toYaml(value: unknown): string {
-  return stringify(value, { lineWidth: 0, blockQuote: "literal" });
-}
-
 /** Un fragment à écrire, sans ses champs absents : un champ facultatif ne s'écrit pas vide. */
 export function compact<T extends Record<string, unknown>>(record: T): Partial<T> {
   return Object.fromEntries(
     Object.entries(record).filter(([, value]) => value !== undefined),
   ) as Partial<T>;
 }
-
-/** Décale chaque ligne non vide d'un fragment YAML. */
-export function indent(fragment: string, spaces: number): string {
-  const pad = " ".repeat(spaces);
-  return fragment
-    .split("\n")
-    .map((line) => (line === "" ? line : pad + line))
-    .join("\n");
-}
-
-export const DATE = /^\d{4}-\d{2}-\d{2}$/;

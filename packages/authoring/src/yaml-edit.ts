@@ -1,5 +1,4 @@
-import { isMap, isScalar, isSeq, type Document, type Node, type YAMLMap } from "yaml";
-import { indent, toYaml } from "./piece-file.js";
+import { isMap, isScalar, isSeq, stringify, type Document, type Node, type YAMLMap } from "yaml";
 
 /**
  * Éditions textuelles d'un frontmatter : chacune renvoie le texte complet,
@@ -67,6 +66,20 @@ function versionNodes(piece: YAMLMap): YAMLMap[] {
 
 function mapsIn(node: unknown): YAMLMap[] {
   return isSeq(node) ? node.items.filter((item): item is YAMLMap => isMap(item)) : [];
+}
+
+/** Sérialisation des fragments écrits : texte long jamais replié, prose en bloc littéral. */
+export function toYaml(value: unknown): string {
+  return stringify(value, { lineWidth: 0, blockQuote: "literal" });
+}
+
+/** Décale chaque ligne non vide d'un fragment YAML. */
+export function indent(fragment: string, spaces: number): string {
+  const pad = " ".repeat(spaces);
+  return fragment
+    .split("\n")
+    .map((line) => (line === "" ? line : pad + line))
+    .join("\n");
 }
 
 /**

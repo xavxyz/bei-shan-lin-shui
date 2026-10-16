@@ -94,7 +94,20 @@ describe("createPiece", () => {
     const result = await createPiece(root, { ...draft, version: { ...draft.version, format: "" } });
 
     expect(result).toMatchObject({ ok: false });
-    expect(!result.ok && result.message).toContain("format");
+    expect(!result.ok && result.message).toMatch(/^version\.format : /);
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
+  });
+
+  it("refuse une date qui n'en est pas une, en nommant le champ du brouillon", async () => {
+    const root = await writeContentTree({});
+
+    const result = await createPiece(root, {
+      ...draft,
+      version: { ...draft.version, date: "pas une date" },
+    });
+
+    expect(!result.ok && result.message).toMatch(/^version\.date : /);
     const loaded = await loadContent(root, { includeUnpublished: true });
     expect(loaded.ok && loaded.content.pieces).toEqual([]);
   });
