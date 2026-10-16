@@ -4,7 +4,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { loadContent } from "@bsls/content";
 import { parsePlan } from "../plan-file.js";
-import { parseScanRegistry } from "../scan-registry.js";
+import { parseScanRegistry } from "@bsls/scans";
 
 /**
  * Valide ce qui attend l'import : chaque plan `*.plan.yaml` et le registre des

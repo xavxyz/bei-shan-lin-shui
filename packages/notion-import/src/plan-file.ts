@@ -5,6 +5,7 @@ import {
   pieceFieldsSchema,
   projectFileSchema,
   slugSchema,
+  variationIdSchema,
   variationSchema,
   versionSchema,
   z,
@@ -30,11 +31,6 @@ const plannedImageSchema = imageSchema.pick({ file: true, featured: true }).exte
   source: z.string().min(1),
   kind: imageSchema.shape.kind.default("work"),
 });
-
-export const variationIdSchema = localIdSchema.regex(
-  /^v\d+[a-z]+$/,
-  "attendu : un identifiant de variation, par exemple v1a",
-);
 
 const plannedVariationSchema = variationSchema
   .pick({ script: true, status: true, personal_note: true })
