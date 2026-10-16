@@ -1,0 +1,48 @@
+---
+import type { LoadedPiece } from "@bsls/schema";
+import VersionDate from "./VersionDate.astro";
+import VersionVariations from "./VersionVariations.astro";
+
+type Props = {
+  piece: LoadedPiece;
+};
+
+const { piece } = Astro.props;
+
+/** Toutes les versions sauf la courante, de la plus ancienne à la plus récente. */
+const earlier = piece.versions.filter((version) => version.id !== piece.latestVersion.id);
+---
+
+{
+  earlier.length > 0 ? (
+    <details class="evolution">
+      <summary class="evolution__toggle">voir l'évolution</summary>
+      <ol class="evolution__list">
+        {earlier.map((version) => (
+          <li class="evolution__version" data-testid="earlier-version">
+            <p class="evolution__tags">
+              <VersionDate version={version} testId="earlier-version-date" />
+              <span class="tag" data-testid="earlier-version-format">
+                {version.format}
+              </span>
+            </p>
+
+            {version.columns.length > 0 ? (
+              <p class="evolution__columns" lang="zh-Hant" data-testid="earlier-version-columns">
+                {version.columns.map((column) => column.traditional).join(" / ")}
+              </p>
+            ) : null}
+
+            {version.intention ? (
+              <p class="reading__body" data-testid="earlier-version-intention">
+                {version.intention.trim()}
+              </p>
+            ) : null}
+
+            <VersionVariations version={version} title={piece.title.traditional} />
+          </li>
+        ))}
+      </ol>
+    </details>
+  ) : null
+}

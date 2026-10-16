@@ -29,6 +29,16 @@ versions:
           - file: v1a-01.jpg
             kind: work
             capture: scan
+      - id: v1b
+        script: kaishu
+        status: tried
+        personal_note: |
+          En régulier, pour poser la structure de 雨.
+        images:
+          - file: v1b-01.jpg
+            kind: study
+            capture: scan
+            caption: Étude de 雨.
   - id: v2
     date: 2026-05-12
     format: A4 vertical

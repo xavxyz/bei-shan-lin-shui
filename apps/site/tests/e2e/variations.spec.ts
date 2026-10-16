@@ -2,8 +2,9 @@ import { expect, test, type Page } from "@playwright/test";
 
 const piecePath = "/montagnes/shan-ju-qiu-ming";
 
+/** Les variations à l'écran : celles de la version courante, l'évolution restant repliée. */
 function variations(page: Page) {
-  return page.getByTestId("variation");
+  return page.getByTestId("variation").filter({ visible: true });
 }
 
 test("toutes les variations de la version courante sont montrées, dans l'ordre du fichier", async ({
