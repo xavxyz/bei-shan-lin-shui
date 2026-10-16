@@ -85,13 +85,41 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 ### 3. Appliquer
 
 1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`.
-2. Modifier le plan : variation et image (`file: v1a.jpg`, `kind: work`) sous
-   leur version — une nouvelle version au besoin —, et chaque correction tirée
-   du papier, avec son commentaire.
-3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`.
-4. Lancer `pnpm validate:imports`.
+2. Rattacher chaque scan retenu, selon où vit sa pièce :
+   - **Pièce dans `content/pieces/<slug>/`** : écrire le rattachement dans
+     `imports/scans/<fichier>.rattachement.yaml`, puis lancer
+     `pnpm attach:scan imports/scans/<fichier>.rattachement.yaml`. Une version
+     ou une variation existante se désigne par son id ; une nouvelle s'écrit
+     avec ses champs :
 
-Fini quand `pnpm validate:imports` passe, les scans copiés et leurs entrées arbitrées. Puis pièce suivante.
+     ```yaml
+     piece: mo-xing-ji
+     version: v1 # ou { id: v2, date: 2026-02-11, format: 2x7, columns: [...], intention: ... }
+     variation: { id: v1b, script: kaishu, status: kept } # ou v1a, si elle existe
+     image:
+       source: imports/scans/2026-10-11_01_01.jpeg
+       kind: work # work | detail | study | context
+       featured: true # facultatif
+       caption: ... # facultatif
+     ```
+
+     La commande ajoute l'image (nommée d'après la variation), la variation ou
+     la version, sans rien modifier d'autre ; elle ne change aucun statut.
+     Refusée, elle n'écrit rien et nomme le champ fautif : corriger le
+     rattachement et relancer. Une correction tirée du papier sur ce qui existe
+     déjà (colonnes, date, statut) ne passe pas par elle : la proposer au
+     calligraphe, qui la fait à la main.
+
+   - **Pièce dans le plan** : modifier le plan, variation et image
+     (`file: v1a.jpg`, `kind: work`) sous leur version — une nouvelle version
+     au besoin —, et chaque correction tirée du papier, avec son commentaire.
+3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`. Son
+   `match` est le slug de la pièce, qu'elle soit au plan ou dans le contenu.
+4. Lancer `pnpm validate:imports`, et `pnpm validate:content` après un
+   rattachement au contenu.
+
+Fini quand les validations passent, les scans copiés, rattachés et leurs
+entrées arbitrées. Puis pièce suivante.
 
 ### Supprimer du Drive
 

@@ -1,7 +1,5 @@
 import { parseDocument } from "yaml";
-import { variationSchema, z } from "@bsls/schema";
-import type { PlanError } from "./plan-file.js";
-import { variationIdSchema } from "./plan-file.js";
+import { variationIdSchema, variationSchema, z } from "@bsls/schema";
 
 /**
  * Le registre des scans : une entrée par fichier du Drive, ce que l'agent y lit
@@ -26,9 +24,12 @@ const scanEntrySchema = z.object({
 
 export const scanRegistrySchema = z.object({ scans: z.array(scanEntrySchema) });
 
+/** Une erreur du registre désigne le scan et le champ fautifs. */
+export type RegistryError = { path: string; message: string };
+
 export type ScanEntry = z.infer<typeof scanEntrySchema>;
 export type ScanRegistryResult =
-  { ok: true; scans: ScanEntry[] } | { ok: false; errors: PlanError[] };
+  { ok: true; scans: ScanEntry[] } | { ok: false; errors: RegistryError[] };
 
 /**
  * Relit le registre. `knownSlugs` est l'ensemble des pièces auxquelles un scan
@@ -65,7 +66,7 @@ export function parseScanRegistry(
     };
   }
 
-  const errors: PlanError[] = [];
+  const errors: RegistryError[] = [];
   const seen = new Set<string>();
   for (const scan of parsed.data.scans) {
     if (seen.has(scan.file)) {

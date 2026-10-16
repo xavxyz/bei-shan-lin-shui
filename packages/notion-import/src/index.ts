@@ -8,10 +8,7 @@ export type {
   ProjectProposal,
   ProposeOptions,
 } from "./propose.js";
-export { parsePlan, planFileSchema, stringifyPlan, variationIdSchema } from "./plan-file.js";
-export { parseScanRegistry, scanRegistrySchema, SCAN_VERDICTS } from "./scan-registry.js";
-export type { ScanEntry, ScanRegistryResult } from "./scan-registry.js";
+export { parsePlan, planFileSchema, stringifyPlan } from "./plan-file.js";
 export type { ArbitratedPlan, PlanError, PlannedPiece, PlannedProject } from "./plan-file.js";
 export { applyImport } from "./apply.js";
 export type { ApplyError, ApplyOptions, ApplyResult } from "./apply.js";
-export { normalizeImage } from "./normalize-image.js";
