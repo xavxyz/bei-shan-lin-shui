@@ -1,5 +1,6 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
+import VersionDate from "./VersionDate.astro";
 import VersionVariations from "./VersionVariations.astro";
 
 type Props = {
@@ -10,18 +11,6 @@ const { piece } = Astro.props;
 
 /** Toutes les versions sauf la courante, de la plus ancienne à la plus récente. */
 const earlier = piece.versions.filter((version) => version.id !== piece.latestVersion.id);
-
-const dateFormat = new Intl.DateTimeFormat("fr-FR", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-/** `YYYY-MM-DD` lu comme un jour civil, sans glissement de fuseau. */
-function formatDate(date: string): string {
-  return dateFormat.format(new Date(`${date}T00:00:00Z`));
-}
 ---
 
 {
@@ -32,9 +21,7 @@ function formatDate(date: string): string {
         {earlier.map((version) => (
           <li class="evolution__version" data-testid="earlier-version">
             <p class="evolution__tags">
-              <time class="tag" datetime={version.date} data-testid="earlier-version-date">
-                {formatDate(version.date)}
-              </time>
+              <VersionDate version={version} testId="earlier-version-date" />
               <span class="tag" data-testid="earlier-version-format">
                 {version.format}
               </span>

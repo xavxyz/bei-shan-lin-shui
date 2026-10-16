@@ -26,7 +26,9 @@ test("voir l'évolution montre chaque version antérieure en entier", async ({ p
 
   const version = earlierVersions(page);
   await expect(version).toHaveCount(1);
-  await expect(version.getByTestId("earlier-version-date")).toHaveText("4 mars 2026");
+  const date = version.getByTestId("earlier-version-date");
+  await expect(date).toContainText("4 mars 2026");
+  await expect(date).toContainText("丙午雨水");
   await expect(version.getByTestId("earlier-version-format")).toHaveText("A4 vertical");
   await expect(version.getByTestId("earlier-version-columns")).toHaveText(
     "空山新雨後 / 天氣晚來秋",
@@ -70,10 +72,9 @@ test("les versions antérieures vont de la plus ancienne à la plus récente", a
   await page.goto("/pieces/xing-xing-zhong-xing-xing");
   await showEvolution(page).click();
 
-  await expect(earlierVersions(page).getByTestId("earlier-version-date")).toHaveText([
-    "9 avril 2026",
-    "23 avril 2026",
-  ]);
+  await expect(
+    earlierVersions(page).getByTestId("earlier-version-date").locator("time"),
+  ).toHaveText(["9 avril 2026", "23 avril 2026"]);
 });
 
 test("une pièce à version unique n'affiche pas « voir l'évolution »", async ({ page }) => {
