@@ -24,7 +24,7 @@ export const variationDraftSchema = variationSchema.pick({
 });
 
 /** Une version qui arrive avec ses premières variations. */
-export const newVersionSchema = versionDraftSchema.extend({
+export const versionWithVariationsDraftSchema = versionDraftSchema.extend({
   variations: variationDraftSchema.array().default([]),
 });
 
@@ -35,7 +35,7 @@ export const pieceDraftSchema = pieceFieldsSchema
 
 export type VersionDraft = z.input<typeof versionDraftSchema>;
 export type VariationDraft = z.input<typeof variationDraftSchema>;
-export type NewVersion = z.input<typeof newVersionSchema>;
+export type NewVersion = z.input<typeof versionWithVariationsDraftSchema>;
 export type PieceDraft = z.input<typeof pieceDraftSchema>;
 
 /** Le brouillon tel que le schéma le lit, ou la raison de son refus. */

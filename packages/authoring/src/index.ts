@@ -3,7 +3,7 @@ export { addVersion } from "./add-version.js";
 export { attachToProject } from "./attach-to-project.js";
 export { availableSlug, createPiece } from "./create-piece.js";
 export {
-  newVersionSchema,
+  versionWithVariationsDraftSchema,
   pieceDraftSchema,
   variationDraftSchema,
   versionDraftSchema,

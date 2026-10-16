@@ -1,4 +1,9 @@
-import { newVersionSchema, readDraft, variationEntry, versionEntry } from "./drafts.js";
+import {
+  versionWithVariationsDraftSchema,
+  readDraft,
+  variationEntry,
+  versionEntry,
+} from "./drafts.js";
 import { editPiece } from "./edit-piece.js";
 import { nextVariationIds, nextVersionId } from "./local-ids.js";
 import type { Outcome } from "./piece-file.js";
@@ -16,7 +21,7 @@ export async function addVersion(
   slug: string,
   input: unknown,
 ): Promise<Outcome<{ id: string }>> {
-  const read = readDraft(newVersionSchema, input);
+  const read = readDraft(versionWithVariationsDraftSchema, input);
   if (!read.ok) return read;
   const version = read.draft;
 
