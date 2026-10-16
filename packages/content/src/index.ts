@@ -4,6 +4,7 @@ export { deriveChineseText } from "./derive.js";
 export { formatContentErrors } from "./format-errors.js";
 export {
   CONTENT_IMAGES_BASE,
+  IMAGES_DIR,
   PIECES_DIR,
   PROJECTS_DIR,
   contentImageDirectories,
