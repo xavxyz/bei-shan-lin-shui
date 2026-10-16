@@ -10,7 +10,10 @@ test("la visionneuse d'images change de prise de vue au clic", async ({ page }) 
   const shown = page.getByTestId("featured-work").locator(".viewer__image");
   await expect(shown).toHaveAttribute("src", "/content-images/shan-ju-qiu-ming/v2a-01.jpg");
 
-  await page.getByRole("button", { name: "山居秋暝 — détail" }).click();
+  await page
+    .getByTestId("featured-work")
+    .getByRole("button", { name: "山居秋暝 — détail" })
+    .click();
 
   await expect(shown).toHaveAttribute("src", "/content-images/shan-ju-qiu-ming/v2a-02.jpg");
 });

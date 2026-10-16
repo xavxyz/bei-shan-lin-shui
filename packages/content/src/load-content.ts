@@ -15,7 +15,7 @@ import {
   type PieceFrontmatter,
   type z,
 } from "@bsls/schema";
-import { deriveChineseText } from "./derive.js";
+import { deriveChineseDate, deriveChineseText } from "./derive.js";
 import {
   IMAGES_DIR,
   PROJECTS_DIR,
@@ -222,6 +222,7 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     .map((version): LoadedVersion => ({
       ...version,
       date: toIsoDate(version.date),
+      chineseDate: deriveChineseDate(toIsoDate(version.date)),
       columns: version.columns.map((column) => deriveChineseText(column, overrides)),
       variations: version.variations.map((variation): LoadedVariation => {
         const images = variation.images.map((image) => ({

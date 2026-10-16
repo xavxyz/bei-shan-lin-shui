@@ -14,6 +14,7 @@
     "@bsls/schema": "workspace:*",
     "opencc-js": "^1.0.5",
     "pinyin-pro": "^3.26.0",
+    "tyme4ts": "^1.5.3",
     "yaml": "^2.6.1",
     "zod": "^3.24.1"
   },

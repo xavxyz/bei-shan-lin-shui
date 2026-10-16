@@ -2,10 +2,11 @@ import { defineConfig, devices } from "@playwright/test";
 import { fileURLToPath } from "node:url";
 
 const fixtureContent = fileURLToPath(new URL("./tests/fixtures/content", import.meta.url));
-const publicPort = 4321;
-// Loin de 4321 : `astro preview` se rabat sur le port suivant quand le sien est
-// pris, et l'on servirait alors le site public à la place du site admin.
-const adminPort = 4391;
+// Surchargeable, pour faire tourner plusieurs worktrees côte à côte.
+const publicPort = Number(process.env.E2E_PORT ?? 4321);
+// Loin du port public : `astro preview` se rabat sur le port suivant quand le
+// sien est pris, et l'on servirait alors le site public à la place de l'admin.
+const adminPort = publicPort + 70;
 const adminSpecs = /admin\.spec\.ts$/;
 
 /** Un build réel des fixtures, servi tel quel ; `env` en fixe le mode. */

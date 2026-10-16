@@ -25,10 +25,24 @@ test("la traduction française et le pinyin sont en regard du texte chinois", as
   await expect(page.getByTestId("simplified")).toContainText("明月松间照");
 });
 
+test("la date chinoise de la version est affichée à côté de sa date", async ({ page }) => {
+  await page.goto(piecePath);
+
+  const date = page.getByTestId("version-date");
+  await expect(date).toContainText("12 mai 2026");
+  await expect(date).toContainText("丙午立夏");
+});
+
 test("une surcharge manuelle de pinyin prime sur la valeur générée", async ({ page }) => {
   await page.goto("/pieces/xing-xing-zhong-xing-xing");
 
   await expect(page.getByTestId("pinyin")).toContainText("háng háng chóng háng háng");
+});
+
+test("une pièce en expérimentation l'affiche en français", async ({ page }) => {
+  await page.goto("/pieces/xing-xing-zhong-xing-xing");
+
+  await expect(page.getByTestId("piece-status")).toHaveText("expérimentation");
 });
 
 test("les styles d'écriture sont affichés en français, jamais en pinyin", async ({ page }) => {

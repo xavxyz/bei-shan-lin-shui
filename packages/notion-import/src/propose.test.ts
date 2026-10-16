@@ -49,10 +49,10 @@ describe("proposeImport", () => {
   it("propose un statut du schéma pour chaque état Notion", () => {
     const states: [string, string][] = [
       ["Brute", "idea"],
-      ["Préparée", "study"],
+      ["Préparée", "experiment"],
       ["En cours", "in-progress"],
       ["Mouvementée", "made"],
-      ["Cadre imprimé", "finished"],
+      ["Cadre imprimé", "in-progress"],
     ];
 
     for (const [notionState, expected] of states) {
