@@ -38,7 +38,7 @@ test("voir l'évolution montre chaque version antérieure en entier", async ({ p
   );
 });
 
-test("toutes les variations d'une version antérieure sont visibles, avec leurs images et leur commentaire", async ({
+test("toutes les variations d'une version antérieure sont listées, avec leur commentaire", async ({
   page,
 }) => {
   await page.goto(piecePath);
@@ -53,16 +53,28 @@ test("toutes les variations d'une version antérieure sont visibles, avec leurs 
   await expect(setAside.getByTestId("variation-note")).toHaveText(
     "Trop sage, les liaisons manquent de tension.",
   );
-  await expect(setAside.locator(".viewer__image")).toHaveAttribute(
-    "src",
-    "/content-images/shan-ju-qiu-ming/v1a-01.jpg",
-  );
 
   const study = variations.filter({ hasText: "essayée" });
   await expect(study.getByTestId("variation-note")).toHaveText(
     "En régulier, pour poser la structure de 雨.",
   );
-  await expect(study.locator(".viewer__image")).toHaveAttribute(
+});
+
+test("cliquer une variation d'une version antérieure amène son carrousel sur sa première image", async ({
+  page,
+}) => {
+  await page.goto(piecePath);
+  await showEvolution(page).click();
+
+  const carousel = earlierVersions(page).getByTestId("carousel");
+  await expect(carousel.getByRole("button", { name: "Image suivante" })).toBeVisible();
+  await carousel
+    .getByTestId("variation")
+    .filter({ hasText: "essayée" })
+    .getByRole("button")
+    .click();
+
+  await expect(carousel.getByTestId("carousel-image")).toHaveAttribute(
     "src",
     "/content-images/shan-ju-qiu-ming/v1b-01.jpg",
   );

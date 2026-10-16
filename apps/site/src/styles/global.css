@@ -247,33 +247,40 @@ a:hover {
   margin: 0 0 2.5rem;
 }
 
-/* Les variations coexistent : une ligne chacune, sous l'œuvre et sa lecture. */
+/* Un carrousel par version, sous le titre ; les variations coexistent, une
+   ligne chacune, sous le carrousel qu'elles pilotent. */
 .variations {
-  margin-top: 4rem;
-  border-top: 1px solid var(--rule);
+  margin: 0 0 3rem;
 }
 
 .variations__list {
   list-style: none;
   margin: 0;
   padding: 0;
+  border-top: 1px solid var(--rule);
 }
 
 .variation {
-  padding: 2.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding: 0.9rem 0;
   border-bottom: 1px solid var(--rule);
 }
 
 .variation__tags {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   gap: 0.5rem;
-  margin: 0 0 1rem;
 }
 
 .variation__note {
-  margin: 0 0 1.5rem;
+  margin: 0;
   max-width: 40rem;
+  color: var(--muted);
+  font-style: italic;
   white-space: pre-wrap;
 }
 
@@ -314,5 +321,5 @@ a:hover {
 }
 
 .evolution__version .variations {
-  margin-top: 2rem;
+  margin: 0 0 2rem;
 }

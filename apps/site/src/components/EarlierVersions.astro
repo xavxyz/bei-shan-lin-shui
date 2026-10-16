@@ -20,6 +20,8 @@ const earlier = piece.versions.filter((version) => version.id !== piece.latestVe
       <ol class="evolution__list">
         {earlier.map((version) => (
           <li class="evolution__version" data-testid="earlier-version">
+            <VersionVariations version={version} title={piece.title.traditional} />
+
             <p class="evolution__tags">
               <VersionDate version={version} testId="earlier-version-date" />
               <span class="tag" data-testid="earlier-version-format">
@@ -38,8 +40,6 @@ const earlier = piece.versions.filter((version) => version.id !== piece.latestVe
                 {version.intention.trim()}
               </p>
             ) : null}
-
-            <VersionVariations version={version} title={piece.title.traditional} />
           </li>
         ))}
       </ol>
