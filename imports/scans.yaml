@@ -917,7 +917,7 @@ scans:
     match: yong-cao-shu
     confidence: high
     script: caoshu
-    variation: v1a # étude (kind: study) ; hors plan, à ajouter au contenu
+    variation: v1a # étude (kind: study) ; dans content/, images/v1a-02.jpg
     # scanné à l'envers, retourné sur le Drive le 2026-10-15
     # (première lecture 有心求柔 / 無意成剛, abandonnée) ; A4 pliée, sans grille
     # un petit 永 en régulier en titre, puis 7 永 en cursive, dont un très libre,

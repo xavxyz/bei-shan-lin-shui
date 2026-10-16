@@ -76,6 +76,15 @@ la Méditerranée. Le sigle s'écrit sur le papier, près de la signature.
 
 ## Statuts d'une pièce
 
+**Idée** :
+La pièce a son texte, mais rien n'est encore préparé sur le papier.
+
+**Expérimentation** :
+La pièce est écrite pour essayer quelque chose, sans viser l'œuvre. Si elle
+devient une vraie pièce, elle reste la même pièce : ce qui a été essayé reste
+une variation essayée, et une nouvelle version porte la variation retenue.
+_À éviter_ : étude, essai
+
 **En cours** :
 La pièce est préparée pour l'écriture, mais l'encre n'est pas encore posée.
 
@@ -83,3 +92,10 @@ La pièce est préparée pour l'écriture, mais l'encre n'est pas encore posée.
 La calligraphie est écrite et ne sera plus retouchée ; si on la refait, c'est
 une nouvelle version. C'est le stade le plus avancé d'une pièce.
 _À éviter_ : achevée, finie, mouvementée
+
+**En veille** :
+La pièce est mise de côté sans être abandonnée ; on peut la reprendre où elle
+en était.
+
+**Abandonnée** :
+La pièce ne sera pas poursuivie. Elle reste au dépôt, avec ce qu'elle a été.
