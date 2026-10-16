@@ -83,7 +83,7 @@ const STATUS_BY_NOTION_STATE: Record<string, PieceStatus> = {
   préparée: "study",
   "en cours": "in-progress",
   mouvementée: "made",
-  "cadre imprimé": "finished",
+  "cadre imprimé": "in-progress",
 };
 
 /** Les états dont la traduction est plausible mais discutable. */
