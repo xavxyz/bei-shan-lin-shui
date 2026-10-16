@@ -1,4 +1,4 @@
-import { isMap, isScalar, isSeq, stringify, type Document, type Node, type YAMLMap } from "yaml";
+import { Document, isMap, isScalar, isSeq, type Node, type YAMLMap } from "yaml";
 
 /**
  * Éditions textuelles d'un frontmatter : chacune renvoie le texte complet,
@@ -68,9 +68,34 @@ function mapsIn(node: unknown): YAMLMap[] {
   return isSeq(node) ? node.items.filter((item): item is YAMLMap => isMap(item)) : [];
 }
 
-/** Sérialisation des fragments écrits : texte long jamais replié, prose en bloc littéral. */
+/** Texte long jamais replié, prose en bloc littéral, listes en ligne sans espaces intérieurs. */
+const YAML_FORMAT = {
+  lineWidth: 0,
+  flowCollectionPadding: false,
+  blockQuote: "literal",
+} as const;
+
+/**
+ * Sérialise un fragment comme le calligraphe l'écrit : les colonnes d'une
+ * version restent sur une ligne, `columns: [永永永, 丙午]`.
+ */
 export function toYaml(value: unknown): string {
-  return stringify(value, { lineWidth: 0, blockQuote: "literal" });
+  const document = new Document(value);
+  flowColumns(document.contents);
+  return document.toString(YAML_FORMAT);
+}
+
+function flowColumns(node: unknown): void {
+  if (isMap(node)) {
+    for (const pair of node.items) {
+      if (isScalar(pair.key) && pair.key.value === "columns" && isSeq(pair.value)) {
+        pair.value.flow = true;
+      }
+      flowColumns(pair.value);
+    }
+  } else if (isSeq(node)) {
+    node.items.forEach(flowColumns);
+  }
 }
 
 /** Décale chaque ligne non vide d'un fragment YAML. */

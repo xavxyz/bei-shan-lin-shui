@@ -146,6 +146,9 @@ importers:
 
   packages/scans:
     dependencies:
+      '@bsls/authoring':
+        specifier: workspace:*
+        version: link:../authoring
       '@bsls/content':
         specifier: workspace:*
         version: link:../content

@@ -1,16 +1,29 @@
 import { isDeepStrictEqual } from "node:util";
-import { mkdir, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
+import { mkdir, readdir, rename, rm, stat } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { Document, isCollection, isMap, isSeq, parseDocument, type Node } from "yaml";
+import { parseDocument, type YAMLMap } from "yaml";
+import {
+  appendToList,
+  checkPiece,
+  isVariationOf,
+  readPiece,
+  rootMap,
+  variationDraftSchema,
+  variationEntry,
+  versionDraftSchema,
+  versionEntry,
+  versionNode,
+  variationNode,
+  writePiece,
+  type PieceText,
+} from "@bsls/authoring/editing";
 import { IMAGES_DIR, PIECES_DIR, pieceFile, pieceImageFile } from "@bsls/content";
 import {
   imageSchema,
   pieceFrontmatterSchema,
   slugSchema,
   variationIdSchema,
-  variationSchema,
   versionIdSchema,
-  versionSchema,
   z,
 } from "@bsls/schema";
 import { normalizeImage } from "./normalize-image.js";
@@ -20,14 +33,10 @@ import { normalizeImage } from "./normalize-image.js";
 /* -------------------------------------------------------------------------- */
 
 /** Une version à ouvrir : ses champs, sans variations — le rattachement apporte la première. */
-export const newVersionSchema = versionSchema
-  .pick({ date: true, format: true, columns: true, intention: true })
-  .extend({ id: versionIdSchema });
+export const newVersionSchema = versionDraftSchema.extend({ id: versionIdSchema });
 
 /** Une variation à ouvrir : ses champs, sans images — le rattachement apporte la première. */
-export const newVariationSchema = variationSchema
-  .pick({ script: true, status: true, personal_note: true })
-  .extend({ id: variationIdSchema });
+export const newVariationSchema = variationDraftSchema.extend({ id: variationIdSchema });
 
 /** Le scan à rattacher : son nom de fichier se dérive de la variation, il ne se choisit pas. */
 export const attachedImageSchema = imageSchema
@@ -65,9 +74,10 @@ export type AttachOptions = { contentRoot: string };
  * variation ou une version, sans jamais modifier ni retirer ce qui existe.
  *
  * Tout est vérifié avant d'écrire — la pièce, les ids, la lisibilité du scan,
- * la validité de la pièce résultante — et l'écriture ne fait qu'insérer du
- * texte dans le frontmatter : commentaires, mise en forme et corps Markdown
- * restent tels que le calligraphe les a laissés.
+ * la validité de la pièce résultante — et l'écriture passe par la couture
+ * d'édition d'`@bsls/authoring` : elle ne fait qu'insérer du texte dans le
+ * frontmatter ; commentaires, mise en forme et corps Markdown restent tels que
+ * le calligraphe les a laissés.
  */
 export async function attachScan(input: unknown, options: AttachOptions): Promise<AttachResult> {
   const parsed = parseAttachment(input);
@@ -99,10 +109,9 @@ export async function attachScan(input: unknown, options: AttachOptions): Promis
     await mkdir(dirname(target), { recursive: true });
     await rename(staged, target);
 
-    const piece = pieceFile(attachment.piece);
-    await writeFile(join(root, piece), planned.text, "utf8");
+    await writePiece(planned.piece);
 
-    return { ok: true, written: [image, piece] };
+    return { ok: true, written: [image, pieceFile(attachment.piece)] };
   } finally {
     await rm(staging, { recursive: true, force: true });
   }
@@ -148,46 +157,40 @@ function parseAttachment(
 /* Vérifier et préparer, sans rien écrire                                      */
 /* -------------------------------------------------------------------------- */
 
-type Planned = { ok: true; text: string; imageFile: string } | { ok: false; errors: AttachError[] };
+type Planned =
+  { ok: true; piece: PieceText; imageFile: string } | { ok: false; errors: AttachError[] };
 
 type RawVariation = { id?: unknown; images?: { file?: unknown }[] };
 type RawVersion = { id?: unknown; variations?: RawVariation[] };
 type RawPiece = { versions?: RawVersion[] };
 
 async function planInsertion(attachment: ParsedAttachment, root: string): Promise<Planned> {
-  const file = join(root, pieceFile(attachment.piece));
-  let text: string;
-  try {
-    text = await readFile(file, "utf8");
-  } catch {
-    return failure("piece", `aucune pièce ${attachment.piece} dans le contenu`);
-  }
-
-  const split = FRONTMATTER.exec(text);
-  if (!split)
-    return failure("piece", `${pieceFile(attachment.piece)} : frontmatter YAML introuvable`);
-  const [, opening = "", frontmatter = "", rest = ""] = split;
+  const read = await readPiece(root, attachment.piece);
+  if (!read.ok) return failure("piece", read.message);
+  const { frontmatter } = read.piece;
 
   const document = parseDocument(frontmatter);
-  const current = document.toJS() as RawPiece | null;
-  if (document.errors.length > 0 || !pieceFrontmatterSchema.safeParse(current).success) {
+  const map = rootMap(document);
+  if (!map || !checkPiece(frontmatter).ok) {
     return failure(
       "piece",
       `la pièce ${attachment.piece} est invalide : la corriger d'abord (pnpm validate:content)`,
     );
   }
-  const versions = current!.versions!;
+  const current = document.toJS() as RawPiece;
+  const versions = current.versions!;
 
   const imageFile = await freeImageName(
     variationIdOf(attachment.variation),
     attachment.piece,
-    current!,
+    current,
     root,
   );
   const image = toImage(attachment.image, imageFile);
 
   /* Où insérer, et quoi : une image, une variation ou une version entière. */
   let path: (string | number)[];
+  let parent: YAMLMap | undefined;
   let item: Record<string, unknown>;
 
   if (typeof attachment.version === "string") {
@@ -204,12 +207,14 @@ async function planInsertion(attachment: ParsedAttachment, root: string): Promis
         return failure("variation", `aucune variation ${variationId} dans la version ${versionId}`);
       }
       path = ["versions", versionIndex, "variations", variationIndex, "images"];
+      parent = variationNode(map, variationId);
       item = image;
     } else {
       const error = checkNewVariation(attachment.variation.id, versionId, variations);
       if (error) return failure("variation.id", error);
       path = ["versions", versionIndex, "variations"];
-      item = toVariation(attachment.variation, image);
+      parent = versionNode(map, versionId);
+      item = variationEntry(attachment.variation.id, attachment.variation, [image]);
     }
   } else {
     const version = attachment.version;
@@ -225,35 +230,38 @@ async function planInsertion(attachment: ParsedAttachment, root: string): Promis
     const error = checkNewVariation(attachment.variation.id, version.id, []);
     if (error) return failure("variation.id", error);
     path = ["versions"];
-    item = toVersion(version, toVariation(attachment.variation, image));
+    parent = map;
+    item = versionEntry(version.id, version, [
+      variationEntry(attachment.variation.id, attachment.variation, [image]),
+    ]);
   }
 
-  const updated = appendToSequence(frontmatter, document, path, item);
+  const edit = parent
+    ? appendToList(frontmatter, parent, path.at(-1) as string, [item])
+    : { ok: false as const, message: "nœud introuvable dans le frontmatter" };
+  if (!edit.ok) return failure("piece", `${pieceFile(attachment.piece)} : ${edit.message}`);
 
   /* La pièce résultante doit passer la validation, et ne différer que de l'ajout. */
-  const reparsed = parseDocument(updated).toJS() as unknown;
+  const reparsed = parseDocument(edit.text).toJS() as unknown;
   const result = pieceFrontmatterSchema.safeParse(reparsed);
   if (!result.success) {
     return { ok: false, errors: result.error.issues.map((issue) => locate(issue, path)) };
   }
-  const expected = structuredClone(current!) as Record<string, unknown>;
+  const expected = structuredClone(current) as Record<string, unknown>;
   appendIn(expected, path, item);
   if (!isDeepStrictEqual(reparsed, expected)) {
     throw new Error(`rattachement : l'insertion dans ${pieceFile(attachment.piece)} a dérivé`);
   }
 
-  return { ok: true, text: `${opening}${updated}${rest}`, imageFile };
+  return { ok: true, piece: { ...read.piece, frontmatter: edit.text }, imageFile };
 }
-
-/** Le frontmatter, fin de ligne comprise, séparé de ses délimiteurs et du corps. */
-const FRONTMATTER = /^(---\r?\n)([\s\S]*?\r?\n)(---\r?(?:\n|$)[\s\S]*)$/;
 
 function checkNewVariation(
   id: string,
   versionId: string,
   variations: RawVariation[],
 ): string | undefined {
-  if (!new RegExp(`^${versionId}[a-z]+$`).test(id)) {
+  if (!isVariationOf(id, versionId)) {
     return `une variation de ${versionId} se nomme ${versionId}a, ${versionId}b… : ${id} n'en est pas une`;
   }
   if (variations.some((variation) => variation.id === id)) {
@@ -293,10 +301,7 @@ async function freeImageName(
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/* Ce qui s'ajoute, dans la forme du frontmatter                               */
-/* -------------------------------------------------------------------------- */
-
+/** Un scan entre toujours comme un scan ; il n'est mis en avant que sur demande. */
 function toImage(image: ParsedAttachment["image"], file: string): Record<string, unknown> {
   return {
     file,
@@ -305,106 +310,6 @@ function toImage(image: ParsedAttachment["image"], file: string): Record<string,
     ...(image.featured ? { featured: true } : {}),
     ...(image.caption ? { caption: image.caption } : {}),
   };
-}
-
-function toVariation(
-  variation: z.output<typeof newVariationSchema>,
-  image: Record<string, unknown>,
-): Record<string, unknown> {
-  return {
-    id: variation.id,
-    script: variation.script,
-    status: variation.status,
-    ...(variation.personal_note ? { personal_note: variation.personal_note } : {}),
-    images: [image],
-  };
-}
-
-function toVersion(
-  version: z.output<typeof newVersionSchema>,
-  variation: Record<string, unknown>,
-): Record<string, unknown> {
-  return {
-    id: version.id,
-    date: version.date.toISOString().slice(0, 10),
-    format: version.format,
-    ...(version.columns.length > 0 ? { columns: version.columns } : {}),
-    ...(version.intention ? { intention: version.intention } : {}),
-    variations: [variation],
-  };
-}
-
-/* -------------------------------------------------------------------------- */
-/* Insertion textuelle                                                         */
-/* -------------------------------------------------------------------------- */
-
-/**
- * Ajoute `item` en fin de la séquence désignée par `path`, en insérant son
- * texte à la suite du dernier élément : le reste du frontmatter ne bouge pas
- * d'un octet. Une séquence absente s'ajoute comme dernière clé de sa table.
- * Une forme que l'insertion ne sait pas prolonger (séquence en flux, clé
- * vide) est réécrite par le document YAML, commentaires compris.
- */
-function appendToSequence(
-  text: string,
-  document: ReturnType<typeof parseDocument>,
-  path: (string | number)[],
-  item: Record<string, unknown>,
-): string {
-  const sequence = document.getIn(path, true) as Node | undefined;
-  if (isSeq(sequence) && !sequence.flow && sequence.items.length > 0 && sequence.range) {
-    return insertAt(text, sequence.range[1], render([item]), columnOf(text, sequence.range[0]));
-  }
-
-  const parent = document.getIn(path.slice(0, -1), true) as Node | undefined;
-  const key = path.at(-1) as string;
-  if (sequence === undefined && isMap(parent) && !parent.flow && parent.range) {
-    return insertAt(
-      text,
-      parent.range[1],
-      render({ [key]: [item] }),
-      columnOf(text, parent.range[0]),
-    );
-  }
-
-  document.setIn(path, [...(isCollection(sequence) ? (sequence.toJSON() as unknown[]) : []), item]);
-  return document.toString(YAML_FORMAT);
-}
-
-const YAML_FORMAT = { lineWidth: 0, flowCollectionPadding: false, blockQuote: "literal" } as const;
-
-/** Rend un nœud comme le calligraphe écrit : les colonnes restent sur une ligne. */
-function render(value: unknown): string {
-  const document = new Document(value);
-  visitColumns(document.contents);
-  return document.toString(YAML_FORMAT);
-}
-
-function visitColumns(node: unknown): void {
-  if (isMap(node)) {
-    for (const pair of node.items) {
-      const key = (pair.key as { value?: unknown } | null)?.value;
-      if (key === "columns" && isSeq(pair.value)) pair.value.flow = true;
-      visitColumns(pair.value);
-    }
-  } else if (isSeq(node)) {
-    node.items.forEach(visitColumns);
-  }
-}
-
-function insertAt(text: string, offset: number, block: string, column: number): string {
-  const indent = " ".repeat(column);
-  const indented = block
-    .split("\n")
-    .map((line) => (line === "" ? line : indent + line))
-    .join("\n");
-  const before = text.slice(0, offset);
-  const separator = before.endsWith("\n") ? "" : "\n";
-  return `${before}${separator}${indented}${text.slice(offset)}`;
-}
-
-function columnOf(text: string, offset: number): number {
-  return offset - (text.lastIndexOf("\n", offset - 1) + 1);
 }
 
 function appendIn(target: Record<string, unknown>, path: (string | number)[], item: unknown): void {

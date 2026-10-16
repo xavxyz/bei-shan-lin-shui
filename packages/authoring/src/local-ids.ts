@@ -11,10 +11,15 @@ export function nextVersionId(existing: string[]): string {
 
 export function nextVariationIds(versionId: string, existing: string[], count: number): string[] {
   const ranks = existing
-    .filter((id) => id.startsWith(versionId) && /^[a-z]+$/.test(id.slice(versionId.length)))
+    .filter((id) => isVariationOf(id, versionId))
     .map((id) => rank(id.slice(versionId.length)));
   const last = Math.max(0, ...ranks);
   return Array.from({ length: count }, (_, index) => versionId + letters(last + index + 1));
+}
+
+/** Une variation se nomme d'après sa version : `v2a`, `v2b`… appartiennent à `v2`, pas `v20a`. */
+export function isVariationOf(id: string, versionId: string): boolean {
+  return id.startsWith(versionId) && /^[a-z]+$/.test(id.slice(versionId.length));
 }
 
 /** `a` vaut 1, `z` 26, `aa` 27 : numération bijective en base 26. */
