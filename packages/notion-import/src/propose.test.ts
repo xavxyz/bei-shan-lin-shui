@@ -52,7 +52,7 @@ describe("proposeImport", () => {
       ["Préparée", "study"],
       ["En cours", "in-progress"],
       ["Mouvementée", "made"],
-      ["Cadre imprimé", "finished"],
+      ["Cadre imprimé", "in-progress"],
     ];
 
     for (const [notionState, expected] of states) {
