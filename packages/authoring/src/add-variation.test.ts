@@ -67,7 +67,11 @@ describe("addVariation", () => {
 
   it("donne sa première variation à une version qui n'en avait pas", async () => {
     const root = await writeTree({});
-    await createPiece(root, { title: "山居秋暝", version: { date: "2026-10-16", format: "A4" } });
+    await createPiece(root, {
+      title: "山居秋暝",
+      version: { date: "2026-10-16", format: "A4" },
+      published: false,
+    });
 
     const result = await addVariation(root, "shan-ju-qiu-ming", "v1", autreStyle);
 

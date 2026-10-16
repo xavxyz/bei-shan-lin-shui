@@ -7,7 +7,8 @@ import { checkPiece, compact, writePiece, type Outcome } from "./piece-file.js";
 import { toYaml } from "./yaml-edit.js";
 
 /**
- * Fait naître une pièce : statut `idea`, une version initiale `v1`, non publiée.
+ * Fait naître une pièce : statut `idea`, une version initiale `v1`, publiée ou
+ * non selon ce que le brouillon répond.
  * Le slug est dérivé du titre une fois pour toutes ; une pièce existante n'est
  * jamais touchée, un homonyme reçoit un slug suffixé.
  *
@@ -36,7 +37,7 @@ export async function createPiece(
       translation: draft.translation,
       pinyin_overrides:
         Object.keys(draft.pinyin_overrides).length > 0 ? draft.pinyin_overrides : undefined,
-      published: false,
+      published: draft.published,
     }),
   );
 

@@ -27,9 +27,11 @@ ce qui manque :
 - **Traduction** française : la sienne, ou rien. L'agent n'en propose aucune.
 - **Projet** : la pièce est-elle conçue pour un projet de `content/projects/` ?
   Par défaut, aucun.
+- **Publication** : « Publier la pièce : oui / non ? ». Pas de réponse par
+  défaut : sans un oui ou un non explicite, redemander.
 
 Fini quand texte, source, format et intention ont chacun une réponse, même
-« rien ».
+« rien », et que la publication a reçu un oui ou un non.
 
 ## 2. Montrer
 
@@ -40,7 +42,8 @@ calligraphe ; chaque correction repasse par cette étape.
 ## 3. Écrire
 
 Envoyer le brouillon arrêté, en YAML, sur l'entrée standard. Sa forme est
-`PieceDraft` dans `packages/authoring/src/create-piece.ts` :
+`PieceDraft` dans `packages/authoring/src/drafts.ts`, où `published` porte la
+réponse du calligraphe :
 
 ```sh
 pnpm piece creer <<'EOF'
@@ -58,19 +61,21 @@ version:
   columns: [空山新雨後, 天氣晚來秋]
   intention: |
     Retrouver l'humidité de la montagne après la pluie.
+published: false
 EOF
 ```
 
 La commande refuse sans rien écrire un brouillon hors schéma ou un projet
-inconnu : corriger avec le calligraphe et relancer. Statut, identifiant `v1` et
-`published: false` sont fixés par la commande.
+inconnu, ou qui ne dit pas si la pièce est publiée : corriger avec le
+calligraphe et relancer. Statut `idea` et identifiant `v1` sont fixés par la
+commande ; `published` s'écrit tel que le brouillon le donne.
 
 ## 4. Valider et commiter
 
 1. `pnpm validate:content`.
 2. `git add content/pieces/<slug>/` puis commit, message en français au style
-   de `git log` : `Nouvelle pièce : <titre> (<slug>)`, avec l'intention en
-   corps.
+   de `git log` : `Nouvelle pièce : <titre> (<slug>), publiée` ou
+   `Nouvelle pièce : <titre> (<slug>), non publiée`, avec l'intention en corps.
 
 Fini quand le commit est fait. S'il existe déjà des scans ou des photos de la
 pièce, dire au calligraphe de lancer `/scans` pour les rattacher.
