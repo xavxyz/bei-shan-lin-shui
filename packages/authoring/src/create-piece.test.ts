@@ -76,7 +76,8 @@ describe("createPiece", () => {
     const result = await createPiece(root, withoutPublication);
 
     expect(result).toMatchObject({ ok: false });
-    expect(!result.ok && result.message).toMatch(/^published : /);
+    expect(!result.ok && result.message).toMatch(/^published : .*oui.*non/);
+    expect(!result.ok && result.message).not.toMatch(/Required/);
     const loaded = await loadContent(root, { includeUnpublished: true });
     expect(loaded.ok && loaded.content.pieces).toEqual([]);
   });
