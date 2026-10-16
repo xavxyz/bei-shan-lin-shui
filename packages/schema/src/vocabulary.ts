@@ -11,7 +11,6 @@ export const PIECE_STATUSES = [
   "study",
   "in-progress",
   "made",
-  "finished",
   "on-hold",
   "abandoned",
 ] as const;
@@ -56,7 +55,6 @@ export const PIECE_STATUS_LABELS: Record<PieceStatus, string> = {
   study: "étude",
   "in-progress": "en cours",
   made: "encre sèche",
-  finished: "achevée",
   "on-hold": "en veille",
   abandoned: "abandonnée",
 };
