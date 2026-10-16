@@ -26,6 +26,7 @@ version:
   columns: [空山新雨後, 天氣晚來秋]
   intention: |
     Retrouver l'humidité de la montagne.
+published: false
 `;
 
 describe("la commande piece", () => {
@@ -50,6 +51,30 @@ describe("la commande piece", () => {
       status: "idea",
       versions: [{ id: "v1" }, { id: "v2", variations: [{ id: "v2a", script: "xingshu" }] }],
     });
+  });
+
+  it("crée publiée la pièce dont le brouillon le demande", async () => {
+    const root = await writeTree({});
+
+    const run = piece(root, ["creer"], BROUILLON.replace("published: false", "published: true"));
+
+    expect(run.code).toBe(0);
+    const loaded = await loadContent(root);
+    expect(loaded.ok && loaded.content.pieces).toMatchObject([
+      { slug: "shan-ju-qiu-ming", published: true },
+    ]);
+  });
+
+  it("refuse sans rien écrire un brouillon qui ne dit pas si la pièce est publiée", async () => {
+    const root = await writeTree({});
+
+    const { code, output } = piece(root, ["creer"], BROUILLON.replace("published: false\n", ""));
+
+    expect(code).toBe(1);
+    expect(output).toContain("refusé, rien n'a été écrit");
+    expect(output).toContain("published");
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
   });
 
   it("refuse sans rien écrire et le dit", async () => {
