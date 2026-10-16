@@ -36,6 +36,7 @@ export type ProposedVersion = {
   format: string;
   columns: string[];
   intention?: string;
+  variations: ProposedVariation[];
 };
 
 export type PieceProposal = {
@@ -45,8 +46,8 @@ export type PieceProposal = {
   status: PieceStatus;
   projects: string[];
   published: boolean;
-  version: ProposedVersion;
-  variations: ProposedVariation[];
+  /** Une page Notion ne propose qu'une version initiale ; le plan en accueille d'autres. */
+  versions: [ProposedVersion];
   /** Contexte Notion, montré pour arbitrer. Rien de tout cela n'est écrit dans le contenu. */
   notion: { title: string; status: string; url: string; relations: string[] };
   warnings: ImportWarning[];
@@ -143,8 +144,7 @@ function proposePiece(
         return hub.id;
       }),
     published: false,
-    version: proposeVersion(page, warnings, options),
-    variations: proposeVariations(page, warnings),
+    versions: [proposeVersion(page, warnings, options)],
     notion: {
       title: page.title,
       status: page.status,
@@ -205,14 +205,14 @@ function proposeVersion(
   const date = page.createdAt ?? page.editedAt ?? options.today;
   if (!page.createdAt && !page.editedAt) {
     warnings.push({
-      field: "version.date",
+      field: "versions.0.date",
       message: `aucune date dans l'export : ${options.today} proposé`,
     });
   }
 
   const format = page.format === "" ? UNSPECIFIED_FORMAT : page.format;
   if (page.format === "") {
-    warnings.push({ field: "version.format", message: "aucun format dans l'export" });
+    warnings.push({ field: "versions.0.format", message: "aucun format dans l'export" });
   }
 
   return {
@@ -221,6 +221,7 @@ function proposeVersion(
     format,
     columns: proposeColumns(page.text, warnings),
     ...(page.body === "" ? {} : { intention: page.body }),
+    variations: proposeVariations(page, warnings),
   };
 }
 
@@ -233,22 +234,22 @@ function proposeColumns(text: string, warnings: ImportWarning[]): string[] {
 
   if (lines.length === 0) {
     warnings.push({
-      field: "version.columns",
+      field: "versions.0.columns",
       message: "aucun texte de calligraphie dans l'export : à compléter ou à retirer",
     });
     return [];
   }
 
   return lines.map((line, index) => {
-    const column = traditionalize(line, `version.columns.${index}`, warnings);
+    const column = traditionalize(line, `versions.0.columns.${index}`, warnings);
     if (/[A-Za-zÀ-ÿ]/.test(column)) {
       warnings.push({
-        field: "version.columns",
+        field: "versions.0.columns",
         message: `« ${ellipsis(column)} » ressemble à une note plutôt qu'à une colonne`,
       });
     } else if (column.length > LONG_COLUMN) {
       warnings.push({
-        field: "version.columns",
+        field: "versions.0.columns",
         message: `« ${ellipsis(column)} » est bien long pour une colonne : à découper ?`,
       });
     }
@@ -279,7 +280,7 @@ function proposeVariations(page: NotionPage, warnings: ImportWarning[]): Propose
   if (page.attachments.length === 0) return [];
 
   warnings.push({
-    field: "variations.0.script",
+    field: "versions.0.variations.0.script",
     message: `le style ne figure pas dans l'export : ${DEFAULT_SCRIPT} proposé`,
   });
 

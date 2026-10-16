@@ -73,24 +73,38 @@ async function stageImages(plan: ArbitratedPlan, staging: string): Promise<Stage
   const images: StagedImage[] = [];
   const errors: ApplyError[] = [];
 
-  for (const [index, piece] of plan.pieces.entries()) {
-    for (const [variationIndex, variation] of piece.variations.entries()) {
-      for (const [imageIndex, image] of variation.images.entries()) {
-        const staged = join(staging, piece.slug, image.file);
-        try {
-          await normalizeImage(image.source, staged);
-          images.push({ target: pieceImageFile(piece.slug, image.file), staged });
-        } catch (cause) {
-          errors.push({
-            path: `pieces.${index}.variations.${variationIndex}.images.${imageIndex}.source`,
-            message: `image impossible à normaliser : ${image.source} (${describe(cause)})`,
-          });
-        }
-      }
+  for (const { piece, path, image } of plannedImages(plan)) {
+    const staged = join(staging, piece.slug, image.file);
+    try {
+      await normalizeImage(image.source, staged);
+      images.push({ target: pieceImageFile(piece.slug, image.file), staged });
+    } catch (cause) {
+      errors.push({
+        path: `${path}.source`,
+        message: `image impossible à normaliser : ${image.source} (${describe(cause)})`,
+      });
     }
   }
 
   return errors.length > 0 ? { ok: false, errors } : { ok: true, images };
+}
+
+type PlannedImage = PlannedPiece["versions"][number]["variations"][number]["images"][number];
+
+/** Chaque image du plan, avec sa pièce et son chemin dans le plan. */
+function* plannedImages(
+  plan: ArbitratedPlan,
+): Generator<{ piece: PlannedPiece; path: string; image: PlannedImage }> {
+  for (const [index, piece] of plan.pieces.entries()) {
+    for (const [versionIndex, version] of piece.versions.entries()) {
+      for (const [variationIndex, variation] of version.variations.entries()) {
+        for (const [imageIndex, image] of variation.images.entries()) {
+          const path = `pieces.${index}.versions.${versionIndex}.variations.${variationIndex}.images.${imageIndex}`;
+          yield { piece, path, image };
+        }
+      }
+    }
+  }
 }
 
 function describe(cause: unknown): string {
@@ -153,25 +167,6 @@ async function checkPlan(plan: ArbitratedPlan, root: string): Promise<ApplyError
       });
     }
 
-    for (const [variationIndex, variation] of piece.variations.entries()) {
-      for (const [imageIndex, image] of variation.images.entries()) {
-        const path = `pieces.${index}.variations.${variationIndex}.images.${imageIndex}.source`;
-        if (!(await exists(image.source))) {
-          errors.push({ path, message: `fichier absent de l'export : ${image.source}` });
-          continue;
-        }
-        /* Une extension ne fait pas une image lisible : le HEIC, par exemple,
-           n'est décodé que par un sharp compilé pour lui. Mieux vaut le savoir
-           avant d'écrire que devant une pièce à moitié importée. */
-        if (!(await isReadableImage(image.source))) {
-          errors.push({
-            path,
-            message: `image illisible, format non pris en charge : ${image.source}`,
-          });
-        }
-      }
-    }
-
     /* Le contenu écrit doit passer la validation ; autant s'en assurer avant d'écrire. */
     const parsed = pieceFrontmatterSchema.safeParse(toFrontmatter(piece));
     if (!parsed.success) {
@@ -181,6 +176,23 @@ async function checkPlan(plan: ArbitratedPlan, root: string): Promise<ApplyError
           message: issue.message,
         })),
       );
+    }
+  }
+
+  for (const { path: imagePath, image } of plannedImages(plan)) {
+    const path = `${imagePath}.source`;
+    if (!(await exists(image.source))) {
+      errors.push({ path, message: `fichier absent de l'export : ${image.source}` });
+      continue;
+    }
+    /* Une extension ne fait pas une image lisible : le HEIC, par exemple,
+       n'est décodé que par un sharp compilé pour lui. Mieux vaut le savoir
+       avant d'écrire que devant une pièce à moitié importée. */
+    if (!(await isReadableImage(image.source))) {
+      errors.push({
+        path,
+        message: `image illisible, format non pris en charge : ${image.source}`,
+      });
     }
   }
 
@@ -201,35 +213,34 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
     slug: piece.slug,
     ...(piece.projects.length > 0 ? { projects: piece.projects } : {}),
     status: piece.status,
-    versions: [
-      {
-        id: piece.version.id,
-        date: piece.version.date,
-        format: piece.version.format,
-        ...(piece.version.columns.length > 0 ? { columns: piece.version.columns } : {}),
-        ...(piece.version.intention ? { intention: piece.version.intention } : {}),
-        ...(piece.variations.length > 0
-          ? {
-              variations: piece.variations.map((variation) => ({
-                id: variation.id,
-                script: variation.script,
-                status: variation.status,
-                ...(variation.personal_note ? { personal_note: variation.personal_note } : {}),
-                ...(variation.images.length > 0
-                  ? {
-                      images: variation.images.map((image) => ({
-                        file: image.file,
-                        kind: image.kind,
-                        capture: "scan",
-                        featured: image.featured,
-                      })),
-                    }
-                  : {}),
-              })),
-            }
-          : {}),
-      },
-    ],
+    /* Les versions telles que le plan les porte, dans son ordre : rien n'est réorganisé. */
+    versions: piece.versions.map((version) => ({
+      id: version.id,
+      date: version.date,
+      format: version.format,
+      ...(version.columns.length > 0 ? { columns: version.columns } : {}),
+      ...(version.intention ? { intention: version.intention } : {}),
+      ...(version.variations.length > 0
+        ? {
+            variations: version.variations.map((variation) => ({
+              id: variation.id,
+              script: variation.script,
+              status: variation.status,
+              ...(variation.personal_note ? { personal_note: variation.personal_note } : {}),
+              ...(variation.images.length > 0
+                ? {
+                    images: variation.images.map((image) => ({
+                      file: image.file,
+                      kind: image.kind,
+                      capture: "scan",
+                      featured: image.featured,
+                    })),
+                  }
+                : {}),
+            })),
+          }
+        : {}),
+    })),
     ...(piece.translation ? { translation: piece.translation } : {}),
     published: piece.published,
   };
