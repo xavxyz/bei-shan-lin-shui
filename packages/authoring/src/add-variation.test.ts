@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { addVariation } from "./add-variation.js";
 import { addVersion } from "./add-version.js";
 import { createPiece } from "./create-piece.js";
-import { readPieceFile, writeContentTree } from "./test-support/content-tree.js";
+import { writeTree } from "@bsls/content/test-support";
+import { readPieceFile } from "./test-support/content-tree.js";
 import { YONG, YONG_HEAD, YONG_TAIL, YONG_V1, loadYong, yongTree } from "./test-support/yong.js";
 import { loadContent } from "@bsls/content";
 
@@ -65,7 +66,7 @@ describe("addVariation", () => {
   });
 
   it("donne sa première variation à une version qui n'en avait pas", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
     await createPiece(root, { title: "山居秋暝", version: { date: "2026-10-16", format: "A4" } });
 
     const result = await addVariation(root, "shan-ju-qiu-ming", "v1", autreStyle);

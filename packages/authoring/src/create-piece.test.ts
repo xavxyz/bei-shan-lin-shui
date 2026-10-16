@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "@bsls/content";
 import { createPiece } from "./create-piece.js";
-import { PROJECT_FILE, readPieceFile, writeContentTree } from "./test-support/content-tree.js";
+import { writeTree } from "@bsls/content/test-support";
+import { PROJECT_FILE, readPieceFile } from "./test-support/content-tree.js";
 
 const draft = {
   title: "山居秋暝",
@@ -16,7 +17,7 @@ const draft = {
 
 describe("createPiece", () => {
   it("fait naître une pièce au statut idée, avec une version initiale, que le content layer accepte", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
 
     const result = await createPiece(root, draft);
 
@@ -46,7 +47,7 @@ describe("createPiece", () => {
   });
 
   it("dérive le slug du titre chinois en pinyin sans tons", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
 
     const result = await createPiece(root, { ...draft, title: "有心求柔，無意成剛" });
 
@@ -54,7 +55,7 @@ describe("createPiece", () => {
   });
 
   it("ne touche jamais une pièce existante : un titre au même pinyin prend un slug suffixé", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
     await createPiece(root, draft);
     const before = await readPieceFile(root, "shan-ju-qiu-ming");
 
@@ -68,7 +69,7 @@ describe("createPiece", () => {
   });
 
   it("rattache la pièce aux projets pour lesquels elle est conçue", async () => {
-    const root = await writeContentTree({ "projects/ge-zhi-yan-jiu.yaml": PROJECT_FILE });
+    const root = await writeTree({ "projects/ge-zhi-yan-jiu.yaml": PROJECT_FILE });
 
     const result = await createPiece(root, { ...draft, projects: ["ge-zhi-yan-jiu"] });
 
@@ -78,7 +79,7 @@ describe("createPiece", () => {
   });
 
   it("refuse sans rien écrire un projet inconnu", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
 
     const result = await createPiece(root, { ...draft, projects: ["inconnu"] });
 
@@ -89,7 +90,7 @@ describe("createPiece", () => {
   });
 
   it("refuse sans rien écrire un brouillon qui ne respecte pas le schéma", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
 
     const result = await createPiece(root, { ...draft, version: { ...draft.version, format: "" } });
 
@@ -100,7 +101,7 @@ describe("createPiece", () => {
   });
 
   it("refuse une date qui n'en est pas une, en nommant le champ du brouillon", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
 
     const result = await createPiece(root, {
       ...draft,

@@ -2,7 +2,8 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { loadContent } from "@bsls/content";
-import { readPieceFile, writeContentTree } from "../test-support/content-tree.js";
+import { writeTree } from "@bsls/content/test-support";
+import { readPieceFile } from "../test-support/content-tree.js";
 
 const cli = fileURLToPath(new URL("./piece.ts", import.meta.url));
 
@@ -29,7 +30,7 @@ version:
 
 describe("la commande piece", () => {
   it("annonce le slug, crée la pièce depuis un brouillon YAML, puis lui ajoute version et variation", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
 
     expect(piece(root, ["slug", "山居秋暝"]).output).toBe("shan-ju-qiu-ming\n");
     expect(piece(root, ["creer"], BROUILLON)).toEqual({
@@ -52,7 +53,7 @@ describe("la commande piece", () => {
   });
 
   it("refuse sans rien écrire et le dit", async () => {
-    const root = await writeContentTree({});
+    const root = await writeTree({});
     piece(root, ["creer"], BROUILLON);
     const before = await readPieceFile(root, "shan-ju-qiu-ming");
 

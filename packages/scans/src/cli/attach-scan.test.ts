@@ -1,11 +1,12 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
 import { describe, expect, it } from "vitest";
+import { pieceFile } from "@bsls/content";
+import { writeTree } from "@bsls/content/test-support";
 
 const run = promisify(execFile);
 const cli = fileURLToPath(new URL("./attach-scan.ts", import.meta.url));
@@ -28,9 +29,7 @@ published: true
 
 /** Un dépôt minimal : le contenu, et un scan copié depuis le Drive. */
 async function repository(): Promise<string> {
-  const root = await mkdtemp(join(tmpdir(), "bsls-repo-"));
-  await mkdir(join(root, "content/pieces/mo-xing-ji"), { recursive: true });
-  await writeFile(join(root, "content/pieces/mo-xing-ji/piece.md"), PIECE, "utf8");
+  const root = await writeTree({ [`content/${pieceFile("mo-xing-ji")}`]: PIECE });
   await mkdir(join(root, "imports/scans"), { recursive: true });
   await sharp({ create: { width: 800, height: 1200, channels: 3, background: "white" } })
     .jpeg()
