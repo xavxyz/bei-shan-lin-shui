@@ -13,7 +13,7 @@ versions:
     format: A4 vertical
     columns: [床前明月光]
     intention: |
-      Brouillon non publié : ne doit apparaître nulle part sur le site.
+      Brouillon non publié : n'apparaît qu'en mode admin.
     variations:
       - id: v1a
         script: kaishu

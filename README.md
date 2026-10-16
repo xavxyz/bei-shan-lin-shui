@@ -32,6 +32,16 @@ apps/site/               le site Astro, ses îlots React et les tests E2E
 Le site lit `content/` par défaut ; `CONTENT_ROOT` permet de le pointer
 ailleurs, ce dont se servent les tests de bout en bout.
 
+`BSLS_ADMIN=1` active le mode admin, en local seulement, au `dev` comme au
+`build` : le site montre aussi les pièces non publiées, à leur URL, dans leurs
+projets et leurs décomptes, et les marque « non publiée ». Le build admin sort
+dans `apps/site/dist-admin`, jamais dans `dist` ; le déploiement ne l'active
+pas.
+
+```sh
+BSLS_ADMIN=1 pnpm --filter @bsls/site dev
+```
+
 ## Déploiement
 
 `netlify.toml` décrit le build. Le branchement du dépôt à Netlify se fait une

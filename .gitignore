@@ -6,6 +6,7 @@ test-results
 playwright-report
 *.log
 dist-invalid
+dist-admin
 cosmos-export
 
 # Scans téléchargés depuis le Drive : données non fiables, hors du contenu
