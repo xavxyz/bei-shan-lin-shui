@@ -9,7 +9,7 @@
 #              `new` (absente de Notion), `unidentified` ou `discarded`
 # confidence : high | medium | low
 # script     : style proposé (vocabulaire SCRIPTS), décidé par le calligraphe
-# variation  : variation arbitrée, et où elle vit (plan ou après apply)
+# variation  : variation arbitrée, dans le plan
 
 scans:
   - file: 2026-10-11_01_01.jpeg
@@ -17,7 +17,7 @@ scans:
     match: mo-xing-ji
     confidence: high
     script: kaishu
-    variation: v2a # kept, image mise en avant ; hors plan (une seule version par pièce), à ajouter après apply
+    variation: v2a # kept, image mise en avant ; dans le plan, version v2
     # format 2x7 ; attribution 苏東坡 (苏 écrit en simplifié) ; traduction
     # française au crayon, reprise par la pièce ; signé 戈, daté 立春 (丙午)
     # → 2026-02-11, milieu du jieqi

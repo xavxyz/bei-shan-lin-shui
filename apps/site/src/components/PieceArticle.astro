@@ -2,6 +2,7 @@
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
 import { PIECE_STATUS_LABELS } from "@bsls/schema";
 import ChineseText from "./ChineseText.astro";
+import VersionVariations from "./VersionVariations.astro";
 import { ImageViewer } from "../islands/ImageViewer.js";
 
 type Props = {
@@ -13,6 +14,13 @@ type Props = {
 const { piece, projects } = Astro.props;
 const version = piece.latestVersion;
 const source = piece.source;
+const frenchDate = (isoDate: string) =>
+  new Date(`${isoDate}T00:00:00Z`).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 const attribution = [source?.author, source?.work, source?.dynasty].filter(Boolean).join(" · ");
 ---
 
@@ -55,6 +63,11 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       ) : null
     }
     <span class="tag">{version.format}</span>
+    <span class="tag" data-testid="version-date">
+      <time datetime={version.date}>{frenchDate(version.date)}</time>
+      {" · "}
+      <span lang="zh-Hant">{version.chineseDate}</span>
+    </span>
   </p>
 
   <div class="piece__reading">
@@ -115,4 +128,6 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       }
     </div>
   </div>
+
+  <VersionVariations version={version} title={piece.title.traditional} />
 </article>

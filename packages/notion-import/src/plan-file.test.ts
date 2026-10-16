@@ -34,7 +34,7 @@ describe("plan d'import", () => {
       status: "made",
       published: false,
       projects: [],
-      version: { id: "v1", date: "2025-12-22", format: "2x7" },
+      versions: [{ id: "v1", date: "2025-12-22", format: "2x7" }],
     });
   });
 
@@ -42,7 +42,7 @@ describe("plan d'import", () => {
     const text = planFor([{ status: "À refaire", format: "" }]);
 
     expect(text).toMatch(/# à arbitrer — status : /);
-    expect(text).toMatch(/# à arbitrer — version\.format : /);
+    expect(text).toMatch(/# à arbitrer — versions\.0\.format : /);
     expect(text.indexOf("à arbitrer")).toBeLessThan(text.indexOf("slug: mo-xing-ji"));
   });
 
@@ -56,11 +56,11 @@ describe("plan d'import", () => {
   });
 
   it("accepte les corrections du calligraphe", () => {
-    const corrected = planFor().replace("status: made", "status: finished");
+    const corrected = planFor().replace("status: made", "status: on-hold");
 
     const result = parsePlan(corrected);
 
-    expect(result.ok && result.plan.pieces[0]?.status).toBe("finished");
+    expect(result.ok && result.plan.pieces[0]?.status).toBe("on-hold");
   });
 
   it("rejette un statut inconnu en désignant le champ", () => {
@@ -68,6 +68,18 @@ describe("plan d'import", () => {
 
     expect(result.ok).toBe(false);
     expect(!result.ok && result.errors[0]?.path).toBe("pieces.0.status");
+  });
+
+  it("rejette une pièce à version unique, de l'ancienne forme", () => {
+    const old = planFor().replace(/versions:\n( +)- id: v1/, "version:\n$1  id: v1");
+
+    const result = parsePlan(old);
+
+    expect(result.ok).toBe(false);
+    expect(!result.ok && result.errors[0]).toMatchObject({
+      path: "pieces.0.versions",
+      message: expect.stringContaining("versions: [...]"),
+    });
   });
 
   it("rejette un YAML illisible", () => {

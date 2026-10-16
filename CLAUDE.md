@@ -53,14 +53,21 @@ pnpm import:notion apply imports/notion-<date>.plan.yaml
 
 `<export>` est le dossier d'export Notion « Markdown & CSV », ou son seul
 fichier CSV. L'étape `plan` n'écrit que le fichier de plan : chaque page devient
-une pièce à version initiale unique, avec un statut et un classement **proposés**,
-et un commentaire `# à arbitrer` partout où l'agent a tranché sans savoir. Les
+une pièce, avec une version initiale, un statut et un classement **proposés**,
+et un commentaire `# à arbitrer` partout où l'agent a tranché sans savoir. Le
+plan porte ses versions sous la forme du frontmatter (`versions: [...]`, chacune
+avec ses `variations:`) : tant qu'il n'est pas appliqué, c'est lui la source de
+vérité, et une nouvelle réalisation y devient une nouvelle version. Les
 relations inter-pages de Notion ne sont pas reconduites : elles servent une
 dernière fois à repérer les projets, puis disparaissent — la page-pôle elle-même
 devient un projet et n'appartient pas au projet qu'elle fait naître. L'étape
 `apply` vérifie le plan en entier — jusqu'à la lisibilité de chaque image — avant
-d'écrire quoi que ce soit, normalise les images à l'écart du contenu, et n'écrase
-jamais une pièce existante.
+d'écrire quoi que ce soit, écrit les versions telles quelles, normalise les images
+à l'écart du contenu, et n'écrase jamais une pièce existante.
+
+Un plan resté à l'ancienne forme, une `version:` unique par pièce, se convertit
+sur place, commentaires compris, et la commande se rejoue sans risque :
+`pnpm import:plan-versions imports/notion-<date>.plan.yaml`.
 
 Déposez l'export dans un dossier à lui : `plan` parcourt tout ce qui entoure le
 CSV pour retrouver les sous-pages et leurs fichiers.

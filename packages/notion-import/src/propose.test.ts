@@ -37,22 +37,24 @@ describe("proposeImport", () => {
       slug: "mo-xing-ji",
       title: "莫性急",
       published: false,
-      version: {
-        id: "v1",
-        date: "2025-12-22",
-        format: "2x7",
-        columns: ["莫性急平流缓進", "墨行機兔起鶻落"].map(toTraditional),
-      },
+      versions: [
+        {
+          id: "v1",
+          date: "2025-12-22",
+          format: "2x7",
+          columns: ["莫性急平流缓進", "墨行機兔起鶻落"].map(toTraditional),
+        },
+      ],
     });
   });
 
   it("propose un statut du schéma pour chaque état Notion", () => {
     const states: [string, string][] = [
       ["Brute", "idea"],
-      ["Préparée", "study"],
+      ["Préparée", "experiment"],
       ["En cours", "in-progress"],
       ["Mouvementée", "made"],
-      ["Cadre imprimé", "finished"],
+      ["Cadre imprimé", "in-progress"],
     ];
 
     for (const [notionState, expected] of states) {
@@ -76,7 +78,7 @@ describe("proposeImport", () => {
     const [piece] = propose([page({ title: "红楼梦", text: "无意成刚" })]).pieces;
 
     expect(piece?.title).toBe("紅樓夢");
-    expect(piece?.version.columns).toEqual(["無意成剛"]);
+    expect(piece?.versions[0]?.columns).toEqual(["無意成剛"]);
     expect(warningsOn(piece!, "title")).not.toEqual([]);
   });
 
@@ -85,31 +87,31 @@ describe("proposeImport", () => {
       page({ text: "至人無己\n\n無心無為\n\nune note en français" }),
     ]).pieces;
 
-    expect(piece?.version.columns).toEqual(["至人無己", "無心無為", "une note en français"]);
-    expect(warningsOn(piece!, "version.columns")).not.toEqual([]);
+    expect(piece?.versions[0]?.columns).toEqual(["至人無己", "無心無為", "une note en français"]);
+    expect(warningsOn(piece!, "versions.0.columns")).not.toEqual([]);
   });
 
   it("propose un format à préciser quand la colonne est vide", () => {
     const [piece] = propose([page({ format: "" })]).pieces;
 
-    expect(piece?.version.format).toBe("à préciser");
-    expect(warningsOn(piece!, "version.format")).not.toEqual([]);
+    expect(piece?.versions[0]?.format).toBe("à préciser");
+    expect(warningsOn(piece!, "versions.0.format")).not.toEqual([]);
   });
 
   it("signale une pièce sans aucun texte de calligraphie", () => {
     const [piece] = propose([page({ text: "" })]).pieces;
 
-    expect(piece?.version.columns).toEqual([]);
-    expect(warningsOn(piece!, "version.columns")).not.toEqual([]);
+    expect(piece?.versions[0]?.columns).toEqual([]);
+    expect(warningsOn(piece!, "versions.0.columns")).not.toEqual([]);
   });
 
   it("retombe sur la modification puis sur aujourd'hui quand la création manque", () => {
     const [modifie] = propose([page({ createdAt: undefined })]).pieces;
     const [sansDate] = propose([page({ createdAt: undefined, editedAt: undefined })]).pieces;
 
-    expect(modifie?.version.date).toBe("2026-02-23");
-    expect(sansDate?.version.date).toBe(TODAY);
-    expect(warningsOn(sansDate!, "version.date")).not.toEqual([]);
+    expect(modifie?.versions[0]?.date).toBe("2026-02-23");
+    expect(sansDate?.versions[0]?.date).toBe(TODAY);
+    expect(warningsOn(sansDate!, "versions.0.date")).not.toEqual([]);
   });
 
   it("suffixe le second slug quand deux titres donnent le même pinyin", () => {
@@ -122,7 +124,7 @@ describe("proposeImport", () => {
   it("reprend le corps de la sous-page comme note d'intention", () => {
     const [piece] = propose([page({ body: "Deux colonnes, encre grasse." })]).pieces;
 
-    expect(piece?.version.intention).toBe("Deux colonnes, encre grasse.");
+    expect(piece?.versions[0]?.intention).toBe("Deux colonnes, encre grasse.");
   });
 
   it("remplace les relations Notion par une appartenance à un projet", () => {
@@ -176,7 +178,7 @@ describe("proposeImport", () => {
       page({ attachments: ["/export/莫性急 abc/scan-1.jpg", "/export/莫性急 abc/scan-2.png"] }),
     ]).pieces;
 
-    expect(piece?.variations).toEqual([
+    expect(piece?.versions[0]?.variations).toEqual([
       {
         id: "v1a",
         script: "xingshu",
@@ -187,13 +189,13 @@ describe("proposeImport", () => {
         ],
       },
     ]);
-    expect(warningsOn(piece!, "variations.0.script")).not.toEqual([]);
+    expect(warningsOn(piece!, "versions.0.variations.0.script")).not.toEqual([]);
   });
 
   it("n'invente aucune variation à une page sans image", () => {
     const [piece] = propose([page()]).pieces;
 
-    expect(piece?.variations).toEqual([]);
+    expect(piece?.versions[0]?.variations).toEqual([]);
   });
 });
 
