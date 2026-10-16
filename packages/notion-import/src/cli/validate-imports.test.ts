@@ -79,4 +79,14 @@ describe("la validation des imports en pre-commit", () => {
     expect(output).toContain("notion.plan.yaml");
     expect(output).toContain("status");
   });
+
+  it("échoue sur une pièce à version unique, de l'ancienne forme", async () => {
+    const old = plan.replace(/versions:\n( +)- id: v1/, "version:\n$1  id: v1");
+
+    const { code, output } = await validate({ "notion.plan.yaml": old });
+
+    expect(old).not.toBe(plan);
+    expect(code).toBe(1);
+    expect(output).toContain("pieces.0.versions");
+  });
 });
