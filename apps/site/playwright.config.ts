@@ -2,7 +2,8 @@ import { defineConfig, devices } from "@playwright/test";
 import { fileURLToPath } from "node:url";
 
 const fixtureContent = fileURLToPath(new URL("./tests/fixtures/content", import.meta.url));
-const port = 4321;
+// Surchargeable, pour faire tourner plusieurs worktrees côte à côte.
+const port = Number(process.env.E2E_PORT ?? 4321);
 
 export default defineConfig({
   testDir: "./tests/e2e",

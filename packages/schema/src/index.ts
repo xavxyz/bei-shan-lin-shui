@@ -161,6 +161,8 @@ export const loadedVariationSchema = variationSchema.extend({
 export const loadedVersionSchema = versionSchema.extend({
   /** Date au format `YYYY-MM-DD`, sérialisable. */
   date: z.string(),
+  /** Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais stockés. */
+  chineseDate: z.string(),
   columns: z.array(chineseTextSchema),
   variations: z.array(loadedVariationSchema),
 });
