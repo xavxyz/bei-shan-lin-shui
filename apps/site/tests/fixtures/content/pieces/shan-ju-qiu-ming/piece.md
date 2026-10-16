@@ -74,7 +74,7 @@ versions:
           - file: v2c-01.jpg
             kind: context
             capture: photo
-            caption: L'atelier, le soir de l'essai.
+            caption: L'atelier, le soir de la variation.
           - file: v2c-02.jpg
             kind: study
             capture: scan
@@ -86,7 +86,7 @@ versions:
           - file: v2c-04.jpg
             kind: work
             capture: scan
-            caption: L'essai, en entier.
+            caption: La variation, en entier.
           - file: v2c-05.jpg
             kind: detail
             capture: scan

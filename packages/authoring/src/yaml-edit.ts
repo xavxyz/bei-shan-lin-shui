@@ -1,5 +1,4 @@
-import { isMap, isScalar, isSeq, type Document, type Node, type YAMLMap } from "yaml";
-import { indent, toYaml } from "./piece-file.js";
+import { Document, isMap, isScalar, isSeq, type Node, type YAMLMap } from "yaml";
 
 /**
  * Éditions textuelles d'un frontmatter : chacune renvoie le texte complet,
@@ -47,6 +46,65 @@ export function replaceScalar(text: string, parent: YAMLMap, key: string, value:
 
 export function rootMap(doc: Document.Parsed): YAMLMap | undefined {
   return isMap(doc.contents) ? doc.contents : undefined;
+}
+
+/** Le nœud de la version `id`, à éditer en place. */
+export function versionNode(piece: YAMLMap, id: string): YAMLMap | undefined {
+  return versionNodes(piece).find((version) => version.get("id") === id);
+}
+
+/** Le nœud de la variation `id`, où qu'elle soit parmi les versions. */
+export function variationNode(piece: YAMLMap, id: string): YAMLMap | undefined {
+  return versionNodes(piece)
+    .flatMap((version) => mapsIn(version.get("variations", true)))
+    .find((variation) => variation.get("id") === id);
+}
+
+function versionNodes(piece: YAMLMap): YAMLMap[] {
+  return mapsIn(piece.get("versions", true));
+}
+
+function mapsIn(node: unknown): YAMLMap[] {
+  return isSeq(node) ? node.items.filter((item): item is YAMLMap => isMap(item)) : [];
+}
+
+/** Texte long jamais replié, prose en bloc littéral, listes en ligne sans espaces intérieurs. */
+const YAML_FORMAT = {
+  lineWidth: 0,
+  flowCollectionPadding: false,
+  blockQuote: "literal",
+} as const;
+
+/**
+ * Sérialise un fragment comme le calligraphe l'écrit : les colonnes d'une
+ * version restent sur une ligne, `columns: [永永永, 丙午]`.
+ */
+export function toYaml(value: unknown): string {
+  const document = new Document(value);
+  flowColumns(document.contents);
+  return document.toString(YAML_FORMAT);
+}
+
+function flowColumns(node: unknown): void {
+  if (isMap(node)) {
+    for (const pair of node.items) {
+      if (isScalar(pair.key) && pair.key.value === "columns" && isSeq(pair.value)) {
+        pair.value.flow = true;
+      }
+      flowColumns(pair.value);
+    }
+  } else if (isSeq(node)) {
+    node.items.forEach(flowColumns);
+  }
+}
+
+/** Décale chaque ligne non vide d'un fragment YAML. */
+export function indent(fragment: string, spaces: number): string {
+  const pad = " ".repeat(spaces);
+  return fragment
+    .split("\n")
+    .map((line) => (line === "" ? line : pad + line))
+    .join("\n");
 }
 
 /**

@@ -78,7 +78,19 @@ describe("addVersion", () => {
 
     const result = await addVersion(root, "yong-cao-shu", { ...realisation, format: "" });
 
-    expect(result).toMatchObject({ ok: false });
+    expect(!result.ok && result.message).toMatch(/^format : /);
+    expect(await readPieceFile(root, "yong-cao-shu")).toBe(YONG);
+  });
+
+  it("refuse une variation hors vocabulaire, en nommant le champ de la version", async () => {
+    const root = await yongTree();
+
+    const result = await addVersion(root, "yong-cao-shu", {
+      ...realisation,
+      variations: [{ script: "kaishu", status: "presque" }],
+    });
+
+    expect(!result.ok && result.message).toMatch(/^variations\.0\.status : /);
     expect(await readPieceFile(root, "yong-cao-shu")).toBe(YONG);
   });
 

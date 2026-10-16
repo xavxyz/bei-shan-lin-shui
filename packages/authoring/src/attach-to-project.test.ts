@@ -2,9 +2,10 @@ import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadContent } from "@bsls/content";
-import { attachToProject } from "./attach.js";
+import { attachToProject } from "./attach-to-project.js";
 import { createPiece } from "./create-piece.js";
-import { PROJECT_FILE, readPieceFile, writeContentTree } from "./test-support/content-tree.js";
+import { writeTree } from "@bsls/content/test-support";
+import { PROJECT_FILE, readPieceFile } from "./test-support/content-tree.js";
 import { YONG, loadYong, yongTree } from "./test-support/yong.js";
 
 const SECOND_PROJECT = PROJECT_FILE.replace("Explorations personnelles", "Le vent");
@@ -24,7 +25,7 @@ describe("attachToProject", () => {
   });
 
   it("rattache une pièce qui n'appartenait à aucun projet", async () => {
-    const root = await writeContentTree({ "projects/ge-zhi-yan-jiu.yaml": PROJECT_FILE });
+    const root = await writeTree({ "projects/ge-zhi-yan-jiu.yaml": PROJECT_FILE });
     await createPiece(root, { title: "山居秋暝", version: { date: "2026-10-16", format: "A4" } });
 
     const result = await attachToProject(root, "shan-ju-qiu-ming", "ge-zhi-yan-jiu");

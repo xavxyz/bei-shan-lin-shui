@@ -1,5 +1,6 @@
 import { loadContent } from "@bsls/content";
-import { PROJECT_FILE, writeContentTree } from "./content-tree.js";
+import { writeTree } from "@bsls/content/test-support";
+import { PROJECT_FILE } from "./content-tree.js";
 
 /**
  * Une pièce écrite à la main, avec ce qu'un humain y laisse : commentaires,
@@ -38,7 +39,7 @@ published: true
 export const YONG = `---\n${YONG_HEAD}${YONG_V1}${YONG_TAIL}---\n`;
 
 export async function yongTree(piece = YONG): Promise<string> {
-  return writeContentTree({
+  return writeTree({
     "projects/ge-zhi-yan-jiu.yaml": PROJECT_FILE,
     "pieces/yong-cao-shu/piece.md": piece,
     "pieces/yong-cao-shu/images/v1a.jpg": "",

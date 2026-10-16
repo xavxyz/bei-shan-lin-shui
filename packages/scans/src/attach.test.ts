@@ -1,9 +1,10 @@
-import { mkdir, mkdtemp, readdir, readFile, writeFile } from "node:fs/promises";
+import { mkdtemp, readdir, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import sharp from "sharp";
 import { beforeAll, describe, expect, it } from "vitest";
-import { loadContent } from "@bsls/content";
+import { loadContent, pieceFile, pieceImageFile } from "@bsls/content";
+import { writeTree } from "@bsls/content/test-support";
 import { attachScan } from "./attach.js";
 
 /** Une pièce telle que le calligraphe l'écrit : commentaires, flux, corps Markdown. */
@@ -31,7 +32,7 @@ versions:
           - file: v1a-02.jpg
             kind: study
             capture: scan
-      - id: v1b # essai en régulier
+      - id: v1b # variation en régulier
         script: kaishu
         status: tried
 translation: |
@@ -57,16 +58,14 @@ beforeAll(async () => {
 
 /** Un vrai contenu sur le disque : la pièce, ses images existantes. */
 async function contentWithPiece(text = PIECE): Promise<string> {
-  const root = await mkdtemp(join(tmpdir(), "bsls-content-"));
-  const images = join(root, "pieces/yong-cao-shu/images");
-  await mkdir(images, { recursive: true });
-  await writeFile(join(root, "pieces/yong-cao-shu/piece.md"), text, "utf8");
-  await writeFile(join(images, "v1a.jpg"), "image existante");
-  await writeFile(join(images, "v1a-02.jpg"), "image existante");
-  return root;
+  return writeTree({
+    [pieceFile("yong-cao-shu")]: text,
+    [pieceImageFile("yong-cao-shu", "v1a.jpg")]: "image existante",
+    [pieceImageFile("yong-cao-shu", "v1a-02.jpg")]: "image existante",
+  });
 }
 
-const readPiece = (root: string) => readFile(join(root, "pieces/yong-cao-shu/piece.md"), "utf8");
+const readPiece = (root: string) => readFile(join(root, pieceFile("yong-cao-shu")), "utf8");
 
 describe("rattacher un scan à une pièce du contenu", () => {
   it("ajoute l'image en fin de variation et laisse le reste du fichier identique", async () => {
@@ -144,7 +143,7 @@ describe("rattacher un scan à une pièce du contenu", () => {
 
     expect(result).toMatchObject({ ok: true });
     const text = await readPiece(root);
-    expect(text).toContain("- id: v1b # essai en régulier");
+    expect(text).toContain("- id: v1b # variation en régulier");
     expect(text).toContain("# une autre feuille, du même jour");
     expect(text).toContain("Notes du calligraphe : **ne pas** toucher.");
     const loaded = await loadContent(root, { includeUnpublished: true });
