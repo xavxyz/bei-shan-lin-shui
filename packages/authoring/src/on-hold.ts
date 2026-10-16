@@ -1,8 +1,8 @@
 import { formatContentErrors, loadContent } from "@bsls/content";
-import { VARIATION_STATUS_LABELS, type LoadedPiece } from "@bsls/schema";
+import { VARIATION_STATUS_LABELS, type LoadedPiece, type PieceStatus } from "@bsls/schema";
 import type { Outcome } from "./piece-file.js";
 
-const ON_HOLD = "on-hold";
+const ON_HOLD: PieceStatus = "on-hold";
 
 /**
  * Les pièces en veille, présentées pour être revues une à une : où chacune en

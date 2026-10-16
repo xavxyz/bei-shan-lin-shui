@@ -1,11 +1,7 @@
-import type { YAMLMap } from "yaml";
+import { parseDocument, type YAMLMap } from "yaml";
 import type { PieceFrontmatter } from "@bsls/schema";
-import { checkPiece, parseFrontmatter, readPiece, writePiece, type Outcome } from "./piece-file.js";
+import { checkPiece, readPiece, writePiece, type Outcome } from "./piece-file.js";
 import { rootMap, type Edit } from "./yaml-edit.js";
-
-export function compact(record: Record<string, unknown>): Record<string, unknown> {
-  return Object.fromEntries(Object.entries(record).filter(([, value]) => value !== undefined));
-}
 
 type Change<T> = { edit: Edit; result: T } | { ok: false; message: string };
 
@@ -24,7 +20,7 @@ export async function editPiece<T extends object>(
   const before = checkPiece(read.piece.frontmatter);
   if (!before.ok) return { ok: false, message: `${slug} est déjà invalide :\n${before.message}` };
 
-  const map = rootMap(parseFrontmatter(read.piece.frontmatter));
+  const map = rootMap(parseDocument(read.piece.frontmatter));
   if (!map) return { ok: false, message: `${slug} : frontmatter illisible` };
 
   const outcome = await change(read.piece.frontmatter, before.data, map);

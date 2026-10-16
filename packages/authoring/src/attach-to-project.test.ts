@@ -2,7 +2,7 @@ import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadContent } from "@bsls/content";
-import { attachToProject } from "./attach.js";
+import { attachToProject } from "./attach-to-project.js";
 import { createPiece } from "./create-piece.js";
 import { PROJECT_FILE, readPieceFile, writeContentTree } from "./test-support/content-tree.js";
 import { YONG, loadYong, yongTree } from "./test-support/yong.js";

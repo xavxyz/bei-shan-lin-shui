@@ -1,7 +1,7 @@
 import type { VersionDraft } from "./create-piece.js";
-import { compact, editPiece } from "./edit-piece.js";
+import { editPiece } from "./edit-piece.js";
 import { nextVariationIds, nextVersionId } from "./local-ids.js";
-import { DATE, type Outcome } from "./piece-file.js";
+import { DATE, compact, type Outcome } from "./piece-file.js";
 import { appendToList } from "./yaml-edit.js";
 
 export type VariationDraft = {

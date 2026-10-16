@@ -2,7 +2,7 @@ import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { PIECES_DIR, deriveSlug, disambiguate, pieceFile } from "@bsls/content";
 import { projectsMissing } from "./projects.js";
-import { DATE, checkPiece, toYaml, writePiece, type Outcome } from "./piece-file.js";
+import { DATE, checkPiece, compact, toYaml, writePiece, type Outcome } from "./piece-file.js";
 
 export type VersionDraft = {
   date: string;
@@ -50,14 +50,14 @@ async function writeNewPiece(
   }
 
   const frontmatter = toYaml(
-    omitEmpty({
+    compact({
       title: draft.title,
       slug,
       status: "idea",
       projects: draft.projects ?? [],
       source: draft.source,
       versions: [
-        omitEmpty({
+        compact({
           id: "v1",
           date: draft.version.date,
           format: draft.version.format,
@@ -80,10 +80,4 @@ async function writeNewPiece(
   const file = pieceFile(slug);
   await writePiece({ slug, path: join(root, file), frontmatter, body: "" });
   return { ok: true, slug, file };
-}
-
-function omitEmpty<T extends Record<string, unknown>>(record: T): Partial<T> {
-  return Object.fromEntries(
-    Object.entries(record).filter(([, value]) => value !== undefined),
-  ) as Partial<T>;
 }

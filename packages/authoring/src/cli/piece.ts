@@ -4,7 +4,7 @@ import { text } from "node:stream/consumers";
 import { parse } from "yaml";
 import { addVariation } from "../add-variation.js";
 import { addVersion } from "../add-version.js";
-import { attachToProject } from "../attach.js";
+import { attachToProject } from "../attach-to-project.js";
 import { availableSlug, createPiece } from "../create-piece.js";
 import { describeOnHold } from "../on-hold.js";
 import type { Outcome } from "../piece-file.js";

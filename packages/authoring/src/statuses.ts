@@ -1,7 +1,6 @@
-import { isMap, isSeq, type YAMLMap } from "yaml";
 import { editPiece } from "./edit-piece.js";
 import type { Outcome } from "./piece-file.js";
-import { replaceScalar } from "./yaml-edit.js";
+import { replaceScalar, variationNode } from "./yaml-edit.js";
 
 /**
  * Les statuts ne bougent que sur décision du calligraphe : ces opérations
@@ -38,17 +37,4 @@ export async function setVariationStatus(
       result: { previous: variation.status },
     };
   });
-}
-
-function variationNode(piece: YAMLMap, id: string): YAMLMap | undefined {
-  const versions = piece.get("versions", true);
-  if (!isSeq(versions)) return undefined;
-  for (const version of versions.items) {
-    const variations = isMap(version) ? version.get("variations", true) : undefined;
-    if (!isSeq(variations)) continue;
-    for (const variation of variations.items) {
-      if (isMap(variation) && variation.get("id") === id) return variation;
-    }
-  }
-  return undefined;
 }

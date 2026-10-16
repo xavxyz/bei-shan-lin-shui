@@ -49,6 +49,26 @@ export function rootMap(doc: Document.Parsed): YAMLMap | undefined {
   return isMap(doc.contents) ? doc.contents : undefined;
 }
 
+/** Le nœud de la version `id`, à éditer en place. */
+export function versionNode(piece: YAMLMap, id: string): YAMLMap | undefined {
+  return versionNodes(piece).find((version) => version.get("id") === id);
+}
+
+/** Le nœud de la variation `id`, où qu'elle soit parmi les versions. */
+export function variationNode(piece: YAMLMap, id: string): YAMLMap | undefined {
+  return versionNodes(piece)
+    .flatMap((version) => mapsIn(version.get("variations", true)))
+    .find((variation) => variation.get("id") === id);
+}
+
+function versionNodes(piece: YAMLMap): YAMLMap[] {
+  return mapsIn(piece.get("versions", true));
+}
+
+function mapsIn(node: unknown): YAMLMap[] {
+  return isSeq(node) ? node.items.filter((item): item is YAMLMap => isMap(item)) : [];
+}
+
 /**
  * Une liste de scalaires reste en ligne, comme `projects: [a, b]` ; une liste
  * d'objets passe en bloc. La clé se réécrit à sa colonne d'origine.

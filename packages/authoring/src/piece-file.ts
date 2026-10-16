@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { parseDocument, stringify, type Document } from "yaml";
+import { parseDocument, stringify } from "yaml";
 import { pieceFile } from "@bsls/content";
 import { pieceFrontmatterSchema, type PieceFrontmatter, type z } from "@bsls/schema";
 
@@ -46,10 +46,6 @@ export async function writePiece(piece: PieceText): Promise<void> {
   await writeFile(piece.path, `---\n${piece.frontmatter}---\n${piece.body}`, "utf8");
 }
 
-export function parseFrontmatter(frontmatter: string): Document.Parsed {
-  return parseDocument(frontmatter);
-}
-
 /** La pièce telle que le schéma la lit, ou la raison de son refus. */
 export function checkPiece(frontmatter: string): Outcome<{ data: PieceFrontmatter }> {
   const result = pieceFrontmatterSchema.safeParse(parseDocument(frontmatter).toJS());
@@ -66,6 +62,13 @@ export function describeIssues(error: z.ZodError): string {
 /** Sérialisation des fragments écrits : texte long jamais replié, prose en bloc littéral. */
 export function toYaml(value: unknown): string {
   return stringify(value, { lineWidth: 0, blockQuote: "literal" });
+}
+
+/** Un fragment à écrire, sans ses champs absents : un champ facultatif ne s'écrit pas vide. */
+export function compact<T extends Record<string, unknown>>(record: T): Partial<T> {
+  return Object.fromEntries(
+    Object.entries(record).filter(([, value]) => value !== undefined),
+  ) as Partial<T>;
 }
 
 /** Décale chaque ligne non vide d'un fragment YAML. */
