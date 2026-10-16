@@ -80,7 +80,7 @@ const toTraditional = Converter({ from: "cn", to: "tw" });
  */
 const STATUS_BY_NOTION_STATE: Record<string, PieceStatus> = {
   brute: "idea",
-  préparée: "study",
+  préparée: "experiment",
   "en cours": "in-progress",
   mouvementée: "made",
   "cadre imprimé": "finished",

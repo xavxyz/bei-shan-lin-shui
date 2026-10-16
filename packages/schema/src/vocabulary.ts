@@ -8,7 +8,7 @@
 
 export const PIECE_STATUSES = [
   "idea",
-  "study",
+  "experiment",
   "in-progress",
   "made",
   "finished",
@@ -53,7 +53,7 @@ export const SCRIPT_HANZI: Record<Script, string> = {
 
 export const PIECE_STATUS_LABELS: Record<PieceStatus, string> = {
   idea: "idée",
-  study: "étude",
+  experiment: "expérimentation",
   "in-progress": "en cours",
   made: "encre sèche",
   finished: "achevée",
