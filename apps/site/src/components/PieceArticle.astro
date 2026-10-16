@@ -5,7 +5,6 @@ import ChineseText from "./ChineseText.astro";
 import VersionVariations from "./VersionVariations.astro";
 import EarlierVersions from "./EarlierVersions.astro";
 import VersionDate from "./VersionDate.astro";
-import { ImageViewer } from "../islands/ImageViewer.js";
 
 type Props = {
   piece: LoadedPiece;
@@ -40,13 +39,7 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
     </p>
   </header>
 
-  {
-    piece.gallery.length > 0 ? (
-      <div class="piece__work" data-testid="featured-work">
-        <ImageViewer client:load images={piece.gallery} title={piece.title.traditional} />
-      </div>
-    ) : null
-  }
+  <VersionVariations version={version} title={piece.title.traditional} />
 
   <p class="piece__tags">
     {
@@ -126,8 +119,6 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       }
     </div>
   </div>
-
-  <VersionVariations version={version} title={piece.title.traditional} />
 
   <EarlierVersions piece={piece} />
 </article>

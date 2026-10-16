@@ -6,7 +6,7 @@ const piecePath = "/montagnes/shan-ju-qiu-ming";
 test("la page de pièce affiche l'œuvre mise en avant en grand", async ({ page }) => {
   await page.goto(piecePath);
 
-  const work = page.getByTestId("featured-work").locator("img").first();
+  const work = page.getByTestId("carousel-image").first();
   await expect(work).toBeVisible();
   await expect(work).toHaveAttribute("src", "/content-images/shan-ju-qiu-ming/v2a-01.jpg");
 
