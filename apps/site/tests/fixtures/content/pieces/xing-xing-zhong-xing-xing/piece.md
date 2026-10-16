@@ -40,6 +40,11 @@ versions:
       - id: v3a
         script: xingcao
         status: to-try
+        images:
+          - file: v3a.jpg
+            kind: work
+            capture: scan
+            caption: La bande entière, au scanner.
 pinyin_overrides:
   行行重行行: háng háng chóng háng háng
 translation: |
