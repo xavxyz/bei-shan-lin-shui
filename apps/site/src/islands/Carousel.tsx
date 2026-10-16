@@ -6,14 +6,19 @@ import {
   type LoadedImage,
   type LoadedVariation,
 } from "@bsls/schema";
-import "./ImageViewer.css";
+import "./Carousel.css";
 
-export type ImageViewerProps = {
+export type CarouselProps = {
   /**
    * Variations d'une version, dans l'ordre du fichier, déjà validées par le
    * content layer : le carrousel ne lit rien lui-même.
    */
   variations: LoadedVariation[];
+  /**
+   * Identifiant de la variation qui ouvre le carrousel, choisie côté Astro par
+   * la règle du content layer (`featuredVariation`) ; `null` si aucune n'a d'image.
+   */
+  leadingVariation: string | null;
   /** Titre de la pièce, utilisé pour décrire les images à qui ne les voit pas. */
   title: string;
 };
@@ -31,8 +36,8 @@ const SWIPE_THRESHOLD = 40;
  * Sans JavaScript, il montre la première image et la liste ; flèches,
  * vignettes et points n'apparaissent qu'une fois l'îlot monté.
  */
-export function ImageViewer({ variations, title }: ImageViewerProps) {
-  const slides = orderSlides(variations);
+export function Carousel({ variations, leadingVariation, title }: CarouselProps) {
+  const slides = orderSlides(variations, leadingVariation);
   const [shownIndex, setShownIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const swipeStart = useRef<number | null>(null);
@@ -247,8 +252,8 @@ function VariationList({ variations, slides, shownVariation, onSelect }: Variati
  * puis les autres dans l'ordre du fichier. Dans une variation : œuvre entière,
  * détail, étude, contexte, puis l'ordre du fichier.
  */
-function orderSlides(variations: LoadedVariation[]): Slide[] {
-  const featured = featuredVariation(variations);
+function orderSlides(variations: LoadedVariation[], leadingVariation: string | null): Slide[] {
+  const featured = variations.find((variation) => variation.id === leadingVariation);
   const ordered = featured
     ? [featured, ...variations.filter((variation) => variation !== featured)]
     : variations;
@@ -258,13 +263,6 @@ function orderSlides(variations: LoadedVariation[]): Slide[] {
     const rest = byKind(variation.images.filter((image) => image.file !== lead?.file));
     return [...(lead ? [lead] : []), ...rest].map((image) => ({ image, variation }));
   });
-}
-
-/** Même règle que le content layer pour la pièce : les variations retenues d'abord. */
-function featuredVariation(variations: LoadedVariation[]): LoadedVariation | undefined {
-  const kept = variations.filter((variation) => variation.status === "kept");
-  const rest = variations.filter((variation) => variation.status !== "kept");
-  return [...kept, ...rest].find((variation) => variation.featuredImage);
 }
 
 function byKind(images: LoadedImage[]): LoadedImage[] {
@@ -286,4 +284,4 @@ function describe(image: LoadedImage, title: string): string {
   return image.caption ?? `${title} — ${IMAGE_KIND_LABELS[image.kind]}`;
 }
 
-export default ImageViewer;
+export default Carousel;

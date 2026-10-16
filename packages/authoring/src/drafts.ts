@@ -49,10 +49,19 @@ export function readDraft<S extends z.ZodTypeAny>(
   schema: S,
   input: unknown,
 ): Outcome<{ draft: z.output<S> }> {
-  const result = schema.safeParse(input);
+  const result = schema.safeParse(input, { errorMap: unansweredQuestion });
   if (result.success) return { ok: true, draft: result.data };
   return { ok: false, message: describeIssues(result.error) };
 }
+
+/**
+ * Un champ booléen absent est une question restée sans réponse : on la repose
+ * en français. Les autres erreurs gardent le message du schéma.
+ */
+const unansweredQuestion: z.ZodErrorMap = (issue, context) =>
+  issue.code === "invalid_type" && issue.expected === "boolean" && issue.received === "undefined"
+    ? { message: "réponse attendue, oui ou non (true / false)" }
+    : { message: context.defaultError };
 
 /** Une version telle qu'elle s'écrit dans le frontmatter. */
 export function versionEntry(

@@ -253,37 +253,6 @@ a:hover {
   margin: 0 0 3rem;
 }
 
-.variations__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--rule);
-}
-
-.variation {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5rem 1.5rem;
-  padding: 0.9rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-
-.variation__tags {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.variation__note {
-  margin: 0;
-  max-width: 40rem;
-  color: var(--muted);
-  font-style: italic;
-  white-space: pre-wrap;
-}
-
 /* Les versions antérieures restent repliées : la version courante prime. */
 .evolution {
   margin-top: 3rem;

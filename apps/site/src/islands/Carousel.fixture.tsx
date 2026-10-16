@@ -5,7 +5,8 @@ import {
   type LoadedImage,
   type LoadedVariation,
 } from "@bsls/schema";
-import { ImageViewer } from "./ImageViewer.js";
+import { featuredVariation, pickFeaturedImage } from "@bsls/content/featured";
+import { Carousel } from "./Carousel.js";
 
 /**
  * Les fixtures sont validées par le schéma partagé : une évolution du schéma
@@ -22,7 +23,7 @@ function variation(
   const images = attributes.images ?? [];
   return loadedVariationSchema.parse({
     scriptLabel: SCRIPT_LABELS[attributes.script],
-    featuredImage: images.find((candidate) => candidate.featured) ?? images[0] ?? null,
+    featuredImage: pickFeaturedImage(images),
     ...attributes,
     images,
   });
@@ -76,69 +77,59 @@ const setAside = variation({
 
 const title = "山居秋暝";
 
+/** Le carrousel tel que `VersionVariations.astro` le monte : la règle du content layer choisit qui l'ouvre. */
+function carousel(variations: LoadedVariation[]) {
+  return (
+    <Carousel
+      title={title}
+      variations={variations}
+      leadingVariation={featuredVariation(variations)?.id ?? null}
+    />
+  );
+}
+
 export default {
-  "une image": (
-    <ImageViewer
-      title={title}
-      variations={[variation({ id: "v1a", script: "xingshu", status: "kept", images: [a4] })]}
-    />
-  ),
+  "une image": carousel([
+    variation({ id: "v1a", script: "xingshu", status: "kept", images: [a4] }),
+  ]),
 
-  "plusieurs variations": <ImageViewer title={title} variations={[kept, setAside]} />,
+  "plusieurs variations": carousel([kept, setAside]),
 
-  "une variation sans image": (
-    <ImageViewer title={title} variations={[kept, withoutImage, setAside]} />
-  ),
+  "une variation sans image": carousel([kept, withoutImage, setAside]),
 
-  "portrait A4": (
-    <ImageViewer
-      title={title}
-      variations={[variation({ id: "v1a", script: "kaishu", status: "tried", images: [a4] })]}
-    />
-  ),
+  "portrait A4": carousel([
+    variation({ id: "v1a", script: "kaishu", status: "tried", images: [a4] }),
+  ]),
 
-  "détail très allongé": (
-    <ImageViewer
-      title={title}
-      variations={[variation({ id: "v1a", script: "caoshu", status: "tried", images: [detail] })]}
-    />
-  ),
+  "détail très allongé": carousel([
+    variation({ id: "v1a", script: "caoshu", status: "tried", images: [detail] }),
+  ]),
 
-  "légende longue": (
-    <ImageViewer
-      title={title}
-      variations={[
-        variation({
-          id: "v1a",
-          script: "xingcao",
-          status: "set-aside",
-          images: [
-            image({
-              ...a4,
-              caption:
-                "Premier jet à l'encre grasse sur papier de riz, encre trop chargée dans le bas de " +
-                "la deuxième colonne ; les liaisons manquent de tension et le dernier caractère " +
-                "déborde du cadre. Repris le lendemain sur un papier plus absorbant.",
-            }),
-          ],
+  "légende longue": carousel([
+    variation({
+      id: "v1a",
+      script: "xingcao",
+      status: "set-aside",
+      images: [
+        image({
+          ...a4,
+          caption:
+            "Premier jet à l'encre grasse sur papier de riz, encre trop chargée dans le bas de " +
+            "la deuxième colonne ; les liaisons manquent de tension et le dernier caractère " +
+            "déborde du cadre. Repris le lendemain sur un papier plus absorbant.",
         }),
-      ]}
-    />
-  ),
+      ],
+    }),
+  ]),
 
-  "aucune légende": (
-    <ImageViewer
-      title={title}
-      variations={[
-        variation({
-          id: "v1a",
-          script: "xingshu",
-          status: "tried",
-          images: [study, image({ ...detail, caption: undefined })],
-        }),
-      ]}
-    />
-  ),
+  "aucune légende": carousel([
+    variation({
+      id: "v1a",
+      script: "xingshu",
+      status: "tried",
+      images: [study, image({ ...detail, caption: undefined })],
+    }),
+  ]),
 
-  "aucune image": <ImageViewer title={title} variations={[withoutImage]} />,
+  "aucune image": carousel([withoutImage]),
 };
