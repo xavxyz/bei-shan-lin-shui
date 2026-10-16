@@ -59,6 +59,14 @@ projects:
     title: 楊澄甫之太極拳十要
     presentation: ""
     theme: ink
+  # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_12_01.jpeg :
+  # hommage à 山山, que le calligraphe surnomme 閒仙 ; la pièce 閒仙機 en est la pièce-pôle
+  - id: xian-xian-ji
+    title: 閒仙機
+    presentation: ""
+    theme: ink
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
 pieces:
   - slug: xi-you-ji
     title: 西遊記
@@ -2136,3 +2144,338 @@ pieces:
           - source: imports/scans/2026-10-11_31_03.jpeg
             file: v1b.jpg
             kind: work
+  # absente de Notion : identifiée sur le scan 2026-10-11_12_01.jpeg (registre imports/scans.yaml)
+  # pièce-pôle du projet xian-xian-ji : hommage à 山山, 閒仙 est le surnom que le calligraphe lui donne
+  # distincte de shu-heng-zhuo-an-npl : N·PL marque aussi 04_01
+  - slug: xian-xian-ji
+    title: 閒仙機
+    status: made
+    projects:
+      - xian-xian-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-03-29 # date du papier : 29 3 26, N·PL
+      format: 1x3
+      columns:
+        - 閒仙機 # 閒 : 門 garni d'un 水 sigillaire ; 仚 (人 sur 山) pour 仙 sur le papier, variante voulue
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # grille imprimée 3x9, un caractère par 3x3 cases ; points rouges au départ de
+          # trois traits ; sous la grille, un petit cercle et la signature emblème de 戈
+          # (croix en X entre quatre chevrons) ; daté 29 3 26, N·PL
+          - source: imports/scans/2026-10-11_12_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+  # absente de Notion : identifiée sur les scans 2026-10-11_13_01 à 13_03 (registre imports/scans.yaml)
+  # en-tête de 13_01 : 山山臨, d'après 山山 ; le 1er 山 en cursive, le 2e renversé ; signé 戈澤宇
+  # les dix tiges célestes, chacune suivie d'un mot puis de 流
+  - slug: tian-gan-liu
+    title: 天干流
+    status: made
+    projects:
+      - xian-xian-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-03-29 # date du papier : 丙午春分, et 29 3 26 en rouge sur 13_01
+      format: 1x3 + 5x3 + 5x3
+      columns:
+        - 天干流 # 13_01 : 天干 en régulier sur un grand 流 cursif à l'encre diluée ; 天 écrit 工 sur 八, variante apprise de 山山
+        - 甲源流 # 13_02
+        - 乙流流
+        - 丙滲流
+        - 丁止流
+        - 固戊流 # 固 à la place du tronc, 戊 à celle du mot : inversion voulue
+        - 己分流 # 13_03
+        - 庚求流
+        - 辛積流
+        - 壬優流 # 优 en simplifié sur le papier
+        - 癸溢流 # 流 en cursive
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # paysage sur petite grille 3x5 imprimée ; 山山臨, 戈澤宇, 丙午春分, 29 3 26 en rouge
+          - source: imports/scans/2026-10-11_13_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # paysage, grille 5x3 imprimée : 甲 à 戊 ; visage au rouge ; ni signature ni date
+          - source: imports/scans/2026-10-11_13_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+          # paysage, grille 5x3 imprimée : 己 à 癸 ; ni signature ni date
+          - source: imports/scans/2026-10-11_13_03.jpeg
+            file: v1a-03.jpg
+            kind: work
+  # absente de Notion : identifiée sur les scans 2026-10-11_14_01 à 14_03 (registre imports/scans.yaml)
+  # pendant de 天干流 (tian-gan-liu), écrit la veille ; en-tête de 14_01 : 山山臨, d'après 山山
+  # (1er 山 en cursive, 2e en régulier renversé) ; heures au crayon en marge de ② et ③ :
+  # le cycle monte de 子 (23 h) à 巳, puis descend de 午 à 亥
+  - slug: di-zhi
+    title: 地支
+    status: made
+    projects:
+      - xian-xian-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-03-28 # date du papier : 28.3.26 春分 丙午
+      format: 1x2 + 2x6 + 2x6
+      columns:
+        - 地支 # feuille ①
+        - 巳辰卯寅丑子 # feuille ②, lue de bas en haut
+        - 虵龍兔虎牛鼠 # 虵 pour 蛇, variante confirmée par le calligraphe
+        - 亥戌酉申未午 # feuille ③, lue de haut en bas
+        - 豬狗鷄猴羊馬 # 鷄 pour 雞, variante confirmée par le calligraphe
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          # feuille ① : 山山臨 地支 sur grille imprimée légère ; signé xav. 戈澤宇, daté 28.3.26 春分 丙午
+          - source: imports/scans/2026-10-11_14_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # feuille ② : grille imprimée 2x6, 子→巳 et leurs animaux ; heures 23→11 en marge, repère 7:35
+          - source: imports/scans/2026-10-11_14_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+          # feuille ③ : grille imprimée 2x6, 午→亥 et leurs animaux ; heures 11→23 en marge, repère 19:08
+          - source: imports/scans/2026-10-11_14_03.jpeg
+            file: v1a-03.jpg
+            kind: work
+  # absente de Notion : identifiée sur les scans 2026-10-11_16_01 à 16_06 (registre imports/scans.yaml)
+  # feuilles 一 à 六 : explorations du dragon, pendant de 虎躍 dans le projet long-teng-hu-yue ;
+  # sur 一 二 五 六, une ligne du 乾 (易經, 卦一) : 初九, 九二, 九五, 上九 ; le 九四
+  # (或躍在淵) manque, 四 porte 藏鋒歛銳 à la place
+  # 戈說 : les écarts avec le 易經 (無用, 二九, 五九) sont innocents, écrits comme un débutant 蒙
+  # qui ne sait pas comment 屯 s'écrit le 周易 ; jeu de mots implicite sur les hexagrammes 3 et 4
+  - slug: long-teng
+    title: 龍騰
+    status: made
+    projects:
+      - long-teng-hu-yue
+    published: false
+    version:
+      id: v1
+      # date du papier : une par feuille, 28 3 26, 29 3 26, 丙午春分, 5 4 26, 6 4 26,
+      # 7 4 26 ; date stockée : la première feuille (春分 → 2026-03-28 aussi)
+      date: 2026-03-28
+      format: 1x4 + 1x2 + 1x4 + 1x2 + 1x1 + 1x1 + 1x3 + 1x2 + 1x4 + 1x1 + 1x3 + 1x2
+      columns:
+        - 龍龍龍龍 # 16_01 ; du régulier vers la cursive
+        - 龍龍
+        - 龍龍龍龍 # 16_02 ; gauche de 龍 tirée du sceau, droite écrite 龙 : style libre
+        - 龍龍
+        - 龍 # en grand
+        - 龍 # 16_03 ; sceau rouge en sigillaire, dans un cadre
+        - 騰騰騰 # 16_04
+        - 騰騰 # le dernier en grande cursive
+        - 騰騰騰騰 # 16_05
+        - 騰 # très cursif, 月 en une boucle
+        - 騰騰騰 # 16_06 ; 肉 pour 月, 火 pour 灬 : 騰 écrit en style libre
+        - 騰騰
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # feuille 一 : inscription 初九潛龍無用 (易經 : 潛龍勿用) ; signé 戈, 28 3 26
+          - source: imports/scans/2026-10-11_16_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # feuille 二 : inscription 二九利見大人 (le 九二 : 見龍在田，利見大人) ; signé 戈, 29 3 26
+          - source: imports/scans/2026-10-11_16_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+          # feuille 三 : grille imprimée 5x11, récit en kaishu : 很久以前奶奶的茶几上一直放着
+          # 一本書，書上我多次看見一個篆字，看不懂它是什麼。我就學完了這本書，才明白。
+          # 我把騰蛇臨寫登石如。右逸聞 ; 登 pour 鄧 (鄧石如), jeu de mots ; 看 écrit 手目 /
+          # 目手, 懂 écrit 董, 着 pour 著 ; le 篆字 est le 龍 au sceau rouge ; signé en rouge
+          # 丙午春分 戈澤宇
+          - source: imports/scans/2026-10-11_16_03.jpeg
+            file: v1a-03.jpg
+            kind: work
+          # feuille 四 : note 藏鋒歛銳 (歛 pour 斂), flèche vers la signature ; signé 戈, 5 4 26
+          - source: imports/scans/2026-10-11_16_04.jpeg
+            file: v1a-04.jpg
+            kind: work
+          # feuille 五 : inscription 五九利見大人 (le 九五 : 飛龍在天，利見大人) ; 利 au 刂
+          # écrit 刀 ; signé 戈, 6 4 26
+          - source: imports/scans/2026-10-11_16_05.jpeg
+            file: v1a-05.jpg
+            kind: work
+          # feuille 六 : inscription 上九亢龍有悔 ; signé 戈, 7 4 26
+          - source: imports/scans/2026-10-11_16_06.jpeg
+            file: v1a-06.jpg
+            kind: work
+  # absente de Notion : identifiée sur les scans 2026-10-11_18_01 à 18_04 (registre imports/scans.yaml)
+  # 戈說 : pièce personnelle en hommage à 山山, pour « horizontaliser les verticaux » et
+  # « verticaliser les horizontaux », deux des cinq points de sa méthode pour la cursive (竪橫) ;
+  # distincte de shu-heng-zhuo-an-npl, qui reste une idée
+  # composition libre : 劑 porte 刀 au centre, 水 à gauche et 火 à droite ; 未 et 既 de part et
+  # d'autre renvoient à 既濟 et à son complémentaire 未濟 (劑 et 濟 se lisent jì)
+  - slug: shui-huo-tiao-ji
+    title: 水火調劑
+    status: made
+    projects:
+      - xian-xian-ji
+    published: false
+    version:
+      id: v1
+      date: 2026-04-19 # date du papier : 19 4 26, sur 18_01 seule
+      format: 1x3 + 1x1 + 1x4 + 1x1
+      columns:
+        - 山竪橫 # feuille ① ; 山 en cursive en tête, hors grille ; 橫 tourné de 90° dans le sens trigonométrique
+        - 未 # feuille ②
+        - 水火調劑 # 劑 en grand courant : 刀 au centre, 水 à gauche, 火 à droite
+        - 既
+    variations:
+      - id: v1a
+        script: ziyou
+        status: kept
+        images:
+          # feuille ① : grille imprimée pâle 3x6 ; signé 戈, daté 19 4 26 ; « 8 » au rouge en bas à droite
+          - source: imports/scans/2026-10-11_18_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+          # feuille ② : grille imprimée pâle ; trait rouge sur le 土 du 周 de 調, correction du
+          # calligraphe ; ni signature ni date
+          - source: imports/scans/2026-10-11_18_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+            featured: true
+          # grille 米 rouge 3x2, en régulier : 調劑 (刀 au centre), 未劑 (火 en bas), 既劑 (水 en bas)
+          - source: imports/scans/2026-10-11_18_03.jpeg
+            file: v1a-03.jpg
+            kind: study
+          # grille 米 rouge 3x2, vers la cursive : 未劑 (火 en bas), 調劑 (水 à gauche, 火 à droite,
+          # 刀 au centre), 既劑 (水 en bas)
+          - source: imports/scans/2026-10-11_18_04.jpeg
+            file: v1a-04.jpg
+            kind: study
+  # absente de Notion : identifiée sur les scans 2026-10-11_19_01 et 19_02 (registre imports/scans.yaml)
+  # un seul texte, une variation par style : régulier (①), cursive (②)
+  - slug: tu-na
+    title: 吐納
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-04-18 # date du papier : 18 4 26 (sur 19_01)
+      format: 1x2
+      columns:
+        - 吐納
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          # feuille ① : grille imprimée 3x6 ; 糸 de 納 aux traits détachés ; signé 戈, daté 18 4 26
+          - source: imports/scans/2026-10-11_19_01.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+      - id: v1b
+        script: caoshu
+        status: kept
+        images:
+          # feuille ② : grille imprimée 3x6 ; ni signature ni date (celles de ① transparaissent)
+          - source: imports/scans/2026-10-11_19_02.jpeg
+            file: v1b.jpg
+            kind: work
+  # absente de Notion : identifiée sur les scans 2026-10-11_22_01 et 22_02 (registre imports/scans.yaml)
+  # 医王会 指圧 : Iokai Shiatsu, l'école de Masunaga ; deux feuilles ① ② au rouge
+  - slug: yi-wang-hui-chan-zhi-ya
+    title: 醫王會 // 禪指壓
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      # date du papier : 戈 谷雨 26 sur les deux feuilles (26 sous 谷雨) ; 3 5 6 au rouge
+      # sur ①, lu 3.5.26
+      date: 2026-05-03
+      format: 1x3 + 1x3
+      columns:
+        - 醫王會 # feuille ① ; 医 et 会 écrits en simplifié
+        - 禪指壓 # feuille ② ; 压 écrit en simplifié
+    variations:
+      - id: v1a
+        script: caoshu
+        status: kept
+        images:
+          # feuille ① : 医王会 en cursive, légende 医王会 en régulier ; A4 sans grille ; 戈 谷雨, 26, 3 5 6 au rouge
+          - source: imports/scans/2026-10-11_22_01.jpeg
+            file: v1a-01.jpg
+            kind: work
+            featured: true
+          # feuille ② : 禪指压 en cursive, légende 禪指压 en régulier ; 戈 谷雨 26
+          - source: imports/scans/2026-10-11_22_02.jpeg
+            file: v1a-02.jpg
+            kind: work
+  # absente de Notion : identifiée sur le scan 2026-10-11_23.jpeg (registre imports/scans.yaml)
+  # source : 篤志力行, formule néo-confucéenne attestée (二程外書 卷7 ; Zhu Xi, 上蔡語錄·跋 et
+  # lettre 答吳德夫 ; 王陽明, 教條示龍場諸生), qui reprend 篤志 de 論語·子張 (子夏) et 力行 de
+  # 禮記·中庸 ; 專心 et 警省 (= 警醒) : deux mots, l'appariement des trois n'est pas attesté
+  - slug: du-zhi-li-xing-zhuan-xin-jing-xing
+    title: 篤志力行，專心，警省
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-05-13 # date du papier : 戈 立夏 26, milieu du jieqi
+      format: 2x4
+      columns:
+        - 篤志力行
+        - 專心警省
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          # A4 sans grille ; une main imprimée au-dessus de chaque colonne ;
+          # signé 戈 立夏 26 entre les colonnes
+          - source: imports/scans/2026-10-11_23.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
+  # absente de Notion : identifiée sur le scan 2026-10-11_27.jpeg (registre imports/scans.yaml)
+  # 戈說 : adaptation en régulier d'une cursive de 鄧岱崑 sur ces huit caractères, dans cet ordre
+  # formule composite, non attestée telle quelle : 飛鴻戲海 reprend 袁昂《古今書評》 (523) sur
+  # 鍾繇 (« 若飛鴻戲海，舞鶴遊天 ») ; 雲鶴遊天, la version de 梁武帝 transmise par le 淳化閣帖
+  # (« 如雲鶴遊天，群鴻戲海 », 雲鵠 ailleurs)
+  # attribution au feutre : 岱崑作頁 (代 et 昆 sur un seul 山), « faire une page »
+  - slug: fei-hong-xi-hai-yun-he-you-tian
+    title: 飛鴻戲海，雲鶴遊天
+    status: made
+    projects: []
+    published: false
+    version:
+      id: v1
+      date: 2026-05-28 # date du papier : 戈 丙午小滿 (滿 abrégé), milieu du jieqi
+      format: 2x4
+      columns:
+        - 飛鴻戲海 # 飛 de forme libre
+        - 雲鶴遊天 # 遊 : 方 écrit comme 扌, variante acceptée selon le maître
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          # A4 sur grille imprimée pâle ; attribution 岱崑作頁 ; signé 戈 丙午小滿
+          - source: imports/scans/2026-10-11_27.jpeg
+            file: v1a.jpg
+            kind: work
+            featured: true
