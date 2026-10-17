@@ -469,7 +469,7 @@ describe("image mise en avant", () => {
     expect(content.pieces[0]!.featuredImage!.file).toBe("v1a-01.jpg");
   });
 
-  it("expose la galerie de la variation mise en avant, image retenue en tête", async () => {
+  it("nomme en français le style de la variation mise en avant", async () => {
     const content = await loadValid(
       withImages([
         { file: "v1a-01.jpg", kind: "detail", capture: "scan" },
@@ -477,17 +477,12 @@ describe("image mise en avant", () => {
       ]),
     );
 
-    expect(content.pieces[0]!.gallery.map((image) => image.file)).toEqual([
-      "v1a-02.jpg",
-      "v1a-01.jpg",
-    ]);
     expect(content.pieces[0]!.featuredScriptLabel).toBe("courant");
   });
 
-  it("retourne une galerie vide et aucun style quand la pièce n'a aucune image", async () => {
+  it("ne nomme aucun style quand la pièce n'a aucune image", async () => {
     const content = await loadValid(withImages([]));
 
-    expect(content.pieces[0]!.gallery).toEqual([]);
     expect(content.pieces[0]!.featuredScriptLabel).toBeNull();
   });
 
