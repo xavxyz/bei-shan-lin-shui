@@ -87,7 +87,9 @@ describe("applyImport", () => {
         id: "v1a",
         script: "xingshu",
         status: "tried",
-        images: [{ file: "v1a-01.jpg", source: scan, featured: true, kind: "work" }],
+        images: [
+          { file: "v1a-01.jpg", source: scan, featured: true, kind: "work", capture: "scan" },
+        ],
       },
     ];
 
@@ -100,6 +102,39 @@ describe("applyImport", () => {
     expect(width).toBeLessThanOrEqual(2480);
     expect(height).toBeLessThanOrEqual(3508);
     expect(await loadContent(root, { includeUnpublished: true })).toMatchObject({ ok: true });
+  });
+
+  it("garde le mode de capture d'une image, un scan à défaut", async () => {
+    const root = await contentRoot();
+    const arbitrated = planFileSchema.parse({
+      projects: [],
+      pieces: [
+        {
+          ...plan().pieces[0],
+          variations: [
+            {
+              id: "v1a",
+              script: "xingshu",
+              status: "kept",
+              images: [
+                { file: "v1a-01.jpg", source: scan, featured: true },
+                { file: "v1a-02.jpg", source: scan, kind: "context", capture: "photo" },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    await applyImport(arbitrated, { contentRoot: root });
+
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(
+      loaded.ok && loaded.content.pieces[0]?.latestVersion.variations[0]?.images,
+    ).toMatchObject([
+      { file: "v1a-01.jpg", kind: "work", capture: "scan" },
+      { file: "v1a-02.jpg", kind: "context", capture: "photo" },
+    ]);
   });
 
   it("écrit les projets et leur rattache les pièces", async () => {
@@ -168,7 +203,15 @@ describe("applyImport", () => {
         id: "v1a",
         script: "xingshu",
         status: "tried",
-        images: [{ file: "v1a-01.jpg", source: "/introuvable.jpg", featured: true, kind: "work" }],
+        images: [
+          {
+            file: "v1a-01.jpg",
+            source: "/introuvable.jpg",
+            featured: true,
+            kind: "work",
+            capture: "scan",
+          },
+        ],
       },
     ];
 
@@ -194,6 +237,7 @@ describe("applyImport", () => {
             source: join(exportRoot, "莫性急 abc/scan.heic"),
             featured: true,
             kind: "work",
+            capture: "scan",
           },
         ],
       },

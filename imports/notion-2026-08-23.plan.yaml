@@ -1111,7 +1111,7 @@ pieces:
       url: ""
       relations: []
   # date du papier : 丙午雨水 (Notion disait 2026-02-12)
-  # colonnes lues sur les scans 2026-10-15_01_01 et _02
+  # colonnes lues sur les photos 2026-10-15_01_01 et _02, prises au téléphone
   - slug: gong-fu-sheng-gong-fu
     title: 工夫生功夫
     status: made
@@ -1135,11 +1135,13 @@ pieces:
           - source: imports/scans/2026-10-15_01_01.jpeg
             file: v1a-01.jpg
             kind: work
+            capture: photo
             featured: true
           # feuille ② : 書法工夫 / 點畫功夫, signée 戈, datée 丙午雨水
           - source: imports/scans/2026-10-15_01_02.jpeg
             file: v1a-02.jpg
             kind: work
+            capture: photo
     notion:
       title: 工夫生功夫
       status: Mouvementée
@@ -1256,7 +1258,6 @@ pieces:
       relations: []
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   # 𫝑 confirmé par le calligraphe : le papier l'écrit ainsi, en régulier comme en cursive
-  # photo contextuelle à faire : la pièce assemblée en 3x2 ne se scanne pas
   - slug: tai-quan-zhu-shan-an
     title: 胎𫝑 / 泉注 / 山安
     status: made
@@ -1300,6 +1301,12 @@ pieces:
           - source: imports/scans/2026-10-11_26_07.jpeg
             file: v1a-06.jpg
             kind: work
+          # la pièce assemblée en 3x2, photographiée sur une étagère ; elle ne se scanne pas
+          # (2026-10-17_01_01.heic du Drive, converti en JPEG : sharp ne lit pas le HEIC)
+          - source: imports/scans/2026-10-17_01_01.jpeg
+            file: v1a-07.jpg
+            kind: context
+            capture: photo
     notion:
       title: 胎𫝑 / 泉注 / 山安
       status: Mouvementée
