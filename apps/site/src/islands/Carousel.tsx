@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type PointerEvent } from "react";
 import {
   IMAGE_KIND_LABELS,
   IMAGE_KINDS,
@@ -32,7 +32,10 @@ const SWIPE_THRESHOLD = 40;
 /**
  * Un carrousel par version : toutes les images de toutes ses variations, une
  * seule fois chacune, et sous lui la liste des variations qui sert à y
- * naviguer. Aucun accès réseau ni disque : tout arrive par les props.
+ * naviguer. Aucun accès réseau ni disque : les données arrivent par les props.
+ * Une fois monté, il s'inscrit auprès du pilote clavier de la page
+ * (`keyboard-pilot.ts`), qui lui transmet les flèches ← → quand il est le
+ * premier carrousel visible.
  *
  * Sans JavaScript, il montre la première image et la liste ; flèches,
  * vignettes et points n'apparaissent qu'une fois l'îlot monté.
@@ -49,21 +52,22 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
   const shown = slides[index];
   const navigable = mounted && slides.length > 1;
 
-  function go(to: number) {
-    setShownIndex((to + slides.length) % slides.length);
-  }
-
-  // Les flèches du clavier pilotent le carrousel visible, sans qu'il ait le focus.
   const count = slides.length;
+  /** D'une image à l'autre, en boucle ; à jour même appelé depuis le clavier. */
+  const move = useCallback(
+    (by: number) => setShownIndex((current) => (current + by + count) % count),
+    [count],
+  );
+
+  // Les flèches ← → pilotent le premier carrousel visible, sans qu'il ait le focus.
   useEffect(() => {
     if (!navigable) return;
-    const step = (by: number) => setShownIndex((current) => (current + by + count) % count);
     return pilotWithKeyboard({
       element: () => image.current,
-      previous: () => step(-1),
-      next: () => step(1),
+      previous: () => move(-1),
+      next: () => move(1),
     });
-  }, [navigable, count]);
+  }, [navigable, move]);
 
   function onPointerDown(event: PointerEvent) {
     swipeStart.current = event.clientX;
@@ -74,8 +78,8 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
     swipeStart.current = null;
     if (!navigable || start === null) return;
     const delta = event.clientX - start;
-    if (delta <= -SWIPE_THRESHOLD) go(index + 1);
-    else if (delta >= SWIPE_THRESHOLD) go(index - 1);
+    if (delta <= -SWIPE_THRESHOLD) move(1);
+    else if (delta >= SWIPE_THRESHOLD) move(-1);
   }
 
   return (
@@ -88,7 +92,7 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
                 type="button"
                 className="carousel__arrow carousel__arrow--previous"
                 aria-label="Image précédente"
-                onClick={() => go(index - 1)}
+                onClick={() => move(-1)}
               >
                 ‹
               </button>
@@ -116,7 +120,7 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
                 type="button"
                 className="carousel__arrow carousel__arrow--next"
                 aria-label="Image suivante"
-                onClick={() => go(index + 1)}
+                onClick={() => move(1)}
               >
                 ›
               </button>
@@ -135,7 +139,7 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
             {shown.image.caption ? (
               <span className="carousel__legend">{shown.image.caption}</span>
             ) : null}
-            <span className="carousel__position" aria-live="polite">
+            <span className="carousel__position" data-testid="carousel-position" aria-live="polite">
               {index + 1} / {slides.length}
             </span>
           </figcaption>
@@ -153,7 +157,7 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
                             className="carousel__thumbnail"
                             aria-current={first + offset === index ? "true" : undefined}
                             aria-label={describe(slide.image, title)}
-                            onClick={() => go(first + offset)}
+                            onClick={() => setShownIndex(first + offset)}
                           >
                             <img src={slide.image.src} alt="" draggable={false} />
                           </button>
@@ -172,7 +176,7 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
                       className="carousel__dot"
                       aria-current={position === index ? "true" : undefined}
                       aria-label={`Image ${position + 1} sur ${slides.length}`}
-                      onClick={() => go(position)}
+                      onClick={() => setShownIndex(position)}
                     />
                   </li>
                 ))}
@@ -187,7 +191,8 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
         shownVariation={shown?.variation.id}
         onSelect={
           mounted
-            ? (variation) => go(slides.findIndex((slide) => slide.variation.id === variation.id))
+            ? (variation) =>
+                setShownIndex(slides.findIndex((slide) => slide.variation.id === variation.id))
             : undefined
         }
         slides={slides}
