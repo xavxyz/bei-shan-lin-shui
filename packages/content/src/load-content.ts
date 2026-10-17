@@ -7,7 +7,6 @@ import {
   loadedPieceSchema,
   pieceFrontmatterSchema,
   projectFileSchema,
-  type LoadedImage,
   type LoadedPiece,
   type LoadedProject,
   type LoadedVariation,
@@ -255,17 +254,9 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     versions,
     latestVersion,
     featuredImage: featured?.featuredImage ?? null,
-    gallery: featured ? withFeaturedFirst(featured) : [],
     featuredScriptLabel: featured?.scriptLabel ?? null,
     href: pieceHref(piece.slug, project),
   } satisfies LoadedPiece);
-}
-
-/** La galerie s'ouvre sur l'image mise en avant ; les autres suivent dans l'ordre du fichier. */
-function withFeaturedFirst(variation: LoadedVariation): LoadedImage[] {
-  const featured = variation.featuredImage;
-  if (!featured) return variation.images;
-  return [featured, ...variation.images.filter((image) => image.file !== featured.file)];
 }
 
 function toIsoDate(date: Date): string {

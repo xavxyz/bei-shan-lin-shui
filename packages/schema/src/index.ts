@@ -185,11 +185,6 @@ export const loadedPieceSchema = pieceFieldsSchema.extend({
   /** Versions triées du plus ancien au plus récent : la dernière est l'intention courante. */
   latestVersion: loadedVersionSchema,
   featuredImage: loadedImageSchema.nullable(),
-  /**
-   * Images à montrer en tête de la page de pièce : celles de la variation qui
-   * porte l'image mise en avant, cette dernière en premier.
-   */
-  gallery: z.array(loadedImageSchema),
   /** Style d'écriture de cette variation, nommé en français. */
   featuredScriptLabel: z.string().nullable(),
   /** URL canonique de la pièce sur le site. */
