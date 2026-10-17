@@ -54,8 +54,8 @@ test("toutes les variations d'une version antérieure sont listées, avec leur c
     "Trop sage, les liaisons manquent de tension.",
   );
 
-  const study = variations.filter({ hasText: "essayée" });
-  await expect(study.getByTestId("variation-note")).toHaveText(
+  const tried = variations.filter({ hasText: "essayée" });
+  await expect(tried.getByTestId("variation-note")).toHaveText(
     "En régulier, pour poser la structure de 雨.",
   );
 });

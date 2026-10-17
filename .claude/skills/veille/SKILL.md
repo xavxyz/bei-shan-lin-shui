@@ -1,7 +1,6 @@
 ---
 name: veille
-description: Repasser une à une avec le calligraphe les pièces en veille, pour l'y remettre face sans en conclure aucune d'office.
-disable-model-invocation: true
+description: Repasser une à une avec le calligraphe les pièces en veille, pour l'y remettre face sans en conclure aucune d'office. À utiliser quand le calligraphe veut revoir ses pièces en veille, demande ce qui attend, ou envisage de reprendre ou d'abandonner une pièce mise de côté.
 ---
 
 # Revue des pièces en veille
