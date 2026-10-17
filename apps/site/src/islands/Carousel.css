@@ -27,11 +27,6 @@
   user-select: none;
 }
 
-.carousel__stage:focus-visible {
-  outline: 1px solid var(--accent, #8a2c2c);
-  outline-offset: 0.5rem;
-}
-
 .carousel__image {
   max-width: min(100%, 46rem);
   max-height: 80vh;

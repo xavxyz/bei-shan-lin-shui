@@ -98,19 +98,6 @@ test("la flèche suivante passe à l'image suivante, puis d'une variation à la 
   await expect(shown(page)).toHaveAttribute("src", `${images}/v2a-02.jpg`);
 });
 
-test("les flèches du clavier font défiler les images", async ({ page }) => {
-  await page.goto(piecePath);
-  await mounted(page);
-
-  await carousel(page).getByTestId("carousel-stage").focus();
-  await page.keyboard.press("ArrowRight");
-  await page.keyboard.press("ArrowRight");
-  await expect(shown(page)).toHaveAttribute("src", `${images}/v2c-04.jpg`);
-
-  await page.keyboard.press("ArrowLeft");
-  await expect(shown(page)).toHaveAttribute("src", `${images}/v2a-02.jpg`);
-});
-
 test("glisser vers la gauche passe à l'image suivante", async ({ page }) => {
   await page.goto(piecePath);
   await mounted(page);
@@ -226,5 +213,130 @@ test.describe("sans JavaScript", () => {
 
     await expect(shown(page)).toHaveAttribute("src", `${images}/v2a-01.jpg`);
     await expect(carousel(page).getByTestId("variation")).toHaveCount(3);
+  });
+});
+
+test.describe("au clavier", () => {
+  const evolution = (page: Page) => page.getByText("voir l'évolution", { exact: true });
+  const current = (page: Page) => page.getByTestId("carousel").first();
+  const earlier = (page: Page) => page.getByTestId("earlier-version").getByTestId("carousel");
+  const position = (carousel: ReturnType<typeof current>) =>
+    carousel.getByTestId("carousel-caption").locator(".carousel__position");
+
+  test("sans cliquer, la flèche droite avance le carrousel visible", async ({ page }) => {
+    await page.goto(piecePath);
+    await mounted(page);
+
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("ArrowRight");
+    await expect(shown(page)).toHaveAttribute("src", `${images}/v2c-04.jpg`);
+    await expect(position(current(page))).toHaveText("3 / 7");
+
+    await page.keyboard.press("ArrowLeft");
+    await expect(shown(page)).toHaveAttribute("src", `${images}/v2a-02.jpg`);
+    await expect(position(current(page))).toHaveText("2 / 7");
+  });
+
+  test("avec un seul carrousel visible, la flèche bas fait défiler la page", async ({ page }) => {
+    await page.goto(piecePath);
+    await mounted(page);
+
+    await page.keyboard.press("ArrowDown");
+
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+    await expect(position(current(page))).toHaveText("1 / 7");
+  });
+
+  test("une version antérieure repliée ne capte jamais les flèches", async ({ page }) => {
+    await page.goto(piecePath);
+    await mounted(page);
+    // Le carrousel courant hors de la fenêtre, il ne reste que celui, caché, de l'évolution.
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await expect(current(page).getByTestId("carousel-image")).not.toBeInViewport();
+
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("ArrowRight");
+    await evolution(page).click();
+
+    await expect(position(earlier(page))).toHaveText("1 / 2");
+    await expect(earlier(page).getByTestId("carousel-image")).toHaveAttribute(
+      "src",
+      `${images}/v1a-01.jpg`,
+    );
+    await expect(position(current(page))).toHaveText("1 / 7");
+  });
+
+  test.describe("deux carrousels à l'écran", () => {
+    test.use({ viewport: { width: 1280, height: 1600 } });
+
+    /**
+     * L'évolution dépliée, la fenêtre descend jusqu'à montrer le haut de
+     * l'image antérieure : celle de la version courante reste la plus visible.
+     */
+    async function bothInView(page: Page) {
+      await page.goto(piecePath);
+      await mounted(page);
+      await evolution(page).click();
+      await expect(earlier(page).getByRole("button", { name: "Image suivante" })).toBeVisible();
+      await earlier(page)
+        .getByTestId("carousel-image")
+        .evaluate((image) => {
+          const box = image.getBoundingClientRect();
+          window.scrollTo(0, window.scrollY + box.top + box.height / 4 - window.innerHeight);
+        });
+      await expect(current(page).getByTestId("carousel-image")).toBeInViewport({ ratio: 0.3 });
+      await expect(earlier(page).getByTestId("carousel-image")).toBeInViewport();
+    }
+
+    test("la flèche droite pilote le plus visible, la flèche bas passe au suivant", async ({
+      page,
+    }) => {
+      await bothInView(page);
+
+      await page.keyboard.press("ArrowRight");
+      await expect(position(current(page))).toHaveText("2 / 7");
+      await expect(position(earlier(page))).toHaveText("1 / 2");
+
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("ArrowRight");
+      await expect(position(earlier(page))).toHaveText("2 / 2");
+      await expect(earlier(page).getByTestId("carousel-image")).toHaveAttribute(
+        "src",
+        `${images}/v1b-01.jpg`,
+      );
+      await expect(position(current(page))).toHaveText("2 / 7");
+
+      await page.keyboard.press("ArrowUp");
+      await page.keyboard.press("ArrowLeft");
+      await expect(position(current(page))).toHaveText("1 / 7");
+      await expect(position(earlier(page))).toHaveText("2 / 2");
+    });
+
+    test("la flèche bas change de carrousel sans faire défiler la page", async ({ page }) => {
+      await bothInView(page);
+      const before = await page.evaluate(() => window.scrollY);
+
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("ArrowRight");
+
+      await expect(position(earlier(page))).toHaveText("2 / 2");
+      expect(await page.evaluate(() => window.scrollY)).toBe(before);
+    });
+
+    test("à égalité de visibilité, la flèche droite pilote le plus haut", async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 3600 });
+      await page.goto(piecePath);
+      await mounted(page);
+      await evolution(page).click();
+      await expect(earlier(page).getByRole("button", { name: "Image suivante" })).toBeVisible();
+      await expect(earlier(page).getByTestId("carousel-image")).toBeInViewport({ ratio: 1 });
+      await expect(current(page).getByTestId("carousel-image")).toBeInViewport({ ratio: 1 });
+
+      await page.keyboard.press("ArrowRight");
+
+      await expect(position(current(page))).toHaveText("2 / 7");
+      await expect(position(earlier(page))).toHaveText("1 / 2");
+    });
   });
 });

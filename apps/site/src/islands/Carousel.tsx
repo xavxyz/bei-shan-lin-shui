@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import {
   IMAGE_KIND_LABELS,
   IMAGE_KINDS,
@@ -6,6 +6,7 @@ import {
   type LoadedImage,
   type LoadedVariation,
 } from "@bsls/schema";
+import { pilotWithKeyboard } from "./keyboard-pilot.js";
 import "./Carousel.css";
 
 export type CarouselProps = {
@@ -41,6 +42,7 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
   const [shownIndex, setShownIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const swipeStart = useRef<number | null>(null);
+  const image = useRef<HTMLImageElement>(null);
   useEffect(() => setMounted(true), []);
 
   const index = Math.min(shownIndex, Math.max(slides.length - 1, 0));
@@ -51,13 +53,17 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
     setShownIndex((to + slides.length) % slides.length);
   }
 
-  function onKeyDown(event: KeyboardEvent) {
+  // Les flèches du clavier pilotent le carrousel visible, sans qu'il ait le focus.
+  const count = slides.length;
+  useEffect(() => {
     if (!navigable) return;
-    if (event.key === "ArrowRight") go(index + 1);
-    else if (event.key === "ArrowLeft") go(index - 1);
-    else return;
-    event.preventDefault();
-  }
+    const step = (by: number) => setShownIndex((current) => (current + by + count) % count);
+    return pilotWithKeyboard({
+      element: () => image.current,
+      previous: () => step(-1),
+      next: () => step(1),
+    });
+  }, [navigable, count]);
 
   function onPointerDown(event: PointerEvent) {
     swipeStart.current = event.clientX;
@@ -75,7 +81,7 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
   return (
     <div className="carousel" data-testid="carousel">
       {shown ? (
-        <figure className="carousel__figure" onKeyDown={onKeyDown}>
+        <figure className="carousel__figure">
           <div className="carousel__frame">
             {navigable ? (
               <button
@@ -91,7 +97,6 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
             <div
               className="carousel__stage"
               data-testid="carousel-stage"
-              tabIndex={navigable ? 0 : undefined}
               onPointerDown={onPointerDown}
               onPointerUp={onPointerUp}
               onPointerCancel={() => (swipeStart.current = null)}
@@ -99,6 +104,7 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
               <img
                 className="carousel__image"
                 data-testid="carousel-image"
+                ref={image}
                 src={shown.image.src}
                 alt={describe(shown.image, title)}
                 draggable={false}
