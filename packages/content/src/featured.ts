@@ -20,10 +20,13 @@ export function pickFeaturedImage(images: LoadedImage[]): LoadedImage | null {
 }
 
 /**
- * Une version se montre par ses variations retenues avant les autres, chacune
+ * Une version se montre par la variation qui porte une image explicitement mise
+ * en avant ; à défaut, par ses variations retenues avant les autres, chacune
  * dans l'ordre du fichier : la première qui a une image mène.
  */
 export function featuredVariation(variations: LoadedVariation[]): LoadedVariation | undefined {
+  const explicit = variations.find((variation) => variation.featuredImage?.featured);
+  if (explicit) return explicit;
   const kept = variations.filter((variation) => variation.status === "kept");
   const rest = variations.filter((variation) => variation.status !== "kept");
   return [...kept, ...rest].find((variation) => variation.featuredImage);

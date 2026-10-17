@@ -6,9 +6,10 @@ function variation(
   id: string,
   status: LoadedVariation["status"],
   files: string[],
+  { featured = false } = {},
 ): LoadedVariation {
   const images = files.map((file) =>
-    loadedImageSchema.parse({ file, src: `/${file}`, kind: "work", capture: "scan" }),
+    loadedImageSchema.parse({ file, src: `/${file}`, kind: "work", capture: "scan", featured }),
   );
   return loadedVariationSchema.parse({
     id,
@@ -29,6 +30,15 @@ describe("featuredVariation", () => {
     ]);
 
     expect(leading?.id).toBe("v1c");
+  });
+
+  it("mène une version par la variation qui porte l'image mise en avant, même non retenue", () => {
+    const leading = featuredVariation([
+      variation("v1a", "kept", ["v1a-01.jpg"]),
+      variation("v1b", "tried", ["v1b-01.jpg"], { featured: true }),
+    ]);
+
+    expect(leading?.id).toBe("v1b");
   });
 
   it("à défaut de variation retenue illustrée, prend la première illustrée dans l'ordre du fichier", () => {
