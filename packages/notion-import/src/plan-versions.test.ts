@@ -70,6 +70,7 @@ describe("conversion du plan à plusieurs versions", () => {
                 source: "imports/scans/2026-10-11_01_02.jpeg",
                 file: "v1a.jpg",
                 kind: "work",
+                capture: "scan",
                 featured: false,
               },
             ],

@@ -223,7 +223,7 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
           variationEntry(
             variation.id,
             variation,
-            variation.images.map((image) => imageEntry({ ...image, capture: "scan" })),
+            variation.images.map((image) => imageEntry(image)),
           ),
         ),
       ),

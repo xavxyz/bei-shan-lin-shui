@@ -31,6 +31,7 @@ const plannedImageSchema = imageSchema.pick({ file: true, featured: true }).exte
   /** Chemin du fichier dans l'export, le temps de l'import. */
   source: z.string().min(1),
   kind: imageSchema.shape.kind.default("work"),
+  capture: imageSchema.shape.capture.default("scan"),
 });
 
 const plannedVariationSchema = variationSchema

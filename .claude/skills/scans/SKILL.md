@@ -18,7 +18,8 @@ niveau de confiance ; le calligraphe tranche, toujours. Lire `CLAUDE.md` et
   On y lit ; on n'y écrit que pour renommer à la demande du calligraphe, ou
   supprimer après sa confirmation (voir « Supprimer du Drive »).
 - **Nom d'un scan** : `AAAA-MM-JJ_<pièce>_<page>.jpeg` — date du dépôt, numéro
-  de la pièce dans le dépôt, numéro de la feuille.
+  de la pièce dans le dépôt, numéro de la feuille. Une photo du téléphone garde
+  son extension : `.heic`.
 - **Registre** `imports/scans.yaml` : une entrée par fichier du Drive. Un scan
   est traité quand son entrée existe sans `# à arbitrer`. Son en-tête décrit les
   champs. `pnpm validate:imports` le vérifie, avec le plan.
@@ -84,7 +85,9 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 
 ### 3. Appliquer
 
-1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`.
+1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`. Un HEIC
+   se convertit en JPEG au passage, sharp ne le lit pas :
+   `sips -s format jpeg <drive>/<fichier> --out imports/scans/<nom>.jpeg`.
 2. Rattacher chaque scan retenu, selon où vit sa pièce :
    - **Pièce dans `content/pieces/<slug>/`** : écrire le rattachement dans
      `imports/scans/<fichier>.rattachement.yaml`, puis lancer
@@ -111,7 +114,8 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
      calligraphe, qui la fait à la main.
 
    - **Pièce dans le plan** : modifier le plan, variation et image
-     (`file: v1a.jpg`, `kind: work`) sous leur version — une nouvelle version
+     (`file: v1a.jpg`, `kind: work`, `capture: photo` pour une photo du
+     téléphone) sous leur version — une nouvelle version
      au besoin —, et chaque correction tirée du papier, avec son commentaire.
 3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`. Son
    `match` est le slug de la pièce, qu'elle soit au plan ou dans le contenu.

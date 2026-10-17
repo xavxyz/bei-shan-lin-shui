@@ -41,6 +41,14 @@ describe("registre des scans", () => {
     expect(parseScanRegistry(registry(discarded), { knownPieces }).ok).toBe(true);
   });
 
+  it("accepte une photo HEIC du téléphone, refuse un autre format", () => {
+    const photo = moXingJi.replace("2026-10-11_01_01.jpeg", "2026-10-17_01_01.heic");
+    const png = moXingJi.replace("2026-10-11_01_01.jpeg", "2026-10-17_01_01.png");
+
+    expect(parseScanRegistry(registry(photo), { knownPieces }).ok).toBe(true);
+    expect(parseScanRegistry(registry(png), { knownPieces }).ok).toBe(false);
+  });
+
   it.each([
     ["un style hors vocabulaire", "script: kaishu", "script: lishu", "script"],
     [

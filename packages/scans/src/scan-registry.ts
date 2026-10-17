@@ -13,7 +13,7 @@ import { variationIdSchema, variationSchema, z } from "@bsls/schema";
 export const SCAN_VERDICTS = ["new", "unidentified", "discarded"] as const;
 
 const scanEntrySchema = z.object({
-  file: z.string().regex(/\.jpe?g$/i, "attendu : le nom d'un fichier JPEG du Drive"),
+  file: z.string().regex(/\.(jpe?g|heic)$/i, "attendu : le nom d'un fichier JPEG ou HEIC du Drive"),
   /** Une colonne lue, en caractères : les notes en français vont en commentaire. */
   read: z.array(z.string().regex(/^[^A-Za-z]*$/, "attendu : des caractères, sans lettres latines")),
   match: z.string().min(1),

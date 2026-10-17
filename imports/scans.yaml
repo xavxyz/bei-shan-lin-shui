@@ -3,7 +3,7 @@
 # Un fichier du Drive, une entrée. L'agent propose, le calligraphe tranche :
 # tant qu'une entrée porte `# à arbitrer`, rien n'entre dans le plan.
 #
-# file       : nom du fichier sur le Drive (AAAA-MM-JJ_<pièce>_<page>.jpeg)
+# file       : nom du fichier sur le Drive (AAAA-MM-JJ_<pièce>_<page>.jpeg, .heic pour une photo)
 # read       : caractères lus sur le scan, colonne par colonne
 # match      : slug de la pièce, du plan (imports/notion-2026-08-23.plan.yaml)
 #              ou du contenu (content/pieces/), `new` (absente de Notion),
@@ -661,8 +661,8 @@ scans:
     confidence: high
     script: caoshu
     variation: v1a # v1a-06 ; dans le plan
-    # 3e colonne en cursive, 山 en boucle, 安 lié ; série datée 立夏 26 par 26_01 ; photo contextuelle de la
-    # pièce assemblée à faire, elle ne se scanne pas
+    # 3e colonne en cursive, 山 en boucle, 安 lié ; série datée 立夏 26 par 26_01 ; la pièce
+    # assemblée ne se scanne pas : sa photo est 2026-10-17_01_01.heic
 
   - file: 2026-10-11_26_08.jpeg
     read: [又手合掌]
@@ -894,3 +894,12 @@ scans:
     variation: v1a # kept ; dans le plan
     # feuille ② (cercle rouge), signée 戈, datée 丙午雨水 ; croix au crayon entre les colonnes
     # 戈說 : 點畫功夫, avec 巨 pour 工 dans 功 ; 夫 écrit en cursive ; 點 : 占 réduit à une petite case
+
+  - file: 2026-10-17_01_01.heic
+    read: [胎𫝑, 泉注, 山安]
+    match: tai-quan-zhu-shan-an
+    confidence: high
+    script: ziyou
+    variation: v1a # v1a-07, kind context, capture photo ; dans le plan
+    # photo de la pièce assemblée en 3x2, posée sur une étagère, prise en biais ;
+    # IMG_1324.HEIC renommé ; convertie en JPEG pour l'import (sharp ne lit pas le HEIC)

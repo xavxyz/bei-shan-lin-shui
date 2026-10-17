@@ -89,7 +89,9 @@ describe("applyImport", () => {
         id: "v1a",
         script: "xingshu",
         status: "tried",
-        images: [{ file: "v1a-01.jpg", source: scan, featured: true, kind: "work" }],
+        images: [
+          { file: "v1a-01.jpg", source: scan, featured: true, kind: "work", capture: "scan" },
+        ],
       },
     ];
 
@@ -111,7 +113,7 @@ describe("applyImport", () => {
       id,
       script: "kaishu" as const,
       status: "kept" as const,
-      images: [{ file, source: scan, featured, kind: "work" as const }],
+      images: [{ file, source: scan, featured, kind: "work" as const, capture: "scan" as const }],
     });
     arbitrated.pieces[0]!.versions = [
       {
@@ -145,6 +147,45 @@ describe("applyImport", () => {
       ["v2a"],
     ]);
     expect(piece?.featuredImage?.file).toBe("v2a.jpg");
+  });
+
+  it("garde le mode de capture d'une image, un scan à défaut", async () => {
+    const root = await contentRoot();
+    const [piece] = plan().pieces;
+    const arbitrated = planFileSchema.parse({
+      projects: [],
+      pieces: [
+        {
+          ...piece,
+          versions: [
+            {
+              ...piece!.versions[0],
+              variations: [
+                {
+                  id: "v1a",
+                  script: "xingshu",
+                  status: "kept",
+                  images: [
+                    { file: "v1a-01.jpg", source: scan, featured: true },
+                    { file: "v1a-02.jpg", source: scan, kind: "context", capture: "photo" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    await applyImport(arbitrated, { contentRoot: root });
+
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(
+      loaded.ok && loaded.content.pieces[0]?.latestVersion.variations[0]?.images,
+    ).toMatchObject([
+      { file: "v1a-01.jpg", kind: "work", capture: "scan" },
+      { file: "v1a-02.jpg", kind: "context", capture: "photo" },
+    ]);
   });
 
   it("écrit les projets et leur rattache les pièces", async () => {
@@ -213,7 +254,15 @@ describe("applyImport", () => {
         id: "v1a",
         script: "xingshu",
         status: "tried",
-        images: [{ file: "v1a-01.jpg", source: "/introuvable.jpg", featured: true, kind: "work" }],
+        images: [
+          {
+            file: "v1a-01.jpg",
+            source: "/introuvable.jpg",
+            featured: true,
+            kind: "work",
+            capture: "scan",
+          },
+        ],
       },
     ];
 
@@ -241,6 +290,7 @@ describe("applyImport", () => {
             source: join(exportRoot, "莫性急 abc/scan.heic"),
             featured: true,
             kind: "work",
+            capture: "scan",
           },
         ],
       },
