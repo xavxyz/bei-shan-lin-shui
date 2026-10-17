@@ -17,7 +17,8 @@ niveau de confiance ; le calligraphe tranche, toujours. Lire `CLAUDE.md` et
   `~/Library/CloudStorage/GoogleDrive-*/Mon Drive/Bèishān línshuǐ 背山臨水/`.
   On y lit ; on n'y écrit que pour renommer, à la demande du calligraphe.
 - **Nom d'un scan** : `AAAA-MM-JJ_<pièce>_<page>.jpeg` — date du dépôt, numéro
-  de la pièce dans le dépôt, numéro de la feuille.
+  de la pièce dans le dépôt, numéro de la feuille. Une photo du téléphone garde
+  son extension : `.heic`.
 - **Registre** `imports/scans.yaml` : une entrée par fichier du Drive. Un scan
   est traité quand son entrée existe sans `# à arbitrer`. Son en-tête décrit les
   champs. `pnpm validate:imports` le vérifie, avec le plan.
@@ -82,8 +83,11 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 
 ### 3. Appliquer
 
-1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`.
-2. Modifier le plan : variation et image (`file: v1a.jpg`, `kind: work`), et
+1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`. Un HEIC
+   se convertit en JPEG au passage, sharp ne le lit pas :
+   `sips -s format jpeg <drive>/<fichier> --out imports/scans/<nom>.jpeg`.
+2. Modifier le plan : variation et image (`file: v1a.jpg`, `kind: work`,
+   `capture: photo` pour une photo du téléphone), et
    chaque correction tirée du papier, avec son commentaire.
 3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`.
 4. Lancer `pnpm validate:imports`.

@@ -220,7 +220,7 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
                       images: variation.images.map((image) => ({
                         file: image.file,
                         kind: image.kind,
-                        capture: "scan",
+                        capture: image.capture,
                         featured: image.featured,
                       })),
                     }
