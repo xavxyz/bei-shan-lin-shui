@@ -2,6 +2,7 @@ import { mkdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import sharp from "sharp";
 import { stringify } from "yaml";
+import { imageEntry, variationEntry, versionEntry } from "@bsls/authoring/editing";
 import { PIECES_DIR, pieceFile, pieceImageFile, projectFile } from "@bsls/content";
 import { RESERVED_PROJECT_ID, pieceFrontmatterSchema } from "@bsls/schema";
 import { normalizeImage } from "@bsls/scans";
@@ -214,33 +215,19 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
     ...(piece.projects.length > 0 ? { projects: piece.projects } : {}),
     status: piece.status,
     /* Les versions telles que le plan les porte, dans son ordre : rien n'est réorganisé. */
-    versions: piece.versions.map((version) => ({
-      id: version.id,
-      date: version.date,
-      format: version.format,
-      ...(version.columns.length > 0 ? { columns: version.columns } : {}),
-      ...(version.intention ? { intention: version.intention } : {}),
-      ...(version.variations.length > 0
-        ? {
-            variations: version.variations.map((variation) => ({
-              id: variation.id,
-              script: variation.script,
-              status: variation.status,
-              ...(variation.personal_note ? { personal_note: variation.personal_note } : {}),
-              ...(variation.images.length > 0
-                ? {
-                    images: variation.images.map((image) => ({
-                      file: image.file,
-                      kind: image.kind,
-                      capture: "scan",
-                      featured: image.featured,
-                    })),
-                  }
-                : {}),
-            })),
-          }
-        : {}),
-    })),
+    versions: piece.versions.map((version) =>
+      versionEntry(
+        version.id,
+        version,
+        version.variations.map((variation) =>
+          variationEntry(
+            variation.id,
+            variation,
+            variation.images.map((image) => imageEntry({ ...image, capture: "scan" })),
+          ),
+        ),
+      ),
+    ),
     ...(piece.translation ? { translation: piece.translation } : {}),
     published: piece.published,
   };

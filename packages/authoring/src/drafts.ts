@@ -1,4 +1,11 @@
-import { pieceFieldsSchema, variationSchema, versionSchema, type z } from "@bsls/schema";
+import {
+  imageSchema,
+  pieceFieldsSchema,
+  toIsoDate,
+  variationSchema,
+  versionSchema,
+  type z,
+} from "@bsls/schema";
 import { compact, describeIssues, type Outcome } from "./piece-file.js";
 
 /**
@@ -63,15 +70,18 @@ const unansweredQuestion: z.ZodErrorMap = (issue, context) =>
     ? { message: "réponse attendue, oui ou non (true / false)" }
     : { message: context.defaultError };
 
-/** Une version telle qu'elle s'écrit dans le frontmatter. */
+/**
+ * Une version telle qu'elle s'écrit dans le frontmatter. Sa date est déjà
+ * écrite `AAAA-MM-JJ` quand elle vient d'un plan d'import.
+ */
 export function versionEntry(
   id: string,
-  version: z.output<typeof versionDraftSchema>,
+  version: Omit<z.output<typeof versionDraftSchema>, "date"> & { date: Date | string },
   variations: Record<string, unknown>[] = [],
 ): Record<string, unknown> {
   return compact({
     id,
-    date: isoDate(version.date),
+    date: typeof version.date === "string" ? version.date : toIsoDate(version.date),
     format: version.format,
     columns: version.columns.length > 0 ? version.columns : undefined,
     intention: version.intention,
@@ -94,7 +104,13 @@ export function variationEntry(
   });
 }
 
-/** `AAAA-MM-JJ`, la forme sous laquelle le calligraphe date ses versions. */
-function isoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
+/** Une image telle qu'elle s'écrit dans le frontmatter : mise en avant seulement sur demande. */
+export function imageEntry(image: z.input<typeof imageSchema>): Record<string, unknown> {
+  return compact({
+    file: image.file,
+    kind: image.kind,
+    capture: image.capture,
+    featured: image.featured ? true : undefined,
+    caption: image.caption,
+  });
 }

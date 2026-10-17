@@ -7,6 +7,7 @@ import {
   loadedPieceSchema,
   pieceFrontmatterSchema,
   projectFileSchema,
+  toIsoDate,
   type LoadedPiece,
   type LoadedProject,
   type LoadedVariation,
@@ -257,10 +258,6 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     featuredScriptLabel: featured?.scriptLabel ?? null,
     href: pieceHref(piece.slug, project),
   } satisfies LoadedPiece);
-}
-
-function toIsoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
 }
 
 function toContentErrors(file: string, error: z.ZodError): ContentError[] {

@@ -1,11 +1,12 @@
 import { Document, isMap, isScalar, isSeq, type Node, type YAMLMap } from "yaml";
+import type { Refusal } from "./piece-file.js";
 
 /**
  * Éditions textuelles d'un frontmatter : chacune renvoie le texte complet,
  * dont seul l'endroit visé a changé. Aucune ne resérialise le document.
  */
 
-export type Edit = { ok: true; text: string } | { ok: false; message: string };
+export type Edit = { ok: true; text: string } | Refusal;
 
 /** Ajoute des éléments à la fin de la liste `key` du nœud `parent`, en la créant au besoin. */
 export function appendToList(text: string, parent: YAMLMap, key: string, items: unknown[]): Edit {
@@ -81,20 +82,21 @@ const YAML_FORMAT = {
  */
 export function toYaml(value: unknown): string {
   const document = new Document(value);
-  flowColumns(document.contents);
+  keepColumnsInline(document.contents);
   return document.toString(YAML_FORMAT);
 }
 
-function flowColumns(node: unknown): void {
+/** Les colonnes d'une version, où qu'elles soient dans le fragment, s'écrivent en ligne. */
+function keepColumnsInline(node: unknown): void {
   if (isMap(node)) {
     for (const pair of node.items) {
       if (isScalar(pair.key) && pair.key.value === "columns" && isSeq(pair.value)) {
         pair.value.flow = true;
       }
-      flowColumns(pair.value);
+      keepColumnsInline(pair.value);
     }
   } else if (isSeq(node)) {
-    node.items.forEach(flowColumns);
+    node.items.forEach(keepColumnsInline);
   }
 }
 

@@ -115,6 +115,9 @@ importers:
 
   packages/notion-import:
     dependencies:
+      '@bsls/authoring':
+        specifier: workspace:*
+        version: link:../authoring
       '@bsls/content':
         specifier: workspace:*
         version: link:../content

@@ -1,7 +1,7 @@
 import { Document, isCollection, parseDocument } from "yaml";
 import {
   imageSchema,
-  localIdSchema,
+  versionIdSchema,
   pieceFieldsSchema,
   projectFileSchema,
   slugSchema,
@@ -43,7 +43,7 @@ const plannedVariationSchema = variationSchema
 const plannedVersionSchema = versionSchema
   .pick({ format: true, columns: true, intention: true })
   .extend({
-    id: localIdSchema.regex(/^v\d+$/, "attendu : un identifiant de version, par exemple v1"),
+    id: versionIdSchema,
     /** Le schéma coerce la date ; le plan la garde lisible et corrigeable à la main. */
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "attendu : une date au format AAAA-MM-JJ"),
     variations: z.array(plannedVariationSchema).default([]),

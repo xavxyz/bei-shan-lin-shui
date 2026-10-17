@@ -41,6 +41,11 @@ export const variationIdSchema = localIdSchema.regex(
 
 const prose = z.string().min(1);
 
+/** `AAAA-MM-JJ`, la forme sous laquelle le calligraphe date ses versions. */
+export function toIsoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
 /* -------------------------------------------------------------------------- */
 /* Schéma des fichiers déposés sur le disque                                   */
 /* -------------------------------------------------------------------------- */

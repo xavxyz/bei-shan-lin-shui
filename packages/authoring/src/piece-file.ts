@@ -11,7 +11,13 @@ import { pieceFrontmatterSchema, type PieceFrontmatter, type z } from "@bsls/sch
  * commentaires compris.
  */
 
-export type Outcome<T> = ({ ok: true } & T) | { ok: false; message: string };
+/**
+ * Un refus : rien n'a été écrit. `path` désigne le champ fautif quand l'appelant
+ * le connaît ; `issues` porte les objections du schéma à la pièce obtenue.
+ */
+export type Refusal = { ok: false; message: string; path?: string; issues?: z.ZodIssue[] };
+
+export type Outcome<T> = ({ ok: true } & T) | Refusal;
 
 export type PieceText = {
   slug: string;
@@ -54,7 +60,7 @@ export function checkPiece(frontmatter: string): Outcome<{ data: PieceFrontmatte
   }
   const result = pieceFrontmatterSchema.safeParse(document.toJS());
   if (result.success) return { ok: true, data: result.data };
-  return { ok: false, message: describeIssues(result.error) };
+  return { ok: false, message: describeIssues(result.error), issues: result.error.issues };
 }
 
 export function describeIssues(error: z.ZodError): string {

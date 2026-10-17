@@ -20,7 +20,9 @@ source de vérité : le contenu vit sur le disque, le site en est une projection
   (`pnpm attach:scan`).
 - `packages/authoring` — les écritures des skills de saisie (`pnpm piece`) :
   ajouts au texte des pièces sans resérialiser ce qu'ils ne visent pas. C'est
-  la seule couture d'édition du frontmatter ; `packages/scans` s'y branche.
+  la seule couture d'édition du frontmatter, et la seule écriture de ses nœuds
+  — version, variation, image ; `packages/scans` et `packages/notion-import`
+  s'y branchent.
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
 
 ## Règles qui tiennent le système

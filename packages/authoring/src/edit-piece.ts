@@ -1,19 +1,26 @@
 import { parseDocument, type YAMLMap } from "yaml";
 import type { PieceFrontmatter } from "@bsls/schema";
-import { checkPiece, readPiece, writePiece, type Outcome } from "./piece-file.js";
+import {
+  checkPiece,
+  readPiece,
+  writePiece,
+  type Outcome,
+  type PieceText,
+  type Refusal,
+} from "./piece-file.js";
 import { rootMap, type Edit } from "./yaml-edit.js";
 
-type Change<T> = { edit: Edit; result: T } | { ok: false; message: string };
+type Change<T> = { edit: Edit; result: T } | Refusal;
 
 /**
- * Lit une pièce valide, applique une édition textuelle, et n'écrit que si la
- * pièce obtenue est encore valide. Sinon, rien n'est écrit.
+ * Lit une pièce valide et lui applique une édition textuelle, sans rien écrire :
+ * rend la pièce obtenue si elle est encore valide, ou la raison du refus.
  */
-export async function editPiece<T extends object>(
+export async function prepareEdit<T extends object>(
   root: string,
   slug: string,
   change: (text: string, data: PieceFrontmatter, piece: YAMLMap) => Change<T> | Promise<Change<T>>,
-): Promise<Outcome<T>> {
+): Promise<Outcome<{ piece: PieceText; result: T }>> {
   const read = await readPiece(root, slug);
   if (!read.ok) return read;
 
@@ -30,6 +37,22 @@ export async function editPiece<T extends object>(
   const after = checkPiece(outcome.edit.text);
   if (!after.ok) return after;
 
-  await writePiece({ ...read.piece, frontmatter: outcome.edit.text });
-  return { ok: true, ...outcome.result };
+  return {
+    ok: true,
+    piece: { ...read.piece, frontmatter: outcome.edit.text },
+    result: outcome.result,
+  };
+}
+
+/** Comme `prepareEdit`, puis écrit la pièce obtenue. Un refus n'écrit rien. */
+export async function editPiece<T extends object>(
+  root: string,
+  slug: string,
+  change: Parameters<typeof prepareEdit<T>>[2],
+): Promise<Outcome<T>> {
+  const prepared = await prepareEdit(root, slug, change);
+  if (!prepared.ok) return prepared;
+
+  await writePiece(prepared.piece);
+  return { ok: true, ...prepared.result };
 }
