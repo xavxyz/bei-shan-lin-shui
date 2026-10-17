@@ -12,7 +12,17 @@ source de vérité : le contenu vit sur le disque, le site en est une projection
 - `packages/content` — le content layer : prend une racine de contenu, retourne
   projets et pièces validés et typés, ou des erreurs localisées.
 - `packages/notion-import` — l'import de l'existant depuis Notion : lit un
-  export, propose un classement, applique le plan arbitré.
+  export, propose un classement, applique le plan arbitré ; ses images passent
+  par la normalisation de `packages/scans`.
+- `packages/scans` — l'entrée des scans : registre des scans arbitrés,
+  normalisation des images (JPEG qualité 92, au plus A4 à 300 dpi), et
+  `attachScan`, qui rattache un scan à une pièce de `content/`
+  (`pnpm attach:scan`).
+- `packages/authoring` — les écritures des skills de saisie (`pnpm piece`) :
+  ajouts au texte des pièces sans resérialiser ce qu'ils ne visent pas. C'est
+  la seule couture d'édition du frontmatter, et la seule écriture de ses nœuds
+  — version, variation, image ; `packages/scans` et `packages/notion-import`
+  s'y branchent.
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
 
 ## Règles qui tiennent le système
@@ -36,6 +46,10 @@ stockés en pinyin sans tons et **affichés en français**.
 
 `pnpm validate:content` valide `content/`, et tourne en pre-commit.
 
+La saisie passe par les skills `nouvelle-piece`, `version-ou-variation`,
+`veille` et `scans`, en conversation avec le calligraphe. Elles écrivent par
+`pnpm piece`, qui n'écrase rien et refuse ce que le schéma refuse.
+
 ## Importer depuis Notion
 
 L'import se fait en deux temps, et le calligraphe arbitre entre les deux :
@@ -47,14 +61,21 @@ pnpm import:notion apply imports/notion-<date>.plan.yaml
 
 `<export>` est le dossier d'export Notion « Markdown & CSV », ou son seul
 fichier CSV. L'étape `plan` n'écrit que le fichier de plan : chaque page devient
-une pièce à version initiale unique, avec un statut et un classement **proposés**,
-et un commentaire `# à arbitrer` partout où l'agent a tranché sans savoir. Les
+une pièce, avec une version initiale, un statut et un classement **proposés**,
+et un commentaire `# à arbitrer` partout où l'agent a tranché sans savoir. Le
+plan porte ses versions sous la forme du frontmatter (`versions: [...]`, chacune
+avec ses `variations:`) : tant qu'il n'est pas appliqué, c'est lui la source de
+vérité, et une nouvelle réalisation y devient une nouvelle version. Les
 relations inter-pages de Notion ne sont pas reconduites : elles servent une
 dernière fois à repérer les projets, puis disparaissent — la page-pôle elle-même
 devient un projet et n'appartient pas au projet qu'elle fait naître. L'étape
 `apply` vérifie le plan en entier — jusqu'à la lisibilité de chaque image — avant
-d'écrire quoi que ce soit, normalise les images à l'écart du contenu, et n'écrase
-jamais une pièce existante.
+d'écrire quoi que ce soit, écrit les versions telles quelles, normalise les images
+à l'écart du contenu, et n'écrase jamais une pièce existante.
+
+Un plan resté à l'ancienne forme, une `version:` unique par pièce, se convertit
+sur place, commentaires compris, et la commande se rejoue sans risque :
+`pnpm import:plan-versions imports/notion-<date>.plan.yaml`.
 
 Déposez l'export dans un dossier à lui : `plan` parcourt tout ce qui entoure le
 CSV pour retrouver les sous-pages et leurs fichiers.

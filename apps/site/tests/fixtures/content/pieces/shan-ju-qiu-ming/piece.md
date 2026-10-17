@@ -29,6 +29,16 @@ versions:
           - file: v1a-01.jpg
             kind: work
             capture: scan
+      - id: v1b
+        script: kaishu
+        status: tried
+        personal_note: |
+          En régulier, pour poser la structure de 雨.
+        images:
+          - file: v1b-01.jpg
+            kind: study
+            capture: scan
+            caption: Étude de 雨.
   - id: v2
     date: 2026-05-12
     format: A4 vertical
@@ -55,6 +65,32 @@ versions:
         status: to-try
         personal_note: |
           À tenter une fois le geste assuré.
+      - id: v2c
+        script: xingcao
+        status: set-aside
+        personal_note: |
+          Le grand courant noie la lumière ; à laisser de côté.
+        images:
+          - file: v2c-01.jpg
+            kind: context
+            capture: photo
+            caption: L'atelier, le soir de la variation.
+          - file: v2c-02.jpg
+            kind: study
+            capture: scan
+            caption: Étude de 松 et de 照.
+          - file: v2c-03.jpg
+            kind: detail
+            capture: scan
+            caption: Détail de la première colonne.
+          - file: v2c-04.jpg
+            kind: work
+            capture: scan
+            caption: La variation, en entier.
+          - file: v2c-05.jpg
+            kind: detail
+            capture: scan
+            caption: Détail de la seconde colonne.
 translation: |
   La lune claire brille entre les pins,
   la source limpide coule sur les pierres.

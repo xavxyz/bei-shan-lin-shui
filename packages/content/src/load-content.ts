@@ -7,7 +7,7 @@ import {
   loadedPieceSchema,
   pieceFrontmatterSchema,
   projectFileSchema,
-  type LoadedImage,
+  toIsoDate,
   type LoadedPiece,
   type LoadedProject,
   type LoadedVariation,
@@ -15,7 +15,8 @@ import {
   type PieceFrontmatter,
   type z,
 } from "@bsls/schema";
-import { deriveChineseText } from "./derive.js";
+import { deriveChineseDate, deriveChineseText } from "./derive.js";
+import { pickFeaturedImage, pickFeaturedVariation } from "./featured.js";
 import {
   IMAGES_DIR,
   PROJECTS_DIR,
@@ -222,6 +223,7 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     .map((version): LoadedVersion => ({
       ...version,
       date: toIsoDate(version.date),
+      chineseDate: deriveChineseDate(toIsoDate(version.date)),
       columns: version.columns.map((column) => deriveChineseText(column, overrides)),
       variations: version.variations.map((variation): LoadedVariation => {
         const images = variation.images.map((image) => ({
@@ -253,49 +255,9 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     versions,
     latestVersion,
     featuredImage: featured?.featuredImage ?? null,
-    gallery: featured ? withFeaturedFirst(featured) : [],
     featuredScriptLabel: featured?.scriptLabel ?? null,
     href: pieceHref(piece.slug, project),
   } satisfies LoadedPiece);
-}
-
-/**
- * Une variation montre en premier l'image explicitement mise en avant ; à
- * défaut la première œuvre entière, à défaut sa première image.
- */
-function pickFeaturedImage(images: LoadedImage[]): LoadedImage | null {
-  return (
-    images.find((image) => image.featured) ??
-    images.find((image) => image.kind === "work") ??
-    images[0] ??
-    null
-  );
-}
-
-/**
- * Une pièce se montre par son travail le plus récent : dernière version
- * d'abord, et dans une version les variations retenues avant les autres.
- */
-function pickFeaturedVariation(versions: LoadedVersion[]): LoadedVariation | null {
-  for (const version of [...versions].reverse()) {
-    const kept = version.variations.filter((variation) => variation.status === "kept");
-    const rest = version.variations.filter((variation) => variation.status !== "kept");
-    for (const variation of [...kept, ...rest]) {
-      if (variation.featuredImage) return variation;
-    }
-  }
-  return null;
-}
-
-/** La galerie s'ouvre sur l'image mise en avant ; les autres suivent dans l'ordre du fichier. */
-function withFeaturedFirst(variation: LoadedVariation): LoadedImage[] {
-  const featured = variation.featuredImage;
-  if (!featured) return variation.images;
-  return [featured, ...variation.images.filter((image) => image.file !== featured.file)];
-}
-
-function toIsoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
 }
 
 function toContentErrors(file: string, error: z.ZodError): ContentError[] {

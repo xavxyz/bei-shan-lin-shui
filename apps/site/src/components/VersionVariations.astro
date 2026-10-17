@@ -1,0 +1,25 @@
+---
+import type { LoadedVersion } from "@bsls/schema";
+import { featuredVariation } from "@bsls/content/featured";
+import { Carousel } from "../islands/Carousel.js";
+
+type Props = {
+  /** N'importe quelle version de la pièce, courante ou antérieure. */
+  version: LoadedVersion;
+  /** Titre de la pièce, pour décrire les images à qui ne les voit pas. */
+  title: string;
+};
+
+const { version, title } = Astro.props;
+/** La variation qui ouvre le carrousel, selon la règle du content layer. */
+const leadingVariation = featuredVariation(version.variations)?.id ?? null;
+---
+
+<section class="variations" id={version.id} aria-label="Variations">
+  <Carousel
+    client:load
+    variations={version.variations}
+    leadingVariation={leadingVariation}
+    title={title}
+  />
+</section>

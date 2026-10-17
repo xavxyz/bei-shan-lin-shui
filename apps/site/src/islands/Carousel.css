@@ -1,0 +1,186 @@
+.carousel {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.carousel__figure {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.carousel__frame {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.carousel__stage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  /* Le glissement horizontal est au carrousel ; le défilement vertical reste à la page. */
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.carousel__image {
+  max-width: min(100%, 46rem);
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 12%);
+  background: var(--paper, #fff);
+}
+
+.carousel__arrow {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--rule, #ddd);
+  border-radius: 999px;
+  background: var(--paper, #fff);
+  color: var(--ink, #222);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.carousel__caption {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 34rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted, #666);
+  line-height: 1.6;
+}
+
+.carousel__position {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+/* Vignettes groupées par variation sur écran large ; points sous 768 px. */
+.carousel__thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel__group > ul {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel__thumbnail {
+  display: block;
+  padding: 0;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.carousel__thumbnail[aria-current="true"] {
+  border-color: var(--accent, #8a2c2c);
+}
+
+.carousel__thumbnail img {
+  width: 4.5rem;
+  height: 6rem;
+  object-fit: cover;
+}
+
+.carousel__dots {
+  display: none;
+  gap: 0.6rem;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel__dot {
+  display: block;
+  width: 0.6rem;
+  height: 0.6rem;
+  padding: 0;
+  border: 1px solid var(--muted, #666);
+  border-radius: 999px;
+  background: none;
+  cursor: pointer;
+}
+
+.carousel__dot[aria-current="true"] {
+  background: var(--accent, #8a2c2c);
+  border-color: var(--accent, #8a2c2c);
+}
+
+@media (max-width: 767.98px) {
+  .carousel__thumbnails {
+    display: none;
+  }
+
+  .carousel__dots {
+    display: flex;
+  }
+}
+
+/* La liste des variations pilote le carrousel ; la variation affichée est marquée. */
+.variations__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule, #ddd);
+}
+
+.variation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--rule, #ddd);
+}
+
+.variation__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.variation__note {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--muted, #666);
+  font-style: italic;
+  white-space: pre-wrap;
+}
+
+.variation__select {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.variation[aria-current="true"] .variation__tags::before {
+  content: "▸";
+  color: var(--accent, #8a2c2c);
+}

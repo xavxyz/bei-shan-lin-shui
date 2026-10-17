@@ -76,6 +76,18 @@ importers:
         specifier: ^6.0.7
         version: 6.4.3(@types/node@22.20.1)(tsx@4.23.12)(yaml@2.9.0)
 
+  packages/authoring:
+    dependencies:
+      '@bsls/content':
+        specifier: workspace:*
+        version: link:../content
+      '@bsls/schema':
+        specifier: workspace:*
+        version: link:../schema
+      yaml:
+        specifier: ^2.6.1
+        version: 2.9.0
+
   packages/content:
     dependencies:
       '@bsls/schema':
@@ -87,6 +99,9 @@ importers:
       pinyin-pro:
         specifier: ^3.26.0
         version: 3.29.3
+      tyme4ts:
+        specifier: ^1.5.3
+        version: 1.5.3
       yaml:
         specifier: ^2.6.1
         version: 2.9.0
@@ -100,9 +115,15 @@ importers:
 
   packages/notion-import:
     dependencies:
+      '@bsls/authoring':
+        specifier: workspace:*
+        version: link:../authoring
       '@bsls/content':
         specifier: workspace:*
         version: link:../content
+      '@bsls/scans':
+        specifier: workspace:*
+        version: link:../scans
       '@bsls/schema':
         specifier: workspace:*
         version: link:../schema
@@ -125,6 +146,27 @@ importers:
       '@types/opencc-js':
         specifier: ^1.0.3
         version: 1.0.3
+
+  packages/scans:
+    dependencies:
+      '@bsls/authoring':
+        specifier: workspace:*
+        version: link:../authoring
+      '@bsls/content':
+        specifier: workspace:*
+        version: link:../content
+      '@bsls/schema':
+        specifier: workspace:*
+        version: link:../schema
+      sharp:
+        specifier: ^0.34.5
+        version: 0.34.5
+      yaml:
+        specifier: ^2.6.1
+        version: 2.9.0
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
 
   packages/schema:
     dependencies:
@@ -2923,6 +2965,9 @@ packages:
     resolution: {integrity: sha512-FDf4L4sYzKtzWYhU/Xm0AQFdTjdIxNo9ElTf2mxXM6k8YMHXzYUe4yODVaXP4V9uMFbVg8c0qyBccK2OOxb45Q==}
     engines: {node: '>=18.0.0'}
     hasBin: true
+
+  tyme4ts@1.5.3:
+    resolution: {integrity: sha512-3Jm9Ylbj0rxUbmH0DJLO8r3phT0J3FsseWuWD7/6UeloqkRKchEmTJG+pD36VLsM5QCfh4nI5NRO3DwYYewOig==}
 
   type-fest@4.41.0:
     resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
@@ -6392,6 +6437,8 @@ snapshots:
       esbuild: 0.28.2
     optionalDependencies:
       fsevents: 2.3.3
+
+  tyme4ts@1.5.3: {}
 
   type-fest@4.41.0: {}
 

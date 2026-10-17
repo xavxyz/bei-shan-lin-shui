@@ -89,21 +89,21 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2025-12-09
-      format: 9x7
-      columns:
-        - 大道升沉何杳冥
-        - 神魔聞之膽自驚
-        - 包羅宇宙無陰險
-        - 含吐乾坤有晦明
-        - 一粒寶珠光焰白
-        - 五方雲霧影縱橫
-        - 達人悟得長生理
-        - 海闊山遙任運行
-        - 西遊記八十八章
-    variations: []
+    versions:
+      - id: v1
+        date: 2025-12-09
+        format: 9x7
+        columns:
+          - 大道升沉何杳冥
+          - 神魔聞之膽自驚
+          - 包羅宇宙無陰險
+          - 含吐乾坤有晦明
+          - 一粒寶珠光焰白
+          - 五方雲霧影縱橫
+          - 達人悟得長生理
+          - 海闊山遙任運行
+          - 西遊記八十八章
+        variations: []
     notion:
       title: 西遊記
       status: Mouvementée
@@ -117,19 +117,19 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2025-12-18
-      format: à préciser
-      columns:
-        - 登山歌訣
-        - 六龍騰岱六虎躍崑
-        - 慧劍斫伐誅龍斬虎
-        - 龍虎不鬭二天一流
-        - 降龍伏虎收拾身心
-        - 龍虎中和玄關一竅
-        - 戈蒙屯
-    variations: []
+    versions:
+      - id: v1
+        date: 2025-12-18
+        format: à préciser
+        columns:
+          - 登山歌訣
+          - 六龍騰岱六虎躍崑
+          - 慧劍斫伐誅龍斬虎
+          - 龍虎不鬭二天一流
+          - 降龍伏虎收拾身心
+          - 龍虎中和玄關一竅
+          - 戈蒙屯
+        variations: []
     notion:
       title: 登山歌訣
       status: En cours
@@ -142,27 +142,24 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2025-12-21
-      format: 1x8 + 38 + 老子/澤宇 + 道德經七十六章 + 2 竹
-      columns:
-        - 有心求柔無意成剛
-        - 人之生也柔弱其死
-        - 也堅強萬物草木之
-        - 生也柔脆其死也枯
-        - 槁故堅強者死之徒
-        - 柔弱者生之徒老子
-    variations: []
+    versions:
+      - id: v1
+        date: 2025-12-21
+        format: 1x8 + 38 + 老子/澤宇 + 道德經七十六章 + 2 竹
+        columns:
+          - 有心求柔無意成剛
+          - 人之生也柔弱其死
+          - 也堅強萬物草木之
+          - 生也柔脆其死也枯
+          - 槁故堅強者死之徒
+          - 柔弱者生之徒老子
+        variations: []
     notion:
       title: 有心求柔，无意成刚
       status: Mouvementée
       url: ""
       relations: []
   # 緩 en traditionnel sur les deux scans (Notion : 缓)
-  # v2 à faire : 2026-10-11_01_01.jpeg, kaishu, kept, image mise en avant de la pièce ;
-  # date du papier : 戈 立春 (丙午) → 2026-02-11 ; format 2x7 + 蘇東坡 (苏 écrit en simplifié)
-  # date du papier : 3.1.26 (Notion disait 2025-12-22)
   # traduction écrite à la main sur le scan 2026-10-11_01_01.jpeg
   - slug: mo-xing-ji
     title: 莫性急
@@ -170,21 +167,39 @@ pieces:
     projects: []
     published: false
     translation: La patience et la constance dans la progression. La vivacité et la précision dans l'action.
-    version:
-      id: v1
-      date: 2026-01-03
-      format: 2x7
-      columns:
-        - 莫性急平流緩進
-        - 墨行機兔起鶻落
-    variations:
-      - id: v1a
-        script: kaishu
-        status: tried
-        images:
-          - source: imports/scans/2026-10-11_01_02.jpeg
-            file: v1a.jpg
-            kind: work
+    versions:
+      # date du papier : 3.1.26 (Notion disait 2025-12-22)
+      - id: v1
+        date: 2026-01-03
+        format: 2x7
+        columns:
+          - 莫性急平流緩進
+          - 墨行機兔起鶻落
+        variations:
+          - id: v1a
+            script: kaishu
+            status: tried
+            images:
+              - source: imports/scans/2026-10-11_01_02.jpeg
+                file: v1a.jpg
+                kind: work
+      # scan 2026-10-11_01_01.jpeg, image mise en avant de la pièce
+      # date du papier : 戈 立春 (丙午) → 2026-02-11 ; format 2x7 + 蘇東坡 (苏 écrit en simplifié)
+      - id: v2
+        date: 2026-02-11
+        format: 2x7 + 蘇東坡
+        columns:
+          - 莫性急平流緩進
+          - 墨行機兔起鶻落
+        variations:
+          - id: v2a
+            script: kaishu
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_01_01.jpeg
+                file: v2a.jpg
+                kind: work
+                featured: true
     notion:
       title: 莫性急
       status: Mouvementée
@@ -195,21 +210,21 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2025-12-23
-      format: 3x4 + 1x4 + 1x5 + 1x4 + 1x4 + 1x4 + 1x4
-      columns:
-        - 至人無己
-        - 神人無功
-        - 聖人無名
-        - 無心無為
-        - 佛面上刮金
-        - 行鬼頭事
-        - 焦芽敗種
-        - 坐井觀天
-        - 磨磚成鏡
-    variations: []
+    versions:
+      - id: v1
+        date: 2025-12-23
+        format: 3x4 + 1x4 + 1x5 + 1x4 + 1x4 + 1x4 + 1x4
+        columns:
+          - 至人無己
+          - 神人無功
+          - 聖人無名
+          - 無心無為
+          - 佛面上刮金
+          - 行鬼頭事
+          - 焦芽敗種
+          - 坐井觀天
+          - 磨磚成鏡
+        variations: []
     notion:
       title: 無心, 無為
       status: Mouvementée
@@ -223,12 +238,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2025-12-23
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2025-12-23
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 《太上老君说常清静经》
       status: Brute
@@ -242,12 +257,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2025-12-30
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2025-12-30
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 方圆
       status: Brute
@@ -263,16 +278,16 @@ pieces:
     projects:
       - xiu-zhu-can-cha
     published: false
-    version:
-      id: v1
-      date: 2025-12-30
-      format: 4x5 + titre + bambous
-      columns:
-        - 種竹不須土
-        - 心空自成林
-        - 夜深看獨立
-        - 數盡別燈陰
-    variations: []
+    versions:
+      - id: v1
+        date: 2025-12-30
+        format: 4x5 + titre + bambous
+        columns:
+          - 種竹不須土
+          - 心空自成林
+          - 夜深看獨立
+          - 數盡別燈陰
+        variations: []
     notion:
       title: 吴宽《种竹诗卷》
       status: Cadre imprimé
@@ -285,12 +300,12 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2025-12-31
-      format: 🤯
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2025-12-31
+        format: 🤯
+        columns: []
+        variations: []
     notion:
       title: 中和集
       status: Mouvementée
@@ -318,22 +333,22 @@ pieces:
     projects:
       - shu-hu-hun-dun
     published: false
-    version:
-      id: v1
-      date: 2026-02-15 # jour absent du papier
-      format: 4x2
-      columns:
-        - 奇幻儵忽
-        - 易貌分形
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_03_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-02-15 # jour absent du papier
+        format: 4x2
+        columns:
+          - 奇幻儵忽
+          - 易貌分形
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_03_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
     notion:
       title: 奇幻儵忽，易貌分形
       status: Mouvementée
@@ -347,24 +362,24 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-01-04
-      format: 3*(3x4)
-      columns:
-        - 內三合
-        - 心與意合
-        - 意與氣合
-        - 氣與勁合
-        - 外三合
-        - 手與腳合
-        - 肘與膝合
-        - 肩與胯合
-        - 六合法
-        - 一合無不合
-        - 一動無不動
-        - 與空氣結合
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-04
+        format: 3*(3x4)
+        columns:
+          - 內三合
+          - 心與意合
+          - 意與氣合
+          - 氣與勁合
+          - 外三合
+          - 手與腳合
+          - 肘與膝合
+          - 肩與胯合
+          - 六合法
+          - 一合無不合
+          - 一動無不動
+          - 與空氣結合
+        variations: []
     notion:
       title: 六合法
       status: À refaire
@@ -376,15 +391,15 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-01-04
-      format: à préciser
-      columns:
-        - 教學相長
-        - 教不嚴師之惰
-        - 學不精生之過
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-04
+        format: à préciser
+        columns:
+          - 教學相長
+          - 教不嚴師之惰
+          - 學不精生之過
+        variations: []
     notion:
       title: 教/學
       status: Mouvementée
@@ -399,37 +414,37 @@ pieces:
     projects:
       - shu-hu-hun-dun
     published: false
-    version:
-      id: v1
-      date: 2026-01-05
-      format: à préciser
-      columns:
-        - 慎術
-        - 去巧
-        - 守渾
-        - 混沌遇儵忽
-        - 誤被鑿一竅
-        - 明朝《元陽洞》
-        - 學者須先立定心體
-        - 心未定而求明必流於妄
-        - 心定之後明自生焉
-        - 王陽明傳習錄捲上
-        - 傳不習乎
-        - 孔子《論語》
-        - 不慌不忙無心無為
-        - 戈澤宇早上練習        1  26
-        - 南海之帝為倏北海
-        - 之帝為忽中央之帝
-        - 為混沌倏😐與忽時
-        - 相與遇於混沌之地
-        - 混沌待之甚善倏與忽
-        - 謀報混沌之德曰人
-        - 皆有七竅以視聽食
-        - 息此獨無有嘗試鑿
-        - 之日鑿一竅七日而
-        - 混沌死莊子應帝王
-        - 戈澤宇小寒二十六
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-05
+        format: à préciser
+        columns:
+          - 慎術
+          - 去巧
+          - 守渾
+          - 混沌遇儵忽
+          - 誤被鑿一竅
+          - 明朝《元陽洞》
+          - 學者須先立定心體
+          - 心未定而求明必流於妄
+          - 心定之後明自生焉
+          - 王陽明傳習錄捲上
+          - 傳不習乎
+          - 孔子《論語》
+          - 不慌不忙無心無為
+          - 戈澤宇早上練習        1  26
+          - 南海之帝為倏北海
+          - 之帝為忽中央之帝
+          - 為混沌倏😐與忽時
+          - 相與遇於混沌之地
+          - 混沌待之甚善倏與忽
+          - 謀報混沌之德曰人
+          - 皆有七竅以視聽食
+          - 息此獨無有嘗試鑿
+          - 之日鑿一竅七日而
+          - 混沌死莊子應帝王
+          - 戈澤宇小寒二十六
+        variations: []
     notion:
       title: 儵忽混沌
       status: Mouvementée
@@ -444,32 +459,32 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-05-13
-      format: 4x4
-      columns:
-        - 龜蛇相交
-        - 水火既濟
-        - 眞一乃定 # 眞 confirmé par le calligraphe (真 sur 25_02)
-        - 中和乃成 # 中和 assemblés en une composition libre
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_25_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
-      # 水火 écrits 氵 et 灬 ; sans signature propre, celle de 25_01 décalquée par contact
-      - id: v1b
-        script: ziyou
-        status: tried
-        images:
-          - source: imports/scans/2026-10-11_25_02.jpeg
-            file: v1b.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-05-13
+        format: 4x4
+        columns:
+          - 龜蛇相交
+          - 水火既濟
+          - 眞一乃定 # 眞 confirmé par le calligraphe (真 sur 25_02)
+          - 中和乃成 # 中和 assemblés en une composition libre
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_25_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
+          # 水火 écrits 氵 et 灬 ; sans signature propre, celle de 25_01 décalquée par contact
+          - id: v1b
+            script: ziyou
+            status: tried
+            images:
+              - source: imports/scans/2026-10-11_25_02.jpeg
+                file: v1b.jpg
+                kind: work
     notion:
       title: 龜蛇相交，水火既濟，真一乃定，中和乃成
       status: Mouvementée
@@ -482,13 +497,13 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-01-10
-      format: 2* 2x4
-      columns:
-        - 按指示做，聚精會神。注意放心，容忍鬆胯。
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-10
+        format: 2* 2x4
+        columns:
+          - 按指示做，聚精會神。注意放心，容忍鬆胯。
+        variations: []
     notion:
       title: 按指示做 // 注意放心
       status: Mouvementée
@@ -501,12 +516,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-01-11
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-11
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 靜中求動
       status: Brute
@@ -520,12 +535,12 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-01-14
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-14
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 《卦象論》
       status: Brute
@@ -541,23 +556,23 @@ pieces:
     projects:
       - tai-xu-huan-jing-hong-lou-meng
     published: false
-    version:
-      id: v1
-      date: 2026-02-25
-      format: 3x7
-      columns:
-        - 真作假時假亦真
-        - 無為有處有還無
-        - 太虛幻境紅樓夢
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_05_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-02-25
+        format: 3x7
+        columns:
+          - 真作假時假亦真
+          - 無為有處有還無
+          - 太虛幻境紅樓夢
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_05_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
     notion:
       title: 太虚幻境红楼梦
       status: Mouvementée
@@ -574,15 +589,15 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-01-15
-      format: 1x5 + 1x3 + 1x2
-      columns:
-        - 外明而內暗
-        - 形意拳
-        - 換勁
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-15
+        format: 1x5 + 1x3 + 1x2
+        columns:
+          - 外明而內暗
+          - 形意拳
+          - 換勁
+        variations: []
     notion:
       title: 换劲明暗
       status: Mouvementée
@@ -597,16 +612,16 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-01-15
-      format: 4x8
-      columns:
-        - 石人斤戈澤宇硃砂
-        - 斫伐歌勁看出心中
-        - 碧眼番齋看破紅塵
-        - 戈興奮蒙澤屯宇王
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-15
+        format: 4x8
+        columns:
+          - 石人斤戈澤宇硃砂
+          - 斫伐歌勁看出心中
+          - 碧眼番齋看破紅塵
+          - 戈興奮蒙澤屯宇王
+        variations: []
     notion:
       title: 看破红尘
       status: Mouvementée
@@ -622,12 +637,12 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-01-17
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-17
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 《原道歌》
       status: Brute
@@ -642,12 +657,12 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-01-17
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-17
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 《鍊虛歌》
       status: Brute
@@ -663,26 +678,26 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-25
-      format: 4x10 + 1x7 + 1x3
-      columns:
-        - 清晨入古寺初日照高林
-        - 曲徑通幽處禪房花木深
-        - 山光悅鳥性潭影空人心
-        - 萬籟此俱寂惟餘鐘磬音
-        - 題破山寺後禪院
-        - 唐常建
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_06_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-02-25
+        format: 4x10 + 1x7 + 1x3
+        columns:
+          - 清晨入古寺初日照高林
+          - 曲徑通幽處禪房花木深
+          - 山光悅鳥性潭影空人心
+          - 萬籟此俱寂惟餘鐘磬音
+          - 題破山寺後禪院
+          - 唐常建
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_06_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
     notion:
       title: 题破山寺后禅院
       status: Mouvementée
@@ -697,12 +712,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-01-20
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-20
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 宝玉四首诗（原文 — 五言律诗）
       status: Brute
@@ -723,23 +738,23 @@ pieces:
       - xiu-zhu-can-cha
     published: false
     translation: Esprit vide, ventre plein, les fondamentaux de la voie
-    version:
-      id: v1
-      date: 2026-02-25
-      format: 3x7
-      columns:
-        - 虛心實腹道之基
-        - 虛心直節青青竹
-        - 箇是鍊虛第一機
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_07_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-02-25
+        format: 3x7
+        columns:
+          - 虛心實腹道之基
+          - 虛心直節青青竹
+          - 箇是鍊虛第一機
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_07_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
     notion:
       title: 虚心實腹
       status: Mouvementée
@@ -753,33 +768,33 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-25
-      format: 2*（4x4）
-      columns:
-        - 嚴寒刺骨
-        - 鑠石流金
-        - 冬小麥在 # 麦 écrit en simplifié ; 在 écrit sans son trait vertical, par erreur
-        - 春季返青
-        - 燒丹田諷
-        - 煮海腹明
-        - 回光反照 # 囬 pour 回 sur le papier
-        - 石人斤歌
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # feuille ① (cœur rouge) : les quatre premières colonnes, signée 戈
-          - source: imports/scans/2026-10-11_11_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # feuille ② : les quatre dernières colonnes, signée 戈, datée 25 2 26
-          - source: imports/scans/2026-10-11_11_02.jpeg
-            file: v1a-02.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-02-25
+        format: 2*（4x4）
+        columns:
+          - 嚴寒刺骨
+          - 鑠石流金
+          - 冬小麥在 # 麦 écrit en simplifié ; 在 écrit sans son trait vertical, par erreur
+          - 春季返青
+          - 燒丹田諷
+          - 煮海腹明
+          - 回光反照 # 囬 pour 回 sur le papier
+          - 石人斤歌
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # feuille ① (cœur rouge) : les quatre premières colonnes, signée 戈
+              - source: imports/scans/2026-10-11_11_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # feuille ② : les quatre dernières colonnes, signée 戈, datée 25 2 26
+              - source: imports/scans/2026-10-11_11_02.jpeg
+                file: v1a-02.jpg
+                kind: work
     notion:
       title: 石人斤歌
       status: Mouvementée
@@ -792,14 +807,14 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-01-22
-      format: 1x4 + 1x2
-      columns:
-        - 回光反照
-        - 破惑
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-22
+        format: 1x4 + 1x2
+        columns:
+          - 回光反照
+          - 破惑
+        variations: []
     notion:
       title: （回光反照） 《破惑歌》
       status: Mouvementée
@@ -814,12 +829,12 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-01-24
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-24
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 《玄理歌》
       status: Brute
@@ -832,21 +847,21 @@ pieces:
     status: in-progress
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-01-24
-      format: 1x7 + 4*(2x7)
-      columns:
-        - 光龕武館啟蒙燈
-        - 虛靈頂勁就陵雲
-        - 鬆沈到家縱真陰
-        - 百會湧泉筒子裡
-        - 肉骨分離筋聯系
-        - 流逆水坎穴起勁
-        - 無洩真陽開六合
-        - 心音唱腔修中和
-        - 默默靜聽神根行
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-24
+        format: 1x7 + 4*(2x7)
+        columns:
+          - 光龕武館啟蒙燈
+          - 虛靈頂勁就陵雲
+          - 鬆沈到家縱真陰
+          - 百會湧泉筒子裡
+          - 肉骨分離筋聯系
+          - 流逆水坎穴起勁
+          - 無洩真陽開六合
+          - 心音唱腔修中和
+          - 默默靜聽神根行
+        variations: []
     notion:
       title: مشكاة • MESHKAH
       status: En cours
@@ -865,12 +880,12 @@ pieces:
       dynasty: 元
       work: 中和集
       full_text: 趙束齋者，古杭人也。幼為內侍，職任中官。因乾旋坤轉而勘破浮生，故棄利捐名，而參求道要。雖紅塵而混跡，實玄境以棲心，真脫略世事者也。意欲混合凝神，故留心於龍虎。一日攜是圖示予，求其贅語。予辭不可，於是乎著筆而塞責焉。告之曰：古人因道而設象，子今因象而立言。束齊者，貴在明加眼力，觀教端的，莫教錯認定盤星。苟能因言會意，觀圖得旨，便知道真龍真虎，不在紙上，而在自己也。至於言象兩忘，道德備矣。咦，真龍真虎不難尋，只要抽陽去補陰。四德運乾誠不息，潛飛見躍盡由心。雖然也是平地起，波濤青天轟霹靂。勉旃勉旃。歌曰： 真龍真虎元無象，誰為起模傳此樣。若於無象裹承當，又落斷常終莽蕩。 青青白白太分明，也是無風自起浪。時人要識真龍虎，不屬有無並子午。休將二物混淪吞，但把五行顛倒數。根芽本是太玄宮，造化卻在朱陵府。雖然運用有主張，畢竟虛靈無處所。一條大道要心通，些子神機非目覩。忽然進開頂顧門，勘破木金同一母。高高絕頂天罡摧，耿耿銀河斗柄戽。興雲起霧仗丁公，掣電驅雷役玄武。瞬息之間天地交，剎那之頃坎離補。虎從水底起清風，龍在火中降甘雨。雷行雨施天下平，運乾龍德功周普。人言六龍以卸天，孰知一龍是真主。人言五虎透玄關，孰知一虎生真土。會得龍虎常合和，便知龜蛇互吞吐。聖人設象指蹄筌，象外明言便造言。言外更須窮祖意，元來太極本無○。得意忘象未為特，和意都忘為極則。稽首束齋趙隱居，徹底掀翻參學畢。
-    version:
-      id: v1
-      date: 2026-01-26
-      format: 1x7 + 4*(2x7)
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-26
+        format: 1x7 + 4*(2x7)
+        columns: []
+        variations: []
     notion:
       title: 《龍虎歌》勉旃勉旃
       status: Cadre imprimé
@@ -885,12 +900,12 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-01-28
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-01-28
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 《慧劍》
       status: Brute
@@ -908,12 +923,12 @@ pieces:
       author: 李道純
       dynasty: 元
       work: 中和集
-    version:
-      id: v1
-      date: 2026-02-03
-      format: 4*(2x7) + titre 2x4
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-03
+        format: 4*(2x7) + titre 2x4
+        columns: []
+        variations: []
     notion:
       title: 《日用》
       status: Cadre imprimé
@@ -931,12 +946,12 @@ pieces:
       author: 李道純
       dynasty: 元
       work: 中和集
-    version:
-      id: v1
-      date: 2026-02-03
-      format: 4*(2x7) + titre 2x4
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-03
+        format: 4*(2x7) + titre 2x4
+        columns: []
+        variations: []
     notion:
       title: 《交合》
       status: Cadre imprimé
@@ -951,12 +966,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-04
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-04
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 鑄劍 // 轻吹
       status: Brute
@@ -969,13 +984,13 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-02-05
-      format: à préciser
-      columns:
-        - 做活 北斗面南看
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-05
+        format: à préciser
+        columns:
+          - 做活 北斗面南看
+        variations: []
     notion:
       title: 北斗面南看
       status: Brute
@@ -990,13 +1005,13 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-02-06
-      format: à préciser
-      columns:
-        - incroyable
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-06
+        format: à préciser
+        columns:
+          - incroyable
+        variations: []
     notion:
       title: 九三/二八（河圖）
       status: Brute
@@ -1013,15 +1028,15 @@ pieces:
     status: in-progress
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-08
-      format: à préciser
-      columns:
-        - 一枝軒億橤塗位
-        - L’arche d’une haute branche tapisse de pollen l’endroit
-        - Une branche courbe offre un abri, le sage aussi calme qu’une pierre se fond dans le printemps
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-08
+        format: à préciser
+        columns:
+          - 一枝軒億橤塗位
+          - L’arche d’une haute branche tapisse de pollen l’endroit
+          - Une branche courbe offre un abri, le sage aussi calme qu’une pierre se fond dans le printemps
+        variations: []
     notion:
       title: 一枝軒亿橤塗位
       status: Cadre imprimé
@@ -1035,12 +1050,12 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-02-11
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-11
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 自得身心定
       status: Brute
@@ -1054,16 +1069,16 @@ pieces:
     status: in-progress
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-11
-      format: 1x3 + 2*(4x5) + 1x3
-      columns:
-        - 自題相
-        - 面黃肌瘦子，看來有甚奇。分明喬眼孔，剛道絕聞知。
-        - 勘破三千法，參同十七師。低頭叉手處，洩盡那些兒。
-        - 中和集
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-11
+        format: 1x3 + 2*(4x5) + 1x3
+        columns:
+          - 自題相
+          - 面黃肌瘦子，看來有甚奇。分明喬眼孔，剛道絕聞知。
+          - 勘破三千法，參同十七師。低頭叉手處，洩盡那些兒。
+          - 中和集
+        variations: []
     notion:
       title: 自题相
       status: Cadre imprimé
@@ -1078,12 +1093,12 @@ pieces:
     projects:
       - zhong-he-ji
     published: false
-    version:
-      id: v1
-      date: 2026-02-11
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-11
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 竖横 《卓菴》 NPL
       status: Brute
@@ -1099,12 +1114,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-11
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-11
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 造化钟神秀, 阴阳割昏晓。杜甫《登泰山》
       status: Brute
@@ -1117,31 +1132,31 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-25
-      format: 2*（2x4）
-      columns:
-        - 地中海齋 # 海 : 氵 écrit en 水 développé ; 齋 écrit en style libre
-        - 背山臨水 # 背 écrit 北 sur 肉 ; 水 écrit d'un trait, en cursive
-        - 書法工夫
-        - 點畫功夫 # 點 : 占 réduit à une petite case ; 巨 pour 工 dans 功 ; 夫 écrit en cursive
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # feuille ① : 地中海齋 / 背山臨水, signée 戈, datée 丙午雨水 ; photo, l'ombre est voulue
-          - source: imports/scans/2026-10-15_01_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            capture: photo
-            featured: true
-          # feuille ② : 書法工夫 / 點畫功夫, signée 戈, datée 丙午雨水
-          - source: imports/scans/2026-10-15_01_02.jpeg
-            file: v1a-02.jpg
-            kind: work
-            capture: photo
+    versions:
+      - id: v1
+        date: 2026-02-25
+        format: 2*（2x4）
+        columns:
+          - 地中海齋 # 海 : 氵 écrit en 水 développé ; 齋 écrit en style libre
+          - 背山臨水 # 背 écrit 北 sur 肉 ; 水 écrit d'un trait, en cursive
+          - 書法工夫
+          - 點畫功夫 # 點 : 占 réduit à une petite case ; 巨 pour 工 dans 功 ; 夫 écrit en cursive
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # feuille ① : 地中海齋 / 背山臨水, signée 戈, datée 丙午雨水 ; photo, l'ombre est voulue
+              - source: imports/scans/2026-10-15_01_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                capture: photo
+                featured: true
+              # feuille ② : 書法工夫 / 點畫功夫, signée 戈, datée 丙午雨水
+              - source: imports/scans/2026-10-15_01_02.jpeg
+                file: v1a-02.jpg
+                kind: work
+                capture: photo
     notion:
       title: 工夫生功夫
       status: Mouvementée
@@ -1153,21 +1168,21 @@ pieces:
     status: in-progress
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-15
-      format: 3x5 + 1x6 + 1x2 + 1x2 + 1x2 + 2x4
-      columns:
-        - 小和尚千里
-        - 來到這裡請
-        - 求大師點化
-        - 神握點畫
-        - 深淺吾筆
-        - 點雲
-        - 海書
-        - 畫風
-        - 三才二天一流
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-15
+        format: 3x5 + 1x6 + 1x2 + 1x2 + 1x2 + 2x4
+        columns:
+          - 小和尚千里
+          - 來到這裡請
+          - 求大師點化
+          - 神握點畫
+          - 深淺吾筆
+          - 點雲
+          - 海書
+          - 畫風
+          - 三才二天一流
+        variations: []
     notion:
       title: 点化 // 点画
       status: Cadre imprimé
@@ -1180,12 +1195,12 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-15
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-15
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 寂靜中攝心
       status: Mouvementée
@@ -1198,12 +1213,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-16
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-16
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 威而不犯和而不同
       status: Brute
@@ -1217,22 +1232,22 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-17
-      format: 2x4
-      columns:
-        - 蒙霽去巧
-        - 風月無邊
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_04_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-02-17
+        format: 2x4
+        columns:
+          - 蒙霽去巧
+          - 風月無邊
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_04_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
     notion:
       title: 蒙霁去巧，风月无边，没有隐语。
       status: Mouvementée
@@ -1245,12 +1260,12 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-02-17
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-17
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 新年快樂，馬到成功
       status: Mouvementée
@@ -1263,50 +1278,51 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-05-13 # date du papier : 立夏 26 sur 26_01, empilée avec la série (Notion disait 2026-02-24)
-      format: 3x2
-      columns: # une feuille par colonne, chaque colonne écrite en régulier puis en cursive
-        - 胎𫝑 # 26_02 et 26_03
-        - 泉注 # 26_04 et 26_05
-        - 山安 # 26_06 et 26_07
-    variations:
-      - id: v1a
-        script: ziyou # la pièce alterne régulier et cursif
-        status: kept
-        images:
-          # grille imprimée 3x6, une colonne de deux caractères ; 胎 au 月 tracé comme 肉
-          - source: imports/scans/2026-10-11_26_02.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # 胎𫝑 en cursive, 力 en grande boucle
-          - source: imports/scans/2026-10-11_26_03.jpeg
-            file: v1a-02.jpg
-            kind: work
-          # 泉注 en régulier
-          - source: imports/scans/2026-10-11_26_04.jpeg
-            file: v1a-03.jpg
-            kind: work
-          # 泉注 en cursive, 注 réduit à 氵 lié et à un zigzag
-          - source: imports/scans/2026-10-11_26_05.jpeg
-            file: v1a-04.jpg
-            kind: work
-          # 山安 en régulier
-          - source: imports/scans/2026-10-11_26_06.jpeg
-            file: v1a-05.jpg
-            kind: work
-          # 山安 en cursive, 山 en boucle, 安 lié
-          - source: imports/scans/2026-10-11_26_07.jpeg
-            file: v1a-06.jpg
-            kind: work
-          # la pièce assemblée en 3x2, photographiée sur une étagère ; elle ne se scanne pas
-          # (2026-10-17_01_01.heic du Drive, converti en JPEG : sharp ne lit pas le HEIC)
-          - source: imports/scans/2026-10-17_01_01.jpeg
-            file: v1a-07.jpg
-            kind: context
-            capture: photo
+    versions:
+      - id: v1
+        date: 2026-05-13 # date du papier : 立夏 26 sur 26_01, empilée avec la série (Notion disait 2026-02-24)
+        format: 3x2
+        columns:
+          # une feuille par colonne, chaque colonne écrite en régulier puis en cursive
+          - 胎𫝑 # 26_02 et 26_03
+          - 泉注 # 26_04 et 26_05
+          - 山安 # 26_06 et 26_07
+        variations:
+          - id: v1a
+            script: ziyou # la pièce alterne régulier et cursif
+            status: kept
+            images:
+              # grille imprimée 3x6, une colonne de deux caractères ; 胎 au 月 tracé comme 肉
+              - source: imports/scans/2026-10-11_26_02.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # 胎𫝑 en cursive, 力 en grande boucle
+              - source: imports/scans/2026-10-11_26_03.jpeg
+                file: v1a-02.jpg
+                kind: work
+              # 泉注 en régulier
+              - source: imports/scans/2026-10-11_26_04.jpeg
+                file: v1a-03.jpg
+                kind: work
+              # 泉注 en cursive, 注 réduit à 氵 lié et à un zigzag
+              - source: imports/scans/2026-10-11_26_05.jpeg
+                file: v1a-04.jpg
+                kind: work
+              # 山安 en régulier
+              - source: imports/scans/2026-10-11_26_06.jpeg
+                file: v1a-05.jpg
+                kind: work
+              # 山安 en cursive, 山 en boucle, 安 lié
+              - source: imports/scans/2026-10-11_26_07.jpeg
+                file: v1a-06.jpg
+                kind: work
+              # la pièce assemblée en 3x2, photographiée sur une étagère ; elle ne se scanne pas
+              # (2026-10-17_01_01.heic du Drive, converti en JPEG : sharp ne lit pas le HEIC)
+              - source: imports/scans/2026-10-17_01_01.jpeg
+                file: v1a-07.jpg
+                kind: context
+                capture: photo
     notion:
       title: 胎𫝑 / 泉注 / 山安
       status: Mouvementée
@@ -1321,30 +1337,30 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-15 # jour absent du papier
-      format: 1x7
-      columns:
-        - 意守一點金剛氣 # 气 pour 氣 ; 剛 écrit en style libre
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_08_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # feuille ② : le 4x4 de Notion
-          - source: imports/scans/2026-10-11_08_02.jpeg
-            file: v1a-02.jpg
-            kind: study
-          # feuille ③ : la ligne 1x7, 意 fautif annoté ; « 小一筆者紫不立，戈說德道不做到 » ;
-          # en marge : « L'erreur elle-même est source d'apprentissage »
-          - source: imports/scans/2026-10-11_08_03.jpeg
-            file: v1a-03.jpg
-            kind: study
+    versions:
+      - id: v1
+        date: 2026-03-15 # jour absent du papier
+        format: 1x7
+        columns:
+          - 意守一點金剛氣 # 气 pour 氣 ; 剛 écrit en style libre
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_08_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # feuille ② : le 4x4 de Notion
+              - source: imports/scans/2026-10-11_08_02.jpeg
+                file: v1a-02.jpg
+                kind: study
+              # feuille ③ : la ligne 1x7, 意 fautif annoté ; « 小一筆者紫不立，戈說德道不做到 » ;
+              # en marge : « L'erreur elle-même est source d'apprentissage »
+              - source: imports/scans/2026-10-11_08_03.jpeg
+                file: v1a-03.jpg
+                kind: study
     notion:
       title: 意守一點金剛氣
       status: Cadre imprimé
@@ -1360,12 +1376,12 @@ pieces:
     projects:
       - xiu-zhu-can-cha
     published: false
-    version:
-      id: v1
-      date: 2026-02-27
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-02-27
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 修竹参差
       status: Brute
@@ -1380,22 +1396,22 @@ pieces:
     projects:
       - qi-gong
     published: false
-    version:
-      id: v1
-      date: 2026-05-13
-      format: 3x7 + titre
-      columns:
-        - 形不正則氣不順
-        - 氣不順則意不寧 # 气 pour le 1er 氣 sur le papier
-        - 意不寧則氣散亂 # 氣 en grande cursive
-    variations:
-      - id: v1a
-        script: ziyou
-        status: tried
-        images:
-          - source: imports/scans/2026-10-11_24.jpeg
-            file: v1a.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-05-13
+        format: 3x7 + titre
+        columns:
+          - 形不正則氣不順
+          - 氣不順則意不寧 # 气 pour le 1er 氣 sur le papier
+          - 意不寧則氣散亂 # 氣 en grande cursive
+        variations:
+          - id: v1a
+            script: ziyou
+            status: tried
+            images:
+              - source: imports/scans/2026-10-11_24.jpeg
+                file: v1a.jpg
+                kind: work
     notion:
       title: 調身
       status: À refaire
@@ -1409,12 +1425,12 @@ pieces:
     projects:
       - qi-gong
     published: false
-    version:
-      id: v1
-      date: 2026-03-03
-      format: 2x4
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-03
+        format: 2x4
+        columns: []
+        variations: []
     notion:
       title: 五氣朝元 / 身心平衡
       status: Cadre imprimé
@@ -1426,15 +1442,15 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: diao-xi
     title: 調息
-    status: study
+    status: experiment
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-04
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-04
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 调息
       status: Préparée
@@ -1446,15 +1462,15 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-04
-      format: à préciser
-      columns:
-        - 靜
-        - 心淨 意誠 兼靜
-        - 丙午雨水末戈澤宇遇道靜讓
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-04
+        format: à préciser
+        columns:
+          - 靜
+          - 心淨 意誠 兼靜
+          - 丙午雨水末戈澤宇遇道靜讓
+        variations: []
     notion:
       title: 靜 ⋯⋯ 心淨 意誠 兼靜
       status: Mouvementée
@@ -1464,15 +1480,15 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: diao-xin
     title: 調心
-    status: study
+    status: experiment
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-05
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-05
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 調心
       status: Préparée
@@ -1485,33 +1501,33 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-10
-      format: 1x4 + 2x6 au dos de cadres 3x5
-      columns:
-        - 過猶不及 # 猶 corrigé en rouge sur le papier (丷 de 酋 ajouté)
-        - 方向堅定不移
-        - 方法因地制宜
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          # feuille ② : 1x4 過猶不及, ouvre le texte
-          - source: imports/scans/2026-10-11_10_04.jpeg
-            file: v1a-01.jpg
-            kind: work
-          # feuille ① : 2x6, signée 戈 10.3.26 ; 制 encadré au stylo, 衣 ajouté au stylo
-          # dessous par 山山, le 師父
-          - source: imports/scans/2026-10-11_10_06.jpeg
-            file: v1a-02.jpg
-            kind: work
-            featured: true
-          # feuille ③ : 過猶不及 repris en simplifié (过犹)
-          - source: imports/scans/2026-10-11_10_02.jpeg
-            file: v1a-03.jpg
-            kind: study
+    versions:
+      - id: v1
+        date: 2026-03-10
+        format: 1x4 + 2x6 au dos de cadres 3x5
+        columns:
+          - 過猶不及 # 猶 corrigé en rouge sur le papier (丷 de 酋 ajouté)
+          - 方向堅定不移
+          - 方法因地制宜
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              # feuille ② : 1x4 過猶不及, ouvre le texte
+              - source: imports/scans/2026-10-11_10_04.jpeg
+                file: v1a-01.jpg
+                kind: work
+              # feuille ① : 2x6, signée 戈 10.3.26 ; 制 encadré au stylo, 衣 ajouté au stylo
+              # dessous par 山山, le 師父
+              - source: imports/scans/2026-10-11_10_06.jpeg
+                file: v1a-02.jpg
+                kind: work
+                featured: true
+              # feuille ③ : 過猶不及 repris en simplifié (过犹)
+              - source: imports/scans/2026-10-11_10_02.jpeg
+                file: v1a-03.jpg
+                kind: study
     notion:
       title: 過猶不及，方向堅定不移，方法因地制宜
       status: Mouvementée
@@ -1527,12 +1543,12 @@ pieces:
     projects:
       - tai-xu-huan-jing-hong-lou-meng
     published: false
-    version:
-      id: v1
-      date: 2026-03-10
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-10
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 螃蟹讽刺 🦀
       status: Brute
@@ -1545,14 +1561,14 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-12
-      format: 2x7 central
-      columns:
-        - 大道不過三兩句
-        - 說破不值半文錢
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-12
+        format: 2x7 central
+        columns:
+          - 大道不過三兩句
+          - 說破不值半文錢
+        variations: []
     notion:
       title: 說破
       status: Mouvementée
@@ -1568,23 +1584,23 @@ pieces:
     projects:
       - tai-xu-huan-jing-hong-lou-meng
     published: false
-    version:
-      id: v1
-      date: 2026-03-12
-      format: 2x3 # Notion n'avait pas de format
-      columns:
-        - 羅掠和 # 罒 écrit 四
-        - 軟煙羅 # 罗 écrit en simplifié, en grand
-    variations:
-      - id: v1a
-        script: kaishu
-        status: tried
-        images:
-          # feuille libre, pinyin au stylo sous chaque caractère ; 流逆 (de meshkah) en marge ; signée 戈
-          - source: imports/scans/2026-10-11_09_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-03-12
+        format: 2x3 # Notion n'avait pas de format
+        columns:
+          - 羅掠和 # 罒 écrit 四
+          - 軟煙羅 # 罗 écrit en simplifié, en grand
+        variations:
+          - id: v1a
+            script: kaishu
+            status: tried
+            images:
+              # feuille libre, pinyin au stylo sous chaque caractère ; 流逆 (de meshkah) en marge ; signée 戈
+              - source: imports/scans/2026-10-11_09_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
     notion:
       title: （罗）羅 掠和 // 软烟罗
       status: À refaire
@@ -1600,13 +1616,13 @@ pieces:
     projects:
       - tian-ren-di
     published: false
-    version:
-      id: v1
-      date: 2026-03-15 # date absente du papier
-      format: à préciser # une étude ne fixe pas le format de l'œuvre
-      columns:
-        - 天人地
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-15 # date absente du papier
+        format: à préciser # une étude ne fixe pas le format de l'œuvre
+        columns:
+          - 天人地
+        variations: []
     notion:
       title: 天人地
       status: Mouvementée
@@ -1616,15 +1632,15 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: mo-li-li
     title: 磨礪〔﹣礪〕
-    status: study
+    status: experiment
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-23
-      format: 1x2 2x5
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-23
+        format: 1x2 2x5
+        columns: []
+        variations: []
     notion:
       title: 磨砺〔﹣礪〕
       status: Préparée
@@ -1639,12 +1655,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-23
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-23
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 易筋经
       status: Brute
@@ -1655,15 +1671,15 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: shen-yu
     title: 神遇
-    status: study
+    status: experiment
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-28
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-28
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 神遇
       status: Préparée
@@ -1672,15 +1688,15 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: xing-qi-yu-pei-ming
     title: 📜 行氣玉佩銘
-    status: study
+    status: experiment
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-29
-      format: Grand (recouvrir 修真后内外火候图）
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-29
+        format: Grand (recouvrir 修真后内外火候图）
+        columns: []
+        variations: []
     notion:
       title: 📜 行氣玉佩銘
       status: Préparée
@@ -1689,15 +1705,15 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: bai-zi-bei
     title: 📜 百字碑
-    status: study
+    status: experiment
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-03-29
-      format: 45x90 cm （couvrir 心性图）
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-03-29
+        format: 45x90 cm （couvrir 心性图）
+        columns: []
+        variations: []
     notion:
       title: 📜 百字碑
       status: Préparée
@@ -1707,67 +1723,67 @@ pieces:
   # colonnes lues sur les scans 2026-10-11_33_01 et _09
   - slug: mo-si-wen-ke
     title: 墨寺㞢文刻
-    status: study # 戈說 : à présenter à Luciano
+    status: experiment # 戈說 : à présenter à Luciano
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-08-30
-      format: 1x5 + 1x4 + 1x3 # Notion n'avait pas de format
-      columns:
-        - 墨寺㞢文刻 # 戈說 : 墨, le 土 glissé entre 里 et 灬, une sombre erreur innocente, 蒙
-        - 血珠玄鋒
-        - 路此岸 # nom chinois trouvé pour Luciano ; absente de Notion ; 岸 écrit 山 sur 厈, étiré
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          # le texte entier sur grille imprimée, signé 戈 澤宇, daté 30.8.26
-          - source: imports/scans/2026-10-11_33_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # 玄鋒
-          - source: imports/scans/2026-10-11_33_02.jpeg
-            file: v1a-02.jpg
-            kind: study
-          # 血珠
-          - source: imports/scans/2026-10-11_33_03.jpeg
-            file: v1a-03.jpg
-            kind: study
-          # 文刻
-          - source: imports/scans/2026-10-11_33_04.jpeg
-            file: v1a-04.jpg
-            kind: study
-          # 墨寺
-          - source: imports/scans/2026-10-11_33_05.jpeg
-            file: v1a-05.jpg
-            kind: study
-          # 石文
-          - source: imports/scans/2026-10-11_33_06.jpeg
-            file: v1a-06.jpg
-            kind: study
-          # 石文, grille plus petite
-          - source: imports/scans/2026-10-11_33_07.jpeg
-            file: v1a-07.jpg
-            kind: study
-          # 此岸
-          - source: imports/scans/2026-10-11_33_08.jpeg
-            file: v1a-08.jpg
-            kind: study
-          # la colonne 1 deux fois, puis 墨寺 en grand ; 墨 encore classique : antérieure à la série 33
-          - source: imports/scans/2026-10-11_09_03.jpeg
-            file: v1a-09.jpg
-            kind: study
-      - id: v1b
-        script: kuangcao
-        status: tried
-        images:
-          # le texte entier sur grille imprimée, signé 戈澤(宇), sans date ; 戈說 : j'ai perdu les pédales
-          - source: imports/scans/2026-10-11_33_09.jpeg
-            file: v1b.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-08-30
+        format: 1x5 + 1x4 + 1x3 # Notion n'avait pas de format
+        columns:
+          - 墨寺㞢文刻 # 戈說 : 墨, le 土 glissé entre 里 et 灬, une sombre erreur innocente, 蒙
+          - 血珠玄鋒
+          - 路此岸 # nom chinois trouvé pour Luciano ; absente de Notion ; 岸 écrit 山 sur 厈, étiré
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              # le texte entier sur grille imprimée, signé 戈 澤宇, daté 30.8.26
+              - source: imports/scans/2026-10-11_33_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # 玄鋒
+              - source: imports/scans/2026-10-11_33_02.jpeg
+                file: v1a-02.jpg
+                kind: study
+              # 血珠
+              - source: imports/scans/2026-10-11_33_03.jpeg
+                file: v1a-03.jpg
+                kind: study
+              # 文刻
+              - source: imports/scans/2026-10-11_33_04.jpeg
+                file: v1a-04.jpg
+                kind: study
+              # 墨寺
+              - source: imports/scans/2026-10-11_33_05.jpeg
+                file: v1a-05.jpg
+                kind: study
+              # 石文
+              - source: imports/scans/2026-10-11_33_06.jpeg
+                file: v1a-06.jpg
+                kind: study
+              # 石文, grille plus petite
+              - source: imports/scans/2026-10-11_33_07.jpeg
+                file: v1a-07.jpg
+                kind: study
+              # 此岸
+              - source: imports/scans/2026-10-11_33_08.jpeg
+                file: v1a-08.jpg
+                kind: study
+              # la colonne 1 deux fois, puis 墨寺 en grand ; 墨 encore classique : antérieure à la série 33
+              - source: imports/scans/2026-10-11_09_03.jpeg
+                file: v1a-09.jpg
+                kind: study
+          - id: v1b
+            script: kuangcao
+            status: tried
+            images:
+              # le texte entier sur grille imprimée, signé 戈澤(宇), sans date ; 戈說 : j'ai perdu les pédales
+              - source: imports/scans/2026-10-11_33_09.jpeg
+                file: v1b.jpg
+                kind: work
     notion:
       title: 墨寺㞢文刻
       status: Préparée
@@ -1776,15 +1792,15 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: tai-xi
     title: 胎息
-    status: study
+    status: experiment
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-04-05
-      format: 2x5
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-04-05
+        format: 2x5
+        columns: []
+        variations: []
     notion:
       title: 胎息
       status: Préparée
@@ -1797,13 +1813,13 @@ pieces:
     status: in-progress
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-04-08
-      format: à préciser
-      columns:
-        - 行住坐臥
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-04-08
+        format: à préciser
+        columns:
+          - 行住坐臥
+        variations: []
     notion:
       title: 四威仪 行住坐臥
       status: Cadre imprimé
@@ -1818,12 +1834,12 @@ pieces:
     projects:
       - tai-xu-huan-jing-hong-lou-meng
     published: false
-    version:
-      id: v1
-      date: 2026-04-19
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-04-19
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 占花名儿
       status: Brute
@@ -1834,16 +1850,16 @@ pieces:
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: hu-si-luan-xiang
     title: 胡思亂想
-    status: study
+    status: experiment
     projects:
       - tai-xu-huan-jing-hong-lou-meng
     published: false
-    version:
-      id: v1
-      date: 2026-07-08
-      format: 4 + 2x7
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-07-08
+        format: 4 + 2x7
+        columns: []
+        variations: []
     notion:
       title: 胡思乱想
       status: Préparée
@@ -1861,30 +1877,30 @@ pieces:
     projects:
       - tian-ren-di
     published: false
-    version:
-      id: v1
-      date: 2026-08-15 # jour absent du papier
-      format: 1x2 + 1x2 + 1x4
-      columns:
-        - 放心
-        - 鬆胯
-        - 放心鬆胯 # en cursive ; 松 pour 鬆 sur le papier
-    variations:
-      # le 1x4 (feuille 03) en cursive (caoshu)
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_32_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-          - source: imports/scans/2026-10-11_32_02.jpeg
-            file: v1a-02.jpg
-            kind: work
-          - source: imports/scans/2026-10-11_32_03.jpeg
-            file: v1a-03.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-08-15 # jour absent du papier
+        format: 1x2 + 1x2 + 1x4
+        columns:
+          - 放心
+          - 鬆胯
+          - 放心鬆胯 # en cursive ; 松 pour 鬆 sur le papier
+        variations:
+          # le 1x4 (feuille 03) en cursive (caoshu)
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_32_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+              - source: imports/scans/2026-10-11_32_02.jpeg
+                file: v1a-02.jpg
+                kind: work
+              - source: imports/scans/2026-10-11_32_03.jpeg
+                file: v1a-03.jpg
+                kind: work
+                featured: true
     notion:
       title: 放心鬆胯…不受苦中苦，難為人上人
       status: Mouvementée
@@ -1897,12 +1913,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-07-12
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-07-12
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 太虛幻境即是真如福地
       status: Brute
@@ -1916,12 +1932,12 @@ pieces:
     status: idea
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-07-12
-      format: à préciser
-      columns: []
-    variations: []
+    versions:
+      - id: v1
+        date: 2026-07-12
+        format: à préciser
+        columns: []
+        variations: []
     notion:
       title: 假作真时真亦假
       status: Brute
@@ -1935,24 +1951,24 @@ pieces:
     projects:
       - tian-ren-di
     published: false
-    version:
-      id: v1
-      date: 2026-02-04
-      format: 4x4
-      columns:
-        - 堅持注意 # 堅 écrit 坚 (simplifié), corrigé en 堅 dans le cartouche en tête
-        - 忍受鬆胯 # 胯 écrit en style libre
-        - 水火既濟
-        - 龍虎穴合 # 合 écrit en style libre
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_02_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-02-04
+        format: 4x4
+        columns:
+          - 堅持注意 # 堅 écrit 坚 (simplifié), corrigé en 堅 dans le cartouche en tête
+          - 忍受鬆胯 # 胯 écrit en style libre
+          - 水火既濟
+          - 龍虎穴合 # 合 écrit en style libre
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_02_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
   # absente de Notion : identifiée sur le scan 2026-10-11_32_04.jpeg (registre imports/scans.yaml),
   # scindée de fang-xin-song-kua, dont la page Notion réunissait les deux pièces
   # date du papier : 丙午處暑 戈化, sans 日 ; 戈化 voulu
@@ -1962,22 +1978,22 @@ pieces:
     projects:
       - tian-ren-di
     published: false
-    version:
-      id: v1
-      date: 2026-08-30
-      format: 2x5
-      columns:
-        - 不受苦中苦
-        - 難為人上人
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          - source: imports/scans/2026-10-11_32_04.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-08-30
+        format: 2x5
+        columns:
+          - 不受苦中苦
+          - 難為人上人
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_32_04.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
   # absente de Notion : identifiée sur le scan 2026-10-11_29.jpeg (registre imports/scans.yaml)
   # exploration de 松 (pour 鬆) et 胯, du régulier au style libre ; scannée à l'envers, retournée sur le Drive
   - slug: song-kua
@@ -1986,28 +2002,28 @@ pieces:
     projects:
       - tian-ren-di
     published: false
-    version:
-      id: v1
-      date: 2026-10-11 # aucune date sur le papier ni en mémoire : date du dépôt
-      format: 1x3 + 1x3 + 1x2
-      columns:
-        - 鬆胯胯 # 松 pour 鬆 ; le second 胯 en style libre
-        - 鬆胯鬆 # 松 pour 鬆, le premier presque régulier
-        - 鬆胯 # 松 pour 鬆 ; 松 et 胯 en style libre
-    variations:
-      - id: v1a
-        script: caoshu
-        status: kept
-        images:
-          # ni signature, ni date, ni note
-          - source: imports/scans/2026-10-11_29.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # 鬆胯 en régulier, encre grise ; 松 pour 鬆 sur le papier ; ni signature ni date
-          - source: imports/scans/2026-10-11_31_04.jpeg
-            file: v1a-02.jpg
-            kind: study
+    versions:
+      - id: v1
+        date: 2026-10-11 # aucune date sur le papier ni en mémoire : date du dépôt
+        format: 1x3 + 1x3 + 1x2
+        columns:
+          - 鬆胯胯 # 松 pour 鬆 ; le second 胯 en style libre
+          - 鬆胯鬆 # 松 pour 鬆, le premier presque régulier
+          - 鬆胯 # 松 pour 鬆 ; 松 et 胯 en style libre
+        variations:
+          - id: v1a
+            script: caoshu
+            status: kept
+            images:
+              # ni signature, ni date, ni note
+              - source: imports/scans/2026-10-11_29.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # 鬆胯 en régulier, encre grise ; 松 pour 鬆 sur le papier ; ni signature ni date
+              - source: imports/scans/2026-10-11_31_04.jpeg
+                file: v1a-02.jpg
+                kind: study
   # absente de Notion : identifiée sur le scan 2026-10-11_15_01.jpeg (registre imports/scans.yaml)
   # pièce-pôle du projet long-teng-hu-yue : 龍騰 écrit à 春分, 虎躍 à 清明
   - slug: long-teng-hu-yue
@@ -2016,27 +2032,27 @@ pieces:
     projects:
       - long-teng-hu-yue
     published: false
-    version:
-      id: v1
-      # date du papier : deux dates au crayon. 舂分 pour 龍騰 : 春 écrit 舂, premier
-      # trait coupé et 日 ouvert en 臼, « décortiqué » ; 分 en ziyou, 刀 écrit 刂
-      # (春分 → 2026-03-28). 玄明 26 pour 虎躍 : jeu sur 玄冥 / 玄明 / 清明
-      # (清明 → 2026-04-12). Date stockée : à mi-chemin des deux
-      date: 2026-04-04
-      format: 1x4
-      columns:
-        - 龍騰虎躍 # 龍 et 騰 en style libre
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # colonne de commentaire en kaishu : 戈試越來越書 ; une flèche au crayon la
-          # relie à 玄明 : écrite le même jour que 虎躍 ; 〇 rouge en bas à droite, le 0 de 2026
-          - source: imports/scans/2026-10-11_15_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        # date du papier : deux dates au crayon. 舂分 pour 龍騰 : 春 écrit 舂, premier
+        # trait coupé et 日 ouvert en 臼, « décortiqué » ; 分 en ziyou, 刀 écrit 刂
+        # (春分 → 2026-03-28). 玄明 26 pour 虎躍 : jeu sur 玄冥 / 玄明 / 清明
+        # (清明 → 2026-04-12). Date stockée : à mi-chemin des deux
+        date: 2026-04-04
+        format: 1x4
+        columns:
+          - 龍騰虎躍 # 龍 et 騰 en style libre
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # colonne de commentaire en kaishu : 戈試越來越書 ; une flèche au crayon la
+              # relie à 玄明 : écrite le même jour que 虎躍 ; 〇 rouge en bas à droite, le 0 de 2026
+              - source: imports/scans/2026-10-11_15_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
   # absente de Notion : identifiée sur les scans 2026-10-11_17_01 à 17_03 (registre imports/scans.yaml)
   # feuilles 一 二 三 : explorations du tigre, pendant de 龍騰 dans le projet long-teng-hu-yue ;
   # sur chaque feuille, une note tirée du 履 (易經, 卦十) : 橫竪履, 格守履, 履乕尾
@@ -2049,37 +2065,37 @@ pieces:
     projects:
       - long-teng-hu-yue
     published: false
-    version:
-      id: v1
-      date: 2026-04-17 # date du papier : 17.4.26 sur les trois feuilles, 丙午清明 sur 17_03
-      format: 2x2 + 1x1 + 2x2 + 1x4 + 1x3 + 1x2
-      columns:
-        - 虎虎 # 17_01
-        - 虎虎
-        - 虎 # en cursive
-        - 虎書 # 17_02 ; 乕 pour 虎 : variante calligraphique du tigre recommandée par 山山
-        - 虎书 # 乕 pour 虎 ; 书 en simplifié, en regard de 書
-        - 躍躍躍躍 # 17_03 ; 履乕尾 en commentaire au milieu
-        - 躍躍躍
-        - 躍躍
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # feuille 一 : 虎 du régulier vers la cursive ; note 橫竪履 ; signé 戈, 17.4.26
-          - source: imports/scans/2026-10-11_17_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # feuille 二 : 乕書 / 乕书 ; note 格守履 ; signé 戈, 17.4.26
-          - source: imports/scans/2026-10-11_17_02.jpeg
-            file: v1a-02.jpg
-            kind: work
-          # feuille 三 : 躍 du régulier vers la cursive ; 履乕尾 ; signé 戈, 丙午清明, 17.4.26
-          - source: imports/scans/2026-10-11_17_03.jpeg
-            file: v1a-03.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-04-17 # date du papier : 17.4.26 sur les trois feuilles, 丙午清明 sur 17_03
+        format: 2x2 + 1x1 + 2x2 + 1x4 + 1x3 + 1x2
+        columns:
+          - 虎虎 # 17_01
+          - 虎虎
+          - 虎 # en cursive
+          - 虎書 # 17_02 ; 乕 pour 虎 : variante calligraphique du tigre recommandée par 山山
+          - 虎书 # 乕 pour 虎 ; 书 en simplifié, en regard de 書
+          - 躍躍躍躍 # 17_03 ; 履乕尾 en commentaire au milieu
+          - 躍躍躍
+          - 躍躍
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # feuille 一 : 虎 du régulier vers la cursive ; note 橫竪履 ; signé 戈, 17.4.26
+              - source: imports/scans/2026-10-11_17_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # feuille 二 : 乕書 / 乕书 ; note 格守履 ; signé 戈, 17.4.26
+              - source: imports/scans/2026-10-11_17_02.jpeg
+                file: v1a-02.jpg
+                kind: work
+              # feuille 三 : 躍 du régulier vers la cursive ; 履乕尾 ; signé 戈, 丙午清明, 17.4.26
+              - source: imports/scans/2026-10-11_17_03.jpeg
+                file: v1a-03.jpg
+                kind: work
   # absente de Notion : identifiée sur les scans 2026-10-11_20_01 et 20_02 (registre imports/scans.yaml)
   # 煉 à la clé du feu sur le papier ; distincte de lian-xu-ge (《鍊虛歌》, colonnes vides)
   # feuille ② : 修, 養, 虛, chacun par les cinq pas de 鄧岱崑, du régulier à la cursive folle
@@ -2088,29 +2104,29 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-04-18 # date du papier : 18 4 26
-      format: 1x2 + 3x5
-      columns:
-        - 煉丹 # feuille ①, en régulier
-        - 修修修修修 # feuille ②, les cinq pas
-        - 養養養養養
-        - 虛虛虛虛虛
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # feuille ① : sur petite grille imprimée 3x5 ; signé 戈, daté 18 4 26
-          - source: imports/scans/2026-10-11_20_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # feuille ② : grille imprimée 3x5 ; ni signature ni date
-          - source: imports/scans/2026-10-11_20_02.jpeg
-            file: v1a-02.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-04-18 # date du papier : 18 4 26
+        format: 1x2 + 3x5
+        columns:
+          - 煉丹 # feuille ①, en régulier
+          - 修修修修修 # feuille ②, les cinq pas
+          - 養養養養養
+          - 虛虛虛虛虛
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # feuille ① : sur petite grille imprimée 3x5 ; signé 戈, daté 18 4 26
+              - source: imports/scans/2026-10-11_20_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # feuille ② : grille imprimée 3x5 ; ni signature ni date
+              - source: imports/scans/2026-10-11_20_02.jpeg
+                file: v1a-02.jpg
+                kind: work
   # absente de Notion : identifiée sur les scans 2026-10-11_21_01 et 21_02 (registre imports/scans.yaml)
   # deux feuilles ① ②, 聚 en charnière ; 聚精會神 figure aussi dans an-zhi-shi-zuo-zhu-yi-fang-xin
   - slug: ning-ju-ju-jing-hui-shen
@@ -2118,27 +2134,27 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-04-19 # date du papier : 19 4 26
-      format: 1x2 + 1x4
-      columns:
-        - 凝聚 # feuille ①, en régulier ; 凝 au 冫 en deux points, 聚 écrit 取 sur 乑
-        - 聚精會神 # feuille ② ; 聚 écrit 取 sur 乑 ; 會 et 神 en style libre
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # feuille ① : grille imprimée 3x6 ; signé 戈, daté 19 4 26
-          - source: imports/scans/2026-10-11_21_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # feuille ② : du régulier (聚精) au style libre (會神) ; ni signature ni date
-          - source: imports/scans/2026-10-11_21_02.jpeg
-            file: v1a-02.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-04-19 # date du papier : 19 4 26
+        format: 1x2 + 1x4
+        columns:
+          - 凝聚 # feuille ①, en régulier ; 凝 au 冫 en deux points, 聚 écrit 取 sur 乑
+          - 聚精會神 # feuille ② ; 聚 écrit 取 sur 乑 ; 會 et 神 en style libre
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # feuille ① : grille imprimée 3x6 ; signé 戈, daté 19 4 26
+              - source: imports/scans/2026-10-11_21_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # feuille ② : du régulier (聚精) au style libre (會神) ; ni signature ni date
+              - source: imports/scans/2026-10-11_21_02.jpeg
+                file: v1a-02.jpg
+                kind: work
   # absente de Notion : identifiée sur le scan 2026-10-11_30_02.jpeg (registre imports/scans.yaml)
   # source à reporter après apply : 紅樓夢 第八十二回, 曹雪芹 (le plan ne porte pas `source`)
   # traduction écrite à la main sur le scan 2026-10-11_30_03.jpeg (« qu'à se se donner » sur le papier)
@@ -2149,26 +2165,26 @@ pieces:
       - tai-xu-huan-jing-hong-lou-meng
     published: false
     translation: Qui souhaite devenir vraiment un homme ne songe pas à se donner de l'aise ; qui ne songe qu'à se donner de l'aise ne deviendra jamais vraiment un homme.
-    version:
-      id: v1
-      # date du papier : 戈 夏至 26 sur 30_02 ; 21 6 26 au stylo sur 30_01, et « le
-      # premier jour de l'été » sur 30_03
-      date: 2026-06-21
-      format: 2x5
-      columns:
-        - 成人不自在
-        - 自在不成人
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        personal_note: Recherché et calligraphié en écoutant les « jeunes Demoiselles » de la famille Féat-Lopez et leur Vénérable Mère Féat discuter de l'avenir du Vénérable Monsieur leur Père Lopez. Exécution innocente et bien réalisée en plein orage le premier jour de l'été (ou en son cœur, selon la culture).
-        images:
-          # sans grille ; attribution 第八十二回 紅樓夢 (樓 au 婁 abrégé) ; signé 戈 夏至 26
-          - source: imports/scans/2026-10-11_30_02.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        # date du papier : 戈 夏至 26 sur 30_02 ; 21 6 26 au stylo sur 30_01, et « le
+        # premier jour de l'été » sur 30_03
+        date: 2026-06-21
+        format: 2x5
+        columns:
+          - 成人不自在
+          - 自在不成人
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            personal_note: Recherché et calligraphié en écoutant les « jeunes Demoiselles » de la famille Féat-Lopez et leur Vénérable Mère Féat discuter de l'avenir du Vénérable Monsieur leur Père Lopez. Exécution innocente et bien réalisée en plein orage le premier jour de l'été (ou en son cœur, selon la culture).
+            images:
+              # sans grille ; attribution 第八十二回 紅樓夢 (樓 au 婁 abrégé) ; signé 戈 夏至 26
+              - source: imports/scans/2026-10-11_30_02.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
   # absente de Notion : identifiée sur les scans 2026-10-11_31_01 et 31_03 (registre imports/scans.yaml)
   # premier des dix principes de 楊澄甫 ; deux jets du même texte, en régulier
   - slug: xu-ling-ding-jin
@@ -2177,30 +2193,30 @@ pieces:
     projects:
       - yang-cheng-fu-zhi-tai-ji-quan-shi-yao
     published: false
-    version:
-      id: v1
-      date: 2026-06-21 # aucune date sur le papier : date donnée par le calligraphe
-      format: 1x4
-      columns:
-        - 虛靈頂勁 # 虚 pour 虛 sur le papier
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          # premier jet, trait plus léger ; A4 sans grille, ni signature ni date
-          - source: imports/scans/2026-10-11_31_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
-      - id: v1b
-        script: kaishu
-        status: tried
-        images:
-          # second jet, plus serré, 頂 et 勁 plus appuyés ; fond de gouttes décalquées, comme 31_04
-          - source: imports/scans/2026-10-11_31_03.jpeg
-            file: v1b.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-06-21 # aucune date sur le papier : date donnée par le calligraphe
+        format: 1x4
+        columns:
+          - 虛靈頂勁 # 虚 pour 虛 sur le papier
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              # premier jet, trait plus léger ; A4 sans grille, ni signature ni date
+              - source: imports/scans/2026-10-11_31_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
+          - id: v1b
+            script: kaishu
+            status: tried
+            images:
+              # second jet, plus serré, 頂 et 勁 plus appuyés ; fond de gouttes décalquées, comme 31_04
+              - source: imports/scans/2026-10-11_31_03.jpeg
+                file: v1b.jpg
+                kind: work
   # absente de Notion : identifiée sur le scan 2026-10-11_12_01.jpeg (registre imports/scans.yaml)
   # pièce-pôle du projet xian-xian-ji : hommage à 山山, 閒仙 est le surnom que le calligraphe lui donne
   # distincte de shu-heng-zhuo-an-npl : N·PL marque aussi 04_01
@@ -2210,24 +2226,24 @@ pieces:
     projects:
       - xian-xian-ji
     published: false
-    version:
-      id: v1
-      date: 2026-03-29 # date du papier : 29 3 26, N·PL
-      format: 1x3
-      columns:
-        - 閒仙機 # 閒 : 門 garni d'un 水 sigillaire ; 仚 (人 sur 山) pour 仙 sur le papier, variante voulue
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # grille imprimée 3x9, un caractère par 3x3 cases ; points rouges au départ de
-          # trois traits ; sous la grille, un petit cercle et la signature emblème de 戈
-          # (croix en X entre quatre chevrons) ; daté 29 3 26, N·PL
-          - source: imports/scans/2026-10-11_12_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-03-29 # date du papier : 29 3 26, N·PL
+        format: 1x3
+        columns:
+          - 閒仙機 # 閒 : 門 garni d'un 水 sigillaire ; 仚 (人 sur 山) pour 仙 sur le papier, variante voulue
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # grille imprimée 3x9, un caractère par 3x3 cases ; points rouges au départ de
+              # trois traits ; sous la grille, un petit cercle et la signature emblème de 戈
+              # (croix en X entre quatre chevrons) ; daté 29 3 26, N·PL
+              - source: imports/scans/2026-10-11_12_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
   # absente de Notion : identifiée sur les scans 2026-10-11_13_01 à 13_03 (registre imports/scans.yaml)
   # en-tête de 13_01 : 山山臨, d'après 山山 ; le 1er 山 en cursive, le 2e renversé ; signé 戈澤宇
   # les dix tiges célestes, chacune suivie d'un mot puis de 流
@@ -2237,40 +2253,40 @@ pieces:
     projects:
       - xian-xian-ji
     published: false
-    version:
-      id: v1
-      date: 2026-03-29 # date du papier : 丙午春分, et 29 3 26 en rouge sur 13_01
-      format: 1x3 + 5x3 + 5x3
-      columns:
-        - 天干流 # 13_01 : 天干 en régulier sur un grand 流 cursif à l'encre diluée ; 天 écrit 工 sur 八, variante apprise de 山山
-        - 甲源流 # 13_02
-        - 乙流流
-        - 丙滲流
-        - 丁止流
-        - 固戊流 # 固 à la place du tronc, 戊 à celle du mot : inversion voulue
-        - 己分流 # 13_03
-        - 庚求流
-        - 辛積流
-        - 壬優流 # 优 en simplifié sur le papier
-        - 癸溢流 # 流 en cursive
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # paysage sur petite grille 3x5 imprimée ; 山山臨, 戈澤宇, 丙午春分, 29 3 26 en rouge
-          - source: imports/scans/2026-10-11_13_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # paysage, grille 5x3 imprimée : 甲 à 戊 ; visage au rouge ; ni signature ni date
-          - source: imports/scans/2026-10-11_13_02.jpeg
-            file: v1a-02.jpg
-            kind: work
-          # paysage, grille 5x3 imprimée : 己 à 癸 ; ni signature ni date
-          - source: imports/scans/2026-10-11_13_03.jpeg
-            file: v1a-03.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-03-29 # date du papier : 丙午春分, et 29 3 26 en rouge sur 13_01
+        format: 1x3 + 5x3 + 5x3
+        columns:
+          - 天干流 # 13_01 : 天干 en régulier sur un grand 流 cursif à l'encre diluée ; 天 écrit 工 sur 八, variante apprise de 山山
+          - 甲源流 # 13_02
+          - 乙流流
+          - 丙滲流
+          - 丁止流
+          - 固戊流 # 固 à la place du tronc, 戊 à celle du mot : inversion voulue
+          - 己分流 # 13_03
+          - 庚求流
+          - 辛積流
+          - 壬優流 # 优 en simplifié sur le papier
+          - 癸溢流 # 流 en cursive
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # paysage sur petite grille 3x5 imprimée ; 山山臨, 戈澤宇, 丙午春分, 29 3 26 en rouge
+              - source: imports/scans/2026-10-11_13_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # paysage, grille 5x3 imprimée : 甲 à 戊 ; visage au rouge ; ni signature ni date
+              - source: imports/scans/2026-10-11_13_02.jpeg
+                file: v1a-02.jpg
+                kind: work
+              # paysage, grille 5x3 imprimée : 己 à 癸 ; ni signature ni date
+              - source: imports/scans/2026-10-11_13_03.jpeg
+                file: v1a-03.jpg
+                kind: work
   # absente de Notion : identifiée sur les scans 2026-10-11_14_01 à 14_03 (registre imports/scans.yaml)
   # pendant de 天干流 (tian-gan-liu), écrit la veille ; en-tête de 14_01 : 山山臨, d'après 山山
   # (1er 山 en cursive, 2e en régulier renversé) ; heures au crayon en marge de ② et ③ :
@@ -2281,34 +2297,34 @@ pieces:
     projects:
       - xian-xian-ji
     published: false
-    version:
-      id: v1
-      date: 2026-03-28 # date du papier : 28.3.26 春分 丙午
-      format: 1x2 + 2x6 + 2x6
-      columns:
-        - 地支 # feuille ①
-        - 巳辰卯寅丑子 # feuille ②, lue de bas en haut
-        - 虵龍兔虎牛鼠 # 虵 pour 蛇, variante confirmée par le calligraphe
-        - 亥戌酉申未午 # feuille ③, lue de haut en bas
-        - 豬狗鷄猴羊馬 # 鷄 pour 雞, variante confirmée par le calligraphe
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          # feuille ① : 山山臨 地支 sur grille imprimée légère ; signé xav. 戈澤宇, daté 28.3.26 春分 丙午
-          - source: imports/scans/2026-10-11_14_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # feuille ② : grille imprimée 2x6, 子→巳 et leurs animaux ; heures 23→11 en marge, repère 7:35
-          - source: imports/scans/2026-10-11_14_02.jpeg
-            file: v1a-02.jpg
-            kind: work
-          # feuille ③ : grille imprimée 2x6, 午→亥 et leurs animaux ; heures 11→23 en marge, repère 19:08
-          - source: imports/scans/2026-10-11_14_03.jpeg
-            file: v1a-03.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-03-28 # date du papier : 28.3.26 春分 丙午
+        format: 1x2 + 2x6 + 2x6
+        columns:
+          - 地支 # feuille ①
+          - 巳辰卯寅丑子 # feuille ②, lue de bas en haut
+          - 虵龍兔虎牛鼠 # 虵 pour 蛇, variante confirmée par le calligraphe
+          - 亥戌酉申未午 # feuille ③, lue de haut en bas
+          - 豬狗鷄猴羊馬 # 鷄 pour 雞, variante confirmée par le calligraphe
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              # feuille ① : 山山臨 地支 sur grille imprimée légère ; signé xav. 戈澤宇, daté 28.3.26 春分 丙午
+              - source: imports/scans/2026-10-11_14_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # feuille ② : grille imprimée 2x6, 子→巳 et leurs animaux ; heures 23→11 en marge, repère 7:35
+              - source: imports/scans/2026-10-11_14_02.jpeg
+                file: v1a-02.jpg
+                kind: work
+              # feuille ③ : grille imprimée 2x6, 午→亥 et leurs animaux ; heures 11→23 en marge, repère 19:08
+              - source: imports/scans/2026-10-11_14_03.jpeg
+                file: v1a-03.jpg
+                kind: work
   # absente de Notion : identifiée sur les scans 2026-10-11_16_01 à 16_06 (registre imports/scans.yaml)
   # feuilles 一 à 六 : explorations du dragon, pendant de 虎躍 dans le projet long-teng-hu-yue ;
   # sur 一 二 五 六, une ligne du 乾 (易經, 卦一) : 初九, 九二, 九五, 上九 ; le 九四
@@ -2321,60 +2337,60 @@ pieces:
     projects:
       - long-teng-hu-yue
     published: false
-    version:
-      id: v1
-      # date du papier : une par feuille, 28 3 26, 29 3 26, 丙午春分, 5 4 26, 6 4 26,
-      # 7 4 26 ; date stockée : la première feuille (春分 → 2026-03-28 aussi)
-      date: 2026-03-28
-      format: 1x4 + 1x2 + 1x4 + 1x2 + 1x1 + 1x1 + 1x3 + 1x2 + 1x4 + 1x1 + 1x3 + 1x2
-      columns:
-        - 龍龍龍龍 # 16_01 ; du régulier vers la cursive
-        - 龍龍
-        - 龍龍龍龍 # 16_02 ; gauche de 龍 tirée du sceau, droite écrite 龙 : style libre
-        - 龍龍
-        - 龍 # en grand
-        - 龍 # 16_03 ; sceau rouge en sigillaire, dans un cadre
-        - 騰騰騰 # 16_04
-        - 騰騰 # le dernier en grande cursive
-        - 騰騰騰騰 # 16_05
-        - 騰 # très cursif, 月 en une boucle
-        - 騰騰騰 # 16_06 ; 肉 pour 月, 火 pour 灬 : 騰 écrit en style libre
-        - 騰騰
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # feuille 一 : inscription 初九潛龍無用 (易經 : 潛龍勿用) ; signé 戈, 28 3 26
-          - source: imports/scans/2026-10-11_16_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # feuille 二 : inscription 二九利見大人 (le 九二 : 見龍在田，利見大人) ; signé 戈, 29 3 26
-          - source: imports/scans/2026-10-11_16_02.jpeg
-            file: v1a-02.jpg
-            kind: work
-          # feuille 三 : grille imprimée 5x11, récit en kaishu : 很久以前奶奶的茶几上一直放着
-          # 一本書，書上我多次看見一個篆字，看不懂它是什麼。我就學完了這本書，才明白。
-          # 我把騰蛇臨寫登石如。右逸聞 ; 登 pour 鄧 (鄧石如), jeu de mots ; 看 écrit 手目 /
-          # 目手, 懂 écrit 董, 着 pour 著 ; le 篆字 est le 龍 au sceau rouge ; signé en rouge
-          # 丙午春分 戈澤宇
-          - source: imports/scans/2026-10-11_16_03.jpeg
-            file: v1a-03.jpg
-            kind: work
-          # feuille 四 : note 藏鋒歛銳 (歛 pour 斂), flèche vers la signature ; signé 戈, 5 4 26
-          - source: imports/scans/2026-10-11_16_04.jpeg
-            file: v1a-04.jpg
-            kind: work
-          # feuille 五 : inscription 五九利見大人 (le 九五 : 飛龍在天，利見大人) ; 利 au 刂
-          # écrit 刀 ; signé 戈, 6 4 26
-          - source: imports/scans/2026-10-11_16_05.jpeg
-            file: v1a-05.jpg
-            kind: work
-          # feuille 六 : inscription 上九亢龍有悔 ; signé 戈, 7 4 26
-          - source: imports/scans/2026-10-11_16_06.jpeg
-            file: v1a-06.jpg
-            kind: work
+    versions:
+      - id: v1
+        # date du papier : une par feuille, 28 3 26, 29 3 26, 丙午春分, 5 4 26, 6 4 26,
+        # 7 4 26 ; date stockée : la première feuille (春分 → 2026-03-28 aussi)
+        date: 2026-03-28
+        format: 1x4 + 1x2 + 1x4 + 1x2 + 1x1 + 1x1 + 1x3 + 1x2 + 1x4 + 1x1 + 1x3 + 1x2
+        columns:
+          - 龍龍龍龍 # 16_01 ; du régulier vers la cursive
+          - 龍龍
+          - 龍龍龍龍 # 16_02 ; gauche de 龍 tirée du sceau, droite écrite 龙 : style libre
+          - 龍龍
+          - 龍 # en grand
+          - 龍 # 16_03 ; sceau rouge en sigillaire, dans un cadre
+          - 騰騰騰 # 16_04
+          - 騰騰 # le dernier en grande cursive
+          - 騰騰騰騰 # 16_05
+          - 騰 # très cursif, 月 en une boucle
+          - 騰騰騰 # 16_06 ; 肉 pour 月, 火 pour 灬 : 騰 écrit en style libre
+          - 騰騰
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # feuille 一 : inscription 初九潛龍無用 (易經 : 潛龍勿用) ; signé 戈, 28 3 26
+              - source: imports/scans/2026-10-11_16_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # feuille 二 : inscription 二九利見大人 (le 九二 : 見龍在田，利見大人) ; signé 戈, 29 3 26
+              - source: imports/scans/2026-10-11_16_02.jpeg
+                file: v1a-02.jpg
+                kind: work
+              # feuille 三 : grille imprimée 5x11, récit en kaishu : 很久以前奶奶的茶几上一直放着
+              # 一本書，書上我多次看見一個篆字，看不懂它是什麼。我就學完了這本書，才明白。
+              # 我把騰蛇臨寫登石如。右逸聞 ; 登 pour 鄧 (鄧石如), jeu de mots ; 看 écrit 手目 /
+              # 目手, 懂 écrit 董, 着 pour 著 ; le 篆字 est le 龍 au sceau rouge ; signé en rouge
+              # 丙午春分 戈澤宇
+              - source: imports/scans/2026-10-11_16_03.jpeg
+                file: v1a-03.jpg
+                kind: work
+              # feuille 四 : note 藏鋒歛銳 (歛 pour 斂), flèche vers la signature ; signé 戈, 5 4 26
+              - source: imports/scans/2026-10-11_16_04.jpeg
+                file: v1a-04.jpg
+                kind: work
+              # feuille 五 : inscription 五九利見大人 (le 九五 : 飛龍在天，利見大人) ; 利 au 刂
+              # écrit 刀 ; signé 戈, 6 4 26
+              - source: imports/scans/2026-10-11_16_05.jpeg
+                file: v1a-05.jpg
+                kind: work
+              # feuille 六 : inscription 上九亢龍有悔 ; signé 戈, 7 4 26
+              - source: imports/scans/2026-10-11_16_06.jpeg
+                file: v1a-06.jpg
+                kind: work
   # absente de Notion : identifiée sur les scans 2026-10-11_18_01 à 18_04 (registre imports/scans.yaml)
   # 戈說 : pièce personnelle en hommage à 山山, pour « horizontaliser les verticaux » et
   # « verticaliser les horizontaux », deux des cinq points de sa méthode pour la cursive (竪橫) ;
@@ -2387,39 +2403,39 @@ pieces:
     projects:
       - xian-xian-ji
     published: false
-    version:
-      id: v1
-      date: 2026-04-19 # date du papier : 19 4 26, sur 18_01 seule
-      format: 1x3 + 1x1 + 1x4 + 1x1
-      columns:
-        - 山竪橫 # feuille ① ; 山 en cursive en tête, hors grille ; 橫 tourné de 90° dans le sens trigonométrique
-        - 未 # feuille ②
-        - 水火調劑 # 劑 en grand courant : 刀 au centre, 水 à gauche, 火 à droite
-        - 既
-    variations:
-      - id: v1a
-        script: ziyou
-        status: kept
-        images:
-          # feuille ① : grille imprimée pâle 3x6 ; signé 戈, daté 19 4 26 ; « 8 » au rouge en bas à droite
-          - source: imports/scans/2026-10-11_18_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-          # feuille ② : grille imprimée pâle ; trait rouge sur le 土 du 周 de 調, correction du
-          # calligraphe ; ni signature ni date
-          - source: imports/scans/2026-10-11_18_02.jpeg
-            file: v1a-02.jpg
-            kind: work
-            featured: true
-          # grille 米 rouge 3x2, en régulier : 調劑 (刀 au centre), 未劑 (火 en bas), 既劑 (水 en bas)
-          - source: imports/scans/2026-10-11_18_03.jpeg
-            file: v1a-03.jpg
-            kind: study
-          # grille 米 rouge 3x2, vers la cursive : 未劑 (火 en bas), 調劑 (水 à gauche, 火 à droite,
-          # 刀 au centre), 既劑 (水 en bas)
-          - source: imports/scans/2026-10-11_18_04.jpeg
-            file: v1a-04.jpg
-            kind: study
+    versions:
+      - id: v1
+        date: 2026-04-19 # date du papier : 19 4 26, sur 18_01 seule
+        format: 1x3 + 1x1 + 1x4 + 1x1
+        columns:
+          - 山竪橫 # feuille ① ; 山 en cursive en tête, hors grille ; 橫 tourné de 90° dans le sens trigonométrique
+          - 未 # feuille ②
+          - 水火調劑 # 劑 en grand courant : 刀 au centre, 水 à gauche, 火 à droite
+          - 既
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # feuille ① : grille imprimée pâle 3x6 ; signé 戈, daté 19 4 26 ; « 8 » au rouge en bas à droite
+              - source: imports/scans/2026-10-11_18_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+              # feuille ② : grille imprimée pâle ; trait rouge sur le 土 du 周 de 調, correction du
+              # calligraphe ; ni signature ni date
+              - source: imports/scans/2026-10-11_18_02.jpeg
+                file: v1a-02.jpg
+                kind: work
+                featured: true
+              # grille 米 rouge 3x2, en régulier : 調劑 (刀 au centre), 未劑 (火 en bas), 既劑 (水 en bas)
+              - source: imports/scans/2026-10-11_18_03.jpeg
+                file: v1a-03.jpg
+                kind: study
+              # grille 米 rouge 3x2, vers la cursive : 未劑 (火 en bas), 調劑 (水 à gauche, 火 à droite,
+              # 刀 au centre), 既劑 (水 en bas)
+              - source: imports/scans/2026-10-11_18_04.jpeg
+                file: v1a-04.jpg
+                kind: study
   # absente de Notion : identifiée sur les scans 2026-10-11_19_01 et 19_02 (registre imports/scans.yaml)
   # un seul texte, une variation par style : régulier (①), cursive (②)
   - slug: tu-na
@@ -2427,30 +2443,30 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-04-18 # date du papier : 18 4 26 (sur 19_01)
-      format: 1x2
-      columns:
-        - 吐納
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          # feuille ① : grille imprimée 3x6 ; 糸 de 納 aux traits détachés ; signé 戈, daté 18 4 26
-          - source: imports/scans/2026-10-11_19_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
-      - id: v1b
-        script: caoshu
-        status: kept
-        images:
-          # feuille ② : grille imprimée 3x6 ; ni signature ni date (celles de ① transparaissent)
-          - source: imports/scans/2026-10-11_19_02.jpeg
-            file: v1b.jpg
-            kind: work
+    versions:
+      - id: v1
+        date: 2026-04-18 # date du papier : 18 4 26 (sur 19_01)
+        format: 1x2
+        columns:
+          - 吐納
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              # feuille ① : grille imprimée 3x6 ; 糸 de 納 aux traits détachés ; signé 戈, daté 18 4 26
+              - source: imports/scans/2026-10-11_19_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
+          - id: v1b
+            script: caoshu
+            status: kept
+            images:
+              # feuille ② : grille imprimée 3x6 ; ni signature ni date (celles de ① transparaissent)
+              - source: imports/scans/2026-10-11_19_02.jpeg
+                file: v1b.jpg
+                kind: work
   # absente de Notion : identifiée sur les scans 2026-10-11_22_01 et 22_02 (registre imports/scans.yaml)
   # 医王会 指圧 : Iokai Shiatsu, l'école de Masunaga ; deux feuilles ① ② au rouge
   - slug: yi-wang-hui-chan-zhi-ya
@@ -2458,29 +2474,29 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      # date du papier : 戈 谷雨 26 sur les deux feuilles (26 sous 谷雨) ; 3 5 6 au rouge
-      # sur ①, lu 3.5.26
-      date: 2026-05-03
-      format: 1x3 + 1x3
-      columns:
-        - 醫王會 # feuille ① ; 医 et 会 écrits en simplifié
-        - 禪指壓 # feuille ② ; 压 écrit en simplifié
-    variations:
-      - id: v1a
-        script: caoshu
-        status: kept
-        images:
-          # feuille ① : 医王会 en cursive, légende 医王会 en régulier ; A4 sans grille ; 戈 谷雨, 26, 3 5 6 au rouge
-          - source: imports/scans/2026-10-11_22_01.jpeg
-            file: v1a-01.jpg
-            kind: work
-            featured: true
-          # feuille ② : 禪指压 en cursive, légende 禪指压 en régulier ; 戈 谷雨 26
-          - source: imports/scans/2026-10-11_22_02.jpeg
-            file: v1a-02.jpg
-            kind: work
+    versions:
+      - id: v1
+        # date du papier : 戈 谷雨 26 sur les deux feuilles (26 sous 谷雨) ; 3 5 6 au rouge
+        # sur ①, lu 3.5.26
+        date: 2026-05-03
+        format: 1x3 + 1x3
+        columns:
+          - 醫王會 # feuille ① ; 医 et 会 écrits en simplifié
+          - 禪指壓 # feuille ② ; 压 écrit en simplifié
+        variations:
+          - id: v1a
+            script: caoshu
+            status: kept
+            images:
+              # feuille ① : 医王会 en cursive, légende 医王会 en régulier ; A4 sans grille ; 戈 谷雨, 26, 3 5 6 au rouge
+              - source: imports/scans/2026-10-11_22_01.jpeg
+                file: v1a-01.jpg
+                kind: work
+                featured: true
+              # feuille ② : 禪指压 en cursive, légende 禪指压 en régulier ; 戈 谷雨 26
+              - source: imports/scans/2026-10-11_22_02.jpeg
+                file: v1a-02.jpg
+                kind: work
   # absente de Notion : identifiée sur le scan 2026-10-11_23.jpeg (registre imports/scans.yaml)
   # source : 篤志力行, formule néo-confucéenne attestée (二程外書 卷7 ; Zhu Xi, 上蔡語錄·跋 et
   # lettre 答吳德夫 ; 王陽明, 教條示龍場諸生), qui reprend 篤志 de 論語·子張 (子夏) et 力行 de
@@ -2490,24 +2506,24 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-05-13 # date du papier : 戈 立夏 26, milieu du jieqi
-      format: 2x4
-      columns:
-        - 篤志力行
-        - 專心警省
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          # A4 sans grille ; une main imprimée au-dessus de chaque colonne ;
-          # signé 戈 立夏 26 entre les colonnes
-          - source: imports/scans/2026-10-11_23.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-05-13 # date du papier : 戈 立夏 26, milieu du jieqi
+        format: 2x4
+        columns:
+          - 篤志力行
+          - 專心警省
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              # A4 sans grille ; une main imprimée au-dessus de chaque colonne ;
+              # signé 戈 立夏 26 entre les colonnes
+              - source: imports/scans/2026-10-11_23.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
   # absente de Notion : identifiée sur le scan 2026-10-11_27.jpeg (registre imports/scans.yaml)
   # 戈說 : adaptation en régulier d'une cursive de 鄧岱崑 sur ces huit caractères, dans cet ordre
   # formule composite, non attestée telle quelle : 飛鴻戲海 reprend 袁昂《古今書評》 (523) sur
@@ -2519,48 +2535,48 @@ pieces:
     status: made
     projects: []
     published: false
-    version:
-      id: v1
-      date: 2026-05-28 # date du papier : 戈 丙午小滿 (滿 abrégé), milieu du jieqi
-      format: 2x4
-      columns:
-        - 飛鴻戲海 # 飛 de forme libre
-        - 雲鶴遊天 # 遊 : 方 écrit comme 扌, variante acceptée selon le maître
-    variations:
-      - id: v1a
-        script: kaishu
-        status: kept
-        images:
-          # A4 sur grille imprimée pâle ; attribution 岱崑作頁 ; signé 戈 丙午小滿
-          - source: imports/scans/2026-10-11_27.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-05-28 # date du papier : 戈 丙午小滿 (滿 abrégé), milieu du jieqi
+        format: 2x4
+        columns:
+          - 飛鴻戲海 # 飛 de forme libre
+          - 雲鶴遊天 # 遊 : 方 écrit comme 扌, variante acceptée selon le maître
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              # A4 sur grille imprimée pâle ; attribution 岱崑作頁 ; signé 戈 丙午小滿
+              - source: imports/scans/2026-10-11_27.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
   # absente de Notion : identifiée sur le scan 2026-10-11_26_01.jpeg (registre imports/scans.yaml)
   # pièce-pôle du projet ge-ze-yu, sur le nom du calligraphe ; 26_01 en est un brouillon
   # au crayon, un grand triangle dont l'axe descend le long de la colonne, un cercle sur 宇
   - slug: ge-ze-yu
     title: 戈澤宇
-    status: study
+    status: experiment
     projects:
       - ge-ze-yu
     published: false
-    version:
-      id: v1
-      date: 2026-05-13 # date du papier : 立夏 26, au crayon, milieu du jieqi
-      format: 1x3
-      columns:
-        - 戈澤宇 # déborde la grille imprimée 3x6 de tai-quan-zhu-shan-an
-    variations:
-      - id: v1a
-        script: ziyou
-        status: tried
-        images:
-          # brouillon sur grille imprimée 3x6 ; 胎𫝑 de 26_02 en transparence ; daté 立夏 26
-          - source: imports/scans/2026-10-11_26_01.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-05-13 # date du papier : 立夏 26, au crayon, milieu du jieqi
+        format: 1x3
+        columns:
+          - 戈澤宇 # déborde la grille imprimée 3x6 de tai-quan-zhu-shan-an
+        variations:
+          - id: v1a
+            script: ziyou
+            status: tried
+            images:
+              # brouillon sur grille imprimée 3x6 ; 胎𫝑 de 26_02 en transparence ; daté 立夏 26
+              - source: imports/scans/2026-10-11_26_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
   # absente de Notion : identifiée sur le scan 2026-10-11_26_08.jpeg (registre imports/scans.yaml)
   # pièce-pôle du projet you-shou-he-zhang ; 戈說 : « mains jointes », 手 la main gauche et 又
   # la main droite, fondus en un caractère inventé en style libre, une part écrite de chaque
@@ -2569,23 +2585,23 @@ pieces:
   # flèche vers « ses deux mains jointes ! »
   - slug: you-shou-he-zhang
     title: 又手合掌
-    status: study
+    status: experiment
     projects:
       - you-shou-he-zhang
     published: false
-    version:
-      id: v1
-      date: 2026-05-13 # date du papier : 立夏 26 sur 26_01, empilée avec la série
-      format: 1x3 # 又手 compte pour un caractère
-      columns:
-        - 又手合掌 # 又手 : un seul caractère inventé, hors grille ; 合掌 dans la grille imprimée 3x6
-    variations:
-      - id: v1a
-        script: ziyou
-        status: tried
-        images:
-          # 又手 hors grille, plus grand ; 合掌 en courant dans la grille ; ni signature ni date
-          - source: imports/scans/2026-10-11_26_08.jpeg
-            file: v1a.jpg
-            kind: work
-            featured: true
+    versions:
+      - id: v1
+        date: 2026-05-13 # date du papier : 立夏 26 sur 26_01, empilée avec la série
+        format: 1x3 # 又手 compte pour un caractère
+        columns:
+          - 又手合掌 # 又手 : un seul caractère inventé, hors grille ; 合掌 dans la grille imprimée 3x6
+        variations:
+          - id: v1a
+            script: ziyou
+            status: tried
+            images:
+              # 又手 hors grille, plus grand ; 合掌 en courant dans la grille ; ni signature ni date
+              - source: imports/scans/2026-10-11_26_08.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true

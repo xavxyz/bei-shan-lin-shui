@@ -1,6 +1,6 @@
 import { Converter } from "opencc-js";
 import { RESERVED_PROJECT_ID, THEMES, type Theme } from "@bsls/schema";
-import { deriveSlug, disambiguate } from "./slug.js";
+import { deriveSlug, disambiguate } from "@bsls/content";
 import type { ProjectProposal } from "./propose.js";
 import type { NotionPage } from "./read-export.js";
 

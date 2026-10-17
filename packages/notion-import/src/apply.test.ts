@@ -29,13 +29,15 @@ function plan(overrides: Partial<ArbitratedPlan> = {}): ArbitratedPlan {
         title: "莫性急",
         status: "made",
         published: true,
-        version: {
-          id: "v1",
-          date: "2025-12-22",
-          format: "2x7",
-          columns: ["莫性急平流緩進", "墨行機兔起鶻落"],
-          intention: "Deux colonnes,\nencre grasse.",
-        },
+        versions: [
+          {
+            id: "v1",
+            date: "2025-12-22",
+            format: "2x7",
+            columns: ["莫性急平流緩進", "墨行機兔起鶻落"],
+            intention: "Deux colonnes,\nencre grasse.",
+          },
+        ],
       },
     ],
     ...overrides,
@@ -82,7 +84,7 @@ describe("applyImport", () => {
   it("rapatrie les fichiers joints et les normalise en JPEG", async () => {
     const root = await contentRoot();
     const arbitrated = plan();
-    arbitrated.pieces[0]!.variations = [
+    arbitrated.pieces[0]!.versions[0]!.variations = [
       {
         id: "v1a",
         script: "xingshu",
@@ -104,21 +106,70 @@ describe("applyImport", () => {
     expect(await loadContent(root, { includeUnpublished: true })).toMatchObject({ ok: true });
   });
 
+  it("écrit chaque version telle que le plan la porte", async () => {
+    const root = await contentRoot();
+    const arbitrated = plan();
+    const variation = (id: string, file: string, featured: boolean) => ({
+      id,
+      script: "kaishu" as const,
+      status: "kept" as const,
+      images: [{ file, source: scan, featured, kind: "work" as const, capture: "scan" as const }],
+    });
+    arbitrated.pieces[0]!.versions = [
+      {
+        id: "v1",
+        date: "2026-01-03",
+        format: "2x7",
+        columns: ["莫性急平流緩進", "墨行機兔起鶻落"],
+        variations: [variation("v1a", "v1a.jpg", false)],
+      },
+      {
+        id: "v2",
+        date: "2026-02-11",
+        format: "2x7 + 蘇東坡",
+        columns: ["莫性急平流緩進", "墨行機兔起鶻落"],
+        variations: [variation("v2a", "v2a.jpg", true)],
+      },
+    ];
+
+    const result = await applyImport(arbitrated, { contentRoot: root });
+
+    expect(result.ok).toBe(true);
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok).toBe(true);
+    const piece = loaded.ok ? loaded.content.pieces[0] : undefined;
+    expect(piece?.versions.map((version) => [version.id, version.date, version.format])).toEqual([
+      ["v1", "2026-01-03", "2x7"],
+      ["v2", "2026-02-11", "2x7 + 蘇東坡"],
+    ]);
+    expect(piece?.versions.map((version) => version.variations.map((v) => v.id))).toEqual([
+      ["v1a"],
+      ["v2a"],
+    ]);
+    expect(piece?.featuredImage?.file).toBe("v2a.jpg");
+  });
+
   it("garde le mode de capture d'une image, un scan à défaut", async () => {
     const root = await contentRoot();
+    const [piece] = plan().pieces;
     const arbitrated = planFileSchema.parse({
       projects: [],
       pieces: [
         {
-          ...plan().pieces[0],
-          variations: [
+          ...piece,
+          versions: [
             {
-              id: "v1a",
-              script: "xingshu",
-              status: "kept",
-              images: [
-                { file: "v1a-01.jpg", source: scan, featured: true },
-                { file: "v1a-02.jpg", source: scan, kind: "context", capture: "photo" },
+              ...piece!.versions[0],
+              variations: [
+                {
+                  id: "v1a",
+                  script: "xingshu",
+                  status: "kept",
+                  images: [
+                    { file: "v1a-01.jpg", source: scan, featured: true },
+                    { file: "v1a-02.jpg", source: scan, kind: "context", capture: "photo" },
+                  ],
+                },
               ],
             },
           ],
@@ -198,7 +249,7 @@ describe("applyImport", () => {
   it("signale un fichier joint absent de l'export", async () => {
     const root = await contentRoot();
     const arbitrated = plan();
-    arbitrated.pieces[0]!.variations = [
+    arbitrated.pieces[0]!.versions[0]!.variations = [
       {
         id: "v1a",
         script: "xingshu",
@@ -217,7 +268,9 @@ describe("applyImport", () => {
 
     const result = await applyImport(arbitrated, { contentRoot: root });
 
-    expect(!result.ok && result.errors[0]?.path).toBe("pieces.0.variations.0.images.0.source");
+    expect(!result.ok && result.errors[0]?.path).toBe(
+      "pieces.0.versions.0.variations.0.images.0.source",
+    );
   });
 
   it("refuse un fichier joint que sharp ne sait pas décoder, sans rien écrire", async () => {
@@ -226,7 +279,7 @@ describe("applyImport", () => {
       "莫性急 abc/scan.heic": Buffer.from("ce n'est pas une image décodable"),
     });
     const arbitrated = plan();
-    arbitrated.pieces[0]!.variations = [
+    arbitrated.pieces[0]!.versions[0]!.variations = [
       {
         id: "v1a",
         script: "xingshu",
@@ -245,7 +298,9 @@ describe("applyImport", () => {
 
     const result = await applyImport(arbitrated, { contentRoot: root });
 
-    expect(!result.ok && result.errors[0]?.path).toBe("pieces.0.variations.0.images.0.source");
+    expect(!result.ok && result.errors[0]?.path).toBe(
+      "pieces.0.versions.0.variations.0.images.0.source",
+    );
     const loaded = await loadContent(root, { includeUnpublished: true });
     expect(loaded.ok && loaded.content.pieces).toEqual([]);
   });

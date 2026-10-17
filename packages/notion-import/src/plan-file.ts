@@ -1,10 +1,11 @@
 import { Document, isCollection, parseDocument } from "yaml";
 import {
   imageSchema,
-  localIdSchema,
+  versionIdSchema,
   pieceFieldsSchema,
   projectFileSchema,
   slugSchema,
+  variationIdSchema,
   variationSchema,
   versionSchema,
   z,
@@ -21,8 +22,9 @@ import type { ImportPlan, ImportWarning } from "./propose.js";
 /*
  * Le plan dérive du schéma : la forme du contenu se définit dans
  * `packages/schema` et nulle part ailleurs. N'est redit ici que ce qui
- * appartient en propre au plan — le fichier source d'une image, la version
- * unique d'une pièce naissante, une date encore textuelle.
+ * appartient en propre au plan — le fichier source d'une image, une date
+ * encore textuelle. Les versions et leurs variations y ont la forme exacte du
+ * frontmatter : tant qu'il existe, le plan est la source de vérité.
  */
 
 const plannedImageSchema = imageSchema.pick({ file: true, featured: true }).extend({
@@ -32,11 +34,6 @@ const plannedImageSchema = imageSchema.pick({ file: true, featured: true }).exte
   capture: imageSchema.shape.capture.default("scan"),
 });
 
-export const variationIdSchema = localIdSchema.regex(
-  /^v\d+[a-z]+$/,
-  "attendu : un identifiant de variation, par exemple v1a",
-);
-
 const plannedVariationSchema = variationSchema
   .pick({ script: true, status: true, personal_note: true })
   .extend({
@@ -44,13 +41,13 @@ const plannedVariationSchema = variationSchema
     images: z.array(plannedImageSchema).default([]),
   });
 
-/** Une pièce naissante ne porte qu'une version, et ses variations sont à plat. */
 const plannedVersionSchema = versionSchema
   .pick({ format: true, columns: true, intention: true })
   .extend({
-    id: localIdSchema.regex(/^v\d+$/, "attendu : un identifiant de version, par exemple v1"),
+    id: versionIdSchema,
     /** Le schéma coerce la date ; le plan la garde lisible et corrigeable à la main. */
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "attendu : une date au format AAAA-MM-JJ"),
+    variations: z.array(plannedVariationSchema).default([]),
   });
 
 const plannedPieceSchema = pieceFieldsSchema
@@ -63,8 +60,11 @@ const plannedPieceSchema = pieceFieldsSchema
     translation: true,
   })
   .extend({
-    version: plannedVersionSchema,
-    variations: z.array(plannedVariationSchema).default([]),
+    versions: z
+      .array(plannedVersionSchema, {
+        required_error: "attendu : versions: [...], chaque version portant ses variations",
+      })
+      .min(1, "attendu : au moins une version"),
   });
 
 const plannedProjectSchema = projectFileSchema.extend({

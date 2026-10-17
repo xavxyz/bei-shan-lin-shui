@@ -232,10 +232,63 @@ a:hover {
   color: var(--muted);
 }
 
+/* En mode admin, une pièce non publiée doit se repérer d'un coup d'œil. */
+.tag--unpublished {
+  border-style: dashed;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* Les métadonnées viennent après l'œuvre : c'est l'image qui prime. */
 .piece__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin: 0 0 2.5rem;
+}
+
+/* Un carrousel par version, sous le titre ; les variations coexistent, une
+   ligne chacune, sous le carrousel qu'elles pilotent. */
+.variations {
+  margin: 0 0 3rem;
+}
+
+/* Les versions antérieures restent repliées : la version courante prime. */
+.evolution {
+  margin-top: 3rem;
+}
+
+.evolution__toggle {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+.evolution__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.evolution__version {
+  padding-top: 3rem;
+}
+
+.evolution__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+}
+
+.evolution__columns {
+  font-family: var(--serif-cn);
+  font-size: 1.25rem;
+  letter-spacing: 0.18em;
+  margin: 0 0 1rem;
+}
+
+.evolution__version .variations {
+  margin: 0 0 2rem;
 }

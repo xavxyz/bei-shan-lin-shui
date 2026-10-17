@@ -28,7 +28,23 @@ export const localIdSchema = z
   .string()
   .regex(/^v\d+[a-z]*$/, "attendu : un identifiant local de la forme v1 ou v1a");
 
+export const versionIdSchema = localIdSchema.regex(
+  /^v\d+$/,
+  "attendu : un identifiant de version, par exemple v1",
+);
+
+/** Une variation se nomme d'après sa version : `v2a`, `v2b`… dans `v2`. */
+export const variationIdSchema = localIdSchema.regex(
+  /^v\d+[a-z]+$/,
+  "attendu : un identifiant de variation, par exemple v1a",
+);
+
 const prose = z.string().min(1);
+
+/** `AAAA-MM-JJ`, la forme sous laquelle le calligraphe date ses versions. */
+export function toIsoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
 
 /* -------------------------------------------------------------------------- */
 /* Schéma des fichiers déposés sur le disque                                   */
@@ -161,6 +177,8 @@ export const loadedVariationSchema = variationSchema.extend({
 export const loadedVersionSchema = versionSchema.extend({
   /** Date au format `YYYY-MM-DD`, sérialisable. */
   date: z.string(),
+  /** Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais stockés. */
+  chineseDate: z.string(),
   columns: z.array(chineseTextSchema),
   variations: z.array(loadedVariationSchema),
 });
@@ -172,11 +190,6 @@ export const loadedPieceSchema = pieceFieldsSchema.extend({
   /** Versions triées du plus ancien au plus récent : la dernière est l'intention courante. */
   latestVersion: loadedVersionSchema,
   featuredImage: loadedImageSchema.nullable(),
-  /**
-   * Images à montrer en tête de la page de pièce : celles de la variation qui
-   * porte l'image mise en avant, cette dernière en premier.
-   */
-  gallery: z.array(loadedImageSchema),
   /** Style d'écriture de cette variation, nommé en français. */
   featuredScriptLabel: z.string().nullable(),
   /** URL canonique de la pièce sur le site. */

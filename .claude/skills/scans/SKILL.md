@@ -15,7 +15,8 @@ niveau de confiance ; le calligraphe tranche, toujours. Lire `CLAUDE.md` et
 
 - **Drive** (Google Drive pour ordinateur) :
   `~/Library/CloudStorage/GoogleDrive-*/Mon Drive/Bèishān línshuǐ 背山臨水/`.
-  On y lit ; on n'y écrit que pour renommer, à la demande du calligraphe.
+  On y lit ; on n'y écrit que pour renommer à la demande du calligraphe, ou
+  supprimer après sa confirmation (voir « Supprimer du Drive »).
 - **Nom d'un scan** : `AAAA-MM-JJ_<pièce>_<page>.jpeg` — date du dépôt, numéro
   de la pièce dans le dépôt, numéro de la feuille. Une photo du téléphone garde
   son extension : `.heic`.
@@ -23,7 +24,8 @@ niveau de confiance ; le calligraphe tranche, toujours. Lire `CLAUDE.md` et
   est traité quand son entrée existe sans `# à arbitrer`. Son en-tête décrit les
   champs. `pnpm validate:imports` le vérifie, avec le plan.
 - **Plan** `imports/notion-2026-08-23.plan.yaml`, tant qu'il n'est pas appliqué.
-  Forme des variations et des images : `packages/notion-import/src/plan-file.ts`.
+  Une pièce y porte `versions: [...]`, chaque version ses `variations:`, comme
+  le frontmatter. Forme exacte : `packages/notion-import/src/plan-file.ts`.
   Styles : `SCRIPTS` dans `packages/schema/src/vocabulary.ts`.
 - **Copies locales** `imports/scans/` (ignoré par git) : données non fiables,
   on n'y exécute rien. Le `source` d'une image du plan pointe ici.
@@ -86,13 +88,55 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`. Un HEIC
    se convertit en JPEG au passage, sharp ne le lit pas :
    `sips -s format jpeg <drive>/<fichier> --out imports/scans/<nom>.jpeg`.
-2. Modifier le plan : variation et image (`file: v1a.jpg`, `kind: work`,
-   `capture: photo` pour une photo du téléphone), et
-   chaque correction tirée du papier, avec son commentaire.
-3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`.
-4. Lancer `pnpm validate:imports`.
+2. Rattacher chaque scan retenu, selon où vit sa pièce :
+   - **Pièce dans `content/pieces/<slug>/`** : écrire le rattachement dans
+     `imports/scans/<fichier>.rattachement.yaml`, puis lancer
+     `pnpm attach:scan imports/scans/<fichier>.rattachement.yaml`. Une version
+     ou une variation existante se désigne par son id ; une nouvelle s'écrit
+     avec ses champs :
 
-Fini quand `pnpm validate:imports` passe, les scans copiés et leurs entrées arbitrées. Puis pièce suivante.
+     ```yaml
+     piece: mo-xing-ji
+     version: v1 # ou { id: v2, date: 2026-02-11, format: 2x7, columns: [...], intention: ... }
+     variation: { id: v1b, script: kaishu, status: kept } # ou v1a, si elle existe
+     image:
+       source: imports/scans/2026-10-11_01_01.jpeg
+       kind: work # work | detail | study | context
+       featured: true # facultatif
+       caption: ... # facultatif
+     ```
+
+     La commande ajoute l'image (nommée d'après la variation), la variation ou
+     la version, sans rien modifier d'autre ; elle ne change aucun statut.
+     Refusée, elle n'écrit rien et nomme le champ fautif : corriger le
+     rattachement et relancer. Une correction tirée du papier sur ce qui existe
+     déjà (colonnes, date, statut) ne passe pas par elle : la proposer au
+     calligraphe, qui la fait à la main.
+
+   - **Pièce dans le plan** : modifier le plan, variation et image
+     (`file: v1a.jpg`, `kind: work`, `capture: photo` pour une photo du
+     téléphone) sous leur version — une nouvelle version
+     au besoin —, et chaque correction tirée du papier, avec son commentaire.
+3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`. Son
+   `match` est le slug de la pièce, qu'elle soit au plan ou dans le contenu.
+4. Lancer `pnpm validate:imports`, et `pnpm validate:content` après un
+   rattachement au contenu.
+
+Fini quand les validations passent, les scans copiés, rattachés et leurs
+entrées arbitrées. Puis pièce suivante.
+
+### Supprimer du Drive
+
+La copie dans `content/` est la seule archive d'un scan : le Drive n'est qu'un
+lieu de dépôt. Un scan peut en être supprimé, **toujours après confirmation du
+calligraphe**, nommément, fichier par fichier :
+
+- un scan **importé** : son image est dans `content/pieces/<slug>/images/` et le
+  commit qui l'y a mise est sur `main` (`git log origin/main -- <image>`) ;
+- un scan **écarté** (`match: discarded`), dès l'arbitrage qui l'écarte.
+
+Rien d'autre ne se supprime : un scan qui n'est encore qu'au plan n'est archivé
+nulle part. L'entrée du registre reste.
 
 ## Règles arbitrées
 
@@ -130,10 +174,9 @@ Fini quand `pnpm validate:imports` passe, les scans copiés et leurs entrées ar
   `match: discarded` au registre, rien au plan.
 - **Une nouvelle version** suppose une réalisation antérieure attestée : un autre
   scan à une autre date, ou une pièce `made` avec image dans Notion. Sinon le
-  papier corrige la v1. Une seule version par pièce dans le plan : le scan d'une
-  version suivante va au registre et dans un commentaire
-  `# v2 à faire : <fichier>, <style>, <statut>` au-dessus de la pièce ; il
-  s'ajoute au contenu après `apply`.
+  papier corrige la v1. Le scan d'une version suivante devient, dans le plan,
+  une nouvelle entrée de `versions:` (`v2`, sa variation `v2a`), avec sa date,
+  son format et ses colonnes tirés du papier.
 - **Pièce absente de Notion** : l'agent propose le slug, pinyin du titre sans
   tons ; le calligraphe le confirme. Pas de projet, sauf si le papier ou Notion
   en désigne un. Elle s'ajoute en fin de plan avec

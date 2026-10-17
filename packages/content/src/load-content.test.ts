@@ -109,6 +109,19 @@ describe("violations de schéma", () => {
     expect(result.errors[0]!.message).toContain("idea");
   });
 
+  it("rejette le statut finished : l'encre sèche est le stade le plus avancé", async () => {
+    const result = await loadTree({
+      ...wellFormedTree,
+      pieces: { "shan-ju-qiu-ming": { ...shanJuQiuMing, status: "finished" } },
+    });
+
+    expect(result.ok).toBe(false);
+    if (result.ok) return;
+    expect(result.errors).toHaveLength(1);
+    expect(result.errors[0]!.file).toBe("pieces/shan-ju-qiu-ming/piece.md");
+    expect(result.errors[0]!.path).toBe("status");
+  });
+
   it("rejette un style d'écriture inconnu, en désignant la variation fautive", async () => {
     const result = await loadTree({
       ...wellFormedTree,
@@ -251,6 +264,49 @@ describe("versions et variations", () => {
     expect(variations.map((each) => each.id)).toEqual(["v1a", "v1b", "v1c"]);
     expect(variations.map((each) => each.script)).toEqual(["kaishu", "caoshu", "kuangcao"]);
     expect(variations.map((each) => each.status)).toEqual(["kept", "tried", "set-aside"]);
+  });
+});
+
+describe("date chinoise", () => {
+  async function chineseDateOf(date: string) {
+    const content = await loadValid({
+      ...wellFormedTree,
+      files: [],
+      pieces: {
+        "shan-ju-qiu-ming": {
+          ...shanJuQiuMing,
+          versions: [{ id: "v1", date, format: "A4 vertical", columns: [], variations: [] }],
+        },
+      },
+    });
+    return content.pieces[0]!.versions[0]!.chineseDate;
+  }
+
+  it("dérive l'année en tronc et branche et le jieqi de la date stockée", async () => {
+    expect(await chineseDateOf("2026-05-13")).toBe("丙午立夏");
+  });
+
+  it("redonne le jieqi d'une date stockée au milieu de ce jieqi", async () => {
+    // 雨水 le 18 février, 驚蟄 le 5 mars : le milieu de 雨水 est le 25 février.
+    expect(await chineseDateOf("2026-02-25")).toBe("丙午雨水");
+    // 立夏 le 5 mai, 小滿 le 21 mai : le milieu de 立夏 est le 13 mai.
+    expect(await chineseDateOf("2026-05-13")).toBe("丙午立夏");
+  });
+
+  it("écrit les jieqi en traditionnel", async () => {
+    expect(await chineseDateOf("2026-03-12")).toBe("丙午驚蟄");
+    expect(await chineseDateOf("2026-08-30")).toBe("丙午處暑");
+  });
+
+  it("donne le jieqi dès le jour même du terme", async () => {
+    expect(await chineseDateOf("2026-02-04")).toBe("丙午立春");
+    expect(await chineseDateOf("2026-03-05")).toBe("丙午驚蟄");
+  });
+
+  it("change d'année au 立春, comme le papier : avant, c'est encore l'année précédente", async () => {
+    expect(await chineseDateOf("2026-02-03")).toBe("乙巳大寒");
+    // Signé 立春 (丙午) le 11 février, avant le Nouvel An lunaire du 17.
+    expect(await chineseDateOf("2026-02-11")).toBe("丙午立春");
   });
 });
 
@@ -413,7 +469,7 @@ describe("image mise en avant", () => {
     expect(content.pieces[0]!.featuredImage!.file).toBe("v1a-01.jpg");
   });
 
-  it("expose la galerie de la variation mise en avant, image retenue en tête", async () => {
+  it("nomme en français le style de la variation mise en avant", async () => {
     const content = await loadValid(
       withImages([
         { file: "v1a-01.jpg", kind: "detail", capture: "scan" },
@@ -421,17 +477,12 @@ describe("image mise en avant", () => {
       ]),
     );
 
-    expect(content.pieces[0]!.gallery.map((image) => image.file)).toEqual([
-      "v1a-02.jpg",
-      "v1a-01.jpg",
-    ]);
     expect(content.pieces[0]!.featuredScriptLabel).toBe("courant");
   });
 
-  it("retourne une galerie vide et aucun style quand la pièce n'a aucune image", async () => {
+  it("ne nomme aucun style quand la pièce n'a aucune image", async () => {
     const content = await loadValid(withImages([]));
 
-    expect(content.pieces[0]!.gallery).toEqual([]);
     expect(content.pieces[0]!.featuredScriptLabel).toBeNull();
   });
 

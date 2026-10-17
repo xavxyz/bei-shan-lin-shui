@@ -2,7 +2,9 @@
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
 import { PIECE_STATUS_LABELS } from "@bsls/schema";
 import ChineseText from "./ChineseText.astro";
-import { ImageViewer } from "../islands/ImageViewer.js";
+import VersionVariations from "./VersionVariations.astro";
+import EarlierVersions from "./EarlierVersions.astro";
+import VersionDate from "./VersionDate.astro";
 
 type Props = {
   piece: LoadedPiece;
@@ -37,15 +39,16 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
     </p>
   </header>
 
-  {
-    piece.gallery.length > 0 ? (
-      <div class="piece__work" data-testid="featured-work">
-        <ImageViewer client:load images={piece.gallery} title={piece.title.traditional} />
-      </div>
-    ) : null
-  }
+  <VersionVariations version={version} title={piece.title.traditional} />
 
   <p class="piece__tags">
+    {
+      piece.published ? null : (
+        <span class="tag tag--unpublished" data-testid="unpublished">
+          non publiée
+        </span>
+      )
+    }
     <span class="tag" data-testid="piece-status">{PIECE_STATUS_LABELS[piece.status]}</span>
     {
       piece.featuredScriptLabel ? (
@@ -55,6 +58,7 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       ) : null
     }
     <span class="tag">{version.format}</span>
+    <VersionDate version={version} testId="version-date" />
   </p>
 
   <div class="piece__reading">
@@ -115,4 +119,6 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       }
     </div>
   </div>
+
+  <EarlierVersions piece={piece} />
 </article>

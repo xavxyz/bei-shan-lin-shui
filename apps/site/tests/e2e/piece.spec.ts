@@ -6,7 +6,7 @@ const piecePath = "/montagnes/shan-ju-qiu-ming";
 test("la page de pièce affiche l'œuvre mise en avant en grand", async ({ page }) => {
   await page.goto(piecePath);
 
-  const work = page.getByTestId("featured-work").locator("img").first();
+  const work = page.getByTestId("carousel-image").first();
   await expect(work).toBeVisible();
   await expect(work).toHaveAttribute("src", "/content-images/shan-ju-qiu-ming/v2a-01.jpg");
 
@@ -25,10 +25,24 @@ test("la traduction française et le pinyin sont en regard du texte chinois", as
   await expect(page.getByTestId("simplified")).toContainText("明月松间照");
 });
 
+test("la date chinoise de la version est affichée à côté de sa date", async ({ page }) => {
+  await page.goto(piecePath);
+
+  const date = page.getByTestId("version-date");
+  await expect(date).toContainText("12 mai 2026");
+  await expect(date).toContainText("丙午立夏");
+});
+
 test("une surcharge manuelle de pinyin prime sur la valeur générée", async ({ page }) => {
   await page.goto("/pieces/xing-xing-zhong-xing-xing");
 
   await expect(page.getByTestId("pinyin")).toContainText("háng háng chóng háng háng");
+});
+
+test("une pièce en expérimentation l'affiche en français", async ({ page }) => {
+  await page.goto("/pieces/xing-xing-zhong-xing-xing");
+
+  await expect(page.getByTestId("piece-status")).toHaveText("expérimentation");
 });
 
 test("les styles d'écriture sont affichés en français, jamais en pinyin", async ({ page }) => {
@@ -61,10 +75,15 @@ test("une pièce non publiée n'a aucune page et n'apparaît dans aucune liste",
 }) => {
   expect((await request.get("/four-seasons/jing-ye-si")).status()).toBe(404);
   expect((await request.get("/pieces/jing-ye-si")).status()).toBe(404);
+  expect((await request.get("/pieces/chun-xiao")).status()).toBe(404);
 
   await page.goto("/four-seasons");
   await expect(page.getByText("靜夜思")).toHaveCount(0);
 
   await page.goto("/");
   await expect(page.getByText("靜夜思")).toHaveCount(0);
+  await expect(page.getByText("春曉")).toHaveCount(0);
+  await expect(page.getByText("non publiée")).toHaveCount(0);
+  // Le décompte du projet ne compte que ses pièces publiées.
+  await expect(page.getByRole("link", { name: /Quatre saisons/ })).toContainText("1 pièce");
 });

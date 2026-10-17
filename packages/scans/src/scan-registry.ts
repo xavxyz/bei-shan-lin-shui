@@ -1,14 +1,12 @@
 import { parseDocument } from "yaml";
-import { variationSchema, z } from "@bsls/schema";
-import type { PlanError } from "./plan-file.js";
-import { variationIdSchema } from "./plan-file.js";
+import { variationIdSchema, variationSchema, z } from "@bsls/schema";
 
 /**
  * Le registre des scans : une entrée par fichier du Drive, ce que l'agent y lit
  * et la pièce qu'il propose. Plusieurs sous-agents y écrivent en parallèle ;
  * le relire ici attrape ce qu'aucun d'eux ne voit — une valeur hors
  * vocabulaire, une lecture qui n'est pas du chinois, un fichier en double, une
- * pièce qui n'existe nulle part.
+ * pièce qui n'existe nulle part, une variation que sa pièce ne porte pas.
  */
 
 /** Ce que `match` peut valoir en dehors d'un slug de pièce. */
@@ -26,18 +24,25 @@ const scanEntrySchema = z.object({
 
 export const scanRegistrySchema = z.object({ scans: z.array(scanEntrySchema) });
 
+/** Une erreur du registre désigne le scan et le champ fautifs. */
+export type RegistryError = { path: string; message: string };
+
 export type ScanEntry = z.infer<typeof scanEntrySchema>;
 export type ScanRegistryResult =
-  { ok: true; scans: ScanEntry[] } | { ok: false; errors: PlanError[] };
+  { ok: true; scans: ScanEntry[] } | { ok: false; errors: RegistryError[] };
+
+/** Les variations de chaque pièce connue, par slug. */
+export type KnownPieces = ReadonlyMap<string, ReadonlySet<string>>;
 
 /**
- * Relit le registre. `knownSlugs` est l'ensemble des pièces auxquelles un scan
- * peut se rattacher : celles du plan et celles du contenu. Chaque erreur
- * désigne le fichier du scan, pas son rang dans la liste.
+ * Relit le registre. `knownPieces` réunit les pièces auxquelles un scan peut se
+ * rattacher — celles du plan et celles du contenu — avec les variations
+ * qu'elles portent. Chaque erreur désigne le fichier du scan, pas son rang dans
+ * la liste.
  */
 export function parseScanRegistry(
   text: string,
-  { knownSlugs }: { knownSlugs: ReadonlySet<string> },
+  { knownPieces }: { knownPieces: KnownPieces },
 ): ScanRegistryResult {
   const document = parseDocument(text);
   if (document.errors.length > 0) {
@@ -65,7 +70,7 @@ export function parseScanRegistry(
     };
   }
 
-  const errors: PlanError[] = [];
+  const errors: RegistryError[] = [];
   const seen = new Set<string>();
   for (const scan of parsed.data.scans) {
     if (seen.has(scan.file)) {
@@ -74,10 +79,17 @@ export function parseScanRegistry(
     seen.add(scan.file);
 
     const verdict = (SCAN_VERDICTS as readonly string[]).includes(scan.match);
-    if (!verdict && !knownSlugs.has(scan.match)) {
+    if (verdict) continue;
+    const variations = knownPieces.get(scan.match);
+    if (!variations) {
       errors.push({
         path: `${scan.file}.match`,
         message: `aucune pièce « ${scan.match} » ; attendu : un slug du plan ou du contenu, ou ${SCAN_VERDICTS.join(", ")}`,
+      });
+    } else if (scan.variation && !variations.has(scan.variation)) {
+      errors.push({
+        path: `${scan.file}.variation`,
+        message: `« ${scan.match} » ne porte pas de variation « ${scan.variation} »`,
       });
     }
   }
