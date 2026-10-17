@@ -160,9 +160,6 @@ pieces:
       url: ""
       relations: []
   # 緩 en traditionnel sur les deux scans (Notion : 缓)
-  # v2 à faire : 2026-10-11_01_01.jpeg, kaishu, kept, image mise en avant de la pièce ;
-  # date du papier : 戈 立春 (丙午) → 2026-02-11 ; format 2x7 + 蘇東坡 (苏 écrit en simplifié)
-  # date du papier : 3.1.26 (Notion disait 2025-12-22)
   # traduction écrite à la main sur le scan 2026-10-11_01_01.jpeg
   - slug: mo-xing-ji
     title: 莫性急
@@ -171,6 +168,7 @@ pieces:
     published: false
     translation: La patience et la constance dans la progression. La vivacité et la précision dans l'action.
     versions:
+      # date du papier : 3.1.26 (Notion disait 2025-12-22)
       - id: v1
         date: 2026-01-03
         format: 2x7
@@ -185,6 +183,23 @@ pieces:
               - source: imports/scans/2026-10-11_01_02.jpeg
                 file: v1a.jpg
                 kind: work
+      # scan 2026-10-11_01_01.jpeg, image mise en avant de la pièce
+      # date du papier : 戈 立春 (丙午) → 2026-02-11 ; format 2x7 + 蘇東坡 (苏 écrit en simplifié)
+      - id: v2
+        date: 2026-02-11
+        format: 2x7 + 蘇東坡
+        columns:
+          - 莫性急平流緩進
+          - 墨行機兔起鶻落
+        variations:
+          - id: v2a
+            script: kaishu
+            status: kept
+            images:
+              - source: imports/scans/2026-10-11_01_01.jpeg
+                file: v2a.jpg
+                kind: work
+                featured: true
     notion:
       title: 莫性急
       status: Mouvementée

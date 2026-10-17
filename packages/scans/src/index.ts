@@ -1,5 +1,5 @@
 export { normalizeImage, MAX_HEIGHT, MAX_WIDTH, QUALITY } from "./normalize-image.js";
 export { parseScanRegistry, scanRegistrySchema, SCAN_VERDICTS } from "./scan-registry.js";
-export type { RegistryError, ScanEntry, ScanRegistryResult } from "./scan-registry.js";
+export type { KnownPieces, RegistryError, ScanEntry, ScanRegistryResult } from "./scan-registry.js";
 export { attachScan, attachedImageSchema, newVariationSchema, newVersionSchema } from "./attach.js";
 export type { AttachError, AttachOptions, AttachResult, Attachment } from "./attach.js";

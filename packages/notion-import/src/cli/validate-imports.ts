@@ -17,7 +17,12 @@ async function main(argv: string[]): Promise<number> {
   const importsDir = resolve(argv[0] ?? "imports");
   const contentRoot = resolve(argv[1] ?? "content");
   const failures: string[] = [];
-  const knownSlugs = new Set<string>();
+  const knownPieces = new Map<string, Set<string>>();
+  const know = (slug: string, versions: { variations: { id: string }[] }[]) =>
+    knownPieces.set(
+      slug,
+      new Set(versions.flatMap((version) => version.variations.map((variation) => variation.id))),
+    );
 
   const plans = (await readdir(importsDir)).filter((name) => name.endsWith(".plan.yaml")).sort();
   for (const name of plans) {
@@ -26,17 +31,17 @@ async function main(argv: string[]): Promise<number> {
       failures.push(`${name} :\n${format(parsed.errors)}`);
       continue;
     }
-    parsed.plan.pieces.forEach((piece) => knownSlugs.add(piece.slug));
+    parsed.plan.pieces.forEach((piece) => know(piece.slug, piece.versions));
   }
 
-  /* Un contenu invalide est signalé par validate:content ; ici on n'y cherche que des slugs. */
+  /* Un contenu invalide est signalé par validate:content ; ici on n'y cherche que des pièces. */
   const content = await loadContent(contentRoot, { includeUnpublished: true });
-  if (content.ok) content.content.pieces.forEach((piece) => knownSlugs.add(piece.slug));
+  if (content.ok) content.content.pieces.forEach((piece) => know(piece.slug, piece.versions));
 
   const registry = join(importsDir, "scans.yaml");
   let scans = 0;
   if (existsSync(registry)) {
-    const parsed = parseScanRegistry(await readFile(registry, "utf8"), { knownSlugs });
+    const parsed = parseScanRegistry(await readFile(registry, "utf8"), { knownPieces });
     if (parsed.ok) scans = parsed.scans.length;
     else failures.push(`scans.yaml :\n${format(parsed.errors)}`);
   }
