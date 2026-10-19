@@ -698,13 +698,13 @@ pieces:
       relations:
         - 中和集
   # absente de Notion : née de l'arbitrage du lot 3 (#17), un vers du 《原道歌》 (6ᵉ quatrain),
-  # pour le 紅樓夢 : le 金鎖 de 寶釵 et le 玉 de 寶玉 ; et dans le projet 易筋經
+  # pour le 紅樓夢 : le 金鎖 de 寶釵 et le 玉 de 寶玉
   - slug: yu-suo-jin-jia-qi-jie-tuo
     title: 玉鎖金枷齊解脫
     status: idea
     projects:
       - tai-xu-huan-jing-hong-lou-meng
-      - yi-jin-jing
+      - zhong-he-ji
     published: false
     source:
       author: 李道純

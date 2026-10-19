@@ -110,7 +110,7 @@ gardés en référence dans `docs/sources/zhong-he-ji.md`. Leçons gardées :
   entier viendra en nouvelle version (`intention`).
 - **Nouvelle idée `yu-suo-jin-jia-qi-jie-tuo`** 玉鎖金枷齊解脫, un vers du
   《原道歌》, dans le projet du 紅樓夢 (le 金鎖 de 寶釵, le 玉 de 寶玉) et dans
-  celui du 易筋經.
+  celui du 中和集.
 - `xuan-li-ge` 《玄理歌》 : du second chant, les vers 1-2 (治人事天莫若嗇…)
   et 13-20, les trois 息 ; elle ne rejoint pas `qi-gong`.
 - `hui-jian` 《慧劍》 est retirée : trop précieuse pour être calligraphiée.
