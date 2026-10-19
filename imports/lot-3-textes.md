@@ -1,13 +1,11 @@
 # Lot 3 — les textes du 中和集
 
-Les huit textes du lot 3, découpés et traduits pour choisir l'étendue de
+Sept des huit textes du lot 3, découpés et traduits pour choisir l'étendue de
 chaque pièce. Traductions de travail, vers par vers, par des subagents sur le
 texte du 正統道藏 (zh.wikisource, `中和集`, `action=raw`) ; la traduction qui
-accompagnera une pièce reste à écrire à la main. Les étendues proposées sont
-posées dans le plan, sous `# à arbitrer` : ce fichier dit le reste.
-Il disparaît avec le plan (#17).
-
-Le 3, 《鍊虛歌》, est arbitré : 虛心直節青青竹 / 個是鍊虛第一機.
+accompagnera une pièce reste à écrire à la main. Le calligraphe y a choisi
+les étendues, écrites dans le plan ; le 3, 《鍊虛歌》, n'y est pas, arbitré
+avant. Le fichier disparaît avec le plan (#17).
 
 ## 1 — 《卦象論》 · `gua-xiang-lun`
 
