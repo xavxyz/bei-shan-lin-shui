@@ -98,8 +98,9 @@ sont pas des idées. Sources vérifiées sur zh.wikisource.
 ## Lot 3 — fait
 
 Le titre renvoie au texte du 中和集 de 李道純 ; le calligraphe a choisi
-l'étendue sur les textes traduits vers par vers de `imports/lot-3-textes.md`
-(正統道藏, zh.wikisource). Leçons gardées : 鍊, 須, 大霶霈, 裏.
+l'étendue sur les textes traduits vers par vers (正統道藏, zh.wikisource),
+gardés en référence dans `docs/sources/zhong-he-ji.md`. Leçons gardées :
+鍊, 須, 大霶霈, 裏.
 
 - `lian-xu-ge` 《鍊虛歌》 : 虛心直節青青竹 / 個是鍊虛第一機.
 - `gua-xiang-lun` 《卦象論》 : 水府求玄者，煉精氣神, puis de la citation de

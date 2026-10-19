@@ -1,11 +1,15 @@
-# Lot 3 — les textes du 中和集
+# 中和集 — textes de référence
 
-Sept des huit textes du lot 3, découpés et traduits pour choisir l'étendue de
-chaque pièce. Traductions de travail, vers par vers, par des subagents sur le
-texte du 正統道藏 (zh.wikisource, `中和集`, `action=raw`) ; la traduction qui
-accompagnera une pièce reste à écrire à la main. Le calligraphe y a choisi
-les étendues, écrites dans le plan ; le 3, 《鍊虛歌》, n'y est pas, arbitré
-avant. Le fichier disparaît avec le plan (#17).
+Sept textes du 中和集 de 李道純 (元), traduits vers par vers pour choisir
+l'étendue des pièces du projet `zhong-he-ji` (lot 3 de #17). Le texte est
+celui du 正統道藏 sur zh.wikisource (`中和集`, `action=raw`), les leçons
+recoupées sur le 清庵先生中和集 de ctext
+([res=3138576](https://ctext.org/wiki.pl?if=gb&res=3138576), images au
+`file=205666`).
+
+Traductions de travail, faites par des agents : la traduction qui accompagne
+une pièce s'écrit à la main. Les ➡️ marquent les étendues candidates ; les
+étendues retenues sont dans les pièces.
 
 ## 1 — 《卦象論》 · `gua-xiang-lun`
 
