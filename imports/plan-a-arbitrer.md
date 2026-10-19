@@ -1,8 +1,8 @@
 # Plan Notion — à arbitrer
 
-État au 2026-10-17, après le lot 0. Le plan `notion-2026-08-23.plan.yaml`
-porte 93 pièces et 11 projets ; il reste **108** `# à arbitrer`, sur 53
-pièces et les 11 projets. Les 40 autres pièces, dont les 36 qui ont un scan,
+État au 2026-10-19, après le lot 1. Le plan `notion-2026-08-23.plan.yaml`
+porte 94 pièces et 12 projets ; il reste **73** `# à arbitrer`, sur 41
+pièces et les 12 projets. Les 53 autres pièces, dont les 36 qui ont un scan,
 n'ont plus rien à arbitrer. Le suivi se fait par les `# à arbitrer` du plan :
 ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
 
@@ -17,6 +17,13 @@ accepte tout.
 - **Une idée entre avec `format: à préciser`.** Le format d'une pièce au
   statut `idea` ne bloque pas `apply` ; ses marques `version.format` sont
   retirées au lot 0 (2026-10-17).
+- **Le traditionnel de Notion se garde.** Une conversion ne remplace pas un
+  caractère déjà traditionnel par sa variante (`泄`, `朱砂`, `卷`) ; une
+  variante voulue se garde en notant le caractère dont elle varie
+  (`# 洩, variante de 泄`) (2026-10-19).
+- **Un simplifié voulu se garde**, avec son commentaire : il s'oppose au
+  traditionnel sur le papier (`（罗）羅`, `虎书`). `丑`, la branche terrestre,
+  est traditionnel (2026-10-19).
 
 ## Lot 0 — fait
 
@@ -27,16 +34,19 @@ accepte tout.
 - `long-hu-ge-mian-zhan-mian-zhan`, `ri-yong` et `jiao-he`, sans texte et
   sans marque, en reçoivent une.
 
-## Lot 1 — conversions au traditionnel (36 marques, 17 pièces)
+## Lot 1 — fait
 
-Mécaniques pour la plupart : un « ok » les accepte. Six sont suspectes :
-
-- **`shu-hu-hun-dun`** : `王陽明傳習錄捲上` — un volume s'écrit `卷`.
-- **`zhan-hua-ming-er`** : `佔花名兒` — le jeu du 紅樓夢 s'écrit `占`.
-- **`kan-po-hong-chen`** : `朱砂 → 硃砂` — `朱砂` est le plus courant.
-- **`meshkah`** et **`zi-ti-xiang`** : `泄 → 洩` — `泄` est déjà
-  traditionnel.
-- **`mo-li-li`** : `磨礪〔﹣礪〕` — un titre d'entrée de dictionnaire.
+- Les 36 marques de conversion, sur 28 pièces, sont levées : 29 acceptées
+  telles quelles ; `卷上` et `占花名兒` corrigés, `朱砂` et le `泄` de
+  `meshkah` rendus à Notion, le `洩` de `zi-ti-xiang` gardé en variante,
+  `（罗）羅` rendu au simplifié voulu.
+- Deux formats en simplifié, sans marque, convertis : `修真後內外火候圖`
+  (`xing-qi-yu-pei-ming`), `心性圖` (`bai-zi-bei`).
+- **Projet `yi-jin-jing`** 易筋經, désigné par le calligraphe : la pièce
+  `yi-jin-jing`, avec sur le côté l'avertissement 不依指示做，磨磚豈成鏡 ;
+  `mo-li-li` devenue `bao-jian-feng-cong-mo-li-chu-ku-lian` (寶劍鋒從磨礪出
+  // 苦練) ; une nouvelle idée, `mei-hua-xiang-zi-ku-han-lai-xia-gong-fu`
+  (梅花香自苦寒來 // 下功夫).
 
 ## Lot 2 — le titre est le texte, et l'échafaudage (15 pièces)
 
@@ -75,10 +85,10 @@ propose ; reste à choisir l'étendue, découpée selon le format.
 
 `tai-shang-lao-jun-shuo-chang-qing-jing-jing` 《太上老君說常清靜經》 ·
 `xing-qi-yu-pei-ming` 行氣玉佩銘 · `bai-zi-bei` 百字碑 · `yi-jin-jing`
-易筋經 (quel passage ?) · `pang-xie-feng-ci` 螃蟹諷刺 (le 螃蟹詠 de 寶釵,
+易筋經 (quel passage ? l'avertissement est posé) · `pang-xie-feng-ci` 螃蟹諷刺 (le 螃蟹詠 de 寶釵,
 chapitre 38).
 
-## Lot 5 — titres ambigus (7 pièces)
+## Lot 5 — titres ambigus (6 pièces)
 
 La lecture du calligraphe d'abord :
 
@@ -86,7 +96,6 @@ La lecture du calligraphe d'abord :
   titre dit 五言律詩.
 - **`zhan-hua-ming-er`** : quelles fiches du jeu (chapitre 63) ?
 - **`hu-si-luan-xiang`** : `4 + 2x7`, quel distique ?
-- **`mo-li-li`** : `1x2 2x5`, quelles deux colonnes ?
 - **`tai-xi`** : 胎息 en `2x5`, le texte dépasse le titre.
 - **`zhu-jian-qing-chui`** : 鑄劍 // 輕吹.
 - **`shu-heng-zhuo-an-npl`** : 豎橫 《卓菴》 NPL.
@@ -101,7 +110,7 @@ La lecture du calligraphe d'abord :
   `yi-zhi-xuan-yi-rui-tu-wei` (deux phrases en français).
 - La pièce `tian-ren-di` porte le nom de son projet : pièce ou page-pôle ?
 
-## Lot 7 — les 11 projets (22 marques)
+## Lot 7 — les 12 projets (24 marques)
 
 En dernier, quand on sait quelles pièces chacun garde. L'agent propose un
 brouillon de présentation à partir des pièces, et un thème parmi `ink`,

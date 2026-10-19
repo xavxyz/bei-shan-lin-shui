@@ -83,6 +83,14 @@ projects:
     title: 又手合掌
     presentation: ""
     theme: ink
+  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
+  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+  # projet désigné par le calligraphe à l'arbitrage du lot 1 : le 易筋經, puis deux vers qui
+  # disent l'entraînement, 寶劍鋒從磨礪出 et 梅花香自苦寒來
+  - id: yi-jin-jing
+    title: 易筋經
+    presentation: ""
+    theme: ink
 pieces:
   - slug: xi-you-ji
     title: 西遊記
@@ -134,8 +142,6 @@ pieces:
       status: En cours
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 有心求柔，无意成刚 » → « 有心求柔，無意成剛 »
-  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 有心求柔无意成刚 » → « 有心求柔無意成剛 »
   - slug: you-xin-qiu-rou-wu-yi-cheng-gang
     title: 有心求柔，無意成剛
     status: made
@@ -229,7 +235,6 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 《太上老君说常清静经》 » → « 《太上老君說常清靜經》 »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: tai-shang-lao-jun-shuo-chang-qing-jing-jing
     title: 《太上老君說常清靜經》
@@ -247,7 +252,6 @@ pieces:
       status: Brute
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 方圆 » → « 方圓 »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: fang-yuan
     title: 方圓
@@ -266,7 +270,6 @@ pieces:
       url: ""
       relations:
         - 竖横 《卓菴》 NPL
-  # à arbitrer — title : converti du simplifié au traditionnel : « 吴宽《种竹诗卷》 » → « 吳寬《種竹詩卷》 »
   # scan attendu (peut-être)
   # v2 à faire : en 2 colonnes de 10, format à préciser — à ajouter au contenu après l'import
   - slug: wu-kuan-zhong-zhu-shi-juan
@@ -353,7 +356,6 @@ pieces:
       relations:
         - 儵忽混沌
   # à refaire
-  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 内三合 » → « 內三合 »
   - slug: liu-he-fa
     title: 六合法
     status: made
@@ -403,8 +405,6 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns.5 : converti du simplifié au traditionnel : « 明朝《元阳洞》 » → « 明朝《元陽洞》 »
-  # à arbitrer — version.columns.9 : converti du simplifié au traditionnel : « 王陽明傳習錄卷上 » → « 王陽明傳習錄捲上 »
   - slug: shu-hu-hun-dun
     title: 儵忽混沌
     status: made
@@ -425,7 +425,7 @@ pieces:
           - 學者須先立定心體
           - 心未定而求明必流於妄
           - 心定之後明自生焉
-          - 王陽明傳習錄捲上
+          - 王陽明傳習錄卷上
           - 傳不習乎
           - 孔子《論語》
           - 不慌不忙無心無為
@@ -488,7 +488,6 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 按指示做，聚精会神。注意放心，容忍鬆胯。 » → « 按指示做，聚精會神。注意放心，容忍鬆胯。 »
   - slug: an-zhi-shi-zuo-zhu-yi-fang-xin
     title: 按指示做 // 注意放心
     status: made
@@ -577,8 +576,6 @@ pieces:
         - （罗）羅 掠和 // 软烟罗
         - 占花名儿
         - 胡思乱想
-  # à arbitrer — title : converti du simplifié au traditionnel : « 换劲明暗 » → « 換勁明暗 »
-  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 外明而内暗 » → « 外明而內暗 »
   - slug: huan-jin-ming-an
     title: 換勁明暗
     status: made
@@ -598,10 +595,6 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 看破红尘 » → « 看破紅塵 »
-  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 石人斤戈澤宇朱砂 » → « 石人斤戈澤宇硃砂 »
-  # à arbitrer — version.columns.1 : converti du simplifié au traditionnel : « 斫伐歌劲看出心中 » → « 斫伐歌勁看出心中 »
-  # à arbitrer — version.columns.2 : converti du simplifié au traditionnel : « 碧眼番齋看破红尘 » → « 碧眼番齋看破紅塵 »
   - slug: kan-po-hong-chen
     title: 看破紅塵
     status: made
@@ -612,7 +605,7 @@ pieces:
         date: 2026-01-15
         format: 4x8
         columns:
-          - 石人斤戈澤宇硃砂
+          - 石人斤戈澤宇朱砂
           - 斫伐歌勁看出心中
           - 碧眼番齋看破紅塵
           - 戈興奮蒙澤屯宇王
@@ -697,7 +690,6 @@ pieces:
       url: ""
       relations:
         - 看破红尘
-  # à arbitrer — title : converti du simplifié au traditionnel : « 宝玉四首诗（原文 — 五言律诗） » → « 寶玉四首詩（原文 — 五言律詩） »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: bao-yu-si-shou-shi-yuan-wen-wu-yan-lu-shi
     title: 寶玉四首詩（原文 — 五言律詩）
@@ -716,7 +708,6 @@ pieces:
       url: ""
       relations:
         - 螃蟹讽刺 🦀
-  # à arbitrer — title : converti du simplifié au traditionnel : « 虚心實腹 » → « 虛心實腹 »
   # date du papier : signé 丙午雨水 (Notion disait 2026-01-21)
   # format du scan 2026-10-11_07_01.jpeg : pas de bambous (Notion disait 3x7 （+ bambous）) ;
   # attribution 中和集 hors colonnes
@@ -832,7 +823,6 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — version.columns.6 : converti du simplifié au traditionnel : « 無泄真陽開六合 » → « 無洩真陽開六合 »
   - slug: meshkah
     title: مشكاة • MESHKAH
     status: in-progress
@@ -849,7 +839,7 @@ pieces:
           - 百會湧泉筒子裡
           - 肉骨分離筋聯系
           - 流逆水坎穴起勁
-          - 無洩真陽開六合
+          - 無泄真陽開六合
           - 心音唱腔修中和
           - 默默靜聽神根行
         variations: []
@@ -951,7 +941,6 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — title : converti du simplifié au traditionnel : « 鑄劍 // 轻吹 » → « 鑄劍 // 輕吹 »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zhu-jian-qing-chui
     title: 鑄劍 // 輕吹
@@ -1008,9 +997,7 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — title : converti du simplifié au traditionnel : « 一枝軒亿橤塗位 » → « 一枝軒億橤塗位 »
   # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns.0 : converti du simplifié au traditionnel : « 一枝軒亿橤塗位 » → « 一枝軒億橤塗位 »
   # à arbitrer — version.columns : « L’arche d’une haute bran… » ressemble à une note plutôt qu'à une colonne
   # à arbitrer — version.columns : « Une branche courbe offre… » ressemble à une note plutôt qu'à une colonne
   - slug: yi-zhi-xuan-yi-rui-tu-wei
@@ -1051,8 +1038,6 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — title : converti du simplifié au traditionnel : « 自题相 » → « 自題相 »
-  # à arbitrer — version.columns.2 : converti du simplifié au traditionnel : « 勘破三千法，參同十七師。低頭叉手處，泄盡那些兒。 » → « 勘破三千法，參同十七師。低頭叉手處，洩盡那些兒。 »
   - slug: zi-ti-xiang
     title: 自題相
     status: in-progress
@@ -1065,7 +1050,7 @@ pieces:
         columns:
           - 自題相
           - 面黃肌瘦子，看來有甚奇。分明喬眼孔，剛道絕聞知。
-          - 勘破三千法，參同十七師。低頭叉手處，洩盡那些兒。
+          - 勘破三千法，參同十七師。低頭叉手處，洩盡那些兒。 # 洩, variante de 泄 (Notion : 泄)
           - 中和集
         variations: []
     notion:
@@ -1073,7 +1058,6 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 竖横 《卓菴》 NPL » → « 豎橫 《卓菴》 NPL »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: shu-heng-zhuo-an-npl
     title: 豎橫 《卓菴》 NPL
@@ -1094,7 +1078,6 @@ pieces:
       relations:
         - 中和集
         - 方圆
-  # à arbitrer — title : converti du simplifié au traditionnel : « 造化钟神秀, 阴阳割昏晓。杜甫《登泰山》 » → « 造化鍾神秀, 陰陽割昏曉。杜甫《登泰山》 »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zao-hua-zhong-shen-xiu-yin-yang-ge-hun-xiao-du-fu-deng-tai
     title: 造化鍾神秀, 陰陽割昏曉。杜甫《登泰山》
@@ -1149,7 +1132,6 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 点化 // 点画 » → « 點化 // 點畫 »
   - slug: dian-hua-dian-hua
     title: 點化 // 點畫
     status: in-progress
@@ -1351,7 +1333,6 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 修竹参差 » → « 修竹參差 »
   # à arbitrer — version.format : aucun format dans l'export
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   # scan attendu
@@ -1422,7 +1403,6 @@ pieces:
       url: ""
       relations:
         - 調身
-  # à arbitrer — title : converti du simplifié au traditionnel : « 调息 » → « 調息 »
   # à arbitrer — version.format : aucun format dans l'export
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: diao-xi
@@ -1519,7 +1499,6 @@ pieces:
       url: ""
       relations:
         - مشكاة • MESHKAH
-  # à arbitrer — title : converti du simplifié au traditionnel : « 螃蟹讽刺 🦀 » → « 螃蟹諷刺 🦀 »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: pang-xie-feng-ci
     title: 螃蟹諷刺 🦀
@@ -1558,12 +1537,11 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « （罗）羅 掠和 // 软烟罗 » → « （羅）羅 掠和 // 軟煙羅 »
   # à refaire
   # date du papier : 惊蟄 26, 驚 écrit 惊 en simplifié (Notion disait 2026-03-13)
   # colonnes lues sur le scan 2026-10-11_09_01 (Notion disait 羅 / 羅掠和 / 軟煙 （= 软烟）)
   - slug: luo-luo-lue-he-ruan-yan-luo
-    title: （羅）羅 掠和 // 軟煙羅
+    title: （罗）羅 掠和 // 軟煙羅 # 罗 en simplifié à dessein, comme sur le papier
     status: made
     projects:
       - tai-xu-huan-jing-hong-lou-meng
@@ -1612,18 +1590,21 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 磨砺〔﹣礪〕 » → « 磨礪〔﹣礪〕 »
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: mo-li-li
-    title: 磨礪〔﹣礪〕
+  # page Notion 磨砺〔﹣礪〕 : son texte, choisi à l'arbitrage du lot 1, est le premier vers du
+  # 警世賢文 ; 苦練 le commente
+  - slug: bao-jian-feng-cong-mo-li-chu-ku-lian
+    title: 寶劍鋒從磨礪出 // 苦練
     status: experiment
-    projects: []
+    projects:
+      - yi-jin-jing
     published: false
     versions:
       - id: v1
         date: 2026-03-23
-        format: 1x2 2x5
-        columns: []
+        format: 1x7 + 1x2 # Notion : 1x2 2x5
+        columns:
+          - 寶劍鋒從磨礪出
+          - 苦練
         variations: []
     notion:
       title: 磨砺〔﹣礪〕
@@ -1631,18 +1612,20 @@ pieces:
       url: ""
       relations:
         - 易筋经
-  # à arbitrer — title : converti du simplifié au traditionnel : « 易筋经 » → « 易筋經 »
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # à arbitrer — version.columns : quel passage du 易筋經 ? seul l'avertissement est connu
   - slug: yi-jin-jing
     title: 易筋經
     status: idea
-    projects: []
+    projects:
+      - yi-jin-jing
     published: false
     versions:
       - id: v1
         date: 2026-03-23
         format: à préciser
-        columns: []
+        columns:
+          - 不依指示做 # avertissement sur le côté, à lire avant de commencer ; d'après 懷讓 :
+          - 磨磚豈成鏡 # 磨磚既不成鏡，坐禪豈得成佛
         variations: []
     notion:
       title: 易筋经
@@ -1677,7 +1660,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-03-29
-        format: Grand (recouvrir 修真后内外火候图）
+        format: Grand (recouvrir 修真後內外火候圖） # Notion : 修真后内外火候图
         columns: []
         variations: []
     notion:
@@ -1694,7 +1677,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-03-29
-        format: 45x90 cm （couvrir 心性图）
+        format: 45x90 cm （couvrir 心性圖） # Notion : 心性图
         columns: []
         variations: []
     notion:
@@ -1789,7 +1772,6 @@ pieces:
       status: Préparée
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 四威仪 行住坐臥 » → « 四威儀 行住坐臥 »
   # à arbitrer — version.format : aucun format dans l'export
   - slug: si-wei-yi-xing-zhu-zuo-wo
     title: 四威儀 行住坐臥
@@ -1808,10 +1790,9 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 占花名儿 » → « 佔花名兒 »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: zhan-hua-ming-er
-    title: 佔花名兒
+    title: 占花名兒
     status: idea
     projects:
       - tai-xu-huan-jing-hong-lou-meng
@@ -1828,7 +1809,6 @@ pieces:
       url: ""
       relations:
         - 太虚幻境红楼梦
-  # à arbitrer — title : converti du simplifié au traditionnel : « 胡思乱想 » → « 胡思亂想 »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: hu-si-luan-xiang
     title: 胡思亂想
@@ -1905,7 +1885,6 @@ pieces:
       status: Brute
       url: https://claude.ai/share/5dc17005-056f-4406-bcb8-ff80e37b231a
       relations: []
-  # à arbitrer — title : converti du simplifié au traditionnel : « 假作真时真亦假 » → « 假作真時真亦假 »
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: jia-zuo-zhen-shi-zhen-yi-jia
     title: 假作真時真亦假
@@ -2585,3 +2564,19 @@ pieces:
                 file: v1a.jpg
                 kind: work
                 featured: true
+  # absente de Notion : née de l'arbitrage du lot 1 (#17), le second vers du 警世賢文 ;
+  # 下功夫 le commente
+  - slug: mei-hua-xiang-zi-ku-han-lai-xia-gong-fu
+    title: 梅花香自苦寒來 // 下功夫
+    status: idea
+    projects:
+      - yi-jin-jing
+    published: false
+    versions:
+      - id: v1
+        date: 2026-10-19
+        format: à préciser
+        columns:
+          - 梅花香自苦寒來
+          - 下功夫
+        variations: []
