@@ -698,12 +698,13 @@ pieces:
       relations:
         - 中和集
   # absente de Notion : née de l'arbitrage du lot 3 (#17), un vers du 《原道歌》 (6ᵉ quatrain),
-  # pour le 紅樓夢 : le 金鎖 de 寶釵 et le 玉 de 寶玉
+  # pour le 紅樓夢 : le 金鎖 de 寶釵 et le 玉 de 寶玉 ; et dans le projet 易筋經
   - slug: yu-suo-jin-jia-qi-jie-tuo
     title: 玉鎖金枷齊解脫
     status: idea
     projects:
       - tai-xu-huan-jing-hong-lou-meng
+      - yi-jin-jing
     published: false
     source:
       author: 李道純
@@ -953,7 +954,7 @@ pieces:
         - 過猶不及，方向堅定不移，方法因地制宜
   # 李道純《中和集》卷四, 歌, 《龍虎歌》並引 (正統道藏, zh.wikisource) : la citation de 紫陽 dans la préface,
   # jusqu'à 神仙之能事畢矣, puis 勉旃勉旃, qui clôt la préface, les vers 5-6 et le dernier vers du chant
-  # à arbitrer — version.format : 89 caractères, le cadre imprimé 1x7 + 4*(2x7) en tient 63
+  # pas de format : trop de choses à prendre dans le texte (lot 3) ; le cadre imprimé 1x7 + 4*(2x7) n'est plus le sien
   - slug: long-hu-ge-mian-zhan-mian-zhan
     title: 《龍虎歌》勉旃勉旃
     status: in-progress
@@ -968,7 +969,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-01-26
-        format: 1x7 + 4*(2x7)
+        format: à préciser
         columns:
           - 紫陽云
           - 收拾身心

@@ -1,8 +1,8 @@
 # Plan Notion — à arbitrer
 
 État au 2026-10-19, après le lot 3. Le plan `notion-2026-08-23.plan.yaml`
-porte 93 pièces et 12 projets ; il reste **49** `# à arbitrer`, sur 21
-pièces et les 12 projets. Les 72 autres pièces, dont les 36 qui ont un scan,
+porte 93 pièces et 12 projets ; il reste **48** `# à arbitrer`, sur 20
+pièces et les 12 projets. Les 73 autres pièces, dont les 36 qui ont un scan,
 n'ont plus rien à arbitrer. Le suivi se fait par les `# à arbitrer` du plan :
 ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
 
@@ -109,16 +109,18 @@ gardés en référence dans `docs/sources/zhong-he-ji.md`. Leçons gardées :
 - `yuan-dao-ge` 《原道歌》 : 浮華亂目孰回光 / 薄霧牽情誰返照 ; le poème
   entier viendra en nouvelle version (`intention`).
 - **Nouvelle idée `yu-suo-jin-jia-qi-jie-tuo`** 玉鎖金枷齊解脫, un vers du
-  《原道歌》, dans le projet du 紅樓夢 : le 金鎖 de 寶釵, le 玉 de 寶玉.
+  《原道歌》, dans le projet du 紅樓夢 (le 金鎖 de 寶釵, le 玉 de 寶玉) et dans
+  celui du 易筋經.
 - `xuan-li-ge` 《玄理歌》 : du second chant, les vers 1-2 (治人事天莫若嗇…)
-  et 13-20, les trois 息.
+  et 13-20, les trois 息 ; elle ne rejoint pas `qi-gong`.
 - `hui-jian` 《慧劍》 est retirée : trop précieuse pour être calligraphiée.
 - `ri-yong` 《日用》 et `jiao-he` 《交合》, en paire : le 七律, puis le titre
   en `2x4`, 中和集詩 / 工夫日用 et 中和集詩 / 工夫交合.
 - `long-hu-ge-mian-zhan-mian-zhan` : de la préface, la citation de 紫陽
   (收拾身心，謂之降伏龍虎…) jusqu'à 神仙之能事畢矣, puis 勉旃勉旃, les vers
-  青青白白太分明 / 也是無風自起浪 et 徹底掀翻參學畢. **Reste le format** :
-  89 caractères, le cadre imprimé `1x7 + 4*(2x7)` en tient 63.
+  青青白白太分明 / 也是無風自起浪 et 徹底掀翻參學畢. Pas de format : il y a
+  trop à prendre dans le texte ; le cadre imprimé `1x7 + 4*(2x7)` n'est plus
+  le sien.
 
 Leçons douteuses non tranchées, hors des étendues retenues : 野雲翕 (翁 ?),
 部天地 (剖 ?), 誰敢覬 (覷 ?), et dans le `full_text` du 龍虎歌 以卸天 (御),
