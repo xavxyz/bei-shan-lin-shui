@@ -252,7 +252,6 @@ pieces:
       status: Brute
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: fang-yuan
     title: 方圓
     status: idea
@@ -262,7 +261,8 @@ pieces:
       - id: v1
         date: 2025-12-30
         format: à préciser
-        columns: []
+        columns:
+          - 方圓
         variations: []
     notion:
       title: 方圆
@@ -293,7 +293,7 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # à refaire en grand
   - slug: zhong-he-ji
     title: 中和集
     status: made
@@ -303,8 +303,9 @@ pieces:
     versions:
       - id: v1
         date: 2025-12-31
-        format: 🤯
-        columns: []
+        format: 1x3
+        columns:
+          - 中和集
         variations: []
     notion:
       title: 中和集
@@ -505,17 +506,21 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: jing-zhong-qiu-dong
-    title: 靜中求動
+  # Notion : 靜中求動. Le titre du dixième point de 楊澄甫《太極拳說十要》 est 十、動中求靜 :
+  # 太極拳以靜禦動，雖動猶靜. 靜中求動 ne se trouve dans aucun classique ; le plus proche est
+  # 靜中觸動動猶靜 (《十三勢歌》)
+  - slug: dong-zhong-qiu-jing
+    title: 動中求靜
     status: idea
-    projects: []
+    projects:
+      - yang-cheng-fu-zhi-tai-ji-quan-shi-yao
     published: false
     versions:
       - id: v1
         date: 2026-01-11
         format: à préciser
-        columns: []
+        columns:
+          - 動中求靜
         variations: []
     notion:
       title: 靜中求動
@@ -1019,7 +1024,8 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 李道純《中和集》卷五, 詩, 《自得》, cinquième des sept poèmes (正統道藏, zh.wikisource) ;
+  # le titre de Notion en est le premier vers
   - slug: zi-de-shen-xin-ding
     title: 自得身心定
     status: idea
@@ -1030,7 +1036,15 @@ pieces:
       - id: v1
         date: 2026-02-11
         format: à préciser
-        columns: []
+        columns:
+          - 自得身心定
+          - 凝神固氣精 # 气 dans le 道藏
+          - 身閒超有漏
+          - 心寂證無生
+          - 烏兔從來去
+          - 乾坤任變更
+          - 廓然無所礙
+          - 獨露大光明
         variations: []
     notion:
       title: 自得身心定
@@ -1059,6 +1073,8 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 《卓菴》 二首 : 李道純《中和集》卷五, 詩 (« dresser son ermitage ») ; 豎橫 vient du distique
+  # 直豎須彌柱，橫安太極楹 du premier poème (正統道藏, zh.wikisource)
   - slug: shu-heng-zhuo-an-npl
     title: 豎橫 《卓菴》 NPL
     status: idea
@@ -1078,9 +1094,10 @@ pieces:
       relations:
         - 中和集
         - 方圆
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: zao-hua-zhong-shen-xiu-yin-yang-ge-hun-xiao-du-fu-deng-tai
-    title: 造化鍾神秀, 陰陽割昏曉。杜甫《登泰山》
+  # Notion : 造化钟神秀, 阴阳割昏晓。杜甫《登泰山》. Le distique est le deuxième vers de 《望嶽》
+  # (岱宗夫如何), sur le 泰山 ; 杜甫 n'a pas de 《登泰山》 (全唐詩 卷216, zh.wikisource)
+  - slug: zao-hua-zhong-shen-xiu-yin-yang-ge-hun-xiao
+    title: 造化鍾神秀，陰陽割昏曉
     status: idea
     projects: []
     published: false
@@ -1088,7 +1105,10 @@ pieces:
       - id: v1
         date: 2026-02-11
         format: à préciser
-        columns: []
+        columns:
+          - 造化鍾神秀
+          - 陰陽割昏曉
+          - 杜甫《望嶽》
         variations: []
     notion:
       title: 造化钟神秀, 阴阳割昏晓。杜甫《登泰山》
@@ -1157,8 +1177,7 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # à refaire, papier introuvable
   - slug: ji-jing-zhong-she-xin
     title: 寂靜中攝心
     status: made
@@ -1167,17 +1186,20 @@ pieces:
     versions:
       - id: v1
         date: 2026-02-15
-        format: à préciser
-        columns: []
+        format: 1x5 # supposé : le papier est introuvable
+        columns:
+          - 寂靜中攝心
         variations: []
     notion:
       title: 寂靜中攝心
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: wei-er-bu-fan-he-er-bu-tong
-    title: 威而不犯和而不同
+  # Notion : 威而不犯, sans source classique ; le calligraphe prend 威而不猛 du 論語 (述而 :
+  # 子溫而厲，威而不猛，恭而安 ; 堯曰). 和而不同 : 論語, 子路 (君子和而不同，小人同而不和).
+  # Une composition : imposant sans être dur, en harmonie sans se confondre
+  - slug: wei-er-bu-meng-he-er-bu-tong
+    title: 威而不猛和而不同
     status: idea
     projects: []
     published: false
@@ -1185,7 +1207,9 @@ pieces:
       - id: v1
         date: 2026-02-16
         format: à préciser
-        columns: []
+        columns:
+          - 威而不猛
+          - 和而不同
         variations: []
     notion:
       title: 威而不犯和而不同
@@ -1221,8 +1245,7 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # produite en 3 exemplaires : demander les photos de contexte
   - slug: xin-nian-kuai-le-ma-dao-cheng-gong
     title: 新年快樂，馬到成功
     status: made
@@ -1231,8 +1254,10 @@ pieces:
     versions:
       - id: v1
         date: 2026-02-17
-        format: à préciser
-        columns: []
+        format: 2x4
+        columns:
+          - 新年快樂
+          - 馬到成功
         variations: []
     notion:
       title: 新年快樂，馬到成功
@@ -1333,8 +1358,6 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   # scan attendu
   - slug: xiu-zhu-can-cha
     title: 修竹參差
@@ -1345,8 +1368,9 @@ pieces:
     versions:
       - id: v1
         date: 2026-02-27
-        format: à préciser
-        columns: []
+        format: 1x4
+        columns:
+          - 修竹參差
         variations: []
     notion:
       title: 修竹参差
@@ -1384,7 +1408,6 @@ pieces:
       url: ""
       relations:
         - 五氣朝元 / 身心平衡
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   - slug: wu-qi-chao-yuan-shen-xin-ping-heng
     title: 五氣朝元 / 身心平衡
     status: in-progress
@@ -1395,7 +1418,9 @@ pieces:
       - id: v1
         date: 2026-03-03
         format: 2x4
-        columns: []
+        columns:
+          - 五氣朝元
+          - 身心平衡
         variations: []
     notion:
       title: 五氣朝元 / 身心平衡
@@ -1404,11 +1429,13 @@ pieces:
       relations:
         - 調身
   # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # à arbitrer — version.columns : texte à retrouver dans un livre de Yang Jwing-Ming ;
+  # sa sœur 調身 (diao-shen) porte trois vers de 7
   - slug: diao-xi
     title: 調息
     status: experiment
-    projects: []
+    projects:
+      - qi-gong
     published: false
     versions:
       - id: v1
@@ -1442,11 +1469,13 @@ pieces:
       url: ""
       relations: []
   # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # à arbitrer — version.columns : texte à retrouver dans un livre de Yang Jwing-Ming ;
+  # sa sœur 調身 (diao-shen) porte trois vers de 7
   - slug: diao-xin
     title: 調心
     status: experiment
-    projects: []
+    projects:
+      - qi-gong
     published: false
     versions:
       - id: v1
@@ -1636,8 +1665,7 @@ pieces:
       url: ""
       relations:
         - 磨砺〔﹣礪〕
-  # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 莊子, 養生主 : 方今之時，臣以神遇而不以目視，官知止而神欲行 (zh.wikisource)
   - slug: shen-yu
     title: 神遇
     status: experiment
@@ -1646,8 +1674,10 @@ pieces:
     versions:
       - id: v1
         date: 2026-03-28
-        format: à préciser
-        columns: []
+        format: 1x2 + 1x9
+        columns:
+          - 庖丁
+          - 臣以神遇而不以目視
         variations: []
     notion:
       title: 神遇
@@ -1871,34 +1901,29 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: tai-xu-huan-jing-ji-shi-zhen-ru-fu-di
-    title: 太虛幻境即是真如福地
+  # deux pages Notion réunies à l'arbitrage du lot 2 : 太虛幻境即是真如福地 et 假作真时真亦假
+  # (https://claude.ai/share/5dc17005-056f-4406-bcb8-ff80e37b231a). Une pièce en trois feuilles :
+  # l'arche du 太虛幻境 à l'aller (紅樓夢, chapitres 1 et 5), celle du 真如福地 au retour
+  # (chapitre 116, où le roman dit 牌樓) ; chaque distique répond à l'autre vers pour vers
+  - slug: hong-lou-meng-pai-lou-lian
+    title: 紅樓夢牌樓聯
     status: idea
-    projects: []
+    projects:
+      - tai-xu-huan-jing-hong-lou-meng
     published: false
     versions:
       - id: v1
         date: 2026-07-12
         format: à préciser
-        columns: []
-        variations: []
-    notion:
-      title: 太虛幻境即是真如福地
-      status: Brute
-      url: https://claude.ai/share/5dc17005-056f-4406-bcb8-ff80e37b231a
-      relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: jia-zuo-zhen-shi-zhen-yi-jia
-    title: 假作真時真亦假
-    status: idea
-    projects: []
-    published: false
-    versions:
-      - id: v1
-        date: 2026-07-12
-        format: à préciser
-        columns: []
+        columns:
+          - 紅樓夢 # feuille 1
+          - 太虛幻境即是真如福地
+          - 太虛幻境 # feuille 2
+          - 假作真時真亦假
+          - 無為有處有還無
+          - 真如福地 # feuille 3
+          - 假去真來真勝假 # 胜 sur zh.wikisource, résidu de simplifié
+          - 無原有是有非無
         variations: []
     notion:
       title: 假作真时真亦假
