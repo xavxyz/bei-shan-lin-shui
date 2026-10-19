@@ -1591,9 +1591,9 @@ pieces:
       url: ""
       relations: []
   # page Notion 磨砺〔﹣礪〕 : son texte, choisi à l'arbitrage du lot 1, est le premier vers du
-  # 警世賢文 ; 苦練 le commente
+  # 警世賢文 ; 苦煉 le commente
   - slug: bao-jian-feng-cong-mo-li-chu-ku-lian
-    title: 寶劍鋒從磨礪出 // 苦練
+    title: 寶劍鋒從磨礪出 // 苦煉
     status: experiment
     projects:
       - yi-jin-jing
@@ -1604,7 +1604,7 @@ pieces:
         format: 1x7 + 1x2 # Notion : 1x2 2x5
         columns:
           - 寶劍鋒從磨礪出
-          - 苦練
+          - 苦煉 # 煉 pour 練 : le corps s'exerce, mais le feu de l'esprit l'affine, s'il suit l'avertissement de yi-jin-jing
         variations: []
     notion:
       title: 磨砺〔﹣礪〕

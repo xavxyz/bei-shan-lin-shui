@@ -45,7 +45,7 @@ accepte tout.
 - **Projet `yi-jin-jing`** 易筋經, désigné par le calligraphe : la pièce
   `yi-jin-jing`, avec sur le côté l'avertissement 不依指示做，磨磚豈成鏡 ;
   `mo-li-li` devenue `bao-jian-feng-cong-mo-li-chu-ku-lian` (寶劍鋒從磨礪出
-  // 苦練) ; une nouvelle idée, `mei-hua-xiang-zi-ku-han-lai-xia-gong-fu`
+  // 苦煉) ; une nouvelle idée, `mei-hua-xiang-zi-ku-han-lai-xia-gong-fu`
   (梅花香自苦寒來 // 下功夫).
 
 ## Lot 2 — le titre est le texte, et l'échafaudage (15 pièces)
