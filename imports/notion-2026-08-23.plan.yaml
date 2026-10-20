@@ -1773,7 +1773,7 @@ pieces:
   # consigne en langue moderne, puis la sentence de 懷讓 avec le 豈 classique
   - slug: yi-jin-jing
     title: 易筋經
-    status: idea
+    status: in-progress # grilles imprimées pour v1, v2 et v3
     projects:
       - yi-jin-jing
     published: false
