@@ -70,7 +70,7 @@ scans:
 
   - file: 2026-10-11_05_01.jpeg
     read: [眞作假時假亦真, 無為有處有還無, 太虚幻境紅樓夢]
-    match: tai-xu-huan-jing-hong-lou-meng
+    match: hong-lou-meng
     confidence: high
     script: kaishu
     variation: v1a # kept ; dans le plan
