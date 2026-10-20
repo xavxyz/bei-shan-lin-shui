@@ -17,3 +17,6 @@ imports/scans/
 
 # Worktrees des agents Claude Code
 /.claude/worktrees/
+
+# Métadonnées du Finder de macOS
+.DS_Store
