@@ -1,29 +1,18 @@
 # Scans en lot : un sous-agent par scan
 
-Quand le calligraphe demande de traiter tous les scans en attente d'un coup.
-Chaque sous-agent lit **un** scan et écrit **lui-même** son entrée au
-registre ; la session principale orchestre et ne lit aucune image, n'écrit
-rien dans le registre ni dans le plan. Le plan n'est pas touché : tout ce qui
-sort d'un lot est `# à arbitrer`.
+Quand le calligraphe demande de traiter tous les scans en attente d'un coup. Chaque sous-agent lit **un** scan et écrit **lui-même** son entrée au registre ; la session principale orchestre et ne lit aucune image, n'écrit rien dans le registre ni dans le plan. Le plan n'est pas touché : tout ce qui sort d'un lot est `# à arbitrer`.
 
 ## 1. Inventaire
 
-Comme l'étape 1 de `SKILL.md`, puis écrire la liste des scans en attente,
-triée, dans `/tmp/scans-todo.txt`. Annoncer le nombre de scans et attendre le
-feu vert.
+Comme l'étape 1 de `SKILL.md`, puis écrire la liste des scans en attente, triée, dans `/tmp/scans-todo.txt`. Annoncer le nombre de scans et attendre le feu vert.
 
 ## 2. Vagues
 
-Au plus **20 sous-agents en même temps** : c'est la limite de l'outil, et
-chaque lancement au-delà échoue. Lancer les 20 premiers, puis un nouveau à
-chaque fin de sous-agent, jusqu'à épuisement de la liste.
+Au plus **20 sous-agents en même temps** : c'est la limite de l'outil, et chaque lancement au-delà échoue. Lancer les 20 premiers, puis un nouveau à chaque fin de sous-agent, jusqu'à épuisement de la liste.
 
-Le prompt de chaque sous-agent est celui ci-dessous, avec `__FILE__` (le nom du
-scan) et `__SIBLINGS__` (les autres feuilles de la même pièce, ou `aucune`)
-remplacés. Le générer par `sed` depuis ce fichier plutôt que le réécrire.
+Le prompt de chaque sous-agent est celui ci-dessous, avec `__FILE__` (le nom du scan) et `__SIBLINGS__` (les autres feuilles de la même pièce, ou `aucune`) remplacés. Le générer par `sed` depuis ce fichier plutôt que le réécrire.
 
-À chaque retour, ne relayer au calligraphe qu'une ligne : le scan, le match, la
-confiance. Noter les erreurs de validation rapportées pour la passe finale.
+À chaque retour, ne relayer au calligraphe qu'une ligne : le scan, le match, la confiance. Noter les erreurs de validation rapportées pour la passe finale.
 
 Fini quand chaque scan de la liste a son entrée au registre, une seule :
 
@@ -35,11 +24,7 @@ sort /tmp/scans-done.txt | uniq -d                  # doublons
 
 ## 3. Passe finale
 
-Un dernier sous-agent remet les entrées dans l'ordre des noms de fichier, lance
-`pnpm exec prettier --write imports/scans.yaml` puis `pnpm validate:imports`,
-et corrige jusqu'à ce que la validation passe. Une valeur que le vocabulaire
-refuse devient un commentaire `# à arbitrer — <champ> proposé : <valeur>`,
-jamais une valeur perdue.
+Un dernier sous-agent remet les entrées dans l'ordre des noms de fichier, lance `pnpm exec prettier --write imports/scans.yaml` puis `pnpm validate:imports`, et corrige jusqu'à ce que la validation passe. Une valeur que le vocabulaire refuse devient un commentaire `# à arbitrer — <champ> proposé : <valeur>`, jamais une valeur perdue.
 
 Fini quand `pnpm validate:imports` passe.
 

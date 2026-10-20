@@ -1,7 +1,6 @@
 # 背山臨水
 
-Soutenu par le maître, je suis les vagues — carnet de calligraphie chinoise : suivi du
-travail sur le disque, site public bâti à partir du même contenu.
+Soutenu par le maître, je suis les vagues — carnet de calligraphie chinoise : suivi du travail sur le disque, site public bâti à partir du même contenu.
 
 ## Démarrer
 
@@ -29,14 +28,9 @@ packages/content/        le content layer et le validateur
 apps/site/               le site Astro, ses îlots React et les tests E2E
 ```
 
-Le site lit `content/` par défaut ; `CONTENT_ROOT` permet de le pointer
-ailleurs, ce dont se servent les tests de bout en bout.
+Le site lit `content/` par défaut ; `CONTENT_ROOT` permet de le pointer ailleurs, ce dont se servent les tests de bout en bout.
 
-`BSLS_ADMIN=1` active le mode admin, en local seulement, au `dev` comme au
-`build` : le site montre aussi les pièces non publiées, à leur URL, dans leurs
-projets et leurs décomptes, et les marque « non publiée ». Le build admin sort
-dans `apps/site/dist-admin`, jamais dans `dist` ; le déploiement ne l'active
-pas.
+`BSLS_ADMIN=1` active le mode admin, en local seulement, au `dev` comme au `build` : le site montre aussi les pièces non publiées, à leur URL, dans leurs projets et leurs décomptes, et les marque « non publiée ». Le build admin sort dans `apps/site/dist-admin`, jamais dans `dist` ; le déploiement ne l'active pas.
 
 ```sh
 BSLS_ADMIN=1 pnpm --filter @bsls/site dev
@@ -44,13 +38,9 @@ BSLS_ADMIN=1 pnpm --filter @bsls/site dev
 
 ## Déploiement
 
-`netlify.toml` décrit le build. Le branchement du dépôt à Netlify se fait une
-fois, à la main :
+`netlify.toml` décrit le build. Le branchement du dépôt à Netlify se fait une fois, à la main :
 
-1. Sur [app.netlify.com](https://app.netlify.com), _Add new site → Import an
-   existing project_, choisir ce dépôt GitHub.
-2. Laisser Netlify lire `netlify.toml` : commande
-   `pnpm --filter @bsls/site build`, publication `apps/site/dist`.
+1. Sur [app.netlify.com](https://app.netlify.com), _Add new site → Import an existing project_, choisir ce dépôt GitHub.
+2. Laisser Netlify lire `netlify.toml` : commande `pnpm --filter @bsls/site build`, publication `apps/site/dist`.
 3. Garder le sous-domaine `*.netlify.app` proposé ; aucun domaine personnalisé.
-4. Vérifier que _Deploy Previews_ est activé pour les pull requests (c'est le
-   réglage par défaut).
+4. Vérifier que _Deploy Previews_ est activé pour les pull requests (c'est le réglage par défaut).
