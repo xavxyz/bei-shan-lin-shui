@@ -1746,9 +1746,10 @@ pieces:
       url: ""
       relations: []
   # page Notion 磨砺〔﹣礪〕 : son texte, choisi à l'arbitrage du lot 1, est le premier vers du
-  # 警世賢文 ; 苦煉 le commente
+  # 警世賢文 ; 苦煉 en est le sujet, en grand et en premier, et le vers l'explique, plus petit
+  # (calligraphe) : le slug garde l'ordre ancien
   - slug: bao-jian-feng-cong-mo-li-chu-ku-lian
-    title: 寶劍鋒從磨礪出 // 苦煉
+    title: 苦煉 // 寶劍鋒從磨礪出
     status: experiment
     projects:
       - yi-jin-jing
@@ -1756,10 +1757,10 @@ pieces:
     versions:
       - id: v1
         date: 2026-03-23
-        format: 1x7 + 1x2 # Notion : 1x2 2x5
+        format: "[(1x2, 1x7)]" # le mot d'abord (calligraphe) ; Notion : 1x2 2x5
         columns:
-          - 寶劍鋒從磨礪出
           - 苦煉 # 煉 pour 練 : le corps s'exerce, mais le feu de l'esprit l'affine, s'il suit l'avertissement de yi-jin-jing
+          - 寶劍鋒從磨礪出
         variations: []
     notion:
       title: 磨砺〔﹣礪〕
@@ -1767,24 +1768,50 @@ pieces:
       url: ""
       relations:
         - 易筋经
-  # à arbitrer — version.columns : quel passage du 易筋經 ? seul l'avertissement est connu
-  # 按 plutôt que 依 : 依 (亻, s'appuyer sur le maître) s'accorde mieux au registre classique
-  # de 豈, mais 按 est un mot du taijiquan qui va avec le 易筋經, et fait écho à 按指示做
-  # (an-zhi-shi-zuo-zhu-yi-fang-xin)
+  # le texte se réduit au titre et à l'avertissement : aucun passage du 易筋經 n'est écrit (calligraphe)
+  # 按 plutôt que 依 : 按 est un mot du taijiquan qui va avec le 易筋經, et fait écho à 按指示做
+  # (an-zhi-shi-zuo-zhu-yi-fang-xin) ; le contraste de registre est voulu (calligraphe) : la
+  # consigne en langue moderne, puis la sentence de 懷讓 avec le 豈 classique
   - slug: yi-jin-jing
     title: 易筋經
-    status: idea
+    status: in-progress # grilles imprimées pour v1, v2 et v3
     projects:
       - yi-jin-jing
     published: false
     versions:
       - id: v1
         date: 2026-03-23
-        format: à préciser
+        format: "[(1x3), (2x5)]"
         columns:
-          - 不按指示做 # avertissement sur le côté, à lire avant de commencer ; d'après 懷讓 :
+          - 易筋經 # le titre du texte, la première colonne (calligraphe)
+          - 不按指示做 # l'avertissement est tout le texte qui suit ; d'après 懷讓 :
           - 磨磚豈成鏡 # 磨磚既不成鏡，坐禪豈得成佛
-        variations: []
+        variations:
+          - id: v1a
+            script: kaishu
+            status: to-try
+      - id: v2
+        date: 2026-10-20
+        format: "[(3x5)]"
+        columns:
+          - 易筋經
+          - 不按指示做
+          - 磨磚豈成鏡
+        variations:
+          - id: v2a
+            script: xingshu
+            status: to-try
+      - id: v3
+        date: 2026-10-20
+        format: "[(1x3), (2x5)]"
+        columns:
+          - 易筋經
+          - 不按指示做
+          - 磨磚豈成鏡
+        variations:
+          - id: v3a
+            script: ziyou
+            status: to-try
     notion:
       title: 易筋经
       status: Brute
@@ -2720,9 +2747,10 @@ pieces:
                 kind: work
                 featured: true
   # absente de Notion : née de l'arbitrage du lot 1 (#17), le second vers du 警世賢文 ;
-  # 下功夫 le commente
+  # 下功夫 en est le sujet, en grand et en premier, et le vers l'explique, plus petit
+  # (calligraphe) : le slug garde l'ordre ancien
   - slug: mei-hua-xiang-zi-ku-han-lai-xia-gong-fu
-    title: 梅花香自苦寒來 // 下功夫
+    title: 下功夫 // 梅花香自苦寒來
     status: idea
     projects:
       - yi-jin-jing
@@ -2730,8 +2758,8 @@ pieces:
     versions:
       - id: v1
         date: 2026-10-19
-        format: à préciser
+        format: "[(1x3, 1x7)]"
         columns:
-          - 梅花香自苦寒來
           - 下功夫
+          - 梅花香自苦寒來
         variations: []

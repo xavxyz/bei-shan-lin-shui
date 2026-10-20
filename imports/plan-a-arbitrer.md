@@ -62,10 +62,10 @@ zoomée 2 à 5k.
 - Deux formats en simplifié, sans marque, convertis : `修真後內外火候圖`
   (`xing-qi-yu-pei-ming`), `心性圖` (`bai-zi-bei`).
 - **Projet `yi-jin-jing`** 易筋經, désigné par le calligraphe : la pièce
-  `yi-jin-jing`, avec sur le côté l'avertissement 不按指示做，磨磚豈成鏡 ;
-  `mo-li-li` devenue `bao-jian-feng-cong-mo-li-chu-ku-lian` (寶劍鋒從磨礪出
-  // 苦煉) ; une nouvelle idée, `mei-hua-xiang-zi-ku-han-lai-xia-gong-fu`
-  (梅花香自苦寒來 // 下功夫).
+  `yi-jin-jing`, dont l'avertissement 不按指示做，磨磚豈成鏡 est tout le texte ;
+  `mo-li-li` devenue `bao-jian-feng-cong-mo-li-chu-ku-lian` (苦煉 //
+  寶劍鋒從磨礪出) ; une nouvelle idée, `mei-hua-xiang-zi-ku-han-lai-xia-gong-fu`
+  (下功夫 // 梅花香自苦寒來). Le mot est le sujet, le vers l'explique.
 
 ## Lot 2 — fait
 
@@ -135,7 +135,7 @@ Pour le lot 5 : le 述工夫十七首 contient un 《鑄劍》, qui éclaire peu
 
 `tai-shang-lao-jun-shuo-chang-qing-jing-jing` 《太上老君說常清靜經》 ·
 `xing-qi-yu-pei-ming` 行氣玉佩銘 · `bai-zi-bei` 百字碑 · `yi-jin-jing`
-易筋經 (quel passage ? l'avertissement est posé) · `pang-xie-feng-ci` 螃蟹諷刺 (le 螃蟹詠 de 寶釵,
+易筋經 (pas de passage : l'avertissement 不按指示做，磨磚豈成鏡 est tout le texte) · `pang-xie-feng-ci` 螃蟹諷刺 (le 螃蟹詠 de 寶釵,
 chapitre 38) · `diao-xi` 調息 et `diao-xin` 調心 (dans un livre de Yang
 Jwing-Ming, que le calligraphe n'a pas sous la main).
 
