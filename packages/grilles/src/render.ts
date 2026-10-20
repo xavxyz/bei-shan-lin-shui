@@ -9,7 +9,7 @@ export type Candidate = {
   text: PouredText;
 };
 
-type SheetSummary = SheetLayout & { characters: number };
+type SheetSummary = SheetLayout & { groups: Sheet; characters: number };
 
 export type RenderInput = {
   title: string;
@@ -24,9 +24,27 @@ const ORIENTATIONS = { portrait: "portrait", landscape: "paysage" } as const;
 /** `A · [(13x7)]` : le nom d'un format candidat, dans la commande et sur la page. */
 export const candidateLabel = (candidate: Candidate) => `${candidate.key} · ${candidate.format}`;
 
+const GROUP_ORIENTATIONS = { v: "vertical", h: "horizontal" } as const;
+
+const plural = (count: number, word: string) => `${count} ${word}${count > 1 ? "s" : ""}`;
+
+/**
+ * Les groupes d'une feuille : `10 colonnes` quand tous sont verticaux, sinon
+ * chacun avec son orientation, `1x7 vertical, 1x4 horizontal, 1x7 vertical`.
+ */
+const groupsLine = (groups: Sheet) =>
+  groups.every((group) => group.orientation === "v")
+    ? plural(
+        groups.reduce((sum, group) => sum + group.lines, 0),
+        "colonne",
+      )
+    : groups
+        .map((group) => `${group.lines}x${group.length} ${GROUP_ORIENTATIONS[group.orientation]}`)
+        .join(", ");
+
 /** La ligne d'une feuille, dans la commande et sous la feuille. */
 export const sheetLine = (sheet: SheetSummary, index: number) =>
-  `feuille ${index + 1} · ${ORIENTATIONS[sheet.orientation]} · carreau ${sheet.cell.toFixed(1)} mm · ${sheet.columns.length} colonnes · ${sheet.characters} caractères`;
+  `feuille ${index + 1} · ${ORIENTATIONS[sheet.orientation]} · carreau ${sheet.cell.toFixed(1)} mm · ${groupsLine(sheet.groups)} · ${sheet.characters} caractères`;
 
 /** Ce que la commande dit de chaque format candidat, et ce que la page affiche sous ses feuilles. */
 export function describeCandidate(candidate: Candidate): {
@@ -35,6 +53,7 @@ export function describeCandidate(candidate: Candidate): {
 } {
   const sheets = candidate.sheets.map((sheet, index) => ({
     ...layoutSheet(sheet),
+    groups: sheet,
     characters: candidate.text.sheets[index]!.flat().join("").length,
   }));
   const notes = [
@@ -56,22 +75,32 @@ const escape = (text: string) =>
 
 const mm = (value: number) => Number(value.toFixed(2));
 
-function renderSheet(layout: SheetSummary, columns: string[], index: number): string {
+/**
+ * Une colonne se lit de haut en bas, une ligne de droite à gauche : la case
+ * `k` d'une ligne est la `k`-ième à partir de son bord droit.
+ */
+function renderSheet(layout: SheetSummary, texts: string[], index: number): string {
   const { width, height, cell } = layout;
   const lines: string[] = [];
   const glyphs: string[] = [];
-  layout.columns.forEach((box, c) => {
-    lines.push(
-      `<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(cell)}" height="${mm(cell * box.rows)}"/>`,
-    );
-    for (let r = 1; r < box.rows; r++) {
-      const y = mm(box.y + r * cell);
-      lines.push(`<line x1="${mm(box.x)}" y1="${y}" x2="${mm(box.x + cell)}" y2="${y}"/>`);
+  layout.lines.forEach((box, l) => {
+    const vertical = box.orientation === "v";
+    const [w, h] = vertical ? [cell, cell * box.length] : [cell * box.length, cell];
+    lines.push(`<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(w)}" height="${mm(h)}"/>`);
+    for (let k = 1; k < box.length; k++) {
+      if (vertical) {
+        const y = mm(box.y + k * cell);
+        lines.push(`<line x1="${mm(box.x)}" y1="${y}" x2="${mm(box.x + cell)}" y2="${y}"/>`);
+      } else {
+        const x = mm(box.x + k * cell);
+        lines.push(`<line x1="${x}" y1="${mm(box.y)}" x2="${x}" y2="${mm(box.y + cell)}"/>`);
+      }
     }
-    [...(columns[c] ?? "")].forEach((character, r) => {
-      glyphs.push(
-        `<text x="${mm(box.x + cell / 2)}" y="${mm(box.y + (r + 0.5) * cell)}">${escape(character)}</text>`,
-      );
+    [...(texts[l] ?? "")].forEach((character, k) => {
+      const [x, y] = vertical
+        ? [box.x + cell / 2, box.y + (k + 0.5) * cell]
+        : [box.x + w - (k + 0.5) * cell, box.y + cell / 2];
+      glyphs.push(`<text x="${mm(x)}" y="${mm(y)}">${escape(character)}</text>`);
     });
   });
   const band = layout.inscription;

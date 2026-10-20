@@ -3,14 +3,22 @@ import { stringify } from "yaml";
 import { writeTree } from "@bsls/content/test-support";
 import { generateGrids, summarize, type GridRequest } from "./index.js";
 
+type Box = { x: number; y: number; width: number; height: number };
+
 type PrintedSheet = {
   width: number;
   height: number;
-  /** Chaque colonne, en millimètres, dans l'ordre de lecture : de droite à gauche. */
-  columns: { x: number; y: number; width: number; height: number }[];
-  /** Le texte de chaque colonne. */
+  /**
+   * Chaque colonne ou ligne de cases, en millimètres, dans l'ordre de lecture :
+   * de droite à gauche, et de haut en bas à bord droit égal.
+   */
+  columns: Box[];
+  /** Le texte de chaque colonne, lu de haut en bas, ou de chaque ligne, lu de droite à gauche. */
   text: string[];
 };
+
+const inside = (glyph: { x: number; y: number }, box: Box) =>
+  glyph.x > box.x && glyph.x < box.x + box.width && glyph.y > box.y && glyph.y < box.y + box.height;
 
 /** Les feuilles telles que la page les imprime, par format candidat. */
 function printedSheets(html: string): Record<string, PrintedSheet[]> {
@@ -26,7 +34,7 @@ function printedSheets(html: string): Record<string, PrintedSheet[]> {
           ...figure.matchAll(/<rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"/g),
         ]
           .map(([, x, y, w, h]) => ({ x: +x!, y: +y!, width: +w!, height: +h! }))
-          .sort((a, b) => b.x - a.x);
+          .sort((a, b) => b.x + b.width - (a.x + a.width) || a.y - b.y);
         const glyphs = [
           ...figure
             .split('class="characters"')[1]!
@@ -34,8 +42,8 @@ function printedSheets(html: string): Record<string, PrintedSheet[]> {
         ].map(([, x, y, character]) => ({ x: +x!, y: +y!, character: character! }));
         const text = columns.map((box) =>
           glyphs
-            .filter((glyph) => glyph.x > box.x && glyph.x < box.x + box.width)
-            .sort((a, b) => a.y - b.y)
+            .filter((glyph) => inside(glyph, box))
+            .sort((a, b) => (box.height >= box.width ? a.y - b.y : b.x - a.x))
             .map((glyph) => glyph.character)
             .join(""),
         );
@@ -92,6 +100,91 @@ describe("la notation des formats", () => {
     });
     expect(!result.ok && result.message).toContain(
       "« A4 vertical » — attendu « [ » à la position 1",
+    );
+  });
+
+  it("lit l'orientation de chaque groupe, v par défaut, et refuse un suffixe inconnu en disant où", async () => {
+    const { sheets } = await grids(piece("2x5", LONG_HU_GE), {
+      slug: "shan-ju",
+      formats: ["[(1x3, 2x7)]", "[(1x3v, 2x7V)]"],
+    });
+    expect(sheets.B).toEqual(sheets.A);
+
+    const result = await generateGrids({
+      root: await writeTree(piece("[(1x7, 1x4d, 1x7)]", LONG_HU_GE)),
+      slug: "shan-ju",
+    });
+    expect(!result.ok && result.message).toContain(
+      "« [(1x7, 1x4d, 1x7)] » — orientation « d » inconnue, attendu « v » ou « h » à la position 10",
+    );
+  });
+});
+
+describe("le groupe horizontal", () => {
+  const PAI_LOU = ["假作真時真亦假", "太虛幻境", "無為有處有還無"];
+
+  it("pose le 橫批 sur le linteau, les colonnes pendant sous lui, et laisse vide le passage", async () => {
+    const { sheets } = await grids(piece("[(1x7, 1x4h, 1x7)]", PAI_LOU), { slug: "shan-ju" });
+    const [right, lintel, left] = sheets.A![0]!.columns;
+    const cell = right!.width;
+
+    expect(right!.height).toBeCloseTo(7 * cell, 1);
+    expect(left!.height).toBeCloseTo(7 * cell, 1);
+    expect(lintel!.width).toBeCloseTo(4 * cell, 1);
+    expect(lintel!.height).toBeCloseTo(cell, 1);
+    // les colonnes commencent un demi-carreau sous le 橫批
+    expect(right!.y - (lintel!.y + lintel!.height)).toBeCloseTo(cell / 2, 1);
+    expect(left!.y).toBeCloseTo(right!.y, 1);
+    // centré entre les colonnes, un demi-carreau de chaque côté
+    expect(right!.x - (lintel!.x + lintel!.width)).toBeCloseTo(cell / 2, 1);
+    expect(lintel!.x - (left!.x + left!.width)).toBeCloseTo(cell / 2, 1);
+    // aucune case sous le 橫批 : le passage de l'arche
+    expect(sheets.A![0]!.columns).toHaveLength(3);
+  });
+
+  it("y fait tomber le texte dans l'ordre de lecture, le 橫批 de droite à gauche", async () => {
+    const { sheets } = await grids(piece("[(1x7, 1x4h, 1x7)]", PAI_LOU), { slug: "shan-ju" });
+    expect(sheets.A![0]!.text).toEqual(PAI_LOU);
+  });
+
+  it("empile ses lignes de haut en bas", async () => {
+    const { sheets } = await grids(piece("[(1x3, 2x2h, 1x3)]", ["紫陽云", "收拾身心", "降伏龍"]), {
+      slug: "shan-ju",
+    });
+    const [, first, second] = sheets.A![0]!.columns;
+    expect(second!.y - first!.y).toBeCloseTo(first!.height, 1);
+    expect(sheets.A![0]!.text).toEqual(["紫陽云", "收拾", "身心", "降伏龍"]);
+  });
+
+  it("fait pendre toutes les colonnes de la feuille sous le plus haut groupe horizontal, où qu'il soit", async () => {
+    const { sheets } = await grids(piece("2x5", LONG_HU_GE), {
+      slug: "shan-ju",
+      formats: ["[(1x4h, 2x7)]", "[(2x3h, 1x7, 1x2h)]"],
+    });
+
+    const [lintel, ...columns] = sheets.A![0]!.columns;
+    const cell = lintel!.height;
+    for (const column of columns) {
+      expect(column.y - (lintel!.y + cell)).toBeCloseTo(cell / 2, 1);
+    }
+
+    const [first, second, column, last] = sheets.B![0]!.columns;
+    expect(second!.y - first!.y).toBeCloseTo(first!.height, 1);
+    expect(last!.y).toBeCloseTo(first!.y, 1);
+    // sous les deux lignes du plus haut, et non sous la ligne unique du dernier
+    expect(column!.y - (second!.y + second!.height)).toBeCloseTo(first!.height / 2, 1);
+  });
+
+  it("dit l'orientation de chaque groupe dans le résumé", async () => {
+    const { summary } = await grids(piece("2x5", PAI_LOU), {
+      slug: "shan-ju",
+      formats: ["[(1x7, 1x4h, 1x7)]", "[(2x7)]"],
+    });
+    expect(summary).toContain(
+      "feuille 1 · portrait · carreau 24.3 mm · 1x7 vertical, 1x4 horizontal, 1x7 vertical · 18 caractères",
+    );
+    expect(summary).toContain(
+      "feuille 1 · portrait · carreau 38.1 mm · 2 colonnes · 14 caractères",
     );
   });
 });

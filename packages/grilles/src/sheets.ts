@@ -3,21 +3,26 @@
  * du texte dans les cases, mise en page sur A4. Tout est en millimètres.
  */
 
-/** `NxM` : N colonnes de M caractères. */
-export type Group = { columns: number; rows: number };
-/** Une feuille juxtapose ses groupes de colonnes, de droite à gauche. */
+/**
+ * `NxM` : N lignes de M caractères. Une ligne est une colonne lue de haut en
+ * bas (`v`, par défaut), ou une ligne lue de droite à gauche (`h`).
+ */
+export type Group = { lines: number; length: number; orientation: "v" | "h" };
+/** Une feuille juxtapose ses groupes, de droite à gauche. */
 export type Sheet = Group[];
 
 export type FormatResult = { ok: true; sheets: Sheet[] } | { ok: false; message: string };
 
 /**
  * Lit la notation des formats : `[(…), (…)]` est la suite des feuilles, et
- * chaque parenthèse les groupes `NxM` d'une feuille, N colonnes de M
- * caractères, séparés par des virgules. `[(1x3, 9x7), (1x4, 3x7)]` fait deux
- * feuilles de deux groupes chacune.
+ * chaque parenthèse les groupes `NxM` d'une feuille, séparés par des virgules.
+ * `[(1x3, 9x7), (1x4, 3x7)]` fait deux feuilles de deux groupes chacune.
+ * Un groupe est vertical, N colonnes de M caractères, sauf suffixé `h` :
+ * N lignes horizontales de M caractères, comme le 橫批 de `[(1x7, 1x4h, 1x7)]`.
+ * `v` explicite est accepté.
  */
 export function parseFormat(format: string): FormatResult {
-  const source = format.replace(/\s+/g, "").replace(/[×X]/g, "x");
+  const source = format.replace(/\s+/g, "").toLowerCase().replace(/×/g, "x");
   let at = 0;
 
   const fail = (expected: string): FormatResult => {
@@ -41,10 +46,13 @@ export function parseFormat(format: string): FormatResult {
     return Number(match[0]);
   };
   const group = (): Group | null => {
-    const columns = integer();
-    if (columns === null || !expect("x")) return null;
-    const rows = integer();
-    return rows === null ? null : { columns, rows };
+    const lines = integer();
+    if (lines === null || !expect("x")) return null;
+    const length = integer();
+    if (length === null) return null;
+    if (expect("h")) return { lines, length, orientation: "h" };
+    expect("v");
+    return { lines, length, orientation: "v" };
   };
 
   if (!expect("[")) return fail("attendu « [ »");
@@ -56,6 +64,8 @@ export function parseFormat(format: string): FormatResult {
       const next = group();
       if (!next) return fail("attendu NxM");
       sheet.push(next);
+      const suffix = /^[a-z]/.exec(source.slice(at));
+      if (suffix) return fail(`orientation « ${suffix[0]} » inconnue, attendu « v » ou « h »`);
     } while (expect(","));
     if (!expect(")")) return fail("attendu « , » ou « ) »");
     sheets.push(sheet);
@@ -99,7 +109,7 @@ function cleanColumn(column: string): string {
 export function pourText(sheets: Sheet[], columns: string[]): PouredText {
   const text = columns.map(cleanColumn).filter((column) => column.length > 0);
   const slots = sheets.flatMap((sheet) =>
-    sheet.flatMap((group) => Array.from({ length: group.columns }, () => group.rows)),
+    sheet.flatMap((group) => Array.from({ length: group.lines }, () => group.length)),
   );
   const cells = slots.reduce((sum, rows) => sum + rows, 0);
 
@@ -122,7 +132,7 @@ export function pourText(sheets: Sheet[], columns: string[]): PouredText {
 
   let index = 0;
   const poured = sheets.map((sheet) =>
-    sheet.map((group) => Array.from({ length: group.columns }, () => filled[index++] ?? "")),
+    sheet.map((group) => Array.from({ length: group.lines }, () => filled[index++] ?? "")),
   );
   const written = filled.reduce((sum, column) => sum + [...column].length, 0);
   return {
@@ -142,10 +152,11 @@ const A4 = { short: 210, long: 297 } as const;
 const MARGIN = 15;
 /** Marge de gauche, réservée au 落款. */
 const INSCRIPTION = 25;
-/** Écart entre deux groupes de colonnes, en carreaux. */
+/** Écart entre deux groupes, en carreaux. */
 const GROUP_GAP = 0.5;
 
-type ColumnBox = { x: number; y: number; rows: number };
+/** Une colonne ou une ligne de cases : son coin haut gauche, et son nombre de cases. */
+export type LineBox = { x: number; y: number; length: number; orientation: "v" | "h" };
 
 export type SheetLayout = {
   orientation: "portrait" | "landscape";
@@ -153,21 +164,42 @@ export type SheetLayout = {
   height: number;
   /** Côté d'un carreau. */
   cell: number;
-  /** Colonnes dans l'ordre de lecture : la première est la plus à droite. */
-  columns: ColumnBox[];
+  /**
+   * Colonnes et lignes dans l'ordre de lecture : les groupes de droite à
+   * gauche, et dans un groupe horizontal ses lignes de haut en bas.
+   */
+  lines: LineBox[];
   /** Bande du 落款, le long du bord gauche. */
   inscription: { x: number; y: number; width: number; height: number };
 };
 
+/** Largeur et hauteur d'un groupe, en carreaux. */
+const extent = (group: Group) =>
+  group.orientation === "v"
+    ? { across: group.lines, down: group.length }
+    : { across: group.length, down: group.lines };
+
 /**
- * Place une feuille sur A4 : l'orientation retenue est celle qui donne les
- * plus grands carreaux ; le bloc est centré entre les marges, colonnes
- * alignées en haut, un demi-carreau entre deux groupes.
+ * Place une feuille sur A4. Chaque groupe est un bloc : un groupe vertical a
+ * N carreaux de large et M de haut, un groupe horizontal M de large et N de
+ * haut. Les blocs se suivent de droite à gauche, un demi-carreau entre deux.
+ * Les groupes horizontaux sont alignés en haut ; quand la feuille en a, tous
+ * ses groupes verticaux commencent sous le plus haut d'entre eux, un
+ * demi-carreau plus bas. Entre deux colonnes, le 橫批 d'un 牌樓 est ainsi sur
+ * le linteau, centré, les colonnes pendant sous lui de part et d'autre du
+ * passage vide. L'orientation retenue est celle qui donne les plus grands
+ * carreaux, et l'ensemble est centré entre les marges.
  */
 export function layoutSheet(sheet: Sheet): SheetLayout {
-  const columns = sheet.reduce((sum, group) => sum + group.columns, 0);
-  const rows = Math.max(...sheet.map((group) => group.rows));
-  const span = columns + (sheet.length - 1) * GROUP_GAP;
+  const extents = sheet.map(extent);
+  const span =
+    extents.reduce((sum, { across }) => sum + across, 0) + (sheet.length - 1) * GROUP_GAP;
+  const downs = (orientation: Group["orientation"]) =>
+    sheet.flatMap((group, i) => (group.orientation === orientation ? [extents[i]!.down] : []));
+  const lintel = Math.max(0, ...downs("h"));
+  /** Où commencent les colonnes, en carreaux sous le haut du bloc. */
+  const hang = lintel > 0 ? lintel + GROUP_GAP : 0;
+  const rows = Math.max(lintel, ...downs("v").map((down) => hang + down));
 
   const fit = (width: number, height: number) =>
     Math.min((width - MARGIN - INSCRIPTION) / span, (height - 2 * MARGIN) / rows);
@@ -182,14 +214,20 @@ export function layoutSheet(sheet: Sheet): SheetLayout {
   const right = width - MARGIN - (area - span * cell) / 2;
   const top = (height - rows * cell) / 2;
 
-  const boxes: ColumnBox[] = [];
+  const lines: LineBox[] = [];
   let offset = 0;
   sheet.forEach((group, index) => {
     if (index > 0) offset += GROUP_GAP * cell;
-    for (let i = 0; i < group.columns; i++) {
-      boxes.push({ x: right - offset - cell, y: top, rows: group.rows });
-      offset += cell;
+    const { across } = extents[index]!;
+    for (let i = 0; i < group.lines; i++) {
+      const { length, orientation } = group;
+      lines.push(
+        orientation === "v"
+          ? { x: right - offset - (i + 1) * cell, y: top + hang * cell, length, orientation }
+          : { x: right - offset - across * cell, y: top + i * cell, length, orientation },
+      );
     }
+    offset += across * cell;
   });
 
   return {
@@ -197,7 +235,7 @@ export function layoutSheet(sheet: Sheet): SheetLayout {
     width,
     height,
     cell,
-    columns: boxes,
+    lines,
     inscription: { x: 0, y: MARGIN, width: INSCRIPTION, height: height - 2 * MARGIN },
   };
 }
