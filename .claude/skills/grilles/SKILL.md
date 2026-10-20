@@ -47,12 +47,13 @@ Fini quand chaque format est en notation `NxM` et que le texte est arrêté.
 
 ```sh
 pnpm grilles long-hu-ge-mian-zhan-mian-zhan \
-  --format '13x7' \
   --format '(1x3 + 9x7) + (1x4 + 3x7)' \
-  --texte '紫陽云/收拾身心謂之…/勉旃勉旃/青青白白太分明/…'
+  --format '13x7'
 ```
 
-`--version vN` vise une autre version que la dernière ; `--out` déplace la
+Sans `--format`, la page prend le format de la version ; avec, les formats
+donnés le remplacent : le redonner pour le comparer. `--texte` ne sert qu'à
+une version sans colonnes. `--version vN` vise une autre version que la dernière ; `--out` déplace la
 page, écrite par défaut dans `grilles/<slug>.html`, que git ignore.
 
 La commande résume chaque variante : orientation, taille du carreau,
