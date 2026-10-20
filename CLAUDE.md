@@ -24,6 +24,9 @@ source de vérité : le contenu vit sur le disque, le site en est une projection
   — version, variation, image ; `packages/scans` et `packages/notion-import`
   s'y branchent.
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
+- `docs/sources/` — les textes de référence, traduits vers par vers pour
+  choisir l'étendue des pièces. Ils survivent au plan d'import, mais
+  n'arbitrent rien : l'étendue retenue vit dans la pièce (ADR 0002).
 
 ## Règles qui tiennent le système
 
