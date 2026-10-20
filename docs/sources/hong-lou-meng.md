@@ -110,12 +110,11 @@ livre extraordinaire, y écrivirent quatre vers » (後人見了這本奇傳，�
 
 | 原文         | traduction (Pléiade, chapitre 120)             |
 | ------------ | ---------------------------------------------- |
-| 說到辛酸處， | Aux passages d'aigreur ou même d'acreté,       |
+| 說到辛酸處， | Aux passages d'aigreur ou même d'âcreté,       |
 | 荒唐愈可悲。 | L'exagération n'en devient que plus vaine ;    |
 | 由來同一夢， | Du début à la fin, tout y semble rêvé,         |
 | 休笑世人痴！ | Mais ne vous gaussez pas de la folie humaine ! |
 
-- « acreté » est tel que relevé ; à vérifier sur le livre (« âcreté » ?).
 - Le quatrain répond à celui du chapitre 1, où l'auteur présente son livre :
   「滿紙荒唐言，一把辛酸淚！都云作者痴，誰解其中味？」 (荒唐, 辛酸 et 痴 y sont
   déjà).
