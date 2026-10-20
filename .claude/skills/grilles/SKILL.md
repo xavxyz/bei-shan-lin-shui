@@ -104,8 +104,20 @@ Fini quand chaque format candidat tient le texte comme le calligraphe le veut.
 
 ## 4. Remettre
 
-Donner au calligraphe le lien `file://` imprimé par la commande, avec ce
-mode d'emploi :
+Donner au calligraphe le lien `file://` imprimé par la commande, et pour
+chaque format candidat de quoi l'ouvrir dans Chrome, directement sur lui :
+une commande à taper dans la conversation, le lien suffixé de `?candidat=`
+et de la lettre du résumé.
+
+```sh
+! open -a 'Google Chrome' 'file:///…/grilles/yi-jin-jing.html?candidat=B'
+```
+
+Avec plusieurs pages, une commande par page et par candidat, dans un tableau
+qui les nomme. Ouvrir soi-même par `open -a 'Google Chrome' '<lien>'` si le
+calligraphe le demande.
+
+Puis ce mode d'emploi :
 
 - `←` `→`, ou la barre du bas, basculent entre les formats candidats ;
 - **Caractères** : affichés, en calque (très pâles, pour écrire par-dessus),
