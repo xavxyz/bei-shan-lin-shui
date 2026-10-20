@@ -52,15 +52,17 @@ de large et M de haut, un groupe `h` M de large et N de haut. Les blocs se
 suivent de droite à gauche, un demi-carreau entre deux. Les groupes `h` sont
 en haut ; dès qu'il y en a un, tous les groupes verticaux de la feuille
 commencent sous le plus haut d'entre eux, un demi-carreau plus bas. Entre deux
-colonnes, le 橫批 est ainsi sur le linteau, centré, et les colonnes pendent
-sous lui de part et d'autre du passage vide. La règle vaut aussi pour un
-groupe `h` en premier ou en dernier, et pour plusieurs groupes `h`. Le carreau
-reste commun à la feuille.
+colonnes, le 橫批 est ainsi sur le linteau, et les colonnes pendent sous lui
+de part et d'autre du passage vide ; il n'est centré au-dessus du passage que
+si les groupes qui l'encadrent sont symétriques, comme dans
+`[(1x7, 1x4h, 1x7)]`. La règle vaut aussi pour un groupe `h` en premier ou en
+dernier, et pour plusieurs groupes `h`. Le carreau reste commun à la feuille.
 
-Le texte tombe dans l'ordre des groupes, qui est l'ordre de lecture : pour
+Le texte tombe dans l'ordre des groupes, de droite à gauche : pour
 `[(1x7, 1x4h, 1x7)]`, le 上聯 (colonne de droite), le 橫批, le 下聯 (colonne
 de gauche). Si les colonnes de la version sont dans un autre ordre, le 橫批 en
-premier par exemple, passer le texte réordonné par `--texte`.
+premier par exemple, les réordonner dans la version, ou passer le texte
+réordonné par `--texte`.
 
 Un format qui n'est pas une grille (`A4 vertical`), ou encore écrit dans
 l'ancienne notation (`1x3 + 2*(4x5) + 1x3`), se réécrit avec le calligraphe
@@ -78,16 +80,22 @@ pnpm grilles long-hu-ge-mian-zhan-mian-zhan \
 ```
 
 Sans `--format`, la page prend le format de la version ; avec, les formats
-candidats donnés le remplacent : le redonner pour le comparer. `--texte` ne
-sert qu'à une version sans colonnes. `--version vN` vise une autre version que
+candidats donnés le remplacent : le redonner pour le comparer. `--texte`
+remplace les colonnes de la version : pour une version sans colonnes, ou pour
+les réordonner. `--version vN` vise une autre version que
 la dernière ; `--out` déplace la page, écrite par défaut dans
 `grilles/<slug>.html`, que git ignore.
 
 La commande résume chaque format candidat : orientation, taille du carreau,
 groupes (chacun avec son orientation dès qu'un groupe est horizontal),
 caractères par feuille, et comment le texte est tombé. Quand le texte a
-autant de colonnes que la grille, chacune tombe dans la sienne ; sinon il
-coule dans l'ordre de lecture et peut couper un vers. Ce hasard est voulu :
+autant de colonnes que la grille de colonnes et de lignes, et que chacune
+tient dans la sienne, elles y tombent une à une ; sinon il coule dans l'ordre
+des groupes et peut couper un vers. Si les nombres sont égaux mais qu'une
+colonne ne tient pas, le résumé le signale et liste, pour chaque colonne du
+texte dont la longueur diffère, sa longueur et le groupe où elle devait
+tomber : c'est souvent un ordre à reprendre (le 橫批 en premier), à corriger
+avant de relancer. Ce hasard de la coulée, lui, est voulu :
 le dire au calligraphe, la coupure peut faire un contresens, fructueux ou
 non. Lire ce résumé avec lui : un débordement, des cases vides, ou une coupure
 qu'il ne veut pas se corrigent au texte ou au format, puis on relance.

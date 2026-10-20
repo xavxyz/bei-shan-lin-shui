@@ -9,11 +9,11 @@ type PrintedSheet = {
   width: number;
   height: number;
   /**
-   * Chaque colonne ou ligne de cases, en millimètres, dans l'ordre de lecture :
+   * Chaque rang (colonne ou ligne de cases), en millimètres, dans l'ordre des groupes :
    * de droite à gauche, et de haut en bas à bord droit égal.
    */
-  columns: Box[];
-  /** Le texte de chaque colonne, lu de haut en bas, ou de chaque ligne, lu de droite à gauche. */
+  ranks: Box[];
+  /** Le texte de chaque rang : une colonne lue de haut en bas, une ligne de droite à gauche. */
   text: string[];
 };
 
@@ -30,7 +30,7 @@ function printedSheets(html: string): Record<string, PrintedSheet[]> {
       .slice(1)
       .map((figure) => {
         const [, width, height] = /viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(figure)!.map(Number);
-        const columns = [
+        const ranks = [
           ...figure.matchAll(/<rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"/g),
         ]
           .map(([, x, y, w, h]) => ({ x: +x!, y: +y!, width: +w!, height: +h! }))
@@ -40,14 +40,14 @@ function printedSheets(html: string): Record<string, PrintedSheet[]> {
             .split('class="characters"')[1]!
             .matchAll(/<text x="([\d.]+)" y="([\d.]+)">(.)<\/text>/gu),
         ].map(([, x, y, character]) => ({ x: +x!, y: +y!, character: character! }));
-        const text = columns.map((box) =>
+        const text = ranks.map((box) =>
           glyphs
             .filter((glyph) => inside(glyph, box))
             .sort((a, b) => (box.height >= box.width ? a.y - b.y : b.x - a.x))
             .map((glyph) => glyph.character)
             .join(""),
         );
-        return { width: width!, height: height!, columns, text };
+        return { width: width!, height: height!, ranks, text };
       });
   }
   return candidates;
@@ -80,8 +80,8 @@ describe("la notation des formats", () => {
       slug: "shan-ju",
       formats: ["[(1x3, 9x7), (1x4, 3x7)]", "[(1x3), (4x5), (4x5), (1x3)]"],
     });
-    expect(sheets.A!.map((sheet) => sheet.columns.length)).toEqual([10, 4]);
-    expect(sheets.B!.map((sheet) => sheet.columns.length)).toEqual([1, 4, 4, 1]);
+    expect(sheets.A!.map((sheet) => sheet.ranks.length)).toEqual([10, 4]);
+    expect(sheets.B!.map((sheet) => sheet.ranks.length)).toEqual([1, 4, 4, 1]);
   });
 
   it("refuse l'ancienne notation, et dit comment l'écrire", async () => {
@@ -125,7 +125,7 @@ describe("le groupe horizontal", () => {
 
   it("pose le 橫批 sur le linteau, les colonnes pendant sous lui, et laisse vide le passage", async () => {
     const { sheets } = await grids(piece("[(1x7, 1x4h, 1x7)]", PAI_LOU), { slug: "shan-ju" });
-    const [right, lintel, left] = sheets.A![0]!.columns;
+    const [right, lintel, left] = sheets.A![0]!.ranks;
     const cell = right!.width;
 
     expect(right!.height).toBeCloseTo(7 * cell, 1);
@@ -139,7 +139,7 @@ describe("le groupe horizontal", () => {
     expect(right!.x - (lintel!.x + lintel!.width)).toBeCloseTo(cell / 2, 1);
     expect(lintel!.x - (left!.x + left!.width)).toBeCloseTo(cell / 2, 1);
     // aucune case sous le 橫批 : le passage de l'arche
-    expect(sheets.A![0]!.columns).toHaveLength(3);
+    expect(sheets.A![0]!.ranks).toHaveLength(3);
   });
 
   it("y fait tomber le texte dans l'ordre de lecture, le 橫批 de droite à gauche", async () => {
@@ -151,7 +151,7 @@ describe("le groupe horizontal", () => {
     const { sheets } = await grids(piece("[(1x3, 2x2h, 1x3)]", ["紫陽云", "收拾身心", "降伏龍"]), {
       slug: "shan-ju",
     });
-    const [, first, second] = sheets.A![0]!.columns;
+    const [, first, second] = sheets.A![0]!.ranks;
     expect(second!.y - first!.y).toBeCloseTo(first!.height, 1);
     expect(sheets.A![0]!.text).toEqual(["紫陽云", "收拾", "身心", "降伏龍"]);
   });
@@ -162,13 +162,13 @@ describe("le groupe horizontal", () => {
       formats: ["[(1x4h, 2x7)]", "[(2x3h, 1x7, 1x2h)]"],
     });
 
-    const [lintel, ...columns] = sheets.A![0]!.columns;
+    const [lintel, ...columns] = sheets.A![0]!.ranks;
     const cell = lintel!.height;
     for (const column of columns) {
       expect(column.y - (lintel!.y + cell)).toBeCloseTo(cell / 2, 1);
     }
 
-    const [first, second, column, last] = sheets.B![0]!.columns;
+    const [first, second, column, last] = sheets.B![0]!.ranks;
     expect(second!.y - first!.y).toBeCloseTo(first!.height, 1);
     expect(last!.y).toBeCloseTo(first!.y, 1);
     // sous les deux lignes du plus haut, et non sous la ligne unique du dernier
@@ -209,13 +209,13 @@ describe("la mise en page sur A4", () => {
       formats: ["[(13x7)]", "[(1x3, 9x7, 1x4, 3x7)]", "[(2x7)]", "[(1x4)]"],
     });
     for (const sheet of Object.values(sheets).flat()) {
-      const { columns, width, height } = sheet;
-      expect(Math.min(...columns.map((box) => box.x))).toBeGreaterThanOrEqual(25 - 0.01);
-      expect(width - Math.max(...columns.map((box) => box.x + box.width))).toBeGreaterThanOrEqual(
+      const { ranks, width, height } = sheet;
+      expect(Math.min(...ranks.map((box) => box.x))).toBeGreaterThanOrEqual(25 - 0.01);
+      expect(width - Math.max(...ranks.map((box) => box.x + box.width))).toBeGreaterThanOrEqual(
         15 - 0.01,
       );
-      expect(Math.min(...columns.map((box) => box.y))).toBeGreaterThanOrEqual(15 - 0.01);
-      expect(height - Math.max(...columns.map((box) => box.y + box.height))).toBeGreaterThanOrEqual(
+      expect(Math.min(...ranks.map((box) => box.y))).toBeGreaterThanOrEqual(15 - 0.01);
+      expect(height - Math.max(...ranks.map((box) => box.y + box.height))).toBeGreaterThanOrEqual(
         15 - 0.01,
       );
     }
@@ -223,7 +223,7 @@ describe("la mise en page sur A4", () => {
 
   it("lit de droite à gauche, un demi-carreau entre deux groupes", async () => {
     const { sheets } = await grids(piece("[(1x3, 2x7)]", LONG_HU_GE), { slug: "shan-ju" });
-    const [first, second, third] = sheets.A![0]!.columns;
+    const [first, second, third] = sheets.A![0]!.ranks;
     const cell = first!.width;
     expect(first!.x - second!.x).toBeCloseTo(1.5 * cell, 1);
     expect(second!.x - third!.x).toBeCloseTo(cell, 1);
@@ -237,6 +237,50 @@ describe("le texte dans les cases", () => {
     expect(sheets.A![0]!.text).toEqual(LONG_HU_GE);
     expect(summary).toContain("les colonnes du texte tombent une à une");
     expect(summary).toContain("1 cases restent vides");
+    expect(summary).not.toContain("du texte,");
+  });
+
+  it("signale, quand le texte a autant de colonnes que la grille, celles qui ne tombent pas dans la leur", async () => {
+    const { summary, sheets } = await grids(
+      piece("[(1x7, 1x4h, 1x7)]", ["太虛幻境", "假作真時真亦假", "無為有處有還無"]),
+      { slug: "shan-ju" },
+    );
+    expect(summary).toContain(
+      "les 3 colonnes du texte ne tombent pas une à une dans les 3 de la grille : réordonner le texte ou le format",
+    );
+    expect(summary).toContain(
+      "colonne 1 du texte, 4 caractères (太虛幻境), pour une colonne de 7 cases (feuille 1, groupe 1 · 1x7 vertical)",
+    );
+    expect(summary).toContain(
+      "colonne 2 du texte, 7 caractères (假作真時真亦假), pour une ligne de 4 cases (feuille 1, groupe 2 · 1x4 horizontal)",
+    );
+    expect(summary).not.toContain("colonne 3 du texte");
+    // le texte coule quand même
+    expect(sheets.A![0]!.text).toEqual(["太虛幻境假作真", "時真亦假", "無為有處有還無"]);
+  });
+
+  it("le signale aussi sans groupe horizontal", async () => {
+    const { summary } = await grids(
+      piece("[(1x3, 2x7)]", ["紫陽云收拾", "身心", "降伏龍虎心不動"]),
+      {
+        slug: "shan-ju",
+      },
+    );
+    expect(summary).toContain(
+      "colonne 1 du texte, 5 caractères (紫陽云收拾), pour une colonne de 3 cases (feuille 1, groupe 1 · 1x3 vertical)",
+    );
+    expect(summary).toContain(
+      "colonne 2 du texte, 2 caractères (身心), pour une colonne de 7 cases (feuille 1, groupe 2 · 2x7 vertical)",
+    );
+  });
+
+  it("dit quand le texte n'a pas autant de colonnes que la grille", async () => {
+    const { summary } = await grids(piece("[(1x3, 2x7)]", [...LONG_HU_GE, "紫陽"]), {
+      slug: "shan-ju",
+    });
+    expect(summary).toContain(
+      "le texte a 4 colonnes, la grille 3 : elles ne tombent pas une à une, reprendre le texte ou le format",
+    );
   });
 
   it("fait couler le texte sans ponctuation, prévient du contresens, et dit ce qui déborde", async () => {

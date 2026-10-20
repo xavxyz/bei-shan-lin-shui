@@ -1,4 +1,10 @@
-import { layoutSheet, type PouredText, type Sheet, type SheetLayout } from "./sheets.js";
+import {
+  groupLabel,
+  layoutSheet,
+  type PouredText,
+  type Sheet,
+  type SheetLayout,
+} from "./sheets.js";
 
 /** Un format mis en grilles pour être comparé aux autres. */
 export type Candidate = {
@@ -24,8 +30,6 @@ const ORIENTATIONS = { portrait: "portrait", landscape: "paysage" } as const;
 /** `A · [(13x7)]` : le nom d'un format candidat, dans la commande et sur la page. */
 export const candidateLabel = (candidate: Candidate) => `${candidate.key} · ${candidate.format}`;
 
-const GROUP_ORIENTATIONS = { v: "vertical", h: "horizontal" } as const;
-
 const plural = (count: number, word: string) => `${count} ${word}${count > 1 ? "s" : ""}`;
 
 /**
@@ -35,12 +39,10 @@ const plural = (count: number, word: string) => `${count} ${word}${count > 1 ? "
 const groupsLine = (groups: Sheet) =>
   groups.every((group) => group.orientation === "v")
     ? plural(
-        groups.reduce((sum, group) => sum + group.lines, 0),
+        groups.reduce((sum, group) => sum + group.ranks, 0),
         "colonne",
       )
-    : groups
-        .map((group) => `${group.lines}x${group.length} ${GROUP_ORIENTATIONS[group.orientation]}`)
-        .join(", ");
+    : groups.map(groupLabel).join(", ");
 
 /** La ligne d'une feuille, dans la commande et sous la feuille. */
 export const sheetLine = (sheet: SheetSummary, index: number) =>
@@ -56,11 +58,28 @@ export function describeCandidate(candidate: Candidate): {
     groups: sheet,
     characters: candidate.text.sheets[index]!.flat().join("").length,
   }));
-  const notes = [
-    candidate.text.mode === "columns"
-      ? "les colonnes du texte tombent une à une dans celles de la grille"
-      : "le texte coule dans les cases, dans l'ordre de lecture : une colonne peut couper un vers, et le contresens être fructueux ou non",
-  ];
+  const { mode, counts, mismatches } = candidate.text;
+  const notes: string[] = [];
+  if (mode === "columns") {
+    notes.push("les colonnes du texte tombent une à une dans celles de la grille");
+  } else {
+    if (mismatches.length > 0) {
+      notes.push(
+        `les ${counts.text} colonnes du texte ne tombent pas une à une dans les ${counts.grid} de la grille : réordonner le texte ou le format`,
+        ...mismatches.map(
+          (m) =>
+            `colonne ${m.column} du texte, ${[...m.text].length} caractères (${m.text}), pour une ${m.spec.orientation === "v" ? "colonne" : "ligne"} de ${m.spec.length} cases (feuille ${m.sheet}, groupe ${m.group} · ${groupLabel(m.spec)})`,
+        ),
+      );
+    } else if (counts.text !== counts.grid) {
+      notes.push(
+        `le texte a ${counts.text} colonnes, la grille ${counts.grid} : elles ne tombent pas une à une, reprendre le texte ou le format`,
+      );
+    }
+    notes.push(
+      "le texte coule dans les cases, dans l'ordre des groupes : une colonne peut couper un vers, et le contresens être fructueux ou non",
+    );
+  }
   if (candidate.text.overflow) {
     notes.push(
       `ne tient pas : ${[...candidate.text.overflow].length} caractères (${candidate.text.overflow})`,
@@ -76,27 +95,28 @@ const escape = (text: string) =>
 const mm = (value: number) => Number(value.toFixed(2));
 
 /**
- * Une colonne se lit de haut en bas, une ligne de droite à gauche : la case
- * `k` d'une ligne est la `k`-ième à partir de son bord droit.
+ * Un rang se lit de haut en bas s'il est une colonne, de droite à gauche s'il
+ * est une ligne : la case `k` d'une ligne est la `k`-ième à partir de son
+ * bord droit.
  */
 function renderSheet(layout: SheetSummary, texts: string[], index: number): string {
   const { width, height, cell } = layout;
-  const lines: string[] = [];
+  const strokes: string[] = [];
   const glyphs: string[] = [];
-  layout.lines.forEach((box, l) => {
+  layout.ranks.forEach((box, r) => {
     const vertical = box.orientation === "v";
     const [w, h] = vertical ? [cell, cell * box.length] : [cell * box.length, cell];
-    lines.push(`<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(w)}" height="${mm(h)}"/>`);
+    strokes.push(`<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(w)}" height="${mm(h)}"/>`);
     for (let k = 1; k < box.length; k++) {
       if (vertical) {
         const y = mm(box.y + k * cell);
-        lines.push(`<line x1="${mm(box.x)}" y1="${y}" x2="${mm(box.x + cell)}" y2="${y}"/>`);
+        strokes.push(`<line x1="${mm(box.x)}" y1="${y}" x2="${mm(box.x + cell)}" y2="${y}"/>`);
       } else {
         const x = mm(box.x + k * cell);
-        lines.push(`<line x1="${x}" y1="${mm(box.y)}" x2="${x}" y2="${mm(box.y + cell)}"/>`);
+        strokes.push(`<line x1="${x}" y1="${mm(box.y)}" x2="${x}" y2="${mm(box.y + cell)}"/>`);
       }
     }
-    [...(texts[l] ?? "")].forEach((character, k) => {
+    [...(texts[r] ?? "")].forEach((character, k) => {
       const [x, y] = vertical
         ? [box.x + cell / 2, box.y + (k + 0.5) * cell]
         : [box.x + w - (k + 0.5) * cell, box.y + cell / 2];
@@ -108,7 +128,7 @@ function renderSheet(layout: SheetSummary, texts: string[], index: number): stri
     <figure class="sheet ${layout.orientation}">
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}mm" height="${height}mm" viewBox="0 0 ${width} ${height}">
         <text class="inscription" x="${mm(band.x + band.width / 2)}" y="${mm(band.y + 4)}" font-size="5">落款</text>
-        <g class="grid">${lines.join("")}</g>
+        <g class="grid">${strokes.join("")}</g>
         <g class="characters" font-size="${mm(cell * 0.78)}">${glyphs.join("")}</g>
       </svg>
       <figcaption>${sheetLine(layout, index)}</figcaption>

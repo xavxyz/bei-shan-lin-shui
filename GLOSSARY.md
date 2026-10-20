@@ -46,8 +46,9 @@ _À éviter_ : cadre, cadre imprimé
 La disposition des colonnes d'une version sur ses feuilles, notée
 `[(1x3, 9x7), (1x4, 3x7)]` : une parenthèse par feuille, et dans chacune ses
 groupes de N colonnes de M caractères ; suffixé `h`, un groupe est fait de
-lignes horizontales, comme le 橫批 de `[(1x7, 1x4h, 1x7)]`. Un **format candidat** est un format
-mis en grille pour être comparé à d'autres avant d'écrire.
+lignes horizontales, comme le 橫批 de `[(1x7, 1x4h, 1x7)]`. Un **format
+candidat** est un format mis en grille pour être comparé à d'autres avant
+d'écrire.
 _À éviter_ : variante (pour un format candidat)
 
 ## Personnes
