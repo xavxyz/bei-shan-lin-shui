@@ -64,6 +64,26 @@ de gauche). Si les colonnes de la version sont dans un autre ordre, le 橫批 en
 premier par exemple, les réordonner dans la version, ou passer le texte
 réordonné par `--texte`.
 
+Proposer les candidats dans l'ordre classique, qui tient au rôle et non à la
+longueur : le titre ou l'en-tête (le 引首 d'un 手卷) en premier, à droite ;
+puis le 正文 ; puis ce qui le commente (款, 跋), à gauche, plus petit, souvent
+en colonne plus courte. Seul le 上款, la dédicace, peut précéder. Le rôle
+d'une colonne courte ne se devine pas : un mot qui condense le vers peut en
+être le sujet, en grand et en premier, le vers l'expliquant plus petit, comme
+un 款. Le demander au calligraphe quand le plan ne le dit pas. Ainsi
+`yi-jin-jing` : 易筋經 / 不按指示做 / 磨磚豈成鏡, le titre d'abord ; 苦煉 /
+寶劍鋒從磨礪出 et 下功夫 / 梅花香自苦寒來, le mot sujet d'abord.
+
+Un titre ou un mot sujet seul sur sa feuille, `[(1x2), (1x7)]`, y prend un
+grand carreau, et c'est sa place. Un 款 ou un 跋 seul sur la sienne renverse
+la hiérarchie : ne le proposer qu'en le disant.
+
+Quand un candidat met sur une même feuille deux parties de rangs différents,
+un mot sujet et son vers, un vers et son 款, dire au calligraphe, en le
+proposant comme en lisant le résumé, que le carreau commun leur fait des
+carreaux de même taille : il peut écrire plus petit à l'intérieur ; un
+carreau plus petit pour un groupe, les grilles ne savent pas le faire.
+
 Un format qui n'est pas une grille (`A4 vertical`), ou encore écrit dans
 l'ancienne notation (`1x3 + 2*(4x5) + 1x3`), se réécrit avec le calligraphe
 dans celle-ci : la commande le refuse et dit où elle bute.
@@ -100,12 +120,34 @@ le dire au calligraphe, la coupure peut faire un contresens, fructueux ou
 non. Lire ce résumé avec lui : un débordement, des cases vides, ou une coupure
 qu'il ne veut pas se corrigent au texte ou au format, puis on relance.
 
+Avant de lancer, regarder si la page existe déjà. Si elle n'existait pas,
+l'ouvrir dans Chrome dès qu'elle est écrite, avec le lien imprimé par la
+commande :
+
+```sh
+open -a 'Google Chrome' 'file:///…/grilles/yi-jin-jing.html'
+```
+
+Si elle existait, un onglet la montre sans doute déjà : ne pas en ouvrir un
+autre, dire au calligraphe de le recharger, et la rouvrir s'il l'a fermé.
+
 Fini quand chaque format candidat tient le texte comme le calligraphe le veut.
 
 ## 4. Remettre
 
-Donner au calligraphe le lien `file://` imprimé par la commande, avec ce
-mode d'emploi :
+Donner au calligraphe, pour chaque page, de quoi la rouvrir dans Chrome : une
+commande à taper dans la conversation, sur le lien `file://` imprimé par la
+commande. Avec plusieurs pages, une ligne par page dans un tableau qui les
+nomme.
+
+```sh
+! open -a 'Google Chrome' 'file:///…/grilles/yi-jin-jing.html'
+```
+
+Pas de commande par format candidat : le calligraphe navigue entre eux sur la
+page.
+
+Puis ce mode d'emploi :
 
 - `←` `→`, ou la barre du bas, basculent entre les formats candidats ;
 - **Caractères** : affichés, en calque (très pâles, pour écrire par-dessus),
