@@ -347,6 +347,12 @@ describe("les grilles d'une pièce", () => {
     expect(sheets.A![0]!.text).toEqual(["空山新雨後", "天氣晚來秋"]);
   });
 
+  it("titrent la page du nom de la pièce d'abord, pour la retrouver parmi les onglets", async () => {
+    const { html } = await grids(piece("[(2x5)]", ["空山新雨後", "天氣晚來秋"]), { slug: "shan-ju" });
+
+    expect(/<title>(.*)<\/title>/.exec(html)![1]).toBe("山居秋暝 — Grilles");
+  });
+
   it("refusent un plan invalide plutôt que de le passer sous silence", async () => {
     const result = await generateGrids({
       root: await writeTree({
