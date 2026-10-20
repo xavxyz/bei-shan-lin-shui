@@ -1746,9 +1746,10 @@ pieces:
       url: ""
       relations: []
   # page Notion 磨砺〔﹣礪〕 : son texte, choisi à l'arbitrage du lot 1, est le premier vers du
-  # 警世賢文 ; 苦煉 le commente
+  # 警世賢文 ; 苦煉 en est le sujet, en grand et en premier, et le vers l'explique, plus petit
+  # (calligraphe) : le slug garde l'ordre ancien
   - slug: bao-jian-feng-cong-mo-li-chu-ku-lian
-    title: 寶劍鋒從磨礪出 // 苦煉
+    title: 苦煉 // 寶劍鋒從磨礪出
     status: experiment
     projects:
       - yi-jin-jing
@@ -1756,10 +1757,10 @@ pieces:
     versions:
       - id: v1
         date: 2026-03-23
-        format: 1x7 + 1x2 # Notion : 1x2 2x5
+        format: à préciser # à arbitrer : 1x7 + 1x2 mettait le vers d'abord ; Notion : 1x2 2x5, le mot d'abord
         columns:
-          - 寶劍鋒從磨礪出
           - 苦煉 # 煉 pour 練 : le corps s'exerce, mais le feu de l'esprit l'affine, s'il suit l'avertissement de yi-jin-jing
+          - 寶劍鋒從磨礪出
         variations: []
     notion:
       title: 磨砺〔﹣礪〕
@@ -2746,9 +2747,10 @@ pieces:
                 kind: work
                 featured: true
   # absente de Notion : née de l'arbitrage du lot 1 (#17), le second vers du 警世賢文 ;
-  # 下功夫 le commente
+  # 下功夫 en est le sujet, en grand et en premier, et le vers l'explique, plus petit
+  # (calligraphe) : le slug garde l'ordre ancien
   - slug: mei-hua-xiang-zi-ku-han-lai-xia-gong-fu
-    title: 梅花香自苦寒來 // 下功夫
+    title: 下功夫 // 梅花香自苦寒來
     status: idea
     projects:
       - yi-jin-jing
@@ -2758,6 +2760,6 @@ pieces:
         date: 2026-10-19
         format: à préciser
         columns:
-          - 梅花香自苦寒來
           - 下功夫
+          - 梅花香自苦寒來
         variations: []

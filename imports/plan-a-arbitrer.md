@@ -63,9 +63,9 @@ zoomée 2 à 5k.
   (`xing-qi-yu-pei-ming`), `心性圖` (`bai-zi-bei`).
 - **Projet `yi-jin-jing`** 易筋經, désigné par le calligraphe : la pièce
   `yi-jin-jing`, dont l'avertissement 不按指示做，磨磚豈成鏡 est tout le texte ;
-  `mo-li-li` devenue `bao-jian-feng-cong-mo-li-chu-ku-lian` (寶劍鋒從磨礪出
-  // 苦煉) ; une nouvelle idée, `mei-hua-xiang-zi-ku-han-lai-xia-gong-fu`
-  (梅花香自苦寒來 // 下功夫).
+  `mo-li-li` devenue `bao-jian-feng-cong-mo-li-chu-ku-lian` (苦煉 //
+  寶劍鋒從磨礪出) ; une nouvelle idée, `mei-hua-xiang-zi-ku-han-lai-xia-gong-fu`
+  (下功夫 // 梅花香自苦寒來). Le mot est le sujet, le vers l'explique.
 
 ## Lot 2 — fait
 
