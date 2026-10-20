@@ -22,8 +22,7 @@ export type GridRequest = {
 };
 
 export type GridResult =
-  | { ok: true; html: string; variants: Variant[] }
-  | { ok: false; message: string };
+  { ok: true; html: string; variants: Variant[] } | { ok: false; message: string };
 
 /** Les feuilles quadrillées d'une pièce, une variante par format candidat. */
 export async function generateGrids(request: GridRequest): Promise<GridResult> {
@@ -36,7 +35,10 @@ export async function generateGrids(request: GridRequest): Promise<GridResult> {
     : piece.versions.at(-1);
   if (!version) {
     const ids = piece.versions.map((candidate) => candidate.id).join(", ");
-    return { ok: false, message: `${piece.slug} n'a pas de version ${request.version} (versions : ${ids})` };
+    return {
+      ok: false,
+      message: `${piece.slug} n'a pas de version ${request.version} (versions : ${ids})`,
+    };
   }
 
   const columns = request.columns ?? version.columns;
@@ -52,7 +54,10 @@ export async function generateGrids(request: GridRequest): Promise<GridResult> {
   for (const [index, format] of formats.entries()) {
     const parsed = parseFormat(format);
     if (!parsed.ok) {
-      return { ok: false, message: `${parsed.message}\n(format de la version : « ${version.format} »)` };
+      return {
+        ok: false,
+        message: `${parsed.message}\n(format de la version : « ${version.format} »)`,
+      };
     }
     variants.push({
       key: String.fromCharCode(65 + index),
@@ -84,7 +89,11 @@ export function summarize(variants: Variant[]): string {
         (sheet, i) =>
           `  feuille ${i + 1} : ${sheet.orientation}, carreau ${sheet.cell.toFixed(1)} mm, ${sheet.columns.length} colonnes, ${sheet.characters} caractères`,
       );
-      return [`${variant.key} · ${variant.format}`, ...lines, ...notes.map((note) => `  — ${note}`)].join("\n");
+      return [
+        `${variant.key} · ${variant.format}`,
+        ...lines,
+        ...notes.map((note) => `  — ${note}`),
+      ].join("\n");
     })
     .join("\n");
 }

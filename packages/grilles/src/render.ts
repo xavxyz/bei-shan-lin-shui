@@ -30,7 +30,9 @@ export function describeVariant(variant: Variant): { sheets: SheetSummary[]; not
       : "le texte coule dans les cases, dans l'ordre de lecture",
   ];
   if (variant.text.overflow) {
-    notes.push(`ne tient pas : ${[...variant.text.overflow].length} caractères (${variant.text.overflow})`);
+    notes.push(
+      `ne tient pas : ${[...variant.text.overflow].length} caractères (${variant.text.overflow})`,
+    );
   }
   if (variant.text.empty > 0) notes.push(`${variant.text.empty} cases restent vides`);
   return { sheets, notes };
@@ -46,7 +48,9 @@ function renderSheet(layout: SheetSummary, columns: string[], index: number): st
   const lines: string[] = [];
   const glyphs: string[] = [];
   layout.columns.forEach((box, c) => {
-    lines.push(`<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(cell)}" height="${mm(cell * box.rows)}"/>`);
+    lines.push(
+      `<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(cell)}" height="${mm(cell * box.rows)}"/>`,
+    );
     for (let r = 1; r < box.rows; r++) {
       const y = mm(box.y + r * cell);
       lines.push(`<line x1="${mm(box.x)}" y1="${y}" x2="${mm(box.x + cell)}" y2="${y}"/>`);

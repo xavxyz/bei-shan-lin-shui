@@ -73,5 +73,8 @@ export async function findPiece(root: string, slug: string): Promise<FindResult>
     };
   }
 
-  return { ok: false, message: `aucune pièce « ${slug} » dans content/ ni dans imports/*${PLAN_SUFFIX}` };
+  return {
+    ok: false,
+    message: `aucune pièce « ${slug} » dans content/ ni dans imports/*${PLAN_SUFFIX}`,
+  };
 }

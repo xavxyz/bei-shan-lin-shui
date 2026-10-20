@@ -31,12 +31,12 @@ Fini quand le calligraphe a confirmé la pièce et la version.
 
 La notation, lue en vertical, de droite à gauche :
 
-| Format          | Sens                                                   |
-| --------------- | ------------------------------------------------------ |
-| `NxM`           | N colonnes de M caractères                             |
-| `1x3 + 9x7`     | deux groupes sur une feuille, un demi-carreau entre eux |
-| `(…) + (…)`     | une feuille par parenthèse                             |
-| `k*(…)`         | k feuilles pareilles                                   |
+| Format      | Sens                                                    |
+| ----------- | ------------------------------------------------------- |
+| `NxM`       | N colonnes de M caractères                              |
+| `1x3 + 9x7` | deux groupes sur une feuille, un demi-carreau entre eux |
+| `(…) + (…)` | une feuille par parenthèse                              |
+| `k*(…)`     | k feuilles pareilles                                    |
 
 Un format qui n'est pas une grille (`A4 vertical`) se traduit avec le
 calligraphe en `NxM`.
