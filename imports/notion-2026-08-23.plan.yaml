@@ -2059,6 +2059,21 @@ pieces:
   # l'arche du 太虛幻境 à l'aller (紅樓夢, chapitres 1 et 5), celle du 真如福地 au retour
   # (chapitre 116, où le roman dit 牌樓) ; chaque distique répond à l'autre vers pour vers.
   # Le 紅樓夢 de la première feuille en est sorti : c'est le texte de la v2 de la pièce pôle, hong-lou-meng
+  # Textes, contexte et traductions : docs/sources/hong-lou-meng.md.
+  # Traductions de Li Tche-houa (李治華, Lǐ Zhìhuá) et Jacqueline Alézaïs (Le Rêve dans le
+  # pavillon rouge, La Pléiade), sauf mention contraire :
+  # 牌樓聯 : « les distiques des arches » (traduction de l'agent ; 牌樓, l'arche d'honneur à toit).
+  # 太虛幻境即是真如福地 : « Le Domaine Illusoire de la Suprême Vanité est le Lieu fortuné de
+  # constante vérité » (faite des deux noms de la Pléiade ; la phrase n'y a pas été retrouvée).
+  # Mot de 甄士隱 à 賈雨村, aux trois quarts du chapitre 120.
+  # 太虛幻境 : « Domaine Illusoire de la Suprême Vanité » ; arche vue en rêve par 甄士隱 au chapitre 1,
+  # puis par 寶玉 au chapitre 5 :
+  # 假作真時真亦假，無為有處有還無 : « Quand on tient le faux pour être vrai, le vrai à son tour est faux ;
+  # Où du néant on fait l'Être, l'Être est encor du Néant. » (chapitre 5)
+  # 真如福地 : « Lieu fortuné de constante vérité » ; arche que 寶玉 retrouve à la place de l'autre
+  # au chapitre 116 :
+  # 假去真來真勝假，無原有是有非無 : « Le faux passé, quand vient le vrai, le vrai prévaut sur le faux.
+  # Le non-être ayant été l'être, l'être n'est plus le non-être. » (chapitre 116)
   - slug: pai-lou-lian
     title: 牌樓聯
     status: idea
@@ -2084,6 +2099,37 @@ pieces:
       status: Brute
       url: https://claude.ai/share/80883ea3-feeb-453c-80c5-26970fe1eba6
       relations: []
+  # absente de Notion : née à l'arbitrage du lot 4, en traduisant le 牌樓聯
+  # le quatrain qui ferme le roman (紅樓夢 第一百二十回) ; traduction de Li Tche-houa
+  # (李治華, Lǐ Zhìhuá) et Jacqueline Alézaïs (La Pléiade) ; voir docs/sources/hong-lou-meng.md
+  # source.author : la signature de l'édition courante, 人民文學出版社 (3ᵉ éd., 2008) : 曹雪芹著,
+  # 無名氏續, les quarante derniers chapitres « 程偉元、高鶚整理 »
+  # texte de zh.wikisource (紅樓夢/第120回) : 痴, et non 癡
+  - slug: shuo-dao-xin-suan-chu
+    title: 說到辛酸處
+    status: idea
+    projects:
+      - hong-lou-meng
+    published: false
+    source:
+      author: 曹雪芹著，無名氏續
+      dynasty: 清
+      work: 紅樓夢
+    translation: |-
+      Aux passages d'aigreur ou même d'acreté,
+      L'exagération n'en devient que plus vaine ;
+      Du début à la fin, tout y semble rêvé,
+      Mais ne vous gaussez pas de la folie humaine !
+    versions:
+      - id: v1
+        date: 2026-10-20
+        format: 4x5 # à arbitrer : un vers par colonne, proposé
+        columns:
+          - 說到辛酸處
+          - 荒唐愈可悲
+          - 由來同一夢
+          - 休笑世人痴
+        variations: []
   # absente de Notion : identifiée sur le scan 2026-10-11_02_01.jpeg (registre imports/scans.yaml)
   # date du papier : 立春日 (乙巳年臘月, avant le Nouvel An 丙午)
   - slug: zhu-yi-song-kua
@@ -2297,7 +2343,7 @@ pieces:
                 file: v1a-02.jpg
                 kind: work
   # absente de Notion : identifiée sur le scan 2026-10-11_30_02.jpeg (registre imports/scans.yaml)
-  # source à reporter après apply : 紅樓夢 第八十二回, 曹雪芹 (le plan ne porte pas `source`)
+  # 紅樓夢 第八十二回 ; source.author : la signature de l'édition courante, comme shuo-dao-xin-suan-chu
   # traduction écrite à la main sur le scan 2026-10-11_30_03.jpeg (« qu'à se se donner » sur le papier)
   - slug: cheng-ren-bu-zi-zai-zi-zai-bu-cheng-ren
     title: 成人不自在，自在不成人
@@ -2305,6 +2351,10 @@ pieces:
     projects:
       - hong-lou-meng
     published: false
+    source:
+      author: 曹雪芹著，無名氏續
+      dynasty: 清
+      work: 紅樓夢
     translation: Qui souhaite devenir vraiment un homme ne songe pas à se donner de l'aise ; qui ne songe qu'à se donner de l'aise ne deviendra jamais vraiment un homme.
     versions:
       - id: v1
