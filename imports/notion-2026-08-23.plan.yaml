@@ -936,7 +936,7 @@ pieces:
   # 李道純《中和集》卷四, 歌, 《龍虎歌》並引 (正統道藏, zh.wikisource) : la citation de 紫陽 dans la préface,
   # jusqu'à 神仙之能事畢矣, puis 勉旃勉旃, qui clôt la préface, les vers 5-6 et le dernier vers du chant
   # full_text : la préface prise à la citation de 紫陽, ajoutée d'après le 道藏 (Notion partait de 趙束齋者)
-  # à arbitrer — version.format : le cadre imprimé 1x7 + 4*(2x7) n'est plus le sien ; formats proposés dans plan-a-arbitrer.md (lot 3)
+  # deux feuilles : la citation, puis l'exhortation et les vers ; le cadre imprimé 1x7 + 4*(2x7) n'est plus le sien
   - slug: long-hu-ge-mian-zhan-mian-zhan
     title: 《龍虎歌》勉旃勉旃
     status: in-progress
@@ -951,24 +951,23 @@ pieces:
     versions:
       - id: v1
         date: 2026-01-26
-        format: à préciser
+        format: (1x3 + 9x7) + (1x4 + 3x7)
         columns:
           - 紫陽云
-          - 收拾身心
-          - 謂之降伏龍虎
-          - 心不動則龍吟
-          - 身不動則虎嘯
-          - 龍吟則氣固 # 气 dans le 道藏
-          - 虎嘯則精凝
-          - 元精凝則足以保形
-          - 元氣固則足以凝神 # 气 dans le 道藏
-          - 形神俱妙
-          - 與道合真
+          - 收拾身心謂之降
+          - 伏龍虎心不動則
+          - 龍吟身不動則虎
+          - 嘯龍吟則氣固虎 # 气 dans le 道藏
+          - 嘯則精凝元精凝
+          - 則足以保形元氣 # 气 dans le 道藏
+          - 固則足以凝神形
+          - 神俱妙與道合真
           - 神仙之能事畢矣
           - 勉旃勉旃
           - 青青白白太分明
           - 也是無風自起浪
           - 徹底掀翻參學畢
+        intention: Une seconde version en 13x7, sur une seule feuille, 紫陽云 et 勉旃勉旃 pris dans la grille.
         variations: []
     notion:
       title: 《龍虎歌》勉旃勉旃

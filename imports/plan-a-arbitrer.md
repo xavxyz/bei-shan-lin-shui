@@ -1,8 +1,8 @@
 # Plan Notion — à arbitrer
 
 État au 2026-10-19, après le lot 3. Le plan `notion-2026-08-23.plan.yaml`
-porte 92 pièces et 12 projets ; il reste **49** `# à arbitrer`, sur 21
-pièces et les 12 projets. Les 71 autres pièces, dont les 36 qui ont un scan,
+porte 92 pièces et 12 projets ; il reste **48** `# à arbitrer`, sur 20
+pièces et les 12 projets. Les 72 autres pièces, dont les 36 qui ont un scan,
 n'ont plus rien à arbitrer. Le suivi se fait par les `# à arbitrer` du plan :
 ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
 
@@ -95,7 +95,7 @@ sont pas des idées. Sources vérifiées sur zh.wikisource.
 - `diao-xi` 調息 et `diao-xin` 調心 rejoignent `qi-gong` avec 調身 ; leur
   texte est à retrouver dans un livre de Yang Jwing-Ming (lot 4).
 
-## Lot 3 — fait, sauf un format
+## Lot 3 — fait
 
 Le titre renvoie au texte du 中和集 de 李道純 ; le calligraphe a choisi
 l'étendue sur les textes traduits vers par vers (正統道藏, zh.wikisource),
@@ -120,14 +120,9 @@ gardés en référence dans `docs/sources/zhong-he-ji.md`. Leçons gardées :
 - `long-hu-ge-mian-zhan-mian-zhan` : de la préface, la citation de 紫陽
   (收拾身心，謂之降伏龍虎…) jusqu'à 神仙之能事畢矣, puis 勉旃勉旃, les vers
   青青白白太分明 / 也是無風自起浪 et 徹底掀翻參學畢. Le `full_text` part
-  désormais de la citation de 紫陽. Le cadre imprimé `1x7 + 4*(2x7)` n'est
-  plus le sien ; **le format reste à arbitrer**, sur 91 caractères :
-  - `13x7` : une seule grille. La citation et 勉旃勉旃 font 70 caractères,
-    dix colonnes pleines ; les trois vers prennent chacun la leur.
-  - `1x3 + 9x7 + 1x4 + 3x7` : 紫陽云 et 勉旃勉旃 en colonnes courtes, qui
-    encadrent la citation (63 caractères, neuf colonnes) et ouvrent les vers.
-  - `(1x3 + 9x7) + (1x4 + 3x7)` : la même chose en deux feuilles, la
-    citation, puis l'exhortation et les vers.
+  désormais de la citation de 紫陽. Deux feuilles, `(1x3 + 9x7) + (1x4 + 3x7)` :
+  la citation, puis l'exhortation et les vers ; le `13x7` d'une seule feuille
+  attend une seconde version (`intention`).
 
 Leçons douteuses non tranchées, hors des étendues retenues : 野雲翕 (翁 ?),
 部天地 (剖 ?), 誰敢覬 (覷 ?), et dans le `full_text` du 龍虎歌 以卸天 (御),
