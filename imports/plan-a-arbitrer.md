@@ -1,8 +1,8 @@
 # Plan Notion — à arbitrer
 
-État au 2026-10-19, après le lot 2. Le plan `notion-2026-08-23.plan.yaml`
-porte 93 pièces et 12 projets ; il reste **56** `# à arbitrer`, sur 28
-pièces et les 12 projets. Les 65 autres pièces, dont les 36 qui ont un scan,
+État au 2026-10-19, après le lot 3. Le plan `notion-2026-08-23.plan.yaml`
+porte 92 pièces et 12 projets ; il reste **49** `# à arbitrer`, sur 21
+pièces et les 12 projets. Les 71 autres pièces, dont les 36 qui ont un scan,
 n'ont plus rien à arbitrer. Le suivi se fait par les `# à arbitrer` du plan :
 ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
 
@@ -95,74 +95,43 @@ sont pas des idées. Sources vérifiées sur zh.wikisource.
 - `diao-xi` 調息 et `diao-xin` 調心 rejoignent `qi-gong` avec 調身 ; leur
   texte est à retrouver dans un livre de Yang Jwing-Ming (lot 4).
 
-## Lot 3 — le 中和集 de 李道純 (8 pièces)
+## Lot 3 — fait, sauf un format
 
-Le titre renvoie au texte : l'agent le prend dans une source primaire et le
-propose ; reste à choisir l'étendue, découpée selon le format.
+Le titre renvoie au texte du 中和集 de 李道純 ; le calligraphe a choisi
+l'étendue sur les textes traduits vers par vers (正統道藏, zh.wikisource),
+gardés en référence dans `docs/sources/zhong-he-ji.md`. Leçons gardées :
+須, 大霶霈, 裏.
 
-`gua-xiang-lun` 《卦象論》 · `yuan-dao-ge` 《原道歌》 · `lian-xu-ge`
-《鍊虛歌》 · `xuan-li-ge` 《玄理歌》 · `hui-jian` 《慧劍》 · `ri-yong`
-《日用》 · `jiao-he` 《交合》 · `long-hu-ge-mian-zhan-mian-zhan`
-《龍虎歌》勉旃勉旃.
+- `lian-xu-ge` 《鍊虛歌》 est retirée : c'était `xu-xin-shi-fu`, dont les deux
+  dernières colonnes, 虛心直節青青竹 / 箇是鍊虛第一機, sont la fin du poème.
+- `gua-xiang-lun` 《卦象論》 : 水府求玄者，煉精氣神, puis de la citation de
+  紫陽 (取將坎位中心實…) à 無爻卦內定乾坤, en 42 membres de phrase en
+  attendant le format.
+- `yuan-dao-ge` 《原道歌》 : 浮華亂目孰回光 / 薄霧牽情誰返照 ; le poème
+  entier viendra en nouvelle version (`intention`).
+- **Nouvelle idée `yu-suo-jin-jia-qi-jie-tuo`** 玉鎖金枷齊解脫, un vers du
+  《原道歌》, dans le projet du 紅樓夢 (le 金鎖 de 寶釵, le 玉 de 寶玉) et dans
+  celui du 中和集.
+- `xuan-li-ge` 《玄理歌》 : du second chant, les vers 1-2 (治人事天莫若嗇…)
+  et 13-20, les trois 息 ; elle ne rejoint pas `qi-gong`.
+- `hui-jian` 《慧劍》 est retirée : trop précieuse pour être calligraphiée.
+- `ri-yong` 《日用》 et `jiao-he` 《交合》, en paire : le 七律, puis le titre
+  en `2x4`, 中和集詩 / 工夫日用 et 中和集詩 / 工夫交合.
+- `long-hu-ge-mian-zhan-mian-zhan` : de la préface, la citation de 紫陽
+  (收拾身心，謂之降伏龍虎…) jusqu'à 神仙之能事畢矣, puis 勉旃勉旃, les vers
+  青青白白太分明 / 也是無風自起浪 et 徹底掀翻參學畢. Le `full_text` part
+  désormais de la citation de 紫陽. Le cadre imprimé `1x7 + 4*(2x7)` n'est
+  plus le sien ; **le format reste à arbitrer**, sur 91 caractères :
+  - `13x7` : une seule grille. La citation et 勉旃勉旃 font 70 caractères,
+    dix colonnes pleines ; les trois vers prennent chacun la leur.
+  - `1x3 + 9x7 + 1x4 + 3x7` : 紫陽云 et 勉旃勉旃 en colonnes courtes, qui
+    encadrent la citation (63 caractères, neuf colonnes) et ouvrent les vers.
+  - `(1x3 + 9x7) + (1x4 + 3x7)` : la même chose en deux feuilles, la
+    citation, puis l'exhortation et les vers.
 
-### Recherche faite (2026-10-19), rien d'écrit dans le plan
-
-Les huit textes sont dans le 中和集 du 正統道藏 : six au 卷四 (論 et 歌), deux
-au 卷五 (詩). Sources :
-
-- [zh.wikisource, 中和集](https://zh.wikisource.org/wiki/中和集) : le
-  正統道藏, avec quelques graphies à convertir (眞→真, 淸→清, 靑→青, 𨿽→雖,
-  个→個 ; 气 noté en commentaire).
-- ctext : le 正統道藏 ([res=537433](https://ctext.org/wiki.pl?if=gb&res=537433)),
-  et 清庵先生中和集 ([res=3138576](https://ctext.org/wiki.pl?if=gb&res=3138576),
-  images au `file=205666`), la seule édition indépendante. Le 道藏輯要 de
-  ctext copie la transcription du 正統道藏.
-
-Leçons recoupées, à confirmer par le calligraphe sur le papier :
-
-- **鍊** partout, titre et texte, comme Notion et le 正統道藏 de ctext ; le 煉
-  ne vient que de wikisource.
-- 原道歌 : 道法法人人不肖 est sur le papier ([p. 15](https://ctext.org/library.pl?if=gb&file=205666&page=15)),
-  on le garde. 大霧需 se lit **大霶霈** sur la même page →
-  `# 大霧需 dans le 道藏`.
-- 慧劍歌 : **蛟螭**, net sur le papier ([p. 35](https://ctext.org/library.pl?if=gb&file=205666&page=35)),
-  rime avec 輝 et 悲 → `# 蛟蠣 dans le 道藏`. **卓豎** plutôt que 卓堅 (parallèle
-  à 橫揮 ; le 道藏 confond 竪 et 堅 ailleurs), la page est floue →
-  `# 卓堅 dans le 道藏`.
-- 卦象論 : 到岸不**須**船, et non 不需船.
-
-Propositions, une question par pièce :
-
-1. `gua-xiang-lun` — un 論 de ~900 caractères (上品丹法無卦爻). Étendue :
-   la conclusion 過河須用栰 / 到岸不須船 / 得魚忘筌 / 得兔忘蹄 ; sinon
-   卦者掛也, ou 紫陽 : 此中得意休求象 / 若究羣爻謾役情.
-2. `yuan-dao-ge` — 贈野雲, 12 quatrains de 七言. Étendue : le poème entier,
-   un vers par colonne, 贈野雲 en commentaire ; sinon le quatrain
-   人人自有長生要 / 道法法人人不肖 / 浮華亂目孰回光 / 薄霧牽情誰返照.
-3. `lian-xu-ge` — préface (並引) et 13 quatrains, pour le 竹齋 d'un ermite de
-   杭州. Étendue : le dernier, sur le bambou comme 修竹參差 :
-   虛至無虛絕百非 / 潛虛天地悉皆歸 / 虛心直節青青竹 / 個是鍊虛第一機 ;
-   sinon les 13 sans la préface.
-4. `xuan-li-ge` — 二首 : 至道雖然無處所… (38 vers) et 治人事天莫若嗇…
-   (22 vers, dédié à 田皎蟾). Étendue : dans le second, le quatrain du
-   souffle 諦觀三教聖人書 / 息之一字最簡直 / 若於息上做工夫 /
-   為佛為仙不勞力 ; il rejoint 調息 dans `qi-gong`.
-5. `hui-jian` — le 道藏 dit 《慧劍歌》 : titre 《慧劍歌》, slug `hui-jian-ge`,
-   l'ancien titre en commentaire. 9 strophes, 36 vers (3+3+7+7). Étendue :
-   le chant entier ; sinon 此寶劍 / 本無形 / 為有神功彊立名 / 學道修真憑此劍
-   / 若無此劍道難成.
-6. `ri-yong` — 4ᵉ des 述工夫十七首 (卷五), un 七律 qui remplit `4*(2x7)` :
-   真鉛真汞大丹頭 / 采取當於罔象求 / 有作有為終有累 / 無求無執便無憂 /
-   常清常靜心珠現 / 忘物忘機命寶周 / 動靜兩途無窒礙 / 不離當處是瀛洲.
-   Le titre en `2x4` : au calligraphe de le dire ; sinon
-   `# colonnes à préciser`.
-7. `jiao-he` — 6ᵉ des 述工夫十七首, un 七律 : 造道元來本不難 / 工夫只在定中間 /
-   陰陽上下常升降 / 金水周流自返還 / 紫府青龍交白虎 / 玄宮地軸合天關 /
-   雲收雨散神胎就 / 男子生兒不等閒. Le titre en `2x4`, comme 日用.
-8. `long-hu-ge-mian-zhan-mian-zhan` — 勉旃勉旃 clôt la préface, après son
-   quatrain final. Étendue : 真龍真虎不難尋 / 只要抽陽去補陰 / 四德運乾誠不息 /
-   潛飛見躍盡由心 / 雖然也是平地起 / 波濤青天轟霹靂 / 勉旃勉旃, en
-   `3*(2x7) + 1x4` ; sinon le début du chant, 真龍真虎元無象….
+Leçons douteuses non tranchées, hors des étendues retenues : 野雲翕 (翁 ?),
+部天地 (剖 ?), 誰敢覬 (覷 ?), et dans le `full_text` du 龍虎歌 以卸天 (御),
+束齊 (齋), 進開頂顧門 (迸開頂顖門 ?), 平地起，波濤.
 
 Pour le lot 5 : le 述工夫十七首 contient un 《鑄劍》, qui éclaire peut-être
 `zhu-jian-qing-chui`.

@@ -527,18 +527,66 @@ pieces:
       status: Brute
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 李道純《中和集》卷四, 論, 《卦象論》 (正統道藏, zh.wikisource) : 水府求玄者，煉精氣神，
+  # puis, sans ce qui les sépare (使三花聚鼎… 再成乾體也), de la citation de 紫陽 à son second distique ;
+  # une colonne par membre de phrase, en attendant le format
   - slug: gua-xiang-lun
     title: 《卦象論》
     status: idea
     projects:
       - zhong-he-ji
     published: false
+    source:
+      author: 李道純
+      dynasty: 元
+      work: 中和集
     versions:
       - id: v1
         date: 2026-01-14
         format: à préciser
-        columns: []
+        columns:
+          - 水府求玄者
+          - 煉精氣神 # 气 dans le 道藏
+          - 紫陽真人云
+          - 取將坎位中心實
+          - 點化離宮腹裏陰
+          - 自此變成乾健體
+          - 潛藏飛躍盡由心
+          - 正謂此也
+          - 行火候用卦爻者
+          - 乾坤二卦
+          - 健順相因
+          - 往來推盪
+          - 定四時成歲
+          - 四德運化
+          - 無有窮也
+          - 行火進退
+          - 抽添加減
+          - 則而象之
+          - 簇一年於一月
+          - 簇一月於一日
+          - 簇一日於一時
+          - 簇一時於一刻
+          - 簇一刻於一息
+          - 大自元會運世
+          - 細至一息之微
+          - 皆有一周之運
+          - 達此理者
+          - 進火退符之要得矣
+          - 雖然丹道用卦
+          - 火候用爻
+          - 皆是譬諭
+          - 卻不可執在卦爻上
+          - 當知過河須用栰 # 栰, variante de 筏
+          - 到岸不須船 # 不需船 dans le 道藏 de wikisource
+          - 得魚忘筌
+          - 得兔忘蹄可也
+          - 紫陽真人云
+          - 此中得意休求象
+          - 若究群爻謾役情 # 羣 dans le 道藏
+          - 又云
+          - 不刻時中分子午
+          - 無爻卦內定乾坤
         variations: []
     notion:
       title: 《卦象論》
@@ -622,18 +670,26 @@ pieces:
       relations:
         - 石人斤歌
         - 题破山寺后禅院
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 李道純《中和集》卷四, 歌, 《原道歌》, 贈野雲 (正統道藏, zh.wikisource) : la fin du 5ᵉ quatrain ;
+  # le poème entier viendra en nouvelle version
   - slug: yuan-dao-ge
     title: 《原道歌》
     status: idea
     projects:
       - zhong-he-ji
     published: false
+    source:
+      author: 李道純
+      dynasty: 元
+      work: 中和集
     versions:
       - id: v1
         date: 2026-01-17
         format: à préciser
-        columns: []
+        columns:
+          - 浮華亂目孰回光
+          - 薄霧牽情誰返照
+        intention: À terme, le poème entier, en douze quatrains.
         variations: []
     notion:
       title: 《原道歌》
@@ -641,25 +697,26 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: lian-xu-ge
-    title: 《鍊虛歌》
+  # absente de Notion : née de l'arbitrage du lot 3 (#17), un vers du 《原道歌》 (6ᵉ quatrain),
+  # pour le 紅樓夢 : le 金鎖 de 寶釵 et le 玉 de 寶玉
+  - slug: yu-suo-jin-jia-qi-jie-tuo
+    title: 玉鎖金枷齊解脫
     status: idea
     projects:
+      - tai-xu-huan-jing-hong-lou-meng
       - zhong-he-ji
     published: false
+    source:
+      author: 李道純
+      dynasty: 元
+      work: 中和集
     versions:
       - id: v1
-        date: 2026-01-17
+        date: 2026-10-19
         format: à préciser
-        columns: []
+        columns:
+          - 玉鎖金枷齊解脫
         variations: []
-    notion:
-      title: 《鍊虛歌》
-      status: Brute
-      url: ""
-      relations:
-        - 中和集
   # titre en traditionnel confirmé par le scan (Notion : 题破山寺后禅院)
   # date du papier : signé 丙午雨水 地中海泡澡, après un bain dans la Méditerranée (Notion disait 2026-01-18)
   # colonnes et format lus sur le scan 2026-10-11_06_01.jpeg
@@ -718,6 +775,9 @@ pieces:
   # attribution 中和集 hors colonnes
   # 1re colonne : 衜 pour 道 sur le papier
   # les trois 虛 écrits chacun autrement, aucun pareil, à dessein
+  # 2e et 3e colonnes : les deux derniers vers du 《鍊虛歌》, 李道純《中和集》卷四, 歌, au dernier quatrain,
+  # celui du bambou (正統道藏, zh.wikisource) ; la page Notion 《鍊虛歌》 était cette pièce (lot 3) ;
+  # 箇 sur le papier, 个 dans le 道藏
   - slug: xu-xin-shi-fu
     title: 虛心實腹
     status: made
@@ -725,6 +785,10 @@ pieces:
       - zhong-he-ji
       - xiu-zhu-can-cha
     published: false
+    source:
+      author: 李道純
+      dynasty: 元
+      work: 中和集
     translation: Esprit vide, ventre plein, les fondamentaux de la voie
     versions:
       - id: v1
@@ -809,18 +873,33 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 李道純《中和集》卷四, 歌, 《玄理歌》, le second des deux chants, dédié à 田皎蟾 (正統道藏, zh.wikisource) :
+  # les vers 1-2, la citation du 道德經 59, puis les vers 13-20, les trois 息
   - slug: xuan-li-ge
     title: 《玄理歌》
     status: idea
     projects:
       - zhong-he-ji
     published: false
+    source:
+      author: 李道純
+      dynasty: 元
+      work: 中和集
     versions:
       - id: v1
         date: 2026-01-24
         format: à préciser
-        columns: []
+        columns:
+          - 治人事天莫若嗇
+          - 夫嗇謂之重積德
+          - 諦觀三教聖人書
+          - 息之一字最簡直
+          - 若於息上做工夫
+          - 為佛為仙不勞力
+          - 息緣達本禪之機
+          - 息心明理儒之極
+          - 息氣凝神道之玄 # 气 dans le 道藏
+          - 三息相須無不克
         variations: []
     notion:
       title: 《玄理歌》
@@ -854,8 +933,10 @@ pieces:
       url: ""
       relations:
         - 過猶不及，方向堅定不移，方法因地制宜
-  # colonnes à préciser : 8 colonnes de 7 ; format peut-être recopié de MESHKAH
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 李道純《中和集》卷四, 歌, 《龍虎歌》並引 (正統道藏, zh.wikisource) : la citation de 紫陽 dans la préface,
+  # jusqu'à 神仙之能事畢矣, puis 勉旃勉旃, qui clôt la préface, les vers 5-6 et le dernier vers du chant
+  # full_text : la préface prise à la citation de 紫陽, ajoutée d'après le 道藏 (Notion partait de 趙束齋者)
+  # à arbitrer — version.format : le cadre imprimé 1x7 + 4*(2x7) n'est plus le sien ; formats proposés dans plan-a-arbitrer.md (lot 3)
   - slug: long-hu-ge-mian-zhan-mian-zhan
     title: 《龍虎歌》勉旃勉旃
     status: in-progress
@@ -866,12 +947,28 @@ pieces:
       author: 李道純
       dynasty: 元
       work: 中和集
-      full_text: 趙束齋者，古杭人也。幼為內侍，職任中官。因乾旋坤轉而勘破浮生，故棄利捐名，而參求道要。雖紅塵而混跡，實玄境以棲心，真脫略世事者也。意欲混合凝神，故留心於龍虎。一日攜是圖示予，求其贅語。予辭不可，於是乎著筆而塞責焉。告之曰：古人因道而設象，子今因象而立言。束齊者，貴在明加眼力，觀教端的，莫教錯認定盤星。苟能因言會意，觀圖得旨，便知道真龍真虎，不在紙上，而在自己也。至於言象兩忘，道德備矣。咦，真龍真虎不難尋，只要抽陽去補陰。四德運乾誠不息，潛飛見躍盡由心。雖然也是平地起，波濤青天轟霹靂。勉旃勉旃。歌曰： 真龍真虎元無象，誰為起模傳此樣。若於無象裹承當，又落斷常終莽蕩。 青青白白太分明，也是無風自起浪。時人要識真龍虎，不屬有無並子午。休將二物混淪吞，但把五行顛倒數。根芽本是太玄宮，造化卻在朱陵府。雖然運用有主張，畢竟虛靈無處所。一條大道要心通，些子神機非目覩。忽然進開頂顧門，勘破木金同一母。高高絕頂天罡摧，耿耿銀河斗柄戽。興雲起霧仗丁公，掣電驅雷役玄武。瞬息之間天地交，剎那之頃坎離補。虎從水底起清風，龍在火中降甘雨。雷行雨施天下平，運乾龍德功周普。人言六龍以卸天，孰知一龍是真主。人言五虎透玄關，孰知一虎生真土。會得龍虎常合和，便知龜蛇互吞吐。聖人設象指蹄筌，象外明言便造言。言外更須窮祖意，元來太極本無○。得意忘象未為特，和意都忘為極則。稽首束齋趙隱居，徹底掀翻參學畢。
+      full_text: 紫陽云：收拾身心，謂之降伏龍虎。心不動則龍吟，身不動則虎嘯。龍吟則氣固，虎嘯則精凝。元精凝則足以保形，元氣固則足以凝神。形神俱妙，與道合真，神仙之能事畢矣。非天下至神，其孰能與於此哉。趙束齋者，古杭人也。幼為內侍，職任中官。因乾旋坤轉而勘破浮生，故棄利捐名，而參求道要。雖紅塵而混跡，實玄境以棲心，真脫略世事者也。意欲混合凝神，故留心於龍虎。一日攜是圖示予，求其贅語。予辭不可，於是乎著筆而塞責焉。告之曰：古人因道而設象，子今因象而立言。束齊者，貴在明加眼力，觀教端的，莫教錯認定盤星。苟能因言會意，觀圖得旨，便知道真龍真虎，不在紙上，而在自己也。至於言象兩忘，道德備矣。咦，真龍真虎不難尋，只要抽陽去補陰。四德運乾誠不息，潛飛見躍盡由心。雖然也是平地起，波濤青天轟霹靂。勉旃勉旃。歌曰： 真龍真虎元無象，誰為起模傳此樣。若於無象裏承當，又落斷常終莽蕩。 青青白白太分明，也是無風自起浪。時人要識真龍虎，不屬有無並子午。休將二物混淪吞，但把五行顛倒數。根芽本是太玄宮，造化卻在朱陵府。雖然運用有主張，畢竟虛靈無處所。一條大道要心通，些子神機非目覩。忽然進開頂顧門，勘破木金同一母。高高絕頂天罡摧，耿耿銀河斗柄戽。興雲起霧仗丁公，掣電驅雷役玄武。瞬息之間天地交，剎那之頃坎離補。虎從水底起清風，龍在火中降甘雨。雷行雨施天下平，運乾龍德功周普。人言六龍以卸天，孰知一龍是真主。人言五虎透玄關，孰知一虎生真土。會得龍虎常合和，便知龜蛇互吞吐。聖人設象指蹄筌，象外明言便造言。言外更須窮祖意，元來太極本無○。得意忘象未為特，和意都忘為極則。稽首束齋趙隱居，徹底掀翻參學畢。
     versions:
       - id: v1
         date: 2026-01-26
-        format: 1x7 + 4*(2x7)
-        columns: []
+        format: à préciser
+        columns:
+          - 紫陽云
+          - 收拾身心
+          - 謂之降伏龍虎
+          - 心不動則龍吟
+          - 身不動則虎嘯
+          - 龍吟則氣固 # 气 dans le 道藏
+          - 虎嘯則精凝
+          - 元精凝則足以保形
+          - 元氣固則足以凝神 # 气 dans le 道藏
+          - 形神俱妙
+          - 與道合真
+          - 神仙之能事畢矣
+          - 勉旃勉旃
+          - 青青白白太分明
+          - 也是無風自起浪
+          - 徹底掀翻參學畢
         variations: []
     notion:
       title: 《龍虎歌》勉旃勉旃
@@ -879,27 +976,8 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: hui-jian
-    title: 《慧劍》
-    status: idea
-    projects:
-      - zhong-he-ji
-    published: false
-    versions:
-      - id: v1
-        date: 2026-01-28
-        format: à préciser
-        columns: []
-        variations: []
-    notion:
-      title: 《慧劍》
-      status: Brute
-      url: ""
-      relations:
-        - 中和集
-  # colonnes à préciser
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 李道純《中和集》卷五, 詩, 《日用》, quatrième des 述工夫十七首 (正統道藏, zh.wikisource) ;
+  # un distique par feuille, puis le titre en 2x4, qui suit le poème comme dans le 道藏 ; en paire avec jiao-he
   - slug: ri-yong
     title: 《日用》
     status: in-progress
@@ -914,7 +992,17 @@ pieces:
       - id: v1
         date: 2026-02-03
         format: 4*(2x7) + titre 2x4
-        columns: []
+        columns:
+          - 真鉛真汞大丹頭
+          - 采取當於罔象求
+          - 有作有為終有累
+          - 無求無執便無憂
+          - 常清常靜心珠現
+          - 忘物忘機命寶周
+          - 動靜兩途無窒礙
+          - 不離當處是瀛洲
+          - 中和集詩
+          - 工夫日用
         variations: []
     notion:
       title: 《日用》
@@ -922,8 +1010,8 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # colonnes à préciser
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 李道純《中和集》卷五, 詩, 《交合》, sixième des 述工夫十七首 (正統道藏, zh.wikisource) ;
+  # un distique par feuille, puis le titre en 2x4, qui suit le poème comme dans le 道藏 ; en paire avec ri-yong
   - slug: jiao-he
     title: 《交合》
     status: in-progress
@@ -938,7 +1026,17 @@ pieces:
       - id: v1
         date: 2026-02-03
         format: 4*(2x7) + titre 2x4
-        columns: []
+        columns:
+          - 造道元來本不難
+          - 工夫只在定中間
+          - 陰陽上下常升降
+          - 金水周流自返還
+          - 紫府青龍交白虎
+          - 玄宮地軸合天關
+          - 雲收雨散神胎就
+          - 男子生兒不等閒
+          - 中和集詩
+          - 工夫交合
         variations: []
     notion:
       title: 《交合》
@@ -2084,7 +2182,7 @@ pieces:
                 file: v1a-03.jpg
                 kind: work
   # absente de Notion : identifiée sur les scans 2026-10-11_20_01 et 20_02 (registre imports/scans.yaml)
-  # 煉 à la clé du feu sur le papier ; distincte de lian-xu-ge (《鍊虛歌》, colonnes vides)
+  # 煉 à la clé du feu sur le papier ; distincte de xu-xin-shi-fu, qui cite le 《鍊虛歌》 (鍊 à la clé du métal)
   # feuille ② : 修, 養, 虛, chacun par les cinq pas de 鄧岱崑, du régulier à la cursive folle
   - slug: lian-dan
     title: 煉丹
