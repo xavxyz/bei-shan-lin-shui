@@ -1767,10 +1767,10 @@ pieces:
       url: ""
       relations:
         - 易筋经
-  # à arbitrer — version.columns : quel passage du 易筋經 ? seul l'avertissement est connu
-  # 按 plutôt que 依 : 依 (亻, s'appuyer sur le maître) s'accorde mieux au registre classique
-  # de 豈, mais 按 est un mot du taijiquan qui va avec le 易筋經, et fait écho à 按指示做
-  # (an-zhi-shi-zuo-zhu-yi-fang-xin)
+  # le texte se réduit à l'avertissement : aucun passage du 易筋經 n'est écrit (calligraphe)
+  # 按 plutôt que 依 : 按 est un mot du taijiquan qui va avec le 易筋經, et fait écho à 按指示做
+  # (an-zhi-shi-zuo-zhu-yi-fang-xin) ; le contraste de registre est voulu (calligraphe) : la
+  # consigne en langue moderne, puis la sentence de 懷讓 avec le 豈 classique
   - slug: yi-jin-jing
     title: 易筋經
     status: idea
@@ -1782,7 +1782,7 @@ pieces:
         date: 2026-03-23
         format: à préciser
         columns:
-          - 不按指示做 # avertissement sur le côté, à lire avant de commencer ; d'après 懷讓 :
+          - 不按指示做 # l'avertissement est tout le texte ; d'après 懷讓 :
           - 磨磚豈成鏡 # 磨磚既不成鏡，坐禪豈得成佛
         variations: []
     notion:
