@@ -56,7 +56,9 @@ async function main(argv: string[]): Promise<number> {
   const out = resolve(values.out ?? `grilles/${slug}.html`);
   await mkdir(dirname(out), { recursive: true });
   await writeFile(out, result.html);
-  process.stdout.write(`${summarize(result.candidates)}\n\n${pathToFileURL(out).href}\n`);
+  process.stdout.write(
+    `${summarize(result.candidates, result.models)}\n\n${pathToFileURL(out).href}\n`,
+  );
   return 0;
 }
 

@@ -1,3 +1,4 @@
+import * as fontkit from "fontkit";
 import { describe, expect, it } from "vitest";
 import { stringify } from "yaml";
 import { writeTree } from "@bsls/content/test-support";
@@ -66,7 +67,7 @@ async function grids(files: Record<string, string>, request: Omit<GridRequest, "
   const result = await generateGrids({ root: await writeTree(files), ...request });
   if (!result.ok) throw new Error(result.message);
   return {
-    summary: summarize(result.candidates),
+    summary: summarize(result.candidates, result.models),
     html: result.html,
     sheets: printedSheets(result.html),
   };
@@ -385,5 +386,90 @@ describe("les grilles d'une pièce", () => {
     expect(!empty.ok && empty.message).toContain("--texte");
     const missing = await generateGrids({ root, slug: "inconnue" });
     expect(!missing.ok && missing.message).toContain("aucune pièce « inconnue »");
+  });
+});
+
+/** Les modèles que la page embarque : la police de chacun, et ce qu'elle en dit. */
+function models(html: string) {
+  const faces = [
+    ...html.matchAll(
+      /@font-face \{ font-family: "modele-(\w+)"; src: url\(data:font\/woff2;base64,([^)]+)\)/g,
+    ),
+  ].map(([, key, data]) => ({
+    key: key!,
+    font: fontkit.create(Buffer.from(data!, "base64")) as fontkit.Font,
+  }));
+  const choices = [
+    ...html.matchAll(
+      /<input type="radio" name="model" value="(\w+)"( checked)?> ([^<]+)<\/label>/g,
+    ),
+  ].map(([, key, checked, label]) => ({ key, label, checked: Boolean(checked) }));
+  const notes = (key: string) =>
+    [
+      ...(
+        new RegExp(`<ul class="model-notes" data-model="${key}">(.*?)</ul>`, "s").exec(html)?.[1] ??
+        ""
+      ).matchAll(/<li>(.*?)<\/li>/g),
+    ].map(([, note]) => note!);
+  return { faces, choices, notes };
+}
+
+const draws = (font: fontkit.Font, text: string) =>
+  [...text].every((character) => font.hasGlyphForCodePoint(character.codePointAt(0)!));
+
+describe("le modèle", () => {
+  it("s'écrit au choix en 楷 standard, en 顏體 ou en 文楷, le 楷 standard par défaut", async () => {
+    const { html } = await grids(piece("[(2x5)]", ["空山新雨後", "天氣晚來秋"]), {
+      slug: "shan-ju",
+    });
+    expect(models(html).choices).toEqual([
+      { key: "kai", label: "楷 standard", checked: true },
+      { key: "yan", label: "顏體", checked: false },
+      { key: "wenkai", label: "文楷", checked: false },
+    ]);
+  });
+
+  it("embarque dans la page les caractères de la pièce, sans police venue d'ailleurs", async () => {
+    const { html } = await grids(piece("[(2x5)]", ["空山新雨後", "天氣晚來秋"]), {
+      slug: "shan-ju",
+    });
+    const { faces } = models(html);
+    expect(faces.map((face) => face.key)).toEqual(["kai", "yan", "wenkai"]);
+    for (const { font } of faces) expect(draws(font, "空山新雨後天氣晚來秋山居秋暝")).toBe(true);
+    expect(html).not.toMatch(/fonts\.googleapis|https:\/\/[^"]*\.(woff2?|ttf)/);
+  });
+
+  it("dit quels caractères un 體 n'a pas, et les dessine en 楷 standard", async () => {
+    const { html, summary } = await grids(piece("[(1x4)]", ["眞一乃定"]), { slug: "shan-ju" });
+    const { faces, notes } = models(html);
+    expect(notes("yan")).toContain("顏體 n'a pas 眞 : il s'affiche en 楷 standard");
+    expect(draws(faces.find((face) => face.key === "kai")!.font, "眞")).toBe(true);
+    expect(notes("kai")).toEqual([]);
+    expect(summary).toContain("顏體 n'a pas 眞 : il s'affiche en 楷 standard");
+  });
+
+  it("dit quand 文楷 dessine un caractère du texte comme une autre forme", async () => {
+    const { html } = await grids(piece("[(1x7)]", ["真作假時假亦真"]), { slug: "shan-ju" });
+    expect(models(html).notes("wenkai")).toContain(
+      "真 partage son dessin avec 眞 : la forme imprimée peut différer du texte",
+    );
+    expect(models(html).notes("kai")).toEqual([]);
+  });
+
+  it("dit quand un caractère ne retombe sur aucun 體, et s'affiche dans une police du système", async () => {
+    const { html } = await grids(piece("[(1x3)]", ["山𫝑水"]), { slug: "shan-ju" });
+    expect(models(html).notes("kai")).toContain(
+      "楷 standard n'a pas 𫝑 : il s'affiche dans une police du système",
+    );
+    expect(models(html).notes("wenkai")).toEqual([]);
+  });
+
+  it("dit quand aucun 體 n'a un caractère", async () => {
+    const { html } = await grids(piece("[(1x3)]", ["山𱍐水"]), { slug: "shan-ju" });
+    for (const key of ["kai", "yan", "wenkai"]) {
+      expect(models(html).notes(key)).toContain(
+        "aucun 體 n'a 𱍐 : il s'affiche dans une police du système",
+      );
+    }
   });
 });
