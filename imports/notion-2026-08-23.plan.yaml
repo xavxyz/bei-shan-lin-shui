@@ -686,13 +686,15 @@ pieces:
       relations:
         - 石人斤歌
         - 题破山寺后禅院
-  # 李道純《中和集》卷四, 歌, 《原道歌》, 贈野雲 (正統道藏, zh.wikisource) : la fin du 5ᵉ quatrain ;
-  # le poème entier viendra en nouvelle version
+  # 李道純《中和集》卷四, 歌, 《原道歌》, 贈野雲 (正統道藏, zh.wikisource) : la fin du 5ᵉ quatrain,
+  # puis le second distique du 6ᵉ, repris de yu-suo-jin-jia-qi-jie-tuo, née du lot 3 puis retirée du plan ;
+  # pour le 紅樓夢 : le 金鎖 de 寶釵 et le 玉 de 寶玉. Le poème entier viendra en nouvelle version
   - slug: yuan-dao-ge
     title: 《原道歌》
     status: idea
     projects:
       - zhong-he-ji
+      - hong-lou-meng
     published: false
     source:
       author: 李道純
@@ -701,10 +703,13 @@ pieces:
     versions:
       - id: v1
         date: 2026-01-17
-        format: à préciser
+        format: "[(1x3), (2x7), (2x7)]"
         columns:
+          - 原道歌
           - 浮華亂目孰回光
           - 薄霧牽情誰返照
+          - 玉鎖金枷齊解脫
+          - 急流勇退慕玄風
         intention: À terme, le poème entier, en douze quatrains.
         variations: []
     notion:
@@ -713,28 +718,6 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # absente de Notion : née de l'arbitrage du lot 3 (#17), le second distique du 6ᵉ quatrain du 《原道歌》,
-  # pour le 紅樓夢 : le 金鎖 de 寶釵 et le 玉 de 寶玉
-  - slug: yu-suo-jin-jia-qi-jie-tuo
-    title: 玉鎖金枷齊解脫
-    status: idea
-    projects:
-      - hong-lou-meng
-      - zhong-he-ji
-    published: false
-    source:
-      author: 李道純
-      dynasty: 元
-      work: 中和集
-    versions:
-      - id: v1
-        date: 2026-10-19
-        format: "[(2x7, 1x3)]"
-        columns:
-          - 玉鎖金枷齊解脫
-          - 急流勇退慕玄風
-          - 原道歌
-        variations: []
   # titre en traditionnel confirmé par le scan (Notion : 题破山寺后禅院)
   # date du papier : signé 丙午雨水 地中海泡澡, après un bain dans la Méditerranée (Notion disait 2026-01-18)
   # colonnes et format lus sur le scan 2026-10-11_06_01.jpeg
