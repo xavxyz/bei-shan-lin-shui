@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@bsls/content": "workspace:*",
-    "@bsls/notion-import": "workspace:*"
+    "@bsls/notion-import": "workspace:*",
+    "@bsls/schema": "workspace:*"
   },
   "devDependencies": {
     "yaml": "^2.6.1"

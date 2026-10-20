@@ -121,6 +121,9 @@ importers:
       '@bsls/notion-import':
         specifier: workspace:*
         version: link:../notion-import
+      '@bsls/schema':
+        specifier: workspace:*
+        version: link:../schema
     devDependencies:
       yaml:
         specifier: ^2.6.1

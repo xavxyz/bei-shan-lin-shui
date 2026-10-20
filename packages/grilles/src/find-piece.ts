@@ -2,16 +2,20 @@ import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { formatContentErrors, loadContent } from "@bsls/content";
 import { parsePlan } from "@bsls/notion-import";
+import type { LoadedVersion } from "@bsls/schema";
 
 /** Ce dont les grilles ont besoin d'une version : son format et ses colonnes, en traditionnel. */
-export type GridVersion = { id: string; date: string; format: string; columns: string[] };
+export type GridVersion = Pick<LoadedVersion, "id" | "date" | "format"> & { columns: string[] };
 
 export type GridPiece = {
   slug: string;
   title: string;
   /** D'où vient la pièce : `content/`, ou le plan d'import qui la porte encore. */
   origin: string;
-  /** Du plus ancien au plus récent : la dernière est l'intention courante. */
+  /**
+   * Du plus ancien au plus récent : la dernière est l'intention courante. Le
+   * content layer les trie ; le plan, append-only, les porte déjà dans cet ordre.
+   */
   versions: GridVersion[];
 };
 
@@ -52,7 +56,10 @@ export async function findPiece(root: string, slug: string): Promise<FindResult>
     .sort();
   for (const file of plans) {
     const parsed = parsePlan(await readFile(join(imports, file), "utf8"));
-    if (!parsed.ok) continue;
+    if (!parsed.ok) {
+      const errors = parsed.errors.map((error) => `  ${error.path}: ${error.message}`).join("\n");
+      return { ok: false, message: `plan invalide : imports/${file}\n${errors}` };
+    }
     const planned = parsed.plan.pieces.find((candidate) => candidate.slug === slug);
     if (!planned) continue;
     return {
@@ -61,14 +68,12 @@ export async function findPiece(root: string, slug: string): Promise<FindResult>
         slug,
         title: planned.title,
         origin: `imports/${file}`,
-        versions: [...planned.versions]
-          .sort((a, b) => a.date.localeCompare(b.date))
-          .map((version) => ({
-            id: version.id,
-            date: version.date,
-            format: version.format,
-            columns: version.columns,
-          })),
+        versions: planned.versions.map((version) => ({
+          id: version.id,
+          date: version.date,
+          format: version.format,
+          columns: version.columns,
+        })),
       },
     };
   }

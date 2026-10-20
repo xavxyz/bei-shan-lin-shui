@@ -1,13 +1,14 @@
 import { findPiece } from "./find-piece.js";
-import { describeVariant, renderPage, type Variant } from "./render.js";
+import {
+  candidateLabel,
+  describeCandidate,
+  renderPage,
+  sheetLine,
+  type Candidate,
+} from "./render.js";
 import { parseFormat, pourText } from "./sheets.js";
 
-export { findPiece } from "./find-piece.js";
-export type { FindResult, GridPiece, GridVersion } from "./find-piece.js";
-export { describeVariant, renderPage } from "./render.js";
-export type { SheetSummary, Variant } from "./render.js";
-export { cleanColumn, layoutSheet, parseFormat, pourText } from "./sheets.js";
-export type { Group, PouredText, Sheet, SheetLayout } from "./sheets.js";
+export type { Candidate } from "./render.js";
 
 export type GridRequest = {
   /** Racine du dépôt : `content/` et `imports/` s'y trouvent. */
@@ -15,16 +16,16 @@ export type GridRequest = {
   slug: string;
   /** Par défaut la dernière version. */
   version?: string;
-  /** Formats à comparer, une variante chacun ; par défaut celui de la version. */
+  /** Formats candidats à comparer ; par défaut celui de la version. */
   formats?: string[];
   /** Colonnes du texte, en traditionnel ; par défaut celles de la version. */
   columns?: string[];
 };
 
 export type GridResult =
-  { ok: true; html: string; variants: Variant[] } | { ok: false; message: string };
+  { ok: true; html: string; candidates: Candidate[] } | { ok: false; message: string };
 
-/** Les feuilles quadrillées d'une pièce, une variante par format candidat. */
+/** Les feuilles quadrillées d'une pièce, pour chaque format candidat. */
 export async function generateGrids(request: GridRequest): Promise<GridResult> {
   const found = await findPiece(request.root, request.slug);
   if (!found.ok) return found;
@@ -50,7 +51,7 @@ export async function generateGrids(request: GridRequest): Promise<GridResult> {
   }
 
   const formats = request.formats?.length ? request.formats : [version.format];
-  const variants: Variant[] = [];
+  const candidates: Candidate[] = [];
   for (const [index, format] of formats.entries()) {
     const parsed = parseFormat(format);
     if (!parsed.ok) {
@@ -59,7 +60,7 @@ export async function generateGrids(request: GridRequest): Promise<GridResult> {
         message: `${parsed.message}\n(format de la version : « ${version.format} »)`,
       };
     }
-    variants.push({
+    candidates.push({
       key: String.fromCharCode(65 + index),
       format,
       sheets: parsed.sheets,
@@ -69,29 +70,25 @@ export async function generateGrids(request: GridRequest): Promise<GridResult> {
 
   return {
     ok: true,
-    variants,
+    candidates,
     html: renderPage({
       title: piece.title,
       slug: piece.slug,
       version: version.id,
       origin: piece.origin,
-      variants,
+      candidates,
     }),
   };
 }
 
 /** Le résumé que la commande affiche, une ligne par feuille. */
-export function summarize(variants: Variant[]): string {
-  return variants
-    .map((variant) => {
-      const { sheets, notes } = describeVariant(variant);
-      const lines = sheets.map(
-        (sheet, i) =>
-          `  feuille ${i + 1} : ${sheet.orientation}, carreau ${sheet.cell.toFixed(1)} mm, ${sheet.columns.length} colonnes, ${sheet.characters} caractères`,
-      );
+export function summarize(candidates: Candidate[]): string {
+  return candidates
+    .map((candidate) => {
+      const { sheets, notes } = describeCandidate(candidate);
       return [
-        `${variant.key} · ${variant.format}`,
-        ...lines,
+        candidateLabel(candidate),
+        ...sheets.map((sheet, i) => `  ${sheetLine(sheet, i)}`),
         ...notes.map((note) => `  — ${note}`),
       ].join("\n");
     })

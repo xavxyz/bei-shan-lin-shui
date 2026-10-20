@@ -1,40 +1,53 @@
 import { layoutSheet, type PouredText, type Sheet, type SheetLayout } from "./sheets.js";
 
-export type Variant = {
-  /** `A`, `B`… : la clé de `?variant=`. */
+/** Un format mis en grilles pour être comparé aux autres. */
+export type Candidate = {
+  /** `A`, `B`… : la clé de `?candidat=`. */
   key: string;
   format: string;
   sheets: Sheet[];
   text: PouredText;
 };
 
-export type SheetSummary = SheetLayout & { characters: number };
+type SheetSummary = SheetLayout & { characters: number };
 
 export type RenderInput = {
   title: string;
   slug: string;
   version: string;
   origin: string;
-  variants: Variant[];
+  candidates: Candidate[];
 };
 
-/** Ce que la commande dit de chaque variante, et ce que la page affiche sous les feuilles. */
-export function describeVariant(variant: Variant): { sheets: SheetSummary[]; notes: string[] } {
-  const sheets = variant.sheets.map((sheet, index) => ({
+const ORIENTATIONS = { portrait: "portrait", landscape: "paysage" } as const;
+
+/** `A · [(13x7)]` : le nom d'un format candidat, dans la commande et sur la page. */
+export const candidateLabel = (candidate: Candidate) => `${candidate.key} · ${candidate.format}`;
+
+/** La ligne d'une feuille, dans la commande et sous la feuille. */
+export const sheetLine = (sheet: SheetSummary, index: number) =>
+  `feuille ${index + 1} · ${ORIENTATIONS[sheet.orientation]} · carreau ${sheet.cell.toFixed(1)} mm · ${sheet.columns.length} colonnes · ${sheet.characters} caractères`;
+
+/** Ce que la commande dit de chaque format candidat, et ce que la page affiche sous ses feuilles. */
+export function describeCandidate(candidate: Candidate): {
+  sheets: SheetSummary[];
+  notes: string[];
+} {
+  const sheets = candidate.sheets.map((sheet, index) => ({
     ...layoutSheet(sheet),
-    characters: variant.text.sheets[index]!.flat().join("").length,
+    characters: candidate.text.sheets[index]!.flat().join("").length,
   }));
   const notes = [
-    variant.text.mode === "colonnes"
+    candidate.text.mode === "columns"
       ? "les colonnes du texte tombent une à une dans celles de la grille"
-      : "le texte coule dans les cases, dans l'ordre de lecture",
+      : "le texte coule dans les cases, dans l'ordre de lecture : une colonne peut couper un vers, et le contresens être fructueux ou non",
   ];
-  if (variant.text.overflow) {
+  if (candidate.text.overflow) {
     notes.push(
-      `ne tient pas : ${[...variant.text.overflow].length} caractères (${variant.text.overflow})`,
+      `ne tient pas : ${[...candidate.text.overflow].length} caractères (${candidate.text.overflow})`,
     );
   }
-  if (variant.text.empty > 0) notes.push(`${variant.text.empty} cases restent vides`);
+  if (candidate.text.empty > 0) notes.push(`${candidate.text.empty} cases restent vides`);
   return { sheets, notes };
 }
 
@@ -69,24 +82,26 @@ function renderSheet(layout: SheetSummary, columns: string[], index: number): st
         <g class="grid">${lines.join("")}</g>
         <g class="characters" font-size="${mm(cell * 0.78)}">${glyphs.join("")}</g>
       </svg>
-      <figcaption>feuille ${index + 1} · ${layout.orientation} · carreau ${layout.cell.toFixed(1)} mm · ${layout.columns.length} colonnes · ${layout.characters} caractères</figcaption>
+      <figcaption>${sheetLine(layout, index)}</figcaption>
     </figure>`;
 }
 
 /**
- * Une page HTML autonome : chaque variante est une suite de feuilles A4 à
- * l'échelle réelle, et seule la variante affichée s'imprime, une feuille par page.
+ * Une page HTML autonome : chaque format candidat est une suite de feuilles
+ * A4 à l'échelle réelle, et seul celui qui est affiché s'imprime, une feuille
+ * par page.
  */
 export function renderPage(input: RenderInput): string {
-  const sections = input.variants.map((variant) => {
-    const { sheets, notes } = describeVariant(variant);
-    const columns = variant.text.sheets.map((sheet) => sheet.flat());
+  const sections = input.candidates.map((candidate) => {
+    const { sheets, notes } = describeCandidate(candidate);
+    const columns = candidate.text.sheets.map((sheet) => sheet.flat());
+    const label = escape(candidateLabel(candidate));
     return `
-  <section class="variant" data-variant="${variant.key}" data-label="${escape(`${variant.key} · ${variant.format}`)}" hidden>
+  <section class="candidate" data-candidate="${candidate.key}" data-label="${label}" hidden>
     <div class="sheets">${sheets.map((sheet, i) => renderSheet(sheet, columns[i]!, i)).join("")}
     </div>
     <aside class="state">
-      <strong>${escape(`${variant.key} · ${variant.format}`)}</strong> — ${sheets.length} feuille${sheets.length > 1 ? "s" : ""}
+      <strong>${label}</strong> — ${sheets.length} feuille${sheets.length > 1 ? "s" : ""}
       <ul>${notes.map((note) => `<li>${escape(note)}</li>`).join("")}</ul>
     </aside>
   </section>`;
@@ -103,24 +118,24 @@ export function renderPage(input: RenderInput): string {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap">
 <style>${STYLE}</style>
 </head>
-<body data-characters="shown">
+<body data-characters="affiches">
   <header class="controls">
     <h1>${escape(input.title)}</h1>
     <p>${escape(`${input.slug} · version ${input.version} · ${input.origin}`)}</p>
     <fieldset>
       <legend>Caractères</legend>
-      <label><input type="radio" name="characters" value="shown" checked> affichés</label>
-      <label><input type="radio" name="characters" value="tracing"> en calque</label>
-      <label><input type="radio" name="characters" value="hidden"> masqués</label>
+      <label><input type="radio" name="characters" value="affiches" checked> affichés</label>
+      <label><input type="radio" name="characters" value="calque"> en calque</label>
+      <label><input type="radio" name="characters" value="masques"> masqués</label>
     </fieldset>
     <p class="hint">Imprimer : une feuille par page, A4, échelle 100 %, marges « aucune ». Les caractères s'impriment comme ils sont affichés.</p>
   </header>
   <main>${sections.join("")}
   </main>
-  <nav class="switcher" aria-label="Variantes">
-    <button type="button" data-step="-1" aria-label="Variante précédente">←</button>
+  <nav class="switcher" aria-label="Formats candidats">
+    <button type="button" data-step="-1" aria-label="Format candidat précédent">←</button>
     <span class="switcher__label"></span>
-    <button type="button" data-step="1" aria-label="Variante suivante">→</button>
+    <button type="button" data-step="1" aria-label="Format candidat suivant">→</button>
   </nav>
 <script>${SCRIPT}</script>
 </body>
@@ -130,7 +145,7 @@ export function renderPage(input: RenderInput): string {
 
 const STYLE = `
 @page { size: A4 portrait; margin: 0; }
-@page paysage { size: A4 landscape; margin: 0; }
+@page landscape { size: A4 landscape; margin: 0; }
 body { margin: 0; padding: 24px 24px 120px; background: #e8e4dc; color: #23201c;
   font-family: "Iowan Old Style", Palatino, Georgia, serif; }
 .controls { max-width: 900px; margin: 0 auto 24px; }
@@ -144,8 +159,8 @@ body { margin: 0; padding: 24px 24px 120px; background: #e8e4dc; color: #23201c;
 .characters text, .inscription { font-family: "Kaiti TC", "BiauKai", "DFKai-SB", "STKaiti", "Noto Serif TC", "Songti TC", serif;
   text-anchor: middle; dominant-baseline: central; fill: #23201c; }
 .inscription { fill: #8a2c2c; opacity: 0.5; writing-mode: vertical-rl; dominant-baseline: auto; }
-body[data-characters="tracing"] .characters { opacity: 0.12; }
-body[data-characters="hidden"] .characters { display: none; }
+body[data-characters="calque"] .characters { opacity: 0.12; }
+body[data-characters="masques"] .characters { display: none; }
 figcaption { margin-top: 8px; font-size: 13px; text-align: center; color: #6d675e; }
 .state { max-width: 900px; margin: 20px auto 0; font-size: 15px; line-height: 1.5; }
 .switcher { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center;
@@ -158,37 +173,36 @@ figcaption { margin-top: 8px; font-size: 13px; text-align: center; color: #6d675
   .sheets { display: block; }
   .sheet { break-after: page; }
   .sheet:last-child { break-after: auto; }
-  .sheet.paysage { page: paysage; }
+  .sheet.landscape { page: landscape; }
   .sheet svg { box-shadow: none; }
 }
 `;
 
 const SCRIPT = `
-const sections = [...document.querySelectorAll(".variant")];
-const keys = sections.map((s) => s.dataset.variant);
+const sections = [...document.querySelectorAll(".candidate")];
+const keys = sections.map((s) => s.dataset.candidate);
 const label = document.querySelector(".switcher__label");
 const params = new URLSearchParams(location.search);
-let current = keys.includes(params.get("variant")) ? params.get("variant") : keys[0];
+let current = keys.includes(params.get("candidat")) ? params.get("candidat") : keys[0];
 
 function sync() {
-  for (const s of sections) s.hidden = s.dataset.variant !== current;
-  label.textContent = sections.find((s) => s.dataset.variant === current).dataset.label;
+  for (const s of sections) s.hidden = s.dataset.candidate !== current;
+  label.textContent = sections.find((s) => s.dataset.candidate === current).dataset.label;
   const url = new URL(location.href);
-  url.searchParams.set("variant", current);
-  url.searchParams.set("caracteres", names[document.body.dataset.characters]);
+  url.searchParams.set("candidat", current);
+  url.searchParams.set("caracteres", document.body.dataset.characters);
   history.replaceState(null, "", url);
 }
 function step(d) {
   current = keys[(keys.indexOf(current) + d + keys.length) % keys.length];
   sync();
 }
-const modes = { affiches: "shown", calque: "tracing", masques: "hidden" };
-const names = Object.fromEntries(Object.entries(modes).map(([k, v]) => [v, k]));
+const modes = ["affiches", "calque", "masques"];
 function setCharacters(mode) {
   document.body.dataset.characters = mode;
   document.querySelector('input[value="' + mode + '"]').checked = true;
 }
-setCharacters(modes[params.get("caracteres")] ?? "shown");
+setCharacters(modes.includes(params.get("caracteres")) ? params.get("caracteres") : "affiches");
 document.querySelectorAll('input[name="characters"]').forEach((input) =>
   input.addEventListener("change", () => { setCharacters(input.value); sync(); }));
 document.querySelectorAll(".switcher button").forEach((b) =>

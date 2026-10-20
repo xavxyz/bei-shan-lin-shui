@@ -11,20 +11,29 @@ export type Sheet = Group[];
 export type FormatResult = { ok: true; sheets: Sheet[] } | { ok: false; message: string };
 
 /**
- * Lit la notation du dépôt : `NxM` est un groupe de N colonnes de M
- * caractères, `+` juxtapose des groupes sur une feuille, `(…)` fait une
- * feuille et `k*(…)` en fait k pareilles. Dès qu'une feuille est parenthésée,
- * chaque terme du premier niveau est une feuille : une suite de `NxM` nus en
- * fait une aussi.
+ * Lit la notation des formats : `[(…), (…)]` est la suite des feuilles, et
+ * chaque parenthèse les groupes `NxM` d'une feuille, N colonnes de M
+ * caractères, séparés par des virgules. `[(1x3, 9x7), (1x4, 3x7)]` fait deux
+ * feuilles de deux groupes chacune.
  */
 export function parseFormat(format: string): FormatResult {
   const source = format.replace(/\s+/g, "").replace(/[×X]/g, "x");
   let at = 0;
 
-  const fail = (expected: string): FormatResult => ({
-    ok: false,
-    message: `format illisible : « ${format} » — ${expected} à la position ${at + 1}`,
-  });
+  const fail = (expected: string): FormatResult => {
+    const old = /[+*]/.test(source)
+      ? "\n(ancienne notation : une feuille par parenthèse, les feuilles entre crochets, ex. [(1x3, 9x7), (1x4, 3x7)])"
+      : "";
+    return {
+      ok: false,
+      message: `format illisible : « ${format} » — ${expected} à la position ${at + 1}${old}`,
+    };
+  };
+  const expect = (token: string): boolean => {
+    if (source[at] !== token) return false;
+    at += 1;
+    return true;
+  };
   const integer = (): number | null => {
     const match = /^\d+/.exec(source.slice(at));
     if (!match || Number(match[0]) < 1) return null;
@@ -33,54 +42,27 @@ export function parseFormat(format: string): FormatResult {
   };
   const group = (): Group | null => {
     const columns = integer();
-    if (columns === null || source[at] !== "x") return null;
-    at += 1;
+    if (columns === null || !expect("x")) return null;
     const rows = integer();
     return rows === null ? null : { columns, rows };
   };
-  const groups = (): Sheet | null => {
+
+  if (!expect("[")) return fail("attendu « [ »");
+  const sheets: Sheet[] = [];
+  do {
+    if (!expect("(")) return fail("attendu « ( »");
     const sheet: Sheet = [];
-    for (;;) {
+    do {
       const next = group();
-      if (!next) return null;
+      if (!next) return fail("attendu NxM");
       sheet.push(next);
-      if (source[at] !== "+" || source[at + 1] === "(" || /^\+\d+\*/.test(source.slice(at))) {
-        return sheet;
-      }
-      at += 1;
-    }
-  };
-
-  const terms: { sheets: Sheet[]; bracketed: boolean }[] = [];
-  for (;;) {
-    const start = at;
-    const repeat = /^(\d+)\*/.exec(source.slice(at));
-    if (repeat) at += repeat[0].length;
-    if (source[at] === "(") {
-      at += 1;
-      const sheet = groups();
-      if (!sheet) return fail("attendu NxM");
-      if (source[at] !== ")") return fail("attendu « ) »");
-      at += 1;
-      const times = repeat ? Number(repeat[1]) : 1;
-      if (times < 1) return fail("attendu une répétition d'au moins 1");
-      terms.push({ sheets: Array.from({ length: times }, () => sheet), bracketed: true });
-    } else {
-      if (repeat) return fail("attendu « ( » après la répétition");
-      at = start;
-      const sheet = groups();
-      if (!sheet) return fail("attendu NxM");
-      terms.push({ sheets: [sheet], bracketed: false });
-    }
-    if (at === source.length) break;
-    if (source[at] !== "+") return fail("attendu « + »");
-    at += 1;
-  }
-
-  if (terms.some((term) => term.bracketed)) {
-    return { ok: true, sheets: terms.flatMap((term) => term.sheets) };
-  }
-  return { ok: true, sheets: [terms.flatMap((term) => term.sheets.flat())] };
+    } while (expect(","));
+    if (!expect(")")) return fail("attendu « , » ou « ) »");
+    sheets.push(sheet);
+  } while (expect(","));
+  if (!expect("]")) return fail("attendu « , » ou « ] »");
+  if (at !== source.length) return fail("attendu la fin du format");
+  return { ok: true, sheets };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -91,11 +73,11 @@ export function parseFormat(format: string): FormatResult {
 export type PouredText = {
   sheets: string[][][];
   /**
-   * `colonnes` quand les colonnes du texte tombent une à une dans celles de la
-   * grille ; `coulé` quand le texte, mis bout à bout, remplit les cases dans
-   * l'ordre de lecture.
+   * `columns` quand les colonnes du texte tombent une à une dans celles de la
+   * grille ; `flowed` quand le texte, mis bout à bout, coule dans les cases
+   * dans l'ordre de lecture.
    */
-  mode: "colonnes" | "coulé";
+  mode: "columns" | "flowed";
   /** Ce qui ne tient pas dans la grille. */
   overflow: string;
   /** Cases restées vides. */
@@ -105,7 +87,7 @@ export type PouredText = {
 /** Ponctuation et blancs : la calligraphie n'en porte pas. */
 const NOT_WRITTEN = /[\s，。、；：！？「」『』《》〈〉（）()·,.;:!?'"“”‘’…—-]/gu;
 
-export function cleanColumn(column: string): string {
+function cleanColumn(column: string): string {
   return column.replace(NOT_WRITTEN, "");
 }
 
@@ -145,7 +127,7 @@ export function pourText(sheets: Sheet[], columns: string[]): PouredText {
   const written = filled.reduce((sum, column) => sum + [...column].length, 0);
   return {
     sheets: poured,
-    mode: oneToOne ? "colonnes" : "coulé",
+    mode: oneToOne ? "columns" : "flowed",
     overflow,
     empty: cells - written,
   };
@@ -155,18 +137,18 @@ export function pourText(sheets: Sheet[], columns: string[]): PouredText {
 /* Mise en page                                                                */
 /* -------------------------------------------------------------------------- */
 
-export const A4 = { short: 210, long: 297 } as const;
+const A4 = { short: 210, long: 297 } as const;
 /** Marges de la feuille. */
-export const MARGIN = 15;
+const MARGIN = 15;
 /** Marge de gauche, réservée au 落款. */
-export const INSCRIPTION = 25;
+const INSCRIPTION = 25;
 /** Écart entre deux groupes de colonnes, en carreaux. */
-export const GROUP_GAP = 0.5;
+const GROUP_GAP = 0.5;
 
-export type ColumnBox = { x: number; y: number; rows: number };
+type ColumnBox = { x: number; y: number; rows: number };
 
 export type SheetLayout = {
-  orientation: "portrait" | "paysage";
+  orientation: "portrait" | "landscape";
   width: number;
   height: number;
   /** Côté d'un carreau. */
@@ -193,7 +175,7 @@ export function layoutSheet(sheet: Sheet): SheetLayout {
   const landscape = fit(A4.long, A4.short);
   const [orientation, width, height, cell] =
     landscape > portrait
-      ? (["paysage", A4.long, A4.short, landscape] as const)
+      ? (["landscape", A4.long, A4.short, landscape] as const)
       : (["portrait", A4.short, A4.long, portrait] as const);
 
   const area = width - MARGIN - INSCRIPTION;
