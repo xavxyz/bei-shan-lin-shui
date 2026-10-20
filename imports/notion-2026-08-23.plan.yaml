@@ -15,8 +15,8 @@ projects:
     theme: ink
   # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
   # à arbitrer — theme : rien dans l'export ne dit le thème : jade proposé, à choisir
-  - id: tai-xu-huan-jing-hong-lou-meng
-    title: 太虛幻境紅樓夢
+  - id: hong-lou-meng
+    title: 紅樓夢
     presentation: ""
     theme: jade
   # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
@@ -601,7 +601,7 @@ pieces:
     title: 太虛幻境紅樓夢
     status: made
     projects:
-      - tai-xu-huan-jing-hong-lou-meng
+      - hong-lou-meng
     published: false
     versions:
       - id: v1
@@ -703,7 +703,7 @@ pieces:
     title: 玉鎖金枷齊解脫
     status: idea
     projects:
-      - tai-xu-huan-jing-hong-lou-meng
+      - hong-lou-meng
       - zhong-he-ji
     published: false
     source:
@@ -1660,7 +1660,7 @@ pieces:
     title: 螃蟹諷刺 🦀
     status: idea
     projects:
-      - tai-xu-huan-jing-hong-lou-meng
+      - hong-lou-meng
     published: false
     versions:
       - id: v1
@@ -1700,7 +1700,7 @@ pieces:
     title: （罗）羅 掠和 // 軟煙羅 # 罗 en simplifié à dessein, comme sur le papier
     status: made
     projects:
-      - tai-xu-huan-jing-hong-lou-meng
+      - hong-lou-meng
     published: false
     versions:
       - id: v1
@@ -1955,7 +1955,7 @@ pieces:
     title: 占花名兒
     status: idea
     projects:
-      - tai-xu-huan-jing-hong-lou-meng
+      - hong-lou-meng
     published: false
     versions:
       - id: v1
@@ -1974,7 +1974,7 @@ pieces:
     title: 胡思亂想
     status: experiment
     projects:
-      - tai-xu-huan-jing-hong-lou-meng
+      - hong-lou-meng
     published: false
     versions:
       - id: v1
@@ -2036,7 +2036,7 @@ pieces:
     title: 紅樓夢牌樓聯
     status: idea
     projects:
-      - tai-xu-huan-jing-hong-lou-meng
+      - hong-lou-meng
     published: false
     versions:
       - id: v1
@@ -2276,7 +2276,7 @@ pieces:
     title: 成人不自在，自在不成人
     status: made
     projects:
-      - tai-xu-huan-jing-hong-lou-meng
+      - hong-lou-meng
     published: false
     translation: Qui souhaite devenir vraiment un homme ne songe pas à se donner de l'aise ; qui ne songe qu'à se donner de l'aise ne deviendra jamais vraiment un homme.
     versions:

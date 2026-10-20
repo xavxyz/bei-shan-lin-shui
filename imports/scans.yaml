@@ -718,7 +718,7 @@ scans:
 
   - file: 2026-10-11_30_02.jpeg
     read: [成人不自在, 自在不成人]
-    match: cheng-ren-bu-zi-zai-zi-zai-bu-cheng-ren # absente de Notion, projet tai-xu-huan-jing-hong-lou-meng
+    match: cheng-ren-bu-zi-zai-zi-zai-bu-cheng-ren # absente de Notion, projet hong-lou-meng
     confidence: high
     script: kaishu
     variation: v1a # kept, image mise en avant ; dans le plan
