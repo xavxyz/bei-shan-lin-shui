@@ -1,6 +1,7 @@
 ---
 name: grilles
 description: Générer pour une pièce des feuilles A4 quadrillées à imprimer, une grille par format candidat, comparables côte à côte. À utiliser quand le calligraphe veut une grille à imprimer pour écrire une pièce, un calque de ses caractères, ou hésite entre plusieurs formats.
+argument-hint: "[slug] [format candidat…]"
 ---
 
 # Grilles
@@ -13,6 +14,10 @@ prototype. La skill lit la pièce et n'écrit rien dans `content/` ni dans le
 plan.
 
 ## 1. Retrouver la pièce
+
+Appelée par `/grilles`, la skill reçoit dans `$ARGUMENTS` le slug, puis
+d'éventuels formats candidats à reprendre à l'étape 2 ; sans slug, demander la
+pièce au calligraphe.
 
 La commande cherche le slug dans `content/`, puis dans `imports/*.plan.yaml`
 tant que le plan n'est pas appliqué. Lire la pièce et résumer au calligraphe
