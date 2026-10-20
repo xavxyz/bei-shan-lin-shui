@@ -348,7 +348,9 @@ describe("les grilles d'une pièce", () => {
   });
 
   it("titrent la page du nom de la pièce d'abord, pour la retrouver parmi les onglets", async () => {
-    const { html } = await grids(piece("[(2x5)]", ["空山新雨後", "天氣晚來秋"]), { slug: "shan-ju" });
+    const { html } = await grids(piece("[(2x5)]", ["空山新雨後", "天氣晚來秋"]), {
+      slug: "shan-ju",
+    });
 
     expect(/<title>(.*)<\/title>/.exec(html)![1]).toBe("山居秋暝 — Grilles");
   });
