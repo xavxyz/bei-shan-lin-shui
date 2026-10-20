@@ -717,32 +717,6 @@ pieces:
         columns:
           - 玉鎖金枷齊解脫
         variations: []
-  # 李道純《中和集》卷四, 歌, 《鍊虛歌》, les deux derniers vers du treizième et dernier quatrain,
-  # celui du bambou (正統道藏, zh.wikisource) ; 鍊 comme Notion et le 道藏 (煉 sur wikisource)
-  - slug: lian-xu-ge
-    title: 《鍊虛歌》
-    status: idea
-    projects:
-      - zhong-he-ji
-    published: false
-    source:
-      author: 李道純
-      dynasty: 元
-      work: 中和集
-    versions:
-      - id: v1
-        date: 2026-01-17
-        format: à préciser
-        columns:
-          - 虛心直節青青竹
-          - 個是鍊虛第一機 # 个 dans le 道藏
-        variations: []
-    notion:
-      title: 《鍊虛歌》
-      status: Brute
-      url: ""
-      relations:
-        - 中和集
   # titre en traditionnel confirmé par le scan (Notion : 题破山寺后禅院)
   # date du papier : signé 丙午雨水 地中海泡澡, après un bain dans la Méditerranée (Notion disait 2026-01-18)
   # colonnes et format lus sur le scan 2026-10-11_06_01.jpeg
@@ -801,6 +775,9 @@ pieces:
   # attribution 中和集 hors colonnes
   # 1re colonne : 衜 pour 道 sur le papier
   # les trois 虛 écrits chacun autrement, aucun pareil, à dessein
+  # 2e et 3e colonnes : les deux derniers vers du 《鍊虛歌》, 李道純《中和集》卷四, 歌, au dernier quatrain,
+  # celui du bambou (正統道藏, zh.wikisource) ; la page Notion 《鍊虛歌》 était cette pièce (lot 3) ;
+  # 箇 sur le papier, 个 dans le 道藏
   - slug: xu-xin-shi-fu
     title: 虛心實腹
     status: made
@@ -808,6 +785,10 @@ pieces:
       - zhong-he-ji
       - xiu-zhu-can-cha
     published: false
+    source:
+      author: 李道純
+      dynasty: 元
+      work: 中和集
     translation: Esprit vide, ventre plein, les fondamentaux de la voie
     versions:
       - id: v1
@@ -954,7 +935,8 @@ pieces:
         - 過猶不及，方向堅定不移，方法因地制宜
   # 李道純《中和集》卷四, 歌, 《龍虎歌》並引 (正統道藏, zh.wikisource) : la citation de 紫陽 dans la préface,
   # jusqu'à 神仙之能事畢矣, puis 勉旃勉旃, qui clôt la préface, les vers 5-6 et le dernier vers du chant
-  # pas de format : trop de choses à prendre dans le texte (lot 3) ; le cadre imprimé 1x7 + 4*(2x7) n'est plus le sien
+  # full_text : la préface prise à la citation de 紫陽, ajoutée d'après le 道藏 (Notion partait de 趙束齋者)
+  # à arbitrer — version.format : le cadre imprimé 1x7 + 4*(2x7) n'est plus le sien ; formats proposés dans plan-a-arbitrer.md (lot 3)
   - slug: long-hu-ge-mian-zhan-mian-zhan
     title: 《龍虎歌》勉旃勉旃
     status: in-progress
@@ -965,7 +947,7 @@ pieces:
       author: 李道純
       dynasty: 元
       work: 中和集
-      full_text: 趙束齋者，古杭人也。幼為內侍，職任中官。因乾旋坤轉而勘破浮生，故棄利捐名，而參求道要。雖紅塵而混跡，實玄境以棲心，真脫略世事者也。意欲混合凝神，故留心於龍虎。一日攜是圖示予，求其贅語。予辭不可，於是乎著筆而塞責焉。告之曰：古人因道而設象，子今因象而立言。束齊者，貴在明加眼力，觀教端的，莫教錯認定盤星。苟能因言會意，觀圖得旨，便知道真龍真虎，不在紙上，而在自己也。至於言象兩忘，道德備矣。咦，真龍真虎不難尋，只要抽陽去補陰。四德運乾誠不息，潛飛見躍盡由心。雖然也是平地起，波濤青天轟霹靂。勉旃勉旃。歌曰： 真龍真虎元無象，誰為起模傳此樣。若於無象裏承當，又落斷常終莽蕩。 青青白白太分明，也是無風自起浪。時人要識真龍虎，不屬有無並子午。休將二物混淪吞，但把五行顛倒數。根芽本是太玄宮，造化卻在朱陵府。雖然運用有主張，畢竟虛靈無處所。一條大道要心通，些子神機非目覩。忽然進開頂顧門，勘破木金同一母。高高絕頂天罡摧，耿耿銀河斗柄戽。興雲起霧仗丁公，掣電驅雷役玄武。瞬息之間天地交，剎那之頃坎離補。虎從水底起清風，龍在火中降甘雨。雷行雨施天下平，運乾龍德功周普。人言六龍以卸天，孰知一龍是真主。人言五虎透玄關，孰知一虎生真土。會得龍虎常合和，便知龜蛇互吞吐。聖人設象指蹄筌，象外明言便造言。言外更須窮祖意，元來太極本無○。得意忘象未為特，和意都忘為極則。稽首束齋趙隱居，徹底掀翻參學畢。
+      full_text: 紫陽云：收拾身心，謂之降伏龍虎。心不動則龍吟，身不動則虎嘯。龍吟則氣固，虎嘯則精凝。元精凝則足以保形，元氣固則足以凝神。形神俱妙，與道合真，神仙之能事畢矣。非天下至神，其孰能與於此哉。趙束齋者，古杭人也。幼為內侍，職任中官。因乾旋坤轉而勘破浮生，故棄利捐名，而參求道要。雖紅塵而混跡，實玄境以棲心，真脫略世事者也。意欲混合凝神，故留心於龍虎。一日攜是圖示予，求其贅語。予辭不可，於是乎著筆而塞責焉。告之曰：古人因道而設象，子今因象而立言。束齊者，貴在明加眼力，觀教端的，莫教錯認定盤星。苟能因言會意，觀圖得旨，便知道真龍真虎，不在紙上，而在自己也。至於言象兩忘，道德備矣。咦，真龍真虎不難尋，只要抽陽去補陰。四德運乾誠不息，潛飛見躍盡由心。雖然也是平地起，波濤青天轟霹靂。勉旃勉旃。歌曰： 真龍真虎元無象，誰為起模傳此樣。若於無象裏承當，又落斷常終莽蕩。 青青白白太分明，也是無風自起浪。時人要識真龍虎，不屬有無並子午。休將二物混淪吞，但把五行顛倒數。根芽本是太玄宮，造化卻在朱陵府。雖然運用有主張，畢竟虛靈無處所。一條大道要心通，些子神機非目覩。忽然進開頂顧門，勘破木金同一母。高高絕頂天罡摧，耿耿銀河斗柄戽。興雲起霧仗丁公，掣電驅雷役玄武。瞬息之間天地交，剎那之頃坎離補。虎從水底起清風，龍在火中降甘雨。雷行雨施天下平，運乾龍德功周普。人言六龍以卸天，孰知一龍是真主。人言五虎透玄關，孰知一虎生真土。會得龍虎常合和，便知龜蛇互吞吐。聖人設象指蹄筌，象外明言便造言。言外更須窮祖意，元來太極本無○。得意忘象未為特，和意都忘為極則。稽首束齋趙隱居，徹底掀翻參學畢。
     versions:
       - id: v1
         date: 2026-01-26
@@ -2200,7 +2182,7 @@ pieces:
                 file: v1a-03.jpg
                 kind: work
   # absente de Notion : identifiée sur les scans 2026-10-11_20_01 et 20_02 (registre imports/scans.yaml)
-  # 煉 à la clé du feu sur le papier ; distincte de lian-xu-ge (《鍊虛歌》, colonnes vides)
+  # 煉 à la clé du feu sur le papier ; distincte de xu-xin-shi-fu, qui cite le 《鍊虛歌》 (鍊 à la clé du métal)
   # feuille ② : 修, 養, 虛, chacun par les cinq pas de 鄧岱崑, du régulier à la cursive folle
   - slug: lian-dan
     title: 煉丹

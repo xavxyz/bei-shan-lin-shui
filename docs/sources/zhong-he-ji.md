@@ -7,6 +7,9 @@ recoupées sur le 清庵先生中和集 de ctext
 ([res=3138576](https://ctext.org/wiki.pl?if=gb&res=3138576), images au
 `file=205666`).
 
+Le 《鍊虛歌》 n'y est pas : ses deux derniers vers sont les deux dernières
+colonnes de `xu-xin-shi-fu`.
+
 Traductions de travail, faites par des agents : la traduction qui accompagne
 une pièce s'écrit à la main. Les ➡️ marquent les étendues candidates ; les
 étendues retenues sont dans les pièces.
@@ -144,7 +147,7 @@ une pièce s'écrit à la main. Les ➡️ marquent les étendues candidates ; l
 - **Le quatrain 1**, l'ouverture : un seul point à percer, et dix mille montagnes pour l'égaré.
 - **Le quatrain 2**, la satire du chat qui guette un terrier vide, qui tient sans contexte.
 
-## 4 — 《玄理歌》二首 · `xuan-li-ge`
+## 3 — 《玄理歌》二首 · `xuan-li-ge`
 
 **Source :** 李道純, 《中和集》卷四「歌」, 正統道藏, entre 《身心定…》 et 《性理歌》 : deux chants, de 38 et 22 vers. Graphies normalisées : 𨿽→雖, 眞→真, 靑→青, 爲→為, 鑪→爐, 奼→姹, 气→氣 (I, 20 et II, 19 ; 炁 si l'on veut marquer le souffle interne). 菴 et 嘿 (默) gardés.
 
@@ -231,7 +234,7 @@ une pièce s'écrit à la main. Les ➡️ marquent les étendues candidates ; l
 - **Le quatrain du silence**, II, 5-8 : 心明智慧不如愚 / 雄辯高談爭似嘿 / 絕慮忘機無是非 / 隱耀含華遠聲色, sans vocabulaire alchimique.
 - **Le second chant entier**, 154 caractères, une seule rime ; 萬虛澄 à trancher.
 
-## 5 — 《慧劍歌》 · `hui-jian`
+## 4 — 《慧劍歌》 · `hui-jian`, pièce retirée
 
 **Source :** 李道純, 《中和集》卷四「歌」(正統道藏). Titre au 道藏 : 《慧劍歌》 (Notion : 《慧劍》). Le chant commence par 自從至人傳劍訣, et non par 此寶劍, qui ouvre la 8ᵉ strophe. 9 strophes, 36 vers, 188 caractères : une première de quatre vers de sept, puis huit en 3+3+7+7+7, la fin d'une strophe ouvrant souvent la suivante (為君說, 明月現). Graphies normalisées : 爲→為, 眞→真, 淸→清, 网→網 ; 鑪 (爐) et 彊 (強) gardés.
 
@@ -294,7 +297,7 @@ une pièce s'écrit à la main. Les ➡️ marquent les étendues candidates ; l
 - **Strophe 1** (28 caractères) : un quatrain régulier, transmission, question, réponse.
 - **Strophe 9** (20 caractères) : l'envoi, qui finit sur la question Chan 會不會 ; 部/剖 à trancher.
 
-## 6 — 《日用》 · `ri-yong`
+## 5 — 《日用》 · `ri-yong`
 
 **Source :** 李道純, 《中和集》卷五「詩」(正統道藏), 4ᵉ des 述工夫十七首 : 發蒙・采藥・進火・**日用**・固形・**交合**・透關・出入・警眾・挽邪・敵魔・顯正・調燮・明本・鑄劍・蟾窟・清菴. Dans la source, le titre suit le poème (« 右日用 », « ci-dessus : 日用 »). Aucun écart de texte ; graphies normalisées (眞→真, 爲→為, 淸→清).
 
@@ -317,7 +320,7 @@ une pièce s'écrit à la main. Les ➡️ marquent les étendues candidates ; l
 - **A.** 常清常靜 + 清菴日用 : la formule centrale (v. 5), puis le *hao* de l'auteur et le titre ;
 - **B.** 中和集詩 + 工夫日用 : la source, puis la série et le titre.
 
-## 7 — 《交合》 · `jiao-he`
+## 6 — 《交合》 · `jiao-he`
 
 **Source :** même série, 6ᵉ poème (« 右交合 »). Aucun écart de texte ; graphie normalisée (靑→青).
 
@@ -343,7 +346,7 @@ une pièce s'écrit à la main. Les ➡️ marquent les étendues candidates ; l
 
 Dans la source, le titre suit le poème : des colonnes de titre à gauche, après la 4ᵉ feuille, gardent l'ordre du 道藏.
 
-## 8 — 《龍虎歌》並引 · `long-hu-ge-mian-zhan-mian-zhan`
+## 7 — 《龍虎歌》並引 · `long-hu-ge-mian-zhan-mian-zhan`
 
 **Source :** 李道純, 《中和集》卷四「歌」, 《龍虎歌》並引, 正統道藏 : une préface (引) pour 趙束齋, qui finit sur 咦 et un quatrain, puis 勉旃勉旃, puis 歌曰 et le chant de 42 vers. Graphies normalisées : 眞→真, 淸→清, 靑→青, 𨿽→雖, 气→氣, 爲→為, 卽→即, 畱→留, 顚→顛, 鑪→爐, 覩→睹. Fautes probables de la source entre 〔 〕.
 
