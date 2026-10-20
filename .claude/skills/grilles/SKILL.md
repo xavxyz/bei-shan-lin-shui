@@ -100,12 +100,23 @@ le dire au calligraphe, la coupure peut faire un contresens, fructueux ou
 non. Lire ce résumé avec lui : un débordement, des cases vides, ou une coupure
 qu'il ne veut pas se corrigent au texte ou au format, puis on relance.
 
+Avant de lancer, regarder si la page existe déjà. Si elle n'existait pas,
+l'ouvrir dans Chrome dès qu'elle est écrite, avec le lien imprimé par la
+commande :
+
+```sh
+open -a 'Google Chrome' 'file:///…/grilles/yi-jin-jing.html'
+```
+
+Si elle existait, un onglet la montre sans doute déjà : ne pas en ouvrir un
+autre, dire au calligraphe de le recharger.
+
 Fini quand chaque format candidat tient le texte comme le calligraphe le veut.
 
 ## 4. Remettre
 
 Donner au calligraphe le lien `file://` imprimé par la commande, et pour
-chaque format candidat de quoi l'ouvrir dans Chrome, directement sur lui :
+chaque format candidat de quoi le rouvrir dans Chrome, directement sur lui :
 une commande à taper dans la conversation, le lien suffixé de `?candidat=`
 et de la lettre du résumé.
 
@@ -114,8 +125,7 @@ et de la lettre du résumé.
 ```
 
 Avec plusieurs pages, une commande par page et par candidat, dans un tableau
-qui les nomme. Ouvrir soi-même par `open -a 'Google Chrome' '<lien>'` si le
-calligraphe le demande.
+qui les nomme.
 
 Puis ce mode d'emploi :
 
