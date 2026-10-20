@@ -64,6 +64,22 @@ de gauche). Si les colonnes de la version sont dans un autre ordre, le 橫批 en
 premier par exemple, les réordonner dans la version, ou passer le texte
 réordonné par `--texte`.
 
+Proposer les candidats dans l'ordre classique, qui tient au rôle et non à la
+longueur : le titre ou l'en-tête (le 引首 d'un 手卷) en premier, à droite ;
+puis le 正文 ; puis ce qui le commente (款, 跋), à gauche, plus petit, souvent
+en colonne plus courte. Seul le 上款, la dédicace, peut précéder. Ainsi
+`yi-jin-jing` : 易筋經 / 不按指示做 / 磨磚豈成鏡, le titre d'abord ;
+寶劍鋒從磨礪出 / 苦煉 et 梅花香自苦寒來 / 下功夫, le commentaire après le
+vers, d'où `[(1x7, 1x2)]` et `[(1x7, 1x3)]`. Un candidat qui donne au
+commentaire sa propre feuille, `[(1x7), (1x2)]`, lui donne un carreau énorme
+et renverse la hiérarchie : ne le proposer qu'en le disant.
+
+Quand un candidat met un commentaire sur la feuille de son vers, dire au
+calligraphe, en le proposant comme en lisant le résumé, que le carreau commun
+fait au commentaire des carreaux aussi grands que ceux du vers : il peut
+écrire plus petit à l'intérieur ; un carreau plus petit pour un groupe, les
+grilles ne savent pas le faire.
+
 Un format qui n'est pas une grille (`A4 vertical`), ou encore écrit dans
 l'ancienne notation (`1x3 + 2*(4x5) + 1x3`), se réécrit avec le calligraphe
 dans celle-ci : la commande le refuse et dit où elle bute.
