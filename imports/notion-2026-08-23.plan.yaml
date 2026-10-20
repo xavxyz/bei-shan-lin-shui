@@ -629,7 +629,7 @@ pieces:
       # la v1 simplifiée : 紅樓夢 seul, sans le distique ni 太虛幻境, et donc sans l'erreur
       - id: v2
         date: 2026-10-20
-        format: 1x3
+        format: "[(1x3)]"
         columns:
           - 紅樓夢
         variations:
