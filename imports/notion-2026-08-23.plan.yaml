@@ -1780,12 +1780,37 @@ pieces:
     versions:
       - id: v1
         date: 2026-03-23
-        format: à préciser
+        format: '[(1x3), (2x5)]'
         columns:
           - 易筋經 # le titre du texte, la première colonne (calligraphe)
           - 不按指示做 # l'avertissement est tout le texte qui suit ; d'après 懷讓 :
           - 磨磚豈成鏡 # 磨磚既不成鏡，坐禪豈得成佛
-        variations: []
+        variations:
+          - id: v1a
+            script: kaishu
+            status: to-try
+      - id: v2
+        date: 2026-10-20
+        format: '[(3x5)]'
+        columns:
+          - 易筋經
+          - 不按指示做
+          - 磨磚豈成鏡
+        variations:
+          - id: v2a
+            script: xingshu
+            status: to-try
+      - id: v3
+        date: 2026-10-20
+        format: '[(1x3), (2x5)]'
+        columns:
+          - 易筋經
+          - 不按指示做
+          - 磨磚豈成鏡
+        variations:
+          - id: v3a
+            script: ziyou
+            status: to-try
     notion:
       title: 易筋经
       status: Brute
