@@ -67,18 +67,22 @@ réordonné par `--texte`.
 Proposer les candidats dans l'ordre classique, qui tient au rôle et non à la
 longueur : le titre ou l'en-tête (le 引首 d'un 手卷) en premier, à droite ;
 puis le 正文 ; puis ce qui le commente (款, 跋), à gauche, plus petit, souvent
-en colonne plus courte. Seul le 上款, la dédicace, peut précéder. Ainsi
-`yi-jin-jing` : 易筋經 / 不按指示做 / 磨磚豈成鏡, le titre d'abord ;
-寶劍鋒從磨礪出 / 苦煉 et 梅花香自苦寒來 / 下功夫, le commentaire après le
-vers, d'où `[(1x7, 1x2)]` et `[(1x7, 1x3)]`. Un candidat qui donne au
-commentaire sa propre feuille, `[(1x7), (1x2)]`, lui donne un carreau énorme
-et renverse la hiérarchie : ne le proposer qu'en le disant.
+en colonne plus courte. Seul le 上款, la dédicace, peut précéder. Le rôle
+d'une colonne courte ne se devine pas : un mot qui condense le vers peut en
+être le sujet, en grand et en premier, le vers l'expliquant plus petit, comme
+un 款. Le demander au calligraphe quand le plan ne le dit pas. Ainsi
+`yi-jin-jing` : 易筋經 / 不按指示做 / 磨磚豈成鏡, le titre d'abord ; 苦煉 /
+寶劍鋒從磨礪出 et 下功夫 / 梅花香自苦寒來, le mot sujet d'abord.
 
-Quand un candidat met un commentaire sur la feuille de son vers, dire au
-calligraphe, en le proposant comme en lisant le résumé, que le carreau commun
-fait au commentaire des carreaux aussi grands que ceux du vers : il peut
-écrire plus petit à l'intérieur ; un carreau plus petit pour un groupe, les
-grilles ne savent pas le faire.
+Un titre ou un mot sujet seul sur sa feuille, `[(1x2), (1x7)]`, y prend un
+grand carreau, et c'est sa place. Un 款 ou un 跋 seul sur la sienne renverse
+la hiérarchie : ne le proposer qu'en le disant.
+
+Quand un candidat met sur une même feuille deux parties de rangs différents,
+un mot sujet et son vers, un vers et son 款, dire au calligraphe, en le
+proposant comme en lisant le résumé, que le carreau commun leur fait des
+carreaux de même taille : il peut écrire plus petit à l'intérieur ; un
+carreau plus petit pour un groupe, les grilles ne savent pas le faire.
 
 Un format qui n'est pas une grille (`A4 vertical`), ou encore écrit dans
 l'ancienne notation (`1x3 + 2*(4x5) + 1x3`), se réécrit avec le calligraphe
@@ -125,23 +129,23 @@ open -a 'Google Chrome' 'file:///…/grilles/yi-jin-jing.html'
 ```
 
 Si elle existait, un onglet la montre sans doute déjà : ne pas en ouvrir un
-autre, dire au calligraphe de le recharger.
+autre, dire au calligraphe de le recharger, et la rouvrir s'il l'a fermé.
 
 Fini quand chaque format candidat tient le texte comme le calligraphe le veut.
 
 ## 4. Remettre
 
-Donner au calligraphe le lien `file://` imprimé par la commande, et pour
-chaque format candidat de quoi le rouvrir dans Chrome, directement sur lui :
-une commande à taper dans la conversation, le lien suffixé de `?candidat=`
-et de la lettre du résumé.
+Donner au calligraphe, pour chaque page, de quoi la rouvrir dans Chrome : une
+commande à taper dans la conversation, sur le lien `file://` imprimé par la
+commande. Avec plusieurs pages, une ligne par page dans un tableau qui les
+nomme.
 
 ```sh
-! open -a 'Google Chrome' 'file:///…/grilles/yi-jin-jing.html?candidat=B'
+! open -a 'Google Chrome' 'file:///…/grilles/yi-jin-jing.html'
 ```
 
-Avec plusieurs pages, une commande par page et par candidat, dans un tableau
-qui les nomme.
+Pas de commande par format candidat : le calligraphe navigue entre eux sur la
+page.
 
 Puis ce mode d'emploi :
 
