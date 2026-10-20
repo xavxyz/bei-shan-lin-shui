@@ -14,3 +14,6 @@ imports/scans/
 
 # Feuilles quadrillées générées par `pnpm grilles` : à imprimer, pas à versionner
 /grilles/
+
+# Worktrees des agents Claude Code
+/.claude/worktrees/
