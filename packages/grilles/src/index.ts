@@ -6,9 +6,11 @@ import {
   sheetLine,
   type Candidate,
 } from "./render.js";
+import { MODELS, prepareModels, type Model } from "./models.js";
 import { parseFormat, pourText } from "./sheets.js";
 
 export type { Candidate } from "./render.js";
+export type { Model } from "./models.js";
 
 export type GridRequest = {
   /** Racine du dépôt : `content/` et `imports/` s'y trouvent. */
@@ -23,7 +25,8 @@ export type GridRequest = {
 };
 
 export type GridResult =
-  { ok: true; html: string; candidates: Candidate[] } | { ok: false; message: string };
+  | { ok: true; html: string; candidates: Candidate[]; models: Model[] }
+  | { ok: false; message: string };
 
 /** Les feuilles quadrillées d'une pièce, pour chaque format candidat. */
 export async function generateGrids(request: GridRequest): Promise<GridResult> {
@@ -68,29 +71,46 @@ export async function generateGrids(request: GridRequest): Promise<GridResult> {
     });
   }
 
+  const models = await prepareModels(`${piece.title}${columns.join("")}落款`);
   return {
     ok: true,
     candidates,
+    models,
     html: renderPage({
       title: piece.title,
       slug: piece.slug,
       version: version.id,
       origin: piece.origin,
       candidates,
+      models,
     }),
   };
 }
 
-/** Le résumé que la commande affiche, une ligne par feuille. */
-export function summarize(candidates: Candidate[]): string {
-  return candidates
-    .map((candidate) => {
+/**
+ * Le résumé que la commande affiche : une ligne par feuille, puis les 體 du
+ * modèle et ce qu'ils disent du texte, chaque remarque une seule fois.
+ */
+export function summarize(candidates: Candidate[], models: Model[]): string {
+  const notes = models.flatMap((model) =>
+    model.notes.map((note) =>
+      note.startsWith(model.label) || note.startsWith("aucun 體")
+        ? note
+        : `${model.label} · ${note}`,
+    ),
+  );
+  return [
+    ...candidates.map((candidate) => {
       const { sheets, notes } = describeCandidate(candidate);
       return [
         candidateLabel(candidate),
         ...sheets.map((sheet, i) => `  ${sheetLine(sheet, i)}`),
         ...notes.map((note) => `  — ${note}`),
       ].join("\n");
-    })
-    .join("\n");
+    }),
+    [
+      `Modèle · ${models.map((model) => model.label).join(", ")}, ${MODELS[0].label} par défaut`,
+      ...[...new Set(notes)].map((note) => `  — ${note}`),
+    ].join("\n"),
+  ].join("\n");
 }

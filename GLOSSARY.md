@@ -42,6 +42,14 @@ Le gabarit des colonnes, imprimé sur le papier avant d'écrire. Une pièce dont
 la grille est imprimée est en cours.
 _À éviter_ : cadre, cadre imprimé
 
+**Modèle** :
+Les caractères de la pièce imprimés dans la grille, toujours en régulier
+(楷書), dans le 體 choisi pour la grille. Ce n'est pas l'œuvre : le
+calligraphe écrit par-dessus dans le style de sa variation, et le courant
+comme le cursif restent son propre travail. Le modèle s'affiche, s'efface en
+calque, ou se masque.
+_À éviter_ : police, gabarit
+
 **Format** :
 La disposition des colonnes d'une version sur ses feuilles, notée
 `[(1x3, 9x7), (1x4, 3x7)]` : une parenthèse par feuille, et dans chacune ses

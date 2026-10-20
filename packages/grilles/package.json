@@ -13,9 +13,12 @@
   "dependencies": {
     "@bsls/content": "workspace:*",
     "@bsls/notion-import": "workspace:*",
-    "@bsls/schema": "workspace:*"
+    "@bsls/schema": "workspace:*",
+    "fontkit": "^2.0.4",
+    "subset-font": "^2.9.0"
   },
   "devDependencies": {
+    "@types/fontkit": "^2.0.9",
     "yaml": "^2.6.1"
   }
 }

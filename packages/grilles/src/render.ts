@@ -1,3 +1,4 @@
+import { MODELS, type Model } from "./models.js";
 import {
   groupLabel,
   layoutSheet,
@@ -23,6 +24,7 @@ export type RenderInput = {
   version: string;
   origin: string;
   candidates: Candidate[];
+  models: Model[];
 };
 
 const ORIENTATIONS = { portrait: "portrait", landscape: "paysage" } as const;
@@ -162,12 +164,9 @@ export function renderPage(input: RenderInput): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escape(`${input.title} — Grilles`)}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap">
-<style>${STYLE}</style>
+<style>${modelStyle(input.models)}${STYLE}</style>
 </head>
-<body data-characters="affiches">
+<body data-characters="affiches" data-model="${MODELS[0].key}">
   <header class="controls">
     <h1>${escape(input.title)}</h1>
     <p>${escape(`${input.slug} · version ${input.version} · ${input.origin}`)}</p>
@@ -177,6 +176,19 @@ export function renderPage(input: RenderInput): string {
       <label><input type="radio" name="characters" value="calque"> en calque</label>
       <label><input type="radio" name="characters" value="masques"> masqués</label>
     </fieldset>
+    <fieldset>
+      <legend>Modèle</legend>${input.models
+        .map(
+          (model, i) =>
+            `\n      <label><input type="radio" name="model" value="${model.key}"${i === 0 ? " checked" : ""}> ${escape(model.label)}</label>`,
+        )
+        .join("")}
+    </fieldset>${input.models
+      .map(
+        (model) =>
+          `\n    <ul class="model-notes" data-model="${model.key}">${model.notes.map((note) => `<li>${escape(note)}</li>`).join("")}</ul>`,
+      )
+      .join("")}
     <p class="hint">Imprimer : une feuille par page, A4, échelle 100 %, marges « aucune ». Les caractères s'impriment comme ils sont affichés.</p>
   </header>
   <main>${sections.join("")}
@@ -192,24 +204,39 @@ export function renderPage(input: RenderInput): string {
 `;
 }
 
+/**
+ * Chaque 體 embarque sa police réduite aux caractères de la pièce ; un
+ * caractère qui lui manque retombe sur le premier 體, puis sur les polices du
+ * système.
+ */
+const modelStyle = (models: Model[]) =>
+  models
+    .map(
+      (model) =>
+        `\n@font-face { font-family: "modele-${model.key}"; src: url(data:font/woff2;base64,${model.font}) format("woff2"); }` +
+        `\nbody[data-model="${model.key}"] .characters text, body[data-model="${model.key}"] .inscription { font-family: "modele-${model.key}", "modele-${MODELS[0].key}", "Kaiti TC", "Songti TC", serif; }`,
+    )
+    .join("");
+
 const STYLE = `
 @page { size: A4 portrait; margin: 0; }
 @page landscape { size: A4 landscape; margin: 0; }
 body { margin: 0; padding: 24px 24px 120px; background: #e8e4dc; color: #23201c;
   font-family: "Iowan Old Style", Palatino, Georgia, serif; }
 .controls { max-width: 900px; margin: 0 auto 24px; }
-.controls h1 { margin: 0; font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 400; }
+.controls h1 { margin: 0; font-family: "modele-kai", serif; font-weight: 400; }
 .controls p { margin: 4px 0; color: #6d675e; font-size: 14px; }
 .controls fieldset { display: inline-flex; gap: 16px; border: 1px solid #c9c2b4; border-radius: 6px; margin: 8px 0; }
 .sheets { display: flex; flex-direction: row-reverse; flex-wrap: wrap; justify-content: center; gap: 24px; align-items: flex-start; }
 .sheet { margin: 0; }
 .sheet svg { display: block; background: #fff; box-shadow: 0 2px 10px rgb(0 0 0 / 0.18); }
 .grid { fill: none; stroke: #b9b2a4; stroke-width: 0.3; }
-.characters text, .inscription { font-family: "Kaiti TC", "BiauKai", "DFKai-SB", "STKaiti", "Noto Serif TC", "Songti TC", serif;
-  text-anchor: middle; dominant-baseline: central; fill: #23201c; }
+.characters text, .inscription { text-anchor: middle; dominant-baseline: central; fill: #23201c; }
 .inscription { fill: #8a2c2c; opacity: 0.5; writing-mode: vertical-rl; dominant-baseline: auto; }
 body[data-characters="calque"] .characters { opacity: 0.12; }
 body[data-characters="masques"] .characters { display: none; }
+.model-notes { margin: 4px 0; color: #8a2c2c; font-size: 14px; }
+.model-notes:empty { display: none; }
 figcaption { margin-top: 8px; font-size: 13px; text-align: center; color: #6d675e; }
 .state { max-width: 900px; margin: 20px auto 0; font-size: 15px; line-height: 1.5; }
 .switcher { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center;
@@ -240,6 +267,7 @@ function sync() {
   const url = new URL(location.href);
   url.searchParams.set("candidat", current);
   url.searchParams.set("caracteres", document.body.dataset.characters);
+  url.searchParams.set("modele", document.body.dataset.model);
   history.replaceState(null, "", url);
 }
 function step(d) {
@@ -247,9 +275,19 @@ function step(d) {
   sync();
 }
 const modes = ["affiches", "calque", "masques"];
+const models = [...document.querySelectorAll('input[name="model"]')].map((input) => input.value);
+const notes = [...document.querySelectorAll(".model-notes")];
+function setModel(model) {
+  document.body.dataset.model = model;
+  document.querySelector('input[name="model"][value="' + model + '"]').checked = true;
+  for (const list of notes) list.hidden = list.dataset.model !== model;
+}
+setModel(models.includes(params.get("modele")) ? params.get("modele") : models[0]);
+document.querySelectorAll('input[name="model"]').forEach((input) =>
+  input.addEventListener("change", () => { setModel(input.value); sync(); }));
 function setCharacters(mode) {
   document.body.dataset.characters = mode;
-  document.querySelector('input[value="' + mode + '"]').checked = true;
+  document.querySelector('input[name="characters"][value="' + mode + '"]').checked = true;
 }
 setCharacters(modes.includes(params.get("caracteres")) ? params.get("caracteres") : "affiches");
 document.querySelectorAll('input[name="characters"]').forEach((input) =>

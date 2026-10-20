@@ -7,8 +7,9 @@ argument-hint: "[slug] [format candidat…]"
 # Grilles
 
 Les feuilles sont la **grille imprimée** : le calligraphe les imprime et écrit
-dessus au pinceau, sur la grille seule ou par-dessus ses caractères en
-**calque**. `pnpm grilles` les écrit dans une page HTML autonome, une
+dessus au pinceau, sur la grille seule ou par-dessus son **modèle** en
+**calque**. Le modèle est toujours en régulier (楷書), dans un 體 au choix ;
+le courant comme le cursif sont son propre travail. `pnpm grilles` les écrit dans une page HTML autonome, une
 série de feuilles par format candidat, basculées par `?candidat=` comme un
 prototype. La skill lit la pièce et n'écrit rien dans `content/` ni dans le
 plan.
@@ -120,6 +121,11 @@ le dire au calligraphe, la coupure peut faire un contresens, fructueux ou
 non. Lire ce résumé avec lui : un débordement, des cases vides, ou une coupure
 qu'il ne veut pas se corrigent au texte ou au format, puis on relance.
 
+Le résumé finit par les 體 du modèle et ce qu'ils disent du texte : un
+caractère qu'un 體 n'a pas, et qui s'affiche en 楷 standard ou dans une police
+du système ; un caractère que 文楷 dessine comme une autre forme (真 en 眞).
+Le dire au calligraphe : le traditionnel du texte fait foi, pas le modèle.
+
 Avant de lancer, regarder si la page existe déjà. Si elle n'existait pas,
 l'ouvrir dans Chrome dès qu'elle est écrite, avec le lien imprimé par la
 commande :
@@ -152,6 +158,8 @@ Puis ce mode d'emploi :
 - `←` `→`, ou la barre du bas, basculent entre les formats candidats ;
 - **Caractères** : affichés, en calque (très pâles, pour écrire par-dessus),
   ou masqués (la grille seule) ;
+- **Modèle** : 楷 standard (par défaut), 顏體 ou 文楷 ; sous la bascule, ce
+  que le 體 choisi dessine autrement que le texte ;
 - impression : seul le format candidat affiché sort, une feuille par page A4,
   chacune dans son orientation ; régler l'échelle à 100 % et les marges sur
   « aucune ». Les caractères sortent comme ils sont affichés.
