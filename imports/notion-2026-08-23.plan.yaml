@@ -2041,14 +2041,15 @@ pieces:
     versions:
       - id: v1
         date: 2026-07-12
-        format: à préciser
+        format: "[(1x10), (1x7, 1x4h, 1x7), (1x7, 1x4h, 1x7)]"
+        # chaque arche dans l'ordre des groupes, de droite à gauche : 上聯, 橫批 au-dessus, 下聯
         columns:
           - 太虛幻境即是真如福地 # feuille 1
-          - 太虛幻境 # feuille 2
-          - 假作真時真亦假
+          - 假作真時真亦假 # feuille 2
+          - 太虛幻境
           - 無為有處有還無
-          - 真如福地 # feuille 3
-          - 假去真來真勝假 # 胜 sur zh.wikisource, résidu de simplifié
+          - 假去真來真勝假 # feuille 3 ; 胜 sur zh.wikisource, résidu de simplifié
+          - 真如福地
           - 無原有是有非無
         variations: []
     notion:
