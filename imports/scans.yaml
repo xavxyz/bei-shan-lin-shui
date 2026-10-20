@@ -903,3 +903,22 @@ scans:
     variation: v1a # v1a-07, kind context, capture photo ; dans le plan
     # photo de la pièce assemblée en 3x2, posée sur une étagère, prise en biais ;
     # IMG_1324.HEIC renommé ; convertie en JPEG pour l'import (sharp ne lit pas le HEIC)
+
+  - file: 2026-10-20_01_01.jpeg
+    read: [新年快樂, 馬到成功]
+    match: xin-nian-kuai-le-ma-dao-cheng-gong
+    confidence: high
+    script: kaishu
+    variation: v1a # v1a-01, kind context, capture photo, mise en avant ; dans le plan
+    # WhatsApp Image 2026-10-19 at 21.01.19.jpeg renommé ; photo claire, dans le bureau du père,
+    # debout sur une étagère ; exemplaire au trait épais (voulu) ; ni signature, ni date, ni sceau
+
+  - file: 2026-10-20_01_02.jpeg
+    read: [新年快樂, 馬到成功]
+    match: xin-nian-kuai-le-ma-dao-cheng-gong
+    confidence: high
+    script: kaishu
+    variation: v1b # v1b-01, kind context, capture photo ; dans le plan
+    # 0ad59e04-f528-4946-afa2-a2fbc0983680.jpg renommé ; photo sombre, dans le salon de la mère,
+    # contre une lampe ; exemplaire au trait fin (voulu) ; marques
+    # grises pâles entre les colonnes ; ni signature, ni date, ni sceau

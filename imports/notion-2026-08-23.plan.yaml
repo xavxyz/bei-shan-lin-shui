@@ -697,7 +697,7 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # absente de Notion : née de l'arbitrage du lot 3 (#17), un vers du 《原道歌》 (6ᵉ quatrain),
+  # absente de Notion : née de l'arbitrage du lot 3 (#17), le second distique du 6ᵉ quatrain du 《原道歌》,
   # pour le 紅樓夢 : le 金鎖 de 寶釵 et le 玉 de 寶玉
   - slug: yu-suo-jin-jia-qi-jie-tuo
     title: 玉鎖金枷齊解脫
@@ -713,9 +713,11 @@ pieces:
     versions:
       - id: v1
         date: 2026-10-19
-        format: à préciser
+        format: "[(2x7, 1x3)]"
         columns:
           - 玉鎖金枷齊解脫
+          - 急流勇退慕玄風
+          - 原道歌
         variations: []
   # titre en traditionnel confirmé par le scan (Notion : 题破山寺后禅院)
   # date du papier : signé 丙午雨水 地中海泡澡, après un bain dans la Méditerranée (Notion disait 2026-01-18)
@@ -1342,7 +1344,8 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # produite en 3 exemplaires : demander les photos de contexte
+  # produite en 3 exemplaires, offerts : dans le salon de la mère (v1b), dans le bureau
+  # du père (v1a), chez le frère (v1c, photo manquante) ; pas encore de scan de l'œuvre
   - slug: xin-nian-kuai-le-ma-dao-cheng-gong
     title: 新年快樂，馬到成功
     status: made
@@ -1355,7 +1358,34 @@ pieces:
         columns:
           - 新年快樂
           - 馬到成功
-        variations: []
+        variations:
+          # 戈說 : trait épais, voulu
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              # dans le bureau du père, debout sur une étagère ; grille 米字格 collée sur
+              # carton rouge ; ni signature, ni date, ni sceau
+              - source: imports/scans/2026-10-20_01_01.jpeg
+                file: v1a-01.jpg
+                kind: context
+                capture: photo
+                featured: true # pas encore d'image work
+          # 戈說 : trait fin, voulu
+          - id: v1b
+            script: kaishu
+            status: kept
+            images:
+              # dans le salon de la mère, contre une lampe ; marques
+              # grises pâles entre les colonnes ; ni signature, ni date, ni sceau
+              - source: imports/scans/2026-10-20_01_02.jpeg
+                file: v1b-01.jpg
+                kind: context
+                capture: photo
+          # chez le frère ; photo pas encore disponible
+          - id: v1c
+            script: ziyou
+            status: kept
     notion:
       title: 新年快樂，馬到成功
       status: Mouvementée
