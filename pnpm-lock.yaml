@@ -113,6 +113,22 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3
 
+  packages/grilles:
+    dependencies:
+      '@bsls/content':
+        specifier: workspace:*
+        version: link:../content
+      '@bsls/notion-import':
+        specifier: workspace:*
+        version: link:../notion-import
+      '@bsls/schema':
+        specifier: workspace:*
+        version: link:../schema
+    devDependencies:
+      yaml:
+        specifier: ^2.6.1
+        version: 2.9.0
+
   packages/notion-import:
     dependencies:
       '@bsls/authoring':

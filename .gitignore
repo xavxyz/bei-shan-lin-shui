@@ -11,3 +11,6 @@ cosmos-export
 
 # Scans téléchargés depuis le Drive : données non fiables, hors du contenu
 imports/scans/
+
+# Feuilles quadrillées générées par `pnpm grilles` : à imprimer, pas à versionner
+/grilles/

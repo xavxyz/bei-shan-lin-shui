@@ -16,6 +16,7 @@
     "import:plan-versions": "tsx packages/notion-import/src/cli/convert-plan-versions.ts",
     "attach:scan": "tsx packages/scans/src/cli/attach-scan.ts",
     "piece": "tsx packages/authoring/src/cli/piece.ts",
+    "grilles": "tsx packages/grilles/src/cli/grilles.ts",
     "cosmos": "pnpm --filter @bsls/site cosmos",
     "prepare": "husky"
   },

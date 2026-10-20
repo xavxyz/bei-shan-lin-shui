@@ -23,6 +23,9 @@ source de vérité : le contenu vit sur le disque, le site en est une projection
   la seule couture d'édition du frontmatter, et la seule écriture de ses nœuds
   — version, variation, image ; `packages/scans` et `packages/notion-import`
   s'y branchent.
+- `packages/grilles` — les feuilles A4 quadrillées d'une pièce, au format de
+  sa version ou de formats candidats, à imprimer (`pnpm grilles`, skill
+  `grilles`). Lit le contenu et le plan d'import, n'écrit qu'une page HTML.
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
 - `docs/sources/` — les textes de référence, traduits vers par vers pour
   choisir l'étendue des pièces. Ils survivent au plan d'import, mais
