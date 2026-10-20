@@ -23,6 +23,12 @@ Pléiade, 1981), relevée à la main par le calligraphe. Là où elle manque, un
 traduction de travail, faite par un agent, le dit. La traduction qui accompagne
 une pièce s'écrit à la main ; les étendues retenues sont dans les pièces.
 
+Chaque passage qui reste à relever dans la Pléiade porte une ligne **À relever
+dans la Pléiade**. Elle situe le passage dans son chapitre (la position est
+mesurée en caractères du texte chinois, elle reste approximative dans la
+traduction), puis donne la scène et ce qui l'entoure, pour le retrouver en
+feuilletant.
+
 ## 1 — L'arche du 太虛幻境 · chapitres 1 et 5 · `pai-lou-lian`
 
 **Source :** 曹雪芹, 《紅樓夢》. L'arche est vue deux fois en rêve. Au chapitre 1,
@@ -39,6 +45,13 @@ dressée en travers » (石牌橫建). Le distique est le même aux deux chapitr
 - « encor », sans e, est dans la Pléiade : la licence poétique garde le vers.
 - Au chapitre 1 : 「與道人竟過一大石牌坊，上書四個大字，乃是『太虛幻境』」 ;
   au chapitre 5 : 「有石牌橫建，上書『太虛幻境』四個大字，兩邊一副對聯」.
+- **À relever dans la Pléiade :** chapitre 1, à la moitié du chapitre. 甄士隱,
+  par un long jour d'été, s'assoupit dans son cabinet et rêve d'un moine et d'un
+  taoïste. Il demande à voir la « chose stupide » (蠢物) qu'ils emportent ; le
+  moine la lui reprend en disant qu'ils sont arrivés au domaine illusoire, et
+  ils passent le grand portique. Juste après le distique, un coup de tonnerre
+  (一聲霹靂) le réveille. Le distique et le nom de l'arche y ont peut-être une
+  autre traduction qu'au chapitre 5.
 
 ## 2 — L'arche du 真如福地 · chapitre 116 · `pai-lou-lian`
 
@@ -74,9 +87,15 @@ passion, puis s'éveiller si complètement :
 | 一番閱冊，原始要終之道，歷歷生平，如何不悟？ | Il a lu une fois les registres : la voie qui remonte au commencement et mène à la fin, toute une vie, une à une — comment ne se serait-il pas éveillé ? |
 | 仙草歸真，焉有通靈不復原之理呢！」           | L'herbe immortelle est retournée au vrai : comment le jade animé ne reviendrait-il pas à son origine ! »                                                |
 
-- Le calligraphe n'a pas retrouvé ce passage dans la Pléiade. La traduction est de
-  travail ; la phrase centrale est faite des deux noms de la Pléiade, sections 1
-  et 2.
+- La traduction est de travail ; la phrase centrale est faite des deux noms de la
+  Pléiade, sections 1 et 2.
+- **À relever dans la Pléiade :** chapitre 120, aux trois quarts du chapitre,
+  après le mariage de 襲人. 賈雨村, amnistié et rendu à la condition de simple
+  sujet (褫籍為民), envoie sa famille devant et retrouve 甄士隱 au gué
+  急流津覺迷渡口 ; ils vont à pied jusqu'à une chaumière (茅庵). 雨村 demande ce qu'est devenu 寶玉 ; la réplique vient à sa deuxième question.
+  Après, 士隱 parle des jeunes filles de la famille 賈, venues « du ciel de la
+  passion et de la mer des fautes » (情天孽海), puis s'en va chercher 香菱, et
+  雨村 s'endort dans la chaumière.
 - 閱冊 : les registres du destin, les 金陵十二釵 冊, que 寶玉 lit en rêve au 薄命司
   du 太虛幻境 (chapitre 5), puis relit au 真如福地 (chapitre 116), où il les
   comprend. 仙草 : la plante de l'au-delà qu'est 黛玉 dans sa vie antérieure ;
@@ -100,3 +119,8 @@ livre extraordinaire, y écrivirent quatre vers » (後人見了這本奇傳，�
 - Le quatrain répond à celui du chapitre 1, où l'auteur présente son livre :
   「滿紙荒唐言，一把辛酸淚！都云作者痴，誰解其中味？」 (荒唐, 辛酸 et 痴 y sont
   déjà).
+- **À relever dans la Pléiade :** le quatrain du chapitre 1, au tiers du
+  chapitre, à la fin du récit-cadre. 空空道人 a recopié le 《石頭記》 gravé sur la
+  pierre ; 曹雪芹, dans son pavillon 悼紅軒, l'a relu dix ans et remanié cinq
+  fois, puis y a écrit ce quatrain. Juste après commence l'histoire de 甄士隱, à
+  姑蘇.
