@@ -27,12 +27,6 @@ projects:
     theme: jade
   # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
   # à arbitrer — theme : absent de Notion : ink proposé, à choisir
-  - id: shu-hu-hun-dun
-    title: 儵忽混沌
-    presentation: ""
-    theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
   - id: tian-ren-di
     title: 天人地
     presentation: ""
@@ -431,8 +425,7 @@ pieces:
   - slug: qi-huan-shu-hu-yi-mao-fen-xing
     title: 奇幻儵忽，易貌分形
     status: made
-    projects:
-      - shu-hu-hun-dun
+    projects: []
     published: false
     versions:
       - id: v1
@@ -485,7 +478,7 @@ pieces:
       status: À refaire
       url: ""
       relations: []
-  # à arbitrer — version.format : aucun format dans l'export
+  # à refaire
   - slug: jiao-xue
     title: 教/學
     status: made
@@ -494,7 +487,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-01-04
-        format: à préciser
+        format: "[(1x4, 2x6)]" # supposé : ni scan, ni format dans Notion
         columns:
           - 教學相長
           - 教不嚴師之惰
@@ -505,43 +498,29 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — version.format : aucun format dans l'export
+  # la feuille ① de Notion, 戈澤宇早上練習 (1.26), et le 莊子 de la feuille ② (應帝王, signé 小寒二十六)
+  # sont perdus ; ses citations sont devenues shen-shu-qu-qiao-shou-hun et chuan-bu-xi-hu, le 莊子 est
+  # abandonné, et le projet shu-hu-hun-dun avec lui : la pièce est désormais les deux premiers vers
+  # du 《元陽洞》, une nouvelle v1
+  # 唐順之, 荊川集 卷三 (四庫全書本, zh.wikisource), série 蠡南雜詩 ; 元陽洞 est une grotte. Le poème :
+  # 混沌遇儵忽，誤被鑿一竅。寄語談玄人，此中可觀妙。 (玄 écrit 𤣥) ; le papier disait 明朝《元陽洞》
   - slug: shu-hu-hun-dun
     title: 儵忽混沌
-    status: made
-    projects:
-      - shu-hu-hun-dun
+    status: idea
+    projects: []
     published: false
+    source:
+      author: 唐順之
+      dynasty: 明
+      work: 荊川集
     versions:
       - id: v1
-        date: 2026-01-05
-        format: à préciser
+        date: 2026-10-21
+        format: "[(2x5, 1x7/2)]"
         columns:
-          - 慎術
-          - 去巧
-          - 守渾
           - 混沌遇儵忽
           - 誤被鑿一竅
-          - 明朝《元陽洞》
-          - 學者須先立定心體
-          - 心未定而求明必流於妄
-          - 心定之後明自生焉
-          - 王陽明傳習錄卷上
-          - 傳不習乎
-          - 孔子《論語》
-          - 不慌不忙無心無為
-          - 戈澤宇早上練習        1  26
-          - 南海之帝為倏北海
-          - 之帝為忽中央之帝
-          - 為混沌倏😐與忽時
-          - 相與遇於混沌之地
-          - 混沌待之甚善倏與忽
-          - 謀報混沌之德曰人
-          - 皆有七竅以視聽食
-          - 息此獨無有嘗試鑿
-          - 之日鑿一竅七日而
-          - 混沌死莊子應帝王
-          - 戈澤宇小寒二十六
+          - 唐順之元陽洞句
         variations: []
     notion:
       title: 儵忽混沌
@@ -549,6 +528,44 @@ pieces:
       url: ""
       relations:
         - 奇幻儵忽，易貌分形
+  # tirée de la feuille ① de shu-hu-hun-dun, 戈澤宇早上練習, 1.26 ; le papier est perdu : une
+  # nouvelle v1, à écrire
+  # aucune source trouvée (zh.wikisource, web) ; 慎術 seul au 明儒學案, 泰州學案四 ; 戈說 : sans
+  # doute d'une séance de questions à Claude, sur le téléphone
+  - slug: shen-shu-qu-qiao-shou-hun
+    title: 慎術 去巧 守渾
+    status: idea
+    projects: []
+    published: false
+    versions:
+      - id: v1
+        date: 2026-10-21
+        format: "[(3x2)]"
+        columns:
+          - 慎術
+          - 去巧
+          - 守渾
+        variations: []
+  # tirée de la feuille ① de shu-hu-hun-dun, 戈澤宇早上練習, 1.26 ; le papier est perdu : une
+  # nouvelle v1, à écrire
+  # 論語, 學而 (1.4), zh.wikisource (論語/學而第一) : 曾子曰：「吾日三省吾身：爲人謀而不忠乎？
+  # 與朋友交而不信乎？傳不習乎？」 ; le papier disait 孔子《論語》, le 款 dit désormais 曾子
+  - slug: chuan-bu-xi-hu
+    title: 傳不習乎
+    status: idea
+    projects: []
+    published: false
+    source:
+      author: 曾子
+      work: 論語
+    versions:
+      - id: v1
+        date: 2026-10-21
+        format: "[(1x4, 1x4/2)]"
+        columns:
+          - 傳不習乎
+          - 曾子論語
+        variations: []
   # date du papier : 戈 立夏, sans 日 (Notion disait 2026-01-09)
   # 眞 dans le titre, comme sur le papier (Notion : 真)
   - slug: gui-she-xiang-jiao-shui-huo-ji-ji-zhen-yi-nai-ding-zhong-he
@@ -1243,42 +1260,21 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — version.columns : « incroyable » ressemble à une note plutôt qu'à une colonne
-  - slug: jiu-san-er-ba-he-tu
-    title: 九三/二八（河圖）
-    status: idea
-    projects:
-      - zhong-he-ji
-    published: false
-    versions:
-      - id: v1
-        date: 2026-02-06
-        format: à préciser
-        columns:
-          - incroyable
-        variations: []
-    notion:
-      title: 九三/二八（河圖）
-      status: Brute
-      url: ""
-      relations:
-        - 中和集
-  # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : « L’arche d’une haute bran… » ressemble à une note plutôt qu'à une colonne
-  # à arbitrer — version.columns : « Une branche courbe offre… » ressemble à une note plutôt qu'à une colonne
+  # les deux phrases en français de Notion, prises pour des colonnes : la littérale devient la
+  # traduction, la lecture l'intention
   - slug: yi-zhi-xuan-yi-rui-tu-wei
     title: 一枝軒億橤塗位
     status: in-progress
     projects: []
     published: false
+    translation: L’arche d’une haute branche tapisse de pollen l’endroit
     versions:
       - id: v1
         date: 2026-02-08
-        format: à préciser
+        format: "[(1x7)]"
+        intention: Une branche courbe offre un abri, le sage aussi calme qu’une pierre se fond dans le printemps
         columns:
           - 一枝軒億橤塗位
-          - L’arche d’une haute branche tapisse de pollen l’endroit
-          - Une branche courbe offre un abri, le sage aussi calme qu’une pierre se fond dans le printemps
         variations: []
     notion:
       title: 一枝軒亿橤塗位
@@ -1778,7 +1774,11 @@ pieces:
       status: Préparée
       url: ""
       relations: []
-  # à arbitrer — version.format : aucun format dans l'export
+  # colonnes lues sur la photo IMG_0619 (2026-10-21_01_01), de droite à gauche ; Notion disait
+  # 靜 / 心淨 意誠 兼靜 / 丙午雨水末戈澤宇遇道靜讓, le 款 en dernier
+  # le 款 est à droite, en petits carreaux : la date, la signature, puis 遇道 et le 上款, 靜讓 ;
+  # 戈說 : 靜讓 est Lucie Calmejeanne, dont j'ai inventé le nom chinois ; c'est moi qui la
+  # rencontre, 遇道 joue sur 遇到
   - slug: jing-xin-jing-yi-cheng-jian-jing
     title: 靜 ⋯⋯ 心淨 意誠 兼靜
     status: made
@@ -1786,13 +1786,24 @@ pieces:
     published: false
     versions:
       - id: v1
-        date: 2026-03-04
-        format: à préciser
+        date: 2026-03-04 # date du papier : 丙午雨水末
+        # 戈說 : « format mixte » ; sur papier quadrillé, le 款 dans un carreau par caractère, 靜 en
+        # grand sur environ quatre carreaux doubles, puis 心淨 et 意誠兼靜 en carreaux doubles
+        format: mixte
         columns:
-          - 靜
-          - 心淨 意誠 兼靜
           - 丙午雨水末戈澤宇遇道靜讓
-        variations: []
+          - 靜心淨 # 靜 écrit en style libre, en grand
+          - 意誠兼靜
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              - source: imports/scans/2026-10-21_01_01.jpeg
+                file: v1a.jpg
+                kind: work
+                capture: photo
+                featured: true
     notion:
       title: 靜 ⋯⋯ 心淨 意誠 兼靜
       status: Mouvementée
@@ -1941,9 +1952,9 @@ pieces:
       url: ""
       relations:
         - 太虚幻境红楼梦
-  # à arbitrer — version.format : aucun format dans l'export
   # colonnes lues sur le scan 2026-10-11_09_05, une étude ; l'œuvre, sans doute non scannée, en sera la variation
   # étude à rattacher à cette variation : 2026-10-11_09_05 (kaishu, 龍 / 天 / 天人 / 天人地, sans signature ni date)
+  # une pièce, la pièce-pôle de son projet, comme 閒仙機 et 戈澤宇
   - slug: tian-ren-di
     title: 天人地
     status: made
@@ -1953,7 +1964,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-03-15 # date absente du papier
-        format: à préciser # une étude ne fixe pas le format de l'œuvre
+        format: "[(1x3)]" # supposé : l'œuvre n'est pas scannée, l'étude ne fixe pas son format
         columns:
           - 天人地
         variations: []
@@ -2205,7 +2216,7 @@ pieces:
       status: Préparée
       url: ""
       relations: []
-  # à arbitrer — version.format : aucun format dans l'export
+  # 行住坐臥 en grand, 四威儀 en demi-carreaux, comme un titre dans le 款 (comparé sur grille)
   - slug: si-wei-yi-xing-zhu-zuo-wo
     title: 四威儀 行住坐臥
     status: in-progress
@@ -2214,9 +2225,10 @@ pieces:
     versions:
       - id: v1
         date: 2026-04-08
-        format: à préciser
+        format: "[(1x4, 1x3/2)]"
         columns:
           - 行住坐臥
+          - 四威儀
         variations: []
     notion:
       title: 四威仪 行住坐臥
@@ -2406,7 +2418,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-10-20
-        format: 4x5 # à arbitrer : un vers par colonne, proposé
+        format: "[(4x5)]" # un vers par colonne
         columns:
           - 說到辛酸處
           - 荒唐愈可悲

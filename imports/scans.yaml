@@ -54,7 +54,7 @@ scans:
     match: qi-huan-shu-hu-yi-mao-fen-xing
     confidence: high
     script: kaishu
-    variation: v1a # kept ; dans le plan, projet shu-hu-hun-dun
+    variation: v1a # kept ; dans le plan, sans projet (shu-hu-hun-dun retiré au lot 6)
     # colonnes identiques au plan, format 4x2 sur grille imprimée ;
     # attribution 張衡《西京賦》 (賦 sur la clé 贝) ; signé 戈, daté « 2 26 »
 
@@ -922,3 +922,12 @@ scans:
     # 0ad59e04-f528-4946-afa2-a2fbc0983680.jpg renommé ; photo sombre, dans le salon de la mère,
     # contre une lampe ; exemplaire au trait fin (voulu) ; marques
     # grises pâles entre les colonnes ; ni signature, ni date, ni sceau
+
+  - file: 2026-10-21_01_01.heic
+    read: [丙午雨水末戈澤宇遇道靜讓, 靜心淨, 意誠兼靜]
+    match: jing-xin-jing-yi-cheng-jian-jing
+    confidence: high
+    script: ziyou
+    variation: v1a # kept, kind work, capture photo, mise en avant ; dans le plan
+    # IMG_0619.HEIC, photo du calligraphe, renommée ; convertie en JPEG pour l'import ;
+    # le 款 à droite, 上款 靜讓 (Lucie Calmejeanne), 遇道 pour 遇到 ; 靜 en grand, en style libre

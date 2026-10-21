@@ -1,6 +1,6 @@
 # Plan Notion — à arbitrer
 
-État au 2026-10-21, après le lot 5. Le plan `notion-2026-08-23.plan.yaml` porte 92 pièces et 12 projets ; il reste **34** `# à arbitrer`, sur 8 pièces et les 12 projets. Les 84 autres pièces, dont les 38 qui ont un scan, n'ont plus rien à arbitrer. Le suivi se fait par les `# à arbitrer` du plan : ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
+État au 2026-10-21, après le lot 6. Le plan `notion-2026-08-23.plan.yaml` porte 93 pièces et 11 projets ; il ne reste que les **22** `# à arbitrer` des 11 projets, le lot 7. Aucune pièce n'a plus rien à arbitrer au titre des lots 0 à 6. Le suivi se fait par les `# à arbitrer` du plan : ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
 
 Un lot commence par ce fichier seul : l'issue #17 et les PR des lots précédents n'apprennent rien de plus, sauf doute sur une décision numérotée.
 
@@ -88,13 +88,23 @@ Les titres ambigus, sur la lecture du calligraphe. Sources gardées en référen
 - `zhu-jian-qing-chui` 鑄劍 // 輕吹 : le 《鑄劍》 du 中和集 en entier. 輕吹 est le souffle léger du soufflet, le feu doux, d'après 吹噓離火巽為風 ; il n'est pas dans le livre.
 - `shu-heng-zhuo-an-npl` devient `shu-heng-zhuo-an` 豎橫 《卓菴》, `made` : la v1 est la couverture 山竪橫 en style libre, le scan `2026-10-11_18_01`, prise jusque-là pour la feuille ① de `shui-huo-tiao-ji`, qui garde la date du 2026-04-19, même séance. La v2, une idée : 豎橫, puis 直豎須彌柱 / 橫安太極楹, du premier 《卓菴》. NPL passe dans son `intention` : le studio-atelier face à la mer. 豎 et 橫 sont aussi les traits de la méthode de 山山 : le lien avec 方圓, défini au glossaire. Ses cinq points : #55.
 
-## Lot 6 — formats et notes (9 pièces)
+## Lot 6 — fait
 
-- Formats des pièces qui ont un texte et ne sont pas des idées : `jiao-xue`, `shu-hu-hun-dun` (25 colonnes), `yi-zhi-xuan-yi-rui-tu-wei`, `jing-xin-jing-yi-cheng-jian-jing`, `tian-ren-di`, `si-wei-yi-xing-zhu-zuo-wo`.
-- Notes prises pour des colonnes : `jiu-san-er-ba-he-tu` (« incroyable »), `yi-zhi-xuan-yi-rui-tu-wei` (deux phrases en français).
-- `shuo-dao-xin-suan-chu` (PR #49) : le `4x5` proposé, un vers par colonne.
-- La pièce `tian-ren-di` porte le nom de son projet : pièce ou page-pôle ?
+Les formats des pièces qui ont un texte, et les notes prises pour des colonnes. Sans scan, un format est déduit des colonnes de Notion et marqué `# supposé`.
 
-## Lot 7 — les 12 projets (24 marques)
+- `jiao-xue` 教/學 : `[(1x4, 2x6)]` supposé ; à refaire.
+- `yi-zhi-xuan-yi-rui-tu-wei` : `[(1x7)]` ; des deux phrases en français, la littérale devient la traduction, la lecture l'intention.
+- `jing-xin-jing-yi-cheng-jian-jing` : la photo `IMG_0619.HEIC` (`2026-10-21_01_01`) devient `v1a`, `ziyou`. Les colonnes suivent le papier, le 款 à droite : 丙午雨水末戈澤宇遇道靜讓 / 靜心淨 / 意誠兼靜. Le format est « mixte », le grand 靜 n'entre pas dans la notation. 靜讓 est le nom chinois inventé pour Lucie Calmejeanne ; 遇道 joue sur 遇到.
+- `tian-ren-di` 天人地 : une pièce, la pièce-pôle de son projet ; `[(1x3)]` supposé.
+- `si-wei-yi-xing-zhu-zuo-wo` : `[(1x4, 1x3/2)]`, 四威儀 en demi-carreaux comme un titre dans le 款, comparé sur grille.
+- `shuo-dao-xin-suan-chu` : `[(4x5)]`, un vers par colonne.
+- `jiu-san-er-ba-he-tu` est retirée : la source est perdue. C'était une conjecture sur le 河圖, ses points blancs 9 et 3, noirs 2 et 8. Dans le 中和集 (zh.wikisource), 九三 et 二八 ne se rencontrent qu'au 《詠眞樂十二首》 : 九三輻輳諸緣息，二八相交五氣朝 ; 河圖 n'y est pas.
+- `shu-hu-hun-dun` 儵忽混沌 : les deux feuilles de Notion sont perdues. Leurs pièces reviennent en idées, de nouvelles v1 :
+  - la pièce elle-même devient les deux premiers vers du 《元陽洞》 de 唐順之 (明, 荊川集), 混沌遇儵忽 / 誤被鑿一竅, `[(2x5, 1x7/2)]` ; le 莊子 (應帝王) est abandonné, et le projet `shu-hu-hun-dun` avec lui ; `qi-huan-shu-hu-yi-mao-fen-xing` reste, sans projet ;
+  - `shen-shu-qu-qiao-shou-hun` 慎術 去巧 守渾, `[(3x2)]`, sans source : sans doute d'une séance de questions à Claude ;
+  - `chuan-bu-xi-hu` 傳不習乎, `[(1x4, 1x4/2)]` : c'est 曾子 qui parle (論語, 學而), pas 孔子 comme le disait le papier ;
+  - abandonnées : 學者須先立定心體…, introuvable dans le 傳習錄 qu'attribuait le papier, et 不慌不忙無心無為, sans source.
+
+## Lot 7 — les 11 projets (22 marques)
 
 En dernier, quand on sait quelles pièces chacun garde. L'agent propose un brouillon de présentation à partir des pièces, et un thème parmi `ink`, `jade`, `cinnabar`, `indigo` ; le calligraphe écrit le texte final.
