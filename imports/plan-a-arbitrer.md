@@ -1,6 +1,6 @@
 # Plan Notion — à arbitrer
 
-État au 2026-10-21, après le lot 6. Le plan `notion-2026-08-23.plan.yaml` porte 93 pièces et 11 projets ; il ne reste que les **22** `# à arbitrer` des 11 projets, le lot 7. Aucune pièce n'a plus rien à arbitrer au titre des lots 0 à 6. Le suivi se fait par les `# à arbitrer` du plan : ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
+État au 2026-10-21, après le lot 7. Le plan `notion-2026-08-23.plan.yaml` porte 93 pièces et 11 projets, et plus aucun `# à arbitrer` : il est prêt pour `apply`. Le suivi se fait par les `# à arbitrer` du plan : ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
 
 Un lot commence par ce fichier seul : l'issue #17 et les PR des lots précédents n'apprennent rien de plus, sauf doute sur une décision numérotée.
 
@@ -105,6 +105,15 @@ Les formats des pièces qui ont un texte, et les notes prises pour des colonnes.
   - `chuan-bu-xi-hu` 傳不習乎, `[(1x4, 1x4/2)]` : c'est 曾子 qui parle (論語, 學而), pas 孔子 comme le disait le papier ;
   - abandonnées : 學者須先立定心體…, introuvable dans le 傳習錄 qu'attribuait le papier, et 不慌不忙無心無為, sans source.
 
-## Lot 7 — les 11 projets (22 marques)
+## Lot 7 — fait
 
-En dernier, quand on sait quelles pièces chacun garde. L'agent propose un brouillon de présentation à partir des pièces, et un thème parmi `ink`, `jade`, `cinnabar`, `indigo` ; le calligraphe écrit le texte final.
+Les présentations et thèmes des 11 projets. L'agent a proposé un brouillon par projet, à partir de ses pièces et des notes du plan ; le calligraphe l'a corrigé ou complété. La présentation s'affiche en texte brut : ni lien ni italique Markdown.
+
+- **Les thèmes sont abandonnés pour l'instant** : `ink` pour tous.
+- `zhong-he-ji`, `hong-lou-meng`, `xian-xian-ji`, `you-shou-he-zhang`, `yi-jin-jing` : le brouillon, tel quel.
+- `xiu-zhu-can-cha` : « Bambouseraie personnelle. »
+- `tian-ren-di` : hommage à l'école de 太極功 Heaven Man Earth (heavenmanearth.com), dont le calligraphe fait partie ; 鬆 est au cœur de l'enseignement d'Adam Mizner.
+- `qi-gong` : « Lecture des ouvrages de Yang Jwing-Ming », qui répète les 五調 d'un livre à l'autre. Le titre du livre est retiré des pièces : `diao-shen` passe de `source.work` à `source.author: Yang Jwing-Ming`.
+- `long-teng-hu-yue` : « L'expression de ma vanité », pour être présentée à 鄧岱崑. `deng-shan-ge-jue` reste hors du projet.
+- `yang-cheng-fu-zhi-tai-ji-quan-shi-yao` : les dix points, à terme, un par pièce ; Yáng Chéngfǔ 楊澄甫 (1883-1936), dates de zh.wikipedia ; le 十要 n'est pas daté.
+- `ge-ze-yu` : le nom créé par 李蓉, étudiante de Nankin, première professeur de chinois du calligraphe, à qui le projet est dédié.

@@ -7,83 +7,94 @@
 # Les blocs `notion:` ne sont là que pour arbitrer : ils ne sont pas importés.
 
 projects:
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : rien dans l'export ne dit le thème : ink proposé, à choisir
   - id: zhong-he-ji
     title: 中和集
-    presentation: ""
+    presentation: |
+      Le 中和集 de 李道純 (元) : chants, poèmes et traités d'alchimie interne. Chaque pièce en
+      écrit un passage, d'un vers isolé jusqu'au poème entier, autour du titre écrit seul.
     theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : rien dans l'export ne dit le thème : jade proposé, à choisir
   - id: hong-lou-meng
     title: 紅樓夢
-    presentation: ""
-    theme: jade
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : jade proposé, à choisir
+    presentation: |
+      Le 紅樓夢 par ses vers et ses inscriptions : les arches du 太虛幻境 et du 真如福地, les
+      poèmes de 寶玉 et de 寶釵, les fiches de fleurs tirées au chapitre 63. Le 《原道歌》 du 中和集
+      y entre par un vers, 玉鎖金枷齊解脫 : le 金鎖 de 寶釵, le 玉 de 寶玉.
+    theme: ink
   - id: xiu-zhu-can-cha
     title: 修竹參差
-    presentation: ""
-    theme: jade
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
+    presentation: |
+      Bambouseraie personnelle. 修竹參差, écrit seul ; le 《種竹詩卷》 de 吳寬, 種竹不須土，心空自成林 ;
+      et, du 中和集, 虛心直節青青竹 : le cœur vide, le nœud droit.
+    theme: ink
   - id: tian-ren-di
     title: 天人地
-    presentation: ""
+    presentation: |
+      Hommage à l'enseignement de l'école de 太極功 Heaven Man Earth (heavenmanearth.com), dont je
+      fais partie. 鬆 est au cœur de l'enseignement d'Adam Mizner. 天人地, le ciel, l'homme et la
+      terre, écrit seul ; autour, 鬆胯, relâcher les hanches : exploré du régulier au style libre,
+      puis pris dans des devises, 放心鬆胯, 堅持注意，忍受鬆胯, et 不受苦中苦，難為人上人.
     theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
   # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_24.jpeg (气功 → 氣功)
   - id: qi-gong
     title: 氣功
-    presentation: ""
+    presentation: |
+      Lecture des ouvrages de Yang Jwing-Ming. Trois des 五調 du qigong, 調身, 調息, 調心, chacun sa
+      formule, celles du souffle et du cœur tirées du 《性命圭旨》. Autour, 胎息, 神行即氣行，神住即氣住,
+      du 《胎息經》, et 五氣朝元 · 身心平衡.
     theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
   # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_15_01.jpeg :
   # 龍騰 (série 16, six feuilles) et 虎躍 (série 17, trois feuilles), autour de la pièce-pôle
   - id: long-teng-hu-yue
     title: 龍騰虎躍
-    presentation: ""
+    presentation: |
+      L'expression de ma vanité : le dragon et le tigre, explorés caractère par caractère, pour
+      être présentés à 鄧岱崑, le 師父 de 山山. 龍騰, six feuilles au 春分, chacune sous une ligne
+      du 乾 ; 虎躍, trois feuilles au 清明, sous le 履. Puis la pièce-pôle, 龍騰虎躍.
     theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
   # projet désigné par le calligraphe à l'arbitrage des scans 2026-10-11_31_01 et 31_03
+  # dates de 楊澄甫 : zh.wikipedia, 杨澄甫 (consulté le 2026-10-21) ; le 十要 n'est pas daté
   - id: yang-cheng-fu-zhi-tai-ji-quan-shi-yao
     title: 楊澄甫之太極拳十要
-    presentation: ""
+    presentation: |
+      Les dix points essentiels du Tàijí Quán, 《太極拳說十要》, de Yáng Chéngfǔ 楊澄甫 (1883-1936),
+      un par pièce. Le premier, 虛靈頂勁, est écrit ; le dixième, 動中求靜, attend son tour.
     theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
   # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_12_01.jpeg :
   # hommage à 山山, que le calligraphe surnomme 閒仙 ; la pièce 閒仙機 en est la pièce-pôle
   - id: xian-xian-ji
     title: 閒仙機
-    presentation: ""
+    presentation: |
+      Hommage à 山山, que je surnomme 閒仙. Autour de 閒仙機, d'après lui (山山臨) : les dix tiges
+      célestes de 天干流 et les douze branches de 地支 ; puis 水火調劑, pour horizontaliser les
+      verticaux et verticaliser les horizontaux, deux des cinq points de sa méthode pour la cursive.
     theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
   # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_26_01.jpeg :
   # un projet sur son nom ; la pièce 戈澤宇 en est la pièce-pôle
   - id: ge-ze-yu
     title: 戈澤宇
-    presentation: ""
+    presentation: |
+      Un projet sur mon nom chinois, 戈澤宇, créé par 李蓉, jeune étudiante de Nankin qui donnait
+      des cours de chinois pour financer ses études en France : ma première professeur de chinois.
+      Je lui suis très reconnaissant et lui dédie ce projet. Pour l'instant, le nom seul, en
+      expérimentation.
     theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
   # projet désigné par le calligraphe à l'arbitrage du scan 2026-10-11_26_08.jpeg :
   # un projet à développer autour des deux mains, le crayon à gauche, le pinceau à droite
   - id: you-shou-he-zhang
     title: 又手合掌
-    presentation: ""
+    presentation: |
+      Les deux mains jointes. 手, la main gauche, et 又, la main droite, fondues en un seul caractère
+      inventé, chaque part écrite de sa main : le stylo et le crayon à gauche, le pinceau à droite.
+      Un projet à développer.
     theme: ink
-  # à arbitrer — presentation : à écrire : un projet sans présentation ne sera pas importé
-  # à arbitrer — theme : absent de Notion : ink proposé, à choisir
   # projet désigné par le calligraphe à l'arbitrage du lot 1 : le 易筋經, puis deux vers qui
   # disent l'entraînement, 寶劍鋒從磨礪出 et 梅花香自苦寒來
   - id: yi-jin-jing
     title: 易筋經
-    presentation: ""
+    presentation: |
+      L'entraînement. Le 易筋經, avec l'avertissement qui l'accompagne, 不按指示做，磨磚豈成鏡 : la
+      consigne d'aujourd'hui, puis la sentence de 懷讓. Puis les deux vers du 警世賢文, chacun au
+      service d'un mot : 苦煉, 寶劍鋒從磨礪出 ; 下功夫, 梅花香自苦寒來.
     theme: ink
 pieces:
   - slug: xi-you-ji
@@ -1718,7 +1729,7 @@ pieces:
   # à refaire
   # date du papier : 戈 立夏 26 (Notion disait 2026-03-03)
   # format du scan 2026-10-11_24.jpeg : titre 調身 hors grille (Notion disait 3x7)
-  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-2 (五調), sans auteur ; absent du 《性命圭旨》,
+  # formule des ouvrages de Yang Jwing-Ming (五調), qui la répète d'un livre à l'autre ; absente du 《性命圭旨》,
   # aucune source classique trouvée
   - slug: diao-shen
     title: 調身
@@ -1727,7 +1738,7 @@ pieces:
       - qi-gong
     published: false
     source:
-      work: "Qigong Meditation: Small Circulation"
+      author: Yang Jwing-Ming
     versions:
       - id: v1
         date: 2026-05-13
@@ -1770,7 +1781,7 @@ pieces:
       url: ""
       relations:
         - 調身
-  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-3 (調息) ;
+  # cité par Yang Jwing-Ming dans ses ouvrages (調息) ;
   # 《性命圭旨》 亨集, 「蟄藏氣穴，眾妙歸根」 : la citation ouverte par 按白玉蟾云 s'arrête à
   # 只要凝神入氣穴 (le 《丹髓歌》 de 白玉蟾) ; la suite est du compilateur, qui reprend en l'inversant
   # 晁迥 (宋), 《法藏碎金錄》 卷八 : 似動不動真人深深之息，似用不用如來空空之心，心息相依，息調心浄 ;
@@ -1834,7 +1845,7 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-4 (調心) ;
+  # cité par Yang Jwing-Ming dans ses ouvrages (調心) ;
   # 《性命圭旨》 亨集, 「涵養本原，救護命寶」, après 沖妙云 ; la source seule, sans auteur, comme 調息
   - slug: diao-xin
     title: 調心
