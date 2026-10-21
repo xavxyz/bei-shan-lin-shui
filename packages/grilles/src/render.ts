@@ -123,7 +123,7 @@ type Measures = {
   groups: { left: number; right: number; cell: number }[];
   /**
    * Quand des colonnes pendent sous un 橫批 : le bas du linteau, le haut des
-   * colonnes, et le carreau du 橫批 le plus haut.
+   * colonnes, et le carreau de la ligne du 橫批 qui descend le plus bas.
    */
   lintel: { bottom: number; hang: number; cell: number } | null;
 };
