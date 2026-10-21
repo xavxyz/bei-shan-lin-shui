@@ -104,6 +104,169 @@ const escape = (text: string) =>
 
 const mm = (value: number) => Number(value.toFixed(2));
 
+/** Une cote, au dixième de millimètre : ce qu'on reporte à la règle. */
+const cote = (value: number) => value.toFixed(1);
+
+const line = (x1: number, y1: number, x2: number, y2: number) =>
+  `<line x1="${mm(x1)}" y1="${mm(y1)}" x2="${mm(x2)}" y2="${mm(y2)}"/>`;
+
+/** Ce qu'il faut reporter à la règle pour tracer une feuille à la main. */
+type Measures = {
+  /** Le bloc de la grille. */
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+  /** Le carreau du rang qui descend le plus bas : celui de la cote de droite. */
+  cell: number;
+  /** Chaque groupe, de droite à gauche : ses bords gauche et droit, et son carreau. */
+  groups: { left: number; right: number; cell: number }[];
+  /**
+   * Quand des colonnes pendent sous un 橫批 : le bas du linteau, le haut des
+   * colonnes, et le carreau du 橫批 le plus haut.
+   */
+  lintel: { bottom: number; hang: number; cell: number } | null;
+};
+
+type MeasuredBox = SheetSummary["ranks"][number] & { right: number; bottom: number };
+
+/** Le rang qui descend le plus bas. */
+const lowest = (boxes: MeasuredBox[]) =>
+  boxes.reduce((low, box) => (box.bottom > low.bottom ? box : low));
+
+function measure(layout: SheetSummary): Measures {
+  const boxes: MeasuredBox[] = layout.ranks.map((box) => {
+    const [w, h] =
+      box.orientation === "v"
+        ? [box.cell, box.cell * box.length]
+        : [box.cell * box.length, box.cell];
+    return { ...box, right: box.x + w, bottom: box.y + h };
+  });
+  let at = 0;
+  const groups = layout.groups.map((group) => {
+    const own = boxes.slice(at, (at += group.ranks));
+    return {
+      left: Math.min(...own.map((box) => box.x)),
+      right: Math.max(...own.map((box) => box.right)),
+      cell: own[0]!.cell,
+    };
+  });
+  const lines = boxes.filter((box) => box.orientation === "h");
+  const columns = boxes.filter((box) => box.orientation === "v");
+  const bottom = lowest(boxes);
+  return {
+    top: Math.min(...boxes.map((box) => box.y)),
+    right: Math.max(...boxes.map((box) => box.right)),
+    bottom: bottom.bottom,
+    left: Math.min(...boxes.map((box) => box.x)),
+    cell: bottom.cell,
+    groups,
+    lintel:
+      lines.length > 0 && columns.length > 0
+        ? {
+            bottom: lowest(lines).bottom,
+            hang: Math.min(...columns.map((box) => box.y)),
+            cell: lowest(lines).cell,
+          }
+        : null,
+  };
+}
+
+/** La ligne des cotes, sous la feuille. */
+function measuresLine(layout: SheetSummary, m: Measures): string {
+  const parts = [
+    `marges : haut ${cote(m.top)} · droite ${cote(layout.width - m.right)} · bas ${cote(layout.height - m.bottom)} · gauche ${cote(m.left)} mm`,
+    `carreau ${cote(layout.cell)} mm`,
+  ];
+  if (m.groups.length > 1) parts.push(`écart ${cote(m.groups[0]!.left - m.groups[1]!.right)} mm`);
+  if (m.lintel) parts.push(`colonnes à ${cote(m.lintel.hang - m.top)} mm sous le 橫批`);
+  return parts.join(" · ");
+}
+
+/**
+ * Les cotes dans les marges : en haut, de gauche à droite, la marge gauche,
+ * chaque groupe et chaque écart, la marge droite ; à droite, de haut en bas,
+ * la marge haute, le 橫批 et le vide sous lui, les colonnes, la marge basse.
+ */
+function renderMeasures(layout: SheetSummary, m: Measures): string {
+  const { width, height } = layout;
+  const marks: string[] = [];
+  const TICK = 1.2;
+  const across = (from: number, to: number, y: number, label: string) => {
+    marks.push(
+      line(from, y, to, y),
+      line(from, y - TICK, from, y + TICK),
+      line(to, y - TICK, to, y + TICK),
+    );
+    marks.push(`<text x="${mm((from + to) / 2)}" y="${mm(y - 1)}">${escape(label)}</text>`);
+  };
+  const down = (from: number, to: number, x: number, label: string) => {
+    marks.push(
+      line(x, from, x, to),
+      line(x - TICK, from, x + TICK, from),
+      line(x - TICK, to, x + TICK, to),
+    );
+    const y = (from + to) / 2;
+    marks.push(
+      `<text x="${mm(x - 1)}" y="${mm(y)}" transform="rotate(-90 ${mm(x - 1)} ${mm(y)})">${escape(label)}</text>`,
+    );
+  };
+  const cells = (length: number, cell: number) => `${Math.round(length / cell)} × ${cote(cell)}`;
+
+  const y = m.top - 6;
+  across(0, m.left, y, cote(m.left));
+  [...m.groups].reverse().forEach((group, i, groups) => {
+    across(group.left, group.right, y, cells(group.right - group.left, group.cell));
+    const next = groups[i + 1];
+    if (next) across(group.right, next.left, y, cote(next.left - group.right));
+  });
+  across(m.right, width, y, cote(width - m.right));
+
+  const x = m.right + 6;
+  down(0, m.top, x, cote(m.top));
+  if (m.lintel) {
+    down(m.top, m.lintel.bottom, x, cells(m.lintel.bottom - m.top, m.lintel.cell));
+    down(m.lintel.bottom, m.lintel.hang, x, cote(m.lintel.hang - m.lintel.bottom));
+    down(m.lintel.hang, m.bottom, x, cells(m.bottom - m.lintel.hang, m.cell));
+  } else {
+    down(m.top, m.bottom, x, cells(m.bottom - m.top, m.cell));
+  }
+  down(m.bottom, height, x, cote(height - m.bottom));
+  return `<g class="cotes" font-size="2.6">${marks.join("")}</g>`;
+}
+
+/**
+ * Le 九宮格 : chaque carreau partagé en trois dans les deux sens, pour situer
+ * les traits d'un caractère.
+ */
+function renderNineSquares(layout: SheetSummary): string {
+  const strokes: string[] = [];
+  for (const box of layout.ranks) {
+    const { cell } = box;
+    const vertical = box.orientation === "v";
+    const [w, h] = vertical ? [cell, cell * box.length] : [cell * box.length, cell];
+    for (let k = 0; k < box.length; k++) {
+      for (const third of [1, 2]) {
+        const offset = (k + third / 3) * cell;
+        strokes.push(
+          vertical
+            ? line(box.x, box.y + offset, box.x + w, box.y + offset)
+            : line(box.x + offset, box.y, box.x + offset, box.y + h),
+        );
+      }
+    }
+    for (const third of [1, 2]) {
+      const offset = (third / 3) * cell;
+      strokes.push(
+        vertical
+          ? line(box.x + offset, box.y, box.x + offset, box.y + h)
+          : line(box.x, box.y + offset, box.x + w, box.y + offset),
+      );
+    }
+  }
+  return `<g class="jiugong">${strokes.join("")}</g>`;
+}
+
 /**
  * Un rang se lit de haut en bas s'il est une colonne, de droite à gauche s'il
  * est une ligne : la case `k` d'une ligne est la `k`-ième à partir de son
@@ -121,11 +284,11 @@ function renderSheet(layout: SheetSummary, texts: string[], index: number): stri
     strokes.push(`<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(w)}" height="${mm(h)}"/>`);
     for (let k = 1; k < box.length; k++) {
       if (vertical) {
-        const y = mm(box.y + k * cell);
-        strokes.push(`<line x1="${mm(box.x)}" y1="${y}" x2="${mm(box.x + cell)}" y2="${y}"/>`);
+        const y = box.y + k * cell;
+        strokes.push(line(box.x, y, box.x + cell, y));
       } else {
-        const x = mm(box.x + k * cell);
-        strokes.push(`<line x1="${x}" y1="${mm(box.y)}" x2="${x}" y2="${mm(box.y + cell)}"/>`);
+        const x = box.x + k * cell;
+        strokes.push(line(x, box.y, x, box.y + cell));
       }
     }
     [...(texts[r] ?? "")].forEach((character, k) => {
@@ -143,14 +306,17 @@ function renderSheet(layout: SheetSummary, texts: string[], index: number): stri
     )
     .join("");
   const band = layout.inscription;
+  const measures = measure(layout);
   return `
     <figure class="sheet ${layout.orientation}">
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}mm" height="${height}mm" viewBox="0 0 ${width} ${height}">
         <text class="inscription" x="${mm(band.x + band.width / 2)}" y="${mm(band.y + 4)}" font-size="5">落款</text>
+        ${renderNineSquares(layout)}
         <g class="grid">${strokes.join("")}</g>
+        ${renderMeasures(layout, measures)}
         ${characters}
       </svg>
-      <figcaption>${sheetLine(layout, index)}</figcaption>
+      <figcaption>${sheetLine(layout, index)}<br><span class="measures">${escape(measuresLine(layout, measures))}</span></figcaption>
     </figure>`;
 }
 
@@ -206,7 +372,12 @@ export function renderPage(input: RenderInput): string {
           `\n    <ul class="model-notes" data-model="${model.key}">${model.notes.map((note) => `<li>${escape(note)}</li>`).join("")}</ul>`,
       )
       .join("")}
-    <p class="hint">Imprimer : une feuille par page, A4, échelle 100 %, marges « aucune ». Les caractères s'impriment comme ils sont affichés.</p>
+    <fieldset>
+      <legend>Repères</legend>
+      <label><input type="checkbox" name="marks" value="jiugong"> 九宮格</label>
+      <label><input type="checkbox" name="marks" value="cotes"> cotes</label>
+    </fieldset>
+    <p class="hint">Imprimer : une feuille par page, A4, échelle 100 %, marges « aucune ». Les caractères et les repères s'impriment comme ils sont affichés.</p>
   </header>
   <main>${sections.join("")}
   </main>
@@ -252,6 +423,11 @@ body { margin: 0; padding: 24px 24px 120px; background: #e8e4dc; color: #23201c;
 .inscription { fill: #8a2c2c; opacity: 0.5; writing-mode: vertical-rl; dominant-baseline: auto; }
 body[data-characters="calque"] .characters { opacity: 0.12; }
 body[data-characters="masques"] .characters { display: none; }
+.jiugong { fill: none; stroke: #c98f8f; stroke-width: 0.2; stroke-dasharray: 1 1; }
+.cotes { stroke: #2c5d8a; stroke-width: 0.2; }
+.cotes text { stroke: none; fill: #2c5d8a; text-anchor: middle; font-family: system-ui, sans-serif; }
+body:not([data-jiugong]) .jiugong, body:not([data-cotes]) .cotes, body:not([data-cotes]) .measures { display: none; }
+.measures { color: #2c5d8a; }
 .model-notes { margin: 4px 0; color: #8a2c2c; font-size: 14px; }
 .model-notes:empty { display: none; }
 figcaption { margin-top: 8px; font-size: 13px; text-align: center; color: #6d675e; }
@@ -285,6 +461,10 @@ function sync() {
   url.searchParams.set("candidat", current);
   url.searchParams.set("caracteres", document.body.dataset.characters);
   url.searchParams.set("modele", document.body.dataset.model);
+  for (const mark of marks) {
+    if (mark in document.body.dataset) url.searchParams.set(mark, "1");
+    else url.searchParams.delete(mark);
+  }
   history.replaceState(null, "", url);
 }
 function step(d) {
@@ -309,6 +489,15 @@ function setCharacters(mode) {
 setCharacters(modes.includes(params.get("caracteres")) ? params.get("caracteres") : "affiches");
 document.querySelectorAll('input[name="characters"]').forEach((input) =>
   input.addEventListener("change", () => { setCharacters(input.value); sync(); }));
+const marks = ["jiugong", "cotes"];
+function setMark(mark, on) {
+  if (on) document.body.dataset[mark] = "";
+  else delete document.body.dataset[mark];
+  document.querySelector('input[name="marks"][value="' + mark + '"]').checked = on;
+}
+for (const mark of marks) setMark(mark, params.get(mark) === "1");
+document.querySelectorAll('input[name="marks"]').forEach((input) =>
+  input.addEventListener("change", () => { setMark(input.value, input.checked); sync(); }));
 document.querySelectorAll(".switcher button").forEach((b) =>
   b.addEventListener("click", () => step(Number(b.dataset.step))));
 document.addEventListener("keydown", (e) => {
