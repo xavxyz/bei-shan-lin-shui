@@ -88,6 +88,7 @@ Puis ce mode d'emploi :
 - `←` `→`, ou la barre du bas, basculent entre les formats candidats ;
 - **Caractères** : affichés, en calque (très pâles, pour écrire par-dessus), ou masqués (la grille seule) ;
 - **Modèle** : 楷 standard (par défaut), 顏體 ou 文楷 ; sous la bascule, ce que le 體 choisi dessine autrement que le texte ;
-- impression : seul le format candidat affiché sort, une feuille par page A4, chacune dans son orientation ; régler l'échelle à 100 % et les marges sur « aucune ». Les caractères sortent comme ils sont affichés.
+- **Repères**, masqués par défaut et à cocher un à un : le **九宮格**, chaque carreau partagé en trois dans les deux sens pour situer les traits, et les **cotes**, pour tracer la feuille à la main : marges, groupes et écarts en haut, 橫批 et colonnes à droite, un groupe moins haut le long de son bord gauche, chacun avec son carreau et, s'il a plusieurs cases, sa longueur ; sous la feuille, la ligne des marges, des carreaux et de l'écart ;
+- impression : seul le format candidat affiché sort, une feuille par page A4, chacune dans son orientation ; régler l'échelle à 100 % et les marges sur « aucune ». Les caractères et les repères sortent comme ils sont affichés.
 
 Si le calligraphe retient un format autre que celui de la version, il s'inscrit là où vit la pièce : dans le plan à l'arbitrage, ou par `/version-ou-variation` pour une pièce de `content/`.

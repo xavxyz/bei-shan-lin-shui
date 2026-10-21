@@ -1,7 +1,9 @@
 import { MODELS, type Model } from "./models.js";
+import { measure, measuresLine, spanLabel, type Measures, type Span } from "./measures.js";
 import {
   groupLabel,
   layoutSheet,
+  rankSize,
   type PouredText,
   type Sheet,
   type SheetLayout,
@@ -104,134 +106,38 @@ const escape = (text: string) =>
 
 const mm = (value: number) => Number(value.toFixed(2));
 
-/** Une cote, au dixième de millimètre : ce qu'on reporte à la règle. */
-const cote = (value: number) => value.toFixed(1);
-
 const line = (x1: number, y1: number, x2: number, y2: number) =>
   `<line x1="${mm(x1)}" y1="${mm(y1)}" x2="${mm(x2)}" y2="${mm(y2)}"/>`;
 
-/** Ce qu'il faut reporter à la règle pour tracer une feuille à la main. */
-type Measures = {
-  /** Le bloc de la grille. */
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
-  /** Le carreau du rang qui descend le plus bas : celui de la cote de droite. */
-  cell: number;
-  /** Chaque groupe, de droite à gauche : ses bords gauche et droit, et son carreau. */
-  groups: { left: number; right: number; cell: number }[];
-  /**
-   * Quand des colonnes pendent sous un 橫批 : le bas du linteau, le haut des
-   * colonnes, et le carreau du 橫批 le plus haut.
-   */
-  lintel: { bottom: number; hang: number; cell: number } | null;
-};
-
-type MeasuredBox = SheetSummary["ranks"][number] & { right: number; bottom: number };
-
-/** Le rang qui descend le plus bas. */
-const lowest = (boxes: MeasuredBox[]) =>
-  boxes.reduce((low, box) => (box.bottom > low.bottom ? box : low));
-
-function measure(layout: SheetSummary): Measures {
-  const boxes: MeasuredBox[] = layout.ranks.map((box) => {
-    const [w, h] =
-      box.orientation === "v"
-        ? [box.cell, box.cell * box.length]
-        : [box.cell * box.length, box.cell];
-    return { ...box, right: box.x + w, bottom: box.y + h };
-  });
-  let at = 0;
-  const groups = layout.groups.map((group) => {
-    const own = boxes.slice(at, (at += group.ranks));
-    return {
-      left: Math.min(...own.map((box) => box.x)),
-      right: Math.max(...own.map((box) => box.right)),
-      cell: own[0]!.cell,
-    };
-  });
-  const lines = boxes.filter((box) => box.orientation === "h");
-  const columns = boxes.filter((box) => box.orientation === "v");
-  const bottom = lowest(boxes);
-  return {
-    top: Math.min(...boxes.map((box) => box.y)),
-    right: Math.max(...boxes.map((box) => box.right)),
-    bottom: bottom.bottom,
-    left: Math.min(...boxes.map((box) => box.x)),
-    cell: bottom.cell,
-    groups,
-    lintel:
-      lines.length > 0 && columns.length > 0
-        ? {
-            bottom: lowest(lines).bottom,
-            hang: Math.min(...columns.map((box) => box.y)),
-            cell: lowest(lines).cell,
-          }
-        : null,
-  };
-}
-
-/** La ligne des cotes, sous la feuille. */
-function measuresLine(layout: SheetSummary, m: Measures): string {
-  const parts = [
-    `marges : haut ${cote(m.top)} · droite ${cote(layout.width - m.right)} · bas ${cote(layout.height - m.bottom)} · gauche ${cote(m.left)} mm`,
-    `carreau ${cote(layout.cell)} mm`,
-  ];
-  if (m.groups.length > 1) parts.push(`écart ${cote(m.groups[0]!.left - m.groups[1]!.right)} mm`);
-  if (m.lintel) parts.push(`colonnes à ${cote(m.lintel.hang - m.top)} mm sous le 橫批`);
-  return parts.join(" · ");
-}
-
 /**
- * Les cotes dans les marges : en haut, de gauche à droite, la marge gauche,
- * chaque groupe et chaque écart, la marge droite ; à droite, de haut en bas,
- * la marge haute, le 橫批 et le vide sous lui, les colonnes, la marge basse.
+ * Les cotes dans les marges : la chaîne du haut, de gauche à droite ; celle de
+ * droite, de haut en bas ; et chaque groupe moins haut, le long de son bord gauche.
  */
-function renderMeasures(layout: SheetSummary, m: Measures): string {
-  const { width, height } = layout;
+function renderMeasures({ block, across, down, shorter }: Measures): string {
   const marks: string[] = [];
   const TICK = 1.2;
-  const across = (from: number, to: number, y: number, label: string) => {
+  const horizontal = (y: number, span: Span) => {
+    const { from, to } = span;
     marks.push(
       line(from, y, to, y),
       line(from, y - TICK, from, y + TICK),
       line(to, y - TICK, to, y + TICK),
+      `<text x="${mm((from + to) / 2)}" y="${mm(y - 1)}">${escape(spanLabel(span))}</text>`,
     );
-    marks.push(`<text x="${mm((from + to) / 2)}" y="${mm(y - 1)}">${escape(label)}</text>`);
   };
-  const down = (from: number, to: number, x: number, label: string) => {
+  const vertical = (x: number, span: Span) => {
+    const { from, to } = span;
+    const y = (from + to) / 2;
     marks.push(
       line(x, from, x, to),
       line(x - TICK, from, x + TICK, from),
       line(x - TICK, to, x + TICK, to),
-    );
-    const y = (from + to) / 2;
-    marks.push(
-      `<text x="${mm(x - 1)}" y="${mm(y)}" transform="rotate(-90 ${mm(x - 1)} ${mm(y)})">${escape(label)}</text>`,
+      `<text x="${mm(x - 1)}" y="${mm(y)}" transform="rotate(-90 ${mm(x - 1)} ${mm(y)})">${escape(spanLabel(span))}</text>`,
     );
   };
-  const cells = (length: number, cell: number) => `${Math.round(length / cell)} × ${cote(cell)}`;
-
-  const y = m.top - 6;
-  across(0, m.left, y, cote(m.left));
-  [...m.groups].reverse().forEach((group, i, groups) => {
-    across(group.left, group.right, y, cells(group.right - group.left, group.cell));
-    const next = groups[i + 1];
-    if (next) across(group.right, next.left, y, cote(next.left - group.right));
-  });
-  across(m.right, width, y, cote(width - m.right));
-
-  const x = m.right + 6;
-  down(0, m.top, x, cote(m.top));
-  if (m.lintel) {
-    down(m.top, m.lintel.bottom, x, cells(m.lintel.bottom - m.top, m.lintel.cell));
-    down(m.lintel.bottom, m.lintel.hang, x, cote(m.lintel.hang - m.lintel.bottom));
-    down(m.lintel.hang, m.bottom, x, cells(m.bottom - m.lintel.hang, m.cell));
-  } else {
-    down(m.top, m.bottom, x, cells(m.bottom - m.top, m.cell));
-  }
-  down(m.bottom, height, x, cote(height - m.bottom));
+  for (const span of across) horizontal(block.top - 6, span);
+  for (const span of down) vertical(block.right + 6, span);
+  for (const { edge, span } of shorter) vertical(edge - 2, span);
   return `<g class="cotes" font-size="2.6">${marks.join("")}</g>`;
 }
 
@@ -244,7 +150,7 @@ function renderNineSquares(layout: SheetSummary): string {
   for (const box of layout.ranks) {
     const { cell } = box;
     const vertical = box.orientation === "v";
-    const [w, h] = vertical ? [cell, cell * box.length] : [cell * box.length, cell];
+    const { width: w, height: h } = rankSize(box);
     for (let k = 0; k < box.length; k++) {
       for (const third of [1, 2]) {
         const offset = (k + third / 3) * cell;
@@ -280,7 +186,7 @@ function renderSheet(layout: SheetSummary, texts: string[], index: number): stri
   layout.ranks.forEach((box, r) => {
     const { cell } = box;
     const vertical = box.orientation === "v";
-    const [w, h] = vertical ? [cell, cell * box.length] : [cell * box.length, cell];
+    const { width: w, height: h } = rankSize(box);
     strokes.push(`<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(w)}" height="${mm(h)}"/>`);
     for (let k = 1; k < box.length; k++) {
       if (vertical) {
@@ -313,7 +219,7 @@ function renderSheet(layout: SheetSummary, texts: string[], index: number): stri
         <text class="inscription" x="${mm(band.x + band.width / 2)}" y="${mm(band.y + 4)}" font-size="5">落款</text>
         ${renderNineSquares(layout)}
         <g class="grid">${strokes.join("")}</g>
-        ${renderMeasures(layout, measures)}
+        ${renderMeasures(measures)}
         ${characters}
       </svg>
       <figcaption>${sheetLine(layout, index)}<br><span class="measures">${escape(measuresLine(layout, measures))}</span></figcaption>
