@@ -14,5 +14,5 @@ versions:
     columns:
       - 苦煉 # 煉 pour 練 : le corps s'exerce, mais le feu de l'esprit l'affine, s'il suit l'avertissement de yi-jin-jing
       - 寶劍鋒從磨礪出
-published: false
+published: true
 ---

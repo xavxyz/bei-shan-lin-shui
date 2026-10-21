@@ -25,5 +25,5 @@ versions:
       - 息心明理儒之極
       - 息氣凝神道之玄 # 气 dans le 道藏
       - 三息相須無不克
-published: false
+published: true
 ---

@@ -33,5 +33,5 @@ versions:
       - 也是無風自起浪
       - 徹底掀翻參學畢
     intention: Une seconde version en 13x7, sur une seule feuille, 紫陽云 et 勉旃勉旃 pris dans la grille.
-published: false
+published: true
 ---

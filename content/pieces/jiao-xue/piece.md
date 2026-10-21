@@ -8,5 +8,5 @@ versions:
     date: 2026-01-04
     format: "[(1x4, 2x6)]" # supposé : ni scan, ni format dans Notion
     columns: [教學相長, 教不嚴師之惰, 學不精生之過]
-published: false
+published: true
 ---

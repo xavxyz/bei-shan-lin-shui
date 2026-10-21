@@ -20,5 +20,5 @@ versions:
     format: "[(4x7, 1x13/2)]"
     columns: [浮華亂目孰回光, 薄霧牽情誰返照, 玉鎖金枷齊解脫, 急流勇退慕玄風, 李道純原道歌句]
     intention: À terme, le poème entier, en douze quatrains.
-published: false
+published: true
 ---

@@ -41,5 +41,5 @@ versions:
           - file: v1a-03.jpg
             kind: work
             capture: scan
-published: false
+published: true
 ---

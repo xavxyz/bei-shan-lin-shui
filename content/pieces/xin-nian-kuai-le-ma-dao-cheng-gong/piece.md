@@ -53,5 +53,5 @@ versions:
       - id: v2c
         script: ziyou
         status: kept
-published: false
+published: true
 ---

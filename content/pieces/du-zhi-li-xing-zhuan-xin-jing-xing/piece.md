@@ -22,5 +22,5 @@ versions:
             kind: work
             capture: scan
             featured: true
-published: false
+published: true
 ---

@@ -16,5 +16,5 @@ versions:
     date: 2026-03-04
     format: "[(1x2, 4x7)]"
     columns: [調息, 以如來空空之心, 合真人深深之息, 則心息相依, 息調心淨]
-published: false
+published: true
 ---

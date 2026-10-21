@@ -30,5 +30,5 @@ versions:
           - file: v1a-03.jpg
             kind: study
             capture: scan
-published: false
+published: true
 ---

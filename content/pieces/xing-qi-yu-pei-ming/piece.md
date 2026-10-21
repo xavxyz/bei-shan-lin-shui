@@ -19,5 +19,5 @@ versions:
       - 退＝則天＝幾舂在上地幾
       - 舂在下順則生逆則死
     intention: Une version A4 sur le modèle du jade, avant le grand format, 45x90 cm, qui recouvrira le 修真後內外火候圖.
-published: false
+published: true
 ---

@@ -30,5 +30,5 @@ versions:
             capture: scan
             featured: true
 translation: Qui souhaite devenir vraiment un homme ne songe pas à se donner de l'aise ; qui ne songe qu'à se donner de l'aise ne deviendra jamais vraiment un homme.
-published: false
+published: true
 ---

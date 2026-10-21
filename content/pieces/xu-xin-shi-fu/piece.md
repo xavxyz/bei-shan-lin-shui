@@ -32,5 +32,5 @@ versions:
             capture: scan
             featured: true
 translation: Esprit vide, ventre plein, les fondamentaux de la voie
-published: false
+published: true
 ---

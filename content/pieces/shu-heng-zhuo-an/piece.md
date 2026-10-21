@@ -37,5 +37,5 @@ versions:
     format: à préciser # le mot-sujet en grand, le distique l'explique, plus petit, comme 苦煉
     columns: [豎橫, 直豎須彌柱, 橫安太極楹]
     intention: Le 卓菴 de NPL, l'appartement face à la mer aménagé en studio-atelier de 工夫, calligraphie et taiji. 背山臨水，工夫生功夫.
-published: false
+published: true
 ---

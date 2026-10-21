@@ -7,5 +7,5 @@ versions:
     date: 2025-12-30
     format: à préciser
     columns: [方圓]
-published: false
+published: true
 ---

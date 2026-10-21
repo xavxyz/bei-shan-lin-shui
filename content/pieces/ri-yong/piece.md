@@ -25,5 +25,5 @@ versions:
       - 不離當處是瀛洲
       - 中和集詩
       - 工夫日用
-published: false
+published: true
 ---

@@ -10,5 +10,5 @@ versions:
     date: 2025-12-31
     format: 1x3
     columns: [中和集]
-published: false
+published: true
 ---
