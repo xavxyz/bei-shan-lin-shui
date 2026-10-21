@@ -305,6 +305,40 @@ describe("la mise en page sur A4", () => {
     }
   });
 
+  it("cote sous chaque feuille ses marges et son carreau, pour la tracer à la main", async () => {
+    const { html, sheets } = await grids(piece("[(1x7, 1x4h, 1x7)]", LONG_HU_GE), {
+      slug: "shan-ju",
+    });
+    const { ranks, width, height } = sheets.A![0]!;
+    const top = Math.min(...ranks.map((box) => box.y));
+    const right = width - Math.max(...ranks.map((box) => box.x + box.width));
+    const bottom = height - Math.max(...ranks.map((box) => box.y + box.height));
+    const left = Math.min(...ranks.map((box) => box.x));
+    const cell = ranks[0]!.width;
+    expect(html).toContain(
+      `marges : haut ${top.toFixed(1)} · droite ${right.toFixed(1)} · bas ${bottom.toFixed(1)} · gauche ${left.toFixed(1)} mm · carreau ${cell.toFixed(1)} mm · écart ${(cell / 2).toFixed(1)} mm`,
+    );
+    expect(html).toContain(`colonnes à ${(ranks[0]!.y - top).toFixed(1)} mm sous le 橫批`);
+  });
+
+  it("partage chaque carreau en neuf, le 九宮格", async () => {
+    const { html, sheets } = await grids(piece("[(1x3)]", LONG_HU_GE), { slug: "shan-ju" });
+    const [column] = sheets.A![0]!.ranks;
+    const cell = column!.width;
+    const lines = [
+      ...html
+        .split('class="jiugong"')[1]!
+        .split("</g>")[0]!
+        .matchAll(/x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"/g),
+    ].map(([, x1, y1, x2, y2]) => [+x1!, +y1!, +x2!, +y2!] as const);
+    const vertical = lines.filter(([x1, , x2]) => x1 === x2).map(([x]) => x - column!.x);
+    const horizontal = lines.filter(([, y1, , y2]) => y1 === y2).map(([, y]) => y - column!.y);
+    expect(vertical.map((x) => x / cell)).toEqual([expect.closeTo(1 / 3), expect.closeTo(2 / 3)]);
+    expect(horizontal.map((y) => y / cell)).toEqual(
+      [1 / 3, 2 / 3, 4 / 3, 5 / 3, 7 / 3, 8 / 3].map((third) => expect.closeTo(third)),
+    );
+  });
+
   it("lit de droite à gauche, un demi-carreau entre deux groupes", async () => {
     const { sheets } = await grids(piece("[(1x3, 2x7)]", LONG_HU_GE), { slug: "shan-ju" });
     const [first, second, third] = sheets.A![0]!.ranks;
