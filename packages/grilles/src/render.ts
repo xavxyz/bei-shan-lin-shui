@@ -117,19 +117,30 @@ type Measures = {
   right: number;
   bottom: number;
   left: number;
-  /** Chaque groupe, de droite à gauche : ses bords gauche et droit. */
-  groups: { left: number; right: number }[];
-  /** Quand des colonnes pendent sous un 橫批 : le bas du linteau et le haut des colonnes. */
-  lintel: { bottom: number; hang: number } | null;
+  /** Le carreau du rang qui descend le plus bas : celui de la cote de droite. */
+  cell: number;
+  /** Chaque groupe, de droite à gauche : ses bords gauche et droit, et son carreau. */
+  groups: { left: number; right: number; cell: number }[];
+  /**
+   * Quand des colonnes pendent sous un 橫批 : le bas du linteau, le haut des
+   * colonnes, et le carreau du 橫批 le plus haut.
+   */
+  lintel: { bottom: number; hang: number; cell: number } | null;
 };
 
+type MeasuredBox = SheetSummary["ranks"][number] & { right: number; bottom: number };
+
+/** Le rang qui descend le plus bas. */
+const lowest = (boxes: MeasuredBox[]) =>
+  boxes.reduce((low, box) => (box.bottom > low.bottom ? box : low));
+
 function measure(layout: SheetSummary): Measures {
-  const { cell, ranks } = layout;
-  const size = (box: (typeof ranks)[number]) =>
-    box.orientation === "v" ? [cell, cell * box.length] : [cell * box.length, cell];
-  const boxes = ranks.map((box) => {
-    const [w, h] = size(box);
-    return { ...box, right: box.x + w!, bottom: box.y + h! };
+  const boxes: MeasuredBox[] = layout.ranks.map((box) => {
+    const [w, h] =
+      box.orientation === "v"
+        ? [box.cell, box.cell * box.length]
+        : [box.cell * box.length, box.cell];
+    return { ...box, right: box.x + w, bottom: box.y + h };
   });
   let at = 0;
   const groups = layout.groups.map((group) => {
@@ -137,21 +148,25 @@ function measure(layout: SheetSummary): Measures {
     return {
       left: Math.min(...own.map((box) => box.x)),
       right: Math.max(...own.map((box) => box.right)),
+      cell: own[0]!.cell,
     };
   });
   const lines = boxes.filter((box) => box.orientation === "h");
   const columns = boxes.filter((box) => box.orientation === "v");
+  const bottom = lowest(boxes);
   return {
     top: Math.min(...boxes.map((box) => box.y)),
     right: Math.max(...boxes.map((box) => box.right)),
-    bottom: Math.max(...boxes.map((box) => box.bottom)),
+    bottom: bottom.bottom,
     left: Math.min(...boxes.map((box) => box.x)),
+    cell: bottom.cell,
     groups,
     lintel:
       lines.length > 0 && columns.length > 0
         ? {
-            bottom: Math.max(...lines.map((box) => box.bottom)),
+            bottom: lowest(lines).bottom,
             hang: Math.min(...columns.map((box) => box.y)),
+            cell: lowest(lines).cell,
           }
         : null,
   };
@@ -174,7 +189,7 @@ function measuresLine(layout: SheetSummary, m: Measures): string {
  * la marge haute, le 橫批 et le vide sous lui, les colonnes, la marge basse.
  */
 function renderMeasures(layout: SheetSummary, m: Measures): string {
-  const { width, height, cell } = layout;
+  const { width, height } = layout;
   const marks: string[] = [];
   const TICK = 1.2;
   const across = (from: number, to: number, y: number, label: string) => {
@@ -196,12 +211,12 @@ function renderMeasures(layout: SheetSummary, m: Measures): string {
       `<text x="${mm(x - 1)}" y="${mm(y)}" transform="rotate(-90 ${mm(x - 1)} ${mm(y)})">${escape(label)}</text>`,
     );
   };
-  const cells = (length: number) => `${Math.round(length / cell)} × ${cote(cell)}`;
+  const cells = (length: number, cell: number) => `${Math.round(length / cell)} × ${cote(cell)}`;
 
   const y = m.top - 6;
   across(0, m.left, y, cote(m.left));
   [...m.groups].reverse().forEach((group, i, groups) => {
-    across(group.left, group.right, y, cells(group.right - group.left));
+    across(group.left, group.right, y, cells(group.right - group.left, group.cell));
     const next = groups[i + 1];
     if (next) across(group.right, next.left, y, cote(next.left - group.right));
   });
@@ -210,11 +225,11 @@ function renderMeasures(layout: SheetSummary, m: Measures): string {
   const x = m.right + 6;
   down(0, m.top, x, cote(m.top));
   if (m.lintel) {
-    down(m.top, m.lintel.bottom, x, cells(m.lintel.bottom - m.top));
+    down(m.top, m.lintel.bottom, x, cells(m.lintel.bottom - m.top, m.lintel.cell));
     down(m.lintel.bottom, m.lintel.hang, x, cote(m.lintel.hang - m.lintel.bottom));
-    down(m.lintel.hang, m.bottom, x, cells(m.bottom - m.lintel.hang));
+    down(m.lintel.hang, m.bottom, x, cells(m.bottom - m.lintel.hang, m.cell));
   } else {
-    down(m.top, m.bottom, x, cells(m.bottom - m.top));
+    down(m.top, m.bottom, x, cells(m.bottom - m.top, m.cell));
   }
   down(m.bottom, height, x, cote(height - m.bottom));
   return `<g class="cotes" font-size="2.6">${marks.join("")}</g>`;
@@ -225,9 +240,9 @@ function renderMeasures(layout: SheetSummary, m: Measures): string {
  * les traits d'un caractère.
  */
 function renderNineSquares(layout: SheetSummary): string {
-  const { cell } = layout;
   const strokes: string[] = [];
   for (const box of layout.ranks) {
+    const { cell } = box;
     const vertical = box.orientation === "v";
     const [w, h] = vertical ? [cell, cell * box.length] : [cell * box.length, cell];
     for (let k = 0; k < box.length; k++) {

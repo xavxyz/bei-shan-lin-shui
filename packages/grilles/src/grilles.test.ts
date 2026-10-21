@@ -238,6 +238,36 @@ describe("les carreaux plus petits", () => {
     expect(sheets.A![0]!.text).toEqual(["假作真時真亦假", "太虛幻境", "無為有處有還無"]);
   });
 
+  it("partagent en neuf chacun leur carreau, le 九宮格", async () => {
+    const { html, sheets } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
+    const [, verse] = sheets.A![0]!.ranks;
+    const cell = verse!.width;
+    const lines = [
+      ...html
+        .split('class="jiugong"')[1]!
+        .split("</g>")[0]!
+        .matchAll(/x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"/g),
+    ]
+      .map(([, x1, y1, x2, y2]) => [+x1!, +y1!, +x2!, +y2!] as const)
+      .filter(([x1, , x2]) => x1 >= verse!.x - 0.01 && x2 <= verse!.x + verse!.width + 0.01);
+    const vertical = lines.filter(([x1, , x2]) => x1 === x2).map(([x]) => x - verse!.x);
+    const horizontal = lines.filter(([, y1, , y2]) => y1 === y2).map(([, y]) => y - verse!.y);
+    expect(vertical.map((x) => x / cell)).toEqual([expect.closeTo(1 / 3), expect.closeTo(2 / 3)]);
+    expect(horizontal).toHaveLength(14);
+    expect(horizontal.slice(0, 3).map((y) => y / cell)).toEqual(
+      [1 / 3, 2 / 3, 4 / 3].map((third) => expect.closeTo(third)),
+    );
+  });
+
+  it("cotent chaque groupe avec son carreau", async () => {
+    const { html } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
+    const cotes = html.split('class="cotes"')[1]!.split("</g>")[0]!;
+    // en haut, le vers puis le mot ; à droite, le vers, le plus haut des deux
+    expect(cotes).toContain(">1 × 38.1<");
+    expect(cotes).toContain(">1 × 76.3<");
+    expect(cotes).toContain(">7 × 38.1<");
+  });
+
   it("disent dans le résumé le carreau de la feuille, puis celui de chaque groupe plus petit", async () => {
     const { summary } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
     expect(summary).toContain(
