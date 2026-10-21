@@ -1,6 +1,6 @@
 # 胎息 — textes de référence
 
-Le 《胎息經》 et les formules voisines sur la respiration embryonnaire (胎息), traduits pour choisir le texte de la pièce `tai-xi`, au format `2x5` (lot 5 de #17). Textes de zh.wikisource : `胎息經註` (le 經 avec le commentaire de 幻真先生), `高上玉皇胎息經` (le fac-similé du 正統道藏, non relu), `胎息精微論`, `胎息秘要歌訣`, `性命圭旨/亨集`, `抱朴子/卷08`.
+Le 《胎息經》 et les formules voisines sur la respiration embryonnaire (胎息), traduits pour choisir le texte de la pièce `tai-xi`, au format `2x5` (lot 5 de #17). Textes de zh.wikisource : `胎息經註` (le 經 avec le commentaire de 幻真先生), `高上玉皇胎息經` (le fac-similé du 正統道藏, 洞真部 本文類, p. 170, dont la transcription n'est pas relue sur wikisource), `胎息精微論`, `胎息秘要歌訣`, `性命圭旨/亨集`, `抱朴子/卷08`.
 
 Le 中和集 n'emploie jamais le mot 胎息.
 
@@ -8,7 +8,7 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 
 ## 《高上玉皇胎息經》 · `tai-xi`
 
-**Source :** anonyme, 正統道藏 ; daté en général des 唐, parfois des dynasties du Sud et du Nord. Le commentaire et le 《胎息銘》 sont de 幻真先生 (唐). **83 caractères**, sans le commentaire.
+**Source :** anonyme, 正統道藏 (洞真部 本文類) ; « 撰人以及著作年代不詳，似出於唐代 » (胡孚琛 dir., 《中華道教大辭典》, 1995, p. 346, cité par zh.wikipedia `胎息經`). Le commentaire est « 題幻真先生註 » (`胎息經註`), et le 《胎息銘》 le suit dans le même texte, sans signature ; zh.wikipedia date 幻真先生 des 唐, sans référence. **83 caractères**, sans le commentaire.
 
 | 原文 | caractères | traduction |
 | --- | --- | --- |
@@ -30,12 +30,12 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 | ➡️ 胎從炁中結，炁從胎息生 | 5+5 | 《胎息精微論》 (道藏), pris dans une suite de trois vers : 胎因炁中成，胎成即萬病自遣 | L'embryon se noue dans le souffle ; le souffle naît de la respiration embryonnaire. |
 | ➡️ 修道久專精，身中胎息成 | 5+5 | 《胎息秘要歌訣》 (道藏), 布氣, les deux premiers vers | Qui cultive la Voie, longuement et avec constance, voit s'accomplir en lui la respiration embryonnaire. |
 | 以神歸氣穴，丹道自然成 | 5+5 | 《性命圭旨》 亨集, 蟄藏氣穴, quatrain de 石杏林 : 萬物生皆死，元神死復生。以神歸氣穴，丹道自然成 | Ramener l'esprit dans la cavité du souffle : la voie de l'élixir s'accomplit d'elle-même. |
-| 假名胎息，實曰內丹 | 4+4 | 《胎息銘》 de 幻真先生 | On l'appelle respiration embryonnaire ; en vérité, c'est l'élixir intérieur. |
+| 假名胎息，實曰內丹 | 4+4 | 《胎息銘》, à la suite du 胎息經註 | On l'appelle respiration embryonnaire ; en vérité, c'est l'élixir intérieur. |
 | 吐唯細細，納唯綿綿 | 4+4 | 《胎息銘》 | Expirer, fin, fin ; inspirer, ténu et continu. |
-| 其大要者，胎息而已 | 4+4 | 葛洪, 《抱朴子》 釋滯 (vers 317), le plus ancien texte sur le 胎息 | L'essentiel, ce n'est que la respiration embryonnaire. |
+| 其大要者，胎息而已 | 4+4 | 葛洪, 《抱朴子》 卷八 釋滯 | L'essentiel, ce n'est que la respiration embryonnaire. |
 | 無息不胎，無胎不息 | 4+4 | 《性命圭旨》 亨集, d'après 許棲巖 | Sans souffle, pas d'embryon ; sans embryon, pas de souffle. |
 | 穀神不死因胎息，長生門戶要綿綿 | 7+7 | 《性命圭旨》, 群仙珠玉 | L'esprit de la vallée ne meurt pas, par la respiration embryonnaire ; la porte de la longue vie veut un souffle continu. |
 
-- 《胎息精微論》 et 《胎息秘要歌訣》 sont des manuels anonymes, plus tardifs que le 經 qu'ils reprennent.
+- 《胎息精微論》, que la tradition attribue à 司馬承禎 (« 相傳 », zh.wikipedia), et 《胎息秘要歌訣》 reprennent le 經.
 - 抱朴子 poursuit : 得胎息者，能不以鼻口噓吸，如在胞胎之中，則道成矣 (« qui obtient la respiration embryonnaire peut ne plus souffler ni aspirer par le nez et la bouche, comme dans la matrice : alors la Voie est accomplie »).
 - 穀神不死 vient du 《老子》 6.

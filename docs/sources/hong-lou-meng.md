@@ -152,7 +152,7 @@ Traductions de travail.
 | 黛玉 | 芙蓉 | 風露清愁 | Chagrin pur de vent et de rosée | 莫怨東風當自嗟 | Ne blâme pas le vent d'est, plains-toi toi-même. |
 | 襲人 | 桃花 | 武陵別景 | Autre paysage de Wuling | 桃紅又是一年春 | Pêcher rouge : encore un printemps. |
 
-- Les vers viennent de 羅隱 (任是無情也動人), 高蟾 (日邊紅杏倚雲栽), 王淇 (竹籬茅舍自甘心), 蘇軾 (只恐夜深花睡去), 王淇 (開到荼蘼花事了), 朱淑真 (連理枝頭花正開), 歐陽修 (莫怨東風當自嗟) et 謝枋得 (桃紅又是一年春). Attributions données de mémoire par l'agent, non collationnées.
+- Les vers viennent de 羅隱, 《牡丹花》 (全唐詩 卷655, qui lit 任是無情亦動人 et note 也 en variante) ; 高蟾, 《下第後上永崇高侍郎》 (全唐詩 卷668) ; 王淇, 《梅》 (千家詩 卷三 ; 宋詩紀事 卷四十九) ; 蘇軾, 《海棠》 (千家詩 卷三) ; 王淇, 《春暮遊小園》 (千家詩 卷三 ; d'autres le donnent à 王琪, et le 全宋詩 n'est pas relevé) ; 朱淑真, 《落花》 (千家詩 卷三 ; 宋藝圃集 卷二十二) ; 歐陽修, 《再和明妃曲》 (居士集 卷八, `歐陽修集/卷008`, qui lit 莫怨春風當自嗟 : le roman écrit 東風) ; 謝枋得, 《慶全菴桃花》 (疊山集 卷一). Textes de zh.wikisource.
 - 湘雲 tire 只恐夜深花睡去 : 黛玉 propose en riant de changer 夜深 en 石涼, la pierre fraîche où 湘雲 s'était endormie ivre au chapitre 62.
 - 武陵 : la source aux fleurs de pêcher de 陶淵明 (桃花源記).
 - Le jeu s'arrête avant que 襲人 lance les dés : 「襲人才要擲，只聽有人叫門」.

@@ -2182,7 +2182,7 @@ pieces:
       status: Préparée
       url: ""
       relations: []
-  # 《高上玉皇胎息經》 : le seul 5+5 du 經, et le plus ancien des candidats ; 氣 du fac-similé du 道藏,
+  # 《高上玉皇胎息經》 : le seul 5+5 du 經 ; 氣 du fac-similé du 道藏,
   # et non le 炁 du 胎息經註 ; 即 et non le 則 du 性命圭旨 ; voir docs/sources/tai-xi.md
   - slug: tai-xi
     title: 胎息
