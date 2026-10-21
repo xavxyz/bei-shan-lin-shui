@@ -20,6 +20,7 @@ Système de suivi et de publication de calligraphie chinoise. Le dépôt est la 
 - **Le traditionnel est la source de vérité.** Le simplifié et le pinyin sont dérivés au build, jamais stockés, jamais l'inverse. La traduction française est écrite à la main.
 - **Le content layer lit, il n'écrit jamais.** C'est le seul point d'entrée du site vers le contenu.
 - **Un contenu invalide casse le build, pas la production.**
+- **Aucune donnée de mémoire.** Un texte, une attribution, une datation s'écrivent avec la source consultée, ou ne s'écrivent pas (ADR 0004).
 - Node et TypeScript exclusivement, pnpm en monorepo.
 
 ## Écrire du contenu
