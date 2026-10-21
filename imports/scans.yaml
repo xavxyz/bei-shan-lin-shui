@@ -909,7 +909,7 @@ scans:
     match: xin-nian-kuai-le-ma-dao-cheng-gong
     confidence: high
     script: kaishu
-    variation: v1a # v1a-01, kind context, capture photo, mise en avant ; dans le plan
+    variation: v2b # v2b-01, kind context, capture photo ; dans le plan
     # WhatsApp Image 2026-10-19 at 21.01.19.jpeg renommé ; photo claire, dans le bureau du père,
     # debout sur une étagère ; exemplaire au trait épais (voulu) ; ni signature, ni date, ni sceau
 
@@ -918,7 +918,17 @@ scans:
     match: xin-nian-kuai-le-ma-dao-cheng-gong
     confidence: high
     script: kaishu
-    variation: v1b # v1b-01, kind context, capture photo ; dans le plan
+    variation: v2a # v2a-01, kind context, capture photo ; dans le plan
     # 0ad59e04-f528-4946-afa2-a2fbc0983680.jpg renommé ; photo sombre, dans le salon de la mère,
     # contre une lampe ; exemplaire au trait fin (voulu) ; marques
     # grises pâles entre les colonnes ; ni signature, ni date, ni sceau
+
+  - file: 2026-10-21_02_01.jpeg
+    read: [新年快樂, 馬到成功, 新年快樂, 馬到成功, 新年快樂, 馬到成功]
+    match: xin-nian-kuai-le-ma-dao-cheng-gong
+    confidence: high
+    script: ziyou # régulier à droite et au milieu, formes libres à gauche
+    variation: v1a # v1a, kind work, capture photo, mise en avant ; dans le plan
+    # capture d'écran (Capture d'écran 2026-10-21 à 20.53.01.png, convertie en JPEG) d'une
+    # vidéo partagée à la famille pour le nouvel an chinois ; pas sur le Drive ; la feuille
+    # 米字格 entière avant découpe, les trois exemplaires de droite à gauche, devenus v2a trait
