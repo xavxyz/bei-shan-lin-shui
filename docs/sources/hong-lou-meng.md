@@ -1,8 +1,8 @@
 # 紅樓夢 — textes de référence
 
-Les deux arches du 《紅樓夢》, celle du 太虛幻境 (chapitres 1 et 5) et celle du 真如福地 (chapitre 116), avec le mot de 甄士隱 qui les réunit et le quatrain qui ferme le roman (chapitre 120). Ils servent aux pièces `pai-lou-lian` (牌樓聯) et `shuo-dao-xin-suan-chu` (說到辛酸處), du projet `hong-lou-meng`.
+Les deux arches du 《紅樓夢》, celle du 太虛幻境 (chapitres 1 et 5) et celle du 真如福地 (chapitre 116), avec le mot de 甄士隱 qui les réunit et le quatrain qui ferme le roman (chapitre 120). Ils servent aux pièces `pai-lou-lian` (牌樓聯) et `shuo-dao-xin-suan-chu` (說到辛酸處), du projet `hong-lou-meng`. Le lot 5 y ajoute les quatre 五律 du 省親 (chapitre 18), les fiches du 占花名兒 (chapitre 63) et les distiques qui entourent 胡思亂想 (chapitres 109 et 91).
 
-Le texte est celui de zh.wikisource, `紅樓夢/第001回`, `第005回`, `第116回` et `第120回` (`action=raw`), l'édition collationnée sans commentaires. Elle garde deux résidus de simplifié, normalisés ici : 胜→勝 (chapitre 116), 语→語 (chapitre 120). Elle écrit **痴**, et non 癡, au dernier vers du roman : il est gardé tel quel.
+Le texte est celui de zh.wikisource, `紅樓夢/第001回`, `第005回`, `第116回` et `第120回` (`action=raw`), et pour le lot 5 `第018回`, `第063回`, `第091回` et `第109回`, l'édition collationnée sans commentaires. Elle garde deux résidus de simplifié, normalisés ici : 胜→勝 (chapitre 116), 语→語 (chapitre 120). Elle écrit **痴**, et non 癡, au dernier vers du roman : il est gardé tel quel.
 
 **Attribution.** L'édition courante, celle du 人民文學出版社 (3ᵉ éd., 2008), signe « 曹雪芹著，無名氏續 » : les quatre-vingts premiers chapitres sont de 曹雪芹, les quarante derniers d'un continuateur anonyme, « 程偉元、高鶚整理 ». Les chapitres 116 et 120 sont de ces quarante-là, comme le 82, d'où vient `cheng-ren-bu-zi-zai-zi-zai-bu-cheng-ren`.
 
@@ -65,3 +65,135 @@ Chaque passage qui reste à relever dans la Pléiade porte une ligne **À releve
 
 - Le quatrain répond à celui du chapitre 1, où l'auteur présente son livre :「滿紙荒唐言，一把辛酸淚！都云作者痴，誰解其中味？」 (荒唐, 辛酸 et 痴 y sont déjà).
 - **À relever dans la Pléiade :** le quatrain du chapitre 1, au tiers du chapitre, à la fin du récit-cadre. 空空道人 a recopié le 《石頭記》 gravé sur la pierre ; 曹雪芹, dans son pavillon 悼紅軒, l'a relu dix ans et remanié cinq fois, puis y a écrit ce quatrain. Juste après commence l'histoire de 甄士隱, à 姑蘇.
+
+## 5 — Les quatre 五律 du 省親 · chapitre 18 · `bao-yu-si-lu`
+
+**Source :** 《紅樓夢》 chapitre 18, 「皇恩重元妃省父母　天倫樂寶玉呈才藻」. Au retour de 元妃 dans sa famille, elle demande à 寶玉 un 五言律 pour chacun des quatre lieux qu'elle préfère dans le jardin : 「如今再各賦五言律一首，使我當面試過」. 寶玉 en compose trois. 黛玉, qui n'a pas pu montrer son talent, écrit le quatrième à sa place et le lui jette roulé en boule : 「因見寶玉獨作四律，大費神思，何不代他作兩首」. Chaque poème est signé 臣寶玉謹題. Quatre 五言律詩, **160 caractères**.
+
+Le texte est celui de zh.wikisource (`紅樓夢/第018回`). Ses 帘 (hors du nom 杏帘), 蜡, 回, 里, 怜 et 庄 sont normalisés ici en 簾, 蠟, 迴, 裏, 憐 et 莊.
+
+### 有鳳來儀 (瀟湘館)
+
+| #   | 原文         | traduction                                                  |
+| --- | ------------ | ----------------------------------------------------------- |
+| 1   | 秀玉初成實， | Les jades élégants viennent de nouer leurs fruits,          |
+| 2   | 堪宜待鳳凰。 | dignes d'attendre le phénix.                                |
+| 3   | 竿竿青欲滴， | Chaque tige, d'un vert prêt à ruisseler ;                   |
+| 4   | 個個綠生涼。 | chaque feuille, d'un vert qui donne la fraîcheur.           |
+| 5   | 迸砌妨階水， | Ils percent le dallage et gênent l'eau des marches,         |
+| 6   | 穿簾礙鼎香。 | traversent le store et retiennent l'encens du brûle-parfum. |
+| 7   | 莫搖清碎影， | N'agitez pas leurs ombres claires et brisées :              |
+| 8   | 好夢晝初長。 | le beau rêve du jour commence à s'allonger.                 |
+
+- Le bambou (秀玉) nourrit le phénix de ses graines : le titre, « le phénix vient faire sa cour », vient du 尚書 (簫韶九成，鳳皇來儀).
+
+### 蘅芷清芬 (蘅蕪苑)
+
+| #   | 原文         | traduction                                              |
+| --- | ------------ | ------------------------------------------------------- |
+| 1   | 蘅蕪滿淨苑， | L'asaret et l'herbe parfumée emplissent le jardin pur,  |
+| 2   | 蘿薜助芬芳。 | les lianes et le lierre ajoutent à leur parfum.         |
+| 3   | 軟襯三春草， | Doucement, ils doublent les herbes des trois printemps, |
+| 4   | 柔拖一縷香。 | souplement, ils traînent un fil de senteur.             |
+| 5   | 輕煙迷曲徑， | Une brume légère égare le sentier sinueux,              |
+| 6   | 冷翠滴迴廊。 | un vert froid goutte sur la galerie tournante.          |
+| 7   | 誰謂池塘曲， | Qui dira « le poème de l'étang » ?                      |
+| 8   | 謝家幽夢長。 | le rêve secret de la maison Xie est long.               |
+
+- 池塘 renvoie au vers de 謝靈運, 池塘生春草, venu, dit-on, en rêve : 謝家幽夢.
+
+### 怡紅快綠 (怡紅院)
+
+| #   | 原文         | traduction                                                          |
+| --- | ------------ | ------------------------------------------------------------------- |
+| 1   | 深庭長日靜， | Dans la cour profonde, le long jour est calme ;                     |
+| 2   | 兩兩出嬋娟。 | deux à deux paraissent les belles.                                  |
+| 3   | 綠蠟春猶卷， | La cire verte, au printemps, est encore roulée ;                    |
+| 4   | 紅妝夜未眠。 | la parure rouge, la nuit, ne dort pas encore.                       |
+| 5   | 憑欄垂絳袖， | Accoudée à la balustrade, elle laisse pendre ses manches pourpres ; |
+| 6   | 倚石護青煙。 | appuyée au rocher, elle protège la fumée bleue.                     |
+| 7   | 對立東風裏， | Face à face, dans le vent d'est,                                    |
+| 8   | 主人應解憐。 | leur maître saura les chérir.                                       |
+
+- Les deux belles sont le bananier (綠蠟, la feuille roulée comme une chandelle de cire verte) et le pommier d'ornement (紅妝).
+- Au brouillon, 寶玉 avait écrit 綠玉. 寶釵 lui fait changer 玉 en 蠟, parce que 元妃 vient de rebaptiser 紅香綠玉 en 怡紅快綠 : c'est l'épisode du « maître d'un seul caractère » (一字師).
+
+### 杏帘在望 (稻香村), écrit par 黛玉
+
+| #   | 原文         | traduction                                             |
+| --- | ------------ | ------------------------------------------------------ |
+| 1   | 杏帘招客飲， | L'enseigne de l'abricotier invite le passant à boire : |
+| 2   | 在望有山莊。 | en vue, une ferme dans la montagne.                    |
+| 3   | 菱荇鵝兒水， | Châtaignes d'eau et nymphoïdes, l'eau des oisons ;     |
+| 4   | 桑榆燕子梁。 | mûriers et ormes, la poutre des hirondelles.           |
+| 5   | 一畦春韭綠， | Une planche de ciboule de printemps, verte ;           |
+| 6   | 十里稻花香。 | dix li de fleurs de riz, parfumées.                    |
+| 7   | 盛世無饑餒， | En ce siècle florissant, nul n'a faim :                |
+| 8   | 何須耕織忙。 | pourquoi s'affairer à labourer et tisser ?             |
+
+- 元妃 le juge 「為前三首之冠」 et rebaptise le lieu 稻香村.
+
+Traductions de travail.
+
+- **À relever dans la Pléiade :** chapitre 18, dans la seconde moitié du chapitre. 元妃 a fait écrire un poème à chacune des jeunes filles, puis demande les quatre 五律 à 寶玉. 寶釵 lui souffle 綠蠟 ; 黛玉 lui jette le quatrième poème roulé en boule. Juste après, 元妃 fait jouer une pièce par les actrices.
+
+## 6 — 占花名兒 · chapitre 63 · `zhan-hua-ming-er`
+
+**Source :** 《紅樓夢》 chapitre 63, 「壽怡紅群芳開夜宴　死金丹獨艷理親喪」. Pour l'anniversaire de 寶玉, les jeunes filles festoient la nuit dans la cour 怡紅院. 寶玉 propose le jeu : 「咱們占花名兒好」. Chacune tire une fiche d'ivoire qui porte une fleur, une devise de quatre caractères et un vers, le plus souvent emprunté à un poète des Tang ou des Song, avec une règle à boire. Le vers se lit comme le destin de celle qui le tire.
+
+| Qui | Fleur | Devise | traduction | Vers | traduction |
+| --- | --- | --- | --- | --- | --- |
+| 寶釵 | 牡丹 | 艷冠群芳 | Beauté qui couronne toutes les fleurs | 任是無情也動人 | Même sans passion, elle émeut. |
+| 探春 | 杏花 | 瑤池仙品 | Essence immortelle de l'étang de jade | 日邊紅杏倚雲栽 | Abricotier rouge planté contre les nuages, près du soleil. |
+| 李紈 | 老梅 | 霜曉寒姿 | Grâce froide d'une aube de givre | 竹籬茅舍自甘心 | Haie de bambou, chaumière : elle s'en contente. |
+| 湘雲 | 海棠 | 香夢沉酣 | Profond sommeil d'un rêve parfumé | 只恐夜深花睡去 | Je crains seulement que, la nuit avancée, la fleur ne s'endorme. |
+| 麝月 | 荼蘼 | 韶華勝極 | La splendeur à son comble | 開到荼蘼花事了 | Quand le rosier blanc fleurit, la saison des fleurs est finie. |
+| 香菱 | 並蒂花 | 聯春繞瑞 | Printemps unis, enlacés de bon augure | 連理枝頭花正開 | Sur les branches enlacées, la fleur s'ouvre. |
+| 黛玉 | 芙蓉 | 風露清愁 | Chagrin pur de vent et de rosée | 莫怨東風當自嗟 | Ne blâme pas le vent d'est, plains-toi toi-même. |
+| 襲人 | 桃花 | 武陵別景 | Autre paysage de Wuling | 桃紅又是一年春 | Pêcher rouge : encore un printemps. |
+
+- Les vers viennent de 羅隱, 《牡丹花》 (全唐詩 卷655, qui lit 任是無情亦動人 et note 也 en variante) ; 高蟾, 《下第後上永崇高侍郎》 (全唐詩 卷668) ; 王淇, 《梅》 (千家詩 卷三 ; 宋詩紀事 卷四十九) ; 蘇軾, 《海棠》 (千家詩 卷三) ; 王淇, 《春暮遊小園》 (千家詩 卷三 ; d'autres le donnent à 王琪, et le 全宋詩 n'est pas relevé) ; 朱淑真, 《落花》 (千家詩 卷三 ; 宋藝圃集 卷二十二) ; 歐陽修, 《再和明妃曲》 (居士集 卷八, `歐陽修集/卷008`, qui lit 莫怨春風當自嗟 : le roman écrit 東風) ; 謝枋得, 《慶全菴桃花》 (疊山集 卷一). Textes de zh.wikisource.
+- 湘雲 tire 只恐夜深花睡去 : 黛玉 propose en riant de changer 夜深 en 石涼, la pierre fraîche où 湘雲 s'était endormie ivre au chapitre 62.
+- 武陵 : la source aux fleurs de pêcher de 陶淵明 (桃花源記).
+- Le jeu s'arrête avant que 襲人 lance les dés : 「襲人才要擲，只聽有人叫門」.
+- wikisource écrit 云, 篱, 胜极 et 荼縻 : normalisés ici en 雲, 籬, 勝極 et 荼蘼.
+
+Traductions de travail.
+
+- **À relever dans la Pléiade :** chapitre 63, dans la première moitié du chapitre. Après le départ de 林之孝家的, les servantes de 怡紅院 font venir les jeunes filles pour fêter 寶玉 ; 晴雯 va chercher le cornet de fiches (簽筒). Chaque fiche lue est suivie de rires et d'une règle à boire. Le jeu s'interrompt quand on vient chercher 黛玉.
+
+## 7 — 胡思亂想 · chapitres 109 et 91 · `hu-si-luan-xiang`
+
+**Source :** 《紅樓夢》. 胡思亂想 revient treize fois dans le roman, dans les chapitres 7, 34, 62, 91, 94, 98, 100, 107, 109 (trois fois) et 111. Deux distiques de 7 + 7 l'entourent : la rêverie, puis la réponse à la rêverie. Les deux sont dans les quarante derniers chapitres, ceux du continuateur (voir l'attribution plus haut).
+
+### Chapitre 109, 「候芳魂五兒承錯愛　還孽債迎女返真元」
+
+寶玉 dort seul dans la pièce extérieure, dans l'espoir que l'âme de 黛玉 lui apparaîtra en rêve. Rien ne vient. Au réveil, il soupire :
+
+| 原文             | traduction                                                      |
+| ---------------- | --------------------------------------------------------------- |
+| 悠悠生死別經年， | Infiniment, la vie et la mort nous séparent depuis des années ; |
+| 魂魄不曾來入夢。 | son âme n'est jamais venue jusque dans mes rêves.               |
+
+- Le distique est du 《長恨歌》 de 白居易 : l'empereur 玄宗 y pleure 楊貴妃.
+- Plus loin, 寶釵 lui dit 「你不要胡思亂想」, puis 「但只不要胡思亂想，招出些邪魔外祟來」 ; la nuit, 「翻來覆去，胡思亂想，五更以後，才朦朧睡去」.
+
+### Chapitre 91, 「縱淫心寶蟾工設計　布疑陣寶玉妄談禪」
+
+黛玉 lui reproche : 「都是你自己心上胡思亂想，鑽入魔道裏去了」. Elle l'éprouve par des questions de 禪. Il répond d'abord 「任憑弱水三千，我只取一瓢飲」, puis, quand elle demande ce qu'il ferait si l'eau s'arrêtait et la perle sombrait :
+
+| 原文             | traduction                                                    |
+| ---------------- | ------------------------------------------------------------- |
+| 禪心已作沾泥絮， | Mon cœur de chan est déjà un duvet de saule collé à la boue : |
+| 莫向春風舞鷓鴣。 | ne viens pas danser la perdrix dans le vent de printemps.     |
+
+- Le premier vers est du moine 道潛 (參寥子), qui l'opposa à une courtisane envoyée par 蘇軾 : 「禪心已作沾泥絮，不逐春風上下狂」. Le duvet collé à la boue ne s'envole plus ; le 鷓鴣 est un air de séduction.
+
+### Autres distiques, écartés
+
+- ➡️ 不因俊俏難為友，正為風流始讀書 : à la fin du chapitre 7, sur 寶玉 et 秦鐘, qui s'envient « dans un même 胡思亂想 ». Il commente l'amitié plutôt que la rêverie.
+- 假作真時真亦假，無為有處有還無 (chapitre 5, où 寶玉 est 正胡思之間) : déjà pris par `pai-lou-lian`.
+
+Traductions de travail.
+
+- **À relever dans la Pléiade :** chapitre 109, au début du chapitre : 寶玉 demande à dormir seul dans la pièce extérieure, et 寶釵 l'y laisse ; le distique vient le lendemain matin, au réveil. Chapitre 91, à la fin du chapitre : 寶玉 rend visite à 黛玉, qui lui pose les questions de 禪 ; un corbeau croasse juste après sa réponse.

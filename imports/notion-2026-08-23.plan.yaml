@@ -855,17 +855,62 @@ pieces:
       url: ""
       relations:
         - 看破红尘
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
-  - slug: bao-yu-si-shou-shi-yuan-wen-wu-yan-lu-shi
-    title: 寶玉四首詩（原文 — 五言律詩）
+  # les quatre 五言律 que 元妃 demande à 寶玉 au 省親 (紅樓夢 第十八回, « 寶玉獨作四律 ») ; les
+  # 即事詩 du chapitre 23 sont des 七律 ; titre et slug de Notion : 寶玉四首詩（原文 — 五言律詩）,
+  # bao-yu-si-shou-shi-yuan-wen-wu-yan-lu-shi ; texte de zh.wikisource (紅樓夢/第018回), ses 帘 (hors
+  # du nom 杏帘), 蜡, 里, 怜 et 庄 rendus au traditionnel ; voir docs/sources/hong-lou-meng.md
+  # la relation Notion à 螃蟹諷刺 n'apprend rien : le 螃蟹詠 est au chapitre 38
+  - slug: bao-yu-si-lu
+    title: 寶玉四律 · 省親
     status: idea
-    projects: []
+    projects:
+      - hong-lou-meng
     published: false
+    source:
+      author: 曹雪芹
+      dynasty: 清
+      work: 紅樓夢
     versions:
       - id: v1
         date: 2026-01-20
         format: à préciser
-        columns: []
+        columns:
+          - 有鳳來儀
+          - 秀玉初成實
+          - 堪宜待鳳凰
+          - 竿竿青欲滴
+          - 個個綠生涼
+          - 迸砌妨階水
+          - 穿簾礙鼎香 # 帘 dans wikisource
+          - 莫搖清碎影
+          - 好夢晝初長
+          - 蘅芷清芬
+          - 蘅蕪滿淨苑
+          - 蘿薜助芬芳
+          - 軟襯三春草
+          - 柔拖一縷香
+          - 輕煙迷曲徑
+          - 冷翠滴迴廊 # 回 dans wikisource
+          - 誰謂池塘曲
+          - 謝家幽夢長
+          - 怡紅快綠
+          - 深庭長日靜
+          - 兩兩出嬋娟
+          - 綠蠟春猶卷 # 綠玉 au brouillon : 寶釵 lui souffle 蠟, l'épisode du 一字師 ; 蜡 dans wikisource
+          - 紅妝夜未眠
+          - 憑欄垂絳袖
+          - 倚石護青煙
+          - 對立東風裏 # 里 dans wikisource
+          - 主人應解憐 # 怜 dans wikisource
+          - 杏帘在望 # écrit par 黛玉 pour 寶玉, qui n'en avait que trois ; 元妃 le juge 前三首之冠
+          - 杏帘招客飲
+          - 在望有山莊 # 庄 dans wikisource
+          - 菱荇鵝兒水
+          - 桑榆燕子梁
+          - 一畦春韭綠
+          - 十里稻花香
+          - 盛世無饑餒
+          - 何須耕織忙
         variations: []
     notion:
       title: 宝玉四首诗（原文 — 五言律诗）
@@ -1146,17 +1191,33 @@ pieces:
       url: ""
       relations:
         - 中和集
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 李道純《中和集》卷五, 詩, 《鑄劍》, quinzième des 述工夫十七首 (正統道藏, zh.wikisource), en entier ;
+  # 爲 du 道藏 écrit 為 ; voir docs/sources/zhong-he-ji.md
+  # 輕吹 : le souffle léger du soufflet, le feu doux (文火), d'après 吹噓離火巽為風 (vers 4) : on forge
+  # sans forcer le souffle (calligraphe) ; 輕吹 n'est pas dans le 中和集, dont c'est le seul 吹
   - slug: zhu-jian-qing-chui
     title: 鑄劍 // 輕吹
     status: idea
-    projects: []
+    projects:
+      - zhong-he-ji
     published: false
+    source:
+      author: 李道純
+      dynasty: 元
+      work: 中和集
     versions:
       - id: v1
         date: 2026-02-04
         format: à préciser
-        columns: []
+        columns:
+          - 明師授我鑄神鋒
+          - 全藉陰陽造化功
+          - 鍛煉乾剛坤作冶
+          - 吹噓離火巽為風
+          - 做成龍象心官巧
+          - 掃蕩妖氛志帥雄
+          - 學道高人知此趣
+          - 等閒劈碎太虛空
         variations: []
     notion:
       title: 鑄劍 // 轻吹
@@ -1272,20 +1333,48 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
   # 《卓菴》 二首 : 李道純《中和集》卷五, 詩 (« dresser son ermitage ») ; 豎橫 vient du distique
-  # 直豎須彌柱，橫安太極楹 du premier poème (正統道藏, zh.wikisource)
-  - slug: shu-heng-zhuo-an-npl
-    title: 豎橫 《卓菴》 NPL
-    status: idea
+  # 直豎須彌柱，橫安太極楹 du premier poème, ses vers 5 et 6 (正統道藏, zh.wikisource) ; voir
+  # docs/sources/zhong-he-ji.md
+  # 豎 et 橫 sont aussi les traits vertical et horizontal : verticaliser les horizontaux et
+  # horizontaliser les verticaux, deux points de la méthode de 山山 ; le lien avec 方圓 (calligraphe)
+  # titre et slug de Notion : 豎橫 《卓菴》 NPL, shu-heng-zhuo-an-npl ; NPL dit le lieu, il passe en intention
+  - slug: shu-heng-zhuo-an
+    title: 豎橫 《卓菴》
+    status: made
     projects:
       - zhong-he-ji
     published: false
+    source:
+      author: 李道純
+      dynasty: 元
+      work: 中和集
     versions:
+      # la couverture, en style libre (calligraphe) ; rattachée d'abord à shui-huo-tiao-ji, dont elle
+      # était la feuille ① (registre imports/scans.yaml)
       - id: v1
-        date: 2026-02-11
-        format: à préciser
-        columns: []
+        date: 2026-04-19 # date du papier : 19 4 26 (Notion disait 2026-02-11)
+        format: "[(1x3)]"
+        columns:
+          - 山竪橫 # 山 en cursive en tête, hors grille ; 竪, variante de 豎 ; 橫 tourné de 90° dans le sens trigonométrique
+        variations:
+          - id: v1a
+            script: ziyou
+            status: kept
+            images:
+              # grille imprimée pâle 3x6 ; signé 戈, daté 19 4 26 ; « 8 » au rouge en bas à droite
+              - source: imports/scans/2026-10-11_18_01.jpeg
+                file: v1a.jpg
+                kind: work
+                featured: true
+      - id: v2
+        date: 2026-10-21
+        format: à préciser # le mot-sujet en grand, le distique l'explique, plus petit, comme 苦煉
+        intention: Le 卓菴 de NPL, l'appartement face à la mer aménagé en studio-atelier de 工夫, calligraphie et taiji. 背山臨水，工夫生功夫.
+        columns:
+          - 豎橫
+          - 直豎須彌柱
+          - 橫安太極楹
         variations: []
     notion:
       title: 竖横 《卓菴》 NPL
@@ -2093,17 +2182,23 @@ pieces:
       status: Préparée
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 《高上玉皇胎息經》 : le seul 5+5 du 經 ; 氣 du fac-similé du 道藏,
+  # et non le 炁 du 胎息經註 ; 即 et non le 則 du 性命圭旨 ; voir docs/sources/tai-xi.md
   - slug: tai-xi
     title: 胎息
     status: experiment
-    projects: []
+    projects:
+      - qi-gong
     published: false
+    source:
+      work: 胎息經
     versions:
       - id: v1
         date: 2026-04-05
-        format: 2x5
-        columns: []
+        format: "[(2x5)]"
+        columns:
+          - 神行即氣行
+          - 神住即氣住
         variations: []
     notion:
       title: 胎息
@@ -2128,18 +2223,41 @@ pieces:
       status: Cadre imprimé
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # les huit fiches du jeu, 紅樓夢 第六十三回 (壽怡紅群芳開夜宴), dans l'ordre du tirage ; le jeu
+  # s'arrête avant 襲人 ne lance les dés ; voir docs/sources/hong-lou-meng.md
+  # chaque fiche : la devise, puis le vers ; qui la tire et sa fleur vont dans la colonne de
+  # signature (calligraphe)
   - slug: zhan-hua-ming-er
     title: 占花名兒
     status: idea
     projects:
       - hong-lou-meng
     published: false
+    source:
+      author: 曹雪芹
+      dynasty: 清
+      work: 紅樓夢
     versions:
       - id: v1
         date: 2026-04-19
         format: à préciser
-        columns: []
+        columns:
+          - 艷冠群芳 # 寶釵 · 牡丹
+          - 任是無情也動人
+          - 瑤池仙品 # 探春 · 杏花
+          - 日邊紅杏倚雲栽 # 云 dans wikisource
+          - 霜曉寒姿 # 李紈 · 老梅
+          - 竹籬茅舍自甘心 # 篱 dans wikisource
+          - 香夢沉酣 # 湘雲 · 海棠
+          - 只恐夜深花睡去
+          - 韶華勝極 # 麝月 · 荼蘼 ; 胜极 dans wikisource
+          - 開到荼蘼花事了 # 荼縻 dans wikisource
+          - 聯春繞瑞 # 香菱 · 並蒂花
+          - 連理枝頭花正開
+          - 風露清愁 # 黛玉 · 芙蓉
+          - 莫怨東風當自嗟
+          - 武陵別景 # 襲人 · 桃花
+          - 桃紅又是一年春
         variations: []
     notion:
       title: 占花名儿
@@ -2147,18 +2265,30 @@ pieces:
       url: ""
       relations:
         - 太虚幻境红楼梦
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # 胡思亂想 revient treize fois dans le roman ; les deux distiques qui l'entourent, la rêverie puis
+  # sa réponse (calligraphe) : 紅樓夢 第一百零九回, où 寶玉 attend en vain 黛玉 en rêve, et 第九十一回,
+  # où 黛玉 lui reproche de 胡思亂想 ; voir docs/sources/hong-lou-meng.md
+  # source.author : la signature de l'édition courante, comme shuo-dao-xin-suan-chu
   - slug: hu-si-luan-xiang
     title: 胡思亂想
     status: experiment
     projects:
       - hong-lou-meng
     published: false
+    source:
+      author: 曹雪芹著，無名氏續
+      dynasty: 清
+      work: 紅樓夢
     versions:
       - id: v1
         date: 2026-07-08
-        format: 4 + 2x7
-        columns: []
+        format: "[(1x4, 2x7, 2x7)]" # Notion : 4 + 2x7, avant le second distique
+        columns:
+          - 胡思亂想
+          - 悠悠生死別經年 # chapitre 109 ; 白居易, 《長恨歌》
+          - 魂魄不曾來入夢
+          - 禪心已作沾泥絮 # chapitre 91 ; d'après 道潛 : 禪心已作沾泥絮，不逐春風上下狂
+          - 莫向春風舞鷓鴣
         variations: []
     notion:
       title: 胡思乱想
@@ -2563,7 +2693,7 @@ pieces:
                 kind: work
   # absente de Notion : identifiée sur le scan 2026-10-11_12_01.jpeg (registre imports/scans.yaml)
   # pièce-pôle du projet xian-xian-ji : hommage à 山山, 閒仙 est le surnom que le calligraphe lui donne
-  # distincte de shu-heng-zhuo-an-npl : N·PL marque aussi 04_01
+  # distincte de shu-heng-zhuo-an : N·PL marque aussi 04_01
   - slug: xian-xian-ji
     title: 閒仙機
     status: made
@@ -2735,10 +2865,10 @@ pieces:
               - source: imports/scans/2026-10-11_16_06.jpeg
                 file: v1a-06.jpg
                 kind: work
-  # absente de Notion : identifiée sur les scans 2026-10-11_18_01 à 18_04 (registre imports/scans.yaml)
+  # absente de Notion : identifiée sur les scans 2026-10-11_18_02 à 18_04 (registre imports/scans.yaml)
   # 戈說 : pièce personnelle en hommage à 山山, pour « horizontaliser les verticaux » et
-  # « verticaliser les horizontaux », deux des cinq points de sa méthode pour la cursive (竪橫) ;
-  # distincte de shu-heng-zhuo-an-npl, qui reste une idée
+  # « verticaliser les horizontaux », deux des cinq points de sa méthode pour la cursive (竪橫)
+  # la feuille ① 山竪橫 (18_01) est la couverture de shu-heng-zhuo-an, sa v1 (calligraphe, lot 5)
   # composition libre : 劑 porte 刀 au centre, 水 à gauche et 火 à droite ; 未 et 既 de part et
   # d'autre renvoient à 既濟 et à son complémentaire 未濟 (劑 et 濟 se lisent jì)
   - slug: shui-huo-tiao-ji
@@ -2749,11 +2879,10 @@ pieces:
     published: false
     versions:
       - id: v1
-        date: 2026-04-19 # date du papier : 19 4 26, sur 18_01 seule
-        format: 1x3 + 1x1 + 1x4 + 1x1
+        date: 2026-04-19 # même séance que 18_01, la couverture de shu-heng-zhuo-an, datée 19 4 26 (calligraphe)
+        format: "[(1x1, 1x4, 1x1)]" # une feuille, 18_02
         columns:
-          - 山竪橫 # feuille ① ; 山 en cursive en tête, hors grille ; 橫 tourné de 90° dans le sens trigonométrique
-          - 未 # feuille ②
+          - 未
           - 水火調劑 # 劑 en grand courant : 刀 au centre, 水 à gauche, 火 à droite
           - 既
         variations:
@@ -2761,11 +2890,7 @@ pieces:
             script: ziyou
             status: kept
             images:
-              # feuille ① : grille imprimée pâle 3x6 ; signé 戈, daté 19 4 26 ; « 8 » au rouge en bas à droite
-              - source: imports/scans/2026-10-11_18_01.jpeg
-                file: v1a-01.jpg
-                kind: work
-              # feuille ② : grille imprimée pâle ; trait rouge sur le 土 du 周 de 調, correction du
+              # grille imprimée pâle ; trait rouge sur le 土 du 周 de 調, correction du
               # calligraphe ; ni signature ni date
               - source: imports/scans/2026-10-11_18_02.jpeg
                 file: v1a-02.jpg

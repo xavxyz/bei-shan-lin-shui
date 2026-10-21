@@ -1,6 +1,6 @@
 # 中和集 — textes de référence
 
-Sept textes du 中和集 de 李道純 (元), traduits vers par vers pour choisir l'étendue des pièces du projet `zhong-he-ji` (lot 3 de #17). Le texte est celui du 正統道藏 sur zh.wikisource (`中和集`, `action=raw`), les leçons recoupées sur le 清庵先生中和集 de ctext ([res=3138576](https://ctext.org/wiki.pl?if=gb&res=3138576), images au `file=205666`).
+Neuf textes du 中和集 de 李道純 (元), traduits vers par vers pour choisir l'étendue des pièces du projet `zhong-he-ji` (lots 3 et 5 de #17). Le texte est celui du 正統道藏 sur zh.wikisource (`中和集`, `action=raw`), les leçons recoupées sur le 清庵先生中和集 de ctext ([res=3138576](https://ctext.org/wiki.pl?if=gb&res=3138576), images au `file=205666`).
 
 Le 《鍊虛歌》 n'y est pas : ses deux derniers vers sont les deux dernières colonnes de `xu-xin-shi-fu`.
 
@@ -467,3 +467,66 @@ Dans la source, le titre suit le poème : des colonnes de titre à gauche, aprè
 
 - **A, le format du plan, `1x7 + 4*(2x7)`** (63 caractères) : 龍虎歌勉旃勉旃 en titre, puis les vers 1 à 8 du chant. Le titre est celui de Notion, et ses sept caractères remplissent exactement la colonne de titre du cadre imprimé (`Cadre imprimé` dans Notion) ; mais il assemble le titre du chant et l'exhortation de la préface. Les vers 1-6 font le premier mouvement, sur une seule rime : on ne peut ni figurer le Dragon et le Tigre, ni s'en passer ; les vers 7-8 ouvrent le second par une définition négative qui tient seule. Variante plus nette : titre et vers 1-6, 7 colonnes.
 - **B, `3*(2x7) + 1x4`** (46 caractères) : le quatrain de la préface, la coda et 勉旃勉旃. L'étendue la plus autonome, de la réponse à l'exhortation ; mais la coupe en colonnes de 7 sépare 平地起 | 波濤, et présenter ces deux colonnes comme deux vers serait faux.
+
+## 8 — 《鑄劍》 · `zhu-jian-qing-chui`
+
+**Source :** 李道純, 《中和集》卷五「詩」(正統道藏), 15ᵉ des 述工夫十七首, entre 明本 et 蟾窟. Le titre suit le poème (« 右鑄劍 »). 七言律詩, rime 東 (鋒・功・風・雄・空). Graphie normalisée : 爲→為.
+
+| # | 原文 | traduction |
+| --- | --- | --- |
+| 1 | 明師授我鑄神鋒 | Un maître éclairé m'a appris à forger la lame divine ; |
+| 2 | 全藉陰陽造化功 | tout repose sur l'œuvre créatrice du yin et du yang. |
+| 3 | 鍛煉乾剛坤作冶 | Je forge et trempe la fermeté de 乾 ; 坤 sert de fonderie ; |
+| 4 | 吹噓離火巽為風 | j'attise en soufflant le feu de 離 ; 巽 fait le vent. |
+| 5 | 做成龍象心官巧 | Achevée, elle est « dragon-éléphant » : habileté du cœur, l'office qui gouverne ; |
+| 6 | 掃蕩妖氛志帥雄 | elle balaie les miasmes maléfiques : vaillance de la volonté, ce chef. |
+| 7 | 學道高人知此趣 | L'homme supérieur qui étudie la Voie connaît ce sens : |
+| 8 | 等閒劈碎太虛空 | d'un geste sans effort, il fend en éclats le grand vide. |
+
+- Les quatre trigrammes sont la forge : 乾 le métal, 坤 le creuset, 離 le feu, 巽 le vent du soufflet. En alchimie intérieure, le soufflet est la respiration.
+- **吹** n'apparaît qu'une fois dans tout le 中和集, au vers 4. 輕吹, du titre de Notion, n'est pas dans le livre : le souffle léger du soufflet, le feu doux (文火).
+- 龍象 : le dragon et l'éléphant, image bouddhique de la force de l'éveillé. 心官 vient de Mencius (心之官則思), 志帥 aussi (夫志，氣之帥也).
+- Le 《慧劍歌》 (section 4) ne contient ni 吹 ni 輕. Au 卷六, le 沁園春 《贈春谷清禪師》 dit : 把殺人手段，輕輕拈出，活人刀子，慢慢教看。一劍當空，萬緣俱掃.
+- Hors du livre, le 吹毛劍 du 禪 (碧巖錄, cas 100, 巴陵吹毛劍) : l'épée si tranchante qu'un cheveu soufflé contre le fil est coupé. Non collationné.
+
+➡️ Le poème entier, 8 vers.
+
+## 9 — 《卓菴》二首 · `shu-heng-zhuo-an`
+
+**Source :** 李道純, 《中和集》卷五「詩」(正統道藏), derniers poèmes du 卷五, après 詠藕二首. Le titre précède les poèmes (« 卓菴 / 二首 »). 卓菴, « dresser son ermitage ». Deux 五言律詩, rime 庚. Graphies normalisées : 靑→青, 爲→為, 卽→即, 淸→清 ; 菴 gardé.
+
+### Premier poème
+
+| #   | 原文          | traduction                                             |
+| --- | ------------- | ------------------------------------------------------ |
+| 1   | 擇盡虛無地    | J'ai choisi jusqu'au bout un sol de vide et de néant ; |
+| 2   | 因緣在玉京    | l'occasion en est à la Capitale de jade.               |
+| 3   | 築基須穩穩    | Poser la fondation : qu'elle soit bien stable ;        |
+| 4   | 立鼎要平平    | dresser le trépied : qu'il soit bien d'aplomb.         |
+| 5   | ➡️ 直豎須彌柱 | À la verticale, je dresse le pilier du mont Sumeru ;   |
+| 6   | ➡️ 橫安太極楹 | à l'horizontale, je pose la colonne du Faîte suprême.  |
+| 7   | 青天為蓋覆    | Le ciel bleu lui sert de toit ;                        |
+| 8   | 菴主樂無生    | le maître de l'ermitage se réjouit du non-né.          |
+
+- 築基 et 立鼎 sont aussi des termes de l'alchimie intérieure : « poser les fondations » du corps, « dresser le trépied » où l'élixir se cuit. L'ermitage est le corps.
+- 須彌 : le mont Sumeru, l'axe du monde bouddhique ; 太極 : le Faîte suprême, celui du taijiquan. Le distique unit les deux axes, bouddhique et taoïste.
+- 楹 est la colonne de façade d'une salle ; 橫安, « poser en travers », en fait par parallélisme la poutre du toit.
+- 豎 et 橫 sont aussi les noms du trait vertical et du trait horizontal de la calligraphie.
+- 玉京 : la capitale céleste du 道教 ; 無生 : le non-né du bouddhisme.
+
+### Second poème
+
+| #   | 原文          | traduction                                                     |
+| --- | ------------- | -------------------------------------------------------------- |
+| 1   | 大地刻教平    | La grande terre, je la fais tailler bien plane ;               |
+| 2   | 菴基即日成    | la base de l'ermitage est faite le jour même.                  |
+| 3   | 來山從丙入    | La montagne qui vient entre par 丙, le sud ;                   |
+| 4   | 去水放西行    | l'eau qui s'en va, je la laisse filer vers l'ouest.            |
+| 5   | 門戶全通達    | Portes et battants s'ouvrent de part en part ;                 |
+| 6   | 窗櫺透底明    | les croisillons des fenêtres laissent la clarté jusqu'au fond. |
+| 7   | ➡️ 菴中誰是伴 | Dans l'ermitage, qui me tient compagnie ?                      |
+| 8   | ➡️ 月白與風清 | La lune blanche et la brise pure.                              |
+
+- Les vers 3 et 4 posent l'ermitage selon le 風水 : la montagne d'où vient le souffle, l'eau qui s'écoule.
+
+➡️ Étendues candidates : 豎橫 et le distique 直豎須彌柱 / 橫安太極楹 ; le premier poème entier ; le distique final du second, 菴中誰是伴 / 月白與風清.

@@ -64,6 +64,8 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **Style libre** (自由) : Le sixième pas, créé par 山山 : l'écriture se transforme et reste lisible ; un caractère qui semble faux y est souvent seulement déplacé dans ses composantes. 山山 parle de danser sur la tête d'une aiguille.
 
+**方圓** : La méthode de 山山 : un caractère se place à la fois dans un carré et dans un rond. Pour la cursive, elle tient en cinq points, dont horizontaliser les verticaux et verticaliser les horizontaux (竪橫).
+
 ## Lieux
 
 **NPL** : Narbonne-Plage : le studio et la terrasse de gong fu du calligraphe, face à la Méditerranée. Le sigle s'écrit sur le papier, près de la signature.
