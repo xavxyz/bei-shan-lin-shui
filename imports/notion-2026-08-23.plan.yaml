@@ -1614,6 +1614,8 @@ pieces:
     projects:
       - qi-gong
     published: false
+    source:
+      work: "Qigong Meditation: Small Circulation"
     versions:
       - id: v1
         date: 2026-05-13

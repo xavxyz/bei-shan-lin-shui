@@ -77,7 +77,7 @@ Les autres textes connus. Le calligraphe a choisi l'étendue et la leçon sur le
 - `xing-qi-yu-pei-ming` 行氣玉佩銘 : le texte de 郭沫若, 幾 et 退, comme Yang Jwing-Ming (son 几 est le simplifié de 幾). Une v1 en A4 à la manière du jade, 36 caractères et les 重文 ＝ dans la case de leur caractère, `[(4x9)]`, avant le grand format (45x90 cm, sur le 修真後內外火候圖) d'une v2.
 - `pang-xie-feng-ci` 螃蟹諷刺 : le distique 眼前道路無經緯 / 皮裏春秋空黑黃 du 螃蟹詠 de 寶釵, puis 只是諷刺世人太毒了些, la fin du jugement des convives, `[(2x7, 1x10)]`. Le texte est le même dans le 庚辰本, les 程本 et l'édition courante (人民文學出版社), au 諷剌 du 程甲本 près, coquille de l'imprimé.
 - `diao-xi` 調息 et `diao-xin` 調心 : le livre est Yang Jwing-Ming, _Qigong Meditation: Small Circulation_, chapitre 4 (五調). Il n'y a pas de chaîne de trois vers comme pour 調身 ; Yang cite le 《性命圭旨》 (亨集). 調息 (4-3) : 以如來空空之心 / 合真人深深之息 / 則心息相依 / 息調心淨, `[(1x2, 4x7)]` ; la citation de 白玉蟾 qui ouvre le passage s'arrête à 只要凝神入氣穴, la phrase est du compilateur, d'après 晁迥 (宋), 《法藏碎金錄》 卷八. 調心 (4-4) : 身不動而心自安 / 心不動而神自守, après 沖妙云, `[(1x2, 2x7)]`. On cite la source, le 《性命圭旨》, pas d'auteur. Le titre à droite, en premier.
-- `diao-shen` 調身 : sa formule est de Yang (4-2), absente du 《性命圭旨》 ; aucune source classique trouvée.
+- `diao-shen` 調身 : sa formule est de Yang (4-2), absente du 《性命圭旨》 ; aucune source classique trouvée. Le livre est sa source, sans auteur, comme pour 調息 et 調心.
 
 ## Lot 5 — titres ambigus (6 pièces)
 
