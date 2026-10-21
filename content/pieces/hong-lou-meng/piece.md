@@ -39,5 +39,5 @@ versions:
       - id: v2a
         script: kaishu
         status: to-try
-published: false
+published: true
 ---

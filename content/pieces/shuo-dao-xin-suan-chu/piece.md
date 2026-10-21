@@ -24,5 +24,5 @@ translation: |-
   L'exagération n'en devient que plus vaine ;
   Du début à la fin, tout y semble rêvé,
   Mais ne vous gaussez pas de la folie humaine !
-published: false
+published: true
 ---

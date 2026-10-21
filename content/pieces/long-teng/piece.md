@@ -64,5 +64,5 @@ versions:
           - file: v1a-06.jpg
             kind: work
             capture: scan
-published: false
+published: true
 ---

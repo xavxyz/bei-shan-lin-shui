@@ -10,5 +10,5 @@ versions:
     date: 2026-02-16
     format: à préciser
     columns: [威而不猛, 和而不同]
-published: false
+published: true
 ---

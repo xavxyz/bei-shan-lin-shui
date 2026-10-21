@@ -7,5 +7,5 @@ versions:
     date: 2026-01-10
     format: 2* 2x4
     columns: [按指示做，聚精會神。注意放心，容忍鬆胯。]
-published: false
+published: true
 ---

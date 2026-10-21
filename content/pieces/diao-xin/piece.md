@@ -13,5 +13,5 @@ versions:
     date: 2026-03-05
     format: "[(1x2, 2x7)]"
     columns: [調心, 身不動而心自安, 心不動而神自守]
-published: false
+published: true
 ---

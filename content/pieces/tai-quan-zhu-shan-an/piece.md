@@ -47,5 +47,5 @@ versions:
           - file: v1a-07.jpg
             kind: context
             capture: photo
-published: false
+published: true
 ---

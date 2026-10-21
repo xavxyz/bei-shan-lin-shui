@@ -11,5 +11,5 @@ versions:
       - 面黃肌瘦子，看來有甚奇。分明喬眼孔，剛道絕聞知。
       - 勘破三千法，參同十七師。低頭叉手處，洩盡那些兒。 # 洩, variante de 泄 (Notion : 泄)
       - 中和集
-published: false
+published: true
 ---

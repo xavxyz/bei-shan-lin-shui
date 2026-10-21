@@ -16,5 +16,5 @@ versions:
       - 焦芽敗種
       - 坐井觀天
       - 磨磚成鏡
-published: false
+published: true
 ---

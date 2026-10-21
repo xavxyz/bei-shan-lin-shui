@@ -34,5 +34,5 @@ versions:
             capture: scan
             featured: true
 translation: La patience et la constance dans la progression. La vivacité et la précision dans l'action.
-published: false
+published: true
 ---

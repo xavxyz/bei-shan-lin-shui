@@ -27,5 +27,5 @@ versions:
           - file: v1a.jpg
             kind: work
             capture: scan
-published: false
+published: true
 ---

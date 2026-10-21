@@ -22,5 +22,5 @@ versions:
       - 魂魄不曾來入夢
       - 禪心已作沾泥絮 # chapitre 91 ; d'après 道潛 : 禪心已作沾泥絮，不逐春風上下狂
       - 莫向春風舞鷓鴣
-published: false
+published: true
 ---

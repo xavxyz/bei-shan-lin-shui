@@ -8,5 +8,5 @@ versions:
     date: 2026-03-28
     format: 1x2 + 1x9
     columns: [庖丁, 臣以神遇而不以目視]
-published: false
+published: true
 ---

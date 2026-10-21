@@ -36,5 +36,5 @@ versions:
       - id: v3a
         script: ziyou
         status: to-try
-published: false
+published: true
 ---

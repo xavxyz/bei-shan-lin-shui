@@ -16,5 +16,5 @@ versions:
       - 海書
       - 畫風
       - 三才二天一流
-published: false
+published: true
 ---

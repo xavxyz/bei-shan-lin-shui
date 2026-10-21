@@ -38,5 +38,5 @@ versions:
       - 真如福地
       - 無原有是有非無
       - 太虛幻境即是真如福地 # feuille 3
-published: false
+published: true
 ---

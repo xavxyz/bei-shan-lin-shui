@@ -62,5 +62,5 @@ versions:
           - file: v1b.jpg
             kind: work
             capture: scan
-published: false
+published: true
 ---

@@ -108,5 +108,5 @@ versions:
       - 悟者自得
       - 得悟道者
       - 常清靜矣
-published: false
+published: true
 ---

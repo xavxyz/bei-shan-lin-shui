@@ -21,5 +21,5 @@ versions:
       - 逍遙誰得知坐聽無弦曲明通造化機
       - 都來二十句端的上天梯
     intention: Une version A4, avant le grand format, 45x90 cm, qui recouvrira le 心性圖.
-published: false
+published: true
 ---

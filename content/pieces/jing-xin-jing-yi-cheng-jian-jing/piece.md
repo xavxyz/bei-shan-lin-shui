@@ -26,5 +26,5 @@ versions:
             kind: work
             capture: photo
             featured: true
-published: false
+published: true
 ---
