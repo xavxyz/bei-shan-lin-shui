@@ -8,9 +8,9 @@ Traduction de travail, faite par un agent : la traduction qui accompagne une pi�
 
 ## 行氣玉佩銘 · `xing-qi-yu-pei-ming`
 
-**Source :** prisme dodécagonal de jade vert (青玉) à taches gris-noir, creux, fermé en haut, percé d'un trou au bas d'une face ; environ 5,2–5,3 cm de haut pour 3,4–3,5 cm de diamètre. C'est un embout de canne (杖首) plutôt qu'un pendentif : le musée le nomme 行氣銘玉杖飾, et le nom de 行氣玉佩銘 (ou行氣玉銘) est resté par l'usage. Royaumes combattants : 郭沫若 le place au début de la période, 于省吾 à la fin des Zhou (晚周) ; la plupart des notices disent « fin des Royaumes combattants », Harper (1998) début du IIIᵉ siècle av. J.-C., Needham beaucoup plus haut. Estampage publié par 羅振玉,《三代吉金文存》 卷二十, p. 49 ; entré en 1953 au 天津市歷史博物館 (aujourd'hui天津博物館). **36 caractères gravés** en creux, en sigillaire de l'époque, **dont 9 portent la marque de répétition** 重文 (deux petits traits, `＝`, sous le caractère) : 蓄, 伸, 下, 定, 固, 萌, 長, 退, 天. Chaque marque se lit « ce caractère encore une fois » : le caractère clôt une proposition et ouvre la suivante (深則蓄＝則伸 → 深則蓄，蓄則伸). Développé, le texte compte donc **45 caractères** (36 + 9), le chiffre que donnent toutes les notices ; il n'a que 22 caractères distincts. Une notice (云起書院) compte 8 重文 : erreur, 36 + 8 ne fait pas 45.
+**Source :** prisme dodécagonal de jade vert (青玉) à taches gris-noir, creux, fermé en haut, percé d'un trou au bas d'une face ; environ 5,2–5,3 cm de haut pour 3,4–3,5 cm de diamètre. C'est un embout de canne (杖首) plutôt qu'un pendentif : le musée le nomme 行氣銘玉杖飾, et le nom de 行氣玉佩銘 (ou 行氣玉銘) est resté par l'usage. Royaumes combattants : 郭沫若 le place au début de la période, 于省吾 à la fin des Zhou (晚周) ; la plupart des notices disent « fin des Royaumes combattants », Harper (1998) début du IIIᵉ siècle av. J.-C., Needham beaucoup plus haut. Estampage publié par 羅振玉,《三代吉金文存》 卷二十, p. 49 ; entré en 1953 au 天津市歷史博物館 (aujourd'hui 天津博物館). **36 caractères gravés** en creux, en sigillaire de l'époque, **dont 9 portent la marque de répétition** 重文 (deux petits traits, `＝`, sous le caractère) : 蓄, 伸, 下, 定, 固, 萌, 長, 退, 天. Chaque marque se lit « ce caractère encore une fois » : le caractère clôt une proposition et ouvre la suivante (深則蓄＝則伸 → 深則蓄，蓄則伸). Développé, le texte compte donc **45 caractères** (36 + 9), le chiffre que donnent toutes les notices ; il n'a que 22 caractères distincts. Une notice (云起書院) compte 8 重文 : erreur, 36 + 8 ne fait pas 45.
 
-**Transcription retenue** (郭沫若, 1972–1973, reprise par wikisource et wikipedia) :
+**Transcription de 郭沫若** (1972–1973, reprise par wikisource et wikipedia) :
 
 > 行氣，深則蓄，蓄則伸，伸則下，下則定，定則固，固則萌，萌則長，長則退，退則天。天幾舂在上，地幾舂在下。順則生，逆則死。
 
@@ -19,7 +19,7 @@ Graphies : 蓄 (wikipedia : 畜（蓄）) ; 幾 et non 几 ; le texte n'emploie 
 **Divergences.** Des 22 caractères distincts, une dizaine sont discutés.
 
 - **深 / 吞** (1ᵉʳ verbe) : 郭沫若 lit 深 « profondément » ; 陳邦懷 (《戰國〈行氣玉銘〉考釋》) lit 吞 « avaler », et Harper (_Early Chinese Medical Literature_, 1998) le suit (« Swallow… »). Une recension lit aussi 實.
-- **蓄 / 畜** : même mot. Le graphe gravé est 畜, que tous lisent 蓄« amasser » ; wikipedia l'écrit 畜（蓄）. Pas une divergence de sens.
+- **蓄 / 畜** : même mot. Le graphe gravé est 畜, que tous lisent 蓄 « amasser » ; wikipedia l'écrit 畜（蓄）. Pas une divergence de sens.
 - **伸 / 神** : 郭沫若 lit 伸 « s'étendre » ; d'autres lisent 神 « devenir esprit » (attesté par wikisource et les recensions ; attribution précise non vérifiée).
 - **萌 / 明** : 郭沫若 萌 « germer » ; lecture 明 « s'éclairer » chez 陳邦懷 selon une recension de seconde main.
 - **退 / 復** : 郭沫若 退 « refluer » ; 陳邦懷 lit 復 « revenir » (長則復，復則天), la plus solidement attribuée des variantes.
@@ -46,7 +46,7 @@ Les lectures de 李零 (《中國方術考》) et le détail de celle de 于省�
 | ➡️ 順則生， | Qui suit (_shùn_ 順) ce cours vit (_shēng_ 生) ; |
 | ➡️ 逆則死。 | qui le prend à rebours (_nì_ 逆) meurt (_sǐ_ 死). |
 
-- Structure : neuf maillons en chaîne (A則B，B則C…), dix en comptant 行氣en titre, puis un distique parallèle 天…在上 / 地…在下, puis la sentence順則生 / 逆則死. La chaîne décrit un cycle : le souffle descend (下 定 固), puis remonte (萌 長) et revient au Ciel (退/復 則天). 郭沫若y lit « un tour de respiration profonde » ; la tradition du 氣功 y lit le petit circuit céleste (小周天), ce qui accorde la pièce à la planche du修真後內外火候圖 qu'elle doit recouvrir.
+- Structure : neuf maillons en chaîne (A則B，B則C…), dix en comptant 行氣 en titre, puis un distique parallèle 天…在上 / 地…在下, puis la sentence 順則生 / 逆則死. La chaîne décrit un cycle : le souffle descend (下 定 固), puis remonte (萌 長) et revient au Ciel (退/復 則天). 郭沫若 y lit « un tour de respiration profonde » ; la tradition du 氣功 y lit le petit circuit céleste (小周天), ce qui accorde la pièce à la planche du 修真後內外火候圖 qu'elle doit recouvrir.
 - 天其本在上，地其本在下 rappelle 《易·乾·文言》 本乎天者親上，本乎地者親下 : argument souvent avancé pour la lecture 本.
 
 ➡️ Étendue candidate : **l'inscription entière** (45 caractères développés, 36 sur l'objet). Le texte est court, d'un seul tenant, et sa chaîne n'a pas de coupure naturelle : en isoler une partie casserait le cycle. La seule alternative serait la sentence finale seule, 順則生，逆則死 (2x3).
@@ -70,7 +70,7 @@ Douze faces de trois caractères chacune, lues de haut en bas, face après face 
 | 11   | 順 則 生     |
 | 12   | 逆 則 死     |
 
-Ce découpage est reconstruit par le calcul (36 = 12 x 3, à partir de行) : il est à vérifier sur l'estampage du 《三代吉金文存》 avant de s'en servir. Pour la pièce, il donne un format naturel de **12 colonnes de 3**, avec les 重文 écrits comme sur l'objet — ce qui garde la chaîne lisible sans répéter le caractère — ou bien 45 caractères développés en colonnes de longueur variable, une proposition par colonne.
+Ce découpage est reconstruit par le calcul (36 = 12 x 3, à partir de 行) : il est à vérifier sur l'estampage du 《三代吉金文存》 avant de s'en servir. Pour la pièce, il donne un format naturel de **12 colonnes de 3**, avec les 重文 écrits comme sur l'objet — ce qui garde la chaîne lisible sans répéter le caractère — ou bien 45 caractères développés en colonnes de longueur variable, une proposition par colonne.
 
 ### Sources consultées
 

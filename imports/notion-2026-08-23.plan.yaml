@@ -1656,9 +1656,11 @@ pieces:
       url: ""
       relations:
         - 調身
-  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-4 (心息相依) ;
-  # 《性命圭旨》 亨集, 「蟄藏氣穴，眾妙歸根」, dans un passage ouvert par 按白玉蟾云 : la fin de la
-  # citation n'est pas marquée, le passage est de 白玉蟾 ou une glose du compilateur
+  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-3 (調息) ;
+  # 《性命圭旨》 亨集, 「蟄藏氣穴，眾妙歸根」 : la citation ouverte par 按白玉蟾云 s'arrête à
+  # 只要凝神入氣穴 (le 《丹髓歌》 de 白玉蟾) ; la suite est du compilateur, qui reprend en l'inversant
+  # 晁迥 (宋), 《法藏碎金錄》 卷八 : 似動不動真人深深之息，似用不用如來空空之心，心息相依，息調心浄 ;
+  # 心息相依，息調心淨 vient d'un commentaire du 圓覺經 (卷五)
   - slug: diao-xi
     title: 調息
     status: experiment
@@ -1666,7 +1668,6 @@ pieces:
       - qi-gong
     published: false
     source:
-      author: 白玉蟾
       work: 性命圭旨
     versions:
       - id: v1
@@ -1704,7 +1705,7 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-4 (五調) ;
+  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-4 (調心) ;
   # 《性命圭旨》 亨集, 「涵養本原，救護命寶」 : 沖妙云 (沖妙 est cité par le livre, il n'en est pas l'auteur)
   - slug: diao-xin
     title: 調心
@@ -1770,8 +1771,8 @@ pieces:
       relations:
         - مشكاة • MESHKAH
   # le distique central du 螃蟹詠 de 寶釵, puis la dernière phrase du jugement des convives,
-  # plus petite, comme un 款 ; texte du 人民文學出版社, le même dans les 程本 et le 庚辰本
-  # (docs/sources/pang-xie-yong.md)
+  # plus petite, comme un 款 ; le même texte dans le 庚辰本, l'édition courante (人民文學出版社) et
+  # les 程本, au 諷剌 du 程甲本 près, coquille de l'imprimé (docs/sources/pang-xie-yong.md)
   - slug: pang-xie-feng-ci
     title: 螃蟹諷刺 🦀
     status: idea
@@ -1788,7 +1789,7 @@ pieces:
         format: "[(2x7, 1x10)]"
         columns:
           - 眼前道路無經緯
-          - 皮裏春秋空黑黃
+          - 皮裏春秋空黑黃 # 裏, variante de 裡
           - 只是諷刺世人太毒了些
         variations: []
     notion:
@@ -1971,8 +1972,8 @@ pieces:
     projects: []
     published: false
     source:
-      work: 行氣玉佩銘
       dynasty: 戰國
+      work: 行氣玉佩銘
     versions:
       - id: v1
         date: 2026-03-29

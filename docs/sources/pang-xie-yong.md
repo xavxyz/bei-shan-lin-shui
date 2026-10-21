@@ -8,7 +8,7 @@ Trois éditions de zh.wikisource, `action=raw` ou `action=render` :
 - **程甲本** (1791) — `紅樓夢（程甲本）/三十八`, transcrit des fac-similés de la 國家圖書館.
 - **程乙本** (1792) — `紅樓夢（程乙本）/第三十一回　至第四十回`.
 
-Le texte retenu est celui du 庚辰本 ; les écarts des deux 程本 sont donnés poème par poème. Graphies normalisées : 裡→裏, 隂→陰, 膓→腸, 姜 (程乙, pour 薑) → 薑.
+Le texte donné est celui du 庚辰本 ; les écarts des deux 程本 sont donnés poème par poème. Graphies normalisées : 裡→裏, 隂→陰, 膓→腸, 姜 (程乙, pour 薑) → 薑.
 
 Traductions de travail, faites par des agents : la traduction qui accompagne une pièce s'écrit à la main. Les ➡️ marquent les étendues candidates ; l'étendue retenue est dans la pièce.
 
