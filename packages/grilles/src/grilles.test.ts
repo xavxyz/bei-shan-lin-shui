@@ -63,6 +63,30 @@ function printedSheets(html: string): Record<string, PrintedSheet[]> {
   return candidates;
 }
 
+/** Les traits du 九宮格 dans un rang, en carreaux depuis son coin haut gauche. */
+function jiugongIn(html: string, box: Box, cell: number) {
+  const lines = [
+    ...html
+      .split('class="jiugong"')[1]!
+      .split("</g>")[0]!
+      .matchAll(/x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"/g),
+  ]
+    .map(([, x1, y1, x2, y2]) => [+x1!, +y1!, +x2!, +y2!] as const)
+    .filter(([x1, , x2]) => x1 >= box.x - 0.01 && x2 <= box.x + box.width + 0.01);
+  return {
+    vertical: lines.filter(([x1, , x2]) => x1 === x2).map(([x]) => (x - box.x) / cell),
+    horizontal: lines.filter(([, y1, , y2]) => y1 === y2).map(([, y]) => (y - box.y) / cell),
+  };
+}
+
+/** Les cotes de la première feuille : chaque libellé, et où il est écrit. */
+function cotesOf(html: string) {
+  const cotes = html.split('class="cotes"')[1]!.split("</g>")[0]!;
+  return [...cotes.matchAll(/<text x="([\d.]+)" y="([\d.]+)"[^>]*>([^<]+)<\/text>/g)].map(
+    ([, x, y, label]) => ({ x: +x!, y: +y!, label: label! }),
+  );
+}
+
 const piece = (format: string, columns: string[]) => ({
   "content/pieces/shan-ju/piece.md": `---\n${stringify({
     title: "山居秋暝",
@@ -241,31 +265,38 @@ describe("les carreaux plus petits", () => {
   it("partagent en neuf chacun leur carreau, le 九宮格", async () => {
     const { html, sheets } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
     const [, verse] = sheets.A![0]!.ranks;
-    const cell = verse!.width;
-    const lines = [
-      ...html
-        .split('class="jiugong"')[1]!
-        .split("</g>")[0]!
-        .matchAll(/x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"/g),
-    ]
-      .map(([, x1, y1, x2, y2]) => [+x1!, +y1!, +x2!, +y2!] as const)
-      .filter(([x1, , x2]) => x1 >= verse!.x - 0.01 && x2 <= verse!.x + verse!.width + 0.01);
-    const vertical = lines.filter(([x1, , x2]) => x1 === x2).map(([x]) => x - verse!.x);
-    const horizontal = lines.filter(([, y1, , y2]) => y1 === y2).map(([, y]) => y - verse!.y);
-    expect(vertical.map((x) => x / cell)).toEqual([expect.closeTo(1 / 3), expect.closeTo(2 / 3)]);
+    const { vertical, horizontal } = jiugongIn(html, verse!, verse!.width);
+    expect(vertical).toEqual([expect.closeTo(1 / 3), expect.closeTo(2 / 3)]);
     expect(horizontal).toHaveLength(14);
-    expect(horizontal.slice(0, 3).map((y) => y / cell)).toEqual(
+    expect(horizontal.slice(0, 3)).toEqual(
       [1 / 3, 2 / 3, 4 / 3].map((third) => expect.closeTo(third)),
     );
   });
 
   it("cotent chaque groupe avec son carreau", async () => {
+    const { html, sheets } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
+    const [, verse] = sheets.A![0]!.ranks;
+    const labels = cotesOf(html).map((cote) => cote.label);
+    // en haut, le vers puis le mot ; à droite, le vers, le plus bas des deux
+    expect(labels).toContain("1 × 38.1");
+    expect(labels).toContain("1 × 76.3");
+    expect(labels).toContain(`7 × 38.1 = ${verse!.height.toFixed(1)}`);
+  });
+
+  it("cotent le long de son bord gauche un groupe moins haut que la cote de droite", async () => {
+    const { html, sheets } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
+    const [word] = sheets.A![0]!.ranks;
+    const cote = cotesOf(html).find(
+      (c) => c.label === `2 × ${word!.width.toFixed(1)} = ${word!.height.toFixed(1)}`,
+    );
+    expect(cote).toBeDefined();
+    expect(cote!.x).toBeLessThan(word!.x);
+    expect(cote!.x).toBeGreaterThan(word!.x - 10);
+  });
+
+  it("disent sous la feuille le carreau de chaque groupe plus petit", async () => {
     const { html } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
-    const cotes = html.split('class="cotes"')[1]!.split("</g>")[0]!;
-    // en haut, le vers puis le mot ; à droite, le vers, le plus haut des deux
-    expect(cotes).toContain(">1 × 38.1<");
-    expect(cotes).toContain(">1 × 76.3<");
-    expect(cotes).toContain(">7 × 38.1<");
+    expect(html).toContain("carreau 76.3 mm, 38.1 mm pour 1x7/2 vertical ·");
   });
 
   it("disent dans le résumé le carreau de la feuille, puis celui de chaque groupe plus petit", async () => {
@@ -354,20 +385,22 @@ describe("la mise en page sur A4", () => {
     expect(html).toContain(`colonnes à ${gap.toFixed(1)} mm sous le 橫批`);
   });
 
+  it("cote en millimètres un groupe de plusieurs colonnes, sans cumuler l'arrondi du carreau", async () => {
+    const { html, sheets } = await grids(piece("[(13x7)]", LONG_HU_GE), { slug: "shan-ju" });
+    const { ranks } = sheets.A![0]!;
+    const left = Math.min(...ranks.map((box) => box.x));
+    const right = Math.max(...ranks.map((box) => box.x + box.width));
+    expect(cotesOf(html).map((cote) => cote.label)).toContain(
+      `13 × ${ranks[0]!.width.toFixed(1)} = ${(right - left).toFixed(1)}`,
+    );
+  });
+
   it("partage chaque carreau en neuf, le 九宮格", async () => {
     const { html, sheets } = await grids(piece("[(1x3)]", LONG_HU_GE), { slug: "shan-ju" });
     const [column] = sheets.A![0]!.ranks;
-    const cell = column!.width;
-    const lines = [
-      ...html
-        .split('class="jiugong"')[1]!
-        .split("</g>")[0]!
-        .matchAll(/x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"/g),
-    ].map(([, x1, y1, x2, y2]) => [+x1!, +y1!, +x2!, +y2!] as const);
-    const vertical = lines.filter(([x1, , x2]) => x1 === x2).map(([x]) => x - column!.x);
-    const horizontal = lines.filter(([, y1, , y2]) => y1 === y2).map(([, y]) => y - column!.y);
-    expect(vertical.map((x) => x / cell)).toEqual([expect.closeTo(1 / 3), expect.closeTo(2 / 3)]);
-    expect(horizontal.map((y) => y / cell)).toEqual(
+    const { vertical, horizontal } = jiugongIn(html, column!, column!.width);
+    expect(vertical).toEqual([expect.closeTo(1 / 3), expect.closeTo(2 / 3)]);
+    expect(horizontal).toEqual(
       [1 / 3, 2 / 3, 4 / 3, 5 / 3, 7 / 3, 8 / 3].map((third) => expect.closeTo(third)),
     );
   });

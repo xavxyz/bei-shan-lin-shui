@@ -229,6 +229,12 @@ export type RankBox = {
   cell: number;
 };
 
+/** Largeur et hauteur d'un rang posé, en millimètres. */
+export const rankSize = (box: RankBox) =>
+  box.orientation === "v"
+    ? { width: box.cell, height: box.cell * box.length }
+    : { width: box.cell * box.length, height: box.cell };
+
 export type SheetLayout = {
   orientation: "portrait" | "landscape";
   width: number;
