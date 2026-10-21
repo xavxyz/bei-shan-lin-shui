@@ -16,6 +16,8 @@ type PrintedSheet = {
   ranks: Box[];
   /** Le texte de chaque rang : une colonne lue de haut en bas, une ligne de droite à gauche. */
   text: string[];
+  /** La taille des caractères du modèle dans chaque rang, en millimètres. */
+  sizes: number[][];
 };
 
 const inside = (glyph: { x: number; y: number }, box: Box) =>
@@ -36,19 +38,26 @@ function printedSheets(html: string): Record<string, PrintedSheet[]> {
         ]
           .map(([, x, y, w, h]) => ({ x: +x!, y: +y!, width: +w!, height: +h! }))
           .sort((a, b) => b.x + b.width - (a.x + a.width) || a.y - b.y);
-        const glyphs = [
-          ...figure
-            .split('class="characters"')[1]!
-            .matchAll(/<text x="([\d.]+)" y="([\d.]+)">(.)<\/text>/gu),
-        ].map(([, x, y, character]) => ({ x: +x!, y: +y!, character: character! }));
-        const text = ranks.map((box) =>
+        const glyphs = figure
+          .split('class="characters"')
+          .slice(1)
+          .flatMap((group) => {
+            const size = Number(/font-size="([\d.]+)"/.exec(group)![1]);
+            return [...group.matchAll(/<text x="([\d.]+)" y="([\d.]+)">(.)<\/text>/gu)].map(
+              ([, x, y, character]) => ({ x: +x!, y: +y!, character: character!, size }),
+            );
+          });
+        const inRank = (box: Box) =>
           glyphs
             .filter((glyph) => inside(glyph, box))
-            .sort((a, b) => (box.height >= box.width ? a.y - b.y : b.x - a.x))
+            .sort((a, b) => (box.height >= box.width ? a.y - b.y : b.x - a.x));
+        const text = ranks.map((box) =>
+          inRank(box)
             .map((glyph) => glyph.character)
             .join(""),
         );
-        return { width: width!, height: height!, ranks, text };
+        const sizes = ranks.map((box) => [...new Set(inRank(box).map((glyph) => glyph.size))]);
+        return { width: width!, height: height!, ranks, text, sizes };
       });
   }
   return candidates;
@@ -186,6 +195,69 @@ describe("le groupe horizontal", () => {
     );
     expect(summary).toContain(
       "feuille 1 · portrait · carreau 38.1 mm · 2 colonnes · 14 caractères",
+    );
+  });
+});
+
+describe("les carreaux plus petits", () => {
+  const KU_LIAN = ["苦煉", "寶劍鋒從磨礪出"];
+
+  it("font un groupe /k de carreaux k fois plus petits, aligné en haut, un demi-carreau de la feuille plus loin", async () => {
+    const { sheets } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
+    const [word, verse] = sheets.A![0]!.ranks;
+    // 2 carreaux de large (1, ½ d'écart, ½), 3,5 de haut (7 × ½) : 267 mm / 3,5
+    expect(word!.width).toBeCloseTo(76.3, 1);
+    expect(word!.height).toBeCloseTo(2 * 76.3, 0);
+    expect(verse!.width).toBeCloseTo(76.3 / 2, 1);
+    expect(verse!.height).toBeCloseTo((7 * 76.3) / 2, 0);
+    expect(verse!.y).toBeCloseTo(word!.y, 1);
+    expect(word!.x - (verse!.x + verse!.width)).toBeCloseTo(76.3 / 2, 1);
+    expect(sheets.A![0]!.text).toEqual(KU_LIAN);
+  });
+
+  it("donnent au modèle la taille de leur carreau", async () => {
+    const { sheets } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
+    const [word, verse] = sheets.A![0]!.sizes;
+    // 0,78 de 267 / 3,5 mm, puis de sa moitié
+    expect(word).toEqual([59.5]);
+    expect(verse).toEqual([29.75]);
+  });
+
+  it("mesurent un 橫批 /k avec ses carreaux, les colonnes pendant un demi-carreau de la feuille sous lui", async () => {
+    const { sheets } = await grids(
+      piece("[(1x7, 1x4h/2, 1x7)]", ["假作真時真亦假", "太虛幻境", "無為有處有還無"]),
+      { slug: "shan-ju" },
+    );
+    const [right, lintel, left] = sheets.A![0]!.ranks;
+    const cell = right!.width;
+    expect(lintel!.height).toBeCloseTo(cell / 2, 1);
+    expect(lintel!.width).toBeCloseTo(2 * cell, 1);
+    expect(right!.y - (lintel!.y + lintel!.height)).toBeCloseTo(cell / 2, 1);
+    expect(left!.y).toBeCloseTo(right!.y, 1);
+    expect(right!.x - (lintel!.x + lintel!.width)).toBeCloseTo(cell / 2, 1);
+    expect(sheets.A![0]!.text).toEqual(["假作真時真亦假", "太虛幻境", "無為有處有還無"]);
+  });
+
+  it("disent dans le résumé le carreau de la feuille, puis celui de chaque groupe plus petit", async () => {
+    const { summary } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
+    expect(summary).toContain(
+      "feuille 1 · portrait · carreau 76.3 mm · 1x2 vertical, 1x7/2 vertical (38.1 mm) · 9 caractères",
+    );
+  });
+
+  it("refusent un rapport plus petit que 1, et une feuille dont aucun groupe n'a le carreau de la feuille", async () => {
+    const refusal = async (format: string) => {
+      const result = await generateGrids({
+        root: await writeTree(piece(format, KU_LIAN)),
+        slug: "shan-ju",
+      });
+      return !result.ok && result.message;
+    };
+    expect(await refusal("[(1x2, 1x7/0.5)]")).toContain(
+      "« [(1x2, 1x7/0.5)] » — rapport « /0.5 » plus petit que 1, attendu un carreau plus petit que celui de la feuille à la position 11",
+    );
+    expect(await refusal("[(1x2), (1x2/2, 1x7/2)]")).toContain(
+      "« [(1x2), (1x2/2, 1x7/2)] » — aucun groupe au carreau de la feuille à la position 8",
     );
   });
 });

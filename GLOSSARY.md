@@ -20,7 +20,9 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **Modèle** : Les caractères de la pièce imprimés dans la grille, toujours en régulier (楷書), dans le 體 choisi pour la grille. Ce n'est pas l'œuvre : le calligraphe écrit par-dessus dans le style de sa variation, et le courant comme le cursif restent son propre travail. Le modèle s'affiche, s'efface en calque, ou se masque. _À éviter_ : police, gabarit
 
-**Format** : La disposition des colonnes d'une version sur ses feuilles, notée `[(1x3, 9x7), (1x4, 3x7)]` : une parenthèse par feuille, et dans chacune ses groupes de N colonnes de M caractères ; suffixé `h`, un groupe est fait de lignes horizontales, comme le 橫批 de `[(1x7, 1x4h, 1x7)]`. Un **format candidat** est un format mis en grille pour être comparé à d'autres avant d'écrire. _À éviter_ : variante (pour un format candidat)
+**Format** : La disposition des colonnes d'une version sur ses feuilles, notée `[(1x3, 9x7), (1x4, 3x7)]` : une parenthèse par feuille, et dans chacune ses groupes de N colonnes de M caractères ; suffixé `h`, un groupe est fait de lignes horizontales, comme le 橫批 de `[(1x7, 1x4h, 1x7)]` ; suffixé `/k`, ses carreaux sont k fois plus petits que ceux de la feuille, comme le vers de `[(1x2, 1x7/2)]` qui explique le mot. Un **format candidat** est un format mis en grille pour être comparé à d'autres avant d'écrire. _À éviter_ : variante (pour un format candidat)
+
+**Carreau** : La case de la grille qui reçoit un caractère. Sur une feuille, chaque groupe a son carreau : celui de la feuille, le plus grand qui tient sur la page, ou un carreau plus petit, pour un texte qui en explique un autre. _À éviter_ : case, cellule
 
 ## Personnes
 

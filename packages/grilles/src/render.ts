@@ -36,19 +36,27 @@ const plural = (count: number, word: string) => `${count} ${word}${count > 1 ? "
 
 /**
  * Les groupes d'une feuille : `10 colonnes` quand tous sont verticaux, sinon
- * chacun avec son orientation, `1x7 vertical, 1x4 horizontal, 1x7 vertical`.
+ * chacun avec son orientation, `1x7 vertical, 1x4 horizontal, 1x7 vertical`,
+ * et son carreau s'il est plus petit que celui de la feuille,
+ * `1x2 vertical, 1x7/2 vertical (38.1 mm)`.
  */
-const groupsLine = (groups: Sheet) =>
-  groups.every((group) => group.orientation === "v")
+const groupsLine = (groups: Sheet, cell: number) =>
+  groups.every((group) => group.orientation === "v" && group.scale === 1)
     ? plural(
         groups.reduce((sum, group) => sum + group.ranks, 0),
         "colonne",
       )
-    : groups.map(groupLabel).join(", ");
+    : groups
+        .map((group) =>
+          group.scale === 1
+            ? groupLabel(group)
+            : `${groupLabel(group)} (${(cell / group.scale).toFixed(1)} mm)`,
+        )
+        .join(", ");
 
 /** La ligne d'une feuille, dans la commande et sous la feuille. */
 export const sheetLine = (sheet: SheetSummary, index: number) =>
-  `feuille ${index + 1} · ${ORIENTATIONS[sheet.orientation]} · carreau ${sheet.cell.toFixed(1)} mm · ${groupsLine(sheet.groups)} · ${sheet.characters} caractères`;
+  `feuille ${index + 1} · ${ORIENTATIONS[sheet.orientation]} · carreau ${sheet.cell.toFixed(1)} mm · ${groupsLine(sheet.groups, sheet.cell)} · ${sheet.characters} caractères`;
 
 /** Ce que la commande dit de chaque format candidat, et ce que la page affiche sous ses feuilles. */
 export function describeCandidate(candidate: Candidate): {
@@ -102,10 +110,12 @@ const mm = (value: number) => Number(value.toFixed(2));
  * bord droit.
  */
 function renderSheet(layout: SheetSummary, texts: string[], index: number): string {
-  const { width, height, cell } = layout;
+  const { width, height } = layout;
   const strokes: string[] = [];
-  const glyphs: string[] = [];
+  /** Les caractères du modèle par carreau : chacun à 0,78 du carreau de son rang. */
+  const glyphs = new Map<number, string[]>();
   layout.ranks.forEach((box, r) => {
+    const { cell } = box;
     const vertical = box.orientation === "v";
     const [w, h] = vertical ? [cell, cell * box.length] : [cell * box.length, cell];
     strokes.push(`<rect x="${mm(box.x)}" y="${mm(box.y)}" width="${mm(w)}" height="${mm(h)}"/>`);
@@ -122,16 +132,23 @@ function renderSheet(layout: SheetSummary, texts: string[], index: number): stri
       const [x, y] = vertical
         ? [box.x + cell / 2, box.y + (k + 0.5) * cell]
         : [box.x + w - (k + 0.5) * cell, box.y + cell / 2];
-      glyphs.push(`<text x="${mm(x)}" y="${mm(y)}">${escape(character)}</text>`);
+      const text = `<text x="${mm(x)}" y="${mm(y)}">${escape(character)}</text>`;
+      glyphs.set(cell, [...(glyphs.get(cell) ?? []), text]);
     });
   });
+  const characters = [...glyphs]
+    .map(
+      ([cell, texts]) =>
+        `<g class="characters" font-size="${mm(cell * 0.78)}">${texts.join("")}</g>`,
+    )
+    .join("");
   const band = layout.inscription;
   return `
     <figure class="sheet ${layout.orientation}">
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}mm" height="${height}mm" viewBox="0 0 ${width} ${height}">
         <text class="inscription" x="${mm(band.x + band.width / 2)}" y="${mm(band.y + 4)}" font-size="5">落款</text>
         <g class="grid">${strokes.join("")}</g>
-        <g class="characters" font-size="${mm(cell * 0.78)}">${glyphs.join("")}</g>
+        ${characters}
       </svg>
       <figcaption>${sheetLine(layout, index)}</figcaption>
     </figure>`;
