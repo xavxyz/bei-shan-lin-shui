@@ -1354,7 +1354,7 @@ pieces:
       # était la feuille ① (registre imports/scans.yaml)
       - id: v1
         date: 2026-04-19 # date du papier : 19 4 26 (Notion disait 2026-02-11)
-        format: 1x3
+        format: "[(1x3)]"
         columns:
           - 山竪橫 # 山 en cursive en tête, hors grille ; 竪, variante de 豎 ; 橫 tourné de 90° dans le sens trigonométrique
         variations:
@@ -2195,7 +2195,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-04-05
-        format: 2x5
+        format: "[(2x5)]"
         columns:
           - 神行即氣行
           - 神住即氣住
@@ -2880,7 +2880,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-04-19 # même séance que 18_01, la couverture de shu-heng-zhuo-an, datée 19 4 26 (calligraphe)
-        format: 1x1 + 1x4 + 1x1
+        format: "[(1x1, 1x4, 1x1)]" # une feuille, 18_02
         columns:
           - 未
           - 水火調劑 # 劑 en grand courant : 刀 au centre, 水 à gauche, 火 à droite

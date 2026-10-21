@@ -84,7 +84,7 @@ Les titres ambigus, sur la lecture du calligraphe. Sources gardées en référen
 - `bao-yu-si-shou-shi-…` devient `bao-yu-si-lu` 寶玉四律 · 省親 : les quatre 五律 du chapitre 18, dont 杏帘在望, écrit par 黛玉 pour lui ; les 即事詩 du chapitre 23 sont des 七律. Dans le projet `hong-lou-meng`.
 - `zhan-hua-ming-er` 占花名兒 : les huit fiches du chapitre 63, chacune sa devise et son vers ; qui la tire et sa fleur vont dans la colonne de signature.
 - `hu-si-luan-xiang` 胡思亂想 : les deux distiques qui l'entourent, la rêverie (悠悠生死別經年 / 魂魄不曾來入夢, chapitre 109, du 《長恨歌》) puis sa réponse (禪心已作沾泥絮 / 莫向春風舞鷓鴣, chapitre 91, d'après 道潛), `[(1x4, 2x7, 2x7)]`.
-- `tai-xi` 胎息 : 神行即氣行 / 神住即氣住, le seul 5+5 du 《胎息經》 et le plus ancien des candidats, 氣 du 道藏 et 即, `2x5`. Dans le projet `qi-gong`.
+- `tai-xi` 胎息 : 神行即氣行 / 神住即氣住, le seul 5+5 du 《胎息經》 et le plus ancien des candidats, 氣 du 道藏 et 即, `[(2x5)]`. Dans le projet `qi-gong`.
 - `zhu-jian-qing-chui` 鑄劍 // 輕吹 : le 《鑄劍》 du 中和集 en entier. 輕吹 est le souffle léger du soufflet, le feu doux, d'après 吹噓離火巽為風 ; il n'est pas dans le livre.
 - `shu-heng-zhuo-an-npl` devient `shu-heng-zhuo-an` 豎橫 《卓菴》, `made` : la v1 est la couverture 山竪橫 en style libre, le scan `2026-10-11_18_01`, prise jusque-là pour la feuille ① de `shui-huo-tiao-ji`, qui garde la date du 2026-04-19, même séance. La v2, une idée : 豎橫, puis 直豎須彌柱 / 橫安太極楹, du premier 《卓菴》. NPL passe dans son `intention` : le studio-atelier face à la mer. 豎 et 橫 sont aussi les traits de la méthode de 山山 : le lien avec 方圓, défini au glossaire. Ses cinq points : #55.
 
