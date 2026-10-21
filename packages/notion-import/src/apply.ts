@@ -1,8 +1,15 @@
 import { mkdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import sharp from "sharp";
-import { stringify } from "yaml";
-import { imageEntry, variationEntry, versionEntry } from "@bsls/authoring/editing";
+import {
+  commentsUnder,
+  imageEntry,
+  toYaml,
+  variationEntry,
+  versionEntry,
+  type NodeComment,
+  type NodePath,
+} from "@bsls/authoring/editing";
 import { PIECES_DIR, pieceFile, pieceImageFile, projectFile } from "@bsls/content";
 import { RESERVED_PROJECT_ID, pieceFrontmatterSchema } from "@bsls/schema";
 import { normalizeImage } from "@bsls/scans";
@@ -13,7 +20,11 @@ export type ApplyError = { path: string; message: string };
 
 export type ApplyResult = { ok: true; written: string[] } | { ok: false; errors: ApplyError[] };
 
-export type ApplyOptions = { contentRoot: string };
+export type ApplyOptions = {
+  contentRoot: string;
+  /** Les commentaires du texte du plan, quand il en a un : ils suivent leur pièce. */
+  comments?: NodeComment[];
+};
 
 /**
  * Applique un plan arbitré : écrit les pièces, les projets et les images.
@@ -40,15 +51,19 @@ export async function applyImport(
 
     const written: string[] = [];
 
-    for (const project of plan.projects) {
+    const commentsOf = (entry: NodePath) => entryComments(options.comments ?? [], entry);
+
+    for (const [index, project] of plan.projects.entries()) {
       const file = projectFile(project.id);
-      await write(join(options.contentRoot, file), stringify(toProjectFile(project)));
+      const text = toYaml(toProjectFile(project), { comments: commentsOf(["projects", index]) });
+      await write(join(options.contentRoot, file), text);
       written.push(file);
     }
 
-    for (const piece of plan.pieces) {
+    for (const [index, piece] of plan.pieces.entries()) {
       const file = pieceFile(piece.slug);
-      await write(join(options.contentRoot, file), toMarkdown(piece));
+      const frontmatter = toYaml(toFrontmatter(piece), { comments: commentsOf(["pieces", index]) });
+      await write(join(options.contentRoot, file), `---\n${frontmatter}---\n`);
       written.push(file);
     }
 
@@ -214,6 +229,7 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
     slug: piece.slug,
     ...(piece.projects.length > 0 ? { projects: piece.projects } : {}),
     status: piece.status,
+    ...(piece.source ? { source: piece.source } : {}),
     /* Les versions telles que le plan les porte, dans son ordre : rien n'est réorganisé. */
     versions: piece.versions.map((version) =>
       versionEntry(
@@ -241,10 +257,16 @@ function toProjectFile(project: PlannedProject): Record<string, unknown> {
   };
 }
 
-function toMarkdown(piece: PlannedPiece): string {
-  const frontmatter = stringify(toFrontmatter(piece), { lineWidth: 0, blockQuote: "literal" });
-  return `---\n${frontmatter}---\n`;
+/**
+ * Les commentaires que le plan posait sur une entrée, à reporter aux mêmes
+ * endroits du fichier écrit. Le contexte Notion reste au plan, ses
+ * commentaires avec lui.
+ */
+function entryComments(comments: NodeComment[], entry: NodePath): NodeComment[] {
+  return commentsUnder(comments, entry).filter((comment) => comment.path[0] !== NOTION_KEY);
 }
+
+const NOTION_KEY = "notion";
 
 async function write(path: string, contents: string): Promise<void> {
   await mkdir(join(path, ".."), { recursive: true });

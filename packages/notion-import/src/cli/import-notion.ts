@@ -104,7 +104,7 @@ async function apply(target: string, options: Options): Promise<number> {
   }
 
   const contentRoot = resolve(options.content ?? "content");
-  const result = await applyImport(parsed.plan, { contentRoot });
+  const result = await applyImport(parsed.plan, { contentRoot, comments: parsed.comments });
   if (!result.ok) {
     process.stderr.write(`import refusé, rien n'a été écrit :\n${format(result.errors)}\n`);
     return 1;

@@ -1,4 +1,5 @@
 import { Document, isCollection, parseDocument } from "yaml";
+import { collectComments, type NodeComment } from "@bsls/authoring/editing";
 import {
   imageSchema,
   versionIdSchema,
@@ -16,7 +17,8 @@ import type { ImportPlan, ImportWarning } from "./propose.js";
  * Le plan d'import : ce que l'agent propose, sur le disque, avant que rien ne
  * soit écrit dans le contenu. Le calligraphe le relit, corrige un statut, un
  * classement, un texte, puis le fait appliquer. Les avertissements y sont des
- * commentaires : ils guident la relecture et disparaissent à l'application.
+ * commentaires ; ceux qui restent après l'arbitrage suivent leur pièce dans le
+ * contenu.
  */
 
 /*
@@ -56,6 +58,7 @@ const plannedPieceSchema = pieceFieldsSchema
     title: true,
     status: true,
     projects: true,
+    source: true,
     published: true,
     translation: true,
   })
@@ -83,7 +86,9 @@ export type PlannedPiece = z.infer<typeof plannedPieceSchema>;
 export type PlannedProject = z.infer<typeof plannedProjectSchema>;
 
 export type PlanError = { path: string; message: string };
-export type ParseResult = { ok: true; plan: ArbitratedPlan } | { ok: false; errors: PlanError[] };
+/** Les commentaires ne sont pas des champs : ils voyagent à côté du plan, par chemin. */
+export type ParseResult =
+  { ok: true; plan: ArbitratedPlan; comments: NodeComment[] } | { ok: false; errors: PlanError[] };
 
 const HEADER = [
   " Plan d'import Notion — proposé par l'agent, arbitré par le calligraphe.",
@@ -144,5 +149,5 @@ export function parsePlan(text: string): ParseResult {
     };
   }
 
-  return { ok: true, plan: parsed.data };
+  return { ok: true, plan: parsed.data, comments: collectComments(document) };
 }
