@@ -1,6 +1,6 @@
 # Plan Notion — à arbitrer
 
-État au 2026-10-21, après le lot 4. Le plan `notion-2026-08-23.plan.yaml` porte 92 pièces et 12 projets ; il reste **40** `# à arbitrer`, sur 14 pièces et les 12 projets. Les 78 autres pièces, dont les 37 qui ont un scan, n'ont plus rien à arbitrer. Le suivi se fait par les `# à arbitrer` du plan : ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
+État au 2026-10-21, après le lot 5. Le plan `notion-2026-08-23.plan.yaml` porte 92 pièces et 12 projets ; il reste **34** `# à arbitrer`, sur 8 pièces et les 12 projets. Les 84 autres pièces, dont les 38 qui ont un scan, n'ont plus rien à arbitrer. Le suivi se fait par les `# à arbitrer` du plan : ce fichier les résume, lot par lot, et disparaît avec le plan (#17).
 
 Un lot commence par ce fichier seul : l'issue #17 et les PR des lots précédents n'apprennent rien de plus, sauf doute sur une décision numérotée.
 
@@ -65,8 +65,6 @@ Le titre renvoie au texte du 中和集 de 李道純 ; le calligraphe a choisi l'
 
 Leçons douteuses non tranchées, hors des étendues retenues : 野雲翕 (翁 ?), 部天地 (剖 ?), 誰敢覬 (覷 ?), et dans le `full_text` du 龍虎歌 以卸天 (御), 束齊 (齋), 進開頂顧門 (迸開頂顖門 ?), 平地起，波濤.
 
-Pour le lot 5 : le 述工夫十七首 contient un 《鑄劍》, qui éclaire peut-être `zhu-jian-qing-chui`.
-
 ## Lot 4 — fait
 
 Les autres textes connus. Le calligraphe a choisi l'étendue et la leçon sur les textes traduits vers par vers, gardés en référence dans `docs/sources/` : `qing-jing-jing.md`, `xing-qi-yu-pei-ming.md`, `bai-zi-bei.md`, `pang-xie-yong.md`.
@@ -79,16 +77,16 @@ Les autres textes connus. Le calligraphe a choisi l'étendue et la leçon sur le
 - `diao-xi` 調息 et `diao-xin` 調心 : le livre est Yang Jwing-Ming, _Qigong Meditation: Small Circulation_, chapitre 4 (五調). Il n'y a pas de chaîne de trois vers comme pour 調身 ; Yang cite le 《性命圭旨》 (亨集). 調息 (4-3) : 以如來空空之心 / 合真人深深之息 / 則心息相依 / 息調心淨, `[(1x2, 4x7)]` ; la citation de 白玉蟾 qui ouvre le passage s'arrête à 只要凝神入氣穴, la phrase est du compilateur, d'après 晁迥 (宋), 《法藏碎金錄》 卷八. 調心 (4-4) : 身不動而心自安 / 心不動而神自守, après 沖妙云, `[(1x2, 2x7)]`. On cite la source, le 《性命圭旨》, pas d'auteur. Le titre à droite, en premier.
 - `diao-shen` 調身 : sa formule est de Yang (4-2), absente du 《性命圭旨》 ; aucune source classique trouvée. Le livre est sa source, sans auteur, comme pour 調息 et 調心.
 
-## Lot 5 — titres ambigus (6 pièces)
+## Lot 5 — fait
 
-La lecture du calligraphe d'abord :
+Les titres ambigus, sur la lecture du calligraphe. Sources gardées en référence : `hong-lou-meng.md` (sections 5 à 7), `zhong-he-ji.md` (sections 8 et 9), `tai-xi.md`.
 
-- **`bao-yu-si-shou-shi-…`** : les quatre 即事詩 de 寶玉 sont des 七律, le titre dit 五言律詩.
-- **`zhan-hua-ming-er`** : quelles fiches du jeu (chapitre 63) ?
-- **`hu-si-luan-xiang`** : `4 + 2x7`, quel distique ?
-- **`tai-xi`** : 胎息 en `2x5`, le texte dépasse le titre.
-- **`zhu-jian-qing-chui`** : 鑄劍 // 輕吹.
-- **`shu-heng-zhuo-an-npl`** : 豎橫 《卓菴》 NPL. 《卓菴》 est un poème du 中和集 (卷五) ; 豎橫 vient de 直豎須彌柱，橫安太極楹. Et NPL ?
+- `bao-yu-si-shou-shi-…` devient `bao-yu-si-lu` 寶玉四律 · 省親 : les quatre 五律 du chapitre 18, dont 杏帘在望, écrit par 黛玉 pour lui ; les 即事詩 du chapitre 23 sont des 七律. Dans le projet `hong-lou-meng`.
+- `zhan-hua-ming-er` 占花名兒 : les huit fiches du chapitre 63, chacune sa devise et son vers ; qui la tire et sa fleur vont dans la colonne de signature.
+- `hu-si-luan-xiang` 胡思亂想 : les deux distiques qui l'entourent, la rêverie (悠悠生死別經年 / 魂魄不曾來入夢, chapitre 109, du 《長恨歌》) puis sa réponse (禪心已作沾泥絮 / 莫向春風舞鷓鴣, chapitre 91, d'après 道潛), `[(1x4, 2x7, 2x7)]`.
+- `tai-xi` 胎息 : 神行即氣行 / 神住即氣住, le seul 5+5 du 《胎息經》 et le plus ancien des candidats, 氣 du 道藏 et 即, `2x5`. Dans le projet `qi-gong`.
+- `zhu-jian-qing-chui` 鑄劍 // 輕吹 : le 《鑄劍》 du 中和集 en entier. 輕吹 est le souffle léger du soufflet, le feu doux, d'après 吹噓離火巽為風 ; il n'est pas dans le livre.
+- `shu-heng-zhuo-an-npl` devient `shu-heng-zhuo-an` 豎橫 《卓菴》, `made` : la v1 est la couverture 山竪橫 en style libre, le scan `2026-10-11_18_01`, prise jusque-là pour la feuille ① de `shui-huo-tiao-ji`, qui garde la date du 2026-04-19, même séance. La v2, une idée : 豎橫, puis 直豎須彌柱 / 橫安太極楹, du premier 《卓菴》. NPL passe dans son `intention` : le studio-atelier face à la mer. 豎 et 橫 sont aussi les traits de la méthode de 山山 : le lien avec 方圓, défini au glossaire. Ses cinq points : #55.
 
 ## Lot 6 — formats et notes (9 pièces)
 

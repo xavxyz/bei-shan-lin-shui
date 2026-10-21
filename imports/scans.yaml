@@ -448,10 +448,10 @@ scans:
 
   - file: 2026-10-11_18_01.jpeg
     read: [山竪橫]
-    match: shui-huo-tiao-ji # absente de Notion, projet xian-xian-ji
+    match: shu-heng-zhuo-an # la couverture, sa v1 (calligraphe, lot 5 du plan) ; d'abord prise pour la feuille ① de shui-huo-tiao-ji
     confidence: high
     script: ziyou
-    variation: v1a # feuille ① (v1a-01) ; dans le plan
+    variation: v1a # image mise en avant ; dans le plan
     # 山 en cursive en tête, hors grille ; 竪, puis 橫 tourné de 90° dans le sens
     # trigonométrique (lu d'abord 心 / 臨菓, puis 以益黃) ; lishu proposé d'abord, hors
     # vocabulaire ; signé 戈, daté 19 4 26 → 2026-04-19 ; « 8 » rouge ; posée sur 18_02
@@ -461,7 +461,7 @@ scans:
     match: shui-huo-tiao-ji
     confidence: high
     script: ziyou
-    variation: v1a # feuille ② (v1a-02), image mise en avant ; dans le plan
+    variation: v1a # v1a-02, image mise en avant ; dans le plan
     # composition libre : 劑 en grand courant, 刀 au centre, 水 à gauche, 火 à droite ;
     # 未 / 既 de part et d'autre : 未濟 / 既濟 ; trait rouge sur le 土 du 周 de 調,
     # correction du calligraphe ; ni signature ni date
