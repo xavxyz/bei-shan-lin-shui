@@ -10,16 +10,19 @@
 /** `v` : des colonnes, le défaut ; `h` : des lignes. */
 export type Orientation = "v" | "h";
 
-/** `NxM` : N rangs de M caractères. */
-export type Group = { ranks: number; length: number; orientation: Orientation };
+/**
+ * `NxM` : N rangs de M caractères. `NxM/k` : des carreaux k fois plus petits
+ * que ceux de la feuille ; `scale` vaut 1 sans rapport.
+ */
+export type Group = { ranks: number; length: number; orientation: Orientation; scale: number };
 /** Une feuille juxtapose ses groupes, de droite à gauche. */
 export type Sheet = Group[];
 
 export type FormatResult = { ok: true; sheets: Sheet[] } | { ok: false; message: string };
 
-/** `1x7 vertical` : un groupe, dans les messages. */
+/** `1x7 vertical`, `1x7/2 vertical` : un groupe, dans les messages. */
 export const groupLabel = (group: Group) =>
-  `${group.ranks}x${group.length} ${group.orientation === "v" ? "vertical" : "horizontal"}`;
+  `${group.ranks}x${group.length}${group.scale === 1 ? "" : `/${group.scale}`} ${group.orientation === "v" ? "vertical" : "horizontal"}`;
 
 /**
  * Lit la notation des formats : `[(…), (…)]` est la suite des feuilles, et
@@ -27,7 +30,8 @@ export const groupLabel = (group: Group) =>
  * `[(1x3, 9x7), (1x4, 3x7)]` fait deux feuilles de deux groupes chacune.
  * Un groupe est vertical, N colonnes de M caractères, sauf suffixé `h` :
  * N lignes horizontales de M caractères, comme le 橫批 de `[(1x7, 1x4h, 1x7)]`.
- * `v` explicite est accepté.
+ * `v` explicite est accepté. Suffixé `/k`, après l'orientation, un groupe a
+ * des carreaux k fois plus petits que ceux de la feuille : `[(1x2, 1x7/2)]`.
  */
 export function parseFormat(format: string): FormatResult {
   const source = format.replace(/\s+/g, "").toLowerCase().replace(/×/g, "x");
@@ -53,29 +57,48 @@ export function parseFormat(format: string): FormatResult {
     at += match[0].length;
     return Number(match[0]);
   };
-  const group = (): Group | null => {
+  /** Un groupe, ou ce qui était attendu là où la lecture bute. */
+  const group = (): Group | string => {
     const ranks = integer();
-    if (ranks === null || !expect("x")) return null;
+    if (ranks === null || !expect("x")) return "attendu NxM";
     const length = integer();
-    if (length === null) return null;
-    if (expect("h")) return { ranks, length, orientation: "h" };
-    expect("v");
-    return { ranks, length, orientation: "v" };
+    if (length === null) return "attendu NxM";
+    let orientation: Orientation = "v";
+    if (expect("h")) orientation = "h";
+    else expect("v");
+    if (!expect("/")) return { ranks, length, orientation, scale: 1 };
+    const match = /^\d+(\.\d+)?/.exec(source.slice(at));
+    if (!match) return "attendu un rapport k après « / »";
+    const scale = Number(match[0]);
+    if (scale < 1) {
+      return `rapport « /${match[0]} » plus petit que 1, attendu un carreau plus petit que celui de la feuille`;
+    }
+    at += match[0].length;
+    const late = /^[hv]/.exec(source.slice(at));
+    if (late) {
+      return `l'orientation « ${late[0]} » précède le rapport, attendu « ${ranks}x${length}${late[0]}/${match[0]} »`;
+    }
+    return { ranks, length, orientation, scale };
   };
 
   if (!expect("[")) return fail("attendu « [ »");
   const sheets: Sheet[] = [];
   do {
+    const start = at;
     if (!expect("(")) return fail("attendu « ( »");
     const sheet: Sheet = [];
     do {
       const next = group();
-      if (!next) return fail("attendu NxM");
+      if (typeof next === "string") return fail(next);
       sheet.push(next);
       const suffix = /^[a-z]/.exec(source.slice(at));
       if (suffix) return fail(`orientation « ${suffix[0]} » inconnue, attendu « v » ou « h »`);
     } while (expect(","));
     if (!expect(")")) return fail("attendu « , » ou « ) »");
+    if (sheet.every((spec) => spec.scale !== 1)) {
+      at = start;
+      return fail("aucun groupe au carreau de la feuille");
+    }
     sheets.push(sheet);
   } while (expect(","));
   if (!expect("]")) return fail("attendu « , » ou « ] »");
@@ -197,14 +220,20 @@ const INSCRIPTION = 25;
 /** Écart entre deux groupes, en carreaux. */
 const GROUP_GAP = 0.5;
 
-/** Un rang posé sur la feuille : son coin haut gauche, et son nombre de cases. */
-export type RankBox = { x: number; y: number; length: number; orientation: Orientation };
+/** Un rang posé sur la feuille : son coin haut gauche, son nombre de cases, et son carreau. */
+export type RankBox = {
+  x: number;
+  y: number;
+  length: number;
+  orientation: Orientation;
+  cell: number;
+};
 
 export type SheetLayout = {
   orientation: "portrait" | "landscape";
   width: number;
   height: number;
-  /** Côté d'un carreau. */
+  /** Côté du carreau de la feuille ; un groupe `/k` a le sien, k fois plus petit. */
   cell: number;
   /**
    * Les rangs dans l'ordre des groupes, de droite à gauche ; dans un groupe
@@ -216,11 +245,11 @@ export type SheetLayout = {
   inscription: { x: number; y: number; width: number; height: number };
 };
 
-/** Largeur et hauteur d'un groupe, en carreaux. */
+/** Largeur et hauteur d'un groupe, en carreaux de la feuille. */
 const extent = (group: Group) =>
   group.orientation === "v"
-    ? { across: group.ranks, down: group.length }
-    : { across: group.length, down: group.ranks };
+    ? { across: group.ranks / group.scale, down: group.length / group.scale }
+    : { across: group.length / group.scale, down: group.ranks / group.scale };
 
 /**
  * Place une feuille sur A4. Chaque groupe est un bloc : un groupe vertical a
@@ -230,7 +259,9 @@ const extent = (group: Group) =>
  * ses groupes verticaux commencent sous le plus haut d'entre eux, un
  * demi-carreau plus bas. Entre deux colonnes, le 橫批 d'un 牌樓 est ainsi sur
  * le linteau, les colonnes pendant sous lui de part et d'autre du passage
- * vide. L'orientation retenue est celle qui donne les plus grands carreaux, et
+ * vide. Un groupe `/k` a des carreaux k fois plus petits, et s'aligne en haut
+ * comme les autres ; les écarts restent d'un demi-carreau de la feuille.
+ * L'orientation retenue est celle qui donne les plus grands carreaux, et
  * l'ensemble est centré entre les marges.
  */
 export function layoutSheet(sheet: Sheet): SheetLayout {
@@ -262,13 +293,14 @@ export function layoutSheet(sheet: Sheet): SheetLayout {
   sheet.forEach((group, index) => {
     if (index > 0) offset += GROUP_GAP * cell;
     const { across } = extents[index]!;
+    const groupCell = cell / group.scale;
     for (let i = 0; i < group.ranks; i++) {
       const { length, orientation } = group;
-      ranks.push(
+      const [x, y] =
         orientation === "v"
-          ? { x: right - offset - (i + 1) * cell, y: top + hang * cell, length, orientation }
-          : { x: right - offset - across * cell, y: top + i * cell, length, orientation },
-      );
+          ? [right - offset - (i + 1) * groupCell, top + hang * cell]
+          : [right - offset - across * cell, top + i * groupCell];
+      ranks.push({ x, y, length, orientation, cell: groupCell });
     }
     offset += across * cell;
   });

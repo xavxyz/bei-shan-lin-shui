@@ -1883,7 +1883,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-03-23
-        format: "[(1x2, 1x7)]" # le mot d'abord (calligraphe) ; Notion : 1x2 2x5
+        format: "[(1x2, 1x7/2)]" # le mot d'abord, le vers en demi-carreaux (calligraphe) ; Notion : 1x2 2x5
         columns:
           - 苦煉 # 煉 pour 練 : le corps s'exerce, mais le feu de l'esprit l'affine, s'il suit l'avertissement de yi-jin-jing
           - 寶劍鋒從磨礪出
@@ -2959,7 +2959,7 @@ pieces:
     versions:
       - id: v1
         date: 2026-10-19
-        format: "[(1x3, 1x7)]"
+        format: "[(1x3, 1x7/2)]" # le mot d'abord, le vers en demi-carreaux (calligraphe)
         columns:
           - 下功夫
           - 梅花香自苦寒來
