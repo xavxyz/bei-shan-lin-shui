@@ -63,7 +63,9 @@ export function parseFormat(format: string): FormatResult {
     if (ranks === null || !expect("x")) return "attendu NxM";
     const length = integer();
     if (length === null) return "attendu NxM";
-    const orientation: Orientation = expect("h") ? "h" : (expect("v"), "v");
+    let orientation: Orientation = "v";
+    if (expect("h")) orientation = "h";
+    else expect("v");
     if (!expect("/")) return { ranks, length, orientation, scale: 1 };
     const match = /^\d+(\.\d+)?/.exec(source.slice(at));
     if (!match) return "attendu un rapport k après « / »";
@@ -72,6 +74,10 @@ export function parseFormat(format: string): FormatResult {
       return `rapport « /${match[0]} » plus petit que 1, attendu un carreau plus petit que celui de la feuille`;
     }
     at += match[0].length;
+    const late = /^[hv]/.exec(source.slice(at));
+    if (late) {
+      return `l'orientation « ${late[0]} » précède le rapport, attendu « ${ranks}x${length}${late[0]}/${match[0]} »`;
+    }
     return { ranks, length, orientation, scale };
   };
 
@@ -287,14 +293,14 @@ export function layoutSheet(sheet: Sheet): SheetLayout {
   sheet.forEach((group, index) => {
     if (index > 0) offset += GROUP_GAP * cell;
     const { across } = extents[index]!;
-    const own = cell / group.scale;
+    const groupCell = cell / group.scale;
     for (let i = 0; i < group.ranks; i++) {
       const { length, orientation } = group;
       const [x, y] =
         orientation === "v"
-          ? [right - offset - (i + 1) * own, top + hang * cell]
-          : [right - offset - across * cell, top + i * own];
-      ranks.push({ x, y, length, orientation, cell: own });
+          ? [right - offset - (i + 1) * groupCell, top + hang * cell]
+          : [right - offset - across * cell, top + i * groupCell];
+      ranks.push({ x, y, length, orientation, cell: groupCell });
     }
     offset += across * cell;
   });

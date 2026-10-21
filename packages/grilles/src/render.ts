@@ -138,8 +138,8 @@ function renderSheet(layout: SheetSummary, texts: string[], index: number): stri
   });
   const characters = [...glyphs]
     .map(
-      ([cell, texts]) =>
-        `<g class="characters" font-size="${mm(cell * 0.78)}">${texts.join("")}</g>`,
+      ([rankCell, glyphsOfCell]) =>
+        `<g class="characters" font-size="${mm(rankCell * 0.78)}">${glyphsOfCell.join("")}</g>`,
     )
     .join("");
   const band = layout.inscription;

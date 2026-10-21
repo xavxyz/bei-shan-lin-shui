@@ -259,6 +259,17 @@ describe("les carreaux plus petits", () => {
     expect(await refusal("[(1x2), (1x2/2, 1x7/2)]")).toContain(
       "« [(1x2), (1x2/2, 1x7/2)] » — aucun groupe au carreau de la feuille à la position 8",
     );
+    expect(await refusal("[(1x2, 1x7/)]")).toContain(
+      "« [(1x2, 1x7/)] » — attendu un rapport k après « / » à la position 11",
+    );
+    expect(await refusal("[(1x2, 1x7/2h)]")).toContain(
+      "« [(1x2, 1x7/2h)] » — l'orientation « h » précède le rapport, attendu « 1x7h/2 » à la position 12",
+    );
+  });
+
+  it("acceptent un rapport décimal", async () => {
+    const { summary } = await grids(piece("[(1x2, 1x7/1.5)]", KU_LIAN), { slug: "shan-ju" });
+    expect(summary).toMatch(/1x2 vertical, 1x7\/1\.5 vertical \([\d.]+ mm\)/);
   });
 });
 
