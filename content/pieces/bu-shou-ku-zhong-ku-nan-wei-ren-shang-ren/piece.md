@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur le scan 2026-10-11_32_04.jpeg (registre imports/scans.yaml),
+# absente de Notion : identifiée sur le scan 2026-10-11_32_04.jpeg (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml),
 # scindée de fang-xin-song-kua, dont la page Notion réunissait les deux pièces
 # date du papier : 丙午處暑 戈化, sans 日 ; 戈化 voulu
 title: 不受苦中苦，難為人上人
@@ -11,9 +11,7 @@ versions:
   - id: v1
     date: 2026-08-30
     format: 2x5
-    columns:
-      - 不受苦中苦
-      - 難為人上人
+    columns: [不受苦中苦, 難為人上人]
     variations:
       - id: v1a
         script: kaishu

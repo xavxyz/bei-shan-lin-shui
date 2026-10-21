@@ -1,12 +1,18 @@
 import { mkdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import sharp from "sharp";
-import { Document } from "yaml";
-import { imageEntry, variationEntry, versionEntry } from "@bsls/authoring/editing";
+import {
+  commentsUnder,
+  imageEntry,
+  toYaml,
+  variationEntry,
+  versionEntry,
+  type NodeComment,
+  type NodePath,
+} from "@bsls/authoring/editing";
 import { PIECES_DIR, pieceFile, pieceImageFile, projectFile } from "@bsls/content";
 import { RESERVED_PROJECT_ID, pieceFrontmatterSchema } from "@bsls/schema";
 import { normalizeImage } from "@bsls/scans";
-import { placeComments, type PlanComments } from "./plan-comments.js";
 import type { ArbitratedPlan, PlannedPiece, PlannedProject } from "./plan-file.js";
 
 /** Une erreur d'application désigne le champ du plan à corriger. */
@@ -14,7 +20,11 @@ export type ApplyError = { path: string; message: string };
 
 export type ApplyResult = { ok: true; written: string[] } | { ok: false; errors: ApplyError[] };
 
-export type ApplyOptions = { contentRoot: string };
+export type ApplyOptions = {
+  contentRoot: string;
+  /** Les commentaires du texte du plan, quand il en a un : ils suivent leur pièce. */
+  comments?: NodeComment[];
+};
 
 /**
  * Applique un plan arbitré : écrit les pièces, les projets et les images.
@@ -41,19 +51,19 @@ export async function applyImport(
 
     const written: string[] = [];
 
-    const comments = plan.comments ?? new Map();
+    const commentsOf = (entry: NodePath) => entryComments(options.comments ?? [], entry);
 
     for (const [index, project] of plan.projects.entries()) {
       const file = projectFile(project.id);
-      const document = new Document(toProjectFile(project));
-      placeComments(document, comments, `projects.${index}`);
-      await write(join(options.contentRoot, file), document.toString(YAML_OPTIONS));
+      const text = toYaml(toProjectFile(project), { comments: commentsOf(["projects", index]) });
+      await write(join(options.contentRoot, file), text);
       written.push(file);
     }
 
     for (const [index, piece] of plan.pieces.entries()) {
       const file = pieceFile(piece.slug);
-      await write(join(options.contentRoot, file), toMarkdown(piece, comments, `pieces.${index}`));
+      const frontmatter = toYaml(toFrontmatter(piece), { comments: commentsOf(["pieces", index]) });
+      await write(join(options.contentRoot, file), `---\n${frontmatter}---\n`);
       written.push(file);
     }
 
@@ -247,16 +257,16 @@ function toProjectFile(project: PlannedProject): Record<string, unknown> {
   };
 }
 
-/** Le texte tel qu'il a été écrit : ni repli des longues lignes, ni bloc replié. */
-const YAML_OPTIONS = { lineWidth: 0, blockQuote: "literal" } as const;
-
-/** Le frontmatter porte les commentaires que le plan posait sur la pièce, aux mêmes endroits. */
-function toMarkdown(piece: PlannedPiece, comments: PlanComments, path: string): string {
-  const document = new Document(toFrontmatter(piece));
-  placeComments(document, comments, path);
-  const frontmatter = document.toString(YAML_OPTIONS);
-  return `---\n${frontmatter}---\n`;
+/**
+ * Les commentaires que le plan posait sur une entrée, à reporter aux mêmes
+ * endroits du fichier écrit. Le contexte Notion reste au plan, ses
+ * commentaires avec lui.
+ */
+function entryComments(comments: NodeComment[], entry: NodePath): NodeComment[] {
+  return commentsUnder(comments, entry).filter((comment) => comment.path[0] !== NOTION_KEY);
 }
+
+const NOTION_KEY = "notion";
 
 async function write(path: string, contents: string): Promise<void> {
   await mkdir(join(path, ".."), { recursive: true });

@@ -16,9 +16,6 @@ versions:
   - id: v1
     date: 2026-10-21
     format: "[(2x5, 1x7/2)]"
-    columns:
-      - 混沌遇儵忽
-      - 誤被鑿一竅
-      - 唐順之元陽洞句
+    columns: [混沌遇儵忽, 誤被鑿一竅, 唐順之元陽洞句]
 published: false
 ---

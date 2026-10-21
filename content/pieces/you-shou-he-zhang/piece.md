@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur le scan 2026-10-11_26_08.jpeg (registre imports/scans.yaml)
+# absente de Notion : identifiée sur le scan 2026-10-11_26_08.jpeg (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # pièce-pôle du projet you-shou-he-zhang ; 戈說 : « mains jointes », 手 la main gauche et 又
 # la main droite, fondus en un caractère inventé en style libre, une part écrite de chaque
 # main : le stylo et le crayon à gauche, le pinceau à droite

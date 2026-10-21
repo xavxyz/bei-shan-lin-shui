@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur les scans 2026-10-11_31_01 et 31_03 (registre imports/scans.yaml)
+# absente de Notion : identifiée sur les scans 2026-10-11_31_01 et 31_03 (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # premier des dix principes de 楊澄甫 ; deux jets du même texte, en régulier
 title: 虛靈頂勁
 slug: xu-ling-ding-jin

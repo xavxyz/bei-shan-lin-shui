@@ -6,7 +6,6 @@ versions:
   - id: v1
     date: 2025-12-30
     format: à préciser
-    columns:
-      - 方圓
+    columns: [方圓]
 published: false
 ---

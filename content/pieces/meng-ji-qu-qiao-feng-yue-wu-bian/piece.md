@@ -9,9 +9,7 @@ versions:
   - id: v1
     date: 2026-02-17
     format: 2x4
-    columns:
-      - 蒙霽去巧
-      - 風月無邊
+    columns: [蒙霽去巧, 風月無邊]
     variations:
       - id: v1a
         script: kaishu

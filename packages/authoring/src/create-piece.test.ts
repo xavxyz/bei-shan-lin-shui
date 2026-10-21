@@ -82,6 +82,32 @@ describe("createPiece", () => {
     expect(loaded.ok && loaded.content.pieces).toEqual([]);
   });
 
+  it("écrit les colonnes sur une ligne, et une à une quand la ligne dépasserait 100 colonnes", async () => {
+    const root = await writeTree({});
+    const long = [
+      "真鉛真汞大丹頭",
+      "采取當於罔象求",
+      "有作有為終有累",
+      "無求無執便無憂",
+      "常清常靜心珠現",
+      "忘物忘機命寶周",
+    ];
+
+    await createPiece(root, draft);
+    await createPiece(root, {
+      ...draft,
+      title: "工夫日用",
+      version: { ...draft.version, columns: long },
+    });
+
+    expect(await readPieceFile(root, "shan-ju-qiu-ming")).toContain(
+      "    columns: [空山新雨後, 天氣晚來秋]\n",
+    );
+    expect(await readPieceFile(root, "gong-fu-ri-yong")).toContain(
+      `    columns:\n${long.map((column) => `      - ${column}\n`).join("")}`,
+    );
+  });
+
   it("dérive le slug du titre chinois en pinyin sans tons", async () => {
     const root = await writeTree({});
 

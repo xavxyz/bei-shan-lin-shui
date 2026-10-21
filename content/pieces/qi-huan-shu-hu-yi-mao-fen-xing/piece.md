@@ -7,9 +7,7 @@ versions:
   - id: v1
     date: 2026-02-15 # jour absent du papier
     format: 4x2
-    columns:
-      - 奇幻儵忽
-      - 易貌分形
+    columns: [奇幻儵忽, 易貌分形]
     variations:
       - id: v1a
         script: kaishu

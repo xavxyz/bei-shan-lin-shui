@@ -8,8 +8,7 @@ versions:
   - id: v1
     date: 2026-02-08
     format: "[(1x7)]"
-    columns:
-      - 一枝軒億橤塗位
+    columns: [一枝軒億橤塗位]
     intention: Une branche courbe offre un abri, le sage aussi calme qu’une pierre se fond dans le printemps
 translation: L’arche d’une haute branche tapisse de pollen l’endroit
 published: false

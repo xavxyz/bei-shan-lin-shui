@@ -12,7 +12,7 @@ Les feuilles sont la **grille imprimée** : le calligraphe les imprime et écrit
 
 Appelée par `/grilles`, la skill reçoit dans `$ARGUMENTS` le slug, puis d'éventuels formats candidats à reprendre à l'étape 2 ; sans slug, demander la pièce au calligraphe.
 
-La commande cherche le slug dans `content/`, puis dans `imports/*.plan.yaml` tant que le plan n'est pas appliqué. Lire la pièce et résumer au calligraphe la version visée (la dernière par défaut) : son format et ses colonnes.
+La commande cherche le slug dans `content/`, puis dans `imports/*.plan.yaml` si un import est en cours. Lire la pièce et résumer au calligraphe la version visée (la dernière par défaut) : son format et ses colonnes.
 
 Fini quand le calligraphe a confirmé la pièce et la version.
 

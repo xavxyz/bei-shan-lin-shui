@@ -18,11 +18,7 @@ versions:
   - id: v1
     date: 2026-10-20
     format: "[(4x5)]" # un vers par colonne
-    columns:
-      - 說到辛酸處
-      - 荒唐愈可悲
-      - 由來同一夢
-      - 休笑世人痴
+    columns: [說到辛酸處, 荒唐愈可悲, 由來同一夢, 休笑世人痴]
 translation: |-
   Aux passages d'aigreur ou même d'âcreté,
   L'exagération n'en devient que plus vaine ;

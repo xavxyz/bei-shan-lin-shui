@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur le scan 2026-10-11_27.jpeg (registre imports/scans.yaml)
+# absente de Notion : identifiée sur le scan 2026-10-11_27.jpeg (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # 戈說 : adaptation en régulier d'une cursive de 鄧岱崑 sur ces huit caractères, dans cet ordre
 # formule composite, non attestée telle quelle : 飛鴻戲海 reprend 袁昂《古今書評》 (523) sur
 # 鍾繇 (« 若飛鴻戲海，舞鶴遊天 ») ; 雲鶴遊天, la version de 梁武帝 transmise par le 淳化閣帖

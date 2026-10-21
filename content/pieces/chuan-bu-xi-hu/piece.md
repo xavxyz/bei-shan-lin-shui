@@ -13,8 +13,6 @@ versions:
   - id: v1
     date: 2026-10-21
     format: "[(1x4, 1x4/2)]"
-    columns:
-      - 傳不習乎
-      - 曾子論語
+    columns: [傳不習乎, 曾子論語]
 published: false
 ---

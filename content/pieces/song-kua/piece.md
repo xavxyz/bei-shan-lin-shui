@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur le scan 2026-10-11_29.jpeg (registre imports/scans.yaml)
+# absente de Notion : identifiée sur le scan 2026-10-11_29.jpeg (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # exploration de 松 (pour 鬆) et 胯, du régulier au style libre ; scannée à l'envers, retournée sur le Drive
 title: 鬆胯 # 松 pour 鬆 sur le papier
 slug: song-kua

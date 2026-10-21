@@ -11,7 +11,6 @@ versions:
   - id: v1
     date: 2026-03-15 # date absente du papier
     format: "[(1x3)]" # supposé : l'œuvre n'est pas scannée, l'étude ne fixe pas son format
-    columns:
-      - 天人地
+    columns: [天人地]
 published: false
 ---

@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur les scans 2026-10-11_16_01 à 16_06 (registre imports/scans.yaml)
+# absente de Notion : identifiée sur les scans 2026-10-11_16_01 à 16_06 (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # feuilles 一 à 六 : explorations du dragon, pendant de 虎躍 dans le projet long-teng-hu-yue ;
 # sur 一 二 五 六, une ligne du 乾 (易經, 卦一) : 初九, 九二, 九五, 上九 ; le 九四
 # (或躍在淵) manque, 四 porte 藏鋒歛銳 à la place

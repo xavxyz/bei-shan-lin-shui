@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur le scan 2026-10-11_12_01.jpeg (registre imports/scans.yaml)
+# absente de Notion : identifiée sur le scan 2026-10-11_12_01.jpeg (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # pièce-pôle du projet xian-xian-ji : hommage à 山山, 閒仙 est le surnom que le calligraphe lui donne
 # distincte de shu-heng-zhuo-an : N·PL marque aussi 04_01
 title: 閒仙機

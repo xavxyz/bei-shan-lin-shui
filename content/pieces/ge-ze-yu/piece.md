@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur le scan 2026-10-11_26_01.jpeg (registre imports/scans.yaml)
+# absente de Notion : identifiée sur le scan 2026-10-11_26_01.jpeg (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # pièce-pôle du projet ge-ze-yu, sur le nom du calligraphe ; 26_01 en est un brouillon
 # au crayon, un grand triangle dont l'axe descend le long de la colonne, un cercle sur 宇
 title: 戈澤宇

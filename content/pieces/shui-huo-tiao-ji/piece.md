@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur les scans 2026-10-11_18_02 à 18_04 (registre imports/scans.yaml)
+# absente de Notion : identifiée sur les scans 2026-10-11_18_02 à 18_04 (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # 戈說 : pièce personnelle en hommage à 山山, pour « horizontaliser les verticaux » et
 # « verticaliser les horizontaux », deux des cinq points de sa méthode pour la cursive (竪橫)
 # la feuille ① 山竪橫 (18_01) est la couverture de shu-heng-zhuo-an, sa v1 (calligraphe, lot 5)

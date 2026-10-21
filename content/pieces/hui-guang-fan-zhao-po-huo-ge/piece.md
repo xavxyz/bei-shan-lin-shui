@@ -8,8 +8,6 @@ versions:
   - id: v1
     date: 2026-01-22
     format: 1x4 + 1x2
-    columns:
-      - 回光反照
-      - 破惑
+    columns: [回光反照, 破惑]
 published: false
 ---

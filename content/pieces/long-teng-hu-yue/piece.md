@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur le scan 2026-10-11_15_01.jpeg (registre imports/scans.yaml)
+# absente de Notion : identifiée sur le scan 2026-10-11_15_01.jpeg (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # pièce-pôle du projet long-teng-hu-yue : 龍騰 écrit à 春分, 虎躍 à 清明
 title: 龍騰虎躍
 slug: long-teng-hu-yue

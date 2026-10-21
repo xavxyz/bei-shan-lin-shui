@@ -8,9 +8,6 @@ versions:
   - id: v1
     date: 2026-02-11
     format: à préciser
-    columns:
-      - 造化鍾神秀
-      - 陰陽割昏曉
-      - 杜甫《望嶽》
+    columns: [造化鍾神秀, 陰陽割昏曉, 杜甫《望嶽》]
 published: false
 ---

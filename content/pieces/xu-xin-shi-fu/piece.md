@@ -21,10 +21,7 @@ versions:
   - id: v1
     date: 2026-02-25
     format: 3x7
-    columns:
-      - 虛心實腹道之基
-      - 虛心直節青青竹
-      - 箇是鍊虛第一機
+    columns: [虛心實腹道之基, 虛心直節青青竹, 箇是鍊虛第一機]
     variations:
       - id: v1a
         script: ziyou

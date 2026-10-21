@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur les scans 2026-10-11_17_01 à 17_03 (registre imports/scans.yaml)
+# absente de Notion : identifiée sur les scans 2026-10-11_17_01 à 17_03 (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # feuilles 一 二 三 : explorations du tigre, pendant de 龍騰 dans le projet long-teng-hu-yue ;
 # sur chaque feuille, une note tirée du 履 (易經, 卦十) : 橫竪履, 格守履, 履乕尾
 # 戈說 : l'expression de ma vanité, à présenter à 鄧岱崑 ce jour-même — je devais être en

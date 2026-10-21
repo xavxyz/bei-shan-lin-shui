@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur le scan 2026-10-11_30_02.jpeg (registre imports/scans.yaml)
+# absente de Notion : identifiée sur le scan 2026-10-11_30_02.jpeg (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # 紅樓夢 第八十二回 ; source.author : la signature de l'édition courante, comme shuo-dao-xin-suan-chu
 # traduction écrite à la main sur le scan 2026-10-11_30_03.jpeg (« qu'à se se donner » sur le papier)
 title: 成人不自在，自在不成人
@@ -17,9 +17,7 @@ versions:
     # premier jour de l'été » sur 30_03
     date: 2026-06-21
     format: 2x5
-    columns:
-      - 成人不自在
-      - 自在不成人
+    columns: [成人不自在, 自在不成人]
     variations:
       - id: v1a
         script: kaishu

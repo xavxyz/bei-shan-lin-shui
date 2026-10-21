@@ -12,8 +12,6 @@ versions:
   - id: v1
     date: 2026-04-05
     format: "[(2x5)]"
-    columns:
-      - 神行即氣行
-      - 神住即氣住
+    columns: [神行即氣行, 神住即氣住]
 published: false
 ---

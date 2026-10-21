@@ -10,9 +10,6 @@ versions:
   - id: v1
     date: 2026-10-21
     format: "[(3x2)]"
-    columns:
-      - 慎術
-      - 去巧
-      - 守渾
+    columns: [慎術, 去巧, 守渾]
 published: false
 ---

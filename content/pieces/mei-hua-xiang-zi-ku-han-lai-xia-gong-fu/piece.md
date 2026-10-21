@@ -11,8 +11,6 @@ versions:
   - id: v1
     date: 2026-10-19
     format: "[(1x3, 1x7/2)]" # le mot d'abord, le vers en demi-carreaux (calligraphe)
-    columns:
-      - 下功夫
-      - 梅花香自苦寒來
+    columns: [下功夫, 梅花香自苦寒來]
 published: false
 ---

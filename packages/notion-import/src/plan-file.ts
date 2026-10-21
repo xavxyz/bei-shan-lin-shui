@@ -1,4 +1,5 @@
 import { Document, isCollection, parseDocument } from "yaml";
+import { collectComments, type NodeComment } from "@bsls/authoring/editing";
 import {
   imageSchema,
   versionIdSchema,
@@ -10,7 +11,6 @@ import {
   versionSchema,
   z,
 } from "@bsls/schema";
-import { collectComments, type PlanComments } from "./plan-comments.js";
 import type { ImportPlan, ImportWarning } from "./propose.js";
 
 /**
@@ -81,13 +81,14 @@ export const planFileSchema = z.object({
   pieces: z.array(plannedPieceSchema).default([]),
 });
 
-/** Les commentaires ne sont pas des champs : ils voyagent à côté, par chemin. */
-export type ArbitratedPlan = z.infer<typeof planFileSchema> & { comments?: PlanComments };
+export type ArbitratedPlan = z.infer<typeof planFileSchema>;
 export type PlannedPiece = z.infer<typeof plannedPieceSchema>;
 export type PlannedProject = z.infer<typeof plannedProjectSchema>;
 
 export type PlanError = { path: string; message: string };
-export type ParseResult = { ok: true; plan: ArbitratedPlan } | { ok: false; errors: PlanError[] };
+/** Les commentaires ne sont pas des champs : ils voyagent à côté du plan, par chemin. */
+export type ParseResult =
+  { ok: true; plan: ArbitratedPlan; comments: NodeComment[] } | { ok: false; errors: PlanError[] };
 
 const HEADER = [
   " Plan d'import Notion — proposé par l'agent, arbitré par le calligraphe.",
@@ -148,5 +149,5 @@ export function parsePlan(text: string): ParseResult {
     };
   }
 
-  return { ok: true, plan: { ...parsed.data, comments: collectComments(document) } };
+  return { ok: true, plan: parsed.data, comments: collectComments(document) };
 }

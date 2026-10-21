@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur les scans 2026-10-11_20_01 et 20_02 (registre imports/scans.yaml)
+# absente de Notion : identifiée sur les scans 2026-10-11_20_01 et 20_02 (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # 煉 à la clé du feu sur le papier ; distincte de xu-xin-shi-fu, qui cite le 《鍊虛歌》 (鍊 à la clé du métal)
 # feuille ② : 修, 養, 虛, chacun par les cinq pas de 鄧岱崑, du régulier à la cursive folle
 title: 煉丹

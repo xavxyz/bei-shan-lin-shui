@@ -12,13 +12,7 @@ versions:
   - id: v1
     date: 2026-02-17
     format: 6x4
-    columns:
-      - 新年快樂
-      - 馬到成功
-      - 新年快樂
-      - 馬到成功
-      - 新年快樂
-      - 馬到成功
+    columns: [新年快樂, 馬到成功, 新年快樂, 馬到成功, 新年快樂, 馬到成功]
     variations:
       - id: v1a
         script: ziyou # la feuille alterne régulier et formes libres
@@ -33,9 +27,7 @@ versions:
   - id: v2
     date: 2026-02-17 # date du collage inconnue, au plus tard le nouvel an ; retenue par le calligraphe
     format: 2x4
-    columns:
-      - 新年快樂
-      - 馬到成功
+    columns: [新年快樂, 馬到成功]
     variations:
       # 戈說 : trait fin, voulu ; la paire de droite de v1
       - id: v2a

@@ -34,8 +34,7 @@ versions:
   - id: v2
     date: 2026-10-20
     format: "[(1x3)]"
-    columns:
-      - 紅樓夢
+    columns: [紅樓夢]
     variations:
       - id: v2a
         script: kaishu

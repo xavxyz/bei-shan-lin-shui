@@ -8,7 +8,6 @@ versions:
   - id: v1
     date: 2026-02-05
     format: à préciser
-    columns:
-      - 做活 北斗面南看
+    columns: [做活 北斗面南看]
 published: false
 ---

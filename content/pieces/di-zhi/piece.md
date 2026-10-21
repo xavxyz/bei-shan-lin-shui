@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur les scans 2026-10-11_14_01 à 14_03 (registre imports/scans.yaml)
+# absente de Notion : identifiée sur les scans 2026-10-11_14_01 à 14_03 (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # pendant de 天干流 (tian-gan-liu), écrit la veille ; en-tête de 14_01 : 山山臨, d'après 山山
 # (1er 山 en cursive, 2e en régulier renversé) ; heures au crayon en marge de ② et ③ :
 # le cycle monte de 子 (23 h) à 巳, puis descend de 午 à 亥

@@ -318,15 +318,16 @@ describe("applyImport", () => {
 
 /** Les commentaires du plan sont le savoir du calligraphe sur ses pièces : ils lui survivent. */
 describe("applyImport, depuis le texte du plan", () => {
-  function parsed(text: string): ArbitratedPlan {
-    const result = parsePlan(text);
-    if (!result.ok) throw new Error(JSON.stringify(result.errors));
-    return result.plan;
+  /** Applique le plan écrit dans ce texte, comme `pnpm import:notion apply`. */
+  async function applyText(text: string, root: string) {
+    const parsed = parsePlan(text);
+    if (!parsed.ok) throw new Error(JSON.stringify(parsed.errors));
+    return applyImport(parsed.plan, { contentRoot: root, comments: parsed.comments });
   }
 
   async function applied(text: string): Promise<string> {
     const root = await contentRoot();
-    const result = await applyImport(parsed(text), { contentRoot: root });
+    const result = await applyText(text, root);
     expect(result).toMatchObject({ ok: true });
     expect(await loadContent(root, { includeUnpublished: true })).toMatchObject({ ok: true });
     return readFile(join(root, "pieces/mo-xing-ji/piece.md"), "utf8");
@@ -365,6 +366,25 @@ pieces:
 `);
 
     expect(written).toContain("    format: 2x7 # supposé : ni scan, ni format dans Notion\n");
+  });
+
+  it("écrit les colonnes sur une ligne, comme une pièce saisie par `pnpm piece`", async () => {
+    const written = await applied(`
+pieces:
+  - slug: mo-xing-ji
+    title: 莫性急
+    status: made
+    published: false
+    versions:
+      - id: v1
+        date: 2025-12-22
+        format: 2x7
+        columns:
+          - 莫性急平流緩進
+          - 墨行機兔起鶻落
+`);
+
+    expect(written).toContain("    columns: [莫性急平流緩進, 墨行機兔起鶻落]\n");
   });
 
   it("garde sur sa colonne le commentaire de fin de ligne", async () => {
@@ -469,7 +489,7 @@ pieces:
 
   it("garde en tête du fichier d'un projet le commentaire posé au-dessus de lui", async () => {
     const root = await contentRoot();
-    const plan = parsed(`
+    const plan = `
 projects:
   - id: zhong-he-ji
     title: 中和集
@@ -481,9 +501,9 @@ projects:
     presentation: Lecture des ouvrages de Yang Jwing-Ming.
     theme: ink # les thèmes attendront
 pieces: []
-`);
+`;
 
-    await applyImport(plan, { contentRoot: root });
+    await applyText(plan, root);
 
     expect(await readFile(join(root, "projects/qi-gong.yaml"), "utf8")).toBe(
       [
@@ -499,7 +519,7 @@ pieces: []
 
   it("écrit la source du texte que le plan attribue à la pièce", async () => {
     const root = await contentRoot();
-    const plan = parsed(`
+    const plan = `
 pieces:
   - slug: mo-xing-ji
     title: 莫性急
@@ -513,9 +533,9 @@ pieces:
         date: 2025-12-22
         format: 2x7
         columns: [莫性急平流緩進, 墨行機兔起鶻落]
-`);
+`;
 
-    await applyImport(plan, { contentRoot: root });
+    await applyText(plan, root);
 
     const loaded = await loadContent(root, { includeUnpublished: true });
     expect(loaded.ok && loaded.content.pieces[0]?.source).toMatchObject({

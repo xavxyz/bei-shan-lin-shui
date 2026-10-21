@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur les scans 2026-10-11_22_01 et 22_02 (registre imports/scans.yaml)
+# absente de Notion : identifiée sur les scans 2026-10-11_22_01 et 22_02 (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # 医王会 指圧 : Iokai Shiatsu, l'école de Masunaga ; deux feuilles ① ② au rouge
 title: 醫王會 // 禪指壓
 slug: yi-wang-hui-chan-zhi-ya

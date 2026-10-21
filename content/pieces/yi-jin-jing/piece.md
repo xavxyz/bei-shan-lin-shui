@@ -23,10 +23,7 @@ versions:
   - id: v2
     date: 2026-10-20
     format: "[(3x5)]"
-    columns:
-      - 易筋經
-      - 不按指示做
-      - 磨磚豈成鏡
+    columns: [易筋經, 不按指示做, 磨磚豈成鏡]
     variations:
       - id: v2a
         script: xingshu
@@ -34,10 +31,7 @@ versions:
   - id: v3
     date: 2026-10-20
     format: "[(1x3), (2x5)]"
-    columns:
-      - 易筋經
-      - 不按指示做
-      - 磨磚豈成鏡
+    columns: [易筋經, 不按指示做, 磨磚豈成鏡]
     variations:
       - id: v3a
         script: ziyou

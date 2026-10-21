@@ -10,10 +10,6 @@ versions:
   - id: v1
     date: 2025-12-30
     format: 4x5 + titre + bambous
-    columns:
-      - 種竹不須土
-      - 心空自成林
-      - 夜深看獨立
-      - 數盡別燈陰
+    columns: [種竹不須土, 心空自成林, 夜深看獨立, 數盡別燈陰]
 published: false
 ---

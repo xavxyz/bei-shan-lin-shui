@@ -9,9 +9,7 @@ versions:
   - id: v1
     date: 2026-01-03
     format: 2x7
-    columns:
-      - 莫性急平流緩進
-      - 墨行機兔起鶻落
+    columns: [莫性急平流緩進, 墨行機兔起鶻落]
     variations:
       - id: v1a
         script: kaishu
@@ -25,9 +23,7 @@ versions:
   - id: v2
     date: 2026-02-11
     format: 2x7 + 蘇東坡
-    columns:
-      - 莫性急平流緩進
-      - 墨行機兔起鶻落
+    columns: [莫性急平流緩進, 墨行機兔起鶻落]
     variations:
       - id: v2a
         script: kaishu

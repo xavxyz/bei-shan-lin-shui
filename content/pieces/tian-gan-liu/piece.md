@@ -1,5 +1,5 @@
 ---
-# absente de Notion : identifiée sur les scans 2026-10-11_13_01 à 13_03 (registre imports/scans.yaml)
+# absente de Notion : identifiée sur les scans 2026-10-11_13_01 à 13_03 (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)
 # en-tête de 13_01 : 山山臨, d'après 山山 ; le 1er 山 en cursive, le 2e renversé ; signé 戈澤宇
 # les dix tiges célestes, chacune suivie d'un mot puis de 流
 title: 天干流

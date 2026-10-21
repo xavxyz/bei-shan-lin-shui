@@ -11,7 +11,6 @@ versions:
   - id: v1
     date: 2026-01-11
     format: à préciser
-    columns:
-      - 動中求靜
+    columns: [動中求靜]
 published: false
 ---

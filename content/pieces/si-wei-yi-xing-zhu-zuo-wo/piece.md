@@ -7,8 +7,6 @@ versions:
   - id: v1
     date: 2026-04-08
     format: "[(1x4, 1x3/2)]"
-    columns:
-      - 行住坐臥
-      - 四威儀
+    columns: [行住坐臥, 四威儀]
 published: false
 ---
