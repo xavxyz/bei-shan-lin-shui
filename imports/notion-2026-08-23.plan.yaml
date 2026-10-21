@@ -235,17 +235,117 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # le 經 entier, sans les trois postfaces (葛玄, 左玄真人, 正一真人) ; leçons du 道藏 contre la vulgate :
+  # 心擾之 (情), 動者靜之基 (靜者動之基), 真常應物 (真靜), 名為得道 (謂) ; docs/sources/qing-jing-jing.md
+  # le titre seul sur sa feuille, à l'horizontale, puis 391 caractères en 93 membres de phrase, qui coulent
+  # dans cinq feuilles paysage de 10 colonnes de 8 ; les 9 cases de la dernière pour le 款
   - slug: tai-shang-lao-jun-shuo-chang-qing-jing-jing
     title: 《太上老君說常清靜經》
     status: idea
     projects: []
     published: false
+    source:
+      dynasty: 唐
+      work: 太上老君說常清靜經
     versions:
       - id: v1
         date: 2025-12-23
-        format: à préciser
-        columns: []
+        format: "[(1x9h), (10x8), (10x8), (10x8), (10x8), (10x8)]"
+        columns:
+          - 太上老君說常清靜經
+          - 老君曰
+          - 大道無形
+          - 生育天地
+          - 大道無情
+          - 運行日月
+          - 大道無名
+          - 長養萬物
+          - 吾不知其名
+          - 強名曰道
+          - 夫道者
+          - 有清有濁
+          - 有動有靜
+          - 天清地濁
+          - 天動地靜
+          - 男清女濁
+          - 男動女靜
+          - 降本流末
+          - 而生萬物
+          - 清者濁之源
+          - 動者靜之基
+          - 人能常清靜
+          - 天地悉皆歸
+          - 夫人神好清
+          - 而心擾之
+          - 人心好靜
+          - 而慾牽之
+          - 常能遣其慾而心自靜
+          - 澄其心而神自清
+          - 自然六慾不生
+          - 三毒消滅
+          - 所以不能者
+          - 為心未澄
+          - 慾未遣也
+          - 能遣之者
+          - 內觀其心
+          - 心無其心
+          - 外觀其形
+          - 形無其形
+          - 遠觀其物
+          - 物無其物
+          - 三者既悟
+          - 唯見於空
+          - 觀空亦空
+          - 空無所空
+          - 所空既無
+          - 無無亦無
+          - 無無既無
+          - 湛然常寂
+          - 寂無所寂
+          - 慾豈能生
+          - 慾既不生
+          - 即是真靜
+          - 真常應物
+          - 真常得性
+          - 常應常靜
+          - 常清靜矣
+          - 如此清靜
+          - 漸入真道
+          - 既入真道
+          - 名為得道
+          - 雖名得道
+          - 實無所得
+          - 為化眾生
+          - 名為得道
+          - 能悟之者
+          - 可傳聖道
+          - 老君曰
+          - 上士無爭
+          - 下士好爭
+          - 上德不德
+          - 下德執德
+          - 執著之者
+          - 不名道德
+          - 眾生所以不得真道者
+          - 為有妄心
+          - 既有妄心
+          - 即驚其神
+          - 既驚其神
+          - 即著萬物
+          - 既著萬物
+          - 即生貪求
+          - 既生貪求
+          - 即是煩惱
+          - 煩惱妄想
+          - 憂苦身心
+          - 便遭濁辱
+          - 流浪生死
+          - 常沉苦海
+          - 永失真道
+          - 真常之道
+          - 悟者自得
+          - 得悟道者
+          - 常清靜矣
         variations: []
     notion:
       title: 《太上老君说常清静经》
@@ -1506,12 +1606,16 @@ pieces:
   # à refaire
   # date du papier : 戈 立夏 26 (Notion disait 2026-03-03)
   # format du scan 2026-10-11_24.jpeg : titre 調身 hors grille (Notion disait 3x7)
+  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-2 (五調), sans auteur ; absent du 《性命圭旨》,
+  # aucune source classique trouvée
   - slug: diao-shen
     title: 調身
     status: made
     projects:
       - qi-gong
     published: false
+    source:
+      work: "Qigong Meditation: Small Circulation"
     versions:
       - id: v1
         date: 2026-05-13
@@ -1554,20 +1658,29 @@ pieces:
       url: ""
       relations:
         - 調身
-  # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : texte à retrouver dans un livre de Yang Jwing-Ming ;
-  # sa sœur 調身 (diao-shen) porte trois vers de 7
+  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-3 (調息) ;
+  # 《性命圭旨》 亨集, 「蟄藏氣穴，眾妙歸根」 : la citation ouverte par 按白玉蟾云 s'arrête à
+  # 只要凝神入氣穴 (le 《丹髓歌》 de 白玉蟾) ; la suite est du compilateur, qui reprend en l'inversant
+  # 晁迥 (宋), 《法藏碎金錄》 卷八 : 似動不動真人深深之息，似用不用如來空空之心，心息相依，息調心浄 ;
+  # 心息相依，息調心淨 vient d'un commentaire du 圓覺經 (卷五)
   - slug: diao-xi
     title: 調息
     status: experiment
     projects:
       - qi-gong
     published: false
+    source:
+      work: 性命圭旨
     versions:
       - id: v1
         date: 2026-03-04
-        format: à préciser
-        columns: []
+        format: "[(1x2, 4x7)]"
+        columns:
+          - 調息
+          - 以如來空空之心
+          - 合真人深深之息
+          - 則心息相依
+          - 息調心淨
         variations: []
     notion:
       title: 调息
@@ -1594,20 +1707,24 @@ pieces:
       status: Mouvementée
       url: ""
       relations: []
-  # à arbitrer — version.format : aucun format dans l'export
-  # à arbitrer — version.columns : texte à retrouver dans un livre de Yang Jwing-Ming ;
-  # sa sœur 調身 (diao-shen) porte trois vers de 7
+  # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-4 (調心) ;
+  # 《性命圭旨》 亨集, 「涵養本原，救護命寶」, après 沖妙云 ; la source seule, sans auteur, comme 調息
   - slug: diao-xin
     title: 調心
     status: experiment
     projects:
       - qi-gong
     published: false
+    source:
+      work: 性命圭旨
     versions:
       - id: v1
         date: 2026-03-05
-        format: à préciser
-        columns: []
+        format: "[(1x2, 2x7)]"
+        columns:
+          - 調心
+          - 身不動而心自安
+          - 心不動而神自守
         variations: []
     notion:
       title: 調心
@@ -1654,18 +1771,27 @@ pieces:
       url: ""
       relations:
         - مشكاة • MESHKAH
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # le distique central du 螃蟹詠 de 寶釵, puis la dernière phrase du jugement des convives,
+  # plus petite, comme un 款 ; le même texte dans le 庚辰本, l'édition courante (人民文學出版社) et
+  # les 程本, au 諷剌 du 程甲本 près, coquille de l'imprimé (docs/sources/pang-xie-yong.md)
   - slug: pang-xie-feng-ci
     title: 螃蟹諷刺 🦀
     status: idea
     projects:
       - hong-lou-meng
     published: false
+    source:
+      author: 曹雪芹
+      dynasty: 清
+      work: 紅樓夢
     versions:
       - id: v1
         date: 2026-03-10
-        format: à préciser
-        columns: []
+        format: "[(2x7, 1x10)]"
+        columns:
+          - 眼前道路無經緯
+          - 皮裏春秋空黑黃 # 裏, variante de 裡
+          - 只是諷刺世人太毒了些
         variations: []
     notion:
       title: 螃蟹讽刺 🦀
@@ -1837,34 +1963,58 @@ pieces:
       status: Préparée
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # texte de 郭沫若, comme Yang Jwing-Ming (Small Circulation, p. 283), dont le 几 est le simplifié de 幾 ;
+  # 陳邦懷 lit 天其本在上 et 復 pour 退 : docs/sources/xing-qi-yu-pei-ming.md
+  # colonnes à la manière du jade : 36 caractères, le 重文 ＝ écrit dans la case du caractère qu'il redouble
+  # (pnpm grilles --texte sans les ＝)
   - slug: xing-qi-yu-pei-ming
     title: 📜 行氣玉佩銘
     status: experiment
     projects: []
     published: false
+    source:
+      dynasty: 戰國
+      work: 行氣玉佩銘
     versions:
       - id: v1
         date: 2026-03-29
-        format: Grand (recouvrir 修真後內外火候圖） # Notion : 修真后内外火候图
-        columns: []
+        format: "[(4x9)]" # Notion : Grand (recouvrir 修真後內外火候圖） ; v2 au grand format
+        columns:
+          - 行氣深則蓄＝則伸＝則下＝
+          - 則定＝則固＝則萌＝則長＝則
+          - 退＝則天＝幾舂在上地幾
+          - 舂在下順則生逆則死
+        intention: Une version A4 sur le modèle du jade, avant le grand format, 45x90 cm, qui recouvrira le 修真後內外火候圖.
         variations: []
     notion:
       title: 📜 行氣玉佩銘
       status: Préparée
       url: ""
       relations: []
-  # à arbitrer — version.columns : aucun texte de calligraphie dans l'export : à compléter ou à retirer
+  # texte de 陸西星 (1571) et 劉一明 (1798) : 返覆 au vers 11 (張三丰 : 反覆) ; docs/sources/bai-zi-bei.md
+  # trois vers par colonne ; les 5 cases de la dernière pour le 款
   - slug: bai-zi-bei
     title: 📜 百字碑
     status: experiment
     projects: []
     published: false
+    source:
+      author: 呂洞賓 # attribution de la tradition, le poème n'est pas au 全唐詩
+      dynasty: 唐
+      work: 百字碑
     versions:
       - id: v1
         date: 2026-03-29
-        format: 45x90 cm （couvrir 心性圖） # Notion : 心性图
-        columns: []
+        format: "[(7x15)]" # Notion : 45x90 cm （couvrir 心性圖） ; v2 au grand format
+        columns:
+          - 養氣忘言守降心為不為動靜知宗祖
+          - 無事更尋誰真常須應物應物要不迷
+          - 不迷性自住性住氣自回氣回丹自結
+          - 壺中配坎離陰陽生返覆普化一聲雷
+          - 白雲朝頂上甘露灑須彌自飲長生酒
+          - 逍遙誰得知坐聽無弦曲明通造化機
+          - 都來二十句端的上天梯
+        intention: Une version A4, avant le grand format, 45x90 cm, qui recouvrira le 心性圖.
         variations: []
     notion:
       title: 📜 百字碑
