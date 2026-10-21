@@ -24,6 +24,28 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **Carreau** : Le carré de la grille qui dessine une case, et sa taille ; la **case** est une place d'une colonne ou d'une ligne, celle qui reçoit un caractère. Sur une feuille, chaque groupe a son carreau : celui de la feuille, le plus grand qui tient sur la page, ou un carreau plus petit, pour un texte qui en explique un autre. _À éviter_ : cellule
 
+## Parties d'une feuille
+
+**正文** (zhèngwén, le texte principal) : Le texte pour lequel la pièce est écrite, à droite, au carreau de la feuille. Tout le reste de la feuille le présente ou le signe. _À éviter_ : corps
+
+**款** (kuǎn, l'inscription) : La colonne plus petite, à gauche du 正文, qui le signe d'un trait : la dédicace s'il y en a une, la source, puis la signature de 戈, datée ou non. Le titre d'un poème y vit d'ordinaire. On dit aussi 落款 (luòkuǎn). _À éviter_ : légende, cartouche
+
+**上款** (shàngkuǎn, la dédicace) : Le nom de celui à qui la pièce est offerte, en tête du 款.
+
+**跋** (bá, le colophon) : Un texte écrit après le 正文 pour le commenter, souvent plus tard ou d'une autre main. _À éviter_ : postface
+
+**引首** (yǐnshǒu, le frontispice) : Le panneau qui ouvre un 手卷 (shǒujuàn, rouleau horizontal), où le titre s'écrit en grand, à part du texte.
+
+**題字** (tízì, le mot en titre) : Quelques caractères écrits en grand, qui sont l'œuvre ou en condensent le sujet, comme 苦煉 devant le vers qui l'explique.
+
+**句** (jù, l'extrait) : Après l'auteur et le titre, dans le 款, marque que le 正文 n'est qu'un passage de l'œuvre : 李道純原道歌句.
+
+## Dater
+
+**干支** (gānzhī, l'année cyclique) : L'année nommée dans le cycle de soixante, comme 丙午 pour 2026. Elle change au 立春, début février, et non au 1er janvier.
+
+**節氣** (jiéqì, le terme solaire) : L'une des vingt-quatre divisions de l'année, comme 寒露 ou 霜降, qui date une pièce dans le 款 après l'année 干支 : 丙午霜降戈書. C'est celui du jour où la pièce s'écrit.
+
 ## Personnes
 
 **戈** : Le calligraphe, et sa signature. Sa part au sixième pas : mélanger les pas dans une même pièce. 戈 parle d'endurer le relâchement alors que l'épée nous transperce.
