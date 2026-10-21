@@ -5,7 +5,7 @@ import sharp from "sharp";
 import { beforeAll, describe, expect, it } from "vitest";
 import { loadContent } from "@bsls/content";
 import { applyImport } from "./apply.js";
-import { planFileSchema, type ArbitratedPlan } from "./plan-file.js";
+import { parsePlan, planFileSchema, type ArbitratedPlan } from "./plan-file.js";
 import { writeExportTree } from "./test-support/export-tree.js";
 
 let scan = "";
@@ -313,5 +313,214 @@ describe("applyImport", () => {
     const result = await applyImport(arbitrated, { contentRoot: root });
 
     expect(!result.ok && result.errors[0]?.path).toBe("pieces.1.slug");
+  });
+});
+
+/** Les commentaires du plan sont le savoir du calligraphe sur ses pièces : ils lui survivent. */
+describe("applyImport, depuis le texte du plan", () => {
+  function parsed(text: string): ArbitratedPlan {
+    const result = parsePlan(text);
+    if (!result.ok) throw new Error(JSON.stringify(result.errors));
+    return result.plan;
+  }
+
+  async function applied(text: string): Promise<string> {
+    const root = await contentRoot();
+    const result = await applyImport(parsed(text), { contentRoot: root });
+    expect(result).toMatchObject({ ok: true });
+    expect(await loadContent(root, { includeUnpublished: true })).toMatchObject({ ok: true });
+    return readFile(join(root, "pieces/mo-xing-ji/piece.md"), "utf8");
+  }
+
+  it("garde en tête du frontmatter le commentaire posé au-dessus d'une pièce", async () => {
+    const written = await applied(`
+pieces:
+  # à refaire
+  - slug: mo-xing-ji
+    title: 莫性急
+    status: made
+    published: false
+    versions:
+      - id: v1
+        date: 2025-12-22
+        format: 2x7
+        columns: [莫性急平流緩進, 墨行機兔起鶻落]
+`);
+
+    expect(written).toMatch(/^---\n# à refaire\ntitle: 莫性急\n/);
+  });
+
+  it("garde sur son champ le commentaire de fin de ligne", async () => {
+    const written = await applied(`
+pieces:
+  - slug: mo-xing-ji
+    title: 莫性急
+    status: made
+    published: false
+    versions:
+      - id: v1
+        date: 2025-12-22
+        format: 2x7 # supposé : ni scan, ni format dans Notion
+        columns: [莫性急平流緩進, 墨行機兔起鶻落]
+`);
+
+    expect(written).toContain("    format: 2x7 # supposé : ni scan, ni format dans Notion\n");
+  });
+
+  it("garde sur sa colonne le commentaire de fin de ligne", async () => {
+    const written = await applied(`
+pieces:
+  - slug: mo-xing-ji
+    title: 莫性急
+    status: made
+    published: false
+    versions:
+      - id: v1
+        date: 2025-12-22
+        format: 2x7
+        columns:
+          - 莫性急平流緩進 # 莫 pour 墨
+          - 墨行機兔起鶻落
+`);
+
+    expect(written).toContain("      - 莫性急平流緩進 # 莫 pour 墨\n      - 墨行機兔起鶻落\n");
+  });
+
+  it("garde au-dessus d'une version, d'une variation, d'une image ou d'un champ ce que le plan y écrivait", async () => {
+    const written = await applied(`
+pieces:
+  - slug: mo-xing-ji
+    title: 莫性急
+    status: made
+    published: false
+    versions:
+      # date du papier : « 2 26 »
+      - id: v1
+        date: 2026-01-02
+        format: 2x7
+        # 墨行機 : 墨 pour 莫
+        columns: [莫性急平流緩進, 墨行機兔起鶻落]
+      # date du papier : 立春 (丙午)
+      - id: v2
+        date: 2026-02-11
+        format: 2x7
+        columns: [莫性急平流緩進, 墨行機兔起鶻落]
+        variations:
+          # gardée, image mise en avant
+          - id: v2a
+            script: kaishu
+            status: kept
+            images:
+              # signé 戈
+              - file: v2a.jpg
+                source: "${scan}"
+                featured: true
+`);
+
+    expect(written).toContain(
+      [
+        "versions:",
+        "  # date du papier : « 2 26 »",
+        "  - id: v1",
+        "    date: 2026-01-02",
+        "    format: 2x7",
+        "    # 墨行機 : 墨 pour 莫",
+        "    columns:",
+      ].join("\n"),
+    );
+    expect(written).toContain("  # date du papier : 立春 (丙午)\n  - id: v2\n");
+    expect(written).toContain("      # gardée, image mise en avant\n      - id: v2a\n");
+    expect(written).toContain("          # signé 戈\n          - file: v2a.jpg\n");
+  });
+
+  it("remonte sur l'image le commentaire de son fichier source, et laisse au plan ceux de Notion", async () => {
+    const written = await applied(`
+pieces:
+  - slug: mo-xing-ji
+    title: 莫性急
+    status: made
+    published: false
+    versions:
+      - id: v1
+        date: 2026-01-02
+        format: 2x7
+        columns: [莫性急平流緩進, 墨行機兔起鶻落]
+        variations:
+          - id: v1a
+            script: kaishu
+            status: kept
+            images:
+              - file: v1a.jpg
+                # scanné à l'envers, retourné sur le Drive
+                source: "${scan}" # feuille ①
+                featured: true
+    # page retrouvée par le titre
+    notion:
+      # relation vers 中和集
+      title: 莫性急
+`);
+
+    expect(written).toContain(
+      "          # scanné à l'envers, retourné sur le Drive\n          # feuille ①\n          - file: v1a.jpg\n",
+    );
+    expect(written).not.toContain("page retrouvée");
+    expect(written).not.toContain("中和集");
+  });
+
+  it("garde en tête du fichier d'un projet le commentaire posé au-dessus de lui", async () => {
+    const root = await contentRoot();
+    const plan = parsed(`
+projects:
+  - id: zhong-he-ji
+    title: 中和集
+    presentation: Les pièces tirées du 中和集.
+    theme: ink
+  # projet désigné par le calligraphe à l'arbitrage du scan 24
+  - id: qi-gong
+    title: 氣功
+    presentation: Lecture des ouvrages de Yang Jwing-Ming.
+    theme: ink # les thèmes attendront
+pieces: []
+`);
+
+    await applyImport(plan, { contentRoot: root });
+
+    expect(await readFile(join(root, "projects/qi-gong.yaml"), "utf8")).toBe(
+      [
+        "# projet désigné par le calligraphe à l'arbitrage du scan 24",
+        "title: 氣功",
+        "presentation: Lecture des ouvrages de Yang Jwing-Ming.",
+        "theme: ink # les thèmes attendront",
+        "",
+      ].join("\n"),
+    );
+    expect(await loadContent(root, { includeUnpublished: true })).toMatchObject({ ok: true });
+  });
+
+  it("écrit la source du texte que le plan attribue à la pièce", async () => {
+    const root = await contentRoot();
+    const plan = parsed(`
+pieces:
+  - slug: mo-xing-ji
+    title: 莫性急
+    status: made
+    published: false
+    source:
+      author: 蘇軾
+      dynasty: 宋
+    versions:
+      - id: v1
+        date: 2025-12-22
+        format: 2x7
+        columns: [莫性急平流緩進, 墨行機兔起鶻落]
+`);
+
+    await applyImport(plan, { contentRoot: root });
+
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces[0]?.source).toMatchObject({
+      author: "蘇軾",
+      dynasty: "宋",
+    });
   });
 });

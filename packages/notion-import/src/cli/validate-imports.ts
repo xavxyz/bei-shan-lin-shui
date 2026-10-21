@@ -24,7 +24,9 @@ async function main(argv: string[]): Promise<number> {
       new Set(versions.flatMap((version) => version.variations.map((variation) => variation.id))),
     );
 
-  const plans = (await readdir(importsDir)).filter((name) => name.endsWith(".plan.yaml")).sort();
+  /* Une fois tout importé, le dossier disparaît avec son dernier plan : rien n'attend. */
+  const entries = existsSync(importsDir) ? await readdir(importsDir) : [];
+  const plans = entries.filter((name) => name.endsWith(".plan.yaml")).sort();
   for (const name of plans) {
     const parsed = parsePlan(await readFile(join(importsDir, name), "utf8"));
     if (!parsed.ok) {

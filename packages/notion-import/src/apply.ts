@@ -1,11 +1,12 @@
 import { mkdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import sharp from "sharp";
-import { stringify } from "yaml";
+import { Document } from "yaml";
 import { imageEntry, variationEntry, versionEntry } from "@bsls/authoring/editing";
 import { PIECES_DIR, pieceFile, pieceImageFile, projectFile } from "@bsls/content";
 import { RESERVED_PROJECT_ID, pieceFrontmatterSchema } from "@bsls/schema";
 import { normalizeImage } from "@bsls/scans";
+import { placeComments, type PlanComments } from "./plan-comments.js";
 import type { ArbitratedPlan, PlannedPiece, PlannedProject } from "./plan-file.js";
 
 /** Une erreur d'application désigne le champ du plan à corriger. */
@@ -40,15 +41,19 @@ export async function applyImport(
 
     const written: string[] = [];
 
-    for (const project of plan.projects) {
+    const comments = plan.comments ?? new Map();
+
+    for (const [index, project] of plan.projects.entries()) {
       const file = projectFile(project.id);
-      await write(join(options.contentRoot, file), stringify(toProjectFile(project)));
+      const document = new Document(toProjectFile(project));
+      placeComments(document, comments, `projects.${index}`);
+      await write(join(options.contentRoot, file), document.toString(YAML_OPTIONS));
       written.push(file);
     }
 
-    for (const piece of plan.pieces) {
+    for (const [index, piece] of plan.pieces.entries()) {
       const file = pieceFile(piece.slug);
-      await write(join(options.contentRoot, file), toMarkdown(piece));
+      await write(join(options.contentRoot, file), toMarkdown(piece, comments, `pieces.${index}`));
       written.push(file);
     }
 
@@ -214,6 +219,7 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
     slug: piece.slug,
     ...(piece.projects.length > 0 ? { projects: piece.projects } : {}),
     status: piece.status,
+    ...(piece.source ? { source: piece.source } : {}),
     /* Les versions telles que le plan les porte, dans son ordre : rien n'est réorganisé. */
     versions: piece.versions.map((version) =>
       versionEntry(
@@ -241,8 +247,14 @@ function toProjectFile(project: PlannedProject): Record<string, unknown> {
   };
 }
 
-function toMarkdown(piece: PlannedPiece): string {
-  const frontmatter = stringify(toFrontmatter(piece), { lineWidth: 0, blockQuote: "literal" });
+/** Le texte tel qu'il a été écrit : ni repli des longues lignes, ni bloc replié. */
+const YAML_OPTIONS = { lineWidth: 0, blockQuote: "literal" } as const;
+
+/** Le frontmatter porte les commentaires que le plan posait sur la pièce, aux mêmes endroits. */
+function toMarkdown(piece: PlannedPiece, comments: PlanComments, path: string): string {
+  const document = new Document(toFrontmatter(piece));
+  placeComments(document, comments, path);
+  const frontmatter = document.toString(YAML_OPTIONS);
   return `---\n${frontmatter}---\n`;
 }
 

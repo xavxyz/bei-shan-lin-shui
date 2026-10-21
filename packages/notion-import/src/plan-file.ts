@@ -10,13 +10,15 @@ import {
   versionSchema,
   z,
 } from "@bsls/schema";
+import { collectComments, type PlanComments } from "./plan-comments.js";
 import type { ImportPlan, ImportWarning } from "./propose.js";
 
 /**
  * Le plan d'import : ce que l'agent propose, sur le disque, avant que rien ne
  * soit écrit dans le contenu. Le calligraphe le relit, corrige un statut, un
  * classement, un texte, puis le fait appliquer. Les avertissements y sont des
- * commentaires : ils guident la relecture et disparaissent à l'application.
+ * commentaires ; ceux qui restent après l'arbitrage suivent leur pièce dans le
+ * contenu.
  */
 
 /*
@@ -56,6 +58,7 @@ const plannedPieceSchema = pieceFieldsSchema
     title: true,
     status: true,
     projects: true,
+    source: true,
     published: true,
     translation: true,
   })
@@ -78,7 +81,8 @@ export const planFileSchema = z.object({
   pieces: z.array(plannedPieceSchema).default([]),
 });
 
-export type ArbitratedPlan = z.infer<typeof planFileSchema>;
+/** Les commentaires ne sont pas des champs : ils voyagent à côté, par chemin. */
+export type ArbitratedPlan = z.infer<typeof planFileSchema> & { comments?: PlanComments };
 export type PlannedPiece = z.infer<typeof plannedPieceSchema>;
 export type PlannedProject = z.infer<typeof plannedProjectSchema>;
 
@@ -144,5 +148,5 @@ export function parsePlan(text: string): ParseResult {
     };
   }
 
-  return { ok: true, plan: parsed.data };
+  return { ok: true, plan: { ...parsed.data, comments: collectComments(document) } };
 }
