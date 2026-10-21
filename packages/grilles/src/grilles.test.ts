@@ -348,7 +348,10 @@ describe("la mise en page sur A4", () => {
     expect(html).toContain(
       `marges : haut ${top.toFixed(1)} · droite ${right.toFixed(1)} · bas ${bottom.toFixed(1)} · gauche ${left.toFixed(1)} mm · carreau ${cell.toFixed(1)} mm · écart ${(cell / 2).toFixed(1)} mm`,
     );
-    expect(html).toContain(`colonnes à ${(ranks[0]!.y - top).toFixed(1)} mm sous le 橫批`);
+    // le vide entre le bas du 橫批 et le haut des colonnes, pas depuis le haut du 橫批
+    const [column, lintel] = ranks;
+    const gap = column!.y - (lintel!.y + lintel!.height);
+    expect(html).toContain(`colonnes à ${gap.toFixed(1)} mm sous le 橫批`);
   });
 
   it("partage chaque carreau en neuf, le 九宮格", async () => {

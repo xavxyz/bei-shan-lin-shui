@@ -179,7 +179,7 @@ function measuresLine(layout: SheetSummary, m: Measures): string {
     `carreau ${cote(layout.cell)} mm`,
   ];
   if (m.groups.length > 1) parts.push(`écart ${cote(m.groups[0]!.left - m.groups[1]!.right)} mm`);
-  if (m.lintel) parts.push(`colonnes à ${cote(m.lintel.hang - m.top)} mm sous le 橫批`);
+  if (m.lintel) parts.push(`colonnes à ${cote(m.lintel.hang - m.lintel.bottom)} mm sous le 橫批`);
   return parts.join(" · ");
 }
 
