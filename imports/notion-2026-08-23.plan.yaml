@@ -1706,7 +1706,7 @@ pieces:
       url: ""
       relations: []
   # Yang Jwing-Ming, Qigong Meditation: Small Circulation, 4-4 (調心) ;
-  # 《性命圭旨》 亨集, 「涵養本原，救護命寶」 : 沖妙云 (沖妙 est cité par le livre, il n'en est pas l'auteur)
+  # 《性命圭旨》 亨集, 「涵養本原，救護命寶」, après 沖妙云 ; la source seule, sans auteur, comme 調息
   - slug: diao-xin
     title: 調心
     status: experiment
@@ -1714,7 +1714,6 @@ pieces:
       - qi-gong
     published: false
     source:
-      author: 沖妙
       work: 性命圭旨
     versions:
       - id: v1
