@@ -194,7 +194,7 @@ describe("rattacher un scan à une pièce du contenu", () => {
         version: {
           id: "v2",
           date: "2026-10-11",
-          format: "2x7",
+          format: "[(2x7)]",
           columns: ["永永永", "丙午"],
           intention: "Reprise sur grille.\n",
         },
@@ -212,7 +212,7 @@ describe("rattacher un scan à une pièce du contenu", () => {
         `        status: tried
   - id: v2
     date: 2026-10-11
-    format: 2x7
+    format: "[(2x7)]"
     columns: [永永永, 丙午]
     intention: |
       Reprise sur grille.
@@ -278,7 +278,7 @@ describe("rattacher un scan à une pièce du contenu", () => {
     await attachScan(
       {
         piece: "yong-cao-shu",
-        version: { id: "v2", date: "2026-10-11", format: "A4" },
+        version: { id: "v2", date: "2026-10-11", format: "[(1x1)]" },
         variation: { id: "v2a", script: "caoshu", status: "kept" },
         image: { source: scan, kind: "work", featured: true },
       },
@@ -308,7 +308,7 @@ describe("un rattachement refusé n'écrit rien", () => {
     [
       "une version déjà prise",
       {
-        version: { id: "v1", date: "2026-10-11", format: "A4" },
+        version: { id: "v1", date: "2026-10-11", format: "[(1x1)]" },
         variation: { id: "v1c", script: "caoshu", status: "kept" },
       },
       "version.id",
@@ -331,7 +331,7 @@ describe("un rattachement refusé n'écrit rien", () => {
     [
       "une date illisible",
       {
-        version: { id: "v2", date: "pas une date", format: "A4" },
+        version: { id: "v2", date: "pas une date", format: "[(1x1)]" },
         variation: { id: "v2a", script: "caoshu", status: "kept" },
       },
       "version.date",

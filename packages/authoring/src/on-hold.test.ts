@@ -9,7 +9,7 @@ describe("describeOnHold", () => {
     const root = await yongTree();
     await createPiece(root, {
       title: "山居秋暝",
-      version: { date: "2026-10-16", format: "A4" },
+      version: { date: "2026-10-16", format: "[(1x1)]" },
       published: false,
     });
 

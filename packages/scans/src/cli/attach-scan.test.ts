@@ -60,7 +60,7 @@ describe("attach:scan, appelé par la skill scans", () => {
 version:
   id: v2
   date: 2026-02-11
-  format: 2x7
+  format: "[(2x7)]"
   columns: [莫性急平流緩進, 墨行機兔起鶻落]
 variation:
   id: v2a

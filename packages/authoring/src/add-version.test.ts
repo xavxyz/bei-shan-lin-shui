@@ -5,7 +5,7 @@ import { YONG, YONG_HEAD, YONG_TAIL, YONG_V1, loadYong, yongTree } from "./test-
 
 const realisation = {
   date: "2026-10-16",
-  format: "A3",
+  format: "[(1x1)]",
   columns: ["永"],
   intention: "Refaire le 永 plus grand,\nsur papier de riz.",
 };
@@ -21,7 +21,7 @@ describe("addVersion", () => {
     expect(piece?.versions.map((version) => version.id)).toEqual(["v1", "v2"]);
     expect(piece?.versions[1]).toMatchObject({
       date: "2026-10-16",
-      format: "A3",
+      format: "[(1x1)]",
       intention: "Refaire le 永 plus grand,\nsur papier de riz.",
       variations: [],
     });
@@ -80,6 +80,29 @@ describe("addVersion", () => {
 
     expect(!result.ok && result.message).toMatch(/^format : /);
     expect(await readPieceFile(root, "yong-cao-shu")).toBe(YONG);
+  });
+
+  it("refuse sans rien écrire un format hors de la notation, en disant où la lecture bute", async () => {
+    const root = await yongTree();
+
+    const result = await addVersion(root, "yong-cao-shu", {
+      ...realisation,
+      format: "1x1 + 1x4 + 1x1",
+    });
+
+    expect(!result.ok && result.message).toContain(
+      "format : format illisible : « 1x1 + 1x4 + 1x1 » — attendu « [ » à la position 1",
+    );
+    expect(!result.ok && result.message).toContain("[(1x3, 9x7), (1x4, 3x7)]");
+    expect(await readPieceFile(root, "yong-cao-shu")).toBe(YONG);
+  });
+
+  it("accepte un format « à préciser », tant que la disposition n'est pas connue", async () => {
+    const root = await yongTree();
+
+    const result = await addVersion(root, "yong-cao-shu", { ...realisation, format: "à préciser" });
+
+    expect(result).toMatchObject({ ok: true, id: "v2" });
   });
 
   it("refuse une variation hors vocabulaire, en nommant le champ de la version", async () => {
