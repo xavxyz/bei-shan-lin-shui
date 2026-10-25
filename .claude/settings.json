@@ -1,5 +1,29 @@
 {
   "permissions": {
     "allow": ["Bash(git push *)", "Bash(gh issue comment *)", "Bash(gh pr merge *)"]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -d node_modules || ! test -f pnpm-lock.yaml || pnpm install --frozen-lockfile --prefer-offline >&2"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "EnterWorktree",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -d node_modules || ! test -f pnpm-lock.yaml || pnpm install --frozen-lockfile --prefer-offline >&2"
+          }
+        ]
+      }
+    ]
   }
 }
