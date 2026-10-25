@@ -57,7 +57,10 @@ function wire(trigger: HTMLElement): void {
       show(trigger, false);
     }
   });
-  focusTarget.addEventListener("focus", () => open(trigger));
+  // Le focus du clavier seul : un clic sur l'œuvre du mur ne doit pas ouvrir le pinyin de son titre.
+  focusTarget.addEventListener("focus", () => {
+    if (focusTarget.matches(":focus-visible")) open(trigger);
+  });
   focusTarget.addEventListener("blur", () => show(trigger, false));
 }
 
