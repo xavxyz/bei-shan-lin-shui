@@ -1,9 +1,7 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
 import VersionFacts from "./VersionFacts.astro";
-import VersionText from "./VersionText.astro";
-import VersionVariations from "./VersionVariations.astro";
-import { hasImage } from "../version-images.js";
+import VersionVisAVis from "./VersionVisAVis.astro";
 
 type Props = {
   piece: LoadedPiece;
@@ -24,37 +22,14 @@ const headingId = "versions-anterieures";
       </h3>
       <ol class="evolution__list">
         {earlier.map((version) => (
-          <li
-            class:list={["piece", { "piece--textual": !hasImage(version) }]}
-            data-testid="earlier-version"
+          <VersionVisAVis
+            version={version}
+            title={piece.title.traditional}
+            tag="li"
+            testIdPrefix="earlier-version"
           >
-            {hasImage(version) ? (
-              <div class="piece__work">
-                <VersionVariations version={version} title={piece.title.traditional} />
-              </div>
-            ) : null}
-
-            <div class="piece__text">
-              {version.columns.length > 0 ? <VersionText version={version} /> : null}
-
-              <VersionFacts version={version} testIdPrefix="earlier-version" />
-
-              {hasImage(version) ? null : (
-                <VersionVariations version={version} title={piece.title.traditional} />
-              )}
-
-              {version.intention ? (
-                <div class="piece__prose">
-                  <div class="reading__block">
-                    <p class="reading__label">Intention</p>
-                    <p class="reading__body" data-testid="earlier-version-intention">
-                      {version.intention.trim()}
-                    </p>
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </li>
+            <VersionFacts slot="facts" version={version} testIdPrefix="earlier-version" />
+          </VersionVisAVis>
         ))}
       </ol>
     </section>
