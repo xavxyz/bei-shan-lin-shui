@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import "../styles/site-font.css";
+import { ClientRouter } from "astro:transitions";
 import SiteHeader from "../components/SiteHeader.astro";
 import { SITE_FONT_FACE, SITE_FONT_URL, SITE_TITLE } from "../site.js";
 
@@ -9,8 +10,19 @@ type Props = {
 };
 
 const { title } = Astro.props;
-// Seul l'accueil porte l'en-tête en grand.
-const home = Astro.url.pathname === "/";
+// Seul l'accueil porte l'en-tête en grand : `data-page` le dit à l'en-tête persistant.
+const page = Astro.url.pathname === "/" ? "home" : "inner";
+
+/**
+ * Le contenu s'efface, puis le nouveau apparaît une fois l'ancien parti : 250 ms
+ * chacun, sans chevauchement (pagetransitions.netlify.app). Les images clés
+ * `sortie` et `entree` sont dans `global.css`.
+ */
+const fade = {
+  old: { name: "sortie", duration: "250ms", easing: "ease-in", fillMode: "both" },
+  new: { name: "entree", duration: "250ms", easing: "ease-out", delay: "250ms", fillMode: "both" },
+};
+const pageFade = { forwards: fade, backwards: fade };
 ---
 
 <!doctype html>
@@ -21,13 +33,28 @@ const home = Astro.url.pathname === "/";
     <title>{title} — {SITE_TITLE}</title>
     <link rel="preload" href={SITE_FONT_URL} as="font" type="font/woff2" crossorigin />
     <style is:inline set:html={SITE_FONT_FACE}></style>
+    <ClientRouter />
   </head>
   <body>
     <div class="page">
-      <SiteHeader large={home} />
-      <main>
+      <SiteHeader />
+      <main
+        id="contenu"
+        data-page={page}
+        tabindex="-1"
+        transition:name="contenu"
+        transition:animate={pageFade}
+      >
         <slot />
       </main>
     </div>
+    <script>
+      // Après une navigation sans rechargement, le focus reprend au début du
+      // nouveau contenu, comme au chargement d'une page. `astro:after-swap` ne
+      // suit que les navigations : le premier chargement garde son focus.
+      document.addEventListener("astro:after-swap", () => {
+        document.getElementById("contenu")?.focus({ preventScroll: true });
+      });
+    </script>
   </body>
 </html>

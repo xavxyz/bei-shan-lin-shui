@@ -42,6 +42,30 @@ a:hover {
   padding: 2.5rem var(--gutter) 5rem;
 }
 
+/* D'une page à l'autre, le contenu s'efface puis le nouveau apparaît (`Layout.astro`). */
+@keyframes sortie {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes entree {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Le contenu ne prend le focus que pour y faire commencer la navigation au clavier. */
+#contenu:focus {
+  outline: none;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -78,8 +102,11 @@ a:hover {
   margin: 0;
 }
 
-/* Sur l'accueil, le titre et la devise en grand, centrés, sur une grande hauteur. */
-.site-header--large {
+/*
+ * Sur l'accueil, le titre et la devise en grand, centrés, sur une grande hauteur.
+ * L'en-tête persiste d'une page à l'autre : c'est le `<main>` de la page qui le dit.
+ */
+.page:has(> main[data-page="home"]) > .site-header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -91,7 +118,7 @@ a:hover {
   text-align: center;
 }
 
-.site-header--large .site-header__title {
+.page:has(> main[data-page="home"]) > .site-header .site-header__title {
   font-size: clamp(3rem, 9vw, 7rem);
   letter-spacing: 0.35em;
   line-height: 1.2;
@@ -99,7 +126,7 @@ a:hover {
   padding-inline-start: 0.35em;
 }
 
-.site-header--large .site-header__motto {
+.page:has(> main[data-page="home"]) > .site-header .site-header__motto {
   font-size: clamp(1.1rem, 2.2vw, 1.6rem);
   letter-spacing: 0.04em;
 }
