@@ -24,8 +24,6 @@ const fade = {
   new: { name: "entree", duration: "250ms", easing: "ease-out", delay: "250ms", fillMode: "both" },
 };
 const pageFade = { forwards: fade, backwards: fade };
-// Sans View Transitions, la page change d'un coup : le repli `swap` d'Astro
-// remplace le contenu sans simuler les fondus.
 ---
 
 <!doctype html>
@@ -36,6 +34,7 @@ const pageFade = { forwards: fade, backwards: fade };
     <title>{title} — {SITE_TITLE}</title>
     <link rel="preload" href={SITE_FONT_URL} as="font" type="font/woff2" crossorigin />
     <style is:inline set:html={siteFontFace}></style>
+    {/* Sans View Transitions, le repli `swap` change la page d'un coup, sans fondus. */}
     <ClientRouter fallback="swap" />
   </head>
   <body>
