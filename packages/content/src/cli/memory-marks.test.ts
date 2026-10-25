@@ -6,11 +6,13 @@ import { writeTree } from "../test-support/fixture-tree.js";
 
 const run = promisify(execFile);
 const cli = fileURLToPath(new URL("./memory-marks.ts", import.meta.url));
+/** Le tsx du dépôt : depuis un dossier temporaire, `npx tsx` le téléchargerait. */
+const tsx = fileURLToPath(new URL("../../../../node_modules/.bin/tsx", import.meta.url));
 
 /** Exécute la vérification comme `pnpm validate:content`, depuis la racine donnée. */
 async function check(root: string, dirs: string[]) {
   try {
-    const { stdout } = await run("npx", ["tsx", cli, ...dirs], { cwd: root });
+    const { stdout } = await run(tsx, [cli, ...dirs], { cwd: root });
     return { code: 0, output: stdout };
   } catch (error) {
     const failure = error as { code?: number; stdout: string; stderr: string };
