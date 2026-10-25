@@ -59,7 +59,7 @@ describe("la police des textes publiés", () => {
 
   it("dessine la date chinoise de chaque version, en traditionnel et en simplifié", async () => {
     const content = await load();
-    const font = open(await subsetSiteFont(publishedTexts(content)));
+    const font = open((await subsetSiteFonts(publishedTexts(content))).twKai);
 
     const dates = content.pieces[0]!.versions.map(
       (version) => `${version.chineseDate}${version.chineseDateSimplified}`,
