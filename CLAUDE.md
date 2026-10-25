@@ -2,6 +2,8 @@
 
 Système de suivi et de publication de calligraphie chinoise. Le dépôt est la source de vérité : le contenu vit sur le disque, le site en est une projection.
 
+Réponds au calligraphe en français.
+
 ## Où vivent les choses
 
 - `content/` — le contenu réel. Projets en YAML, pièces en Markdown à frontmatter YAML, images à côté de leur pièce.
@@ -31,22 +33,17 @@ Le format d'une pièce est décrit par `pieceFrontmatterSchema` (`packages/schem
 
 La saisie passe par les skills `nouvelle-piece`, `version-ou-variation`, `veille` et `scans`, en conversation avec le calligraphe. Elles écrivent par `pnpm piece`, qui n'écrase rien et refuse ce que le schéma refuse.
 
+## Git
+
+- Chaque tâche dans son worktree, parti d'un `origin/main` tout juste récupéré ; le checkout principal reste tel que le calligraphe l'a laissé.
+- Une branche au nom inédit sur `origin`, créée avec le worktree : `git worktree add -b <branche> .claude/worktrees/<nom> origin/main` (`EnterWorktree` la renomme `worktree-…`).
+- Le hook pre-commit n'existe qu'après `pnpm install --frozen-lockfile --prefer-offline` : `.claude/settings.json` le lance au démarrage et après `EnterWorktree` ; dans un worktree de sous-agent, lance-le toi-même. `imports/scans`, gitignoré, reste dans le checkout principal.
+- Une préoccupation par branche.
+- Chaque compte rendu nomme la branche et le numéro de PR.
+
 ## Importer depuis Notion
 
-L'import du 2026-08-23 est appliqué (PR #62) : `content/` est la seule source de vérité, et son plan ne vit plus que dans l'historique git. La commande reste, pour un export à venir.
-
-L'import se fait en deux temps, et le calligraphe arbitre entre les deux :
-
-```
-pnpm import:notion plan <export> --out imports/notion-<date>.plan.yaml
-pnpm import:notion apply imports/notion-<date>.plan.yaml
-```
-
-`<export>` est le dossier d'export Notion « Markdown & CSV », ou son seul fichier CSV. L'étape `plan` n'écrit que le fichier de plan : chaque page devient une pièce, avec une version initiale, un statut et un classement **proposés**, et un commentaire `# à arbitrer` partout où l'agent a tranché sans savoir. Le plan porte ses versions sous la forme du frontmatter (`versions: [...]`, chacune avec ses `variations:`) : tant qu'il n'est pas appliqué, c'est lui la source de vérité, et une nouvelle réalisation y devient une nouvelle version. Les relations inter-pages de Notion ne sont pas reconduites : elles servent une dernière fois à repérer les projets, puis disparaissent — la page-pôle elle-même devient un projet et n'appartient pas au projet qu'elle fait naître. L'étape `apply` vérifie le plan en entier — jusqu'à la lisibilité de chaque image — avant d'écrire quoi que ce soit, écrit les versions telles quelles avec les commentaires du plan aux mêmes endroits (ceux des blocs `notion:` restent au plan), normalise les images à l'écart du contenu, et n'écrase jamais une pièce existante.
-
-Un plan resté à l'ancienne forme, une `version:` unique par pièce, se convertit sur place, commentaires compris, et la commande se rejoue sans risque : `pnpm import:plan-versions imports/notion-<date>.plan.yaml`.
-
-Déposez l'export dans un dossier à lui : `plan` parcourt tout ce qui entoure le CSV pour retrouver les sous-pages et leurs fichiers.
+L'import du 2026-08-23 est appliqué (PR #62) ; la commande reste pour un export à venir, en deux temps arbitrés par le calligraphe : `pnpm import:notion plan <export> --out imports/notion-<date>.plan.yaml`, puis `pnpm import:notion apply <plan>`. Options : `pnpm import:notion --help`. Le détail du plan et de ses deux étapes : `git show 99d356d:CLAUDE.md`.
 
 ## Tests
 
