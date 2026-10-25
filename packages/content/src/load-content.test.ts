@@ -272,7 +272,7 @@ describe("date chinoise", () => {
         },
       },
     });
-    return content.pieces[0]!.versions[0]!.chineseDate;
+    return content.pieces[0]!.versions[0]!.chineseDate.traditional;
   }
 
   it("dérive l'année en tronc et branche et le jieqi de la date stockée", async () => {

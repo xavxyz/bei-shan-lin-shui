@@ -66,8 +66,7 @@ function version(id: string, variations: LoadedVariation[]): LoadedVersion {
   return loadedVersionSchema.parse({
     id,
     date: "2026-01-01",
-    chineseDate: "乙巳冬至",
-    chineseDateSimplified: "乙巳冬至",
+    chineseDate: { traditional: "乙巳冬至", simplified: "乙巳冬至", pinyin: "yǐ sì dōng zhì" },
     format: "à préciser",
     formatLabel: { readable: false },
     columns: [],

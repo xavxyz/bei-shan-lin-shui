@@ -238,10 +238,12 @@ export const loadedVariationSchema = variationSchema.extend({
 export const loadedVersionSchema = versionSchema.extend({
   /** Date au format `YYYY-MM-DD`, sérialisable. */
   date: z.string(),
-  /** Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais stockés. */
-  chineseDate: z.string(),
-  /** La même date chinoise en simplifié (`丙午处暑`), telle que le site l'affiche. */
-  chineseDateSimplified: z.string(),
+  /**
+   * Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais
+   * stockés ; et, comme tout texte chinois, son simplifié (`丙午处暑`), tel que
+   * le site l'affiche.
+   */
+  chineseDate: chineseTextSchema,
   /**
    * Le format dit en français (`4 colonnes de 5 caractères`), dérivé de la
    * notation, jamais stocké. Une notation illisible n'a pas de libellé : elle
