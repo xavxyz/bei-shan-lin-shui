@@ -46,7 +46,7 @@ export function publishedTexts(content: Pick<Content, "pieces" | "projects">): P
       both(piece.title),
       ...piece.versions.flatMap((version) => [
         ...version.columns.map(both),
-        `${version.chineseDate}\n${version.chineseDateSimplified}`,
+        both(version.chineseDate),
       ]),
       ...(source?.full_text ? [both(source.full_text)] : []),
       ...(source?.attribution ? [both(source.attribution)] : []),

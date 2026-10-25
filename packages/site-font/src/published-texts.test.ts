@@ -62,7 +62,7 @@ describe("la police des textes publiés", () => {
     const font = open((await subsetSiteFonts(publishedTexts(content))).twKai);
 
     const dates = content.pieces[0]!.versions.map(
-      (version) => `${version.chineseDate}${version.chineseDateSimplified}`,
+      (version) => `${version.chineseDate.traditional}${version.chineseDate.simplified}`,
     ).join("");
     expect(dates).not.toBe("");
     expect(undrawn(font, dates)).toEqual([]);

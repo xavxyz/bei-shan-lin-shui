@@ -257,7 +257,6 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
   const versions = [...piece.versions]
     .sort((a, b) => a.date.getTime() - b.date.getTime())
     .map((version): LoadedVersion => {
-      const chineseDate = deriveChineseText(deriveChineseDate(toIsoDate(version.date)));
       const variations = version.variations.map((variation): LoadedVariation => {
         const images = variation.images.map((image) => ({
           ...image,
@@ -273,8 +272,7 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
       return {
         ...version,
         date: toIsoDate(version.date),
-        chineseDate: chineseDate.traditional,
-        chineseDateSimplified: chineseDate.simplified,
+        chineseDate: deriveChineseText(deriveChineseDate(toIsoDate(version.date))),
         formatLabel: deriveFormatLabel(version.format),
         columns: version.columns.map((column) => deriveChineseText(column, overrides)),
         variations,

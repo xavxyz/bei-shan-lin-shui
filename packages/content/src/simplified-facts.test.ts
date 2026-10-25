@@ -27,8 +27,8 @@ describe("faits en simplifié", () => {
   it("donne la date chinoise en simplifié, à côté du traditionnel", async () => {
     const version = (await loadPiece()).versions[0]!;
 
-    expect(version.chineseDate).toBe("丙午處暑");
-    expect(version.chineseDateSimplified).toBe("丙午处暑");
+    expect(version.chineseDate.traditional).toBe("丙午處暑");
+    expect(version.chineseDate.simplified).toBe("丙午处暑");
   });
 
   it("donne l'attribution de la source, auteur, œuvre puis dynastie, en simplifié", async () => {
