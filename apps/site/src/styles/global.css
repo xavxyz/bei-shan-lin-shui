@@ -42,6 +42,11 @@ a:hover {
   padding: 2.5rem var(--gutter) 5rem;
 }
 
+/* Le contenu ne prend le focus que pour y faire commencer la navigation au clavier. */
+#contenu:focus {
+  outline: none;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));

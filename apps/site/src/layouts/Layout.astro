@@ -29,9 +29,17 @@ const page = Astro.url.pathname === "/" ? "home" : "inner";
   <body>
     <div class="page">
       <SiteHeader />
-      <main id="contenu" data-page={page}>
+      <main id="contenu" data-page={page} tabindex="-1">
         <slot />
       </main>
     </div>
+    <script>
+      // Après une navigation sans rechargement, le focus reprend au début du
+      // nouveau contenu, comme au chargement d'une page. `astro:after-swap` ne
+      // suit que les navigations : le premier chargement garde son focus.
+      document.addEventListener("astro:after-swap", () => {
+        document.getElementById("contenu")?.focus({ preventScroll: true });
+      });
+    </script>
   </body>
 </html>

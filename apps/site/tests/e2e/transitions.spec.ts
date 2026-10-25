@@ -51,3 +51,51 @@ test("l'en-tête reste en place d'une page à l'autre, grand sur l'accueil et r�
   await stillMarked(page);
   await expect.poll(() => titleSize(page)).toBeGreaterThanOrEqual(48);
 });
+
+test("après une navigation sans rechargement, les flèches pilotent le carrousel de la nouvelle page", async ({
+  page,
+}) => {
+  const carousel = page.getByTestId("carousel").first();
+  const position = carousel.getByTestId("carousel-position");
+  const mounted = carousel.getByRole("button", { name: "Image suivante" });
+
+  await page.goto("/");
+  await mark(page);
+  await page.getByRole("link", { name: "墨寺㞢文刻" }).click();
+  await expect(page).toHaveURL("/pieces/mo-si-wen-ke");
+  await expect(mounted).toBeVisible();
+  await page.keyboard.press("ArrowRight");
+  await expect(position).toHaveText("2 / 10");
+
+  // D'une pièce à l'autre : le carrousel quitté ne capte plus rien.
+  await banner(page).getByRole("link", { name: "背山臨水" }).click();
+  await page.getByRole("link", { name: "新年快樂，馬到成功" }).click();
+  await expect(page).toHaveURL("/pieces/xin-nian-kuai-le-ma-dao-cheng-gong");
+  await expect(mounted).toBeVisible();
+  await page.keyboard.press("ArrowRight");
+  await expect(position).toHaveText("2 / 2");
+  await stillMarked(page);
+});
+
+test("après une navigation au clavier, le focus est au début du nouveau contenu", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await mark(page);
+
+  await page.getByRole("link", { name: "永草書" }).first().focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL("/ge-zhi-yan-jiu/yong-cao-shu");
+  await stillMarked(page);
+  await expect(page.getByRole("main")).toBeFocused();
+
+  // Tab mène au premier lien du contenu, pas à l'en-tête ni au bas de la page.
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("main").getByRole("link").first()).toBeFocused();
+
+  // Revenir par l'en-tête, qui reste en place, ramène aussi le focus au contenu.
+  await banner(page).getByRole("link", { name: "背山臨水" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL("/");
+  await expect(page.getByRole("main")).toBeFocused();
+});
