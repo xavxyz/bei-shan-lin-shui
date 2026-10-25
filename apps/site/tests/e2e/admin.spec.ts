@@ -15,7 +15,11 @@ test("en mode admin, une pièce non publiée figure dans son projet et dans son 
   page,
 }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: /中和集/ })).toContainText("2 pièces");
+  await expect(
+    page
+      .getByTestId("project-row")
+      .filter({ has: page.getByRole("heading", { name: "中和集", exact: true }) }),
+  ).toContainText("2 pièces");
 
   await page.goto("/zhong-he-ji");
   const card = page.getByTestId("piece-link").filter({ hasText: "龜蛇相交" });
@@ -68,6 +72,19 @@ test("en mode admin, l'accueil range entre le mur et les projets les pièces san
 
   await row.getByRole("link", { name: "說到辛酸處" }).click();
   await expect(page).toHaveURL("/hong-lou-meng/shuo-dao-xin-suan-chu");
+});
+
+test("en mode admin, une rangée de projet ne compte que les œuvres de son mur", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const row = page
+    .getByTestId("project-row")
+    .filter({ has: page.getByRole("heading", { name: "紅樓夢", exact: true }) });
+  await expect(row.getByText("1 pièce", { exact: true })).toBeVisible();
+
+  await row.getByRole("link", { name: "紅樓夢" }).click();
+  await expect(page.getByRole("heading", { name: "Pièces · 1" })).toBeVisible();
 });
 
 test("en mode admin, la page projet range ses pièces sans scan sous ses œuvres", async ({

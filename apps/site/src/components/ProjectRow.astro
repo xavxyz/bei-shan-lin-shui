@@ -1,0 +1,41 @@
+---
+import type { LoadedPiece, LoadedProject } from "@bsls/schema";
+
+type Props = {
+  project: LoadedProject;
+  /** Les œuvres du projet, telles que son mur les accroche (`hang`) : elles seules se comptent. */
+  works: LoadedPiece[];
+};
+
+const { project, works } = Astro.props;
+// La couverture : l'œuvre que le mur du projet accroche en premier, la plus récente.
+const cover = works[0];
+---
+
+<li class="project-row grid" data-testid="project-row">
+  <div class="project-row__head">
+    <h3 class="project-row__title" lang="zh-Hant">
+      <a href={project.href}>{project.title.traditional}</a>
+    </h3>
+    {
+      project.gloss ? (
+        <p class="gloss" data-testid="gloss">
+          {project.gloss}
+        </p>
+      ) : null
+    }
+    <p class="project-row__count">{works.length} pièce{works.length > 1 ? "s" : ""}</p>
+  </div>
+  {project.presentation ? <p class="project-row__presentation">{project.presentation}</p> : null}
+  {
+    cover?.featuredImage ? (
+      <img
+        class="project-row__cover"
+        src={cover.featuredImage.src}
+        alt={cover.title.traditional}
+        lang="zh-Hant"
+        loading="lazy"
+      />
+    ) : null
+  }
+</li>

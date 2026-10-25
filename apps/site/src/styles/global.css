@@ -110,40 +110,6 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
-.card-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-}
-
-.card {
-  border: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--paper) 80%, white);
-  padding: 1.25rem;
-  height: 100%;
-  display: grid;
-  gap: 0.5rem;
-  align-content: start;
-}
-
-.card__title {
-  margin: 0;
-  font-size: 1.15rem;
-}
-
-.card__title--cn {
-  font-family: var(--serif-cn);
-  letter-spacing: 0.08em;
-}
-
-.card__meta {
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
 /* La glose : une phrase française, sous le titre, plus discrète que lui. */
 .gloss {
   color: var(--muted);
@@ -153,6 +119,76 @@ a:hover {
 
 .piece__header .gloss {
   font-size: 1.15rem;
+}
+
+/* Les rangées de projets : la tête en colonnes 1 à 4, la présentation en 5 à 9,
+   la couverture en 10 à 12. */
+.project-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project-row {
+  align-items: start;
+  row-gap: 1.5rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.project-row__head {
+  grid-column: 1 / span 4;
+}
+
+.project-row__title {
+  font-family: var(--serif-cn);
+  font-size: 1.75rem;
+  font-weight: normal;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.5rem;
+}
+
+.project-row__title a {
+  text-decoration: none;
+}
+
+.project-row__count {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0.75rem 0 0;
+}
+
+.project-row__presentation {
+  grid-column: 5 / span 5;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.project-row__cover {
+  grid-column: 10 / -1;
+  justify-self: end;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 16rem;
+}
+
+@media (max-width: 64rem) {
+  .project-row__head {
+    grid-column: 1 / span 7;
+  }
+
+  .project-row__cover {
+    grid-column: 8 / -1;
+    grid-row: 1;
+  }
+
+  .project-row__presentation {
+    grid-column: 1 / -1;
+  }
 }
 
 /* Le mur : les œuvres, à hauteur fixe et largeur libre, jamais recadrées ni

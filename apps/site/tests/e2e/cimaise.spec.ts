@@ -60,6 +60,16 @@ test("ailleurs, l'en-tête tient sur une ligne : le titre, puis la devise en ita
   }
 });
 
+test("toutes les pages sont sur le même papier teinté", async ({ page }) => {
+  for (const path of ["/", "/ge-zhi-yan-jiu", "/hong-lou-meng", "/ge-zhi-yan-jiu/yong-cao-shu"]) {
+    await page.goto(path);
+    const paper = await page
+      .locator("body")
+      .evaluate((body) => getComputedStyle(body).backgroundColor);
+    expect(paper, path).toBe("rgb(247, 244, 238)");
+  }
+});
+
 function wall(page: Page, count: number) {
   return page.getByRole("region", { name: `Pièces · ${count}` });
 }
@@ -80,6 +90,73 @@ test("le mur montre toutes les pièces visibles, de la plus récente à la plus 
     "新年快樂，馬到成功", // 2026-02-17
     "莫性急", // 2026-02-11
   ]);
+});
+
+function projectRow(page: Page, title: string) {
+  return page
+    .getByRole("region", { name: "Projets" })
+    .getByTestId("project-row")
+    .filter({ has: page.getByRole("heading", { name: title, exact: true }) });
+}
+
+test("une rangée de projet montre sa tête, sa présentation, puis son œuvre de couverture", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/");
+
+  const row = projectRow(page, "紅樓夢");
+  const head = row.getByRole("heading", { name: "紅樓夢" });
+  await expect(head).toHaveAttribute("lang", "zh-Hant");
+  const count = row.getByText("1 pièce", { exact: true });
+  await expect(count).toBeVisible();
+  const presentation = row.getByText(/Le 紅樓夢 par ses vers et ses inscriptions/);
+  await expect(presentation).toBeVisible();
+  const cover = row.getByRole("img", { name: "成人不自在，自在不成人" });
+  await expect(cover).toBeVisible();
+
+  const [headBox, countBox, presentationBox, coverBox] = await Promise.all(
+    [head, count, presentation, cover].map(async (element) => (await element.boundingBox())!),
+  );
+  expect(countBox.y).toBeGreaterThanOrEqual(headBox.y + headBox.height - 1);
+  expect(presentationBox.x).toBeGreaterThanOrEqual(
+    Math.max(headBox.x + headBox.width, countBox.x + countBox.width),
+  );
+  expect(coverBox.x).toBeGreaterThanOrEqual(presentationBox.x + presentationBox.width);
+
+  await head.getByRole("link").click();
+  await expect(page).toHaveURL("/hong-lou-meng");
+});
+
+test("une rangée de projet montre sa glose sous son titre, et rien à la place d'une présentation absente", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const row = projectRow(page, "戈之研究");
+  await expect(row.getByTestId("gloss")).toHaveText("Explorations personnelles");
+  await expect(row.getByText("1 pièce", { exact: true })).toBeVisible();
+  await expect(row.getByRole("img", { name: "永草書" })).toBeVisible();
+  await expect(row.getByRole("paragraph")).toHaveText(["Explorations personnelles", "1 pièce"]);
+});
+
+test("l'œuvre de couverture d'un projet garde ses proportions ; un projet sans pièce visible n'en a pas", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const cover = projectRow(page, "中和集").getByRole("img", { name: "虛心實腹" });
+  await cover.scrollIntoViewIfNeeded();
+  await expect(cover).toHaveJSProperty("complete", true);
+  const ratios = await cover.evaluate((image: HTMLImageElement) => {
+    const box = image.getBoundingClientRect();
+    return { natural: image.naturalWidth / image.naturalHeight, rendered: box.width / box.height };
+  });
+  expect(ratios.rendered).toBeCloseTo(ratios.natural, 2);
+
+  const empty = projectRow(page, "易筋經");
+  await expect(empty.getByText("0 pièce", { exact: true })).toBeVisible();
+  await expect(empty.getByRole("img")).toHaveCount(0);
 });
 
 /** Chaque œuvre du mur a la hauteur donnée, et la largeur que lui dictent ses proportions. */
