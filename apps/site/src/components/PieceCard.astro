@@ -1,5 +1,6 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
+import Gloss from "./Gloss.astro";
 import Pinyin from "./Pinyin.astro";
 import { workTransitionName } from "../work-transition.js";
 
@@ -28,13 +29,7 @@ const { piece, href } = Astro.props;
     <h3 class="wall__title" lang="zh-Hant">
       <Pinyin pinyin={piece.title.pinyin}>{piece.title.traditional}</Pinyin>
     </h3>
-    {
-      piece.gloss ? (
-        <p class="gloss" data-testid="gloss">
-          {piece.gloss}
-        </p>
-      ) : null
-    }
+    <Gloss gloss={piece.gloss} />
     {piece.published ? null : <span class="tag tag--unpublished">non publiée</span>}
   </a>
 </li>

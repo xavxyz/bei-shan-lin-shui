@@ -1,0 +1,68 @@
+---
+import type { LoadedVersion } from "@bsls/schema";
+import VersionText from "./VersionText.astro";
+import VersionVariations from "./VersionVariations.astro";
+
+type Props = {
+  version: LoadedVersion;
+  /** Le titre de la pièce, en traditionnel, pour les images de la version. */
+  title: string;
+  /** L'élément qui porte la version : `li` dans la liste des versions antérieures. */
+  tag: "div" | "li";
+  /** Préfixe des repères de test : `version` pour la courante, `earlier-version` sinon. */
+  testIdPrefix: "version" | "earlier-version";
+  /** Le nom de transition de l'œuvre, pour la version courante. */
+  transitionName?: string;
+};
+
+/*
+ * Une version en Vis-à-vis : son œuvre à gauche, qui tient à l'écran ; à
+ * droite, son texte, ses faits et son intention. Sans image, le texte seul,
+ * et les variations sans scan sous les faits.
+ *
+ * Fentes : `header` avant le texte ; `facts`, les faits de la version ;
+ * `prose`, après l'intention, dans le même bloc de lecture.
+ */
+const { version, title, tag: Element, testIdPrefix, transitionName } = Astro.props;
+const withWork = version.hasImage;
+// Rendue d'avance : une fente passée vide (`null`) ne doit pas ouvrir de bloc de lecture.
+const prose = Astro.slots.has("prose") ? (await Astro.slots.render("prose")).trim() : "";
+const intention = version.intention?.trim();
+const intentionTestId = `${testIdPrefix}-intention`;
+const withProse = Boolean(intention) || prose !== "";
+---
+
+<Element class:list={["piece", { "piece--textual": !withWork }]} data-testid={testIdPrefix}>
+  {
+    withWork ? (
+      <div class="piece__work">
+        <VersionVariations version={version} title={title} transitionName={transitionName} />
+      </div>
+    ) : null
+  }
+
+  <div class="piece__text">
+    <slot name="header" />
+
+    {version.columns.length > 0 ? <VersionText version={version} /> : null}
+
+    <slot name="facts" />
+
+    {withWork ? null : <VersionVariations version={version} title={title} />}
+
+    {
+      withProse ? (
+        <div class="piece__prose">
+          {intention ? (
+            <div class="reading__block">
+              <p class="reading__label">Intention</p>
+              {/* `set:text` : `reading__body` garde les blancs (`pre-wrap`), même de mise en forme. */}
+              <p class="reading__body" data-testid={intentionTestId} set:text={intention} />
+            </div>
+          ) : null}
+          <Fragment set:html={prose} />
+        </div>
+      ) : null
+    }
+  </div>
+</Element>

@@ -1,10 +1,10 @@
 ---
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
 import EarlierVersions from "./EarlierVersions.astro";
+import Gloss from "./Gloss.astro";
 import Pinyin from "./Pinyin.astro";
 import VersionFacts from "./VersionFacts.astro";
-import VersionText from "./VersionText.astro";
-import VersionVariations from "./VersionVariations.astro";
+import VersionVisAVis from "./VersionVisAVis.astro";
 import { workTransitionName } from "../work-transition.js";
 
 type Props = {
@@ -14,94 +14,74 @@ type Props = {
 };
 
 /*
- * La page pièce en Vis-à-vis : l'œuvre à gauche, qui tient à l'écran ; à
- * droite, le texte qui défile. Sous 64 rem, tout s'empile, le titre d'abord.
+ * La page pièce : sa version courante en Vis-à-vis, l'en-tête de la pièce en
+ * tête du texte, le texte intégral de la source après l'intention ; puis ses
+ * versions antérieures. Sous 64 rem, tout s'empile, le titre d'abord.
  */
 const { piece, projects } = Astro.props;
 const version = piece.latestVersion;
 const source = piece.source;
-const withWork = version.hasImage;
 ---
 
 <article>
-  <div class:list={["piece", { "piece--textual": !withWork }]}>
-    {
-      withWork ? (
-        <div class="piece__work">
-          <VersionVariations
-            version={version}
-            title={piece.title.traditional}
-            transitionName={workTransitionName(piece.slug)}
-          />
-        </div>
-      ) : null
-    }
-
-    <div class="piece__text">
-      <header class="piece__header">
-        <nav class="breadcrumb" aria-label="Fil d'Ariane">
-          <a href="/">Accueil</a>
-          {
-            projects.map((project) => (
-              <>
-                {" / "}
-                <a href={project.href} lang="zh-Hant">
-                  {project.title.traditional}
-                </a>
-              </>
-            ))
-          }
-        </nav>
-        <h2 class="piece__title" lang="zh-Hant">
-          <Pinyin pinyin={piece.title.pinyin}>{piece.title.traditional}</Pinyin>
-        </h2>
+  <VersionVisAVis
+    version={version}
+    title={piece.title.traditional}
+    tag="div"
+    testIdPrefix="version"
+    transitionName={workTransitionName(piece.slug)}
+  >
+    <header class="piece__header" slot="header">
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a>
         {
-          piece.gloss ? (
-            <p class="gloss" data-testid="gloss">
-              {piece.gloss}
-            </p>
-          ) : null
+          projects.map((project) => (
+            <>
+              {" / "}
+              <a href={project.href} lang="zh-Hant">
+                {project.title.traditional}
+              </a>
+            </>
+          ))
         }
-        {
-          piece.published ? null : (
-            <p>
-              <span class="tag tag--unpublished" data-testid="unpublished">
-                non publiée
-              </span>
-            </p>
-          )
-        }
-      </header>
-
-      {version.columns.length > 0 ? <VersionText version={version} /> : null}
-
-      <VersionFacts version={version} piece={piece} testIdPrefix="version" />
-
-      {withWork ? null : <VersionVariations version={version} title={piece.title.traditional} />}
-
+      </nav>
+      <h2 class="piece__title" lang="zh-Hant">
+        <Pinyin pinyin={piece.title.pinyin}>{piece.title.traditional}</Pinyin>
+      </h2>
+      <Gloss gloss={piece.gloss} />
       {
-        version.intention || source?.full_text ? (
-          <div class="piece__prose">
-            {version.intention ? (
-              <div class="reading__block">
-                <p class="reading__label">Intention</p>
-                <p class="reading__body">{version.intention.trim()}</p>
-              </div>
-            ) : null}
+        piece.published ? null : (
+          <p>
+            <span class="tag tag--unpublished" data-testid="unpublished">
+              non publiée
+            </span>
+          </p>
+        )
+      }
+    </header>
 
-            {source?.full_text ? (
-              <div class="reading__block">
-                <p class="reading__label">Texte intégral</p>
-                <p class="reading__body" lang="zh-Hant">
-                  {source.full_text.traditional}
-                </p>
-              </div>
-            ) : null}
+    <VersionFacts
+      slot="facts"
+      version={version}
+      testIdPrefix="version"
+      scriptLabel={piece.featuredScriptLabel}
+      status={piece.status}
+      attribution={source?.attribution}
+    />
+
+    <Fragment slot="prose">
+      {
+        source?.full_text ? (
+          <div class="reading__block">
+            <p class="reading__label">Texte intégral</p>
+            <p class="reading__body" lang="zh-Hant">
+              {source.full_text.traditional}
+            </p>
           </div>
         ) : null
       }
-    </div>
-  </div>
+    </Fragment>
+  </VersionVisAVis>
 
   <EarlierVersions piece={piece} />
 </article>

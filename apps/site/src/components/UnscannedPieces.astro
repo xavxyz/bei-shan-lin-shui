@@ -1,16 +1,12 @@
 ---
-import type { LoadedPiece } from "@bsls/schema";
 import { PIECE_STATUS_LABELS } from "@bsls/schema";
-import { pieceHref } from "@bsls/content";
 import VersionDate from "./VersionDate.astro";
+import { linkedPieceHref, type PieceLinks } from "../piece-links.js";
 
-type Props = {
-  /** Pièces sans image : il n'y en a qu'en mode admin. */
-  pieces: LoadedPiece[];
+/** Pièces sans image : il n'y en a qu'en mode admin. */
+type Props = PieceLinks & {
   /** Le niveau de titre de la section, selon la page qui l'accueille. */
   level: 2 | 3;
-  /** Le projet de la page, sous lequel mènent les liens ; sinon la route propre de la pièce. */
-  projectId?: string;
 };
 
 const { pieces, level, projectId } = Astro.props;
@@ -27,9 +23,7 @@ const heading = `Sans scan · ${pieces.length}`;
           {pieces.map((piece) => (
             <tr>
               <th scope="row" class="unscanned__title" lang="zh-Hant">
-                <a href={projectId ? pieceHref(piece.slug, projectId) : piece.href}>
-                  {piece.title.traditional}
-                </a>
+                <a href={linkedPieceHref(piece, projectId)}>{piece.title.traditional}</a>
               </th>
               <td class="gloss">{piece.gloss ?? ""}</td>
               <td>{PIECE_STATUS_LABELS[piece.status]}</td>

@@ -65,7 +65,7 @@ test("une pièce en expérimentation l'affiche en français", async ({ page }) =
 test("les styles d'écriture sont affichés en français, jamais en pinyin", async ({ page }) => {
   await page.goto(piecePath);
 
-  await expect(page.getByTestId("script-label")).toHaveText("régulier");
+  await expect(page.getByTestId("version-script-label")).toHaveText("régulier");
 
   const visibleText = await page.locator("body").innerText();
   for (const script of SCRIPTS) {
