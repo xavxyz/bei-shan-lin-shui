@@ -1,8 +1,4 @@
-import { parseFormat, type Group } from "@bsls/schema";
-
-/** `1 colonne`, `2 colonnes` ; chaque mot prend la marque du pluriel. */
-const plural = (count: number, words: string) =>
-  `${count} ${count > 1 ? words.replace(/(\S+)/g, "$1s") : words}`;
+import { parseFormat, plural, type Group } from "@bsls/schema";
 
 /** `4 colonnes de 5 caractères`, `1 ligne horizontale de 4 caractères en petits carreaux (1/2)`. */
 function groupLabel(group: Group): string {

@@ -1,3 +1,4 @@
+import { plural } from "@bsls/schema";
 import type { ContentError } from "./load-content.js";
 
 /**
@@ -21,6 +22,6 @@ export function formatContentErrors(
   });
 
   const count = errors.length;
-  const summary = `${count} ${noun}${count > 1 ? "s" : ""} de contenu`;
+  const summary = `${plural(count, noun)} de contenu`;
   return [...blocks, summary].join("\n\n");
 }

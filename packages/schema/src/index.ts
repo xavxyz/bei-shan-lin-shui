@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { checkFormat } from "./format.js";
+import { plural } from "./plural.js";
 import {
   CAPTURE_MODES,
   IMAGE_KINDS,
@@ -10,6 +11,7 @@ import {
 
 export * from "./vocabulary.js";
 export * from "./format.js";
+export * from "./plural.js";
 export { z };
 
 /**
@@ -166,7 +168,7 @@ function reportTranslationLength(
   ctx.addIssue({
     code: z.ZodIssueCode.custom,
     path: ["versions", versionIndex, "translation"],
-    message: `attendu : une ligne de traduction par colonne, soit ${expected} ${expected > 1 ? "colonnes" : "colonne"} ; reçu ${version.translation.length} ${version.translation.length > 1 ? "lignes" : "ligne"}`,
+    message: `attendu : une ligne de traduction par colonne, soit ${plural(expected, "colonne")} ; reçu ${plural(version.translation.length, "ligne")}`,
   });
 }
 
