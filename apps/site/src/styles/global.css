@@ -1,5 +1,6 @@
-/* Une palette unique, encre sur papier, en attendant le papier teinté de la Cimaise. */
+/* Un seul thème : le papier teinté de la Cimaise. */
 :root {
+  --gutter: clamp(1rem, 2.5vw, 2rem);
   --paper: #f7f4ee;
   --ink: #23201c;
   --muted: #6d675e;
@@ -34,31 +35,73 @@ a:hover {
   color: var(--accent);
 }
 
+/* La page : une grille de 12 colonnes à gouttière fluide, sur 88 rem au plus. */
 .page {
-  max-width: 62rem;
+  max-width: 88rem;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 5rem;
+  padding: 2.5rem var(--gutter) 5rem;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+/* L'en-tête, ailleurs qu'à l'accueil : une ligne, le titre puis la devise, sur un filet. */
 .site-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 1rem;
+  column-gap: 1.25rem;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 1rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .site-header__title {
   font-family: var(--serif-cn);
   font-size: 1.4rem;
+  font-weight: normal;
   margin: 0;
   letter-spacing: 0.1em;
 }
 
-.site-header__tagline {
+.site-header__title a {
+  text-decoration: none;
+}
+
+.site-header__motto {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Sur l'accueil, le titre et la devise en grand, centrés, sur une grande hauteur. */
+.site-header--large {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  min-height: 60vh;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.site-header--large .site-header__title {
+  font-size: clamp(3rem, 9vw, 7rem);
+  letter-spacing: 0.35em;
+  line-height: 1.2;
+  /* L'interlettrage suit aussi le dernier caractère : on l'équilibre au début. */
+  padding-inline-start: 0.35em;
+}
+
+.site-header--large .site-header__motto {
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  letter-spacing: 0.04em;
 }
 
 .breadcrumb {
