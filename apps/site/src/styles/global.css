@@ -243,6 +243,12 @@ a:hover {
   color: var(--muted);
 }
 
+/* La notation brute du format suit son libellé, en retrait. */
+.format__notation {
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
 /* En mode admin, une pièce non publiée doit se repérer d'un coup d'œil. */
 .tag--unpublished {
   border-style: dashed;

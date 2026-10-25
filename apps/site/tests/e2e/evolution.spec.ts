@@ -49,9 +49,14 @@ test("les versions antérieures vont de la plus ancienne à la plus récente", a
   await expect(
     earlierVersions(page).getByTestId("earlier-version-date").locator("time"),
   ).toHaveText(["23 mars 2026", "20 octobre 2026"]);
-  await expect(earlierVersions(page).getByTestId("earlier-version-format")).toHaveText([
-    "[(1x3), (2x5)]",
-    "[(3x5)]",
+  await expect(
+    earlierVersions(page).getByTestId("earlier-version-format").getByTestId("format-notation"),
+  ).toHaveText(["[(1x3), (2x5)]", "[(3x5)]"]);
+  await expect(
+    earlierVersions(page).getByTestId("earlier-version-format").getByTestId("format-label"),
+  ).toHaveText([
+    "2 feuilles : 1 colonne de 3 caractères ; 2 colonnes de 5 caractères",
+    "3 colonnes de 5 caractères",
   ]);
 });
 

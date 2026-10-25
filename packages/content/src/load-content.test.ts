@@ -310,6 +310,28 @@ describe("date chinoise", () => {
   });
 });
 
+describe("libellé du format", () => {
+  it("dit en français le format de chaque version, à côté de sa notation", async () => {
+    const content = await loadValid({
+      ...wellFormedTree,
+      files: [],
+      pieces: {
+        "shan-ju-qiu-ming": {
+          ...shanJuQiuMing,
+          versions: [
+            { id: "v1", date: "2026-03-04", format: "[(4x5)]", columns: [], variations: [] },
+            { id: "v2", date: "2026-05-01", format: "2x7 + 蘇東坡", columns: [], variations: [] },
+          ],
+        },
+      },
+    });
+
+    const [v1, v2] = content.pieces[0]!.versions;
+    expect(v1).toMatchObject({ format: "[(4x5)]", formatLabel: "4 colonnes de 5 caractères" });
+    expect(v2).toMatchObject({ format: "2x7 + 蘇東坡", formatLabel: "2x7 + 蘇東坡" });
+  });
+});
+
 describe("rattachement aux projets", () => {
   const trees = (projects: string[]) => ({
     projects: { "four-seasons": fourSeasons, mountains: { ...fourSeasons, title: "Montagnes" } },
