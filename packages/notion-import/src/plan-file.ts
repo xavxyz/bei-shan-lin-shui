@@ -75,12 +75,12 @@ const plannedPieceSchema = pieceFieldsSchema
 const plannedProjectSchema = projectFileSchema.omit({ pinyin_overrides: true }).extend({
   id: slugSchema,
   /**
-   * Optionnelle, comme dans le contenu. Le plan la propose vide, à écrire ou
-   * non : laissée vide, elle est tenue pour absente.
+   * Celle du contenu. Le plan la propose vide, à écrire ou non : laissée vide
+   * ou blanche, elle est tenue pour absente.
    */
   presentation: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
-    z.string().optional(),
+    projectFileSchema.shape.presentation,
   ),
 });
 

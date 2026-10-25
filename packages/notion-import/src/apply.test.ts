@@ -567,6 +567,9 @@ projects:
   - id: zhong-he-ji
     title: 中和集
     presentation: ""
+  - id: qi-gong
+    title: 氣功
+    presentation: "   "
 pieces: []
 `;
 
@@ -574,6 +577,7 @@ pieces: []
 
     expect(result).toMatchObject({ ok: true });
     expect(await readFile(join(root, "projects/zhong-he-ji.yaml"), "utf8")).toBe("title: 中和集\n");
+    expect(await readFile(join(root, "projects/qi-gong.yaml"), "utf8")).toBe("title: 氣功\n");
     expect(await loadContent(root, { includeUnpublished: true })).toMatchObject({ ok: true });
   });
 
