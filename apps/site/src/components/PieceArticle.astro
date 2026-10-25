@@ -33,6 +33,13 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
 
   <header class="piece__header">
     <h2 class="piece__title" lang="zh-Hant">{piece.title.traditional}</h2>
+    {
+      piece.gloss ? (
+        <p class="gloss" data-testid="gloss">
+          {piece.gloss}
+        </p>
+      ) : null
+    }
     <p class="piece__attribution">
       <span class="pinyin">{piece.title.pinyin}</span>
       {attribution ? ` — ${attribution}` : ""}

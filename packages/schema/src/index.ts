@@ -110,6 +110,8 @@ export const pinyinOverridesSchema = z.record(z.string().min(1), z.string().min(
  */
 export const pieceFieldsSchema = z.object({
   title: z.string().min(1),
+  /** Courte phrase française qui dit de quoi parle la pièce (voir GLOSSARY.md). */
+  gloss: prose.optional(),
   slug: slugSchema,
   projects: z.array(slugSchema).default([]),
   status: z.enum(PIECE_STATUSES),
@@ -159,6 +161,8 @@ function reportDuplicates(
 
 export const projectFileSchema = z.object({
   title: z.string().min(1),
+  /** Courte phrase française qui dit de quoi parle le projet (voir GLOSSARY.md). */
+  gloss: prose.optional(),
   presentation: prose,
   theme: z.enum(THEMES),
 });

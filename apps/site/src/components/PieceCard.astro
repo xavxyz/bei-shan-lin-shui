@@ -17,6 +17,13 @@ const { piece, href } = Astro.props;
       ) : null
     }
     <h3 class="card__title card__title--cn" lang="zh-Hant">{piece.title.traditional}</h3>
+    {
+      piece.gloss ? (
+        <p class="gloss" data-testid="gloss">
+          {piece.gloss}
+        </p>
+      ) : null
+    }
     <p class="card__meta">{piece.title.pinyin}</p>
     {piece.published ? null : <span class="tag tag--unpublished">non publiée</span>}
   </a>
