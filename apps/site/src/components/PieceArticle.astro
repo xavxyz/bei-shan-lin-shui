@@ -5,6 +5,7 @@ import VersionFacts from "./VersionFacts.astro";
 import VersionText from "./VersionText.astro";
 import VersionVariations from "./VersionVariations.astro";
 import { hasImage } from "../version-images.js";
+import { workTransitionName } from "../work-transition.js";
 
 type Props = {
   piece: LoadedPiece;
@@ -27,7 +28,11 @@ const withWork = hasImage(version);
     {
       withWork ? (
         <div class="piece__work">
-          <VersionVariations version={version} title={piece.title.traditional} />
+          <VersionVariations
+            version={version}
+            title={piece.title.traditional}
+            transitionName={workTransitionName(piece.slug)}
+          />
         </div>
       ) : null
     }
