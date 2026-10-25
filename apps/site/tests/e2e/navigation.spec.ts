@@ -14,7 +14,7 @@ test("une page de projet liste ses pièces", async ({ page }) => {
   await page.goto("/hong-lou-meng");
 
   await expect(page.getByRole("heading", { name: "紅樓夢" })).toBeVisible();
-  await expect(page.getByTestId("piece-link")).toHaveCount(2);
+  await expect(page.getByTestId("piece-link")).toHaveCount(1);
 });
 
 test("le fil d'Ariane d'une pièce nomme son projet par son titre chinois", async ({ page }) => {

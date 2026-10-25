@@ -1,0 +1,27 @@
+---
+import type { LoadedVersion } from "@bsls/schema";
+
+type Props = {
+  version: LoadedVersion;
+  testId: string;
+};
+
+const { version, testId } = Astro.props;
+
+/** Une notation illisible est son propre libellé : rien à redire en petit. */
+const readable = version.formatLabel !== version.format;
+---
+
+<span class="tag" data-testid={testId}>
+  <span data-testid="format-label">{version.formatLabel}</span>
+  {
+    readable ? (
+      <>
+        {" "}
+        <small class="format__notation" data-testid="format-notation">
+          {version.format}
+        </small>
+      </>
+    ) : null
+  }
+</span>

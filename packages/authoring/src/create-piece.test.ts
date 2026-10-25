@@ -47,13 +47,13 @@ describe("createPiece", () => {
     ]);
   });
 
-  it("écrit publiée la pièce dont la publication est demandée : le site la charge", async () => {
+  it("écrit publiée la pièce dont la publication est demandée : le site la montrera une fois scannée", async () => {
     const root = await writeTree({});
 
     const result = await createPiece(root, { ...draft, published: true });
 
     expect(result).toMatchObject({ ok: true });
-    const loaded = await loadContent(root);
+    const loaded = await loadContent(root, { includeUnpublished: true });
     expect(loaded.ok && loaded.content.pieces).toMatchObject([
       { slug: "shan-ju-qiu-ming", status: "idea", published: true, versions: [{ id: "v1" }] },
     ]);

@@ -21,7 +21,8 @@ async function load(overrides: { piece?: object; project?: object }) {
     projects: { "ge-zhi-yan-jiu": { ...project, ...overrides.project } },
     pieces: { yong: { ...piece, ...overrides.piece } },
   });
-  return loadContent(root);
+  // La pièce n'a pas d'image : on charge tout, comme le mode admin.
+  return loadContent(root, { includeUnpublished: true });
 }
 
 async function loadValid(overrides: { piece?: object; project?: object }) {

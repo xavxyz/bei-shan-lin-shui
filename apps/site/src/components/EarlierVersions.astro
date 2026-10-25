@@ -1,6 +1,7 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
 import VersionDate from "./VersionDate.astro";
+import VersionFormat from "./VersionFormat.astro";
 import VersionVariations from "./VersionVariations.astro";
 
 type Props = {
@@ -24,9 +25,7 @@ const earlier = piece.versions.filter((version) => version.id !== piece.latestVe
 
             <p class="evolution__tags">
               <VersionDate version={version} testId="earlier-version-date" />
-              <span class="tag" data-testid="earlier-version-format">
-                {version.format}
-              </span>
+              <VersionFormat version={version} testId="earlier-version-format" />
             </p>
 
             {version.columns.length > 0 ? (
