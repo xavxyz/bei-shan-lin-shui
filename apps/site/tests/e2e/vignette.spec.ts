@@ -149,7 +149,7 @@ test("au retour, l'œuvre redevient sa vignette dans le mur", async ({ page }) =
   await gestureBetween(page, departure, await box(wallWork(page, "莫性急")));
 });
 
-test("les autres œuvres du mur s'effacent avec le contenu, et reviennent avec lui", async ({
+test("les autres pièces du mur s'effacent avec le contenu, et reviennent avec lui", async ({
   page,
 }) => {
   await page.goto("/");
