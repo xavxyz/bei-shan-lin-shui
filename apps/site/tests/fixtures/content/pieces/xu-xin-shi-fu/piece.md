@@ -31,6 +31,8 @@ versions:
             kind: work
             capture: scan
             featured: true
-translation: Esprit vide, ventre plein, les fondamentaux de la voie
+# à arbitrer (#76) — l'ancienne traduction de la pièce : une phrase pour trois colonnes, qui ne
+# traduit que la 1re (虛心實腹道之基) ; la traduction partielle n'est pas permise :
+#   Esprit vide, ventre plein, les fondamentaux de la voie
 published: true
 ---

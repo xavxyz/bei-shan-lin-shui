@@ -26,7 +26,6 @@ const shanJuQiuMing = {
       ],
     },
   ],
-  translation: "Après la pluie nouvelle sur la montagne déserte…\n",
   published: true,
 };
 
@@ -69,7 +68,6 @@ describe("une pièce bien formée", () => {
     expect(piece.status).toBe("in-progress");
     expect(piece.title.traditional).toBe("山居秋暝");
     expect(piece.versions[0]!.variations[0]!.script).toBe("xingshu");
-    expect(piece.translation).toContain("Après la pluie");
   });
 
   it("expose ses images sous une URL servie par le site", async () => {

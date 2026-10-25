@@ -244,7 +244,6 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
         ),
       ),
     ),
-    ...(piece.translation ? { translation: piece.translation } : {}),
     published: piece.published,
   };
 }

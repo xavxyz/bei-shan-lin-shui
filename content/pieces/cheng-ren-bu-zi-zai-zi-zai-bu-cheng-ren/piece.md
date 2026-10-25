@@ -18,6 +18,10 @@ versions:
     date: 2026-06-21
     format: 2x5
     columns: [成人不自在, 自在不成人]
+    # la phrase du scan, coupée à son point-virgule : une proposition par colonne
+    translation:
+      - Qui souhaite devenir vraiment un homme ne songe pas à se donner de l'aise ;
+      - qui ne songe qu'à se donner de l'aise ne deviendra jamais vraiment un homme.
     variations:
       - id: v1a
         script: kaishu
@@ -29,6 +33,5 @@ versions:
             kind: work
             capture: scan
             featured: true
-translation: Qui souhaite devenir vraiment un homme ne songe pas à se donner de l'aise ; qui ne songe qu'à se donner de l'aise ne deviendra jamais vraiment un homme.
 published: true
 ---
