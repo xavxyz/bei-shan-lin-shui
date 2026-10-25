@@ -196,7 +196,6 @@ describe("applyImport", () => {
           id: "zhong-he-ji",
           title: "中和集",
           presentation: "Les pièces tirées du 中和集.",
-          theme: "jade",
         },
       ],
     });
@@ -226,7 +225,7 @@ describe("applyImport", () => {
   it("refuse un projet sans présentation, et n'écrit alors rien du tout", async () => {
     const root = await contentRoot();
     const arbitrated = plan({
-      projects: [{ id: "zhong-he-ji", title: "中和集", presentation: "", theme: "jade" }],
+      projects: [{ id: "zhong-he-ji", title: "中和集", presentation: "" }],
     });
     arbitrated.pieces[0]!.projects = ["zhong-he-ji"];
 
@@ -494,12 +493,10 @@ projects:
   - id: zhong-he-ji
     title: 中和集
     presentation: Les pièces tirées du 中和集.
-    theme: ink
   # projet désigné par le calligraphe à l'arbitrage du scan 24
   - id: qi-gong
     title: 氣功
-    presentation: Lecture des ouvrages de Yang Jwing-Ming.
-    theme: ink # les thèmes attendront
+    presentation: Lecture des ouvrages de Yang Jwing-Ming. # à étoffer
 pieces: []
 `;
 
@@ -509,8 +506,7 @@ pieces: []
       [
         "# projet désigné par le calligraphe à l'arbitrage du scan 24",
         "title: 氣功",
-        "presentation: Lecture des ouvrages de Yang Jwing-Ming.",
-        "theme: ink # les thèmes attendront",
+        "presentation: Lecture des ouvrages de Yang Jwing-Ming. # à étoffer",
         "",
       ].join("\n"),
     );

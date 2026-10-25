@@ -3,7 +3,6 @@ import {
   UNSPECIFIED_FORMAT,
   type PieceStatus,
   type Script,
-  type Theme,
   type VariationStatus,
 } from "@bsls/schema";
 import {
@@ -63,7 +62,6 @@ export type ProjectProposal = {
   id: string;
   title: string;
   presentation: string;
-  theme: Theme;
   warnings: ImportWarning[];
 };
 

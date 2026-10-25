@@ -85,6 +85,6 @@ Rien d'autre ne se supprime : un scan rattaché sur une branche pas encore fusio
 - **Feuille d'entraînement sans rapport avec le texte d'une pièce** — rectos, grilles, traits : écarté, rien n'est écrit.
 - **Une nouvelle version** suppose une réalisation antérieure attestée : un autre scan à une autre date, ou une pièce `made` avec image dans Notion. Sinon le papier corrige la v1. Le scan d'une version suivante la rattache comme nouvelle version (`version: { id: v2, … }`, sa variation `v2a`), avec sa date, son format et ses colonnes tirés du papier.
 - **Pièce absente du contenu** : elle naît par la skill `nouvelle-piece` (`pnpm piece creer`, qui dérive le slug du titre), passe `made` (`pnpm piece statut <slug> made`), puis reçoit son scan. Pas de projet, sauf si le papier en désigne un. Sans date sur le papier, prendre celle du dépôt et le dire au calligraphe.
-- **Nouveau projet** : aucune commande ne le crée. Le proposer au calligraphe, présentation et thème compris ; il écrit `content/projects/<id>.yaml`, puis la pièce-pôle de même nom le rejoint (`pnpm piece rattacher`).
+- **Nouveau projet** : aucune commande ne le crée. Le proposer au calligraphe, titre chinois, glose et présentation compris ; il écrit `content/projects/<id>.yaml`, puis la pièce-pôle de même nom le rejoint (`pnpm piece rattacher`).
 - **Photo du téléphone** : `attach:scan` écrit `capture: scan` ; le signaler au calligraphe, qui corrige en `capture: photo`.
 - **Pièce `in-progress`** qui arrive scannée : l'encre est posée, proposer `made`.

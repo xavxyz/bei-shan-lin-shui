@@ -70,7 +70,8 @@ const plannedPieceSchema = pieceFieldsSchema
       .min(1, "attendu : au moins une version"),
   });
 
-const plannedProjectSchema = projectFileSchema.extend({
+/** Comme pour les pièces, les surcharges de pinyin s'écrivent après l'import. */
+const plannedProjectSchema = projectFileSchema.omit({ pinyin_overrides: true }).extend({
   id: slugSchema,
   /** Vide tant que le calligraphe ne l'a pas écrite ; `apply` la réclamera. */
   presentation: z.string(),

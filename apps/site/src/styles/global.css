@@ -1,4 +1,4 @@
-/* Thème par défaut : encre sur papier. Chaque projet en bascule les variables. */
+/* Une palette unique, encre sur papier, en attendant le papier teinté de la Cimaise. */
 :root {
   --paper: #f7f4ee;
   --ink: #23201c;
@@ -8,30 +8,6 @@
 
   --serif-cn: "Noto Serif TC", "Songti TC", "Source Han Serif TC", serif;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-}
-
-[data-theme="jade"] {
-  --paper: #f2f5f1;
-  --ink: #1e2a24;
-  --muted: #5d6f64;
-  --accent: #2f6b52;
-  --rule: #cddbd2;
-}
-
-[data-theme="cinnabar"] {
-  --paper: #fbf3ec;
-  --ink: #2a1d18;
-  --muted: #7a5c4c;
-  --accent: #b1462a;
-  --rule: #e5cfbe;
-}
-
-[data-theme="indigo"] {
-  --paper: #f1f2f7;
-  --ink: #1c2030;
-  --muted: #5b6178;
-  --accent: #35407a;
-  --rule: #ccd1e2;
 }
 
 *,

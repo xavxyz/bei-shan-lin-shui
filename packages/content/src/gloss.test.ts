@@ -14,7 +14,6 @@ const piece = {
 const project = {
   title: "戈之研究",
   presentation: "Une série sur le trait 戈.\n",
-  theme: "jade",
 };
 
 async function load(overrides: { piece?: object; project?: object }) {

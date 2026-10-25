@@ -13,6 +13,7 @@ import {
   type LoadedVariation,
   type LoadedVersion,
   type PieceFrontmatter,
+  type ProjectFile,
   type z,
 } from "@bsls/schema";
 import { deriveChineseDate, deriveChineseText } from "./derive.js";
@@ -108,8 +109,14 @@ async function readProjects(root: string, errors: ContentError[]): Promise<Proje
       });
       continue;
     }
+    if (!checkProjectOverridesApply(parsed.data, file, errors)) continue;
 
-    projects.push({ ...parsed.data, id, href: projectHref(id) });
+    projects.push({
+      ...parsed.data,
+      title: deriveChineseText(parsed.data.title, parsed.data.pinyin_overrides),
+      id,
+      href: projectHref(id),
+    });
   }
 
   return projects.sort((a, b) => a.id.localeCompare(b.id));
@@ -214,6 +221,23 @@ function checkOverridesApply(piece: PieceFrontmatter, file: string, errors: Cont
       message: "attendu : un texte présent dans le titre, une colonne ou le texte intégral",
     });
   }
+}
+
+/** Le seul texte chinois d'un projet est son titre : une surcharge ne peut viser que lui. */
+function checkProjectOverridesApply(
+  project: ProjectFile,
+  file: string,
+  errors: ContentError[],
+): boolean {
+  const strays = Object.keys(project.pinyin_overrides).filter((key) => key !== project.title);
+  for (const key of strays) {
+    errors.push({
+      file,
+      path: `pinyin_overrides.${key}`,
+      message: "attendu : le titre du projet, seul texte chinois qu'il porte",
+    });
+  }
+  return strays.length === 0;
 }
 
 function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {

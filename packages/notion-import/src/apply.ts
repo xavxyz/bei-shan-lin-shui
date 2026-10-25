@@ -253,7 +253,6 @@ function toProjectFile(project: PlannedProject): Record<string, unknown> {
   return {
     title: project.title,
     presentation: project.presentation,
-    theme: project.theme,
   };
 }
 

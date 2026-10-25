@@ -21,9 +21,9 @@ export const getStaticPaths = (async () => {
 const { project, pieces } = Astro.props;
 ---
 
-<Layout title={project.title} theme={project.theme}>
+<Layout title={project.title.traditional}>
   <nav class="breadcrumb"><a href="/">Accueil</a></nav>
-  <h2>{project.title}</h2>
+  <h2 lang="zh-Hant">{project.title.traditional}</h2>
   {
     project.gloss ? (
       <p class="gloss" data-testid="gloss">
@@ -31,7 +31,7 @@ const { project, pieces } = Astro.props;
       </p>
     ) : null
   }
-  <p class="reading__body">{project.presentation}</p>
+  {project.presentation ? <p class="reading__body">{project.presentation}</p> : null}
 
   <ul class="card-list">
     {pieces.map((piece) => <PieceCard piece={piece} href={pieceHref(piece.slug, project.id)} />)}

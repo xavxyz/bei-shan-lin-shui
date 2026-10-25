@@ -8,7 +8,7 @@ import { writeTree } from "@bsls/content/test-support";
 import { PROJECT_FILE, readPieceFile } from "./test-support/content-tree.js";
 import { YONG, loadYong, yongTree } from "./test-support/yong.js";
 
-const SECOND_PROJECT = PROJECT_FILE.replace("Explorations personnelles", "Le vent");
+const SECOND_PROJECT = PROJECT_FILE.replace("戈之研究", "風");
 
 describe("attachToProject", () => {
   it("ajoute le projet à ceux de la pièce, sans toucher au reste du fichier", async () => {

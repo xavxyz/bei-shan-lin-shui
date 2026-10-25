@@ -28,9 +28,6 @@ export type ImageKind = (typeof IMAGE_KINDS)[number];
 export const CAPTURE_MODES = ["scan", "photo"] as const;
 export type CaptureMode = (typeof CAPTURE_MODES)[number];
 
-export const THEMES = ["ink", "jade", "cinnabar", "indigo"] as const;
-export type Theme = (typeof THEMES)[number];
-
 /** Les styles d'écriture sont affichés en français, jamais en pinyin. */
 export const SCRIPT_LABELS: Record<Script, string> = {
   kaishu: "régulier",

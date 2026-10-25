@@ -1,17 +1,15 @@
 ---
 import "../styles/global.css";
-import type { Theme } from "@bsls/schema";
 
 type Props = {
   title: string;
-  theme?: Theme;
 };
 
-const { title, theme = "ink" } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="fr" data-theme={theme}>
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

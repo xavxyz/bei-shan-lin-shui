@@ -1,5 +1,5 @@
 import { Converter } from "opencc-js";
-import { RESERVED_PROJECT_ID, THEMES, type Theme } from "@bsls/schema";
+import { RESERVED_PROJECT_ID } from "@bsls/schema";
 import { deriveSlug, disambiguate } from "@bsls/content";
 import type { ProjectProposal } from "./propose.js";
 import type { NotionPage } from "./read-export.js";
@@ -15,7 +15,6 @@ export type Hub = {
   /** Titre Notion de la page-pôle, tel quel : c'est par lui que passent les relations. */
   source: string;
   title: string;
-  theme: Theme;
   members: Set<string>;
   used: boolean;
 };
@@ -51,7 +50,7 @@ export function proposeProjects(pages: NotionPage[], threshold: number): Hub[] {
 
   return pages
     .filter((page) => (neighbours.get(page.title)?.size ?? 0) >= threshold)
-    .map((page, index) => {
+    .map((page) => {
       const id = disambiguate(deriveSlug(page.title), taken);
       taken.add(id);
       return {
@@ -62,7 +61,6 @@ export function proposeProjects(pages: NotionPage[], threshold: number): Hub[] {
         // serait son propre contenant.
         members: new Set(neighbours.get(page.title) ?? []),
         used: false,
-        theme: THEMES[index % THEMES.length]!,
       };
     });
 }
@@ -72,15 +70,10 @@ export function toProjectProposal(hub: Hub): ProjectProposal {
     id: hub.id,
     title: hub.title,
     presentation: "",
-    theme: hub.theme,
     warnings: [
       {
         field: "presentation",
         message: "à écrire : un projet sans présentation ne sera pas importé",
-      },
-      {
-        field: "theme",
-        message: `rien dans l'export ne dit le thème : ${hub.theme} proposé, à choisir`,
       },
     ],
   };

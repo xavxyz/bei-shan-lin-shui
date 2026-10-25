@@ -11,12 +11,10 @@ export const getStaticPaths = (async () => {
 
   return pieces.flatMap((piece) =>
     piece.projects.map((id) => {
-      const project = projects.find((each) => each.id === id)!;
       return {
         params: { project: id, piece: piece.slug },
         props: {
           piece,
-          project,
           projects: projects.filter((each) => piece.projects.includes(each.id)),
         },
       };
@@ -24,9 +22,9 @@ export const getStaticPaths = (async () => {
   );
 }) satisfies GetStaticPaths;
 
-const { piece, project, projects } = Astro.props;
+const { piece, projects } = Astro.props;
 ---
 
-<Layout title={piece.title.traditional} theme={project.theme}>
+<Layout title={piece.title.traditional}>
   <PieceArticle piece={piece} projects={projects} />
 </Layout>
