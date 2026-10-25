@@ -212,6 +212,8 @@ test("sous chaque œuvre du mur, son titre chinois puis sa glose, à la largeur 
   await page.goto("/");
 
   const card = wall(page, 8).getByTestId("piece-link").filter({ hasText: "永草書" });
+  // Sans dimensions dans le balisage, l'œuvre n'a de largeur qu'une fois chargée.
+  await expect(card.locator("img")).toHaveJSProperty("complete", true);
   const work = (await card.locator("img").boundingBox())!;
   const title = (await card.getByRole("heading", { name: "永草書" }).boundingBox())!;
   const gloss = (await card.getByTestId("gloss").boundingBox())!;
