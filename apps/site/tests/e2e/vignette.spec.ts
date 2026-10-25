@@ -3,13 +3,13 @@ import { played, recordAnimations } from "./animations.js";
 
 // La vignette sur laquelle on clique grandit jusqu'à l'œuvre de la page pièce.
 
-type Size = { width: number; height: number };
-type Gesture = { from: Size; to: Size; duration: number };
+type Box = { x: number; y: number; width: number; height: number };
+type Gesture = { from: Box; to: Box; duration: number };
 
-async function size(locator: Locator): Promise<Size> {
-  const box = await locator.boundingBox();
-  if (!box) throw new Error("aucune boîte");
-  return { width: box.width, height: box.height };
+async function box(locator: Locator): Promise<Box> {
+  const found = await locator.boundingBox();
+  if (!found) throw new Error("aucune boîte");
+  return found;
 }
 
 /**
@@ -23,42 +23,66 @@ async function transitionName(locator: Locator): Promise<string> {
 }
 
 /**
- * Guette le geste de l'œuvre de nom de transition `name` : la boîte d'où elle
- * part et celle où elle arrive, telles que la transition de vue les fait parcourir.
+ * Guette les gestes de la transition de vue : pour chaque œuvre qui passe d'une
+ * page à l'autre, la boîte d'où elle part et celle où elle arrive, à l'écran.
  */
-async function watchGesture(page: Page, name: string) {
-  await page.evaluate((name) => {
-    const target = `::view-transition-group(${name})`;
+async function watchGestures(page: Page) {
+  await page.evaluate(() => {
+    const seen = new Map<string, Gesture>();
+    (window as Window & { gestes?: Map<string, Gesture> }).gestes = seen;
     const sample = () => {
       for (const animation of document.getAnimations()) {
         const effect = animation.effect as KeyframeEffect | null;
-        if (effect?.pseudoElement !== target) continue;
+        const target = effect?.pseudoElement;
+        if (!effect || !target?.startsWith("::view-transition-group(") || seen.has(target)) {
+          continue;
+        }
         const frames = effect.getKeyframes();
         const px = (value: unknown) => parseFloat(String(value));
-        const at = (frame: ComputedKeyframe | undefined) => ({
-          width: px(frame?.width),
-          height: px(frame?.height),
-        });
-        (window as Window & { geste?: Gesture }).geste = {
+        const at = (frame: ComputedKeyframe | undefined): Box => {
+          const { e, f } = new DOMMatrixReadOnly(String(frame?.transform ?? "none"));
+          return { x: e, y: f, width: px(frame?.width), height: px(frame?.height) };
+        };
+        seen.set(target, {
           from: at(frames[0]),
           to: at(frames.at(-1)),
           duration: Number(effect.getTiming().duration),
-        };
-        return;
+        });
       }
       requestAnimationFrame(sample);
     };
     sample();
-  }, name);
+  });
 }
 
-async function gesture(page: Page): Promise<Gesture | undefined> {
-  return page.evaluate(() => (window as Window & { geste?: Gesture }).geste);
+async function gestures(page: Page): Promise<Gesture[]> {
+  return page.evaluate(() => [
+    ...((window as Window & { gestes?: Map<string, Gesture> }).gestes?.values() ?? []),
+  ]);
 }
 
-function expectClose(actual: Size, expected: Size) {
-  expect(actual.width).toBeCloseTo(expected.width, 0);
-  expect(actual.height).toBeCloseTo(expected.height, 0);
+const close = (a: Box, b: Box, sides: readonly (keyof Box)[]) =>
+  sides.every((side) => Math.abs(a[side] - b[side]) <= 1);
+
+/**
+ * Le geste qui mène une œuvre de la boîte `from` à la boîte `to` : ce que le
+ * visiteur a vu partir de l'une est ce qu'il voit arriver dans l'autre. Le
+ * départ se compare en place et en taille ; l'arrivée en taille seulement, le
+ * mur pouvant encore se ranger, ses images chargées, une fois le geste fini.
+ */
+async function gestureBetween(page: Page, from: Box, to: Box): Promise<Gesture> {
+  await page.waitForTimeout(700);
+  const seen = await gestures(page);
+  const found = seen.find(
+    (gesture) =>
+      close(gesture.from, from, ["x", "y", "width", "height"]) &&
+      close(gesture.to, to, ["width", "height"]),
+  );
+  expect(
+    found,
+    `aucun geste de ${JSON.stringify(from)} à ${JSON.stringify(to)} : ${JSON.stringify(seen)}`,
+  ).toBeDefined();
+  return found!;
 }
 
 function wallWork(page: Page, title: string) {
@@ -82,19 +106,14 @@ for (const { from, path, title, url } of [
     await page.goto(path);
     const thumbnail = wallWork(page, title);
     await thumbnail.scrollIntoViewIfNeeded();
-    const departure = await size(thumbnail);
-    const name = await transitionName(thumbnail);
-    await watchGesture(page, name);
+    const departure = await box(thumbnail);
+    await watchGestures(page);
 
     await thumbnail.click();
     await expect(page).toHaveURL(url);
-    expect(await transitionName(work(page)), "l'œuvre n'est pas la vignette cliquée").toBe(name);
-    await expect.poll(() => gesture(page)).toBeDefined();
-    await page.waitForTimeout(700);
+    await expect(work(page)).toBeVisible();
 
-    const seen = (await gesture(page))!;
-    expectClose(seen.from, departure);
-    expectClose(seen.to, await size(work(page)));
+    const seen = await gestureBetween(page, departure, await box(work(page)));
     // L'œuvre grandit le temps que le contenu s'efface puis revienne.
     expect(seen.duration).toBeGreaterThanOrEqual(400);
   });
@@ -107,41 +126,27 @@ test("quand seule une version antérieure a une image, la vignette grandit jusqu
   await page.goto("/");
   const thumbnail = wallWork(page, "豎橫 《卓菴》");
   await thumbnail.scrollIntoViewIfNeeded();
-  const name = await transitionName(thumbnail);
+  const departure = await box(thumbnail);
+  await watchGestures(page);
 
   await thumbnail.click();
   await expect(page).toHaveURL("/zhong-he-ji/shu-heng-zhuo-an");
   const arrival = page.getByTestId("earlier-version").getByTestId("carousel-image");
-  expect(await transitionName(arrival), "l'œuvre n'est pas la vignette cliquée").toBe(name);
-  // Deux éléments du même nom annuleraient la transition.
-  const named = await page.evaluate(
-    (name) =>
-      [...document.querySelectorAll("*")].filter(
-        (element) => getComputedStyle(element).viewTransitionName === name,
-      ).length,
-    name,
-  );
-  expect(named).toBe(1);
+  await expect(arrival).toBeVisible();
+
+  await gestureBetween(page, departure, await box(arrival));
 });
 
 test("au retour, l'œuvre redevient sa vignette dans le mur", async ({ page }) => {
   await page.goto("/pieces/mo-xing-ji");
-  const departure = await size(work(page));
-  const name = await transitionName(work(page));
-  await watchGesture(page, name);
+  const departure = await box(work(page));
+  await watchGestures(page);
 
   await page.getByRole("banner").getByRole("link", { name: "背山臨水" }).click();
   await expect(page).toHaveURL("/");
-  expect(
-    await transitionName(wallWork(page, "莫性急")),
-    "la vignette n'est pas l'œuvre quittée",
-  ).toBe(name);
-  await expect.poll(() => gesture(page)).toBeDefined();
-  await page.waitForTimeout(700);
+  await expect(wallWork(page, "莫性急")).toBeVisible();
 
-  const seen = (await gesture(page))!;
-  expectClose(seen.from, departure);
-  expectClose(seen.to, await size(wallWork(page, "莫性急")));
+  await gestureBetween(page, departure, await box(wallWork(page, "莫性急")));
 });
 
 test("les autres œuvres du mur s'effacent avec le contenu, et reviennent avec lui", async ({
