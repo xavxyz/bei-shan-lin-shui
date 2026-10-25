@@ -75,7 +75,7 @@ test("au clavier, une ligne et un titre prennent le focus et montrent leur pinyi
   await page.keyboard.press("Tab");
   await expect(pinyin(page)).toHaveText("zì zài bù chéng rén");
 
-  // Au mur, le titre est dans le lien de l'œuvre : c'est le lien qui prend le focus.
+  // Au mur, le titre est dans le lien de la pièce : c'est le lien qui prend le focus.
   await page.goto("/");
   await tabTo(page, page.getByTestId("piece-link").filter({ hasText: "永草書" }));
   await expect(pinyin(page)).toHaveText("yǒng cǎo shū");
@@ -146,7 +146,7 @@ test.describe("sur un téléphone", () => {
     await expect(pinyin(page)).toHaveCount(0);
   });
 
-  test("au mur, toucher un titre montre son pinyin sans quitter la page ; le toucher encore mène à l'œuvre", async ({
+  test("au mur, toucher un titre montre son pinyin sans quitter la page ; le toucher encore mène à la pièce", async ({
     page,
   }) => {
     await page.goto("/");
