@@ -80,8 +80,9 @@ test("le mur montre toutes les pièces visibles, de la plus récente à la plus 
   await page.goto("/");
 
   // À date égale, l'ordre des slugs départage.
-  await expect(wall(page, 8).getByTestId("piece-link").getByRole("heading")).toHaveText(
+  await expect(wall(page, 9).getByTestId("piece-link").getByRole("heading")).toHaveText(
     [
+      "豎橫 《卓菴》", // 2026-10-21
       "墨寺㞢文刻", // 2026-08-30
       "成人不自在，自在不成人", // 2026-06-21
       "永草書", // 2026-06-21
@@ -148,7 +149,7 @@ test("l'œuvre de couverture d'un projet garde ses proportions ; un projet sans 
 }) => {
   await page.goto("/");
 
-  const cover = projectRow(page, "中和集").getByRole("img", { name: "虛心實腹" });
+  const cover = projectRow(page, "中和集").getByRole("img", { name: "豎橫 《卓菴》" });
   await cover.scrollIntoViewIfNeeded();
   await expect(cover).toHaveJSProperty("complete", true);
   const ratios = await cover.evaluate((image: HTMLImageElement) => {
@@ -164,8 +165,8 @@ test("l'œuvre de couverture d'un projet garde ses proportions ; un projet sans 
 
 /** Chaque œuvre du mur a la hauteur donnée, et la largeur que lui dictent ses proportions. */
 async function expectHungUncropped(page: Page, height: number) {
-  const works = wall(page, 8).getByTestId("piece-link").locator("img");
-  await expect(works).toHaveCount(8);
+  const works = wall(page, 9).getByTestId("piece-link").locator("img");
+  await expect(works).toHaveCount(9);
   for (const work of await works.all()) {
     await work.scrollIntoViewIfNeeded();
     await expect(work).toHaveJSProperty("complete", true);
@@ -198,7 +199,7 @@ test("les œuvres du mur sont accrochées sur leur pied", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
 
-  const works = await wall(page, 8).getByTestId("piece-link").locator("img").all();
+  const works = await wall(page, 9).getByTestId("piece-link").locator("img").all();
   const first = (await works[0]!.boundingBox())!;
   const second = (await works[1]!.boundingBox())!;
   expect(second.y).toBeCloseTo(first.y, 0);
@@ -211,7 +212,7 @@ test("sous chaque œuvre du mur, son titre chinois puis sa glose, à la largeur 
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
 
-  const card = wall(page, 8).getByTestId("piece-link").filter({ hasText: "永草書" });
+  const card = wall(page, 9).getByTestId("piece-link").filter({ hasText: "永草書" });
   // Sans dimensions dans le balisage, l'œuvre n'a de largeur qu'une fois chargée.
   await expect(card.locator("img")).toHaveJSProperty("complete", true);
   const work = (await card.locator("img").boundingBox())!;

@@ -20,7 +20,7 @@ test("en mode admin, une pièce non publiée figure dans son projet et dans son 
     page
       .getByTestId("project-row")
       .filter({ has: page.getByRole("heading", { name: "中和集", exact: true }) }),
-  ).toContainText("2 pièces");
+  ).toContainText("3 pièces");
 
   await page.goto("/zhong-he-ji");
   const card = page.getByTestId("piece-link").filter({ hasText: "龜蛇相交" });
@@ -40,7 +40,7 @@ test("en mode admin, une pièce scannée non publiée paraît dans le mur, marqu
 }) => {
   await page.goto("/");
 
-  const wall = page.getByRole("region", { name: "Pièces · 10" });
+  const wall = page.getByRole("region", { name: "Pièces · 11" });
   const card = wall.getByTestId("piece-link").filter({ hasText: "篤志力行" });
   await expect(card).toContainText("non publiée");
   await expect(wall.getByTestId("piece-link").filter({ hasText: "龜蛇相交" })).toContainText(
@@ -65,11 +65,11 @@ test("en mode admin, l'accueil range entre le mur et les projets les pièces san
   await expect(row).toContainText("20 octobre 2026");
   await expect(unscanned.getByRole("row").filter({ hasText: "易筋經" })).toContainText("en cours");
   await expect(
-    page.getByRole("region", { name: "Pièces · 10" }).getByText("說到辛酸處"),
+    page.getByRole("region", { name: "Pièces · 11" }).getByText("說到辛酸處"),
   ).toHaveCount(0);
 
   const sections = await page.getByRole("heading", { level: 2 }).allTextContents();
-  expect(sections).toEqual(["Pièces · 10", "Sans scan · 3", "Projets"]);
+  expect(sections).toEqual(["Pièces · 11", "Sans scan · 3", "Projets"]);
 
   await row.getByRole("link", { name: "說到辛酸處" }).click();
   await expect(page).toHaveURL("/hong-lou-meng/shuo-dao-xin-suan-chu");

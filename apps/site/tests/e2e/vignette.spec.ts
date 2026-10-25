@@ -100,6 +100,30 @@ for (const { from, path, title, url } of [
   });
 }
 
+test("quand seule une version antérieure a une image, la vignette grandit jusqu'à elle", async ({
+  page,
+}) => {
+  // 豎橫 《卓菴》 : la v1 a son scan, la v2, courante, n'en a pas encore.
+  await page.goto("/");
+  const thumbnail = wallWork(page, "豎橫 《卓菴》");
+  await thumbnail.scrollIntoViewIfNeeded();
+  const name = await transitionName(thumbnail);
+
+  await thumbnail.click();
+  await expect(page).toHaveURL("/zhong-he-ji/shu-heng-zhuo-an");
+  const arrival = page.getByTestId("earlier-version").getByTestId("carousel-image");
+  expect(await transitionName(arrival), "l'œuvre n'est pas la vignette cliquée").toBe(name);
+  // Deux éléments du même nom annuleraient la transition.
+  const named = await page.evaluate(
+    (name) =>
+      [...document.querySelectorAll("*")].filter(
+        (element) => getComputedStyle(element).viewTransitionName === name,
+      ).length,
+    name,
+  );
+  expect(named).toBe(1);
+});
+
 test("au retour, l'œuvre redevient sa vignette dans le mur", async ({ page }) => {
   await page.goto("/pieces/mo-xing-ji");
   const departure = await size(work(page));

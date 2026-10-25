@@ -5,7 +5,7 @@ import Gloss from "./Gloss.astro";
 import Pinyin from "./Pinyin.astro";
 import VersionFacts from "./VersionFacts.astro";
 import VersionVisAVis from "./VersionVisAVis.astro";
-import { workTransitionName } from "../work-transition.js";
+import { versionTransitionName } from "../work-transition.js";
 
 type Props = {
   piece: LoadedPiece;
@@ -29,7 +29,7 @@ const source = piece.source;
     title={piece.title.traditional}
     tag="div"
     testIdPrefix="version"
-    transitionName={workTransitionName(piece.slug)}
+    transitionName={versionTransitionName(piece, version)}
   >
     <header class="piece__header" slot="header">
       <nav class="breadcrumb" aria-label="Fil d'Ariane">

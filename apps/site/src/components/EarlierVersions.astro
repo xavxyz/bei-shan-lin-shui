@@ -2,6 +2,7 @@
 import type { LoadedPiece } from "@bsls/schema";
 import VersionFacts from "./VersionFacts.astro";
 import VersionVisAVis from "./VersionVisAVis.astro";
+import { versionTransitionName } from "../work-transition.js";
 
 type Props = {
   piece: LoadedPiece;
@@ -27,6 +28,7 @@ const headingId = "versions-anterieures";
             title={piece.title.traditional}
             tag="li"
             testIdPrefix="earlier-version"
+            transitionName={versionTransitionName(piece, version)}
           >
             <VersionFacts slot="facts" version={version} testIdPrefix="earlier-version" />
           </VersionVisAVis>

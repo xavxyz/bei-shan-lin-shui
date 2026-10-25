@@ -15,7 +15,7 @@ test("une pièce publiée sans image est absente du site public", async ({ page,
 
 test("les comptes de pièces ne comptent que les pièces visibles", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Pièces · 8" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Pièces · 9" })).toBeVisible();
   await expect(
     page
       .getByTestId("project-row")

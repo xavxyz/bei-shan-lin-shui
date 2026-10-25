@@ -3,7 +3,12 @@ export type { Content, ContentError, LoadOptions, LoadResult } from "./load-cont
 export { deriveChineseDate, deriveChineseText } from "./derive.js";
 export { deriveFormatLabel } from "./format-label.js";
 export { deriveSlug, disambiguate } from "./slug.js";
-export { featuredVariation, pickFeaturedImage, pickFeaturedVariation } from "./featured.js";
+export {
+  featuredVariation,
+  featuredVersion,
+  pickFeaturedImage,
+  pickFeaturedVariation,
+} from "./featured.js";
 export { formatContentErrors } from "./format-errors.js";
 export { contentWarnings } from "./warnings.js";
 export {

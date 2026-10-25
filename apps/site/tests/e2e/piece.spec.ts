@@ -96,5 +96,5 @@ test("une pièce non publiée n'a aucune page et n'apparaît dans aucune liste",
     page
       .getByTestId("project-row")
       .filter({ has: page.getByRole("heading", { name: "中和集", exact: true }) }),
-  ).toContainText("1 pièce");
+  ).toContainText("2 pièces");
 });
