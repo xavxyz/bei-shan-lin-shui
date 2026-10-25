@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import * as fontkit from "fontkit";
 import subsetFont from "subset-font";
-import { deriveChineseText, pieceFile, projectFile, type Content } from "@bsls/content";
+import { pieceFile, projectFile, type Content } from "@bsls/content";
 import type { ChineseText } from "@bsls/schema";
 
 /**
@@ -23,11 +23,11 @@ export type PublishedText = { owner: string; text: string };
  * Les textes chinois que le site montre, chacun en traditionnel et en
  * simplifié, rattachés au fichier qui les porte : titres de pièce et de
  * projet, colonnes et date chinoise de chaque version, texte intégral et
- * attribution de la source.
+ * attribution de la source. Ils sont pris tels que le content layer les
+ * dérive, jamais redérivés ici.
  */
 export function publishedTexts(content: Pick<Content, "pieces" | "projects">): PublishedText[] {
   const both = ({ traditional, simplified }: ChineseText) => `${traditional}\n${simplified}`;
-  const derived = (traditional: string) => both(deriveChineseText(traditional));
 
   const pieces = content.pieces.map((piece) => {
     const source = piece.source;
@@ -35,12 +35,10 @@ export function publishedTexts(content: Pick<Content, "pieces" | "projects">): P
       both(piece.title),
       ...piece.versions.flatMap((version) => [
         ...version.columns.map(both),
-        derived(version.chineseDate),
+        `${version.chineseDate}\n${version.chineseDateSimplified}`,
       ]),
       ...(source?.full_text ? [both(source.full_text)] : []),
-      ...[source?.author, source?.work, source?.dynasty]
-        .filter((text) => text !== undefined)
-        .map(derived),
+      ...(source?.attribution ? [both(source.attribution)] : []),
     ];
     return {
       owner: `${pieceFile(piece.slug)} (${piece.title.traditional})`,

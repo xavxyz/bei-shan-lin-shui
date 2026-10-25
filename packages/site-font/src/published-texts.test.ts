@@ -46,11 +46,24 @@ describe("la police des textes publiés", () => {
     expect(undrawn(font, "蘇軾苏轼東坡集东宋")).toEqual([]); // attribution
   });
 
-  it("dessine la date chinoise de chaque version", async () => {
+  it("dessine l'attribution telle que le site la montre, séparateurs compris", async () => {
     const content = await load();
     const font = open(await subsetSiteFont(publishedTexts(content)));
 
-    const dates = content.pieces[0]!.versions.map((version) => version.chineseDate).join("");
+    const attribution = content.pieces[0]!.source!.attribution!;
+    expect(attribution.traditional).toContain("·");
+    // Les blancs restent à la police du système : seuls les caractères comptent.
+    const shown = `${attribution.traditional}${attribution.simplified}`.replace(/\s/g, "");
+    expect(undrawn(font, shown)).toEqual([]);
+  });
+
+  it("dessine la date chinoise de chaque version, en traditionnel et en simplifié", async () => {
+    const content = await load();
+    const font = open(await subsetSiteFont(publishedTexts(content)));
+
+    const dates = content.pieces[0]!.versions.map(
+      (version) => `${version.chineseDate}${version.chineseDateSimplified}`,
+    ).join("");
     expect(dates).not.toBe("");
     expect(undrawn(font, dates)).toEqual([]);
   });
