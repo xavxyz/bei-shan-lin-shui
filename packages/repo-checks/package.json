@@ -1,0 +1,12 @@
+{
+  "name": "@bsls/repo-checks",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@bsls/content": "workspace:*"
+  }
+}

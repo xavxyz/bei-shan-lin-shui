@@ -12,6 +12,7 @@
     "format:check": "prettier --check .",
     "validate:content": "tsx packages/content/src/cli/validate.ts content",
     "validate:imports": "tsx packages/notion-import/src/cli/validate-imports.ts imports content",
+    "validate:repo": "vitest run packages/repo-checks",
     "import:notion": "tsx packages/notion-import/src/cli/import-notion.ts",
     "import:plan-versions": "tsx packages/notion-import/src/cli/convert-plan-versions.ts",
     "attach:scan": "tsx packages/scans/src/cli/attach-scan.ts",

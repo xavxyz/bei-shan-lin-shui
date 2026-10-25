@@ -145,12 +145,14 @@ export function indent(fragment: string, spaces: number): string {
 }
 
 /**
- * Une liste de scalaires reste en ligne, comme `projects: [a, b]` ; une liste
- * d'objets passe en bloc. La clé se réécrit à sa colonne d'origine.
+ * Une liste de scalaires reste en ligne, comme `projects: [a, b]`, tant que la
+ * ligne tient dans la largeur de Prettier ; au-delà, comme une liste d'objets,
+ * elle passe en bloc. La clé se réécrit à sa colonne d'origine.
  */
 function flowOrBlock(key: string, items: unknown[], keyColumn: number): string {
   const scalars = items.every((item) => typeof item === "string");
-  if (scalars) return `${key}: [${(items as string[]).join(", ")}]`;
+  const inline = `${key}: [${(items as string[]).join(", ")}]`;
+  if (scalars && keyColumn + displayWidth(inline) <= PRINT_WIDTH) return inline;
   const block = indent(toYaml({ [key]: items }, { column: keyColumn }), keyColumn).trimEnd();
   return block.slice(keyColumn);
 }
