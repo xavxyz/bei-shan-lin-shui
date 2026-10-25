@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("la page d'accueil liste les projets et permet d'entrer dans l'un d'eux", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByTestId("project-link")).toHaveCount(5);
+  await expect(page.getByTestId("project-row")).toHaveCount(5);
   await page.getByRole("link", { name: "戈之研究" }).click();
 
   await expect(page).toHaveURL("/ge-zhi-yan-jiu");

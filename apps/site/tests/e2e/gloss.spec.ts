@@ -31,12 +31,12 @@ test("la glose d'un projet paraît sous son titre, sur l'accueil et sur sa page"
   page,
 }) => {
   await page.goto("/");
-  const card = page.getByTestId("project-link").filter({ has: page.getByTestId("gloss") });
+  const card = page.getByTestId("project-row").filter({ has: page.getByTestId("gloss") });
   await expect(card).toHaveCount(1);
   await expect(card.getByTestId("gloss")).toHaveText(projectGloss);
   await expectBelow(card.getByTestId("gloss"), card.getByRole("heading"));
 
-  await card.click();
+  await card.getByRole("link", { name: "戈之研究" }).click();
   await expect(page).toHaveURL("/ge-zhi-yan-jiu");
   const gloss = page.getByTestId("gloss").filter({ hasText: projectGloss });
   await expect(gloss).toBeVisible();
@@ -49,7 +49,10 @@ test("sans glose, rien ne paraît à sa place", async ({ page }) => {
   await expect(card).toBeVisible();
   await expect(card.getByTestId("gloss")).toHaveCount(0);
   await expect(
-    page.getByTestId("project-link").filter({ hasText: "紅樓夢" }).getByTestId("gloss"),
+    page
+      .getByTestId("project-row")
+      .filter({ has: page.getByRole("heading", { name: "紅樓夢", exact: true }) })
+      .getByTestId("gloss"),
   ).toHaveCount(0);
 
   await page.goto("/pieces/mo-xing-ji");

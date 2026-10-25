@@ -85,5 +85,9 @@ test("une pièce non publiée n'a aucune page et n'apparaît dans aucune liste",
   await expect(page.getByText("篤志力行")).toHaveCount(0);
   await expect(page.getByText("non publiée")).toHaveCount(0);
   // Le décompte du projet ne compte que ses pièces publiées.
-  await expect(page.getByRole("link", { name: /中和集/ })).toContainText("1 pièce");
+  await expect(
+    page
+      .getByTestId("project-row")
+      .filter({ has: page.getByRole("heading", { name: "中和集", exact: true }) }),
+  ).toContainText("1 pièce");
 });

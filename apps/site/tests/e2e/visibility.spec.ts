@@ -16,8 +16,16 @@ test("une pièce publiée sans image est absente du site public", async ({ page,
 test("les comptes de pièces ne comptent que les pièces visibles", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Pièces · 8" })).toBeVisible();
-  await expect(page.getByRole("link", { name: /紅樓夢/ })).toContainText("1 pièce");
-  await expect(page.getByRole("link", { name: /易筋經/ })).toContainText("0 pièce");
+  await expect(
+    page
+      .getByTestId("project-row")
+      .filter({ has: page.getByRole("heading", { name: "紅樓夢", exact: true }) }),
+  ).toContainText("1 pièce");
+  await expect(
+    page
+      .getByTestId("project-row")
+      .filter({ has: page.getByRole("heading", { name: "易筋經", exact: true }) }),
+  ).toContainText("0 pièce");
 
   await page.goto("/hong-lou-meng");
   await expect(page.getByRole("heading", { name: "Pièces · 1" })).toBeVisible();

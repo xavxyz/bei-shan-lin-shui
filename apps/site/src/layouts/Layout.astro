@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import "../styles/site-font.css";
+import SiteHeader from "../components/SiteHeader.astro";
 import { SITE_FONT_FACE, SITE_FONT_URL, SITE_TITLE } from "../site.js";
 
 type Props = {
@@ -8,6 +9,8 @@ type Props = {
 };
 
 const { title } = Astro.props;
+// Seul l'accueil porte l'en-tête en grand.
+const home = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -21,10 +24,7 @@ const { title } = Astro.props;
   </head>
   <body>
     <div class="page">
-      <header class="site-header">
-        <h1 class="site-header__title"><a href="/" lang="zh-Hant">{SITE_TITLE}</a></h1>
-        <p class="site-header__tagline">Soutenu par le maître, je suis les vagues</p>
-      </header>
+      <SiteHeader large={home} />
       <main>
         <slot />
       </main>
