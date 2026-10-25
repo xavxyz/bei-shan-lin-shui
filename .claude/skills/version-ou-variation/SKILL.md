@@ -19,7 +19,7 @@ Poser la question telle quelle, même quand la réponse semble évidente :
 
 > As-tu refait la pièce, ou l'as-tu écrite dans un autre style ?
 
-- **Refaite** : une nouvelle réalisation, c'est une nouvelle **version**. Demander sa date, son format, ses colonnes et son intention, et les styles dans lesquels elle est écrite : chacun en est une variation.
+- **Refaite** : une nouvelle réalisation, c'est une nouvelle **version**. Demander sa date, son format (dans la notation de **Format**, `GLOSSARY.md`, ou `à préciser`), ses colonnes et son intention, et les styles dans lesquels elle est écrite : chacun en est une variation.
 - **Autre style** : une **variation** d'une version existante. Demander laquelle (la dernière par défaut), le style, le statut de la variation et le commentaire personnel.
 
 Styles et statuts de variation : `SCRIPTS` et `VARIATION_STATUSES` de `packages/schema/src/vocabulary.ts`. Les identifiants (`v2`, `v1b`…) sont attribués par la commande.
@@ -35,7 +35,7 @@ Montrer le YAML qui sera ajouté et attendre l'accord. Puis, selon le cas :
 ```sh
 pnpm piece version <slug> <<'EOF'
 date: 2026-10-16
-format: A3
+format: "[(2x5)]" # entre guillemets : sans eux, YAML y lit une liste
 columns: [空山新雨後, 天氣晚來秋]
 intention: |
   Plus grand, sur papier de riz.

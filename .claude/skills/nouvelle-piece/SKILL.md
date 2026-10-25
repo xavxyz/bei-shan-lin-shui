@@ -13,7 +13,7 @@ Reprendre ce que le calligraphe a déjà dit, puis demander en un seul message c
 
 - **Texte** : le titre chinois et l'extrait calligraphié, découpé en colonnes, en traditionnel. Un texte donné en simplifié se convertit en traditionnel, à faire confirmer caractère par caractère.
 - **Source** : auteur, œuvre, dynastie, et le texte intégral quand l'extrait n'en est qu'une partie. Ces champs forment l'attribution : le calligraphe la dicte, la fournit, ou la fait rédiger par l'agent sous sa direction ; elle s'écrit telle qu'il l'arrête.
-- **Format** envisagé (`A4 vertical`, `2x7`…) et **date** de la version (aujourd'hui par défaut).
+- **Format** envisagé, dans la notation de **Format** (`GLOSSARY.md`) : `[(2x5)]`, `[(1x2, 1x7/2)]`… ; `à préciser` tant que le calligraphe ne le sait pas. `pnpm piece` refuse tout autre format et dit où il bute : le réécrire avec lui. **Date** de la version : aujourd'hui par défaut.
 - **Intention** : ce qu'il cherche à obtenir, dans ses mots.
 - **Traduction** française : la sienne, ou rien. L'agent n'en propose aucune.
 - **Projet** : la pièce est-elle conçue pour un projet de `content/projects/` ? Par défaut, aucun.
@@ -41,7 +41,7 @@ source:
     明月松間照，清泉石上流。
 version:
   date: 2026-10-16
-  format: A4 vertical
+  format: "[(2x5)]" # entre guillemets : sans eux, YAML y lit une liste
   columns: [空山新雨後, 天氣晚來秋]
   intention: |
     Retrouver l'humidité de la montagne après la pluie.
