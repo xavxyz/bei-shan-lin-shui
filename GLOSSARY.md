@@ -6,9 +6,13 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **Pièce** : Une calligraphie identifiée par son texte, suivie de l'idée jusqu'à l'œuvre à travers ses versions. _À éviter_ : œuvre, page
 
-**Projet** : Une série de pièces conçues pour être montrées ensemble, avec une présentation et un thème. Une pièce peut rejoindre un projet longtemps après sa création, si elle est reprise pour lui ; rapprocher après coup des pièces écrites sans lui n'en fait pas un projet. _À éviter_ : collection, dossier, page-pôle
+**Projet** : Une série de pièces conçues pour être montrées ensemble, avec une présentation. Une pièce peut rejoindre un projet longtemps après sa création, si elle est reprise pour lui ; rapprocher après coup des pièces écrites sans lui n'en fait pas un projet. _À éviter_ : collection, dossier, page-pôle
+
+**Glose** : La courte phrase française qui accompagne le titre chinois d'une pièce ou d'un projet et dit de quoi il s'agit, sans le traduire mot à mot ; ainsi « Les 8 mouvements fondamentaux de l'éternité, exécutés au solstice d'été 2026 » pour 永草書. _À éviter_ : titre français, sous-titre, traduction
 
 **Version** : Une réalisation de la pièce, avec sa date, son format et son texte. Refaire une pièce dont une réalisation existe déjà, c'est en ouvrir une nouvelle version. _À éviter_ : reprise, édition
+
+**Traduction** : Le français d'une version, écrit à la main colonne par colonne, 款 compris : chaque colonne a sa ligne. _À éviter_ : glose
 
 **Variation** : Une écriture complète d'une version, dans un style donné. Les variations d'une version coexistent ; changer de style, c'est changer de variation. _À éviter_ : essai, déclinaison
 
