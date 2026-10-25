@@ -281,7 +281,11 @@ export const loadedProjectSchema = projectFileSchema.extend({
   title: chineseTextSchema,
   id: z.string(),
   href: z.string(),
-  /** Slugs des pièces publiées rattachées à ce projet, dans l'ordre du disque. */
+  /**
+   * Slugs des pièces rattachées à ce projet que le chargement rend, dans l'ordre
+   * du disque : en public, les pièces publiées qui ont une image ; en admin,
+   * toutes.
+   */
   pieceSlugs: z.array(z.string()),
 });
 
