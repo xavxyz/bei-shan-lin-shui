@@ -305,6 +305,31 @@ Les questions posées par la première version de cette note ont toutes reçu le
 
 Il ne reste aucune question ouverte. Un point est à vérifier au premier rendu : la ponctuation verticale de TW-Kai (3.1, principe 4).
 
+## 6. Arbitrages du calligraphe après le prototype (25 octobre 2026)
+
+Le prototype (branche `prototype/mise-en-page`) a retenu **A · Cimaise, avec la devise en grand de C**. Une séance de questions a ensuite repris l'interface à partir de ce verdict, et un second prototype (branche `prototype/gloses-et-traduction`) a tranché le corps de la page pièce. Ces décisions **remplacent** celles du §5 là où elles le contredisent : le texte vertical, les replis du pinyin et du simplifié, le thème, et GSAP pour le carrousel.
+
+| Question | Arbitrage |
+| --- | --- |
+| La mise en page ? | A · Cimaise. Sur l'accueil, l'en-tête prend toute la hauteur, avec le titre et la devise en grand. Ailleurs, il reste réduit. |
+| Le titre d'une pièce et d'un projet ? | Un titre chinois et, dessous, une **glose** : une courte phrase française, optionnelle (`GLOSSARY.md`). Le titre d'un projet devient chinois, comme celui d'une pièce : 戈之研究, glosé « Explorations personnelles ». Sans glose, on n'affiche que le titre chinois. Les gloses manquantes sont à revoir ([#69](https://github.com/xavxyz/bei-shan-lin-shui/issues/69)). |
+| La traduction ? | Elle appartient à la version : une ligne française par colonne, 款 compris, écrite à la main (`GLOSSARY.md`, **Traduction**). Elle est optionnelle, mais une traduction présente couvre toutes les colonnes, sinon le build casse. Le champ `translation` de la pièce disparaît : celui de 永草書 était en fait une glose. |
+| Le texte de la pièce ? | **Plus de texte vertical.** Il se présente à l'horizontale, dans un tableau « chinois simplifié / français », une ligne par colonne de l'œuvre. Sans traduction, c'est une simple liste des lignes en simplifié. Le traditionnel ne reste que dans l'œuvre, dans le titre et dans le texte intégral de la source. |
+| Le pinyin ? | Il s'ouvre en popover sur chaque ligne du tableau : au survol sur ordinateur, au toucher sur mobile, et au focus au clavier. Il n'y a plus de replis. |
+| La ponctuation ? | Horizontale, celle de TW-Kai. La question de la ponctuation verticale disparaît avec le texte vertical. |
+| Le corps de la page pièce ? | **Vis-à-vis** (variante 3 du second prototype). L'œuvre reste fixe en colonnes 1 à 7. À droite, en colonnes 8 à 12, défilent le titre, la glose, le tableau, les faits et la prose. |
+| Une œuvre plus haute que l'écran ? | Elle tient entière dans la hauteur de la fenêtre, réduite au besoin, jamais recadrée. Avec plusieurs images, le carrousel reste fixe dans la colonne de gauche. |
+| Les versions antérieures ? | Même vis-à-vis que la version courante, en dessous. |
+| Le format ? | Un libellé français dérivé au build (« 4 colonnes de 5 caractères »), avec la notation brute en petit dessous. |
+| Le pinyin des titres ? | En popover, comme les lignes du tableau. |
+| Sur mobile ? | Le vis-à-vis s'empile : titre, glose, œuvre, tableau, faits, prose, versions antérieures. |
+| Ce que voit le public ? | Les pièces publiées **qui ont une image**. Une pièce publiée sans scan reste cachée. |
+| Les pièces sans scan, en mode admin ? | Elles sont regroupées dans une section à part, « Sans scan · N », entre le mur et les projets, et sous les œuvres sur la page projet. Chacune y occupe une rangée : titre, glose, statut et date de la dernière version. |
+| Les pièces scannées non publiées, en mode admin ? | Elles restent dans le mur, marquées « non publiée ». |
+| Le thème des projets ? | Retiré du schéma et du vocabulaire dans ce chantier. |
+| Ce que fait GSAP ? | Seulement la vignette du mur qui grandit jusqu'à l'œuvre. Le carrousel garde son défilement, et le reste est en CSS. |
+| La police du site ? | Une ADR à écrire, qui cite l'ADR 0003 : TW-Kai réduite aux caractères publiés, à la place de Noto Serif TC chargée depuis Google Fonts. |
+
 ---
 
 ## Sources
