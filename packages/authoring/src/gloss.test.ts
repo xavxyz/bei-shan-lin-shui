@@ -51,6 +51,22 @@ describe("setPieceGloss", () => {
     expect(result).toMatchObject({ ok: false });
     expect(await readPieceFile(root, "yong-cao-shu")).toBe(YONG);
   });
+
+  it("refuse une pièce introuvable", async () => {
+    const root = await yongTree();
+
+    const result = await setPieceGloss(root, "inconnue", "Une glose.");
+
+    expect(result).toMatchObject({ ok: false, message: "pièce introuvable : inconnue" });
+  });
+
+  it("laisse remonter un fichier de pièce illisible, qui n'est pas une pièce introuvable", async () => {
+    const root = await writeTree({ "pieces/yong-cao-shu/piece.md/remplissage": "un répertoire" });
+
+    await expect(setPieceGloss(root, "yong-cao-shu", "Une glose.")).rejects.toMatchObject({
+      code: "EISDIR",
+    });
+  });
 });
 
 const PROJET = `# projet ouvert à l'arbitrage du scan 24
@@ -119,5 +135,13 @@ describe("setProjectGloss", () => {
     const result = await setProjectGloss(root, "inconnu", "Une glose de projet.");
 
     expect(result).toMatchObject({ ok: false, message: "projet inconnu : inconnu" });
+  });
+
+  it("laisse remonter un fichier de projet illisible, qui n'est pas un projet inconnu", async () => {
+    const root = await writeTree({ "projects/qi-gong.yaml/remplissage": "un répertoire" });
+
+    await expect(setProjectGloss(root, "qi-gong", "Une glose de projet.")).rejects.toMatchObject({
+      code: "EISDIR",
+    });
   });
 });

@@ -1,8 +1,9 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { pieceFile } from "@bsls/content";
 import { pieceFrontmatterSchema, type PieceFrontmatter, type z } from "@bsls/schema";
 import { checkYaml } from "./edit-document.js";
+import { readIfPresent } from "./read-if-present.js";
 
 /**
  * Lecture et réécriture d'un `piece.md` au caractère près. Les opérations
@@ -35,7 +36,7 @@ export async function readPiece(
   slug: string,
 ): Promise<Outcome<{ piece: PieceText }>> {
   const path = join(root, pieceFile(slug));
-  const text = await readFile(path, "utf8").catch(() => undefined);
+  const text = await readIfPresent(path);
   if (text === undefined) return { ok: false, message: `pièce introuvable : ${slug}` };
 
   const match = FRONTMATTER.exec(text);
