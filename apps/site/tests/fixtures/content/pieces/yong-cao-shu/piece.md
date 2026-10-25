@@ -1,5 +1,6 @@
 ---
 title: 永草書
+gloss: Les 8 mouvements fondamentaux de l'éternité, exécutés au solstice d'été 2026.
 slug: yong-cao-shu
 status: idea
 projects: [ge-zhi-yan-jiu]

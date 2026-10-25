@@ -31,6 +31,7 @@ const heading = `Sans scan · ${pieces.length}`;
                   {piece.title.traditional}
                 </a>
               </th>
+              <td class="gloss">{piece.gloss ?? ""}</td>
               <td>{PIECE_STATUS_LABELS[piece.status]}</td>
               <td>
                 <VersionDate version={piece.latestVersion} testId="unscanned-date" />

@@ -27,6 +27,13 @@ const { wall, unscanned } = hang(pieces);
 <Layout title={project.title} theme={project.theme}>
   <nav class="breadcrumb"><a href="/">Accueil</a></nav>
   <h2>{project.title}</h2>
+  {
+    project.gloss ? (
+      <p class="gloss" data-testid="gloss">
+        {project.gloss}
+      </p>
+    ) : null
+  }
   <p class="reading__body">{project.presentation}</p>
 
   <section aria-labelledby="oeuvres">

@@ -125,6 +125,17 @@ a:hover {
   font-size: 0.85rem;
 }
 
+/* La glose : une phrase française, sous le titre, plus discrète que lui. */
+.gloss {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0 0 0.25rem;
+}
+
+.piece__header .gloss {
+  font-size: 1.15rem;
+}
+
 .card__thumbnail {
   width: 100%;
   aspect-ratio: 3 / 4;

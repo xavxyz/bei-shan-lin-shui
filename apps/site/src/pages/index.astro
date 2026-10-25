@@ -28,6 +28,11 @@ const { wall, unscanned } = hang(pieces);
           <li>
             <a class="card" href={project.href} data-testid="project-link">
               <h3 class="card__title">{project.title}</h3>
+              {project.gloss ? (
+                <p class="gloss" data-testid="gloss">
+                  {project.gloss}
+                </p>
+              ) : null}
               <p class="card__meta">
                 {project.pieceSlugs.length} pièce{project.pieceSlugs.length > 1 ? "s" : ""}
               </p>
