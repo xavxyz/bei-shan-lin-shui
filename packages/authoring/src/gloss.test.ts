@@ -103,6 +103,16 @@ describe("setProjectGloss", () => {
     expect(await readProject(root)).toBe(PROJET);
   });
 
+  it("refuse sans rien écrire un projet déjà invalide", async () => {
+    const invalide = `${PROJET}theme: encre\n`;
+    const root = await writeTree({ "projects/qi-gong.yaml": invalide });
+
+    const result = await setProjectGloss(root, "qi-gong", "Une glose de projet.");
+
+    expect(result).toMatchObject({ ok: false, message: expect.stringContaining("déjà invalide") });
+    expect(await readProject(root)).toBe(invalide);
+  });
+
   it("refuse un projet inconnu", async () => {
     const root = await projectTree();
 
