@@ -8,8 +8,9 @@ type Props = {
 
 /*
  * Le pinyin en popover, partagé par les titres et les lignes du texte : il
- * s'ouvre au survol, au focus et au toucher, et se ferme par Échap ou par un
- * toucher ailleurs (`pinyin-popover.ts`).
+ * s'ouvre au survol, au focus du clavier et au toucher — sauf dans un lien, que
+ * le toucher suit —, et se ferme par Échap ou par un toucher ailleurs
+ * (`pinyin-popover.ts`).
  *
  * Le texte est décrit (`aria-describedby`) par son pinyin, dans une description
  * cachée qui ne se ferme jamais : un lecteur d'écran l'entend, popover ouvert ou

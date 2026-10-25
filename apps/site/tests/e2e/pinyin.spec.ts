@@ -176,22 +176,27 @@ test.describe("sur un téléphone", () => {
     await expect(pinyin(page)).toHaveCount(0);
   });
 
-  test("au mur, toucher un titre montre son pinyin sans quitter la page ; le toucher encore mène à l'œuvre", async ({
+  test("au mur, toucher le titre d'une œuvre mène à l'œuvre, sans ouvrir son pinyin", async ({
     page,
   }) => {
     await page.goto("/");
-    // Repéré avant d'être touché : ouvert, le popover s'ajoute au nom du titre.
-    const wallTitle = page
+
+    await page
       .getByTestId("piece-link")
       .filter({ hasText: "永草書" })
       .getByRole("heading")
-      .getByText("永草書");
+      .getByText("永草書")
+      .tap();
 
-    await wallTitle.tap();
-    await expect(pinyin(page)).toHaveText("yǒng cǎo shū");
-    await expect(page).toHaveURL("/");
-
-    await wallTitle.tap();
     await expect(page).toHaveURL(/\/yong-cao-shu$/);
+    await expect(pinyin(page)).toHaveCount(0);
+  });
+
+  test("dans les rangées, toucher le titre d'un projet mène au projet", async ({ page }) => {
+    await page.goto("/");
+
+    await page.getByTestId("project-row").getByRole("link", { name: "紅樓夢" }).tap();
+
+    await expect(page).toHaveURL(/\/hong-lou-meng$/);
   });
 });
