@@ -5,11 +5,12 @@
  * d'une prop de page. C'est `<main data-page>`, échangé à chaque navigation,
  * qui le fait passer de grand (accueil) à réduit (ailleurs), en CSS.
  */
+import { SITE_TITLE } from "../site.js";
 ---
 
 <header class="site-header" transition:persist="site-header">
   <h1 class="site-header__title" lang="zh-Hant" transition:name="site-title">
-    <a href="/">背山臨水</a>
+    <a href="/">{SITE_TITLE}</a>
   </h1>
   <p class="site-header__motto" transition:name="site-motto">
     Soutenu par le maître, je suis les vagues

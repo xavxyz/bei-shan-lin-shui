@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
+import "../styles/site-font.css";
 import { ClientRouter } from "astro:transitions";
 import SiteHeader from "../components/SiteHeader.astro";
+import { SITE_FONT_FACE, SITE_FONT_URL, SITE_TITLE } from "../site.js";
 
 type Props = {
   title: string;
@@ -28,13 +30,9 @@ const pageFade = { forwards: fade, backwards: fade };
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} — 背山臨水</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap"
-    />
+    <title>{title} — {SITE_TITLE}</title>
+    <link rel="preload" href={SITE_FONT_URL} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={SITE_FONT_FACE}></style>
     <ClientRouter />
   </head>
   <body>

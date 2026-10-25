@@ -100,6 +100,10 @@ test("en mode admin, la page projet range ses pièces sans scan sous ses œuvres
   const worksBox = (await works.boundingBox())!;
   const unscannedBox = (await unscanned.boundingBox())!;
   expect(unscannedBox.y).toBeGreaterThanOrEqual(worksBox.y + worksBox.height);
+  // Dans la colonne des œuvres, à droite de l'introduction.
+  expect(unscannedBox.x).toBeCloseTo(worksBox.x, 0);
+  const title = (await page.getByRole("heading", { level: 2, name: "紅樓夢" }).boundingBox())!;
+  expect(unscannedBox.x).toBeGreaterThan(title.x + title.width);
 });
 
 // 易筋經 est la seule pièce des fixtures à trois versions ; sans image, seul le

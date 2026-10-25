@@ -28,6 +28,7 @@ content/                 le contenu : projets, pièces, images
 packages/schema/         le schéma Zod, seule définition du format
 packages/content/        le content layer et le validateur
 packages/repo-checks/    les vérifications du dépôt : couture YAML, chemins cités, glossaire
+packages/site-font/      TW-Kai réduite aux caractères publiés, pour le site
 apps/site/               le site Astro, ses îlots React et les tests E2E
 ```
 

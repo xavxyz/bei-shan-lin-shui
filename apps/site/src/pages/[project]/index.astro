@@ -24,21 +24,30 @@ const { wall, unscanned } = hang(pieces);
 ---
 
 <Layout title={project.title.traditional}>
-  <nav class="breadcrumb"><a href="/">Accueil</a></nav>
-  <h2 lang="zh-Hant">{project.title.traditional}</h2>
-  {
-    project.gloss ? (
-      <p class="gloss" data-testid="gloss">
-        {project.gloss}
-      </p>
-    ) : null
-  }
-  {project.presentation ? <p class="reading__body">{project.presentation}</p> : null}
+  <div class="project grid">
+    <header class="project__intro">
+      <h2 class="project__title" lang="zh-Hant">{project.title.traditional}</h2>
+      {
+        project.gloss ? (
+          <p class="gloss" data-testid="gloss">
+            {project.gloss}
+          </p>
+        ) : null
+      }
+      {
+        project.presentation ? (
+          <p class="project__presentation reading__body">{project.presentation}</p>
+        ) : null
+      }
+    </header>
 
-  <section aria-labelledby="oeuvres">
-    <h3 id="oeuvres">Pièces · {wall.length}</h3>
-    <Wall pieces={wall} projectId={project.id} />
-  </section>
+    <div class="project__works">
+      <section aria-labelledby="oeuvres">
+        <h3 id="oeuvres">Pièces · {wall.length}</h3>
+        <Wall pieces={wall} projectId={project.id} />
+      </section>
 
-  <UnscannedPieces pieces={unscanned} level={3} projectId={project.id} />
+      <UnscannedPieces pieces={unscanned} level={3} projectId={project.id} />
+    </div>
+  </div>
 </Layout>

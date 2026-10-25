@@ -19,9 +19,11 @@ import { compact, describeIssues, type Outcome } from "./piece-file.js";
 /**
  * Une version à ouvrir : ses champs, sans variations ni identifiant. Son format
  * est dans la notation, ou `à préciser` : l'ancienne notation ne s'écrit plus.
+ * Sa traduction est celle que le calligraphe donne pour elle : une nouvelle
+ * version ne reprend jamais celle de la précédente.
  */
 export const versionDraftSchema = versionSchema
-  .pick({ date: true, columns: true, intention: true })
+  .pick({ date: true, columns: true, intention: true, translation: true })
   .extend({ format: formatSchema });
 
 /** Une variation à ouvrir : ses champs, sans images ni identifiant. */
@@ -41,7 +43,7 @@ export const versionWithVariationsDraftSchema = versionDraftSchema.extend({
  * réponse du calligraphe, jamais un défaut : le brouillon qui la tait est refusé.
  */
 export const pieceDraftSchema = pieceFieldsSchema
-  .pick({ title: true, source: true, projects: true, pinyin_overrides: true })
+  .pick({ title: true, gloss: true, source: true, projects: true, pinyin_overrides: true })
   .extend({
     version: versionDraftSchema,
     published: pieceFieldsSchema.shape.published.removeDefault(),
@@ -77,10 +79,7 @@ const unansweredQuestion: z.ZodErrorMap = (issue, context) =>
  */
 export function versionEntry(
   id: string,
-  version: Omit<z.output<typeof versionDraftSchema>, "date"> & {
-    date: Date | string;
-    translation?: string[];
-  },
+  version: Omit<z.output<typeof versionDraftSchema>, "date"> & { date: Date | string },
   variations: Record<string, unknown>[] = [],
 ): Record<string, unknown> {
   return compact({
