@@ -194,6 +194,11 @@ export const loadedVersionSchema = versionSchema.extend({
   date: z.string(),
   /** Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais stockés. */
   chineseDate: z.string(),
+  /**
+   * Le format dit en français (`4 colonnes de 5 caractères`), dérivé de la
+   * notation, jamais stocké. Une notation illisible s'y retrouve telle quelle.
+   */
+  formatLabel: z.string(),
   columns: z.array(chineseTextSchema),
   variations: z.array(loadedVariationSchema),
 });

@@ -16,6 +16,7 @@ import {
   type z,
 } from "@bsls/schema";
 import { deriveChineseDate, deriveChineseText } from "./derive.js";
+import { deriveFormatLabel } from "./format-label.js";
 import { pickFeaturedImage, pickFeaturedVariation } from "./featured.js";
 import {
   IMAGES_DIR,
@@ -224,6 +225,7 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
       ...version,
       date: toIsoDate(version.date),
       chineseDate: deriveChineseDate(toIsoDate(version.date)),
+      formatLabel: deriveFormatLabel(version.format),
       columns: version.columns.map((column) => deriveChineseText(column, overrides)),
       variations: version.variations.map((variation): LoadedVariation => {
         const images = variation.images.map((image) => ({
