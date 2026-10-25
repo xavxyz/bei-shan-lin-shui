@@ -5,6 +5,7 @@ import ChineseText from "./ChineseText.astro";
 import VersionVariations from "./VersionVariations.astro";
 import EarlierVersions from "./EarlierVersions.astro";
 import VersionDate from "./VersionDate.astro";
+import VersionFormat from "./VersionFormat.astro";
 
 type Props = {
   piece: LoadedPiece;
@@ -57,7 +58,7 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
         </span>
       ) : null
     }
-    <span class="tag">{version.format}</span>
+    <VersionFormat version={version} testId="version-format" />
     <VersionDate version={version} testId="version-date" />
   </p>
 
