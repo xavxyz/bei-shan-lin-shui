@@ -1,23 +1,13 @@
 import { defineCollection } from "astro:content";
 import type { Loader } from "astro/loaders";
-import { formatContentErrors, loadContent, type Content } from "@bsls/content";
+import type { Content } from "@bsls/content";
 import { loadedPieceSchema, loadedProjectSchema } from "@bsls/schema";
-import { adminMode, contentRoot } from "./content-root.js";
+import { readContent } from "./read-content.js";
 
 /**
- * Le contenu est relu à chaque chargement de collection : en développement,
- * une édition sur le disque doit se voir sans redémarrer le serveur.
+ * Alimente une collection depuis le content layer, seul point d'entrée du
+ * contenu, relu à chaque chargement de collection.
  */
-async function readContent(): Promise<Content> {
-  // Le content layer tient seul la règle publique : publiées, avec une image.
-  // En mode admin, il rend tout, et le site ne fait que répartir (mur, « Sans scan »).
-  const result = await loadContent(contentRoot, { includeUnpublished: adminMode });
-  if (result.ok) return result.content;
-  // Un contenu invalide casse le build, jamais la production.
-  throw new Error(`Contenu invalide sous ${contentRoot}\n\n${formatContentErrors(result.errors)}`);
-}
-
-/** Alimente une collection depuis le content layer, seul point d'entrée du contenu. */
 function contentLoader(name: string, select: (content: Content) => { id: string }[]): Loader {
   return {
     name: `bsls:${name}`,

@@ -45,7 +45,14 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
     }
     <p class="piece__attribution">
       <span class="pinyin">{piece.title.pinyin}</span>
-      {attribution ? ` — ${attribution}` : ""}
+      {
+        attribution ? (
+          <>
+            {" — "}
+            <span lang="zh-Hant">{attribution}</span>
+          </>
+        ) : null
+      }
     </p>
   </header>
 

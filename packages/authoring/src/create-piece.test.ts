@@ -108,6 +108,37 @@ describe("createPiece", () => {
     );
   });
 
+  it("écrit la glose de la pièce et la traduction de sa version, une ligne par colonne", async () => {
+    const root = await writeTree({});
+
+    const result = await createPiece(root, {
+      ...draft,
+      gloss: "Une glose écrite par le calligraphe.",
+      version: { ...draft.version, translation: ["Première ligne", "Seconde ligne"] },
+    });
+
+    expect(result).toMatchObject({ ok: true });
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces[0]).toMatchObject({
+      gloss: "Une glose écrite par le calligraphe.",
+      versions: [{ id: "v1", translation: ["Première ligne", "Seconde ligne"] }],
+    });
+  });
+
+  it("refuse sans rien écrire une traduction qui n'a pas une ligne par colonne", async () => {
+    const root = await writeTree({});
+
+    const result = await createPiece(root, {
+      ...draft,
+      version: { ...draft.version, translation: ["Une seule ligne pour deux colonnes"] },
+    });
+
+    expect(result).toMatchObject({ ok: false });
+    expect(!result.ok && result.message).toContain("translation");
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
+  });
+
   it("dérive le slug du titre chinois en pinyin sans tons", async () => {
     const root = await writeTree({});
 
