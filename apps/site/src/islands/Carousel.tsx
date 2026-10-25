@@ -22,6 +22,11 @@ export type CarouselProps = {
   leadingVariation: string | null;
   /** Titre de la pièce, utilisé pour décrire les images à qui ne les voit pas. */
   title: string;
+  /**
+   * Nom de transition de vue que porte l'image d'ouverture, celle du mur :
+   * la vignette cliquée y grandit. Absent, l'image change de page avec le contenu.
+   */
+  transitionName?: string;
 };
 
 type Slide = { image: LoadedImage; variation: LoadedVariation };
@@ -40,7 +45,7 @@ const SWIPE_THRESHOLD = 40;
  * Sans JavaScript, il montre la première image et la liste ; flèches,
  * vignettes et points n'apparaissent qu'une fois l'îlot monté.
  */
-export function Carousel({ variations, leadingVariation, title }: CarouselProps) {
+export function Carousel({ variations, leadingVariation, title, transitionName }: CarouselProps) {
   const slides = orderSlides(variations, leadingVariation);
   const [shownIndex, setShownIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
@@ -112,6 +117,9 @@ export function Carousel({ variations, leadingVariation, title }: CarouselProps)
                 src={shown.image.src}
                 alt={describe(shown.image, title)}
                 draggable={false}
+                style={
+                  transitionName && index === 0 ? { viewTransitionName: transitionName } : undefined
+                }
               />
             </div>
 

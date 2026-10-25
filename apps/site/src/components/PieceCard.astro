@@ -1,5 +1,6 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
+import { workTransitionName } from "../work-transition.js";
 
 type Props = {
   /** Une pièce du mur : elle a toujours une image (`hang`). */
@@ -14,7 +15,13 @@ const { piece, href } = Astro.props;
   <a class="wall__work" href={href} data-testid="piece-link">
     {
       piece.featuredImage ? (
-        <img class="wall__image" src={piece.featuredImage.src} alt="" loading="lazy" />
+        <img
+          class="wall__image"
+          src={piece.featuredImage.src}
+          alt=""
+          loading="lazy"
+          style={`view-transition-name: ${workTransitionName(piece.slug)}`}
+        />
       ) : null
     }
     <h3 class="wall__title" lang="zh-Hant">{piece.title.traditional}</h3>
