@@ -74,6 +74,16 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **NPL** : Narbonne-Plage : le studio et la terrasse de gong fu du calligraphe, face à la Méditerranée. Le sigle s'écrit sur le papier, près de la signature.
 
+## Le site
+
+**Cimaise** : La mise en page du site, retenue au prototype : un seul fond, le papier teinté ; un en-tête qui reste en place d'une page à l'autre, grand sur l'accueil avec 背山臨水 et sa devise, réduit à une ligne ailleurs ; sur l'accueil, le mur puis les rangées de projets.
+
+**Mur** : Les pièces qui ont une image, accrochées à la file de la plus récente à la plus ancienne selon leur dernière version, alignées sur leur pied, chacune à ses proportions sans jamais être recadrée, avec dessous son titre chinois et sa glose. L'accueil porte le mur de toutes les pièces, une page projet celui des siennes ; le compte « Pièces · N » ne compte que lui. En mode admin, une pièce scannée non publiée y est marquée « non publiée ».
+
+**Sans scan** : Se dit d'une pièce qui n'a encore aucune image. Le public ne la voit pas, même publiée ; le mode admin la range hors du mur, dans la section « Sans scan · N », entre le mur et les projets sur l'accueil et sous le mur sur la page projet, en une rangée : titre, glose, statut, date de la dernière version.
+
+**Vis-à-vis** : La page d'une pièce, l'œuvre d'un côté et son texte de l'autre : l'œuvre reste à gauche, réduite au besoin pour tenir entière à l'écran ; à droite défilent le titre, la glose, le texte de la version avec sa traduction, les faits et la prose. Chaque version antérieure suit dessous dans son propre vis-à-vis. Sur un écran étroit, il s'empile : titre, glose, œuvre, texte, faits, prose.
+
 ## Statuts d'une pièce
 
 **Idée** : La pièce a son texte, mais rien n'est encore préparé sur le papier.
