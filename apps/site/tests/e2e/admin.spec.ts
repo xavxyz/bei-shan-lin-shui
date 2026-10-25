@@ -30,15 +30,79 @@ test("en mode admin, une pièce non publiée figure dans son projet et dans son 
   );
 });
 
-test("en mode admin, une pièce non publiée sans projet figure dans les pièces isolées", async ({
+test("en mode admin, une pièce scannée non publiée paraît dans le mur, marquée non publiée", async ({
   page,
 }) => {
   await page.goto("/");
 
-  const card = page.getByTestId("piece-link").filter({ hasText: "篤志力行" });
+  const wall = page.getByRole("region", { name: "Pièces · 10" });
+  const card = wall.getByTestId("piece-link").filter({ hasText: "篤志力行" });
   await expect(card).toContainText("non publiée");
+  await expect(wall.getByTestId("piece-link").filter({ hasText: "龜蛇相交" })).toContainText(
+    "non publiée",
+  );
+  await expect(wall.getByText("non publiée")).toHaveCount(2);
 
   await card.click();
   await expect(page).toHaveURL("/pieces/du-zhi-li-xing-zhuan-xin-jing-xing");
   await expect(page.getByTestId("unpublished")).toHaveText("non publiée");
+});
+
+test("en mode admin, l'accueil range entre le mur et les projets les pièces sans scan", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const unscanned = page.getByRole("region", { name: "Sans scan · 2" });
+  await expect(unscanned.getByRole("row")).toHaveCount(2);
+  const row = unscanned.getByRole("row").filter({ hasText: "說到辛酸處" });
+  await expect(row).toContainText("idée");
+  await expect(row).toContainText("20 octobre 2026");
+  await expect(unscanned.getByRole("row").filter({ hasText: "易筋經" })).toContainText("en cours");
+  await expect(
+    page.getByRole("region", { name: "Pièces · 10" }).getByText("說到辛酸處"),
+  ).toHaveCount(0);
+
+  const sections = await page.getByRole("heading", { level: 2 }).allTextContents();
+  expect(sections).toEqual(["Pièces · 10", "Sans scan · 2", "Projets"]);
+
+  await row.getByRole("link", { name: "說到辛酸處" }).click();
+  await expect(page).toHaveURL("/hong-lou-meng/shuo-dao-xin-suan-chu");
+});
+
+test("en mode admin, la page projet range ses pièces sans scan sous ses œuvres", async ({
+  page,
+}) => {
+  await page.goto("/hong-lou-meng");
+
+  const works = page.getByRole("region", { name: "Pièces · 1" });
+  await expect(works.getByTestId("piece-link")).toHaveCount(1);
+  const unscanned = page.getByRole("region", { name: "Sans scan · 1" });
+  await expect(unscanned.getByRole("row").filter({ hasText: "說到辛酸處" })).toContainText("idée");
+
+  const worksBox = (await works.boundingBox())!;
+  const unscannedBox = (await unscanned.boundingBox())!;
+  expect(unscannedBox.y).toBeGreaterThanOrEqual(worksBox.y + worksBox.height);
+});
+
+// 易筋經 est la seule pièce des fixtures à trois versions ; sans image, seul le
+// mode admin la montre.
+test("les versions antérieures vont de la plus ancienne à la plus récente", async ({ page }) => {
+  await page.goto("/yi-jin-jing/yi-jin-jing");
+  await page.getByText("voir l'évolution", { exact: true }).click();
+
+  const earlier = page.getByTestId("earlier-version");
+  await expect(earlier.getByTestId("earlier-version-date").locator("time")).toHaveText([
+    "23 mars 2026",
+    "20 octobre 2026",
+  ]);
+  await expect(
+    earlier.getByTestId("earlier-version-format").getByTestId("format-notation"),
+  ).toHaveText(["[(1x3), (2x5)]", "[(3x5)]"]);
+  await expect(
+    earlier.getByTestId("earlier-version-format").getByTestId("format-label"),
+  ).toHaveText([
+    "2 feuilles : 1 colonne de 3 caractères ; 2 colonnes de 5 caractères",
+    "3 colonnes de 5 caractères",
+  ]);
 });

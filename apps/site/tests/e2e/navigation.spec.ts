@@ -14,7 +14,7 @@ test("une page de projet liste ses pièces et rend son thème visuel propre", as
   await page.goto("/hong-lou-meng");
 
   await expect(page.locator("html")).toHaveAttribute("data-theme", "ink");
-  await expect(page.getByTestId("piece-link")).toHaveCount(2);
+  await expect(page.getByTestId("piece-link")).toHaveCount(1);
 
   await page.goto("/ge-zhi-yan-jiu");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "jade");

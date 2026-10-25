@@ -42,13 +42,21 @@ const wellFormedTree = {
   files: ["pieces/shan-ju-qiu-ming/images/v1a-01.jpg"],
 };
 
+/** Charge tout, comme le mode admin et la validation : ce qui est publié comme le reste. */
 async function loadTree(tree: Parameters<typeof writeFixtureTree>[0]) {
-  return loadContent(await writeFixtureTree(tree));
+  return loadContent(await writeFixtureTree(tree), { includeUnpublished: true });
 }
 
-/** Charge une arborescence attendue valide, ou fait échouer le test avec ses erreurs. */
+/** Charge tout d'une arborescence attendue valide, ou fait échouer le test avec ses erreurs. */
 async function loadValid(tree: Parameters<typeof writeFixtureTree>[0]) {
   const result = await loadTree(tree);
+  if (!result.ok) expect.unreachable(`chargement en échec : ${JSON.stringify(result.errors)}`);
+  return result.content;
+}
+
+/** Charge ce que reçoit le site public d'une arborescence attendue valide. */
+async function loadPublic(tree: Parameters<typeof writeFixtureTree>[0]) {
+  const result = await loadContent(await writeFixtureTree(tree));
   if (!result.ok) expect.unreachable(`chargement en échec : ${JSON.stringify(result.errors)}`);
   return result.content;
 }
@@ -553,40 +561,62 @@ describe("image mise en avant", () => {
   });
 });
 
-describe("pièces non publiées", () => {
-  it("les exclut du contenu retourné et des listes de projets", async () => {
-    const content = await loadValid({
-      projects: { "four-seasons": fourSeasons },
-      files: [],
-      pieces: {
-        "shan-ju-qiu-ming": { ...shanJuQiuMing, versions: bareVersions() },
-        "deng-guan-que-lou": {
-          ...shanJuQiuMing,
-          slug: "deng-guan-que-lou",
-          title: "登鸛雀樓",
-          versions: bareVersions(),
-          published: false,
-        },
-      },
-    });
+describe("visibilité", () => {
+  const scanned = { ...shanJuQiuMing };
+  const unscanned = {
+    ...shanJuQiuMing,
+    slug: "deng-guan-que-lou",
+    title: "登鸛雀樓",
+    versions: bareVersions(),
+  };
+  const unpublished = { ...shanJuQiuMing, slug: "jiang-xue", title: "江雪", published: false };
+  const tree = {
+    projects: { "four-seasons": fourSeasons },
+    pieces: {
+      "shan-ju-qiu-ming": scanned,
+      "deng-guan-que-lou": unscanned,
+      "jiang-xue": unpublished,
+    },
+    files: ["pieces/shan-ju-qiu-ming/images/v1a-01.jpg", "pieces/jiang-xue/images/v1a-01.jpg"],
+  };
+
+  it("le public ne reçoit que les pièces publiées qui ont une image, dans les projets comme ailleurs", async () => {
+    const content = await loadPublic(tree);
 
     expect(content.pieces.map((piece) => piece.slug)).toEqual(["shan-ju-qiu-ming"]);
     expect(byId(content, "four-seasons").pieceSlugs).toEqual(["shan-ju-qiu-ming"]);
   });
 
-  it("les valide quand même : un brouillon mal formé casse le build", async () => {
-    const result = await loadTree({
-      ...wellFormedTree,
-      files: [],
-      pieces: {
-        "shan-ju-qiu-ming": {
-          ...shanJuQiuMing,
-          versions: bareVersions(),
-          published: false,
-          status: "presque-fini",
+  it("le mode admin rend tout : non publiées et pièces sans image", async () => {
+    const content = await loadValid(tree);
+
+    expect(content.pieces.map((piece) => piece.slug)).toEqual([
+      "deng-guan-que-lou",
+      "jiang-xue",
+      "shan-ju-qiu-ming",
+    ]);
+    expect(byId(content, "four-seasons").pieceSlugs).toEqual([
+      "deng-guan-que-lou",
+      "jiang-xue",
+      "shan-ju-qiu-ming",
+    ]);
+  });
+
+  it("valide aussi ce que le public ne voit pas : un brouillon mal formé casse le build", async () => {
+    const result = await loadContent(
+      await writeFixtureTree({
+        ...wellFormedTree,
+        files: [],
+        pieces: {
+          "shan-ju-qiu-ming": {
+            ...shanJuQiuMing,
+            versions: bareVersions(),
+            published: false,
+            status: "presque-fini",
+          },
         },
-      },
-    });
+      }),
+    );
 
     expect(result.ok).toBe(false);
   });
