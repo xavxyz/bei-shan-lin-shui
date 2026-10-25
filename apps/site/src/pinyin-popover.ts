@@ -63,7 +63,7 @@ function wire(trigger: HTMLElement): void {
       show(trigger, false);
     }
   });
-  // Le focus du clavier seul : un clic ou un toucher sur l'œuvre du mur la suit sans ouvrir le pinyin de son titre.
+  // Le focus du clavier seul : un clic ou un toucher sur la pièce du mur la suit sans ouvrir le pinyin de son titre.
   focusTarget.addEventListener("focus", () => {
     if (focusTarget.matches(":focus-visible")) open(trigger);
   });
