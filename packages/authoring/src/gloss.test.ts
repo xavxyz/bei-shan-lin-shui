@@ -61,7 +61,7 @@ describe("setPieceGloss", () => {
   });
 
   it("laisse remonter un fichier de pièce illisible, qui n'est pas une pièce introuvable", async () => {
-    const root = await writeTree({ "pieces/yong-cao-shu/piece.md/v1a.jpg": "un répertoire" });
+    const root = await writeTree({ "pieces/yong-cao-shu/piece.md/remplissage": "un répertoire" });
 
     await expect(setPieceGloss(root, "yong-cao-shu", "Une glose.")).rejects.toMatchObject({
       code: "EISDIR",
@@ -138,7 +138,7 @@ describe("setProjectGloss", () => {
   });
 
   it("laisse remonter un fichier de projet illisible, qui n'est pas un projet inconnu", async () => {
-    const root = await writeTree({ "projects/qi-gong.yaml/piece.md": "un répertoire" });
+    const root = await writeTree({ "projects/qi-gong.yaml/remplissage": "un répertoire" });
 
     await expect(setProjectGloss(root, "qi-gong", "Une glose de projet.")).rejects.toMatchObject({
       code: "EISDIR",

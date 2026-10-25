@@ -30,15 +30,15 @@ export async function setProjectGloss(
   return setGloss(gloss, (change) => editProject(root, projectId, change));
 }
 
-/** Lit la glose, puis la fait écrire sous le titre du document par `edit`. */
+/** Lit la glose, puis la fait écrire sous le titre du document par `editDocument`. */
 async function setGloss(
   gloss: unknown,
-  edit: (change: ChangeOf<unknown, object>) => Promise<Outcome<object>>,
+  editDocument: (change: ChangeOf<unknown, object>) => Promise<Outcome<object>>,
 ): Promise<Outcome<object>> {
   const read = readDraft(glossDraftSchema, { gloss });
   if (!read.ok) return read;
 
-  return edit((text, _data, map) => ({
+  return editDocument((text, _data, map) => ({
     edit: setField(text, map, "gloss", read.draft.gloss, { after: ["title"] }),
     result: {},
   }));

@@ -1,8 +1,9 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { pieceFile } from "@bsls/content";
 import { pieceFrontmatterSchema, type PieceFrontmatter, type z } from "@bsls/schema";
 import { checkYaml } from "./edit-document.js";
+import { readIfPresent } from "./read-if-present.js";
 
 /**
  * Lecture et réécriture d'un `piece.md` au caractère près. Les opérations
@@ -45,18 +46,6 @@ export async function readPiece(
     ok: true,
     piece: { slug, path, frontmatter: match[1] ?? "", body: text.slice(match[0].length) },
   };
-}
-
-/**
- * Le texte d'un fichier, ou `undefined` s'il n'existe pas. Toute autre erreur
- * de lecture, permissions comprises, remonte telle quelle : un fichier
- * illisible n'est pas un fichier absent.
- */
-export async function readIfPresent(path: string): Promise<string | undefined> {
-  return readFile(path, "utf8").catch((error: NodeJS.ErrnoException) => {
-    if (error.code === "ENOENT") return undefined;
-    throw error;
-  });
 }
 
 export async function writePiece(piece: PieceText): Promise<void> {

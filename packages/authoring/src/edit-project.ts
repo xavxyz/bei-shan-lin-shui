@@ -3,7 +3,8 @@ import { join } from "node:path";
 import { projectFile } from "@bsls/content";
 import { projectFileSchema, type ProjectFile } from "@bsls/schema";
 import { applyChange, checkYaml, type ChangeOf } from "./edit-document.js";
-import { readIfPresent, type Outcome } from "./piece-file.js";
+import type { Outcome } from "./piece-file.js";
+import { readIfPresent } from "./read-if-present.js";
 
 /**
  * Lit un projet valide, lui applique une édition textuelle et l'écrit s'il est
