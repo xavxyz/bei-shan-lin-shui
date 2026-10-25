@@ -234,6 +234,8 @@ export const loadedVersionSchema = versionSchema.extend({
   date: z.string(),
   /** Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais stockés. */
   chineseDate: z.string(),
+  /** La même date chinoise en simplifié (`丙午处暑`), telle que le site l'affiche. */
+  chineseDateSimplified: z.string(),
   /**
    * Le format dit en français (`4 colonnes de 5 caractères`), dérivé de la
    * notation, jamais stocké. Une notation illisible s'y retrouve telle quelle.
@@ -245,7 +247,16 @@ export const loadedVersionSchema = versionSchema.extend({
 
 export const loadedPieceSchema = pieceFieldsSchema.extend({
   title: chineseTextSchema,
-  source: sourceSchema.extend({ full_text: chineseTextSchema.optional() }).optional(),
+  source: sourceSchema
+    .extend({
+      full_text: chineseTextSchema.optional(),
+      /**
+       * Auteur, œuvre puis dynastie, joints par « · », et leurs dérivations ;
+       * absente si la source n'en nomme aucun.
+       */
+      attribution: chineseTextSchema.optional(),
+    })
+    .optional(),
   versions: z.array(loadedVersionSchema),
   /** Versions triées du plus ancien au plus récent : la dernière est l'intention courante. */
   latestVersion: loadedVersionSchema,
