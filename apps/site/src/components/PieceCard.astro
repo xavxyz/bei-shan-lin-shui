@@ -1,5 +1,6 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
+import Pinyin from "./Pinyin.astro";
 
 type Props = {
   /** Une pièce du mur : elle a toujours une image (`hang`). */
@@ -17,7 +18,9 @@ const { piece, href } = Astro.props;
         <img class="wall__image" src={piece.featuredImage.src} alt="" loading="lazy" />
       ) : null
     }
-    <h3 class="wall__title" lang="zh-Hant">{piece.title.traditional}</h3>
+    <h3 class="wall__title" lang="zh-Hant">
+      <Pinyin pinyin={piece.title.pinyin}>{piece.title.traditional}</Pinyin>
+    </h3>
     {
       piece.gloss ? (
         <p class="gloss" data-testid="gloss">

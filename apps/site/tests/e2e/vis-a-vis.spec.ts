@@ -6,7 +6,7 @@ import { box, expectInReadingOrder } from "./reading-order.js";
  * à droite, qui défile. On regarde où les choses sont, pas comment elles y sont.
  */
 
-/** 題破山寺後禪院 : une image, six lignes de texte, plus hautes que l'œuvre. */
+/** 題破山寺後禪院 : une image, six lignes de texte. */
 const longText = "/pieces/ti-po-shan-si-hou-shan-yuan";
 /** 永草書 : un projet, une glose, une liste sans traduction et une intention. */
 const withGloss = "/ge-zhi-yan-jiu/yong-cao-shu";
@@ -47,6 +47,14 @@ test.describe("sur un écran large", () => {
     await expect(work(page)).toHaveJSProperty("complete", true);
     // L'image fait 800 px de haut : plus que la fenêtre.
     const viewport = page.viewportSize()!;
+    // Le pinyin passé en popover, aucune pièce des fixtures n'a un texte plus haut que son
+    // œuvre : on allonge le texte, pour qu'il ait de quoi défiler.
+    await page
+      .getByTestId("version-text")
+      .first()
+      .evaluate((text) => {
+        (text as HTMLElement).style.minHeight = "300vh";
+      });
 
     // Assez loin pour qu'une œuvre qui défilerait avec le texte soit sortie par le haut.
     const before = await box(work(page));
@@ -212,7 +220,8 @@ test("chaque écriture est balisée dans sa langue", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: "虛心實腹" })).toHaveAttribute("lang", "zh-Hant");
   await expect(page.getByTestId("version-text")).toHaveAttribute("lang", "zh-Hans");
-  await expect(page.getByTestId("pinyin")).toHaveAttribute("lang", "zh-Latn-pinyin");
+  await page.getByRole("heading", { name: "虛心實腹" }).getByText("虛心實腹").hover();
+  await expect(page.getByRole("tooltip")).toHaveAttribute("lang", "zh-Latn-pinyin");
   await expect(page.getByRole("definition").filter({ hasText: "丙午雨水" })).toHaveAttribute(
     "lang",
     "zh-Hans",

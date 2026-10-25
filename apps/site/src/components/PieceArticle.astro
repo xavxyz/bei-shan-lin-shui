@@ -1,6 +1,7 @@
 ---
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
 import EarlierVersions from "./EarlierVersions.astro";
+import Pinyin from "./Pinyin.astro";
 import VersionFacts from "./VersionFacts.astro";
 import VersionText from "./VersionText.astro";
 import VersionVariations from "./VersionVariations.astro";
@@ -47,7 +48,9 @@ const withWork = hasImage(version);
             ))
           }
         </nav>
-        <h2 class="piece__title" lang="zh-Hant">{piece.title.traditional}</h2>
+        <h2 class="piece__title" lang="zh-Hant">
+          <Pinyin pinyin={piece.title.pinyin}>{piece.title.traditional}</Pinyin>
+        </h2>
         {
           piece.gloss ? (
             <p class="gloss" data-testid="gloss">
@@ -66,19 +69,7 @@ const withWork = hasImage(version);
         }
       </header>
 
-      {
-        version.columns.length > 0 ? (
-          <div class="piece__reading">
-            <VersionText version={version} />
-            <div class="reading__block">
-              <p class="reading__label">Prononciation</p>
-              <p class="reading__body pinyin" lang="zh-Latn-pinyin" data-testid="pinyin">
-                {version.columns.map((column) => column.pinyin).join(" / ")}
-              </p>
-            </div>
-          </div>
-        ) : null
-      }
+      {version.columns.length > 0 ? <VersionText version={version} /> : null}
 
       <VersionFacts version={version} piece={piece} testIdPrefix="version" />
 

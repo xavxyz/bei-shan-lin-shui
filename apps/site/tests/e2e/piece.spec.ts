@@ -14,11 +14,16 @@ test("la page de pièce affiche l'œuvre mise en avant en grand", async ({ page 
   expect(width).toBeGreaterThan(300);
 });
 
-test("le pinyin est en regard du texte chinois", async ({ page }) => {
+test("le pinyin d'une ligne se lit sur elle, et non plus en bloc à part", async ({ page }) => {
   await page.goto(piecePath);
 
-  await expect(page.getByTestId("version-text").first()).toContainText("莫性急平流缓进");
-  await expect(page.getByTestId("pinyin")).toContainText("mò xìng jí píng liú huǎn jìn");
+  const text = page.getByTestId("version-text").first();
+  await expect(text).toContainText("莫性急平流缓进");
+  await expect(page.getByText("Prononciation")).toHaveCount(0);
+  await expect(page.getByText("mò xìng jí píng liú huǎn jìn")).toBeHidden();
+
+  await text.getByText("莫性急平流缓进").hover();
+  await expect(page.getByRole("tooltip")).toHaveText("mò xìng jí píng liú huǎn jìn");
 });
 
 test("la date chinoise de la version est affichée à la suite de sa date", async ({ page }) => {

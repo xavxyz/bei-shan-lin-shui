@@ -427,11 +427,6 @@ main > section + .unscanned {
   letter-spacing: 0.08em;
 }
 
-.piece__reading {
-  display: grid;
-  gap: 1.75rem;
-}
-
 /* Le texte d'une version, à l'horizontale, une ligne par colonne de l'œuvre :
    la colonne chinoise prend sa largeur naturelle, le français le reste. */
 .version-text {
@@ -485,11 +480,40 @@ td.version-text__zh {
   }
 }
 
+/* Le pinyin en popover, sous le texte qu'il prononce (`Pinyin.astro`). */
 .pinyin {
+  position: relative;
+}
+
+.pinyin:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 0.15em;
+}
+
+.pinyin__popover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  margin-top: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.25rem 0.75rem rgb(35 32 28 / 0.12);
   color: var(--muted);
+  font-family: var(--serif);
   font-size: 0.9rem;
   font-style: italic;
+  font-weight: normal;
   letter-spacing: 0.02em;
+  line-height: 1.4;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.pinyin__popover[hidden] {
+  display: none;
 }
 
 .reading__block + .reading__block {
