@@ -7,7 +7,8 @@ import {
   versionSchema,
   type z,
 } from "@bsls/schema";
-import { compact, describeIssues, type Outcome } from "./piece-file.js";
+import { describeIssues } from "./edit-document.js";
+import { compact, type Outcome } from "./piece-file.js";
 
 /**
  * Ce que le calligraphe décrit pour faire naître une pièce, une version ou une

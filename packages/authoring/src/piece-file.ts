@@ -1,8 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { parseDocument } from "yaml";
 import { pieceFile } from "@bsls/content";
 import { pieceFrontmatterSchema, type PieceFrontmatter, type z } from "@bsls/schema";
+import { checkYaml } from "./edit-document.js";
 
 /**
  * Lecture et réécriture d'un `piece.md` au caractère près. Les opérations
@@ -54,19 +54,7 @@ export async function writePiece(piece: PieceText): Promise<void> {
 
 /** La pièce telle que le schéma la lit, ou la raison de son refus. */
 export function checkPiece(frontmatter: string): Outcome<{ data: PieceFrontmatter }> {
-  const document = parseDocument(frontmatter);
-  if (document.errors.length > 0) {
-    return { ok: false, message: document.errors.map((error) => error.message).join("\n") };
-  }
-  const result = pieceFrontmatterSchema.safeParse(document.toJS());
-  if (result.success) return { ok: true, data: result.data };
-  return { ok: false, message: describeIssues(result.error), issues: result.error.issues };
-}
-
-export function describeIssues(error: z.ZodError): string {
-  return error.issues
-    .map((issue) => `${issue.path.join(".") || "(racine)"} : ${issue.message}`)
-    .join("\n");
+  return checkYaml(pieceFrontmatterSchema, frontmatter);
 }
 
 /** Un fragment à écrire, sans ses champs absents : un champ facultatif ne s'écrit pas vide. */

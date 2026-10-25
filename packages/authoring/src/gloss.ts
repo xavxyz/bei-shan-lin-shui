@@ -1,12 +1,9 @@
-import { readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
-import { parseDocument } from "yaml";
-import { projectFile } from "@bsls/content";
-import { pieceFieldsSchema, projectFileSchema, z } from "@bsls/schema";
+import { pieceFieldsSchema, z } from "@bsls/schema";
 import { readDraft } from "./drafts.js";
 import { editPiece } from "./edit-piece.js";
-import { describeIssues, type Outcome } from "./piece-file.js";
-import { rootMap, setField } from "./yaml-edit.js";
+import { editProject } from "./edit-project.js";
+import type { Outcome } from "./piece-file.js";
+import { setField } from "./yaml-edit.js";
 
 /** Une glose est une réponse du calligraphe : jamais vide. */
 const glossDraftSchema = z.object({ gloss: pieceFieldsSchema.shape.gloss.unwrap() });
@@ -29,10 +26,7 @@ export async function setPieceGloss(
   }));
 }
 
-/**
- * Écrit la glose d'un projet, comme celle d'une pièce : sous le titre, le reste
- * du fichier intact. Le projet obtenu est vérifié avant d'être écrit.
- */
+/** Écrit la glose d'un projet, comme celle d'une pièce : sous le titre, le reste du fichier intact. */
 export async function setProjectGloss(
   root: string,
   projectId: string,
@@ -41,19 +35,8 @@ export async function setProjectGloss(
   const read = readDraft(glossDraftSchema, { gloss });
   if (!read.ok) return read;
 
-  const path = join(root, projectFile(projectId));
-  const text = await readFile(path, "utf8").catch(() => undefined);
-  if (text === undefined) return { ok: false, message: `projet inconnu : ${projectId}` };
-
-  const project = rootMap(parseDocument(text));
-  if (!project) return { ok: false, message: `${projectFile(projectId)} : YAML illisible` };
-
-  const edit = setField(text, project, "gloss", read.draft.gloss, { after: ["title"] });
-  if (!edit.ok) return edit;
-
-  const checked = projectFileSchema.safeParse(parseDocument(edit.text).toJS());
-  if (!checked.success) return { ok: false, message: describeIssues(checked.error) };
-
-  await writeFile(path, edit.text, "utf8");
-  return { ok: true };
+  return editProject(root, projectId, (text, _data, project) => ({
+    edit: setField(text, project, "gloss", read.draft.gloss, { after: ["title"] }),
+    result: {},
+  }));
 }
