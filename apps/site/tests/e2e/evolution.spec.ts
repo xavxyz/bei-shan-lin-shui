@@ -22,10 +22,10 @@ test("chaque version antérieure montre ses faits et son texte en simplifié", a
   await expect(version.getByTestId("earlier-version-date")).toHaveText("3 janvier 2026");
   await expect(version.getByTestId("earlier-version-chinese-date")).toHaveText("乙巳冬至");
   await expect(version.getByTestId("earlier-version-format")).toHaveText("2x7");
-  await expect(version.getByTestId("version-text").getByRole("listitem")).toHaveText([
-    "莫性急平流缓进",
-    "墨行机兔起鹘落",
-  ]);
+  await expect(version.getByTestId("version-text").getByRole("listitem")).toHaveText(
+    ["莫性急平流缓进", "墨行机兔起鹘落"],
+    { useInnerText: true },
+  );
 });
 
 test("toutes les variations d'une version antérieure sont listées", async ({ page }) => {

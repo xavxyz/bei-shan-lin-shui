@@ -81,6 +81,36 @@ test("au clavier, une ligne et un titre prennent le focus et montrent leur pinyi
   await expect(pinyin(page)).toHaveText("yǒng cǎo shū");
 });
 
+test("popover fermé, une ligne et un titre se décrivent par leur pinyin au lecteur d'écran", async ({
+  page,
+}) => {
+  await page.goto(translated);
+  await expect(pinyin(page)).toHaveCount(0);
+
+  await expect(line(page, "成人不自在")).toHaveAccessibleDescription("chéng rén bú zì zài");
+  await expect(title(page, "成人不自在，自在不成人")).toHaveAccessibleDescription(
+    /chéng rén bú zì zài/,
+  );
+
+  // Au mur, c'est le lien de l'œuvre qui prend le focus : il porte le pinyin de son titre.
+  await page.goto("/");
+  await expect(title(page, "永草書")).toHaveAccessibleDescription("yǒng cǎo shū");
+  await expect(
+    page.getByTestId("piece-link").filter({ hasText: "永草書" }),
+  ).toHaveAccessibleDescription("yǒng cǎo shū");
+  await expect(pinyin(page)).toHaveCount(0);
+});
+
+test("le pinyin ne s'écrit à l'écran que dans le popover ouvert", async ({ page }) => {
+  const onScreen = page.getByText("chéng rén bú zì zài", { exact: true }).filter({ visible: true });
+  await page.goto(translated);
+  await expect(onScreen).toHaveCount(0);
+
+  await line(page, "成人不自在").hover();
+  await expect(onScreen).toHaveCount(1);
+  await expect(onScreen).toHaveRole("tooltip");
+});
+
 test("le popover se referme quand le pointeur quitte le texte", async ({ page }) => {
   await page.goto(translated);
 
@@ -146,22 +176,27 @@ test.describe("sur un téléphone", () => {
     await expect(pinyin(page)).toHaveCount(0);
   });
 
-  test("au mur, toucher un titre montre son pinyin sans quitter la page ; le toucher encore mène à la pièce", async ({
+  test("au mur, toucher le titre d'une pièce mène à la pièce, sans ouvrir son pinyin", async ({
     page,
   }) => {
     await page.goto("/");
-    // Repéré avant d'être touché : ouvert, le popover s'ajoute au nom du titre.
-    const wallTitle = page
+
+    await page
       .getByTestId("piece-link")
       .filter({ hasText: "永草書" })
       .getByRole("heading")
-      .getByText("永草書");
+      .getByText("永草書")
+      .tap();
 
-    await wallTitle.tap();
-    await expect(pinyin(page)).toHaveText("yǒng cǎo shū");
-    await expect(page).toHaveURL("/");
-
-    await wallTitle.tap();
     await expect(page).toHaveURL(/\/yong-cao-shu$/);
+    await expect(pinyin(page)).toHaveCount(0);
+  });
+
+  test("dans les rangées, toucher le titre d'un projet mène au projet", async ({ page }) => {
+    await page.goto("/");
+
+    await page.getByTestId("project-row").getByRole("link", { name: "紅樓夢" }).tap();
+
+    await expect(page).toHaveURL(/\/hong-lou-meng$/);
   });
 });

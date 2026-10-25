@@ -8,20 +8,25 @@ type Props = {
 
 /*
  * Le pinyin en popover, partagé par les titres et les lignes du texte : il
- * s'ouvre au survol, au focus et au toucher, et se ferme par Échap ou par un
- * toucher ailleurs (`pinyin-popover.ts`).
+ * s'ouvre au survol, au focus du clavier et au toucher — sauf dans un lien, que
+ * le toucher suit —, et se ferme par Échap ou par un toucher ailleurs
+ * (`pinyin-popover.ts`).
  *
- * Le popover décrit son texte (`aria-describedby`) : un lecteur d'écran le lit
- * en pinyin. Fermé, il est vide : le pinyin n'entre ni dans le texte de la page,
- * ni dans le nom d'un titre ou d'un lien.
+ * Le texte est décrit (`aria-describedby`) par son pinyin, dans une description
+ * cachée qui ne se ferme jamais : un lecteur d'écran l'entend, popover ouvert ou
+ * non. Cachée, elle n'entre ni dans le texte de la page, ni dans le nom d'un
+ * titre ou d'un lien. Le popover n'est que l'affichage : fermé, il est vide.
  */
 const { pinyin } = Astro.props;
 const id = nextPinyinId();
 ---
 
 <span class="pinyin" data-pinyin={pinyin} aria-describedby={id}
-  ><slot /><span class="pinyin__popover" id={id} role="tooltip" lang="zh-Latn-pinyin" hidden
-  ></span></span
+  ><slot /><span class="pinyin__popover" role="tooltip" lang="zh-Latn-pinyin" hidden></span><span
+    id={id}
+    lang="zh-Latn-pinyin"
+    hidden>{pinyin}</span
+  ></span
 >
 
 <script>
