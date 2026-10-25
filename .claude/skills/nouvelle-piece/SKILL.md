@@ -5,14 +5,14 @@ description: Créer une pièce à partir d'une idée du calligraphe, en l'interr
 
 # Nouvelle pièce
 
-Le calligraphe décrit une idée ; la pièce naît au statut `idea` avec une version initiale `v1`. Rien n'est écrit avant l'étape 3. Le vocabulaire est celui de `GLOSSARY.md`.
+Le calligraphe décrit une idée ; la pièce naît au statut `idea` avec une version initiale `v1`. Rien n'est écrit avant l'étape 3. Le vocabulaire est celui de `GLOSSARY.md`. Chaque proposition au calligraphe — conversion, attribution, colonnes, brouillon — suit `docs/agents/propositions.md`.
 
 ## 1. Interroger
 
 Reprendre ce que le calligraphe a déjà dit, puis demander en un seul message ce qui manque :
 
 - **Texte** : le titre chinois et l'extrait calligraphié, découpé en colonnes, en traditionnel. Un texte donné en simplifié se convertit en traditionnel, à faire confirmer caractère par caractère.
-- **Source** : auteur, œuvre, dynastie, et le texte intégral quand l'extrait n'en est qu'une partie. Ces champs forment l'attribution : le calligraphe la dicte, la fournit, ou la fait rédiger par l'agent sous sa direction ; elle s'écrit telle qu'il l'arrête.
+- **Source** : auteur, œuvre, dynastie, et le texte intégral quand l'extrait n'en est qu'une partie. Ces champs forment l'attribution : le calligraphe la dicte, la fournit, ou la fait rédiger par l'agent sous sa direction ; elle s'écrit telle qu'il l'arrête. Rédigée par l'agent, elle part d'une source primaire, cherchée selon `docs/sources/README.md` et citée en commentaire.
 - **Format** envisagé, dans la notation de **Format** (`GLOSSARY.md`) : `[(2x5)]`, `[(1x2, 1x7/2)]`… ; `à préciser` tant que le calligraphe ne le sait pas. `pnpm piece` refuse tout autre format et dit où il bute : le réécrire avec lui. **Date** de la version : aujourd'hui par défaut.
 - **Intention** : ce qu'il cherche à obtenir, dans ses mots.
 - **Traduction** française : la sienne, ou rien. L'agent n'en propose aucune.

@@ -8,7 +8,7 @@ slug: xing-qi-yu-pei-ming
 status: experiment
 source:
   work: 行氣玉佩銘
-  dynasty: 戰國
+  dynasty: 戰國 # datations recensées dans docs/sources/xing-qi-yu-pei-ming.md
 versions:
   - id: v1
     date: 2026-03-29

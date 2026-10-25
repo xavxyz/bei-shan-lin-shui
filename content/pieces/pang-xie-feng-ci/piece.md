@@ -10,7 +10,7 @@ status: idea
 source:
   author: 曹雪芹
   work: 紅樓夢
-  dynasty: 清
+  dynasty: 清 # attribution du roman : docs/sources/hong-lou-meng.md
 versions:
   - id: v1
     date: 2026-03-10

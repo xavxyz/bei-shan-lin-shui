@@ -11,7 +11,7 @@ status: idea
 source:
   author: 李道純
   work: 中和集
-  dynasty: 元
+  dynasty: 元 # « 元李道純撰 », notice du 中和集 sur zh.wikisource ; docs/sources/zhong-he-ji.md
 versions:
   - id: v1
     date: 2026-02-04

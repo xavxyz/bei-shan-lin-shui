@@ -11,7 +11,7 @@ status: idea
 source:
   author: 唐順之
   work: 荊川集
-  dynasty: 明
+  dynasty: 明 # « 明 唐順之 撰 », en-tête de 荆川集 (四庫全書本)/卷03, zh.wikisource
 versions:
   - id: v1
     date: 2026-10-21

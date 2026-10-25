@@ -10,7 +10,7 @@
     "build": "pnpm --filter @bsls/site build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "validate:content": "tsx packages/content/src/cli/validate.ts content",
+    "validate:content": "tsx packages/content/src/cli/validate.ts content && tsx packages/content/src/cli/memory-marks.ts content docs/sources",
     "validate:imports": "tsx packages/notion-import/src/cli/validate-imports.ts imports content",
     "validate:repo": "vitest run packages/repo-checks",
     "import:notion": "tsx packages/notion-import/src/cli/import-notion.ts",

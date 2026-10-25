@@ -13,7 +13,7 @@ status: made
 source:
   author: 李道純
   work: 中和集
-  dynasty: 元
+  dynasty: 元 # « 元李道純撰 », notice du 中和集 sur zh.wikisource ; docs/sources/zhong-he-ji.md
 versions:
   # la couverture, en style libre (calligraphe) ; rattachée d'abord à shui-huo-tiao-ji, dont elle
   # était la feuille ① (registre imports/scans.yaml, retiré à l'import : git show 954688d:imports/scans.yaml)

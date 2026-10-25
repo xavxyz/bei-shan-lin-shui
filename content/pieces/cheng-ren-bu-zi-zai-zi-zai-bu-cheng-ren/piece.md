@@ -10,7 +10,7 @@ status: made
 source:
   author: 曹雪芹著，無名氏續
   work: 紅樓夢
-  dynasty: 清
+  dynasty: 清 # attribution du roman : docs/sources/hong-lou-meng.md
 versions:
   - id: v1
     # date du papier : 戈 夏至 26 sur 30_02 ; 21 6 26 au stylo sur 30_01, et « le
