@@ -1,5 +1,5 @@
 ---
-# Pièce synthétique : un contenu valide, mais un caractère, 𮌖, que TW-Kai ne dessine pas.
+# Pièce synthétique : un contenu valide, mais un caractère, 𮌖, que ni TW-Kai ni sa police de secours ne dessine.
 title: 困𮌖
 slug: kun
 status: made

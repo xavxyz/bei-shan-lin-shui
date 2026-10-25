@@ -28,8 +28,8 @@ async function failedBuildOutput(contentRoot: string, outDir: string): Promise<s
 /**
  * Un contenu invalide casse le build, jamais la production : on l'établit avant
  * de lancer la suite, faute de quoi les tests vérifieraient un site fantôme.
- * De même pour un caractère que TW-Kai ne dessine pas : le site n'a pas de
- * police de repli (ADR 0005).
+ * De même pour un caractère que ni TW-Kai ni sa police de secours ne dessine :
+ * le site n'écrit ni case vide, ni police du système (ADR 0005, ADR 0006).
  */
 export default async function verifyInvalidContentFailsTheBuild(): Promise<void> {
   const outDir = fileURLToPath(new URL("../dist-invalid", import.meta.url));
@@ -42,7 +42,7 @@ export default async function verifyInvalidContentFailsTheBuild(): Promise<void>
   const missingGlyph = await failedBuildOutput(fixture("missing-glyph-content"), outDir);
   if (!/pieces\/kun\/piece\.md \(困𮌖\).*𮌖/.test(missingGlyph)) {
     throw new Error(
-      `le build a échoué sans désigner la pièce et le caractère absent de TW-Kai :\n${missingGlyph}`,
+      `le build a échoué sans désigner la pièce et le caractère qu'aucune police du site ne dessine :\n${missingGlyph}`,
     );
   }
 }

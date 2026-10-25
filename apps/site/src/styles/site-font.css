@@ -1,6 +1,7 @@
 /*
- * Tout le chinois balisé, traditionnel comme simplifié, s'écrit en TW-Kai,
- * déclarée dans Layout.astro (ADR 0005).
+ * Tout le chinois balisé, traditionnel comme simplifié, s'écrit en TW-Kai, et
+ * ce qu'elle ne dessine pas dans sa police de secours, déclarées dans
+ * Layout.astro (ADR 0005, ADR 0006).
  */
 :lang(zh-Hant),
 :lang(zh-Hans) {
