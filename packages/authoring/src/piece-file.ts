@@ -35,7 +35,7 @@ export async function readPiece(
   slug: string,
 ): Promise<Outcome<{ piece: PieceText }>> {
   const path = join(root, pieceFile(slug));
-  const text = await readFile(path, "utf8").catch(() => undefined);
+  const text = await readIfPresent(path);
   if (text === undefined) return { ok: false, message: `pièce introuvable : ${slug}` };
 
   const match = FRONTMATTER.exec(text);
@@ -45,6 +45,18 @@ export async function readPiece(
     ok: true,
     piece: { slug, path, frontmatter: match[1] ?? "", body: text.slice(match[0].length) },
   };
+}
+
+/**
+ * Le texte d'un fichier, ou `undefined` s'il n'existe pas. Toute autre erreur
+ * de lecture, permissions comprises, remonte telle quelle : un fichier
+ * illisible n'est pas un fichier absent.
+ */
+export async function readIfPresent(path: string): Promise<string | undefined> {
+  return readFile(path, "utf8").catch((error: NodeJS.ErrnoException) => {
+    if (error.code === "ENOENT") return undefined;
+    throw error;
+  });
 }
 
 export async function writePiece(piece: PieceText): Promise<void> {

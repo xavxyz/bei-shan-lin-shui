@@ -51,6 +51,22 @@ describe("setPieceGloss", () => {
     expect(result).toMatchObject({ ok: false });
     expect(await readPieceFile(root, "yong-cao-shu")).toBe(YONG);
   });
+
+  it("refuse une pièce introuvable", async () => {
+    const root = await yongTree();
+
+    const result = await setPieceGloss(root, "inconnue", "Une glose.");
+
+    expect(result).toMatchObject({ ok: false, message: "pièce introuvable : inconnue" });
+  });
+
+  it("laisse remonter un fichier de pièce illisible, qui n'est pas une pièce introuvable", async () => {
+    const root = await writeTree({ "pieces/yong-cao-shu/piece.md/v1a.jpg": "un répertoire" });
+
+    await expect(setPieceGloss(root, "yong-cao-shu", "Une glose.")).rejects.toMatchObject({
+      code: "EISDIR",
+    });
+  });
 });
 
 const PROJET = `# projet ouvert à l'arbitrage du scan 24

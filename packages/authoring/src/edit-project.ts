@@ -1,9 +1,9 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { projectFile } from "@bsls/content";
 import { projectFileSchema, type ProjectFile } from "@bsls/schema";
 import { applyChange, checkYaml, type ChangeOf } from "./edit-document.js";
-import type { Outcome } from "./piece-file.js";
+import { readIfPresent, type Outcome } from "./piece-file.js";
 
 /**
  * Lit un projet valide, lui applique une édition textuelle et l'écrit s'il est
@@ -17,10 +17,7 @@ export async function editProject<T extends object>(
   change: ChangeOf<ProjectFile, T>,
 ): Promise<Outcome<T>> {
   const path = join(root, projectFile(projectId));
-  const text = await readFile(path, "utf8").catch((error: NodeJS.ErrnoException) => {
-    if (error.code === "ENOENT") return undefined;
-    throw error;
-  });
+  const text = await readIfPresent(path);
   if (text === undefined) return { ok: false, message: `projet inconnu : ${projectId}` };
 
   const check = (yaml: string) => checkYaml(projectFileSchema, yaml);
