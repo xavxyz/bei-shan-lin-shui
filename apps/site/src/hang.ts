@@ -15,7 +15,7 @@ function byLatestVersion(a: LoadedPiece, b: LoadedPiece): number {
  */
 export function hang(pieces: LoadedPiece[]): { wall: LoadedPiece[]; unscanned: LoadedPiece[] } {
   return {
-    wall: pieces.filter((piece) => piece.featuredImage !== null).sort(byLatestVersion),
-    unscanned: pieces.filter((piece) => piece.featuredImage === null),
+    wall: pieces.filter((piece) => piece.hasImage).sort(byLatestVersion),
+    unscanned: pieces.filter((piece) => !piece.hasImage),
   };
 }

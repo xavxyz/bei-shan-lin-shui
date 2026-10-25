@@ -1,6 +1,6 @@
 import { MODELS, type Model } from "./models.js";
 import { measure, measuresLine, spanLabel, type Measures, type Span } from "./measures.js";
-import { groupLabel, type Sheet } from "@bsls/schema";
+import { groupLabel, plural, type Sheet } from "@bsls/schema";
 import { layoutSheet, rankSize, type PouredText, type SheetLayout } from "./sheets.js";
 
 /** Un format mis en grilles pour être comparé aux autres. */
@@ -27,8 +27,6 @@ const ORIENTATIONS = { portrait: "portrait", landscape: "paysage" } as const;
 
 /** `A · [(13x7)]` : le nom d'un format candidat, dans la commande et sur la page. */
 export const candidateLabel = (candidate: Candidate) => `${candidate.key} · ${candidate.format}`;
-
-const plural = (count: number, word: string) => `${count} ${word}${count > 1 ? "s" : ""}`;
 
 /**
  * Les groupes d'une feuille : `10 colonnes` quand tous sont verticaux, sinon
@@ -235,7 +233,7 @@ export function renderPage(input: RenderInput): string {
     <div class="sheets">${sheets.map((sheet, i) => renderSheet(sheet, columns[i]!, i)).join("")}
     </div>
     <aside class="state">
-      <strong>${label}</strong> — ${sheets.length} feuille${sheets.length > 1 ? "s" : ""}
+      <strong>${label}</strong> — ${plural(sheets.length, "feuille")}
       <ul>${notes.map((note) => `<li>${escape(note)}</li>`).join("")}</ul>
     </aside>
   </section>`;

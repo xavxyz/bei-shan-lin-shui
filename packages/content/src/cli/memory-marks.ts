@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { plural } from "@bsls/schema";
 
 /**
  * Refuse les marques d'un fait écrit de mémoire (ADR 0004) dans les dossiers
@@ -35,7 +36,7 @@ async function main(): Promise<number> {
   }
 
   if (found.length > 0) {
-    const count = `${found.length} marque${found.length > 1 ? "s" : ""} de mémoire`;
+    const count = `${plural(found.length, "marque")} de mémoire`;
     const hint =
       "Sourcer le fait, le retirer, ou le laisser « à relever » avec l'ouvrage où le chercher (ADR 0004).";
     process.stderr.write(`${[...found, "", count, hint].join("\n")}\n`);

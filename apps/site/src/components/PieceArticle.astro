@@ -5,7 +5,6 @@ import Pinyin from "./Pinyin.astro";
 import VersionFacts from "./VersionFacts.astro";
 import VersionText from "./VersionText.astro";
 import VersionVariations from "./VersionVariations.astro";
-import { hasImage } from "../version-images.js";
 import { workTransitionName } from "../work-transition.js";
 
 type Props = {
@@ -21,7 +20,7 @@ type Props = {
 const { piece, projects } = Astro.props;
 const version = piece.latestVersion;
 const source = piece.source;
-const withWork = hasImage(version);
+const withWork = version.hasImage;
 ---
 
 <article>

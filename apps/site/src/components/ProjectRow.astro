@@ -1,5 +1,5 @@
 ---
-import type { LoadedPiece, LoadedProject } from "@bsls/schema";
+import { plural, type LoadedPiece, type LoadedProject } from "@bsls/schema";
 import Pinyin from "./Pinyin.astro";
 
 type Props = {
@@ -27,7 +27,7 @@ const cover = pieces[0];
         </p>
       ) : null
     }
-    <p class="project-row__count">{pieces.length} pièce{pieces.length > 1 ? "s" : ""}</p>
+    <p class="project-row__count">{plural(pieces.length, "pièce")}</p>
   </div>
   {project.presentation ? <p class="project-row__presentation">{project.presentation}</p> : null}
   {

@@ -320,8 +320,11 @@ describe("libellé du format", () => {
     });
 
     const [v1, v2] = content.pieces[0]!.versions;
-    expect(v1).toMatchObject({ format: "[(4x5)]", formatLabel: "4 colonnes de 5 caractères" });
-    expect(v2).toMatchObject({ format: "2x7 + 蘇東坡", formatLabel: "2x7 + 蘇東坡" });
+    expect(v1).toMatchObject({
+      format: "[(4x5)]",
+      formatLabel: { readable: true, text: "4 colonnes de 5 caractères" },
+    });
+    expect(v2).toMatchObject({ format: "2x7 + 蘇東坡", formatLabel: { readable: false } });
   });
 });
 
@@ -543,6 +546,42 @@ describe("image mise en avant", () => {
     });
 
     expect(content.pieces[0]!.featuredImage!.file).toBe("v2b-01.jpg");
+  });
+
+  it("dit d'une version et d'une pièce si elles ont une image", async () => {
+    const content = await loadValid({
+      ...wellFormedTree,
+      files: ["pieces/shan-ju-qiu-ming/images/v1b-01.jpg"],
+      pieces: {
+        "shan-ju-qiu-ming": {
+          ...shanJuQiuMing,
+          versions: [
+            {
+              id: "v1",
+              date: "2026-03-04",
+              format: "A4 vertical",
+              columns: [],
+              variations: [
+                { ...variation("v1a"), images: [] },
+                { ...variation("v1b"), images: [imageNamed("v1b-01.jpg")] },
+              ],
+            },
+            { id: "v2", date: "2026-05-01", format: "A4 vertical", columns: [], variations: [] },
+          ],
+        },
+      },
+    });
+
+    const [piece] = content.pieces;
+    expect(piece!.versions.map((version) => version.hasImage)).toEqual([true, false]);
+    expect(piece!.hasImage).toBe(true);
+  });
+
+  it("dit d'une pièce sans aucune image qu'elle n'en a pas", async () => {
+    const content = await loadValid(withImages([]));
+
+    expect(content.pieces[0]!.hasImage).toBe(false);
+    expect(content.pieces[0]!.versions[0]!.hasImage).toBe(false);
   });
 });
 

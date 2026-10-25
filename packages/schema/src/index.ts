@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { checkFormat } from "./format.js";
+import { plural } from "./plural.js";
 import {
   CAPTURE_MODES,
   IMAGE_KINDS,
@@ -10,6 +11,7 @@ import {
 
 export * from "./vocabulary.js";
 export * from "./format.js";
+export * from "./plural.js";
 export { z };
 
 /**
@@ -166,7 +168,7 @@ function reportTranslationLength(
   ctx.addIssue({
     code: z.ZodIssueCode.custom,
     path: ["versions", versionIndex, "translation"],
-    message: `attendu : une ligne de traduction par colonne, soit ${expected} ${expected > 1 ? "colonnes" : "colonne"} ; reçu ${version.translation.length} ${version.translation.length > 1 ? "lignes" : "ligne"}`,
+    message: `attendu : une ligne de traduction par colonne, soit ${plural(expected, "colonne")} ; reçu ${plural(version.translation.length, "ligne")}`,
   });
 }
 
@@ -238,11 +240,17 @@ export const loadedVersionSchema = versionSchema.extend({
   chineseDateSimplified: z.string(),
   /**
    * Le format dit en français (`4 colonnes de 5 caractères`), dérivé de la
-   * notation, jamais stocké. Une notation illisible s'y retrouve telle quelle.
+   * notation, jamais stocké. Une notation illisible n'a pas de libellé : elle
+   * le dit, et le site montre la notation telle quelle.
    */
-  formatLabel: z.string(),
+  formatLabel: z.discriminatedUnion("readable", [
+    z.object({ readable: z.literal(true), text: z.string() }),
+    z.object({ readable: z.literal(false) }),
+  ]),
   columns: z.array(chineseTextSchema),
   variations: z.array(loadedVariationSchema),
+  /** Une version a une image dès qu'une de ses variations en a une. */
+  hasImage: z.boolean(),
 });
 
 export const loadedPieceSchema = pieceFieldsSchema.extend({
@@ -261,6 +269,8 @@ export const loadedPieceSchema = pieceFieldsSchema.extend({
   /** Versions triées du plus ancien au plus récent : la dernière est l'intention courante. */
   latestVersion: loadedVersionSchema,
   featuredImage: loadedImageSchema.nullable(),
+  /** Une pièce a une image dès qu'une de ses versions en a une. */
+  hasImage: z.boolean(),
   /** Style d'écriture de cette variation, nommé en français. */
   featuredScriptLabel: z.string().nullable(),
   /** URL canonique de la pièce sur le site. */
@@ -279,5 +289,6 @@ export type ChineseText = z.infer<typeof chineseTextSchema>;
 export type LoadedImage = z.infer<typeof loadedImageSchema>;
 export type LoadedVariation = z.infer<typeof loadedVariationSchema>;
 export type LoadedVersion = z.infer<typeof loadedVersionSchema>;
+export type FormatLabel = LoadedVersion["formatLabel"];
 export type LoadedPiece = z.infer<typeof loadedPieceSchema>;
 export type LoadedProject = z.infer<typeof loadedProjectSchema>;

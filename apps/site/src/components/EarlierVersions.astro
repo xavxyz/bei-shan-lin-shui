@@ -3,7 +3,6 @@ import type { LoadedPiece } from "@bsls/schema";
 import VersionFacts from "./VersionFacts.astro";
 import VersionText from "./VersionText.astro";
 import VersionVariations from "./VersionVariations.astro";
-import { hasImage } from "../version-images.js";
 
 type Props = {
   piece: LoadedPiece;
@@ -25,10 +24,10 @@ const headingId = "versions-anterieures";
       <ol class="evolution__list">
         {earlier.map((version) => (
           <li
-            class:list={["piece", { "piece--textual": !hasImage(version) }]}
+            class:list={["piece", { "piece--textual": !version.hasImage }]}
             data-testid="earlier-version"
           >
-            {hasImage(version) ? (
+            {version.hasImage ? (
               <div class="piece__work">
                 <VersionVariations version={version} title={piece.title.traditional} />
               </div>
@@ -39,7 +38,7 @@ const headingId = "versions-anterieures";
 
               <VersionFacts version={version} testIdPrefix="earlier-version" />
 
-              {hasImage(version) ? null : (
+              {version.hasImage ? null : (
                 <VersionVariations version={version} title={piece.title.traditional} />
               )}
 
