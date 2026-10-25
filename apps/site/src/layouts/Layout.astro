@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import SiteHeader from "../components/SiteHeader.astro";
 
 type Props = {
@@ -7,8 +8,8 @@ type Props = {
 };
 
 const { title } = Astro.props;
-// Seul l'accueil porte l'en-tête en grand.
-const home = Astro.url.pathname === "/";
+// Seul l'accueil porte l'en-tête en grand : `data-page` le dit à l'en-tête persistant.
+const page = Astro.url.pathname === "/" ? "home" : "inner";
 ---
 
 <!doctype html>
@@ -23,11 +24,12 @@ const home = Astro.url.pathname === "/";
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap"
     />
+    <ClientRouter />
   </head>
   <body>
     <div class="page">
-      <SiteHeader large={home} />
-      <main>
+      <SiteHeader />
+      <main id="contenu" data-page={page}>
         <slot />
       </main>
     </div>

@@ -1,13 +1,17 @@
 ---
-type Props = {
-  /** Sur l'accueil, le titre et la devise s'affichent en grand ; ailleurs, sur une ligne. */
-  large: boolean;
-};
-
-const { large } = Astro.props;
+/*
+ * L'en-tête persiste d'une page à l'autre : le routeur client le garde tel quel
+ * au lieu de prendre celui de la nouvelle page. Il ne peut donc pas dépendre
+ * d'une prop de page. C'est `<main data-page>`, échangé à chaque navigation,
+ * qui le fait passer de grand (accueil) à réduit (ailleurs), en CSS.
+ */
 ---
 
-<header class:list={["site-header", { "site-header--large": large }]}>
-  <h1 class="site-header__title" lang="zh-Hant"><a href="/">背山臨水</a></h1>
-  <p class="site-header__motto">Soutenu par le maître, je suis les vagues</p>
+<header class="site-header" transition:persist="site-header">
+  <h1 class="site-header__title" lang="zh-Hant" transition:name="site-title">
+    <a href="/">背山臨水</a>
+  </h1>
+  <p class="site-header__motto" transition:name="site-motto">
+    Soutenu par le maître, je suis les vagues
+  </p>
 </header>
