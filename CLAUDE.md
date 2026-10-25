@@ -13,6 +13,7 @@ Réponds au calligraphe en français.
 - `packages/scans` — l'entrée des scans : registre des scans d'un import en cours (aucun hors import, ADR 0001), normalisation des images (JPEG qualité 92, au plus A4 à 300 dpi), et `attachScan`, qui rattache un scan à une pièce de `content/` (`pnpm attach:scan`).
 - `packages/authoring` — les écritures des skills de saisie (`pnpm piece`) : ajouts au texte des pièces sans resérialiser ce qu'ils ne visent pas. C'est la seule couture d'édition du frontmatter, et la seule écriture de ses nœuds — version, variation, image ; `packages/scans` et `packages/notion-import` s'y branchent.
 - `packages/grilles` — les feuilles A4 quadrillées d'une pièce, au format de sa version ou de formats candidats, à imprimer (`pnpm grilles`, skill `grilles`). Lit le contenu, et le plan d'un import en cours s'il y en a un ; n'écrit qu'une page HTML.
+- `packages/repo-checks` — les vérifications du dépôt lui-même (`pnpm validate:repo`, en pre-commit) : le YAML ne s'écrit que par `packages/authoring`, un chemin cité existe, un mot que le glossaire dit d'éviter ne s'écrit ni dans les skills, ni dans la doc, ni sur le site.
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
 - `docs/sources/` — les textes de référence, traduits vers par vers pour choisir l'étendue des pièces. Ils survivent au plan d'import, mais n'arbitrent rien : l'étendue retenue vit dans la pièce (ADR 0002).
 

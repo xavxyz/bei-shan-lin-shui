@@ -34,7 +34,7 @@ Dossier du Drive : ~/Library/CloudStorage/GoogleDrive-*/Mon Drive/Bèishān lín
 
 Travail :
 1. Lis le scan avec Read, colonne par colonne, de droite à gauche. Relève aussi l'attribution, la signature (戈), la date et les notes en français. Pour zoomer, recadre dans /tmp uniquement (par exemple `sips -c` ou `sips --cropOffset`), jamais dans le dépôt.
-2. Cherche la pièce : grep de deux ou trois séquences de 2 à 4 caractères dans content/pieces/ (titre, columns, source.full_text). La pièce est un slug du contenu ; sinon `new` (absente du contenu), `unidentified` ou `discarded` (verso, exercices de traits).
+2. Cherche la pièce : grep de deux ou trois séquences de 2 à 4 caractères dans content/pieces/ (titre, columns, source.full_text). La pièce est un slug du contenu ; sinon `new` (absente du contenu), `unidentified` ou `discarded` (verso, traits d'entraînement).
 3. Écris ta proposition dans imports/scans/__FILE__.rattachement.yaml, sous la forme d'un rattachement : `piece`, `version`, `variation`, `image` (`source: imports/scans/__FILE__`, `kind`). Chaque champ porte `# à arbitrer` : rien n'est arbitré par le calligraphe. Pour `new`, `unidentified` ou `discarded`, `piece` porte ce mot et le fichier s'arrête là, avec ce que tu as lu. Ce que tu lis sur le papier (colonnes en traditionnel, date, signature, notes) va en commentaire en tête du fichier. `script` prend une valeur de SCRIPTS (packages/schema/src/vocabulary.ts). Termine par des commentaires courts : format, date du papier, écarts avec la pièce, questions pour le calligraphe.
 
 Règles d'écriture :
