@@ -61,6 +61,36 @@ a:hover {
   }
 }
 
+/* La vignette cliquée grandit jusqu'à l'œuvre de la page pièce, et l'œuvre redevient
+   sa vignette au retour : elles portent le même nom (`work-transition.ts`). Le geste
+   dure le temps que le contenu s'efface puis revienne. Une œuvre nommée sans
+   partenaire sur l'autre page s'efface et revient avec le contenu. */
+.wall__image,
+.carousel__image {
+  view-transition-class: oeuvre;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(*.oeuvre) {
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+  }
+
+  ::view-transition-old(*.oeuvre),
+  ::view-transition-new(*.oeuvre) {
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+  }
+
+  ::view-transition-old(*.oeuvre):only-child {
+    animation: sortie 250ms ease-in both;
+  }
+
+  ::view-transition-new(*.oeuvre):only-child {
+    animation: entree 250ms ease-out 250ms both;
+  }
+}
+
 /* Le contenu ne prend le focus que pour y faire commencer la navigation au clavier. */
 #contenu:focus {
   outline: none;
