@@ -59,3 +59,25 @@ test("ailleurs, l'en-tête tient sur une ligne : le titre, puis la devise en ita
     await expect(page).toHaveURL("/");
   }
 });
+
+function wall(page: Page, count: number) {
+  return page.getByRole("region", { name: `Pièces · ${count}` });
+}
+
+test("le mur montre toutes les pièces visibles, de la plus récente à la plus ancienne", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  // À date égale, l'ordre des slugs départage.
+  await expect(wall(page, 8).getByTestId("piece-link").getByRole("heading")).toHaveText([
+    "墨寺㞢文刻", // 2026-08-30
+    "成人不自在，自在不成人", // 2026-06-21
+    "永草書", // 2026-06-21
+    "過猶不及，方向堅定不移，方法因地制宜", // 2026-03-10
+    "題破山寺後禪院", // 2026-02-25
+    "虛心實腹", // 2026-02-25
+    "新年快樂，馬到成功", // 2026-02-17
+    "莫性急", // 2026-02-11
+  ]);
+});
