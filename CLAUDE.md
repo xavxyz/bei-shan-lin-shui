@@ -30,7 +30,7 @@ Réponds au calligraphe en français.
 
 ## Écrire du contenu
 
-Le format d'une pièce est décrit par `pieceFrontmatterSchema` (`packages/schema/src/index.ts`) ; les vocabulaires fermés — statuts, styles d'écriture, thèmes — par `packages/schema/src/vocabulary.ts`. Les styles sont stockés en pinyin sans tons et **affichés en français**.
+Le format d'une pièce est décrit par `pieceFrontmatterSchema` (`packages/schema/src/index.ts`) ; les vocabulaires fermés — statuts, styles d'écriture, types d'image — par `packages/schema/src/vocabulary.ts`. Les styles sont stockés en pinyin sans tons et **affichés en français**.
 
 Le format d'une version suit la notation de **Format** (`GLOSSARY.md`), lue par `parseFormat` dans `packages/schema/src/format.ts` ; hors notation, seul `à préciser` s'écrit.
 

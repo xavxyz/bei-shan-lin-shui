@@ -31,9 +31,8 @@ const shanJuQiuMing = {
 };
 
 const fourSeasons = {
-  title: "Quatre saisons",
+  title: "四季",
   presentation: "Une série sur le passage des saisons.\n",
-  theme: "jade",
 };
 
 const wellFormedTree = {
@@ -192,18 +191,6 @@ describe("violations de schéma", () => {
     expect(result.errors[0]!.message).toContain("shan-ju-qiu-ming");
   });
 
-  it("rejette un thème de projet inconnu", async () => {
-    const result = await loadTree({
-      ...wellFormedTree,
-      projects: { "four-seasons": { ...fourSeasons, theme: "fuchsia" } },
-    });
-
-    expect(result.ok).toBe(false);
-    if (result.ok) return;
-    expect(result.errors[0]!.file).toBe("projects/four-seasons.yaml");
-    expect(result.errors[0]!.path).toBe("theme");
-  });
-
   it("signale toutes les pièces fautives, pas seulement la première", async () => {
     const result = await loadTree({
       ...wellFormedTree,
@@ -342,7 +329,7 @@ describe("libellé du format", () => {
 
 describe("rattachement aux projets", () => {
   const trees = (projects: string[]) => ({
-    projects: { "four-seasons": fourSeasons, mountains: { ...fourSeasons, title: "Montagnes" } },
+    projects: { "four-seasons": fourSeasons, mountains: { ...fourSeasons, title: "山" } },
     pieces: { "shan-ju-qiu-ming": { ...shanJuQiuMing, projects, versions: bareVersions() } },
     files: [],
   });

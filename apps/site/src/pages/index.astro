@@ -27,7 +27,9 @@ const { wall, unscanned } = hang(pieces);
         projects.map((project) => (
           <li>
             <a class="card" href={project.href} data-testid="project-link">
-              <h3 class="card__title">{project.title}</h3>
+              <h3 class="card__title card__title--cn" lang="zh-Hant">
+                {project.title.traditional}
+              </h3>
               {project.gloss ? (
                 <p class="gloss" data-testid="gloss">
                   {project.gloss}

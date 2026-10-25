@@ -24,9 +24,9 @@ const { project, pieces } = Astro.props;
 const { wall, unscanned } = hang(pieces);
 ---
 
-<Layout title={project.title} theme={project.theme}>
+<Layout title={project.title.traditional}>
   <nav class="breadcrumb"><a href="/">Accueil</a></nav>
-  <h2>{project.title}</h2>
+  <h2 lang="zh-Hant">{project.title.traditional}</h2>
   {
     project.gloss ? (
       <p class="gloss" data-testid="gloss">
@@ -34,7 +34,7 @@ const { wall, unscanned } = hang(pieces);
       </p>
     ) : null
   }
-  <p class="reading__body">{project.presentation}</p>
+  {project.presentation ? <p class="reading__body">{project.presentation}</p> : null}
 
   <section aria-labelledby="oeuvres">
     <h3 id="oeuvres">Pièces · {wall.length}</h3>
