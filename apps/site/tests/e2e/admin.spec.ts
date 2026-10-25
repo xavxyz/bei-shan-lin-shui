@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { expectInReadingOrder } from "./reading-order.js";
 
 // Ces parcours tournent sur le build des fixtures en mode admin.
 
@@ -57,8 +58,8 @@ test("en mode admin, l'accueil range entre le mur et les projets les pièces san
 }) => {
   await page.goto("/");
 
-  const unscanned = page.getByRole("region", { name: "Sans scan · 2" });
-  await expect(unscanned.getByRole("row")).toHaveCount(2);
+  const unscanned = page.getByRole("region", { name: "Sans scan · 3" });
+  await expect(unscanned.getByRole("row")).toHaveCount(3);
   const row = unscanned.getByRole("row").filter({ hasText: "說到辛酸處" });
   await expect(row).toContainText("idée");
   await expect(row).toContainText("20 octobre 2026");
@@ -68,7 +69,7 @@ test("en mode admin, l'accueil range entre le mur et les projets les pièces san
   ).toHaveCount(0);
 
   const sections = await page.getByRole("heading", { level: 2 }).allTextContents();
-  expect(sections).toEqual(["Pièces · 10", "Sans scan · 2", "Projets"]);
+  expect(sections).toEqual(["Pièces · 10", "Sans scan · 3", "Projets"]);
 
   await row.getByRole("link", { name: "說到辛酸處" }).click();
   await expect(page).toHaveURL("/hong-lou-meng/shuo-dao-xin-suan-chu");
@@ -110,7 +111,6 @@ test("en mode admin, la page projet range ses pièces sans scan sous ses œuvres
 // mode admin la montre.
 test("les versions antérieures vont de la plus ancienne à la plus récente", async ({ page }) => {
   await page.goto("/yi-jin-jing/yi-jin-jing");
-  await page.getByText("voir l'évolution", { exact: true }).click();
 
   const earlier = page.getByTestId("earlier-version");
   await expect(earlier.getByTestId("earlier-version-date").locator("time")).toHaveText([
@@ -126,4 +126,43 @@ test("les versions antérieures vont de la plus ancienne à la plus récente", a
     "2 feuilles : 1 colonne de 3 caractères ; 2 colonnes de 5 caractères",
     "3 colonnes de 5 caractères",
   ]);
+});
+
+// 《龍虎歌》勉旃勉旃 : sans image, la seule pièce des fixtures qui porte le texte
+// intégral de sa source.
+const withFullText = "/zhong-he-ji/long-hu-ge-mian-zhan-mian-zhan";
+
+test.describe("une pièce sans image", () => {
+  test.use({ viewport: { width: 1280, height: 800 } });
+
+  test("centre son texte sur la page", async ({ page }) => {
+    await page.goto(withFullText);
+
+    await expect(page.getByTestId("carousel-image")).toHaveCount(0);
+    const main = (await page.locator("main").boundingBox())!;
+    const title = (await page.getByRole("heading", { name: "《龍虎歌》勉旃勉旃" }).boundingBox())!;
+    const left = title.x - main.x;
+    const right = main.x + main.width - (title.x + title.width);
+    expect(left).toBeGreaterThan(main.width / 8);
+    expect(Math.abs(left - right)).toBeLessThan(2);
+  });
+
+  test("finit sur l'intention puis le texte intégral de la source, en traditionnel", async ({
+    page,
+  }) => {
+    await page.goto(withFullText);
+
+    await expectInReadingOrder({
+      "fil d'Ariane": page.getByRole("navigation", { name: "Fil d'Ariane" }),
+      titre: page.getByRole("heading", { name: "《龍虎歌》勉旃勉旃" }),
+      texte: page.getByTestId("version-text"),
+      faits: page.getByRole("term").first(),
+      intention: page.getByText("Une seconde version en 13x7", { exact: false }),
+      "texte intégral": page.getByText("紫陽云：收拾身心，謂之降伏龍虎。"),
+    });
+    await expect(page.getByText("紫陽云：收拾身心，謂之降伏龍虎。")).toHaveAttribute(
+      "lang",
+      "zh-Hant",
+    );
+  });
 });

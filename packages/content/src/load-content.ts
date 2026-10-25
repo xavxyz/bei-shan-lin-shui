@@ -8,6 +8,7 @@ import {
   pieceFrontmatterSchema,
   projectFileSchema,
   toIsoDate,
+  type ChineseText,
   type LoadedPiece,
   type LoadedProject,
   type LoadedVariation,
@@ -255,25 +256,29 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
   const overrides = piece.pinyin_overrides;
   const versions = [...piece.versions]
     .sort((a, b) => a.date.getTime() - b.date.getTime())
-    .map((version): LoadedVersion => ({
-      ...version,
-      date: toIsoDate(version.date),
-      chineseDate: deriveChineseDate(toIsoDate(version.date)),
-      formatLabel: deriveFormatLabel(version.format),
-      columns: version.columns.map((column) => deriveChineseText(column, overrides)),
-      variations: version.variations.map((variation): LoadedVariation => {
-        const images = variation.images.map((image) => ({
-          ...image,
-          src: contentImageUrl(piece.slug, image.file),
-        }));
-        return {
-          ...variation,
-          scriptLabel: SCRIPT_LABELS[variation.script],
-          images,
-          featuredImage: pickFeaturedImage(images),
-        };
-      }),
-    }));
+    .map((version): LoadedVersion => {
+      const chineseDate = deriveChineseText(deriveChineseDate(toIsoDate(version.date)));
+      return {
+        ...version,
+        date: toIsoDate(version.date),
+        chineseDate: chineseDate.traditional,
+        chineseDateSimplified: chineseDate.simplified,
+        formatLabel: deriveFormatLabel(version.format),
+        columns: version.columns.map((column) => deriveChineseText(column, overrides)),
+        variations: version.variations.map((variation): LoadedVariation => {
+          const images = variation.images.map((image) => ({
+            ...image,
+            src: contentImageUrl(piece.slug, image.file),
+          }));
+          return {
+            ...variation,
+            scriptLabel: SCRIPT_LABELS[variation.script],
+            images,
+            featuredImage: pickFeaturedImage(images),
+          };
+        }),
+      };
+    });
 
   const latestVersion = versions[versions.length - 1]!;
   const project = piece.projects[0];
@@ -287,6 +292,7 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
       full_text: piece.source.full_text
         ? deriveChineseText(piece.source.full_text, overrides)
         : undefined,
+      attribution: deriveAttribution(piece.source, overrides),
     },
     versions,
     latestVersion,
@@ -294,6 +300,15 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     featuredScriptLabel: featured?.scriptLabel ?? null,
     href: pieceHref(piece.slug, project),
   } satisfies LoadedPiece);
+}
+
+/** Auteur, œuvre puis dynastie, ce que la source en nomme. */
+function deriveAttribution(
+  source: NonNullable<PieceFrontmatter["source"]>,
+  overrides: Record<string, string>,
+): ChineseText | undefined {
+  const named = [source.author, source.work, source.dynasty].filter(Boolean);
+  return named.length > 0 ? deriveChineseText(named.join(" · "), overrides) : undefined;
 }
 
 function toContentErrors(file: string, error: z.ZodError): ContentError[] {

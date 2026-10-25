@@ -79,18 +79,6 @@ test("la légende d'une image est affichée sous elle", async ({ page }) => {
   );
 });
 
-test("le carrousel est sous le titre, avant le texte", async ({ page }) => {
-  await page.goto(piecePath);
-
-  const top = (locator: Locator) =>
-    locator.evaluate((element) => element.getBoundingClientRect().top);
-  const title = await top(page.getByRole("heading", { name: "墨寺㞢文刻" }));
-  const image = await top(shown(page));
-  const text = await top(page.getByTestId("version-text"));
-  expect(image).toBeGreaterThan(title);
-  expect(text).toBeGreaterThan(image);
-});
-
 test("la flèche suivante passe à l'image suivante, puis d'une variation à la suivante", async ({
   page,
 }) => {
@@ -188,9 +176,8 @@ test("cliquer une variation de la liste amène le carrousel sur sa première ima
   await expect(variations.filter({ hasText: "régulier" })).not.toHaveAttribute("aria-current");
 });
 
-test("une version antérieure dépliée a son propre carrousel", async ({ page }) => {
+test("une version antérieure a son propre carrousel", async ({ page }) => {
   await page.goto("/pieces/mo-xing-ji");
-  await page.getByText("voir l'évolution", { exact: true }).click();
 
   const earlier = page.getByTestId("earlier-version").getByTestId("carousel");
   await expect(earlier.getByTestId("carousel-image")).toHaveAttribute(
@@ -227,7 +214,6 @@ test.describe("au clavier", () => {
    * l'antérieure — dont le carrousel n'a donc rien à piloter.
    */
   const twoVersions = "/pieces/xin-nian-kuai-le-ma-dao-cheng-gong";
-  const evolution = (page: Page) => page.getByText("voir l'évolution", { exact: true });
   const earlier = (page: Page) => page.getByTestId("earlier-version").getByTestId("carousel");
   const position = (of: Locator) => of.getByTestId("carousel-position");
   /**
@@ -273,7 +259,6 @@ test.describe("au clavier", () => {
     await page.keyboard.press("ArrowRight");
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("ArrowRight");
-    await evolution(page).click();
 
     await expect(position(earlier(page))).toHaveText("1 / 1");
     await expect(position(carousel(page))).toHaveText("1 / 2");
@@ -283,18 +268,22 @@ test.describe("au clavier", () => {
     test.use({ viewport: { width: 1280, height: 1600 } });
 
     /**
-     * L'évolution dépliée, la fenêtre descend jusqu'à ne plus montrer que le
-     * bas de l'image courante : l'image antérieure est la plus visible.
+     * La fenêtre descend jusqu'à ne plus montrer que le bas de l'image
+     * courante : l'image antérieure est la plus visible.
      */
     async function bothInView(page: Page) {
       await page.goto(twoVersions);
       await mounted(page);
       await roomToScroll(page);
-      await evolution(page).click();
       await expect(earlier(page).getByTestId("carousel-image")).toBeVisible();
       await shown(page).evaluate((image) => {
-        const box = image.getBoundingClientRect();
-        window.scrollTo(0, window.scrollY + box.bottom - box.height / 5);
+        // L'œuvre courante tient tant que le texte de sa version défile : on
+        // descend pas à pas, jusqu'à n'en plus voir qu'un cinquième.
+        for (let step = 0; step < 500; step++) {
+          const box = image.getBoundingClientRect();
+          if (box.top < 0 && box.bottom <= box.height / 5) break;
+          window.scrollBy(0, 10);
+        }
       });
       await expect(shown(page)).toBeInViewport();
       await expect(shown(page)).not.toBeInViewport({ ratio: 0.5 });

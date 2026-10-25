@@ -15,7 +15,10 @@ export const getStaticPaths = (async () => {
         params: { project: id, piece: piece.slug },
         props: {
           piece,
-          projects: projects.filter((each) => piece.projects.includes(each.id)),
+          // Dans l'ordre où la pièce nomme ses projets.
+          projects: piece.projects.flatMap((projectId) =>
+            projects.filter((each) => each.id === projectId),
+          ),
         },
       };
     }),

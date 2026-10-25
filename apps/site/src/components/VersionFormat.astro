@@ -12,7 +12,7 @@ const { version, testId } = Astro.props;
 const readable = version.formatLabel !== version.format;
 ---
 
-<span class="tag" data-testid={testId}>
+<span data-testid={testId}>
   <span data-testid="format-label">{version.formatLabel}</span>
   {
     readable ? (
