@@ -41,6 +41,7 @@ describe("setVersionTranslation", () => {
     ["trop courte", []],
     ["trop longue", ["Une ligne", "En trop"]],
     ["à ligne vide", [""]],
+    ["à ligne faite d'espaces", ["   "]],
   ])("refuse sans rien écrire une traduction %s", async (_, lines) => {
     const root = await yongTree();
 
