@@ -1,4 +1,4 @@
-import { parseFormat, plural, type Group } from "@bsls/schema";
+import { parseFormat, plural, type FormatLabel, type Group } from "@bsls/schema";
 
 /** `4 colonnes de 5 caractères`, `1 ligne horizontale de 4 caractères en petits carreaux (1/2)`. */
 function groupLabel(group: Group): string {
@@ -10,14 +10,18 @@ function groupLabel(group: Group): string {
 
 /**
  * Dit en français le format d'une version, depuis sa notation : jamais
- * stocké, il vit le temps du build, comme le simplifié.
+ * stocké, il vit le temps du build, comme le simplifié. Une notation
+ * illisible le dit, sans faire échouer le build.
  */
-export function deriveFormatLabel(format: string): string {
+export function deriveFormatLabel(format: string): FormatLabel {
   const parsed = parseFormat(format);
-  if (!parsed.ok) return format;
+  if (!parsed.ok) return { readable: false };
   const sheets = parsed.sheets.map((sheet) => enumerate(sheet.map(groupLabel)));
-  if (sheets.length === 1) return sheets[0]!;
-  return `${plural(sheets.length, "feuille")} : ${sheets.join(" ; ")}`;
+  const text =
+    sheets.length === 1
+      ? sheets[0]!
+      : `${plural(sheets.length, "feuille")} : ${sheets.join(" ; ")}`;
+  return { readable: true, text };
 }
 
 /** `a`, `a et b`, `a, b et c`. */

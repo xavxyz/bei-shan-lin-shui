@@ -240,9 +240,13 @@ export const loadedVersionSchema = versionSchema.extend({
   chineseDateSimplified: z.string(),
   /**
    * Le format dit en français (`4 colonnes de 5 caractères`), dérivé de la
-   * notation, jamais stocké. Une notation illisible s'y retrouve telle quelle.
+   * notation, jamais stocké. Une notation illisible n'a pas de libellé : elle
+   * le dit, et le site montre la notation telle quelle.
    */
-  formatLabel: z.string(),
+  formatLabel: z.discriminatedUnion("readable", [
+    z.object({ readable: z.literal(true), text: z.string() }),
+    z.object({ readable: z.literal(false) }),
+  ]),
   columns: z.array(chineseTextSchema),
   variations: z.array(loadedVariationSchema),
 });
@@ -281,5 +285,6 @@ export type ChineseText = z.infer<typeof chineseTextSchema>;
 export type LoadedImage = z.infer<typeof loadedImageSchema>;
 export type LoadedVariation = z.infer<typeof loadedVariationSchema>;
 export type LoadedVersion = z.infer<typeof loadedVersionSchema>;
+export type FormatLabel = LoadedVersion["formatLabel"];
 export type LoadedPiece = z.infer<typeof loadedPieceSchema>;
 export type LoadedProject = z.infer<typeof loadedProjectSchema>;

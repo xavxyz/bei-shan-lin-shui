@@ -7,21 +7,21 @@ type Props = {
 };
 
 const { version, testId } = Astro.props;
-
-/** Une notation illisible est son propre libellé : rien à redire en petit. */
-const readable = version.formatLabel !== version.format;
+const { formatLabel } = version;
 ---
 
 <span data-testid={testId}>
-  <span data-testid="format-label">{version.formatLabel}</span>
   {
-    readable ? (
+    /* Une notation illisible est son propre libellé : rien à redire en petit. */
+    formatLabel.readable ? (
       <>
-        {" "}
+        <span data-testid="format-label">{formatLabel.text}</span>{" "}
         <small class="format__notation" data-testid="format-notation">
           {version.format}
         </small>
       </>
-    ) : null
+    ) : (
+      <span data-testid="format-label">{version.format}</span>
+    )
   }
 </span>

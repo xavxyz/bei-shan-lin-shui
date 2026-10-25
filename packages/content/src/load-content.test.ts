@@ -320,8 +320,11 @@ describe("libellé du format", () => {
     });
 
     const [v1, v2] = content.pieces[0]!.versions;
-    expect(v1).toMatchObject({ format: "[(4x5)]", formatLabel: "4 colonnes de 5 caractères" });
-    expect(v2).toMatchObject({ format: "2x7 + 蘇東坡", formatLabel: "2x7 + 蘇東坡" });
+    expect(v1).toMatchObject({
+      format: "[(4x5)]",
+      formatLabel: { readable: true, text: "4 colonnes de 5 caractères" },
+    });
+    expect(v2).toMatchObject({ format: "2x7 + 蘇東坡", formatLabel: { readable: false } });
   });
 });
 
