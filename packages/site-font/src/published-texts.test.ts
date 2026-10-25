@@ -2,7 +2,7 @@ import * as fontkit from "fontkit";
 import { describe, expect, it } from "vitest";
 import { loadContent, type Content } from "@bsls/content";
 import { writeFixtureTree } from "@bsls/content/test-support";
-import { publishedTexts, subsetSiteFont } from "./index.js";
+import { publishedTexts, subsetSiteFonts } from "./index.js";
 
 const piece = {
   title: "說劍",
@@ -37,7 +37,7 @@ const undrawn = (font: fontkit.Font, text: string) =>
 
 describe("la police des textes publiés", () => {
   it("dessine les titres, les colonnes, le texte intégral et l'attribution, en traditionnel et en simplifié", async () => {
-    const font = open(await subsetSiteFont(publishedTexts(await load())));
+    const font = open((await subsetSiteFonts(publishedTexts(await load()))).twKai);
 
     expect(undrawn(font, "說劍说剑")).toEqual([]); // titre de la pièce
     expect(undrawn(font, "紅樓夢红楼梦")).toEqual([]); // titre du projet
@@ -48,7 +48,7 @@ describe("la police des textes publiés", () => {
 
   it("dessine l'attribution telle que le site la montre, séparateurs compris", async () => {
     const content = await load();
-    const font = open(await subsetSiteFont(publishedTexts(content)));
+    const font = open((await subsetSiteFonts(publishedTexts(content))).twKai);
 
     const attribution = content.pieces[0]!.source!.attribution!;
     expect(attribution.traditional).toContain("·");
@@ -68,12 +68,24 @@ describe("la police des textes publiés", () => {
     expect(undrawn(font, dates)).toEqual([]);
   });
 
-  it("casse sur un caractère que TW-Kai n'a pas, en nommant la pièce et le caractère", async () => {
+  it("n'a pas de police de secours quand TW-Kai dessine tout", async () => {
+    expect((await subsetSiteFonts(publishedTexts(await load()))).fallback).toBeUndefined();
+  });
+
+  it("écrit dans la police de secours le caractère d'un titre que TW-Kai n'a pas", async () => {
+    const fonts = await subsetSiteFonts(publishedTexts(await load({ title: "太𫝑竹山庵" })));
+
+    expect(undrawn(open(fonts.twKai), "太竹山庵")).toEqual([]);
+    expect(fonts.fallback?.characters).toBe("𫝑");
+    expect(undrawn(open(fonts.fallback!.font), "𫝑")).toEqual([]);
+  });
+
+  it("casse sur un caractère que ni TW-Kai ni la secours ne dessine, en nommant la pièce et le caractère", async () => {
     const content = await load({
       versions: [{ id: "v1", date: "2026-06-21", format: "[(1x2)]", columns: ["困𮌖"] }],
     });
 
-    await expect(subsetSiteFont(publishedTexts(content))).rejects.toThrow(
+    await expect(subsetSiteFonts(publishedTexts(content))).rejects.toThrow(
       /pieces\/shuo-jian\/piece\.md \(說劍\).*𮌖/,
     );
   });

@@ -16,6 +16,17 @@ export const TW_KAI_LICENSE = fileURLToPath(
   new URL("../../grilles/fonts/TW-Kai.OFL.txt", import.meta.url),
 );
 
+/**
+ * La police de secours : 霞鶩文楷 TC, le 文楷 des grilles, pour les caractères
+ * des extensions de l'Unicode que TW-Kai ne dessine pas (ADR 0006).
+ */
+const FALLBACK = new URL("../../grilles/fonts/LXGWWenKaiTC-Regular.ttf", import.meta.url);
+
+/** La licence de la police de secours (OFL 1.1), qui accompagne toute copie servie. */
+export const FALLBACK_LICENSE = fileURLToPath(
+  new URL("../../grilles/fonts/LXGWWenKaiTC.OFL.txt", import.meta.url),
+);
+
 /** Un texte que le site montre, et ce qui le porte : le fichier d'une pièce, d'un projet, ou le site. */
 export type PublishedText = { owner: string; text: string };
 
@@ -53,39 +64,76 @@ export function publishedTexts(content: Pick<Content, "pieces" | "projects">): P
 }
 
 /**
- * Les caractères que TW-Kai doit dessiner : tout, sauf les blancs et les
- * emoji (sélecteurs de variante et liants compris), qui restent à la police
- * emoji du système.
+ * Les caractères qu'une police du site doit dessiner : tout, sauf les blancs
+ * et les emoji (sélecteurs de variante et liants compris), qui restent à la
+ * police emoji du système.
  */
 const charactersOf = (text: string) =>
   [...text].filter((character) => !/[\s\p{Extended_Pictographic}‍︎️]/u.test(character));
 
-/**
- * TW-Kai réduite aux caractères des textes donnés, en woff2. Un caractère que
- * TW-Kai ne dessine pas la fait échouer, en nommant le caractère et ce qui le
- * porte : il n'y a pas de police de repli (ADR 0005).
- */
-export async function subsetSiteFont(texts: PublishedText[]): Promise<Buffer> {
-  const data = await readFile(TW_KAI);
+/** Une police lue sur le disque, et ce qu'elle dessine. */
+async function openFont(file: URL) {
+  const data = await readFile(file);
   const font = fontkit.create(data) as fontkit.Font;
-  const draws = (character: string) => font.hasGlyphForCodePoint(character.codePointAt(0)!);
+  return {
+    data,
+    draws: (character: string) => font.hasGlyphForCodePoint(character.codePointAt(0)!),
+  };
+}
 
-  const missing = new Map<string, Set<string>>();
+/** Les polices que le site sert, réduites aux caractères publiés, en woff2. */
+export type SiteFonts = {
+  twKai: Buffer;
+  /**
+   * La police de secours, réduite aux caractères que TW-Kai ne dessine pas,
+   * dans l'ordre de leur première apparition ; absente si TW-Kai dessine tout.
+   */
+  fallback?: { font: Buffer; characters: string };
+};
+
+/**
+ * TW-Kai réduite aux caractères des textes donnés, et la police de secours
+ * réduite à ceux que TW-Kai ne dessine pas. Un caractère qu'aucune des deux
+ * ne dessine les fait échouer, en nommant le caractère et ce qui le porte :
+ * le site n'écrit jamais une case vide, ni dans une police du système
+ * (ADR 0005, ADR 0006).
+ */
+export async function subsetSiteFonts(texts: PublishedText[]): Promise<SiteFonts> {
+  const twKai = await openFont(TW_KAI);
+  const beyondTwKai = new Map<string, Set<string>>();
   for (const { owner, text } of texts) {
     for (const character of charactersOf(text)) {
-      if (draws(character)) continue;
-      missing.set(owner, (missing.get(owner) ?? new Set()).add(character));
+      if (twKai.draws(character)) continue;
+      beyondTwKai.set(owner, (beyondTwKai.get(owner) ?? new Set()).add(character));
     }
-  }
-  if (missing.size > 0) {
-    const lines = [...missing].map(
-      ([owner, characters]) => `  ${owner} : ${[...characters].join(" ")}`,
-    );
-    throw new Error(
-      `TW-Kai ne dessine pas ces caractères, et le site n'a pas de police de repli :\n${lines.join("\n")}`,
-    );
   }
 
   const characters = new Set(texts.flatMap(({ text }) => charactersOf(text)));
-  return subsetFont(data, [...characters].join(""), { targetFormat: "woff2" });
+  const twKaiCharacters = [...characters].filter(twKai.draws).join("");
+  const twKaiSubset = await subsetFont(twKai.data, twKaiCharacters, { targetFormat: "woff2" });
+  if (beyondTwKai.size === 0) return { twKai: twKaiSubset };
+
+  const fallback = await openFont(FALLBACK);
+  const undrawn = [...beyondTwKai]
+    .map(
+      ([owner, characters]) => [owner, [...characters].filter((c) => !fallback.draws(c))] as const,
+    )
+    .filter(([, characters]) => characters.length > 0);
+  if (undrawn.length > 0) {
+    const lines = undrawn.map(([owner, characters]) => `  ${owner} : ${characters.join(" ")}`);
+    throw new Error(
+      `Ni TW-Kai ni sa police de secours (霞鶩文楷 TC) ne dessinent ces caractères :\n${lines.join("\n")}`,
+    );
+  }
+
+  const fallbackCharacters = [
+    ...new Set([...beyondTwKai.values()].flatMap((set) => [...set])),
+  ].join("");
+  return {
+    twKai: twKaiSubset,
+    fallback: {
+      font: await subsetFont(fallback.data, fallbackCharacters, { targetFormat: "woff2" }),
+      characters: fallbackCharacters,
+    },
+  };
 }

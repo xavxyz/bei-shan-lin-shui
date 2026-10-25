@@ -3,7 +3,8 @@ import "../styles/global.css";
 import "../styles/site-font.css";
 import { ClientRouter } from "astro:transitions";
 import SiteHeader from "../components/SiteHeader.astro";
-import { SITE_FONT_FACE, SITE_FONT_URL, SITE_TITLE } from "../site.js";
+import siteFontFace from "virtual:bsls/site-font-face";
+import { SITE_FONT_URL, SITE_TITLE } from "../site.js";
 
 type Props = {
   title: string;
@@ -34,7 +35,7 @@ const pageFade = { forwards: fade, backwards: fade };
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} — {SITE_TITLE}</title>
     <link rel="preload" href={SITE_FONT_URL} as="font" type="font/woff2" crossorigin />
-    <style is:inline set:html={SITE_FONT_FACE}></style>
+    <style is:inline set:html={siteFontFace}></style>
     <ClientRouter fallback="swap" />
   </head>
   <body>

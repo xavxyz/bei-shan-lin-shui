@@ -53,3 +53,10 @@ test("le chinois s'écrit en TW-Kai, servie par le site", async ({ page }) => {
   const simplified = page.locator('[lang="zh-Hans"]').first();
   await expect(simplified).toHaveCSS("font-family", /^"?TW-Kai"?/);
 });
+
+test("sans caractère que TW-Kai ne dessine pas, le site ne sert aucune police de secours", async ({
+  request,
+}) => {
+  const fallback = await request.get("/fonts/lxgw-wenkai-tc.woff2");
+  expect(fallback.status()).toBe(404);
+});
