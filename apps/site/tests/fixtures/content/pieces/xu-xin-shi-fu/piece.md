@@ -20,7 +20,7 @@ source:
 versions:
   - id: v1
     date: 2026-02-25
-    format: 3x7
+    format: "[(3x7)]" # 3x7 dans content/, à la notation de #65 dans la fixture
     columns: [虛心實腹道之基, 虛心直節青青竹, 箇是鍊虛第一機]
     variations:
       - id: v1a

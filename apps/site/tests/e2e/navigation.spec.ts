@@ -4,20 +4,26 @@ test("la page d'accueil liste les projets et permet d'entrer dans l'un d'eux", a
   await page.goto("/");
 
   await expect(page.getByTestId("project-link")).toHaveCount(5);
-  await page.getByRole("link", { name: "Explorations personnelles" }).click();
+  await page.getByRole("link", { name: "戈之研究" }).click();
 
   await expect(page).toHaveURL("/ge-zhi-yan-jiu");
-  await expect(page.getByRole("heading", { name: "Explorations personnelles" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "戈之研究" })).toHaveAttribute("lang", "zh-Hant");
 });
 
-test("une page de projet liste ses pièces et rend son thème visuel propre", async ({ page }) => {
+test("une page de projet liste ses pièces", async ({ page }) => {
   await page.goto("/hong-lou-meng");
 
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "ink");
-  await expect(page.getByTestId("piece-link")).toHaveCount(2);
+  await expect(page.getByRole("heading", { name: "紅樓夢" })).toBeVisible();
+  await expect(page.getByTestId("piece-link")).toHaveCount(1);
+});
 
-  await page.goto("/ge-zhi-yan-jiu");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "jade");
+test("le fil d'Ariane d'une pièce nomme son projet par son titre chinois", async ({ page }) => {
+  await page.goto("/ge-zhi-yan-jiu/yong-cao-shu");
+
+  const crumb = page.getByRole("navigation").getByRole("link", { name: "戈之研究" });
+  await expect(crumb).toHaveAttribute("lang", "zh-Hant");
+  await crumb.click();
+  await expect(page).toHaveURL("/ge-zhi-yan-jiu");
 });
 
 test("une pièce de deux projets est accessible depuis l'un et l'autre", async ({ page }) => {

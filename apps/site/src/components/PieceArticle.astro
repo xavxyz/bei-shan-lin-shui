@@ -4,6 +4,7 @@ import { PIECE_STATUS_LABELS } from "@bsls/schema";
 import VersionVariations from "./VersionVariations.astro";
 import EarlierVersions from "./EarlierVersions.astro";
 import VersionDate from "./VersionDate.astro";
+import VersionFormat from "./VersionFormat.astro";
 import VersionText from "./VersionText.astro";
 
 type Props = {
@@ -25,7 +26,9 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
       projects.map((project) => (
         <>
           {" / "}
-          <a href={project.href}>{project.title}</a>
+          <a href={project.href} lang="zh-Hant">
+            {project.title.traditional}
+          </a>
         </>
       ))
     }
@@ -64,7 +67,7 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
         </span>
       ) : null
     }
-    <span class="tag">{version.format}</span>
+    <VersionFormat version={version} testId="version-format" />
     <VersionDate version={version} testId="version-date" />
   </p>
 

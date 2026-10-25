@@ -14,7 +14,6 @@ const piece = {
 const project = {
   title: "戈之研究",
   presentation: "Une série sur le trait 戈.\n",
-  theme: "jade",
 };
 
 async function load(overrides: { piece?: object; project?: object }) {
@@ -22,7 +21,8 @@ async function load(overrides: { piece?: object; project?: object }) {
     projects: { "ge-zhi-yan-jiu": { ...project, ...overrides.project } },
     pieces: { yong: { ...piece, ...overrides.piece } },
   });
-  return loadContent(root);
+  // La pièce n'a pas d'image : on charge tout, comme le mode admin.
+  return loadContent(root, { includeUnpublished: true });
 }
 
 async function loadValid(overrides: { piece?: object; project?: object }) {

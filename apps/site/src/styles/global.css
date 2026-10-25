@@ -1,4 +1,4 @@
-/* Thème par défaut : encre sur papier. Chaque projet en bascule les variables. */
+/* Une palette unique, encre sur papier, en attendant le papier teinté de la Cimaise. */
 :root {
   --paper: #f7f4ee;
   --ink: #23201c;
@@ -8,30 +8,6 @@
 
   --serif-cn: "Noto Serif TC", "Songti TC", "Source Han Serif TC", serif;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-}
-
-[data-theme="jade"] {
-  --paper: #f2f5f1;
-  --ink: #1e2a24;
-  --muted: #5d6f64;
-  --accent: #2f6b52;
-  --rule: #cddbd2;
-}
-
-[data-theme="cinnabar"] {
-  --paper: #fbf3ec;
-  --ink: #2a1d18;
-  --muted: #7a5c4c;
-  --accent: #b1462a;
-  --rule: #e5cfbe;
-}
-
-[data-theme="indigo"] {
-  --paper: #f1f2f7;
-  --ink: #1c2030;
-  --muted: #5b6178;
-  --accent: #35407a;
-  --rule: #ccd1e2;
 }
 
 *,
@@ -270,11 +246,40 @@ td.version-text__zh {
   color: var(--muted);
 }
 
+/* La notation brute du format suit son libellé, en retrait. */
+.format__notation {
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
 /* En mode admin, une pièce non publiée doit se repérer d'un coup d'œil. */
 .tag--unpublished {
   border-style: dashed;
   border-color: var(--accent);
   color: var(--accent);
+}
+
+/* En mode admin, les pièces qui attendent leur scan : une rangée chacune. */
+.unscanned {
+  margin: 2.5rem 0;
+}
+
+.unscanned__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.unscanned__table th,
+.unscanned__table td {
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-weight: normal;
+}
+
+.unscanned__title {
+  font-family: var(--serif-cn);
+  letter-spacing: 0.08em;
 }
 
 /* Les métadonnées viennent après l'œuvre : c'est l'image qui prime. */

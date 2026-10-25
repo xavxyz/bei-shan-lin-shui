@@ -1,0 +1,45 @@
+---
+import type { LoadedPiece } from "@bsls/schema";
+import { PIECE_STATUS_LABELS } from "@bsls/schema";
+import { pieceHref } from "@bsls/content";
+import VersionDate from "./VersionDate.astro";
+
+type Props = {
+  /** Pièces sans image : il n'y en a qu'en mode admin. */
+  pieces: LoadedPiece[];
+  /** Le niveau de titre de la section, selon la page qui l'accueille. */
+  level: 2 | 3;
+  /** Le projet de la page, sous lequel mènent les liens ; sinon la route propre de la pièce. */
+  projectId?: string;
+};
+
+const { pieces, level, projectId } = Astro.props;
+const headingId = "sans-scan";
+const heading = `Sans scan · ${pieces.length}`;
+---
+
+{
+  pieces.length > 0 ? (
+    <section class="unscanned" aria-labelledby={headingId}>
+      {level === 2 ? <h2 id={headingId}>{heading}</h2> : <h3 id={headingId}>{heading}</h3>}
+      <table class="unscanned__table">
+        <tbody>
+          {pieces.map((piece) => (
+            <tr>
+              <th scope="row" class="unscanned__title" lang="zh-Hant">
+                <a href={projectId ? pieceHref(piece.slug, projectId) : piece.href}>
+                  {piece.title.traditional}
+                </a>
+              </th>
+              <td class="gloss">{piece.gloss ?? ""}</td>
+              <td>{PIECE_STATUS_LABELS[piece.status]}</td>
+              <td>
+                <VersionDate version={piece.latestVersion} testId="unscanned-date" />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  ) : null
+}

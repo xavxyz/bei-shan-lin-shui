@@ -5,7 +5,6 @@ import {
   IMAGE_KINDS,
   PIECE_STATUSES,
   SCRIPTS,
-  THEMES,
   VARIATION_STATUSES,
 } from "./vocabulary.js";
 
@@ -193,8 +192,15 @@ export const projectFileSchema = z.object({
   title: z.string().min(1),
   /** Courte phrase française qui dit de quoi parle le projet (voir GLOSSARY.md). */
   gloss: prose.optional(),
-  presentation: prose,
-  theme: z.enum(THEMES),
+  /** Optionnelle : un projet peut attendre que le calligraphe l'écrive. */
+  presentation: prose.optional(),
+  /**
+   * Les thèmes de couleur sont abandonnés (#70) : un projet qui en porte encore
+   * un est refusé, plutôt que de voir le champ ignoré en silence.
+   */
+  theme: z.never({ message: "le thème de projet n'existe plus : retirez `theme`" }).optional(),
+  /** Comme pour une pièce : indexées par le texte traditionnel exact, ici le titre. */
+  pinyin_overrides: pinyinOverridesSchema.default({}),
 });
 
 export type PieceFrontmatter = z.infer<typeof pieceFrontmatterSchema>;
@@ -228,6 +234,11 @@ export const loadedVersionSchema = versionSchema.extend({
   date: z.string(),
   /** Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais stockés. */
   chineseDate: z.string(),
+  /**
+   * Le format dit en français (`4 colonnes de 5 caractères`), dérivé de la
+   * notation, jamais stocké. Une notation illisible s'y retrouve telle quelle.
+   */
+  formatLabel: z.string(),
   columns: z.array(chineseTextSchema),
   variations: z.array(loadedVariationSchema),
 });
@@ -246,6 +257,7 @@ export const loadedPieceSchema = pieceFieldsSchema.extend({
 });
 
 export const loadedProjectSchema = projectFileSchema.extend({
+  title: chineseTextSchema,
   id: z.string(),
   href: z.string(),
   /** Slugs des pièces publiées rattachées à ce projet, dans l'ordre du disque. */

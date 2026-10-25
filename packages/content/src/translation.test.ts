@@ -26,7 +26,8 @@ async function load(overrides: { versions?: object[]; piece?: object }) {
       },
     },
   });
-  return loadContent(root);
+  /* Tout le contenu, comme à la validation : la pièce n'a pas d'image. */
+  return loadContent(root, { includeUnpublished: true });
 }
 
 async function loadErrors(overrides: { versions?: object[]; piece?: object }) {

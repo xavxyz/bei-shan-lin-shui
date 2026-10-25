@@ -29,6 +29,26 @@ test("la date chinoise de la version est affichée à côté de sa date", async 
   await expect(date).toContainText("丙午立春");
 });
 
+test("le format est dit en français, avec sa notation brute en petit", async ({ page }) => {
+  await page.goto("/zhong-he-ji/xu-xin-shi-fu");
+
+  const format = page.getByTestId("version-format");
+  await expect(format.getByTestId("format-label")).toHaveText("3 colonnes de 7 caractères");
+  const notation = format.getByTestId("format-notation");
+  await expect(notation).toHaveText("[(3x7)]");
+  const size = (locator: typeof format) =>
+    locator.evaluate((element) => parseFloat(getComputedStyle(element).fontSize));
+  expect(await size(notation)).toBeLessThan(await size(format.getByTestId("format-label")));
+});
+
+test("un format que la notation ne lit pas s'affiche tel quel", async ({ page }) => {
+  await page.goto(piecePath);
+
+  const format = page.getByTestId("version-format");
+  await expect(format).toHaveText("2x7 + 蘇東坡");
+  await expect(format.getByTestId("format-notation")).toHaveCount(0);
+});
+
 test("une pièce en expérimentation l'affiche en français", async ({ page }) => {
   await page.goto("/pieces/mo-si-wen-ke");
 

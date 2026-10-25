@@ -9,8 +9,8 @@ import { adminMode, contentRoot } from "./content-root.js";
  * une édition sur le disque doit se voir sans redémarrer le serveur.
  */
 async function readContent(): Promise<Content> {
-  // En mode admin, le content layer inclut les pièces non publiées : c'est le
-  // seul filtre, le site n'en ajoute aucun.
+  // Le content layer tient seul la règle publique : publiées, avec une image.
+  // En mode admin, il rend tout, et le site ne fait que répartir (mur, « Sans scan »).
   const result = await loadContent(contentRoot, { includeUnpublished: adminMode });
   if (result.ok) return result.content;
   // Un contenu invalide casse le build, jamais la production.
