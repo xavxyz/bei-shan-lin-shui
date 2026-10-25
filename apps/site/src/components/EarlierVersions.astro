@@ -1,8 +1,9 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
-import VersionDate from "./VersionDate.astro";
-import VersionFormat from "./VersionFormat.astro";
+import VersionFacts from "./VersionFacts.astro";
+import VersionText from "./VersionText.astro";
 import VersionVariations from "./VersionVariations.astro";
+import { hasImage } from "../version-images.js";
 
 type Props = {
   piece: LoadedPiece;
@@ -12,36 +13,50 @@ const { piece } = Astro.props;
 
 /** Toutes les versions sauf la courante, de la plus ancienne à la plus récente. */
 const earlier = piece.versions.filter((version) => version.id !== piece.latestVersion.id);
+const headingId = "versions-anterieures";
 ---
 
 {
   earlier.length > 0 ? (
-    <details class="evolution">
-      <summary class="evolution__toggle">voir l'évolution</summary>
+    <section class="evolution" aria-labelledby={headingId}>
+      <h3 class="evolution__heading" id={headingId}>
+        Versions antérieures
+      </h3>
       <ol class="evolution__list">
         {earlier.map((version) => (
-          <li class="evolution__version" data-testid="earlier-version">
-            <VersionVariations version={version} title={piece.title.traditional} />
-
-            <p class="evolution__tags">
-              <VersionDate version={version} testId="earlier-version-date" />
-              <VersionFormat version={version} testId="earlier-version-format" />
-            </p>
-
-            {version.columns.length > 0 ? (
-              <p class="evolution__columns" lang="zh-Hant" data-testid="earlier-version-columns">
-                {version.columns.map((column) => column.traditional).join(" / ")}
-              </p>
+          <li
+            class:list={["piece", { "piece--textual": !hasImage(version) }]}
+            data-testid="earlier-version"
+          >
+            {hasImage(version) ? (
+              <div class="piece__work">
+                <VersionVariations version={version} title={piece.title.traditional} />
+              </div>
             ) : null}
 
-            {version.intention ? (
-              <p class="reading__body" data-testid="earlier-version-intention">
-                {version.intention.trim()}
-              </p>
-            ) : null}
+            <div class="piece__text">
+              {version.columns.length > 0 ? <VersionText version={version} /> : null}
+
+              <VersionFacts version={version} testIdPrefix="earlier-version" />
+
+              {hasImage(version) ? null : (
+                <VersionVariations version={version} title={piece.title.traditional} />
+              )}
+
+              {version.intention ? (
+                <div class="piece__prose">
+                  <div class="reading__block">
+                    <p class="reading__label">Intention</p>
+                    <p class="reading__body" data-testid="earlier-version-intention">
+                      {version.intention.trim()}
+                    </p>
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </li>
         ))}
       </ol>
-    </details>
+    </section>
   ) : null
 }

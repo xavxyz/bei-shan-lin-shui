@@ -3,9 +3,9 @@ import { expect, test, type Page } from "@playwright/test";
 /** La version courante a trois variations, dont la dernière n'a pas encore d'image. */
 const piecePath = "/pieces/xin-nian-kuai-le-ma-dao-cheng-gong";
 
-/** Les variations à l'écran : celles de la version courante, l'évolution restant repliée. */
+/** Les variations de la version courante : celles de son carrousel, le premier de la page. */
 function variations(page: Page) {
-  return page.getByTestId("variation").filter({ visible: true });
+  return page.getByTestId("carousel").first().getByTestId("variation");
 }
 
 test("toutes les variations de la version courante sont listées, dans l'ordre du fichier", async ({

@@ -27,7 +27,8 @@ test("une version sans traduction montre la liste de ses lignes en simplifié, s
   await page.goto("/pieces/mo-xing-ji");
 
   await expect(page.getByRole("table")).toHaveCount(0);
-  const lines = page.getByTestId("version-text").getByRole("listitem");
-  await expect(lines).toHaveText(["莫性急平流缓进", "墨行机兔起鹘落"]);
-  await expect(page.getByTestId("version-text")).toHaveAttribute("lang", "zh-Hans");
+  // La première est celle de la version courante ; l'antérieure suit.
+  const text = page.getByTestId("version-text").first();
+  await expect(text.getByRole("listitem")).toHaveText(["莫性急平流缓进", "墨行机兔起鹘落"]);
+  await expect(text).toHaveAttribute("lang", "zh-Hans");
 });

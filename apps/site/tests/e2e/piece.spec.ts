@@ -17,16 +17,15 @@ test("la page de pièce affiche l'œuvre mise en avant en grand", async ({ page 
 test("le pinyin est en regard du texte chinois", async ({ page }) => {
   await page.goto(piecePath);
 
-  await expect(page.getByTestId("version-text")).toContainText("莫性急平流缓进");
+  await expect(page.getByTestId("version-text").first()).toContainText("莫性急平流缓进");
   await expect(page.getByTestId("pinyin")).toContainText("mò xìng jí píng liú huǎn jìn");
 });
 
-test("la date chinoise de la version est affichée à côté de sa date", async ({ page }) => {
+test("la date chinoise de la version est affichée à la suite de sa date", async ({ page }) => {
   await page.goto(piecePath);
 
-  const date = page.getByTestId("version-date");
-  await expect(date).toContainText("11 février 2026");
-  await expect(date).toContainText("丙午立春");
+  await expect(page.getByTestId("version-date")).toHaveText("11 février 2026");
+  await expect(page.getByTestId("version-chinese-date")).toHaveText("丙午立春");
 });
 
 test("le format est dit en français, avec sa notation brute en petit", async ({ page }) => {
