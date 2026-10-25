@@ -29,6 +29,7 @@ export async function createPiece(
   const frontmatter = toYaml(
     compact({
       title: draft.title,
+      gloss: draft.gloss,
       slug,
       status: "idea",
       projects: draft.projects,

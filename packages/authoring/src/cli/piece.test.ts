@@ -108,4 +108,53 @@ describe("la commande piece", () => {
     );
     expect(await readPieceFile(root, "shan-ju-qiu-ming")).toBe(before);
   });
+
+  it("écrit la glose d'une pièce, la traduction d'une version et la glose d'un projet", async () => {
+    const root = await writeTree({ "projects/qi-gong.yaml": "title: 氣功\n" });
+    piece(root, ["creer"], BROUILLON);
+
+    expect(piece(root, ["glose", "shan-ju-qiu-ming"], "gloss: Une glose de pièce.\n").output).toBe(
+      "glose écrite : shan-ju-qiu-ming\n",
+    );
+    expect(
+      piece(
+        root,
+        ["traduction", "shan-ju-qiu-ming", "v1"],
+        "translation:\n  - Première ligne\n  - Seconde ligne\n",
+      ).output,
+    ).toBe("traduction écrite : shan-ju-qiu-ming v1\n");
+    expect(piece(root, ["glose-projet", "qi-gong"], "gloss: Une glose de projet.\n").output).toBe(
+      "glose écrite : projet qi-gong\n",
+    );
+
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content).toMatchObject({
+      pieces: [
+        {
+          gloss: "Une glose de pièce.",
+          versions: [{ translation: ["Première ligne", "Seconde ligne"] }],
+        },
+      ],
+      projects: [{ id: "qi-gong", gloss: "Une glose de projet." }],
+    });
+  });
+
+  it("refuse sans rien écrire une traduction qui n'a pas une ligne par colonne", async () => {
+    const root = await writeTree({});
+    piece(root, ["creer"], BROUILLON);
+    const before = await readPieceFile(root, "shan-ju-qiu-ming");
+
+    const { code, output } = piece(
+      root,
+      ["traduction", "shan-ju-qiu-ming", "v1"],
+      "translation: [Une seule ligne]\n",
+    );
+
+    expect(code).toBe(1);
+    expect(output).toContain("refusé, rien n'a été écrit");
+    expect(output).toContain(
+      "versions.0.translation : attendu : une ligne de traduction par colonne",
+    );
+    expect(await readPieceFile(root, "shan-ju-qiu-ming")).toBe(before);
+  });
 });

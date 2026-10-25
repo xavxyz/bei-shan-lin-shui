@@ -267,8 +267,9 @@ describe("applyImport", () => {
 
   it("écrit la glose d'une pièce", async () => {
     const root = await contentRoot();
-    const arbitrated = plan();
-    arbitrated.pieces[0]!.gloss = "Une glose écrite au plan.";
+    const arbitrated = planFileSchema.parse({
+      pieces: [{ ...plan().pieces[0], gloss: "Une glose écrite au plan." }],
+    });
 
     await applyImport(arbitrated, { contentRoot: root });
 
