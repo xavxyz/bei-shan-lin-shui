@@ -1,6 +1,6 @@
 # 中和集 — textes de référence
 
-Neuf textes du 中和集 de 李道純 (元), traduits vers par vers pour choisir l'étendue des pièces du projet `zhong-he-ji` (lots 3 et 5 de #17). Le texte est celui du 正統道藏 sur zh.wikisource (`中和集`, `action=raw`), les leçons recoupées sur le 清庵先生中和集 de ctext ([res=3138576](https://ctext.org/wiki.pl?if=gb&res=3138576), images au `file=205666`).
+Neuf textes du 中和集 de 李道純 (元), traduits vers par vers pour choisir l'étendue des pièces du projet `zhong-he-ji` (lots 3 et 5 de #17). Le texte est celui du 正統道藏 sur zh.wikisource (`中和集`, `action=raw`, [https://zh.wikisource.org/wiki/中和集](https://zh.wikisource.org/wiki/%E4%B8%AD%E5%92%8C%E9%9B%86)). Attribution et datation y sont dans la notice d'ouverture, « 經名﹕中和集。元李道純撰。六卷。底本出處﹕《正統道藏》洞眞部方法類 », et la ligne d'auteur du 卷一, « 都梁淸菴瑩蟾子李道純元素撰﹑門弟子損菴寶蟾子蔡志頤編 » ; le 敘 de 杜道堅 (« 當塗南谷杜道堅書於錢塘玄元眞館 ») dit que le disciple 蔡志頤 compila le recueil et vint le faire approuver « 大德丙午秋 ». Les leçons recoupées sur le 清庵先生中和集 de ctext ([res=3138576](https://ctext.org/wiki.pl?if=gb&res=3138576), images au `file=205666`).
 
 Le 《鍊虛歌》 n'y est pas : ses deux derniers vers sont les deux dernières colonnes de `xu-xin-shi-fu`.
 
@@ -61,9 +61,10 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 | 中下之士，不能直下了達，須從漸入。 | Les hommes de rang moyen et inférieur ne peuvent tout pénétrer d'un coup : il leur faut entrer par degrés. |
 | 故諸丹書皆以卦爻為法則也，達者味之而自得之矣。 | C'est pourquoi tous les livres d'alchimie prennent les _guà_ et les _yáo_ pour règle. Celui qui pénètre les savoure, et les obtient de lui-même. |
 
-- 海瓊真人 = 白玉蟾, patriarche du Sud : le texte ouvre et ferme sur sa formule. 紫陽真人 = 張伯端, 《悟真篇》 ; ses trois citations ne sont pas situées au poème près.
-- 象也者，象此者也 et 六虛 viennent du 《繫辭》 ; 負陰抱陽 du 《道德經》 42, 虛心實腹 du 3 ; 生而知之 / 不勉而中 du 《論語》 et du 《中庸》 ; 元會運世 est la chronologie de 邵雍.
-- 過河須用栰 : la parabole bouddhique du radeau. 得魚忘筌，得兔忘蹄 vient du 《莊子·外物》, qui conclut par 得意而忘言 : d'où le 得意 de 紫陽 juste après.
+- 海瓊真人 = 白玉蟾 : le 《道德真經三解》 de 鄧錡 (元, 正統道藏, zh.wikisource `道德真經三解`) le nomme « 海瓊真人白玉蟾 » dans son tableau de filiation et le place dans la lignée de 張紫陽 : « 紫陽傳之翠玄，翠玄傳之紫賢，紫賢傳之翠虛，翠虛傳之海瓊 ». Le texte ouvre et ferme sur sa formule. 紫陽真人 = 張伯端 : zh.wikisource `作者:張伯端`, « 號紫陽。紫陽真人，又名張紫陽 ».
+- Les citations de 紫陽 dans le 《悟真篇》 (zh.wikisource `悟真篇`, 正統道藏) : 取將坎位中心實 est le 16ᵉ des 七言絶句六十四首, qui lit 點化離宮腹内隂 · 從此變成乾健體 · 潛藏飛躍總由心 (中和集 : 腹裏陰, 自此, 盡由心) ; 此中得意休求象 est le 36ᵉ, qui lit 漫役情 (中和集 : 謾役情). 不刻時中分子午，無爻卦內定乾坤 n'est pas sur cette page : à relever dans un autre texte de 張伯端 ou une autre édition du 《悟真篇》. Au 卷三 du 中和集, le même quatrain 取將坎位… est cité sous « 祖師云 ».
+- 象也者，象此者也 et 六虛 viennent du 《繫辭下》 (zh.wikisource `易傳/繫辭下` : « 爻也者，效此者也；象也者，像此者也 », « 周流六虛 ») ; 負陰抱陽 du 《道德經》 42 (道藏 道德真經, 道化章第四十二 : 萬物負陰而抱陽), 虛心實腹 du 3 (安民章第三 : 虛其心，實其腹) ; 生而知之 du 《論語·季氏》 (生而知之者，上也) ou du 《中庸》, 不勉而中 du 《中庸》 (誠者不勉而中, zh.wikisource `禮記/中庸`) ; 元會運世 est la chronologie du 《皇極經世書》 de 邵雍 (四庫全書總目提要, 卷108 : « 《皇極經世書》，邵伯溫以為共十二卷，一至六則元會運世 »).
+- 過河須用栰 : la parabole bouddhique du radeau, 《金剛經》 (T08n0235_p0749b11, « 知我說法，如筏喻者，法尚應捨，何況非法 »). 得魚忘筌，得兔忘蹄 vient du 《莊子·外物》 (zh.wikisource `莊子/外物`, qui écrit 荃 : 荃者所以在魚，得魚而忘荃), qui conclut par 得意而忘言 : d'où le 得意 de 紫陽 juste après.
 - 潛藏飛躍盡由心 (紫陽) : le quatrain de la préface du 龍虎歌 le reprend, 潛飛見躍盡由心.
 
 ➡️ Étendues candidates :
@@ -127,11 +128,11 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 |  | 進破頂門神蛻也 | Il perce le sommet du crâne : l'esprit mue et s'en va. |
 |  | 與君同步謁三清 | Avec toi, d'un même pas, nous irons saluer les Trois Purs (三清). |
 
-- **野雲**, « Nuage sauvage », le dédicataire : un lettré de 穎川 (d'ordinaire 潁川) qui a quitté la carrière (急流勇退) pour la Voie, versé dans le Dao et le Bouddha. On ne sait rien d'autre de lui.
-- **翕** (6.1) n'a pas de sens, et la rime (通, 風) veut _-ong_ : on lit **翁**, « le vieil homme ». À confirmer sur le 清庵先生中和集.
-- **道法法人人不肖** renverse le 《老子》 25 (人法地…道法自然) : la Voie prend l'homme pour modèle, l'homme ne lui ressemble pas ; 不肖, « ne pas ressembler » et « indigne ».
+- **野雲**, « Nuage sauvage », le dédicataire : un lettré de 穎川 (d'ordinaire 潁川) qui a quitté la carrière (急流勇退) pour la Voie, versé dans le Dao et le Bouddha. Le 中和集 n'en dit pas plus ; à relever ailleurs.
+- **翕** (6.1) n'a pas de sens, et la rime (通, 風) veut _-ong_ : on lit **翁**, « le vieil homme ». À relever dans le 清庵先生中和集 (ctext).
+- **道法法人人不肖** renverse le 《老子》 25 (道藏 道德真經, 名象章第二十五 : 人法地，地法天，天法道，道法自然) : la Voie prend l'homme pour modèle, l'homme ne lui ressemble pas ; 不肖, « ne pas ressembler » et « indigne ».
 - Les quatrains 2 à 4 font le catalogue des erreurs : l'alchimie externe (金石), et le corps lu à la lettre (玄牝 réduit à la bouche et au nez, 坎離 au cœur et aux reins).
-- 7.3-4 : 取坎填離, le yang caché dans l'Eau retourne au Feu. 9.2 : 地雷, l'hexagramme 復, premier yang sous la terre ; 橐籥, 《老子》 5. 12.1 : 持盈, 《老子》 9 ; 12.3, la sortie de l'esprit par le sommet du crâne (出神). 7.1 : 知音, 伯牙 et 鍾子期.
+- 7.3-4 : 取坎填離, le yang caché dans l'Eau retourne au Feu. 9.2 : 地雷, l'hexagramme 復 (周易·復, 象 : 雷在地中，復), premier yang sous la terre ; 橐籥, 《老子》 5 (虛用章第五 : 天地之間其猶橐籥乎). 12.1 : 持盈, 《老子》 9 (運夷章第九 : 持而盈之，不如其已) ; 12.3, la sortie de l'esprit par le sommet du crâne (出神). 7.1 : 知音, 伯牙 et 鍾子期 (《列子·湯問》, zh.wikisource `列子/湯問篇` : 伯牙善鼓琴，鍾子期善聽).
 - 10.1 **賒** : lu « venu de loin » ; sens et rime incertains.
 
 ➡️ Étendues candidates :
@@ -215,11 +216,11 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 | 21 | 說與知堂田皎蟾 | Je le dis à Tian Jiaochan, du Zhitang : |
 | 22 | 究竟自心為軌則 | en dernier ressort, fais de ton propre cœur ta règle. |
 
-- 治人事天莫若嗇 : 《道德經》 59, dont 李道純 saute l'étape 早服. 窈冥 renvoie au 21, 不如愚 et 嘿 au 45 (大辯若訥), 寡欲 au 19.
-- 屯蒙 / 復姤 : le régime du feu par les hexagrammes, dans la tradition du 《參同契》. 二五 : le 《太極圖說》, 二五之精，妙合而凝.
-- 根塵, 業識 sont bouddhiques ; 三心 vient du Sūtra du Diamant.
+- 治人事天莫若嗇 : 《道德經》 59, dont 李道純 saute l'étape intermédiaire : le 道藏 (道德真經, 守道章第五十九) lit 夫惟嗇是謂早復，早復謂之重積德, le 王弼本 (zh.wikisource `道德經 (王弼本)`) 夫唯嗇，是謂早服 ; le chant écrit 夫嗇謂之重積德. 窈冥 renvoie au 21 (虛心章第二十一 : 窈兮冥，其中有精), 不如愚 et 嘿 au 45 (洪德章第四十五 : 大辯若訥), 寡欲 au 19 (還淳章第十九 : 少私寡欲).
+- 屯蒙 / 復姤 : le régime du feu par les hexagrammes, dans la tradition du 《周易參同契》 (zh.wikisource `周易參同契/01章`, 大易總敘章第一 : 朔旦屯直事，至暮蒙當受). 二五 : le 《太極圖說》 (zh.wikisource `太極圖說`), 二五之精，妙合而凝.
+- 根塵, 業識 sont bouddhiques ; 三心 renvoie au Sūtra du Diamant (T08n0235_p0751b27 : 過去心不可得，現在心不可得，未來心不可得).
 - Le second chant place les trois enseignements sous un seul mot, 息, « souffle » et « cesser » : 息緣 pour le Chan, 息心 pour les lettrés, 息氣 pour le Dao.
-- 田皎蟾, du 知堂, n'est pas autrement connu ; son nom clôt déjà le premier chant (I, 37) : les deux lui sont sans doute adressés.
+- 田皎蟾, du 知堂, n'apparaît pas ailleurs dans le 中和集 ; son nom clôt déjà le premier chant (I, 37) : les deux lui sont sans doute adressés.
 - **Leçons douteuses** : I, 20, 覬 casse la rime en -u ; on attend 覷 « regarder », traduit ainsi. II, 11, 萬虛澄 pourrait être 萬慮澄, meilleur parallèle avec 諸緣息. Ni l'une ni l'autre n'est dans les étendues proposées, sauf le second chant entier.
 
 ➡️ Étendues candidates :
@@ -280,11 +281,11 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 |  | 有人問我借來看 | Si quelqu'un me demande de la lui prêter pour la voir, |
 |  | 拈出向君會不會 | je la tire et vous la tends : comprenez-vous, ou non ? |
 
-- **慧劍** : l'épée de sagesse (prajñā) qui tranche les passions ; cf. 《維摩經》 以智慧劍破煩惱賊. Le chant se lit en clef bouddhique (六賊, 三界, 塵) et alchimique (fer, fourneau, feu, 一陽來復, dragon et tigre).
-- **彊立名** : écho du 《老子》 25, 強為之名曰大 : l'épée sans forme est nommée comme le Dao.
-- **正令全提**, **拈出**, **會不會** : tournures du Chan ; 拈出 rappelle le Bouddha qui lève la fleur (拈花).
+- **慧劍** : l'épée de sagesse (prajñā) qui tranche les passions ; cf. 《維摩詰所說經》, 菩薩行品第十一 (T14n0475_p0554b21) : 以智慧劍，破煩惱賊. Le chant se lit en clef bouddhique (六賊, 三界, 塵) et alchimique (fer, fourneau, feu, 一陽來復, dragon et tigre).
+- **彊立名** : écho du 《老子》 25 (道藏 道德真經, 名象章第二十五 : 彊為之名曰大) : l'épée sans forme est nommée comme le Dao.
+- **正令全提**, **拈出**, **會不會** : tournures du Chan ; 拈出 rappelle le Bouddha qui lève la fleur (《無門關》, 「世尊拈花」, T48n2005_p0293c13 : 世尊昔在靈山會上。拈花示眾).
 - **Rimes** : 訣 烈 鐵 · 方 昂 鋼 · 訣 滅 說 · 機 時 鎚 · 劍 電 現 · 輝 悲 螭 · 絕 裂 拆 · 形 名 成 · 地 備 會.
-- **Leçons** : 卓豎 (`卓堅 dans le 道藏`), 蛟螭 (`蛟蠣 dans le 道藏`). **部天地** : on attendrait 剖 (« fendre ») ; à vérifier sur le 清庵先生中和集.
+- **Leçons** : 卓豎 (`卓堅 dans le 道藏`), 蛟螭 (`蛟蠣 dans le 道藏`). **部天地** : on attendrait 剖 (« fendre ») ; à relever dans le 清庵先生中和集 (ctext).
 
 ➡️ Étendues candidates :
 
@@ -309,7 +310,7 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 | 8 | 不離當處是瀛洲 | Sans quitter le lieu même où l'on est, on est à Yingzhou (瀛洲, l'île des Immortels). |
 
 - 罔象 vient du _Zhuangzi_ (天地) : la perle noire (玄珠) perdue par l'Empereur Jaune est retrouvée par 象罔 (« Sans-forme »), là où l'intelligence et la vue avaient échoué. C'est donc la non-intention. La perle du vers 5 répond à cette perle perdue.
-- Les vers 5 et 6 posent le couple 性/命 propre au 全真 : 心珠 du côté de la nature (性), 命寶 du côté de la vie (命). 周 se lit « complet, qui circule partout ».
+- Les vers 5 et 6 posent le couple 性/命, celui du 《性命論》 du même livre (卷四) : 心珠 du côté de la nature (性), 命寶 du côté de la vie (命). 周 se lit « complet, qui circule partout ».
 - 日用 veut dire « l'usage de tous les jours ». Le poème dit que le travail alchimique n'est pas à part de la vie ordinaire, et le dernier vers le conclut. Le 7ᵉ poème, 透關, le reprend : 真常之道果何難，只在如今日用間.
 
 ➡️ Les 8 vers, un distique par feuille (`4*(2x7)`). Le titre en `2x4` est une conjecture :
@@ -332,8 +333,8 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 | 7 | 雲收雨散神胎就 | Les nuages se retirent, la pluie se dissipe : l'embryon divin (神胎) est formé. |
 | 8 | 男子生兒不等閒 | Qu'un homme enfante, ce n'est pas chose ordinaire. |
 
-- 青龍/白虎 : le Dragon (Est, Bois, mercure, le cœur) et le Tigre (Ouest, Métal, plomb, les reins). Leur union est le 交合 du titre, une union intérieure.
-- 紫府 et 玄宮 sont deux « palais » du corps : le plus souvent 紫府 en haut (cœur ou tête), 玄宮 en bas (丹田 inférieur). La lecture propre à 李道純 n'est pas vérifiée.
+- 青龍/白虎 : le Dragon et le Tigre. Le 中和集 lui-même les glose, dans la préface du 龍虎歌 (卷四) : « 龍虎者，陰陽之異名也 », et les dit tour à tour 藥物, 鼎鑪, 火候, 坎離, 金木, 男女, 夫婦. Leur union est le 交合 du titre, une union intérieure. Les correspondances d'orient, de métal et d'organe : à relever dans le 《悟真篇》 ou le 《周易參同契》.
+- 紫府 et 玄宮 sont deux « palais » du corps. Chez 李道純, 玄宮 est en bas, au point de départ du feu : le 火候圖 du 卷一 le place au mois 十一, à l'heure 子 et à l'hexagramme 復 (« 十一﹐初一﹐子﹐玄宮﹐復﹐初九 »), face à 崙山 au 午 ; le 沁園春 du 卷六 dit « 自玄宮起火﹐運入崑山 ». 紫府 n'apparaît dans le 中和集 qu'en ce vers : sa place, en haut par le parallélisme, est à relever dans le 道藏 (glossaires du 內丹).
 - 地軸/天關 : le pivot d'en bas et la passe d'en haut, qui répondent au vers 3.
 - 雲收雨散 reprend l'image classique de l'union (雲雨), détournée vers l'alchimie. 男子生兒 désigne l'embryon d'immortalité (聖胎 / 神胎) conçu par l'adepte.
 
@@ -458,7 +459,7 @@ Dans la source, le titre suit le poème : des colonnes de titre à gauche, aprè
 
 - **雖然也是平地起波濤，青天轟霹靂 n'est pas un 7+7.** La syntaxe coupe 雖然也是｜平地起波濤｜青天轟霹靂 (4+5+5) : 平地起波濤, « lever des vagues en terrain plat », est une locution figée, qui répond au 無風自起浪 du chant (v. 6). Le quatrain s'arrête à 盡由心 (rime 尋 / 陰 / 心) ; la suite est une coda en prose rythmée. Le `full_text` du plan ponctue à tort 雖然也是平地起，波濤青天轟霹靂.
 - **忽然進開頂顧門** (v. 17) : 進開 n'a guère de sens, 頂顧門 n'existe pas. On lirait 迸開, « éclater », et 頂顖門, la porte de la fontanelle, par où sort l'esprit. Conjecture, aucune autre édition ne tranche en ligne. Le 原道歌 dit de même 進破頂門 (12.3).
-- **Autres fautes probables** : 以卸天 → 以御天 (時乘六龍以御天, _Tuan_ de Qian) ; 用之不動 → 用之不勤 (《老子》 6) ; 化而栽之 → 化而裁之 (《繫辭》) ; 束齊 → 束齋 ; 跑 parasite ; 觀教端的 sans doute 覷教端的. Le `full_text` du plan porte 以卸天, 束齊, 進開頂顧門.
+- **Autres fautes probables** : 以卸天 → 以御天 (時乘六龍以御天, _Tuan_ de Qian, zh.wikisource `周易/乾`) ; 用之不動 → 用之不勤 (《老子》 6, 成象章第六 : 綿綿若存，用之不勤) ; 化而栽之 → 化而裁之 (《繫辭上》 : 化而裁之謂之變) ; 束齊 → 束齋 ; 跑 parasite ; 觀教端的 sans doute 覷教端的. Le `full_text` du plan porte 以卸天, 束齊, 進開頂顧門.
 - **裏** : wikisource porte bien 裏, ce qui confirme la correction du `full_text`.
 - **Rimes** : v. 1-6 en _-ang_ (象・樣・當・蕩・浪), v. 7-34 en _-u_ (午・數・府・所・睹…), puis 筌・言, et la chute en tons entrants (特・則・畢).
 - 潛飛見躍盡由心 reprend 紫陽, 潛藏飛躍盡由心, cité aussi dans le 卦象論.
@@ -485,9 +486,9 @@ Dans la source, le titre suit le poème : des colonnes de titre à gauche, aprè
 
 - Les quatre trigrammes sont la forge : 乾 le métal, 坤 le creuset, 離 le feu, 巽 le vent du soufflet. En alchimie intérieure, le soufflet est la respiration.
 - **吹** n'apparaît qu'une fois dans tout le 中和集, au vers 4. 輕吹, du titre de Notion, n'est pas dans le livre : le souffle léger du soufflet, le feu doux (文火).
-- 龍象 : le dragon et l'éléphant, image bouddhique de la force de l'éveillé. 心官 vient de Mencius (心之官則思), 志帥 aussi (夫志，氣之帥也).
+- 龍象 : le dragon et l'éléphant, image bouddhique de la force de l'éveillé. 心官 vient de Mencius, 《孟子·告子上》 (zh.wikisource `孟子/告子上` : 心之官則思；思則得之，不思則不得也), 志帥 du 《孟子·公孫丑上》 (zh.wikisource `孟子/公孫丑上` : 夫志，氣之帥也；氣，體之充也).
 - Le 《慧劍歌》 (section 4) ne contient ni 吹 ni 輕. Au 卷六, le 沁園春 《贈春谷清禪師》 dit : 把殺人手段，輕輕拈出，活人刀子，慢慢教看。一劍當空，萬緣俱掃.
-- Hors du livre, le 吹毛劍 du 禪 (碧巖錄, cas 100, 巴陵吹毛劍) : l'épée si tranchante qu'un cheveu soufflé contre le fil est coupé. Non collationné.
+- Hors du livre, le 吹毛劍 du 禪 : 《碧巖錄》 (T48n2003, 卷十), cas 【一〇〇】, T48n2003_p0223b21 : « 僧問巴陵。如何是吹毛劍。陵云。珊瑚枝枝撐著月 » (le titre 巴陵吹毛劍 n'est pas dans le texte de CBETA). Le commentaire glose le mot, T48n2003_p0223c12-13 : « 劍刃上吹毛試之。其毛自斷。乃利劍謂之吹毛也 », on souffle un poil sur le fil de l'épée et il se coupe de lui-même : une épée tranchante s'appelle « souffle-poil ».
 
 ➡️ Le poème entier, 8 vers.
 
