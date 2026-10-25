@@ -1,11 +1,14 @@
 ---
 import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
 
 type Props = {
   title: string;
 };
 
 const { title } = Astro.props;
+// Seul l'accueil porte l'en-tête en grand.
+const home = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -23,10 +26,7 @@ const { title } = Astro.props;
   </head>
   <body>
     <div class="page">
-      <header class="site-header">
-        <h1 class="site-header__title"><a href="/">背山臨水</a></h1>
-        <p class="site-header__tagline">Soutenu par le maître, je suis les vagues</p>
-      </header>
+      <SiteHeader large={home} />
       <main>
         <slot />
       </main>

@@ -1,9 +1,8 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import { pieceHref } from "@bsls/content";
 import Layout from "../../layouts/Layout.astro";
-import PieceCard from "../../components/PieceCard.astro";
+import Wall from "../../components/Wall.astro";
 import UnscannedPieces from "../../components/UnscannedPieces.astro";
 import { hang } from "../../hang.js";
 
@@ -38,9 +37,7 @@ const { wall, unscanned } = hang(pieces);
 
   <section aria-labelledby="oeuvres">
     <h3 id="oeuvres">Pièces · {wall.length}</h3>
-    <ul class="card-list">
-      {wall.map((piece) => <PieceCard piece={piece} href={pieceHref(piece.slug, project.id)} />)}
-    </ul>
+    <Wall pieces={wall} projectId={project.id} />
   </section>
 
   <UnscannedPieces pieces={unscanned} level={3} projectId={project.id} />

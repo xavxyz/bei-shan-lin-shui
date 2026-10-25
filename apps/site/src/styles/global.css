@@ -1,5 +1,6 @@
-/* Une palette unique, encre sur papier, en attendant le papier teinté de la Cimaise. */
+/* Un seul thème : le papier teinté de la Cimaise. */
 :root {
+  --gutter: clamp(1rem, 2.5vw, 2rem);
   --paper: #f7f4ee;
   --ink: #23201c;
   --muted: #6d675e;
@@ -34,71 +35,79 @@ a:hover {
   color: var(--accent);
 }
 
+/* La page : une grille de 12 colonnes à gouttière fluide, sur 88 rem au plus. */
 .page {
-  max-width: 62rem;
+  max-width: 88rem;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 5rem;
+  padding: 2.5rem var(--gutter) 5rem;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+/* L'en-tête, ailleurs qu'à l'accueil : une ligne, le titre puis la devise, sur un filet. */
 .site-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 1rem;
+  column-gap: 1.25rem;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 1rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .site-header__title {
   font-family: var(--serif-cn);
   font-size: 1.4rem;
+  font-weight: normal;
   margin: 0;
   letter-spacing: 0.1em;
 }
 
-.site-header__tagline {
+.site-header__title a {
+  text-decoration: none;
+}
+
+.site-header__motto {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Sur l'accueil, le titre et la devise en grand, centrés, sur une grande hauteur. */
+.site-header--large {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  min-height: 60vh;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.site-header--large .site-header__title {
+  font-size: clamp(3rem, 9vw, 7rem);
+  letter-spacing: 0.35em;
+  line-height: 1.2;
+  /* L'interlettrage suit aussi le dernier caractère : on l'équilibre au début. */
+  padding-inline-start: 0.35em;
+}
+
+.site-header--large .site-header__motto {
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  letter-spacing: 0.04em;
 }
 
 .breadcrumb {
   font-size: 0.9rem;
   color: var(--muted);
   margin-bottom: 1.5rem;
-}
-
-.card-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-}
-
-.card {
-  border: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--paper) 80%, white);
-  padding: 1.25rem;
-  height: 100%;
-  display: grid;
-  gap: 0.5rem;
-  align-content: start;
-}
-
-.card__title {
-  margin: 0;
-  font-size: 1.15rem;
-}
-
-.card__title--cn {
-  font-family: var(--serif-cn);
-  letter-spacing: 0.08em;
-}
-
-.card__meta {
-  color: var(--muted);
-  font-size: 0.85rem;
 }
 
 /* La glose : une phrase française, sous le titre, plus discrète que lui. */
@@ -112,11 +121,135 @@ a:hover {
   font-size: 1.15rem;
 }
 
-.card__thumbnail {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  background: var(--paper);
+/* Les sections de l'accueil (mur, « Sans scan », projets) respirent entre elles. */
+main > section + section,
+main > section + .unscanned {
+  margin-top: 5rem;
+}
+
+/* Les rangées de projets : la tête en colonnes 1 à 4, la présentation en 5 à 9,
+   la couverture en 10 à 12. */
+.project-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project-row {
+  align-items: start;
+  row-gap: 1.5rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.project-row__head {
+  grid-column: 1 / span 4;
+}
+
+.project-row__title {
+  font-family: var(--serif-cn);
+  font-size: 1.75rem;
+  font-weight: normal;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.5rem;
+}
+
+.project-row__title a {
+  text-decoration: none;
+}
+
+.project-row__count {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0.75rem 0 0;
+}
+
+.project-row__presentation {
+  grid-column: 5 / span 5;
+  margin: 0;
+  /* Le YAML replie la présentation à la main : la ligne suit la colonne. */
+  white-space: normal;
+}
+
+.project-row__cover {
+  grid-column: 10 / -1;
+  justify-self: end;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 16rem;
+}
+
+@media (max-width: 64rem) {
+  .project-row__head {
+    grid-column: 1 / span 7;
+  }
+
+  .project-row__cover {
+    grid-column: 8 / -1;
+    grid-row: 1;
+  }
+
+  .project-row__presentation {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Le mur : les œuvres, à hauteur fixe et largeur libre, jamais recadrées ni
+   déformées, s'accrochent à la file ; leurs pieds s'alignent d'une rangée à l'autre. */
+.wall {
+  --work-height: 18rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 3rem var(--gutter);
+}
+
+@media (max-width: 64rem) {
+  .wall {
+    --work-height: 13rem;
+  }
+}
+
+/* L'œuvre donne sa largeur : le titre et la glose s'y plient sans l'élargir. */
+.wall__work {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  width: min-content;
+  text-decoration: none;
+}
+
+.wall__image {
+  display: block;
+  height: var(--work-height);
+  width: auto;
+  max-width: none;
+  margin-bottom: 0.6rem;
+}
+
+.wall__title {
+  font-family: var(--serif-cn);
+  font-size: 1.1rem;
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+.wall__work:hover .wall__title {
+  color: var(--accent);
+}
+
+.wall__work .gloss {
+  color: var(--muted);
+  line-height: 1.45;
 }
 
 .piece__header {
