@@ -1,0 +1,22 @@
+{
+  "name": "@bsls/site-font",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@bsls/content": "workspace:*",
+    "@bsls/schema": "workspace:*",
+    "fontkit": "^2.0.4",
+    "subset-font": "^2.9.0"
+  },
+  "devDependencies": {
+    "@types/fontkit": "^2.0.9"
+  }
+}

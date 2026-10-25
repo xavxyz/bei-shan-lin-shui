@@ -1,0 +1,8 @@
+/*
+ * Tout le chinois balisé, traditionnel comme simplifié, s'écrit en TW-Kai,
+ * déclarée dans Layout.astro (ADR 0005).
+ */
+:lang(zh-Hant),
+:lang(zh-Hans) {
+  font-family: var(--serif-cn);
+}
