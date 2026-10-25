@@ -1,0 +1,22 @@
+---
+import type { LoadedPiece } from "@bsls/schema";
+import { pieceHref } from "@bsls/content";
+import PieceCard from "./PieceCard.astro";
+
+type Props = {
+  /** Les pièces du mur, dans l'ordre où `hang` les accroche. */
+  pieces: LoadedPiece[];
+  /** Le projet de la page, sous lequel mènent les liens ; sinon la route propre de la pièce. */
+  projectId?: string;
+};
+
+const { pieces, projectId } = Astro.props;
+---
+
+<ul class="wall">
+  {
+    pieces.map((piece) => (
+      <PieceCard piece={piece} href={projectId ? pieceHref(piece.slug, projectId) : piece.href} />
+    ))
+  }
+</ul>
