@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import "../styles/site-font.css";
+import { SITE_FONT_FACE, SITE_FONT_URL, SITE_TITLE } from "../site.js";
 
 type Props = {
   title: string;
@@ -13,18 +15,14 @@ const { title } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} — 背山臨水</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap"
-    />
+    <title>{title} — {SITE_TITLE}</title>
+    <link rel="preload" href={SITE_FONT_URL} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={SITE_FONT_FACE}></style>
   </head>
   <body>
     <div class="page">
       <header class="site-header">
-        <h1 class="site-header__title"><a href="/">背山臨水</a></h1>
+        <h1 class="site-header__title"><a href="/" lang="zh-Hant">{SITE_TITLE}</a></h1>
         <p class="site-header__tagline">Soutenu par le maître, je suis les vagues</p>
       </header>
       <main>
