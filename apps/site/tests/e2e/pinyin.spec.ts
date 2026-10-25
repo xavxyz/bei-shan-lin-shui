@@ -92,7 +92,7 @@ test("popover fermé, une ligne et un titre se décrivent par leur pinyin au lec
     /chéng rén bú zì zài/,
   );
 
-  // Au mur, c'est le lien de l'œuvre qui prend le focus : il porte le pinyin de son titre.
+  // Au mur, c'est le lien de la pièce qui prend le focus : il porte le pinyin de son titre.
   await page.goto("/");
   await expect(title(page, "永草書")).toHaveAccessibleDescription("yǒng cǎo shū");
   await expect(
