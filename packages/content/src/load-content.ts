@@ -92,7 +92,7 @@ export async function loadContent(root: string, options: LoadOptions = {}): Prom
 
 /** Le public ne voit que ce qui est publié et a de quoi se montrer : jamais une case vide. */
 function isPubliclyVisible(piece: LoadedPiece): boolean {
-  return piece.published && piece.featuredImage !== null;
+  return piece.published && piece.hasImage;
 }
 
 type ProjectWithoutPieces = Omit<LoadedProject, "pieceSlugs">;
@@ -258,6 +258,18 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     .sort((a, b) => a.date.getTime() - b.date.getTime())
     .map((version): LoadedVersion => {
       const chineseDate = deriveChineseText(deriveChineseDate(toIsoDate(version.date)));
+      const variations = version.variations.map((variation): LoadedVariation => {
+        const images = variation.images.map((image) => ({
+          ...image,
+          src: contentImageUrl(piece.slug, image.file),
+        }));
+        return {
+          ...variation,
+          scriptLabel: SCRIPT_LABELS[variation.script],
+          images,
+          featuredImage: pickFeaturedImage(images),
+        };
+      });
       return {
         ...version,
         date: toIsoDate(version.date),
@@ -265,18 +277,8 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
         chineseDateSimplified: chineseDate.simplified,
         formatLabel: deriveFormatLabel(version.format),
         columns: version.columns.map((column) => deriveChineseText(column, overrides)),
-        variations: version.variations.map((variation): LoadedVariation => {
-          const images = variation.images.map((image) => ({
-            ...image,
-            src: contentImageUrl(piece.slug, image.file),
-          }));
-          return {
-            ...variation,
-            scriptLabel: SCRIPT_LABELS[variation.script],
-            images,
-            featuredImage: pickFeaturedImage(images),
-          };
-        }),
+        variations,
+        hasImage: variations.some((variation) => variation.featuredImage !== null),
       };
     });
 
@@ -297,6 +299,7 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
     versions,
     latestVersion,
     featuredImage: featured?.featuredImage ?? null,
+    hasImage: versions.some((version) => version.hasImage),
     featuredScriptLabel: featured?.scriptLabel ?? null,
     href: pieceHref(piece.slug, project),
   } satisfies LoadedPiece);

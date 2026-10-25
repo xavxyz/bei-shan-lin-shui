@@ -249,6 +249,8 @@ export const loadedVersionSchema = versionSchema.extend({
   ]),
   columns: z.array(chineseTextSchema),
   variations: z.array(loadedVariationSchema),
+  /** Une version a une image dès qu'une de ses variations en a une. */
+  hasImage: z.boolean(),
 });
 
 export const loadedPieceSchema = pieceFieldsSchema.extend({
@@ -267,6 +269,8 @@ export const loadedPieceSchema = pieceFieldsSchema.extend({
   /** Versions triées du plus ancien au plus récent : la dernière est l'intention courante. */
   latestVersion: loadedVersionSchema,
   featuredImage: loadedImageSchema.nullable(),
+  /** Une pièce a une image dès qu'une de ses versions en a une. */
+  hasImage: z.boolean(),
   /** Style d'écriture de cette variation, nommé en français. */
   featuredScriptLabel: z.string().nullable(),
   /** URL canonique de la pièce sur le site. */

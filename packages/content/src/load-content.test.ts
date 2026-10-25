@@ -547,6 +547,42 @@ describe("image mise en avant", () => {
 
     expect(content.pieces[0]!.featuredImage!.file).toBe("v2b-01.jpg");
   });
+
+  it("dit d'une version et d'une pièce si elles ont une image", async () => {
+    const content = await loadValid({
+      ...wellFormedTree,
+      files: ["pieces/shan-ju-qiu-ming/images/v1b-01.jpg"],
+      pieces: {
+        "shan-ju-qiu-ming": {
+          ...shanJuQiuMing,
+          versions: [
+            {
+              id: "v1",
+              date: "2026-03-04",
+              format: "A4 vertical",
+              columns: [],
+              variations: [
+                { ...variation("v1a"), images: [] },
+                { ...variation("v1b"), images: [imageNamed("v1b-01.jpg")] },
+              ],
+            },
+            { id: "v2", date: "2026-05-01", format: "A4 vertical", columns: [], variations: [] },
+          ],
+        },
+      },
+    });
+
+    const [piece] = content.pieces;
+    expect(piece!.versions.map((version) => version.hasImage)).toEqual([true, false]);
+    expect(piece!.hasImage).toBe(true);
+  });
+
+  it("dit d'une pièce sans aucune image qu'elle n'en a pas", async () => {
+    const content = await loadValid(withImages([]));
+
+    expect(content.pieces[0]!.hasImage).toBe(false);
+    expect(content.pieces[0]!.versions[0]!.hasImage).toBe(false);
+  });
 });
 
 describe("visibilité", () => {
