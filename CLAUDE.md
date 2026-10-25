@@ -26,6 +26,8 @@ Réponds au calligraphe en français.
 - **Aucune donnée de mémoire.** Un texte, une attribution, une datation s'écrivent avec la source consultée, ou ne s'écrivent pas (ADR 0004).
 - Node et TypeScript exclusivement, pnpm en monorepo.
 
+Écrire ou relire du code, une skill ou une doc : `CODING_STANDARDS.md`.
+
 ## Écrire du contenu
 
 Le format d'une pièce est décrit par `pieceFrontmatterSchema` (`packages/schema/src/index.ts`) ; les vocabulaires fermés — statuts, styles d'écriture, thèmes — par `packages/schema/src/vocabulary.ts`. Les styles sont stockés en pinyin sans tons et **affichés en français**.
