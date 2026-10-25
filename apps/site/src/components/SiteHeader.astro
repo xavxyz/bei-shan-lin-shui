@@ -1,4 +1,6 @@
 ---
+import { SITE_TITLE } from "../site.js";
+
 type Props = {
   /** Sur l'accueil, le titre et la devise s'affichent en grand ; ailleurs, sur une ligne. */
   large: boolean;
@@ -8,6 +10,6 @@ const { large } = Astro.props;
 ---
 
 <header class:list={["site-header", { "site-header--large": large }]}>
-  <h1 class="site-header__title" lang="zh-Hant"><a href="/">背山臨水</a></h1>
+  <h1 class="site-header__title" lang="zh-Hant"><a href="/">{SITE_TITLE}</a></h1>
   <p class="site-header__motto">Soutenu par le maître, je suis les vagues</p>
 </header>

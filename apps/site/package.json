@@ -16,6 +16,7 @@
     "@astrojs/react": "^4.2.0",
     "@bsls/content": "workspace:*",
     "@bsls/schema": "workspace:*",
+    "@bsls/site-font": "workspace:*",
     "astro": "^5.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

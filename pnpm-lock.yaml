@@ -41,6 +41,9 @@ importers:
       '@bsls/schema':
         specifier: workspace:*
         version: link:../../packages/schema
+      '@bsls/site-font':
+        specifier: workspace:*
+        version: link:../../packages/site-font
       astro:
         specifier: ^5.2.0
         version: 5.18.2(@types/node@22.20.1)(rollup@4.62.5)(supports-color@5.5.0)(tsx@4.23.12)(typescript@5.9.3)(yaml@2.9.0)
@@ -204,6 +207,25 @@ importers:
       zod:
         specifier: ^3.24.1
         version: 3.25.76
+
+  packages/site-font:
+    dependencies:
+      '@bsls/content':
+        specifier: workspace:*
+        version: link:../content
+      '@bsls/schema':
+        specifier: workspace:*
+        version: link:../schema
+      fontkit:
+        specifier: ^2.0.4
+        version: 2.0.4
+      subset-font:
+        specifier: ^2.9.0
+        version: 2.9.0
+    devDependencies:
+      '@types/fontkit':
+        specifier: ^2.0.9
+        version: 2.0.9
 
 packages:
 
