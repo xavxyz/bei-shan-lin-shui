@@ -59,7 +59,7 @@ describe("la commande piece", () => {
     const run = piece(root, ["creer"], BROUILLON.replace("published: false", "published: true"));
 
     expect(run.code).toBe(0);
-    const loaded = await loadContent(root);
+    const loaded = await loadContent(root, { includeUnpublished: true });
     expect(loaded.ok && loaded.content.pieces).toMatchObject([
       { slug: "shan-ju-qiu-ming", published: true },
     ]);

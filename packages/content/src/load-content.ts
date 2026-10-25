@@ -46,7 +46,12 @@ export type Content = {
 export type LoadResult = { ok: true; content: Content } | { ok: false; errors: ContentError[] };
 
 export type LoadOptions = {
-  /** Par défaut le contenu chargé est celui du site : les brouillons en sont absents. */
+  /**
+   * Par défaut le contenu chargé est celui du site public : seules les pièces
+   * publiées qui ont une image mise en avant en font partie. Avec cette option,
+   * tout est rendu, comme en mode admin et à la validation : brouillons et
+   * pièces encore sans image compris.
+   */
   includeUnpublished?: boolean;
 };
 
@@ -66,20 +71,25 @@ export async function loadContent(root: string, options: LoadOptions = {}): Prom
 
   if (errors.length > 0) return { ok: false, errors };
 
-  const published = options.includeUnpublished ? pieces : pieces.filter((piece) => piece.published);
+  const visible = options.includeUnpublished ? pieces : pieces.filter(isPubliclyVisible);
 
   return {
     ok: true,
     content: {
       projects: projectFiles.map((project) => ({
         ...project,
-        pieceSlugs: published
+        pieceSlugs: visible
           .filter((piece) => piece.projects.includes(project.id))
           .map((piece) => piece.slug),
       })),
-      pieces: published,
+      pieces: visible,
     },
   };
+}
+
+/** Le public ne voit que ce qui est publié et a de quoi se montrer : jamais une case vide. */
+function isPubliclyVisible(piece: LoadedPiece): boolean {
+  return piece.published && piece.featuredImage !== null;
 }
 
 type ProjectWithoutPieces = Omit<LoadedProject, "pieceSlugs">;
