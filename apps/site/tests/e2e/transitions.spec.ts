@@ -51,12 +51,37 @@ test("le contenu s'efface en 250 ms, puis le nouveau apparaît en 250 ms, sans c
   expect(entering, JSON.stringify(animations)).toMatchObject({ delay: 250, duration: 250 });
 });
 
-test("sans View Transitions, on passe d'une page à l'autre, l'en-tête et le carrousel en place", async ({
-  page,
-}) => {
+/** Un navigateur qui ne connaît pas les View Transitions. */
+async function withoutViewTransitions(page: Page) {
   await page.addInitScript(() => {
     delete (Document.prototype as Partial<Document>).startViewTransition;
   });
+}
+
+test("sans View Transitions, la page change d'un coup : rien ne s'efface ni n'apparaît", async ({
+  page,
+}) => {
+  await withoutViewTransitions(page);
+  await page.goto("/");
+  expect(await page.evaluate(() => "startViewTransition" in document)).toBe(false);
+  await mark(page);
+  await recordAnimations(page);
+
+  await page.getByRole("link", { name: "莫性急" }).click();
+  await expect(page).toHaveURL("/pieces/mo-xing-ji");
+  await expect(page.getByRole("heading", { name: "莫性急", level: 2 })).toBeVisible();
+  await banner(page).getByRole("link", { name: "背山臨水" }).click();
+  await expect(page).toHaveURL("/");
+  await page.waitForTimeout(700);
+
+  await stillMarked(page);
+  expect(await played(page)).toEqual([]);
+});
+
+test("sans View Transitions, on passe d'une page à l'autre, l'en-tête et le carrousel en place", async ({
+  page,
+}) => {
+  await withoutViewTransitions(page);
   await page.goto("/");
   expect(await page.evaluate(() => "startViewTransition" in document)).toBe(false);
   await mark(page);

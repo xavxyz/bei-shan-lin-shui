@@ -13,10 +13,20 @@ async function size(locator: Locator): Promise<Size> {
 }
 
 /**
- * Guette le geste de l'œuvre nommée `piece-<slug>` : la boîte d'où elle part
- * et celle où elle arrive, telles que la transition de vue les fait parcourir.
+ * Le nom de transition de vue que porte une image, quel qu'il soit : deux
+ * images de même nom, d'une page à l'autre, sont une seule œuvre qui se déplace.
  */
-async function watchGesture(page: Page, slug: string) {
+async function transitionName(locator: Locator): Promise<string> {
+  const name = await locator.evaluate((element) => getComputedStyle(element).viewTransitionName);
+  expect(name, "l'image ne porte aucun nom de transition").not.toBe("none");
+  return name;
+}
+
+/**
+ * Guette le geste de l'œuvre de nom de transition `name` : la boîte d'où elle
+ * part et celle où elle arrive, telles que la transition de vue les fait parcourir.
+ */
+async function watchGesture(page: Page, name: string) {
   await page.evaluate((name) => {
     const target = `::view-transition-group(${name})`;
     const sample = () => {
@@ -39,7 +49,7 @@ async function watchGesture(page: Page, slug: string) {
       requestAnimationFrame(sample);
     };
     sample();
-  }, `piece-${slug}`);
+  }, name);
 }
 
 async function gesture(page: Page): Promise<Gesture | undefined> {
@@ -57,13 +67,12 @@ function wallWork(page: Page, title: string) {
 
 const work = (page: Page) => page.getByTestId("carousel-image").first();
 
-for (const { from, path, title, slug, url } of [
-  { from: "le mur", path: "/", title: "莫性急", slug: "mo-xing-ji", url: "/pieces/mo-xing-ji" },
+for (const { from, path, title, url } of [
+  { from: "le mur", path: "/", title: "莫性急", url: "/pieces/mo-xing-ji" },
   {
     from: "une page projet",
     path: "/ge-zhi-yan-jiu",
     title: "永草書",
-    slug: "yong-cao-shu",
     url: "/ge-zhi-yan-jiu/yong-cao-shu",
   },
 ]) {
@@ -74,10 +83,12 @@ for (const { from, path, title, slug, url } of [
     const thumbnail = wallWork(page, title);
     await thumbnail.scrollIntoViewIfNeeded();
     const departure = await size(thumbnail);
-    await watchGesture(page, slug);
+    const name = await transitionName(thumbnail);
+    await watchGesture(page, name);
 
     await thumbnail.click();
     await expect(page).toHaveURL(url);
+    expect(await transitionName(work(page)), "l'œuvre n'est pas la vignette cliquée").toBe(name);
     await expect.poll(() => gesture(page)).toBeDefined();
     await page.waitForTimeout(700);
 
@@ -92,10 +103,15 @@ for (const { from, path, title, slug, url } of [
 test("au retour, l'œuvre redevient sa vignette dans le mur", async ({ page }) => {
   await page.goto("/pieces/mo-xing-ji");
   const departure = await size(work(page));
-  await watchGesture(page, "mo-xing-ji");
+  const name = await transitionName(work(page));
+  await watchGesture(page, name);
 
   await page.getByRole("banner").getByRole("link", { name: "背山臨水" }).click();
   await expect(page).toHaveURL("/");
+  expect(
+    await transitionName(wallWork(page, "莫性急")),
+    "la vignette n'est pas l'œuvre quittée",
+  ).toBe(name);
   await expect.poll(() => gesture(page)).toBeDefined();
   await page.waitForTimeout(700);
 
@@ -108,6 +124,7 @@ test("les autres œuvres du mur s'effacent avec le contenu, et reviennent avec l
   page,
 }) => {
   await page.goto("/");
+  const other = await transitionName(wallWork(page, "永草書"));
   await recordAnimations(page);
 
   await wallWork(page, "莫性急").click();
@@ -117,8 +134,8 @@ test("les autres œuvres du mur s'effacent avec le contenu, et reviennent avec l
   await page.waitForTimeout(700);
 
   const animations = await played(page);
-  const leaving = animations.find((a) => a.target === "::view-transition-old(piece-yong-cao-shu)");
-  const entering = animations.find((a) => a.target === "::view-transition-new(piece-yong-cao-shu)");
+  const leaving = animations.find((a) => a.target === `::view-transition-old(${other})`);
+  const entering = animations.find((a) => a.target === `::view-transition-new(${other})`);
   expect(leaving, JSON.stringify(animations)).toMatchObject({ delay: 0, duration: 250 });
   expect(entering, JSON.stringify(animations)).toMatchObject({ delay: 250, duration: 250 });
 });
