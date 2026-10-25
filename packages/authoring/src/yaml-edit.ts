@@ -48,6 +48,49 @@ export function replaceScalar(text: string, parent: YAMLMap, key: string, value:
   return { ok: true, text: text.slice(0, start) + value + text.slice(end) };
 }
 
+/**
+ * Écrit le champ `key` du nœud `parent` : remplacé s'il existe, à sa colonne,
+ * sinon inséré après le premier champ présent de `after`, ou à la fin du nœud.
+ */
+export function setField(
+  text: string,
+  parent: YAMLMap,
+  key: string,
+  value: unknown,
+  options: { after?: string[] } = {},
+): Edit {
+  const existing = pairOf(parent, key);
+  if (existing) {
+    const start = (existing.key as Node).range![0];
+    const end = valueEnd(existing, start);
+    const keyColumn = column(text, start);
+    const fragment = indent(toYaml({ [key]: value }, { column: keyColumn }), keyColumn);
+    const replacement = text[end - 1] === "\n" ? fragment : fragment.trimEnd();
+    return {
+      ok: true,
+      text: text.slice(0, start) + replacement.slice(keyColumn) + text.slice(end),
+    };
+  }
+
+  const anchor = (options.after ?? []).map((name) => pairOf(parent, name)).find(Boolean);
+  const anchorStart = anchor ? (anchor.key as Node).range![0] : parent.range![0];
+  const at = lineEnd(text, anchor ? valueEnd(anchor, anchorStart) : parent.range![1]);
+  const atColumn = column(text, anchorStart);
+  return insert(text, at, indent(toYaml({ [key]: value }, { column: atColumn }), atColumn));
+}
+
+type Pair = YAMLMap["items"][number];
+
+function pairOf(parent: YAMLMap, key: string): Pair | undefined {
+  return parent.items.find((item) => isScalar(item.key) && item.key.value === key);
+}
+
+/** Fin de la valeur d'une paire, commentaire de fin de ligne exclu. */
+function valueEnd(pair: Pair, keyStart: number): number {
+  const value = pair.value as Node | null;
+  return value?.range ? value.range[1] : keyStart;
+}
+
 export function rootMap(doc: Document.Parsed): YAMLMap | undefined {
   return isMap(doc.contents) ? doc.contents : undefined;
 }

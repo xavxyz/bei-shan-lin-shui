@@ -56,6 +56,7 @@ const plannedPieceSchema = pieceFieldsSchema
   .pick({
     slug: true,
     title: true,
+    gloss: true,
     status: true,
     projects: true,
     source: true,

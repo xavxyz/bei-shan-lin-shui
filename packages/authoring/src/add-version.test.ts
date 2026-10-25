@@ -63,6 +63,41 @@ describe("addVersion", () => {
     ]);
   });
 
+  it("écrit la traduction de la nouvelle version, une ligne par colonne", async () => {
+    const root = await yongTree();
+
+    await addVersion(root, "yong-cao-shu", { ...realisation, translation: ["Une ligne"] });
+
+    expect((await loadYong(root))?.versions[1]?.translation).toEqual(["Une ligne"]);
+  });
+
+  it("ne recopie jamais la traduction de la version précédente", async () => {
+    const root = await yongTree(
+      YONG.replace(
+        "    intention: |\n      Exploration sans modèle du caractère 永 en cursive.\n",
+        "    intention: |\n      Exploration sans modèle du caractère 永 en cursive.\n    translation: [Une ligne]\n",
+      ),
+    );
+
+    await addVersion(root, "yong-cao-shu", realisation);
+
+    const piece = await loadYong(root);
+    expect(piece?.versions[0]?.translation).toEqual(["Une ligne"]);
+    expect(piece?.versions[1]?.translation).toBeUndefined();
+  });
+
+  it("refuse sans rien écrire une traduction qui n'a pas une ligne par colonne", async () => {
+    const root = await yongTree();
+
+    const result = await addVersion(root, "yong-cao-shu", {
+      ...realisation,
+      translation: ["Une ligne", "En trop"],
+    });
+
+    expect(!result.ok && result.message).toContain("translation");
+    expect(await readPieceFile(root, "yong-cao-shu")).toBe(YONG);
+  });
+
   it("ne change aucun statut de la pièce", async () => {
     const root = await yongTree();
 
