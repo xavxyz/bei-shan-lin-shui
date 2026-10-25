@@ -71,7 +71,13 @@ const withWork = hasImage(version);
 
       {version.columns.length > 0 ? <VersionText version={version} /> : null}
 
-      <VersionFacts version={version} piece={piece} testIdPrefix="version" />
+      <VersionFacts
+        version={version}
+        testIdPrefix="version"
+        scriptLabel={piece.featuredScriptLabel}
+        status={piece.status}
+        attribution={source?.attribution}
+      />
 
       {withWork ? null : <VersionVariations version={version} title={piece.title.traditional} />}
 
