@@ -42,6 +42,25 @@ a:hover {
   padding: 2.5rem var(--gutter) 5rem;
 }
 
+/* D'une page à l'autre, le contenu s'efface puis le nouveau apparaît (`Layout.astro`). */
+@keyframes sortie {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes entree {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Le contenu ne prend le focus que pour y faire commencer la navigation au clavier. */
 #contenu:focus {
   outline: none;

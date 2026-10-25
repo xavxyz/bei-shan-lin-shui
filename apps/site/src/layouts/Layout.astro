@@ -10,6 +10,17 @@ type Props = {
 const { title } = Astro.props;
 // Seul l'accueil porte l'en-tête en grand : `data-page` le dit à l'en-tête persistant.
 const page = Astro.url.pathname === "/" ? "home" : "inner";
+
+/**
+ * Le contenu s'efface, puis le nouveau apparaît une fois l'ancien parti : 250 ms
+ * chacun, sans chevauchement (pagetransitions.netlify.app). Les images clés
+ * `sortie` et `entree` sont dans `global.css`.
+ */
+const fade = {
+  old: { name: "sortie", duration: "250ms", easing: "ease-in", fillMode: "both" },
+  new: { name: "entree", duration: "250ms", easing: "ease-out", delay: "250ms", fillMode: "both" },
+};
+const pageFade = { forwards: fade, backwards: fade };
 ---
 
 <!doctype html>
@@ -29,7 +40,13 @@ const page = Astro.url.pathname === "/" ? "home" : "inner";
   <body>
     <div class="page">
       <SiteHeader />
-      <main id="contenu" data-page={page} tabindex="-1">
+      <main
+        id="contenu"
+        data-page={page}
+        tabindex="-1"
+        transition:name="contenu"
+        transition:animate={pageFade}
+      >
         <slot />
       </main>
     </div>

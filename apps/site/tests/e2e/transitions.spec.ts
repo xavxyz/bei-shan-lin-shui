@@ -33,6 +33,107 @@ async function stillMarked(page: Page) {
   await expect(banner(page), "l'en-tête a été remplacé").toHaveAttribute("data-marque", "");
 }
 
+type Played = { target: string; name: string; delay: number; duration: number };
+
+/**
+ * Relève, image par image, les animations que joue le document : celles des
+ * éléments comme celles des transitions de vue (`::view-transition-old(…)`).
+ */
+async function recordAnimations(page: Page) {
+  await page.evaluate(() => {
+    const played = new Map<string, Played>();
+    (window as Window & { played?: Map<string, Played> }).played = played;
+    const sample = () => {
+      for (const animation of document.getAnimations()) {
+        const effect = animation.effect as KeyframeEffect | null;
+        const timing = effect?.getTiming();
+        const target = effect?.pseudoElement ?? effect?.target?.nodeName ?? "?";
+        const name =
+          animation instanceof CSSAnimation
+            ? animation.animationName
+            : animation instanceof CSSTransition
+              ? `transition ${animation.transitionProperty}`
+              : "animation";
+        played.set(`${target} ${name}`, {
+          target,
+          name,
+          delay: Number(timing?.delay ?? 0),
+          duration: Number(timing?.duration ?? 0),
+        });
+      }
+      requestAnimationFrame(sample);
+    };
+    sample();
+  });
+}
+
+async function played(page: Page): Promise<Played[]> {
+  return page.evaluate(() => [
+    ...(window as Window & { played?: Map<string, Played> }).played!.values(),
+  ]);
+}
+
+test("le contenu s'efface en 250 ms, puis le nouveau apparaît en 250 ms, sans chevauchement", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await recordAnimations(page);
+
+  await page.getByRole("link", { name: "莫性急" }).click();
+  await expect(page).toHaveURL("/pieces/mo-xing-ji");
+  await page.waitForTimeout(700);
+
+  const animations = await played(page);
+  const leaving = animations.find((a) => a.target === "::view-transition-old(contenu)");
+  const entering = animations.find((a) => a.target === "::view-transition-new(contenu)");
+  expect(leaving, JSON.stringify(animations)).toMatchObject({ delay: 0, duration: 250 });
+  expect(entering, JSON.stringify(animations)).toMatchObject({ delay: 250, duration: 250 });
+});
+
+test("sans View Transitions, on passe d'une page à l'autre, l'en-tête et le carrousel en place", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    delete (Document.prototype as Partial<Document>).startViewTransition;
+  });
+  await page.goto("/");
+  expect(await page.evaluate(() => "startViewTransition" in document)).toBe(false);
+  await mark(page);
+
+  await page.getByRole("link", { name: "墨寺㞢文刻" }).click();
+  await expect(page).toHaveURL("/pieces/mo-si-wen-ke");
+  await expect(page.getByRole("heading", { name: "墨寺㞢文刻", level: 2 })).toBeVisible();
+  await expect.poll(() => titleSize(page)).toBeLessThan(32);
+  await expect(page.getByRole("main")).toBeFocused();
+
+  const carousel = page.getByTestId("carousel").first();
+  await expect(carousel.getByRole("button", { name: "Image suivante" })).toBeVisible();
+  await page.keyboard.press("ArrowRight");
+  await expect(carousel.getByTestId("carousel-position")).toHaveText("2 / 10");
+
+  await banner(page).getByRole("link", { name: "背山臨水" }).click();
+  await expect(page).toHaveURL("/");
+  await expect.poll(() => titleSize(page)).toBeGreaterThanOrEqual(48);
+});
+
+test("sous prefers-reduced-motion, aucune animation ne joue d'une page à l'autre", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await mark(page);
+  await recordAnimations(page);
+
+  await page.getByRole("link", { name: "莫性急" }).click();
+  await expect(page).toHaveURL("/pieces/mo-xing-ji");
+  await banner(page).getByRole("link", { name: "背山臨水" }).click();
+  await expect(page).toHaveURL("/");
+  await page.waitForTimeout(700);
+
+  await stillMarked(page);
+  expect(await played(page)).toEqual([]);
+});
+
 test("l'en-tête reste en place d'une page à l'autre, grand sur l'accueil et réduit ailleurs", async ({
   page,
 }) => {
