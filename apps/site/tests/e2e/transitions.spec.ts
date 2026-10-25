@@ -176,9 +176,12 @@ test("après une navigation au clavier, le focus est au début du nouveau conten
   await stillMarked(page);
   await expect(page.getByRole("main")).toBeFocused();
 
-  // Tab mène au premier lien du contenu, pas à l'en-tête ni au bas de la page.
+  // Tab mène au premier arrêt du contenu, pas à l'en-tête ni au bas de la page :
+  // l'œuvre, à gauche, dont les flèches n'apparaissent qu'une fois le carrousel monté.
+  const previous = page.getByRole("main").getByRole("button", { name: "Image précédente" });
+  await expect(previous).toBeVisible();
   await page.keyboard.press("Tab");
-  await expect(page.getByRole("main").getByRole("link").first()).toBeFocused();
+  await expect(previous).toBeFocused();
 
   // Revenir par l'en-tête, qui reste en place, ramène aussi le focus au contenu.
   await banner(page).getByRole("link", { name: "背山臨水" }).focus();
