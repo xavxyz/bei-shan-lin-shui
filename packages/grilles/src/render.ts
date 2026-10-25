@@ -1,13 +1,7 @@
 import { MODELS, type Model } from "./models.js";
 import { measure, measuresLine, spanLabel, type Measures, type Span } from "./measures.js";
-import {
-  groupLabel,
-  layoutSheet,
-  rankSize,
-  type PouredText,
-  type Sheet,
-  type SheetLayout,
-} from "./sheets.js";
+import { groupLabel, type Sheet } from "@bsls/schema";
+import { layoutSheet, rankSize, type PouredText, type SheetLayout } from "./sheets.js";
 
 /** Un format mis en grilles pour être comparé aux autres. */
 export type Candidate = {

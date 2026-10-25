@@ -1,4 +1,5 @@
-import { groupLabel, rankSize, type Orientation, type Sheet, type SheetLayout } from "./sheets.js";
+import { groupLabel, type Orientation, type Sheet } from "@bsls/schema";
+import { rankSize, type SheetLayout } from "./sheets.js";
 
 /** Une cote, au dixième de millimètre : ce qu'on reporte à la règle. */
 export const cote = (value: number) => value.toFixed(1);

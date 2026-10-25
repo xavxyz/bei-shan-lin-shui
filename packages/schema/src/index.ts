@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { checkFormat } from "./format.js";
 import {
   CAPTURE_MODES,
   IMAGE_KINDS,
@@ -9,6 +10,7 @@ import {
 } from "./vocabulary.js";
 
 export * from "./vocabulary.js";
+export * from "./format.js";
 export { z };
 
 /**
@@ -65,6 +67,19 @@ export const variationSchema = z.object({
   personal_note: prose.optional(),
   images: z.array(imageSchema).default([]),
 });
+
+/**
+ * Le format d'une version qu'on écrit : une grille dans la notation, ou
+ * `à préciser`. Le contenu en lecture tolère encore l'ancienne notation
+ * (`versionSchema`), que `validate:content` signale sans casser le build.
+ */
+export const formatSchema = z
+  .string()
+  .min(1)
+  .superRefine((format, ctx) => {
+    const checked = checkFormat(format);
+    if (!checked.ok) ctx.addIssue({ code: z.ZodIssueCode.custom, message: checked.message });
+  });
 
 export const versionSchema = z.object({
   id: localIdSchema,
