@@ -46,7 +46,7 @@ export const variationIdSchema = localIdSchema.regex(
  * Un texte écrit à la main — glose, traduction, intention, présentation… : un
  * texte blanc n'y dirait rien, il est refusé. La valeur est gardée telle quelle.
  */
-const prose = z.string().regex(/\S/, "attendu : un texte, ni vide ni fait que d'espaces");
+const prose = z.string().regex(/\S/, "attendu : un texte, ni vide ni fait seulement d'espaces");
 
 /** `AAAA-MM-JJ`, la forme sous laquelle le calligraphe date ses versions. */
 export function toIsoDate(date: Date): string {

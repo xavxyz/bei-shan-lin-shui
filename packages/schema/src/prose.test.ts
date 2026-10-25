@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { pieceFrontmatterSchema, projectFileSchema } from "./index.js";
 
 const BLANK = "  \t ";
-const BLANK_MESSAGE = "attendu : un texte, ni vide ni fait que d'espaces";
+const BLANK_MESSAGE = "attendu : un texte, ni vide ni fait seulement d'espaces";
 
 const version = {
   id: "v1",
