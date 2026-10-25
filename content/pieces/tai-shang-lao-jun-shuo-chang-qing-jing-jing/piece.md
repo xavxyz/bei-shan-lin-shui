@@ -8,7 +8,7 @@ slug: tai-shang-lao-jun-shuo-chang-qing-jing-jing
 status: idea
 source:
   work: 太上老君說常清靜經
-  dynasty: 唐
+  dynasty: 唐 # 唐前半, catalogue de Kanripo (KR5c0001) ; docs/sources/qing-jing-jing.md
 versions:
   - id: v1
     date: 2025-12-23

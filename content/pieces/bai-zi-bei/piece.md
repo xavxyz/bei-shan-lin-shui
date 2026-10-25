@@ -7,7 +7,7 @@ status: experiment
 source:
   author: 呂洞賓 # attribution de la tradition, le poème n'est pas au 全唐詩
   work: 百字碑
-  dynasty: 唐
+  dynasty: 唐 # 「唐河中府永樂縣人」, 《呂祖志》卷一 ; docs/sources/bai-zi-bei.md
 versions:
   - id: v1
     date: 2026-03-29

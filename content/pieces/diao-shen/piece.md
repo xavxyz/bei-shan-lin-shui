@@ -10,7 +10,7 @@ projects:
   - qi-gong
 status: made
 source:
-  author: Yang Jwing-Ming
+  author: Yang Jwing-Ming # le livre et la page restent à relever dans ses ouvrages
 versions:
   - id: v1
     date: 2026-05-13
