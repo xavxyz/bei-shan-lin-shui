@@ -4,13 +4,13 @@ import Pinyin from "./Pinyin.astro";
 
 type Props = {
   project: LoadedProject;
-  /** Les œuvres du projet, telles que son mur les accroche (`hang`) : elles seules se comptent. */
-  works: LoadedPiece[];
+  /** Les pièces du mur du projet, telles que `hang` les accroche : elles seules se comptent. */
+  pieces: LoadedPiece[];
 };
 
-const { project, works } = Astro.props;
-// La couverture : l'œuvre que le mur du projet accroche en premier, la plus récente.
-const cover = works[0];
+const { project, pieces } = Astro.props;
+// La couverture : l'image de la pièce que le mur du projet accroche en premier, la plus récente.
+const cover = pieces[0];
 ---
 
 <li class="project-row grid" data-testid="project-row">
@@ -27,7 +27,7 @@ const cover = works[0];
         </p>
       ) : null
     }
-    <p class="project-row__count">{works.length} pièce{works.length > 1 ? "s" : ""}</p>
+    <p class="project-row__count">{pieces.length} pièce{pieces.length > 1 ? "s" : ""}</p>
   </div>
   {project.presentation ? <p class="project-row__presentation">{project.presentation}</p> : null}
   {

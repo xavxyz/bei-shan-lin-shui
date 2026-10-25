@@ -26,7 +26,7 @@ const { wall, unscanned } = hang(pieces);
         projects.map((project) => (
           <ProjectRow
             project={project}
-            works={hang(pieces.filter((piece) => piece.projects.includes(project.id))).wall}
+            pieces={hang(pieces.filter((piece) => piece.projects.includes(project.id))).wall}
           />
         ))
       }

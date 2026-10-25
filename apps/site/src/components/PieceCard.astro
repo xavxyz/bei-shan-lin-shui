@@ -13,7 +13,7 @@ const { piece, href } = Astro.props;
 ---
 
 <li class="wall__item">
-  <a class="wall__work" href={href} data-testid="piece-link">
+  <a class="wall__piece" href={href} data-testid="piece-link">
     {
       piece.featuredImage ? (
         <img

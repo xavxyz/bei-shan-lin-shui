@@ -75,7 +75,7 @@ test("en mode admin, l'accueil range entre le mur et les projets les pièces san
   await expect(page).toHaveURL("/hong-lou-meng/shuo-dao-xin-suan-chu");
 });
 
-test("en mode admin, une rangée de projet ne compte que les œuvres de son mur", async ({
+test("en mode admin, une rangée de projet ne compte que les pièces de son mur", async ({
   page,
 }) => {
   await page.goto("/");
@@ -88,21 +88,19 @@ test("en mode admin, une rangée de projet ne compte que les œuvres de son mur"
   await expect(page.getByRole("heading", { name: "Pièces · 1" })).toBeVisible();
 });
 
-test("en mode admin, la page projet range ses pièces sans scan sous ses œuvres", async ({
-  page,
-}) => {
+test("en mode admin, la page projet range ses pièces sans scan sous son mur", async ({ page }) => {
   await page.goto("/hong-lou-meng");
 
-  const works = page.getByRole("region", { name: "Pièces · 1" });
-  await expect(works.getByTestId("piece-link")).toHaveCount(1);
+  const wall = page.getByRole("region", { name: "Pièces · 1" });
+  await expect(wall.getByTestId("piece-link")).toHaveCount(1);
   const unscanned = page.getByRole("region", { name: "Sans scan · 1" });
   await expect(unscanned.getByRole("row").filter({ hasText: "說到辛酸處" })).toContainText("idée");
 
-  const worksBox = (await works.boundingBox())!;
+  const wallBox = (await wall.boundingBox())!;
   const unscannedBox = (await unscanned.boundingBox())!;
-  expect(unscannedBox.y).toBeGreaterThanOrEqual(worksBox.y + worksBox.height);
-  // Dans la colonne des œuvres, à droite de l'introduction.
-  expect(unscannedBox.x).toBeCloseTo(worksBox.x, 0);
+  expect(unscannedBox.y).toBeGreaterThanOrEqual(wallBox.y + wallBox.height);
+  // Dans la colonne du mur, à droite de l'introduction.
+  expect(unscannedBox.x).toBeCloseTo(wallBox.x, 0);
   const title = (await page.getByRole("heading", { level: 2, name: "紅樓夢" }).boundingBox())!;
   expect(unscannedBox.x).toBeGreaterThan(title.x + title.width);
 });
