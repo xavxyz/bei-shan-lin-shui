@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Pinyin from "../../components/Pinyin.astro";
 import Wall from "../../components/Wall.astro";
 import UnscannedPieces from "../../components/UnscannedPieces.astro";
 import { hang } from "../../hang.js";
@@ -26,7 +27,9 @@ const { wall, unscanned } = hang(pieces);
 <Layout title={project.title.traditional}>
   <div class="project grid">
     <header class="project__intro">
-      <h2 class="project__title" lang="zh-Hant">{project.title.traditional}</h2>
+      <h2 class="project__title" lang="zh-Hant">
+        <Pinyin pinyin={project.title.pinyin}>{project.title.traditional}</Pinyin>
+      </h2>
       {
         project.gloss ? (
           <p class="gloss" data-testid="gloss">

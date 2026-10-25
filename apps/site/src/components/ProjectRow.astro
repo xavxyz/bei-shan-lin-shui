@@ -1,5 +1,6 @@
 ---
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
+import Pinyin from "./Pinyin.astro";
 
 type Props = {
   project: LoadedProject;
@@ -15,7 +16,9 @@ const cover = works[0];
 <li class="project-row grid" data-testid="project-row">
   <div class="project-row__head">
     <h3 class="project-row__title" lang="zh-Hant">
-      <a href={project.href}>{project.title.traditional}</a>
+      <a href={project.href}>
+        <Pinyin pinyin={project.title.pinyin}>{project.title.traditional}</Pinyin>
+      </a>
     </h3>
     {
       project.gloss ? (

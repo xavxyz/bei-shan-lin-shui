@@ -1,5 +1,6 @@
 ---
 import type { LoadedVersion } from "@bsls/schema";
+import Pinyin from "./Pinyin.astro";
 
 type Props = {
   version: LoadedVersion;
@@ -9,6 +10,7 @@ type Props = {
  * Le texte d'une version à l'horizontale, une ligne par colonne de l'œuvre.
  * Traduite, elle se lit en tableau, simplifié en regard du français : le schéma
  * garantit une ligne de traduction par colonne. Sinon, une simple liste.
+ * Chaque ligne montre son pinyin en popover.
  */
 const { version } = Astro.props;
 const translation = version.translation;
@@ -27,7 +29,7 @@ const translation = version.translation;
         {version.columns.map((column, index) => (
           <tr>
             <td class="version-text__zh" lang="zh-Hans">
-              {column.simplified}
+              <Pinyin pinyin={column.pinyin}>{column.simplified}</Pinyin>
             </td>
             <td class="version-text__fr">{translation[index]}</td>
           </tr>
@@ -37,7 +39,9 @@ const translation = version.translation;
   ) : (
     <ol class="version-text version-text--lines" data-testid="version-text" lang="zh-Hans">
       {version.columns.map((column) => (
-        <li class="version-text__zh">{column.simplified}</li>
+        <li class="version-text__zh">
+          <Pinyin pinyin={column.pinyin}>{column.simplified}</Pinyin>
+        </li>
       ))}
     </ol>
   )
