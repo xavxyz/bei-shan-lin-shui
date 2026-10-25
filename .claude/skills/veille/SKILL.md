@@ -13,7 +13,7 @@ Lancer `pnpm piece veille` et annoncer le nombre de pièces en veille. S'il n'y 
 
 ## 2. Une pièce par message
 
-Présenter la pièce suivante, dans l'ordre de la commande : son bloc tel quel, et sa traduction lue dans `content/pieces/<slug>/piece.md`. Demander ce qu'il en fait :
+Présenter la pièce suivante, dans l'ordre de la commande : son bloc tel quel, et sa traduction lue dans `content/pieces/<slug>/piece.md` ; sans traduction, celle de travail de son texte de référence, selon `docs/agents/propositions.md`. Demander ce qu'il en fait :
 
 - **La laisser en veille** : rien à écrire.
 - **La reprendre** : la pièce a été ou va être refaite, ou écrite dans un autre style. Suivre la skill `version-ou-variation` pour cette pièce, puis revenir à la suivante.

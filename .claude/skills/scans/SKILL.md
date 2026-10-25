@@ -28,21 +28,13 @@ Lister le dossier du Drive : chaque fichier est en attente. Un scan déjà impor
 
 Prendre la première pièce en attente, dans l'ordre des numéros, avec toutes ses feuilles : elles se comprennent ensemble.
 
-**Un sous-agent par pièce lit et cherche** ; la session principale ne lit aucune image. Lui confier les noms des feuilles, la proposition de lot de chacune si elle existe (à revoir, pas un acquis), et le renvoyer à ce fichier : « Lire », « Chercher », « Proposer », « Règles arbitrées ». Il n'écrit rien et rend la proposition au format ci-dessous, prête à montrer. Une question du calligraphe sur le papier retourne au même sous-agent (SendMessage), qui a encore les images en tête.
+**Un sous-agent par pièce lit et cherche** ; la session principale ne lit aucune image. Lui confier les noms des feuilles, la proposition de lot de chacune si elle existe (à revoir, pas un acquis), et le renvoyer à ce fichier : « Lire », « Chercher », « Proposer », « Règles arbitrées ». Il n'écrit rien et rend la proposition prête à montrer. Une question du calligraphe sur le papier retourne au même sous-agent (SendMessage), qui a encore les images en tête.
 
 **Lire** le scan avec Read, colonne par colonne, de droite à gauche. Relever aussi ce qui entoure le texte : attribution, signature, date, notes en français. Vérifier d'abord le sens de la feuille : un scan peut être à l'envers, et sa lecture en sort fausse mais plausible. Le signaler, le calligraphe le fait retourner sur le Drive.
 
 **Chercher** la pièce : `grep` de deux ou trois séquences de 2 à 4 caractères dans `content/pieces/` (titre, `columns`, `source.full_text`). Confiance `high` quand les colonnes sont identiques au caractère près.
 
-**Proposer** dans ce format, pour que « ok » accepte tout :
-
-```
-## <n>/<total> — <titre> · `<slug>`
-statut · date · format · projet, ce que montre le scan.
-
-❓ **a - <question>**
-➡️ <recommandation>
-```
+**Proposer** selon `docs/agents/propositions.md` : sa forme, et ce que chaque question montre au calligraphe (traduction d'un passage, grille d'un format, terme expliqué).
 
 Questions habituelles : quelle pièce, quelle variation (`v1a`…), quel style, quel statut de variation, quelle image mise en avant ; et chaque écart entre le papier et la pièce.
 
