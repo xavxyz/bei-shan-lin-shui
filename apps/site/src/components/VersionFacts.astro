@@ -53,7 +53,7 @@ const { version, testIdPrefix, scriptLabel, status, attribution } = Astro.props;
     status ? (
       <>
         <dt>Statut</dt>
-        <dd data-testid="piece-status">{PIECE_STATUS_LABELS[status]}</dd>
+        <dd data-testid={`${testIdPrefix}-status`}>{PIECE_STATUS_LABELS[status]}</dd>
       </>
     ) : null
   }
@@ -62,7 +62,7 @@ const { version, testIdPrefix, scriptLabel, status, attribution } = Astro.props;
     attribution ? (
       <>
         <dt>Source</dt>
-        <dd lang="zh-Hans" data-testid="source">
+        <dd lang="zh-Hans" data-testid={`${testIdPrefix}-source`}>
           {attribution.simplified}
         </dd>
       </>
