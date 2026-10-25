@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import PieceCard from "../components/PieceCard.astro";
+import Wall from "../components/Wall.astro";
 import UnscannedPieces from "../components/UnscannedPieces.astro";
 import { hang } from "../hang.js";
 
@@ -13,9 +13,7 @@ const { wall, unscanned } = hang(pieces);
 <Layout title="Projets">
   <section aria-labelledby="mur">
     <h2 id="mur">Pièces · {wall.length}</h2>
-    <ul class="card-list">
-      {wall.map((piece) => <PieceCard piece={piece} href={piece.href} />)}
-    </ul>
+    <Wall pieces={wall} />
   </section>
 
   <UnscannedPieces pieces={unscanned} level={2} />

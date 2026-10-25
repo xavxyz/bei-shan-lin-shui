@@ -81,3 +81,63 @@ test("le mur montre toutes les pièces visibles, de la plus récente à la plus 
     "莫性急", // 2026-02-11
   ]);
 });
+
+/** Chaque œuvre du mur a la hauteur donnée, et la largeur que lui dictent ses proportions. */
+async function expectHungUncropped(page: Page, height: number) {
+  const works = wall(page, 8).getByTestId("piece-link").locator("img");
+  await expect(works).toHaveCount(8);
+  for (const work of await works.all()) {
+    await work.scrollIntoViewIfNeeded();
+    await expect(work).toHaveJSProperty("complete", true);
+    const { naturalWidth, naturalHeight, renderedWidth, renderedHeight } = await work.evaluate(
+      (image: HTMLImageElement) => {
+        const box = image.getBoundingClientRect();
+        return {
+          naturalWidth: image.naturalWidth,
+          naturalHeight: image.naturalHeight,
+          renderedWidth: box.width,
+          renderedHeight: box.height,
+        };
+      },
+    );
+    expect(renderedHeight).toBeCloseTo(height, 0);
+    expect(renderedWidth).toBeCloseTo((naturalWidth / naturalHeight) * height, 0);
+  }
+}
+
+test("les œuvres du mur ont une hauteur fixe et gardent leurs proportions", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/");
+  await expectHungUncropped(page, 18 * 16);
+
+  await page.setViewportSize({ width: 900, height: 900 });
+  await expectHungUncropped(page, 13 * 16);
+});
+
+test("les œuvres du mur sont accrochées sur leur pied", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/");
+
+  const works = await wall(page, 8).getByTestId("piece-link").locator("img").all();
+  const first = (await works[0]!.boundingBox())!;
+  const second = (await works[1]!.boundingBox())!;
+  expect(second.y).toBeCloseTo(first.y, 0);
+  expect(second.x).toBeGreaterThan(first.x + first.width);
+});
+
+test("sous chaque œuvre du mur, son titre chinois puis sa glose, à la largeur de l'œuvre", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/");
+
+  const card = wall(page, 8).getByTestId("piece-link").filter({ hasText: "永草書" });
+  const work = (await card.locator("img").boundingBox())!;
+  const title = (await card.getByRole("heading", { name: "永草書" }).boundingBox())!;
+  const gloss = (await card.getByTestId("gloss").boundingBox())!;
+
+  expect(title.y).toBeGreaterThanOrEqual(work.y + work.height - 1);
+  expect(gloss.y).toBeGreaterThanOrEqual(title.y + title.height - 1);
+  expect(gloss.width).toBeLessThanOrEqual(work.width + 1);
+  expect((await card.boundingBox())!.width).toBeLessThanOrEqual(work.width + 1);
+});

@@ -155,11 +155,58 @@ a:hover {
   font-size: 1.15rem;
 }
 
-.card__thumbnail {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  background: var(--paper);
+/* Le mur : les œuvres, à hauteur fixe et largeur libre, jamais recadrées ni
+   déformées, s'accrochent à la file ; leurs pieds s'alignent d'une rangée à l'autre. */
+.wall {
+  --work-height: 18rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 3rem var(--gutter);
+}
+
+@media (max-width: 64rem) {
+  .wall {
+    --work-height: 13rem;
+  }
+}
+
+/* L'œuvre donne sa largeur : le titre et la glose s'y plient sans l'élargir. */
+.wall__work {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  width: min-content;
+  text-decoration: none;
+}
+
+.wall__image {
+  display: block;
+  height: var(--work-height);
+  width: auto;
+  max-width: none;
+  margin-bottom: 0.6rem;
+}
+
+.wall__title {
+  font-family: var(--serif-cn);
+  font-size: 1.1rem;
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+.wall__work:hover .wall__title {
+  color: var(--accent);
+}
+
+.wall__work .gloss {
+  color: var(--muted);
+  line-height: 1.45;
 }
 
 .piece__header {

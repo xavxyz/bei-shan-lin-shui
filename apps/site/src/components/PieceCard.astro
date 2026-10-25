@@ -2,6 +2,7 @@
 import type { LoadedPiece } from "@bsls/schema";
 
 type Props = {
+  /** Une pièce du mur : elle a toujours une image (`hang`). */
   piece: LoadedPiece;
   href: string;
 };
@@ -9,14 +10,14 @@ type Props = {
 const { piece, href } = Astro.props;
 ---
 
-<li>
-  <a class="card" href={href} data-testid="piece-link">
+<li class="wall__item">
+  <a class="wall__work" href={href} data-testid="piece-link">
     {
       piece.featuredImage ? (
-        <img class="card__thumbnail" src={piece.featuredImage.src} alt="" loading="lazy" />
+        <img class="wall__image" src={piece.featuredImage.src} alt="" loading="lazy" />
       ) : null
     }
-    <h3 class="card__title card__title--cn" lang="zh-Hant">{piece.title.traditional}</h3>
+    <h3 class="wall__title" lang="zh-Hant">{piece.title.traditional}</h3>
     {
       piece.gloss ? (
         <p class="gloss" data-testid="gloss">
@@ -24,7 +25,6 @@ const { piece, href } = Astro.props;
         </p>
       ) : null
     }
-    <p class="card__meta">{piece.title.pinyin}</p>
     {piece.published ? null : <span class="tag tag--unpublished">non publiée</span>}
   </a>
 </li>
