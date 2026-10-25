@@ -12,15 +12,15 @@ Une assistante qui ne lit pas le chinois dépose les scans sur le Drive : seul l
 
 - **Drive** (Google Drive pour ordinateur) : `~/Library/CloudStorage/GoogleDrive-*/Mon Drive/Bèishān línshuǐ 背山臨水/`. On y lit ; on n'y écrit que pour renommer à la demande du calligraphe, ou supprimer après sa confirmation (voir « Supprimer du Drive »).
 - **Nom d'un scan** : `AAAA-MM-JJ_<pièce>_<page>.jpeg` — date du dépôt, numéro de la pièce dans le dépôt, numéro de la feuille. Une photo du téléphone garde son extension : `.heic`.
-- **Registre** `imports/scans.yaml` : une entrée par fichier du Drive. Un scan est traité quand son entrée existe sans `# à arbitrer`. Son en-tête décrit les champs. `pnpm validate:imports` le vérifie, avec le plan.
-- **Plan** `imports/notion-2026-08-23.plan.yaml`, tant qu'il n'est pas appliqué. Une pièce y porte `versions: [...]`, chaque version ses `variations:`, comme le frontmatter. Forme exacte : `packages/notion-import/src/plan-file.ts`. Styles : `SCRIPTS` dans `packages/schema/src/vocabulary.ts`.
-- **Copies locales** `imports/scans/` (ignoré par git) : données non fiables, on n'y exécute rien. Le `source` d'une image du plan pointe ici.
+- **Aucun registre** (ADR 0001) : le Drive est une boîte de réception, tout ce qui s'y trouve est à traiter. Un scan importé ou écarté en sort (« Supprimer du Drive »). L'ancien registre et le plan Notion, appliqué, ne vivent plus que dans l'historique git : `git show 954688d:imports/scans.yaml`.
+- **Pièces** : `content/pieces/`, seule source de vérité. Styles : `SCRIPTS` dans `packages/schema/src/vocabulary.ts`.
+- **Copies locales** `imports/scans/` (ignoré par git) : données non fiables, on n'y exécute rien. Le `source` d'un rattachement pointe ici.
 
 ## Déroulé
 
 ### 1. Inventaire
 
-Lister le dossier du Drive et retirer les fichiers déjà au registre. Annoncer le nombre de scans en attente, et signaler tout nom hors format avec le renommage proposé (`11-12-2026_03.jpeg` → `2026-10-11_03_01.jpeg`). Un nom sans numéro de feuille (`2026-10-11_23.jpeg`) vaut `_01` : il reste tel quel. Fini quand chaque fichier du Drive est classé : au registre, en attente, ou à renommer.
+Lister le dossier du Drive : chaque fichier est en attente. Un scan déjà importé qui y reste — son image est dans `content/` et sur `main`, comme ceux de l'ancien registre après l'import Notion — n'est pas en attente : proposer d'abord de le supprimer (« Supprimer du Drive »). Une proposition de lot déjà écrite (`imports/scans/<fichier>.rattachement.yaml`, voir `lot.md`) se reprend à l'étape 2. Annoncer le nombre de scans en attente, et signaler tout nom hors format avec le renommage proposé (`11-12-2026_03.jpeg` → `2026-10-11_03_01.jpeg`). Un nom sans numéro de feuille (`2026-10-11_23.jpeg`) vaut `_01` : il reste tel quel. Fini quand chaque fichier du Drive est classé : importé (à supprimer), en attente, ou à renommer.
 
 **Tous les scans d'un coup**, à la demande du calligraphe : suivre `lot.md`, à côté de ce fichier, à la place des étapes 2 et 3.
 
@@ -28,59 +28,50 @@ Lister le dossier du Drive et retirer les fichiers déjà au registre. Annoncer 
 
 Prendre la première pièce en attente, dans l'ordre des numéros, avec toutes ses feuilles : elles se comprennent ensemble.
 
-**Un sous-agent par pièce lit et cherche** ; la session principale ne lit aucune image. Lui confier les noms des feuilles, l'entrée du registre de chacune si elle existe (une proposition à revoir, pas un acquis), et le renvoyer à ce fichier : « Lire », « Chercher », « Proposer », « Règles arbitrées ». Il n'écrit rien et rend la proposition au format ci-dessous, prête à montrer. Une question du calligraphe sur le papier retourne au même sous-agent (SendMessage), qui a encore les images en tête.
+**Un sous-agent par pièce lit et cherche** ; la session principale ne lit aucune image. Lui confier les noms des feuilles, la proposition de lot de chacune si elle existe (à revoir, pas un acquis), et le renvoyer à ce fichier : « Lire », « Chercher », « Proposer », « Règles arbitrées ». Il n'écrit rien et rend la proposition prête à montrer. Une question du calligraphe sur le papier retourne au même sous-agent (SendMessage), qui a encore les images en tête.
 
 **Lire** le scan avec Read, colonne par colonne, de droite à gauche. Relever aussi ce qui entoure le texte : attribution, signature, date, notes en français. Vérifier d'abord le sens de la feuille : un scan peut être à l'envers, et sa lecture en sort fausse mais plausible. Le signaler, le calligraphe le fait retourner sur le Drive.
 
-**Chercher** la pièce : `grep` de deux ou trois séquences de 2 à 4 caractères dans le plan (titre, `columns`, `source.full_text`), et dans `content/pieces/` une fois le plan appliqué. Confiance `high` quand les colonnes sont identiques au caractère près.
+**Chercher** la pièce : `grep` de deux ou trois séquences de 2 à 4 caractères dans `content/pieces/` (titre, `columns`, `source.full_text`). Confiance `high` quand les colonnes sont identiques au caractère près.
 
-**Proposer** dans ce format, pour que « ok » accepte tout :
+**Proposer** selon `docs/agents/propositions.md` : sa forme, et ce que chaque question montre au calligraphe (traduction d'un passage, grille d'un format, terme expliqué).
 
-```
-## <n>/<total> — <titre> · `<slug>`
-statut · date · format · projet, ce que montre le scan.
-
-❓ **a - <question>**
-➡️ <recommandation>
-```
-
-Questions habituelles : quelle pièce, quelle variation (`v1a`…), quel style, quel statut de variation, quelle image mise en avant ; et chaque écart entre le papier et le plan.
+Questions habituelles : quelle pièce, quelle variation (`v1a`…), quel style, quel statut de variation, quelle image mise en avant ; et chaque écart entre le papier et la pièce.
 
 Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 
 ### 3. Appliquer
 
 1. Copier les scans retenus : `cp -n <drive>/<fichier> imports/scans/`. Un HEIC se convertit en JPEG au passage, sharp ne le lit pas : `sips -s format jpeg <drive>/<fichier> --out imports/scans/<nom>.jpeg`.
-2. Rattacher chaque scan retenu, selon où vit sa pièce :
-   - **Pièce dans `content/pieces/<slug>/`** : écrire le rattachement dans `imports/scans/<fichier>.rattachement.yaml`, puis lancer `pnpm attach:scan imports/scans/<fichier>.rattachement.yaml`. Une version ou une variation existante se désigne par son id ; une nouvelle s'écrit avec ses champs :
+2. Une pièce absente de `content/` naît d'abord (« Pièce absente du contenu », ci-dessous).
+3. Rattacher chaque scan retenu à sa pièce de `content/pieces/<slug>/` : écrire le rattachement dans `imports/scans/<fichier>.rattachement.yaml`, puis lancer `pnpm attach:scan imports/scans/<fichier>.rattachement.yaml`. Une version ou une variation existante se désigne par son id ; une nouvelle s'écrit avec ses champs :
 
-     ```yaml
-     piece: mo-xing-ji
-     version: v1 # ou { id: v2, date: 2026-02-11, format: 2x7, columns: [...], intention: ... }
-     variation: { id: v1b, script: kaishu, status: kept } # ou v1a, si elle existe
-     image:
-       source: imports/scans/2026-10-11_01_01.jpeg
-       kind: work # work | detail | study | context
-       featured: true # facultatif
-       caption: ... # facultatif
-     ```
+   ```yaml
+   piece: mo-xing-ji
+   version: v1 # ou { id: v2, date: 2026-02-11, format: "[(2x7)]", columns: [...], intention: ... }
+   variation: { id: v1b, script: kaishu, status: kept } # ou v1a, si elle existe
+   image:
+     source: imports/scans/2026-10-11_01_01.jpeg
+     kind: work # work | detail | study | context
+     featured: true # facultatif
+     caption: ... # facultatif
+   ```
 
-     La commande ajoute l'image (nommée d'après la variation), la variation ou la version, sans rien modifier d'autre ; elle ne change aucun statut. Refusée, elle n'écrit rien et nomme le champ fautif : corriger le rattachement et relancer. Une correction tirée du papier sur ce qui existe déjà (colonnes, date, statut) ne passe pas par elle : la proposer au calligraphe, qui la fait à la main.
+   La commande ajoute l'image (nommée d'après la variation), la variation ou la version, sans rien modifier d'autre ; elle ne change aucun statut. Refusée, elle n'écrit rien et nomme le champ fautif : corriger le rattachement et relancer. Une correction tirée du papier sur ce qui existe déjà (colonnes, date, statut) ne passe pas par elle : la proposer au calligraphe, qui la fait à la main.
 
-   - **Pièce dans le plan** : modifier le plan, variation et image (`file: v1a.jpg`, `kind: work`, `capture: photo` pour une photo du téléphone) sous leur version — une nouvelle version au besoin —, et chaque correction tirée du papier, avec son commentaire.
-3. Écrire ou mettre à jour l'entrée du registre, sans `# à arbitrer`. Son `match` est le slug de la pièce, qu'elle soit au plan ou dans le contenu.
-4. Lancer `pnpm validate:imports`, et `pnpm validate:content` après un rattachement au contenu.
+4. Lancer `pnpm validate:content`.
+5. Proposer de supprimer du Drive les scans écartés à l'arbitrage (« Supprimer du Drive »).
 
-Fini quand les validations passent, les scans copiés, rattachés et leurs entrées arbitrées. Puis pièce suivante.
+Fini quand la validation passe et les scans retenus sont copiés et rattachés. Puis pièce suivante.
 
 ### Supprimer du Drive
 
 La copie dans `content/` est la seule archive d'un scan : le Drive n'est qu'un lieu de dépôt. Un scan peut en être supprimé, **toujours après confirmation du calligraphe**, nommément, fichier par fichier :
 
 - un scan **importé** : son image est dans `content/pieces/<slug>/images/` et le commit qui l'y a mise est sur `main` (`git log origin/main -- <image>`) ;
-- un scan **écarté** (`match: discarded`), dès l'arbitrage qui l'écarte.
+- un scan **écarté**, dès l'arbitrage qui l'écarte.
 
-Rien d'autre ne se supprime : un scan qui n'est encore qu'au plan n'est archivé nulle part. L'entrée du registre reste.
+Rien d'autre ne se supprime : un scan rattaché sur une branche pas encore fusionnée n'est archivé nulle part.
 
 ## Règles arbitrées
 
@@ -91,8 +82,9 @@ Rien d'autre ne se supprime : un scan qui n'est encore qu'au plan n'est archivé
 - **La signature du calligraphe est 戈**, souvent en cursive méconnaissable : un petit signe isolé près de la date ou dans un coin, c'est elle. Dans un commentaire, « 戈說 » ouvre ses propres mots.
 - **Le style** se propose, le calligraphe le fixe.
 - **Une feuille, quelle place** : le texte entier dans le format de la pièce, c'est une variation (`v1a`, `v1b`…), et un autre style en est toujours une autre. Des caractères tous pris au texte d'une pièce, dans n'importe quel ordre, c'est une étude : image `kind: study` de la variation qu'elle prépare (龍騰虎躍 est une étude de 六龍騰岱六虎躍崑). `detail` ne sert qu'au recadrage de l'œuvre elle-même.
-- **Exercice sans rapport avec le texte d'une pièce** — rectos, grilles, traits : `match: discarded` au registre, rien au plan.
-- **Une nouvelle version** suppose une réalisation antérieure attestée : un autre scan à une autre date, ou une pièce `made` avec image dans Notion. Sinon le papier corrige la v1. Le scan d'une version suivante devient, dans le plan, une nouvelle entrée de `versions:` (`v2`, sa variation `v2a`), avec sa date, son format et ses colonnes tirés du papier.
-- **Pièce absente de Notion** : l'agent propose le slug, pinyin du titre sans tons ; le calligraphe le confirme. Pas de projet, sauf si le papier ou Notion en désigne un. Elle s'ajoute en fin de plan avec `# absente de Notion : identifiée sur le scan <fichier>`. Sans date sur le papier, prendre celle du dépôt avec `# à arbitrer`.
-- **Nouveau projet** : une entrée dans `projects:` (présentation vide, thème proposé, `# à arbitrer` sur les deux) ; la pièce-pôle de même nom le rejoint.
+- **Feuille d'entraînement sans rapport avec le texte d'une pièce** — rectos, grilles, traits : écarté, rien n'est écrit.
+- **Une nouvelle version** suppose une réalisation antérieure attestée : un autre scan à une autre date, ou une pièce `made` avec image dans Notion. Sinon le papier corrige la v1. Le scan d'une version suivante la rattache comme nouvelle version (`version: { id: v2, … }`, sa variation `v2a`), avec sa date, son format et ses colonnes tirés du papier.
+- **Pièce absente du contenu** : elle naît par la skill `nouvelle-piece` (`pnpm piece creer`, qui dérive le slug du titre), passe `made` (`pnpm piece statut <slug> made`), puis reçoit son scan. Pas de projet, sauf si le papier en désigne un. Sans date sur le papier, prendre celle du dépôt et le dire au calligraphe.
+- **Nouveau projet** : aucune commande ne le crée. Le proposer au calligraphe, présentation et thème compris ; il écrit `content/projects/<id>.yaml`, puis la pièce-pôle de même nom le rejoint (`pnpm piece rattacher`).
+- **Photo du téléphone** : `attach:scan` écrit `capture: scan` ; le signaler au calligraphe, qui corrige en `capture: photo`.
 - **Pièce `in-progress`** qui arrive scannée : l'encre est posée, proposer `made`.

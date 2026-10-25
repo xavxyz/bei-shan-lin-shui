@@ -6,7 +6,7 @@ Traduction de travail, faite par un agent : la traduction qui accompagne une pi�
 
 ## 《百字碑》 · `bai-zi-bei`
 
-**Source :** attribué à 呂洞賓 (唐), sans attestation ancienne : le poème n'est pas au 《全唐詩》 et circule par ses commentaires. Il est aussi appelé 《呂祖百字碑》, 《純陽呂公百字碑》, 《呂真人百字碑》, 《呂祖百字銘》. Témoins lus : 陸西星 (潛虛), 《純陽呂公百字碑測疏》 (明, 隆慶辛未 1571, repris au 《道藏精華》) ; le 「註《呂祖百字碑》」 attribué à 張三丰, au 《玄機直講》, 《張三丰先生全集》 卷三 (李涵虛 éd., 清) ; 劉一明, 《百字碑注》 (嘉慶三年 1798, 《道書十二種》). Non vérifiés ici : le 《呂祖全書》 et le 《道藏輯要》, dont aucun texte numérisé n'a été trouvé. **100 caractères exactement**, 20 vers de 5 — le poème se compte lui-même : 都來二十句. Les trois témoins concordent mot pour mot, à une seule leçon près, au vers 11 : 陰陽生**返覆** (陸西星, 劉一明), **反覆** (張三丰), **反復** (page 百字碑 de wikisource, sans source dite). 返覆 est la leçon du plus ancien témoin, et son 返 dit le retour. Les leçons 坐臥知宗祖 (pour 動靜), 白雲朝上頂 (pour 頂上) ou une autre lecture de 甘露灑須彌 n'apparaissent dans aucun des trois témoins ni ailleurs dans ce qui a été cherché : non attestées. Graphies normalisées : 爲→為, 眞→真 (張三丰).
+**Source :** attribué à 呂洞賓 (唐), sans attestation ancienne : le poème n'est pas au 《全唐詩》 (aucun de ses vers dans les 卷856 à 858 de 呂岩, zh.wikisource `全唐詩/卷856`, `卷857`, `卷858`, texte du 欽定四庫全書薈要) et circule par ses commentaires. La datation 唐 de 呂洞賓 : 「唐河中府永樂縣人」, 《呂祖志》 卷一, 真人本傳 (續道藏, 明 ; zh.wikisource `呂祖志/卷一`, https://zh.wikisource.org/wiki/呂祖志/卷一) ; 「吕則唐之洞賓」, 提要 du 《月波洞中記》 (四庫全書本 ; zh.wikisource `月波洞中記 (四庫全書本)`) ; plus anciennement, 吳曾 (宋), 《能改齋漫錄》 卷十八 : 「洞賓嘗自序，以爲呂渭之孫。渭，仕德宗朝」 (zh.wikisource `能改齋漫錄/卷十八`), ce qui le place sous les 唐 sans le dire ; 劉一明, préface du 《百字碑注》 : 「純陽呂祖……自唐至今，千年有餘」. Il est aussi appelé 《呂祖百字碑》, 《純陽呂公百字碑》, 《呂真人百字碑》, 《呂祖百字銘》. Témoins lus : 陸西星 (潛虛), 《純陽呂公百字碑測疏》 (zh.wikisource `純陽呂公百字碑測疏`, en-tête : 陸潛虛, 明 ; postface datée 「隆慶辛未五月十有一日」) ; le 「註《呂祖百字碑》」 attribué à 張三丰, au 《玄機直講》, 《張三丰先生全集》 卷三 (zh.wikisource `張三丰先生全集/卷3`, en-tête : 重刊道藏輯要, 「漢嘉長乙山人李西月重編」) ; 劉一明, 《百字碑注》 (zh.wikisource `百字碑注 (劉一明)`, en-tête : 清, tiré du 《道書十二種》 ; préface datée 「嘉慶三年歲次戊午三月三日」). Non vérifiés ici : le 《呂祖全書》, dont aucun texte numérisé n'a été trouvé, et le 《道藏輯要》 au-delà du 《張三丰先生全集》 qu'en reprend wikisource. **100 caractères exactement**, 20 vers de 5 — le poème se compte lui-même : 都來二十句. Les trois témoins concordent mot pour mot, à une seule leçon près, au vers 11 : 陰陽生**返覆** (陸西星, 劉一明), **反覆** (張三丰), **反復** (page 百字碑 de wikisource, sans source dite). 返覆 est la leçon du plus ancien témoin, et son 返 dit le retour. Les leçons 坐臥知宗祖 (pour 動靜), 白雲朝上頂 (pour 頂上) ou une autre lecture de 甘露灑須彌 n'apparaissent dans aucun des trois témoins ni ailleurs dans ce qui a été cherché : non attestées. Graphies normalisées : 爲→為, 眞→真 (張三丰).
 
 | 原文 | traduction |
 | --- | --- |
@@ -31,11 +31,11 @@ Traduction de travail, faite par un agent : la traduction qui accompagne une pi�
 | 都來二十句 | En tout, vingt vers : |
 | 端的上天梯 | en vérité, l'échelle pour monter au ciel. |
 
-- 為不為 : le 為無為 du 《道德經》 63. 陸西星 lit 忘言守 avec le 不如守中 du 5 ; 降心 avec le 云何降伏其心 du 《金剛經》.
+- 為不為 : le 為無為 du 《道德經》 63 (王弼本, zh.wikisource `道德經 (王弼本)`). 陸西星 lit 忘言守 avec le 不如守中 du 5 ; 降心 avec le 云何降伏其心 du 《金剛經》.
 - 動靜 : pour 張三丰, le yin et le yang du souffle, l'ouvrir et le fermer de la porte ; 宗祖, « entre le cœur et les reins », le lieu d'avant la naissance.
 - 壺中 : la gourde où tient un monde (壺天), ici le chaudron intérieur. 一聲雷 : 張三丰 y lit le 復卦 ䷗, le tonnerre sous la terre, le yang qui renaît au bas du ventre.
 - 白雲朝頂上 / 甘露灑須彌 : le souffle monte par l'échine jusqu'au sommet du crâne, puis redescend en salive douce, « envoyée par les yeux, accueillie par l'intention », jusqu'au chaudron (張三丰).
-- 無弦曲 : écho du luth sans cordes de 陶淵明.
+- 無弦曲 : écho du luth sans cordes de 陶淵明 : 「畜素琴一張，弦徽不具……曰：『但識琴中趣，何勞弦上聲！』」, 《晉書》 卷九十四, 隱逸傳 (zh.wikisource `晉書/卷094`).
 - 都來二十句，端的上天梯 : le poème se nomme lui-même ; c'est de là que 劉一明 tire son « échelle du ciel ».
 
 ➡️ Étendues candidates :

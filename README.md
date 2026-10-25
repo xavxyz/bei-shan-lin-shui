@@ -17,6 +17,8 @@ pnpm typecheck
 pnpm test
 pnpm test:e2e
 pnpm validate:content
+pnpm validate:imports
+pnpm validate:repo
 ```
 
 ## Structure
@@ -25,6 +27,7 @@ pnpm validate:content
 content/                 le contenu : projets, pièces, images
 packages/schema/         le schéma Zod, seule définition du format
 packages/content/        le content layer et le validateur
+packages/repo-checks/    les vérifications du dépôt : couture YAML, chemins cités, glossaire
 apps/site/               le site Astro, ses îlots React et les tests E2E
 ```
 

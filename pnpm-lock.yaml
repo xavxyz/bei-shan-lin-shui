@@ -172,6 +172,12 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3
 
+  packages/repo-checks:
+    devDependencies:
+      '@bsls/content':
+        specifier: workspace:*
+        version: link:../content
+
   packages/scans:
     dependencies:
       '@bsls/authoring':

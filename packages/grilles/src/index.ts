@@ -1,3 +1,4 @@
+import { parseFormat } from "@bsls/schema";
 import { findPiece } from "./find-piece.js";
 import {
   candidateLabel,
@@ -7,7 +8,7 @@ import {
   type Candidate,
 } from "./render.js";
 import { MODELS, prepareModels, type Model } from "./models.js";
-import { parseFormat, pourText } from "./sheets.js";
+import { pourText } from "./sheets.js";
 
 export type { Candidate } from "./render.js";
 export type { Model } from "./models.js";

@@ -1,5 +1,11 @@
 import { Converter } from "opencc-js";
-import { type PieceStatus, type Script, type Theme, type VariationStatus } from "@bsls/schema";
+import {
+  UNSPECIFIED_FORMAT,
+  type PieceStatus,
+  type Script,
+  type Theme,
+  type VariationStatus,
+} from "@bsls/schema";
 import {
   DEFAULT_HUB_THRESHOLD,
   proposeProjects,
@@ -95,7 +101,6 @@ const ARGUABLE_STATES: Record<string, PieceStatus> = {
 const DEFAULT_STATUS: PieceStatus = "idea";
 const DEFAULT_SCRIPT: Script = "xingshu";
 const DEFAULT_VARIATION_STATUS: VariationStatus = "tried";
-const UNSPECIFIED_FORMAT = "à préciser";
 /** Au-delà, une ligne est plus vraisemblablement une note qu'une colonne. */
 const LONG_COLUMN = 30;
 

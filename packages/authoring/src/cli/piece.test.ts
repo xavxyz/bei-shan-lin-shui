@@ -22,7 +22,7 @@ source:
   dynasty: 唐
 version:
   date: 2026-10-16
-  format: A4 vertical
+  format: "[(2x5)]"
   columns: [空山新雨後, 天氣晚來秋]
   intention: |
     Retrouver l'humidité de la montagne.
@@ -39,7 +39,7 @@ describe("la commande piece", () => {
       output: "pièce créée : pieces/shan-ju-qiu-ming/piece.md\n",
     });
     expect(
-      piece(root, ["version", "shan-ju-qiu-ming"], "date: 2026-11-02\nformat: A3\n").output,
+      piece(root, ["version", "shan-ju-qiu-ming"], "date: 2026-11-02\nformat: '[(2x5)]'\n").output,
     ).toBe("version ajoutée : v2\n");
     expect(
       piece(root, ["variation", "shan-ju-qiu-ming", "v2"], "script: xingshu\nstatus: kept\n")
@@ -87,6 +87,25 @@ describe("la commande piece", () => {
     expect(code).toBe(1);
     expect(output).toContain("refusé, rien n'a été écrit");
     expect(output).toContain("status");
+    expect(await readPieceFile(root, "shan-ju-qiu-ming")).toBe(before);
+  });
+
+  it("refuse une version à l'ancienne notation, en disant où la lecture du format bute", async () => {
+    const root = await writeTree({});
+    piece(root, ["creer"], BROUILLON);
+    const before = await readPieceFile(root, "shan-ju-qiu-ming");
+
+    const { code, output } = piece(
+      root,
+      ["version", "shan-ju-qiu-ming"],
+      "date: 2026-11-02\nformat: 1x3 + 2x5\n",
+    );
+
+    expect(code).toBe(1);
+    expect(output).toContain("refusé, rien n'a été écrit");
+    expect(output).toContain(
+      "format : format illisible : « 1x3 + 2x5 » — attendu « [ » à la position 1",
+    );
     expect(await readPieceFile(root, "shan-ju-qiu-ming")).toBe(before);
   });
 });

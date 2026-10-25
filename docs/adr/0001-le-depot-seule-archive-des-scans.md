@@ -1,6 +1,6 @@
 # Le dépôt est la seule archive des scans
 
-Un scan importé — son image dans `content/`, le commit sur `main` — est supprimé du Drive ; un scan écarté l'est dès l'arbitrage. La copie de `content/` devient la seule archive : un JPEG qualité 92, plafonné à A4 300 dpi (`packages/notion-import/src/normalize-image.ts`). Le Drive redevient une boîte de réception où ne reste que ce qui est à faire, sans registre à tenir à côté, et `content/` reste la seule source de vérité. Le calligraphe numérise en A4 300 dpi : la perte se limite au ré-encodage.
+Un scan importé — son image dans `content/`, le commit sur `main` — est supprimé du Drive ; un scan écarté l'est dès l'arbitrage. La copie de `content/` devient la seule archive : un JPEG qualité 92, plafonné à A4 300 dpi (`packages/scans/src/normalize-image.ts`). Le Drive redevient une boîte de réception où ne reste que ce qui est à faire, sans registre à tenir à côté, et `content/` reste la seule source de vérité. Le calligraphe numérise en A4 300 dpi : la perte se limite au ré-encodage.
 
 ## Options écartées
 

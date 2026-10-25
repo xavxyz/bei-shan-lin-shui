@@ -11,10 +11,10 @@ const run = promisify(execFile);
 const cli = fileURLToPath(new URL("./validate-imports.ts", import.meta.url));
 
 /** Exécute la validation comme le fait le hook de pre-commit. */
-async function validate(files: Record<string, string>) {
+async function validate(files: Record<string, string>, imports = "") {
   const root = await writeExportTree(files);
   try {
-    const { stdout } = await run("npx", ["tsx", cli, root, join(root, "content")]);
+    const { stdout } = await run("npx", ["tsx", cli, join(root, imports), join(root, "content")]);
     return { code: 0, output: stdout };
   } catch (error) {
     const failure = error as { code?: number; stdout: string; stderr: string };
@@ -58,6 +58,13 @@ describe("la validation des imports en pre-commit", () => {
 
     expect(code).toBe(0);
     expect(output).toContain("imports valides : 1 plans, 1 scans au registre");
+  });
+
+  it("accepte un dépôt sans dossier d'imports, une fois tout importé", async () => {
+    const { code, output } = await validate({ "content/projects/.keep": "" }, "imports");
+
+    expect(code).toBe(0);
+    expect(output).toContain("imports valides : 0 plans, 0 scans au registre");
   });
 
   it("accepte un scan rattaché à une pièce du contenu, hors de tout plan", async () => {

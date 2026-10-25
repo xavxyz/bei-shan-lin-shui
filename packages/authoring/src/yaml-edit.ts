@@ -1,4 +1,5 @@
-import { Document, isMap, isScalar, isSeq, type Node, type YAMLMap } from "yaml";
+import { Document, isMap, isNode, isScalar, isSeq, type Node, type YAMLMap } from "yaml";
+import { placeComments, type NodeComment } from "./comments.js";
 import type { Refusal } from "./piece-file.js";
 
 /**
@@ -14,7 +15,8 @@ export function appendToList(text: string, parent: YAMLMap, key: string, items: 
 
   if (list === undefined) {
     const at = lineEnd(text, parent.range![1]);
-    return insert(text, at, indent(toYaml({ [key]: items }), column(text, parent.range![0])));
+    const atColumn = column(text, parent.range![0]);
+    return insert(text, at, indent(toYaml({ [key]: items }, { column: atColumn }), atColumn));
   }
 
   if (!isSeq(list)) return { ok: false, message: `${key} : attendu une liste` };
@@ -34,7 +36,8 @@ export function appendToList(text: string, parent: YAMLMap, key: string, items: 
 
   const first = list.items[0] as Node;
   const at = lineEnd(text, list.range![1]);
-  return insert(text, at, indent(toYaml(items), column(text, first.range![0]) - 2));
+  const itemsColumn = column(text, first.range![0]) - 2;
+  return insert(text, at, indent(toYaml(items, { column: itemsColumn }), itemsColumn));
 }
 
 /** Remplace la valeur scalaire `key` du nœud `parent`, et rien d'autre. */
@@ -76,29 +79,61 @@ const YAML_FORMAT = {
   blockQuote: "literal",
 } as const;
 
+export type YamlOptions = {
+  /** Les commentaires à poser, chacun sur le nœud qu'il vise. */
+  comments?: NodeComment[];
+  /** La colonne où le fragment sera inséré : elle compte dans la largeur d'une ligne. */
+  column?: number;
+};
+
 /**
  * Sérialise un fragment comme le calligraphe l'écrit : les colonnes d'une
- * version restent sur une ligne, `columns: [永永永, 丙午]`.
+ * version restent sur une ligne, `columns: [永永永, 丙午]`. Les commentaires
+ * se posent sur les nœuds qu'ils visent.
  */
-export function toYaml(value: unknown): string {
+export function toYaml(value: unknown, options: YamlOptions = {}): string {
   const document = new Document(value);
-  keepColumnsInline(document.contents);
+  placeComments(document, options.comments ?? []);
+  keepColumnsInline(document.contents, options.column ?? 0);
   return document.toString(YAML_FORMAT);
 }
 
-/** Les colonnes d'une version, où qu'elles soient dans le fragment, s'écrivent en ligne. */
-function keepColumnsInline(node: unknown): void {
+/** La largeur de ligne de Prettier, qui vérifie le contenu en pre-commit (`.prettierrc`). */
+const PRINT_WIDTH = 100;
+
+/**
+ * Les colonnes d'une version, où qu'elles soient dans le fragment, s'écrivent
+ * en ligne quand la ligne tient dans la largeur de Prettier, qui la replierait
+ * sinon ; une colonne commentée garde la sienne.
+ */
+function keepColumnsInline(node: unknown, column: number): void {
   if (isMap(node)) {
     for (const pair of node.items) {
-      if (isScalar(pair.key) && pair.key.value === "columns" && isSeq(pair.value)) {
-        pair.value.flow = true;
+      const value = pair.value;
+      if (isScalar(pair.key) && pair.key.value === "columns" && isSeq(value)) {
+        const columns = value.items.map((item) => String(isScalar(item) ? item.value : item));
+        const width = column + displayWidth(`columns: [${columns.join(", ")}]`);
+        const commented = value.items.some(
+          (item) => isNode(item) && (item.comment || item.commentBefore),
+        );
+        value.flow = !commented && width <= PRINT_WIDTH;
       }
-      keepColumnsInline(pair.value);
+      keepColumnsInline(value, column + 2);
     }
   } else if (isSeq(node)) {
-    node.items.forEach(keepColumnsInline);
+    for (const item of node.items) keepColumnsInline(item, column + 2);
   }
 }
+
+/** Largeur affichée, comme Prettier la compte : un caractère chinois en vaut deux. */
+function displayWidth(text: string): number {
+  let width = 0;
+  for (const char of text) width += WIDE.test(char) ? 2 : 1;
+  return width;
+}
+
+const WIDE =
+  /[\u1100-\u115F\u2E80-\uA4CF\uAC00-\uD7A3\uF900-\uFAFF\uFE30-\uFE4F\uFF00-\uFF60\uFFE0-\uFFE6\u{20000}-\u{3FFFD}]/u;
 
 /** Décale chaque ligne non vide d'un fragment YAML. */
 export function indent(fragment: string, spaces: number): string {
@@ -110,13 +145,15 @@ export function indent(fragment: string, spaces: number): string {
 }
 
 /**
- * Une liste de scalaires reste en ligne, comme `projects: [a, b]` ; une liste
- * d'objets passe en bloc. La clé se réécrit à sa colonne d'origine.
+ * Une liste de scalaires reste en ligne, comme `projects: [a, b]`, tant que la
+ * ligne tient dans la largeur de Prettier ; au-delà, comme une liste d'objets,
+ * elle passe en bloc. La clé se réécrit à sa colonne d'origine.
  */
 function flowOrBlock(key: string, items: unknown[], keyColumn: number): string {
   const scalars = items.every((item) => typeof item === "string");
-  if (scalars) return `${key}: [${(items as string[]).join(", ")}]`;
-  const block = indent(toYaml({ [key]: items }), keyColumn).trimEnd();
+  const inline = `${key}: [${(items as string[]).join(", ")}]`;
+  if (scalars && keyColumn + displayWidth(inline) <= PRINT_WIDTH) return inline;
+  const block = indent(toYaml({ [key]: items }, { column: keyColumn }), keyColumn).trimEnd();
   return block.slice(keyColumn);
 }
 

@@ -108,7 +108,7 @@ async function grids(files: Record<string, string>, request: Omit<GridRequest, "
 
 const LONG_HU_GE = ["紫陽云", "收拾身心謂之", "降伏龍虎心不動"];
 
-describe("la notation des formats", () => {
+describe("les formats candidats", () => {
   it("fait une feuille de chaque parenthèse, ses groupes séparés par des virgules", async () => {
     const { sheets } = await grids(piece("2x5", LONG_HU_GE), {
       slug: "shan-ju",
@@ -116,15 +116,6 @@ describe("la notation des formats", () => {
     });
     expect(sheets.A!.map((sheet) => sheet.ranks.length)).toEqual([10, 4]);
     expect(sheets.B!.map((sheet) => sheet.ranks.length)).toEqual([1, 4, 4, 1]);
-  });
-
-  it("refuse l'ancienne notation, et dit comment l'écrire", async () => {
-    const result = await generateGrids({
-      root: await writeTree(piece("1x3 + 2*(4x5) + 1x3", LONG_HU_GE)),
-      slug: "shan-ju",
-    });
-    expect(!result.ok && result.message).toContain("1x3 + 2*(4x5) + 1x3");
-    expect(!result.ok && result.message).toContain("[(1x3, 9x7), (1x4, 3x7)]");
   });
 
   it("refuse ce qui n'est pas une grille, en disant où", async () => {
@@ -137,20 +128,12 @@ describe("la notation des formats", () => {
     );
   });
 
-  it("lit l'orientation de chaque groupe, v par défaut, et refuse un suffixe inconnu en disant où", async () => {
+  it("lit l'orientation de chaque groupe, v par défaut", async () => {
     const { sheets } = await grids(piece("2x5", LONG_HU_GE), {
       slug: "shan-ju",
       formats: ["[(1x3, 2x7)]", "[(1x3v, 2x7V)]"],
     });
     expect(sheets.B).toEqual(sheets.A);
-
-    const result = await generateGrids({
-      root: await writeTree(piece("[(1x7, 1x4d, 1x7)]", LONG_HU_GE)),
-      slug: "shan-ju",
-    });
-    expect(!result.ok && result.message).toContain(
-      "« [(1x7, 1x4d, 1x7)] » — orientation « d » inconnue, attendu « v » ou « h » à la position 10",
-    );
   });
 });
 
@@ -303,28 +286,6 @@ describe("les carreaux plus petits", () => {
     const { summary } = await grids(piece("[(1x2, 1x7/2)]", KU_LIAN), { slug: "shan-ju" });
     expect(summary).toContain(
       "feuille 1 · portrait · carreau 76.3 mm · 1x2 vertical, 1x7/2 vertical (38.1 mm) · 9 caractères",
-    );
-  });
-
-  it("refusent un rapport plus petit que 1, et une feuille dont aucun groupe n'a le carreau de la feuille", async () => {
-    const refusal = async (format: string) => {
-      const result = await generateGrids({
-        root: await writeTree(piece(format, KU_LIAN)),
-        slug: "shan-ju",
-      });
-      return !result.ok && result.message;
-    };
-    expect(await refusal("[(1x2, 1x7/0.5)]")).toContain(
-      "« [(1x2, 1x7/0.5)] » — rapport « /0.5 » plus petit que 1, attendu un carreau plus petit que celui de la feuille à la position 11",
-    );
-    expect(await refusal("[(1x2), (1x2/2, 1x7/2)]")).toContain(
-      "« [(1x2), (1x2/2, 1x7/2)] » — aucun groupe au carreau de la feuille à la position 8",
-    );
-    expect(await refusal("[(1x2, 1x7/)]")).toContain(
-      "« [(1x2, 1x7/)] » — attendu un rapport k après « / » à la position 11",
-    );
-    expect(await refusal("[(1x2, 1x7/2h)]")).toContain(
-      "« [(1x2, 1x7/2h)] » — l'orientation « h » précède le rapport, attendu « 1x7h/2 » à la position 12",
     );
   });
 

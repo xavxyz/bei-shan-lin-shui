@@ -5,8 +5,8 @@ Les trois poèmes sur le crabe du chapitre 38 du 《紅樓夢》, 「林瀟湘�
 Trois éditions de zh.wikisource, `action=raw` ou `action=render` :
 
 - **庚辰本** — `脂硯齋重評石頭記/第三十八回` (texte du 庚辰本, avec les 批語 du 庚辰本 et du 蒙府本 ; aucune ne porte sur les poèmes) ; `紅樓夢/第038回`, l'édition collationnée sans commentaires dont les quatre-vingts premiers chapitres suivent le 庚辰本, en donne le même texte.
-- **程甲本** (1791) — `紅樓夢（程甲本）/三十八`, transcrit des fac-similés de la 國家圖書館.
-- **程乙本** (1792) — `紅樓夢（程乙本）/第三十一回　至第四十回`.
+- **程甲本** (« 乾隆辛亥年（1791）冬 », notes de l'en-tête de `紅樓夢（程甲本）`) — `紅樓夢（程甲本）/三十八`, transcrit des fac-similés de la 國家圖書館 (fichier d'index `NLC892-003290079-42641_紅樓夢_第8冊.pdf`).
+- **程乙本** (« 程氏萃文書屋 原版活字印本 乾隆壬子 », exemplaire du 天津圖書館 cité en 校閱參考 de `紅樓夢（程乙本）`) — `紅樓夢（程乙本）/第三十一回　至第四十回`.
 
 Le texte donné est celui du 庚辰本 ; les écarts des deux 程本 sont donnés poème par poème. Graphies normalisées : 裡→裏, 隂→陰, 膓→腸, 姜 (程乙, pour 薑) → 薑.
 
@@ -14,7 +14,7 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 
 ## 3 — 寶釵 · 螃蟹詠 · `pang-xie-feng-ci`
 
-**Source :** 曹雪芹, 《紅樓夢》 chapitre 38, troisième et dernier poème sur le crabe : 寶釵 dit l'avoir « fait à grand-peine » (我也勉強了一首) et l'écrit après celui de 黛玉. 七言律詩, **56 caractères**, rime en _-ang_ (觴 陽 黃 薑 香). Le récit le coupe en deux : après le deuxième distique, 「眾人不禁叫絕」, et 寶玉 s'écrie 「寫得痛快！我的詩也該燒了」 (庚辰本 ; les 程本 : 「罵得痛快」, « quelle volée d'injures »).
+**Source :** 曹雪芹, 《紅樓夢》 chapitre 38 (attribution et dynastie : en-tête de zh.wikisource `紅樓夢`, 「曹雪芹（前八十回）；高鶚（後四十回）」, `times=清` ; en-tête de `脂硯齋重評石頭記`, 「曹雪芹（著） 脂硯齋（評）」), troisième et dernier poème sur le crabe : 寶釵 dit l'avoir « fait à grand-peine » (我也勉強了一首) et l'écrit après celui de 黛玉. 七言律詩, **56 caractères**, rime en _-ang_ (觴 陽 黃 薑 香). Le récit le coupe en deux : après le deuxième distique, 「眾人不禁叫絕」, et 寶玉 s'écrie 「寫得痛快！我的詩也該燒了」 (庚辰本 ; les 程本 : 「罵得痛快」, « quelle volée d'injures »).
 
 Une seule leçon diverge entre les trois éditions, au vers 5 : **酒未敵腥** (庚辰本) / **酒未滌腥** (程甲本, 程乙本), « le vin ne vient pas à bout de » / « le vin n'a pas lavé » l'odeur. Les autres lectures parfois citées ailleurs ne se trouvent dans aucune des trois : les trois lisent 長安**涎口**盼重陽 (et non 饞口), 性防**積冷** (le 積冷 qui est aussi dans le poème de 寶玉), **於今**落釜, 月浦**空餘**禾黍香.
 

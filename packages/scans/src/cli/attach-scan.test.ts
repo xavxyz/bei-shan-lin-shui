@@ -10,6 +10,8 @@ import { writeTree } from "@bsls/content/test-support";
 
 const run = promisify(execFile);
 const cli = fileURLToPath(new URL("./attach-scan.ts", import.meta.url));
+/** Le tsx du dépôt : depuis un dossier temporaire, `npx tsx` le téléchargerait. */
+const tsx = fileURLToPath(new URL("../../../../node_modules/.bin/tsx", import.meta.url));
 
 const PIECE = `---
 title: 莫性急
@@ -40,7 +42,7 @@ async function repository(): Promise<string> {
 async function attach(root: string, attachment: string) {
   await writeFile(join(root, "imports/scans/rattachement.yaml"), attachment, "utf8");
   try {
-    const { stdout } = await run("npx", ["tsx", cli, "imports/scans/rattachement.yaml"], {
+    const { stdout } = await run(tsx, [cli, "imports/scans/rattachement.yaml"], {
       cwd: root,
     });
     return { code: 0, output: stdout };
@@ -60,7 +62,7 @@ describe("attach:scan, appelé par la skill scans", () => {
 version:
   id: v2
   date: 2026-02-11
-  format: 2x7
+  format: "[(2x7)]"
   columns: [莫性急平流緩進, 墨行機兔起鶻落]
 variation:
   id: v2a
