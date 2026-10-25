@@ -120,4 +120,12 @@ describe("setProjectGloss", () => {
 
     expect(result).toMatchObject({ ok: false, message: "projet inconnu : inconnu" });
   });
+
+  it("laisse remonter un fichier de projet illisible, qui n'est pas un projet inconnu", async () => {
+    const root = await writeTree({ "projects/qi-gong.yaml/piece.md": "un répertoire" });
+
+    await expect(setProjectGloss(root, "qi-gong", "Une glose de projet.")).rejects.toMatchObject({
+      code: "EISDIR",
+    });
+  });
 });
