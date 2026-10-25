@@ -243,6 +243,42 @@ describe("applyImport", () => {
     });
   });
 
+  it("écrit la glose d'un projet", async () => {
+    const root = await contentRoot();
+    const arbitrated = plan({
+      projects: [
+        {
+          id: "zhong-he-ji",
+          title: "中和集",
+          gloss: "Une série tirée d'un même recueil.",
+          presentation: "Les pièces tirées du 中和集.",
+        },
+      ],
+    });
+
+    await applyImport(arbitrated, { contentRoot: root });
+
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.projects[0]).toMatchObject({
+      id: "zhong-he-ji",
+      gloss: "Une série tirée d'un même recueil.",
+    });
+  });
+
+  it("écrit la glose d'une pièce", async () => {
+    const root = await contentRoot();
+    const arbitrated = plan();
+    arbitrated.pieces[0]!.gloss = "Une glose écrite au plan.";
+
+    await applyImport(arbitrated, { contentRoot: root });
+
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces[0]).toMatchObject({
+      slug: "mo-xing-ji",
+      gloss: "Une glose écrite au plan.",
+    });
+  });
+
   it("refuse d'écraser une pièce déjà sur le disque", async () => {
     const root = await contentRoot();
     await mkdir(join(root, "pieces/mo-xing-ji"), { recursive: true });
