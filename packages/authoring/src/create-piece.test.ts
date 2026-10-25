@@ -9,7 +9,7 @@ const draft = {
   source: { author: "王維", work: "山居秋暝", dynasty: "唐", full_text: "空山新雨後\n天氣晚來秋" },
   version: {
     date: "2026-10-16",
-    format: "A4 vertical",
+    format: "[(2x5)]",
     columns: ["空山新雨後", "天氣晚來秋"],
     intention: "Retrouver l'humidité\nde la montagne après la pluie.",
   },
@@ -37,7 +37,7 @@ describe("createPiece", () => {
     expect(piece?.versions[0]).toMatchObject({
       id: "v1",
       date: "2026-10-16",
-      format: "A4 vertical",
+      format: "[(2x5)]",
       intention: "Retrouver l'humidité\nde la montagne après la pluie.",
       variations: [],
     });
@@ -123,7 +123,7 @@ describe("createPiece", () => {
 
     const result = await createPiece(root, {
       ...draft,
-      version: { ...draft.version, format: "A3" },
+      version: { ...draft.version, format: "[(1x5, 1x5)]" },
     });
 
     expect(result).toMatchObject({ ok: true, slug: "shan-ju-qiu-ming-2" });

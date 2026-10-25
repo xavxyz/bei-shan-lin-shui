@@ -1,4 +1,5 @@
 import {
+  formatSchema,
   imageSchema,
   pieceFieldsSchema,
   toIsoDate,
@@ -15,13 +16,13 @@ import { compact, describeIssues, type Outcome } from "./piece-file.js";
  * une erreur nomme le champ du brouillon, pas celui du fichier.
  */
 
-/** Une version à ouvrir : ses champs, sans variations ni identifiant. */
-export const versionDraftSchema = versionSchema.pick({
-  date: true,
-  format: true,
-  columns: true,
-  intention: true,
-});
+/**
+ * Une version à ouvrir : ses champs, sans variations ni identifiant. Son format
+ * est dans la notation, ou `à préciser` : l'ancienne notation ne s'écrit plus.
+ */
+export const versionDraftSchema = versionSchema
+  .pick({ date: true, columns: true, intention: true })
+  .extend({ format: formatSchema });
 
 /** Une variation à ouvrir : ses champs, sans images ni identifiant. */
 export const variationDraftSchema = variationSchema.pick({

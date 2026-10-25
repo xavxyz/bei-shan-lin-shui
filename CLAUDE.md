@@ -32,7 +32,9 @@ Réponds au calligraphe en français.
 
 Le format d'une pièce est décrit par `pieceFrontmatterSchema` (`packages/schema/src/index.ts`) ; les vocabulaires fermés — statuts, styles d'écriture, thèmes — par `packages/schema/src/vocabulary.ts`. Les styles sont stockés en pinyin sans tons et **affichés en français**.
 
-`pnpm validate:content` valide `content/`, et tourne en pre-commit.
+Le format d'une version suit la notation de **Format** (`GLOSSARY.md`), lue par `parseFormat` dans `packages/schema/src/format.ts` ; hors notation, seul `à préciser` s'écrit.
+
+`pnpm validate:content` valide `content/`, et tourne en pre-commit. Un format hors de la notation n'y est qu'un avertissement, le temps de migrer l'existant (#65).
 
 La saisie passe par les skills `nouvelle-piece`, `version-ou-variation`, `veille` et `scans`, en conversation avec le calligraphe. Elles écrivent par `pnpm piece`, qui n'écrase rien et refuse ce que le schéma refuse.
 

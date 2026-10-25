@@ -1,7 +1,13 @@
 import type { ContentError } from "./load-content.js";
 
-/** Rend les erreurs de contenu lisibles en terminal : un fichier, ses champs fautifs. */
-export function formatContentErrors(errors: ContentError[]): string {
+/**
+ * Rend les erreurs de contenu lisibles en terminal : un fichier, ses champs
+ * fautifs. Les avertissements prennent la même forme, sous leur nom.
+ */
+export function formatContentErrors(
+  errors: ContentError[],
+  noun: "erreur" | "avertissement" = "erreur",
+): string {
   const byFile = new Map<string, ContentError[]>();
   for (const error of errors) {
     byFile.set(error.file, [...(byFile.get(error.file) ?? []), error]);
@@ -15,6 +21,6 @@ export function formatContentErrors(errors: ContentError[]): string {
   });
 
   const count = errors.length;
-  const summary = `${count} erreur${count > 1 ? "s" : ""} de contenu`;
+  const summary = `${count} ${noun}${count > 1 ? "s" : ""} de contenu`;
   return [...blocks, summary].join("\n\n");
 }

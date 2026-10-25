@@ -10,8 +10,8 @@ const cli = fileURLToPath(new URL("./validate.ts", import.meta.url));
 /** Exécute la validation comme le fait le hook de pre-commit. */
 async function validate(root: string) {
   try {
-    const { stdout } = await run("npx", ["tsx", cli, root]);
-    return { code: 0, output: stdout };
+    const { stdout, stderr } = await run("npx", ["tsx", cli, root]);
+    return { code: 0, output: stderr + stdout };
   } catch (error) {
     const failure = error as { code?: number; stdout: string; stderr: string };
     return { code: failure.code ?? 1, output: failure.stderr + failure.stdout };
@@ -23,7 +23,7 @@ const piece = {
   slug: "shan-ju-qiu-ming",
   projects: [],
   status: "idea",
-  versions: [{ id: "v1", date: "2026-03-04", format: "A4 vertical", columns: ["空山新雨後"] }],
+  versions: [{ id: "v1", date: "2026-03-04", format: "[(1x5)]", columns: ["空山新雨後"] }],
   published: true,
 };
 
@@ -35,6 +35,35 @@ describe("la validation de contenu en pre-commit", () => {
 
     expect(code).toBe(0);
     expect(output).toContain("contenu valide");
+  });
+
+  it("signale sans échouer un format hors de la notation, avec son fichier et où sa lecture bute", async () => {
+    const root = await writeFixtureTree({
+      pieces: {
+        "shan-ju-qiu-ming": piece,
+        "zhu-li-guan": {
+          ...piece,
+          title: "竹里館",
+          slug: "zhu-li-guan",
+          versions: [
+            { id: "v1", date: "2026-03-04", format: "à préciser" },
+            { id: "v2", date: "2026-04-04", format: "1x1 + 1x4 + 1x1" },
+          ],
+        },
+      },
+    });
+
+    const { code, output } = await validate(root);
+
+    expect(code).toBe(0);
+    expect(output).toContain("contenu valide");
+    expect(output).toContain("pieces/zhu-li-guan/piece.md");
+    expect(output).toContain(
+      "v2 · format — format illisible : « 1x1 + 1x4 + 1x1 » — attendu « [ » à la position 1",
+    );
+    expect(output).toContain("1 avertissement de contenu");
+    expect(output).not.toContain("shan-ju-qiu-ming");
+    expect(output).not.toContain("à préciser");
   });
 
   it("échoue en désignant le fichier et le champ fautifs", async () => {

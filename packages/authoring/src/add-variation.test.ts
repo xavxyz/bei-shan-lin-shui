@@ -53,7 +53,7 @@ describe("addVariation", () => {
 
   it("vise la version demandée, même quand elle n'est pas la dernière", async () => {
     const root = await yongTree();
-    await addVersion(root, "yong-cao-shu", { date: "2026-10-16", format: "A3" });
+    await addVersion(root, "yong-cao-shu", { date: "2026-10-16", format: "[(1x1)]" });
 
     await addVariation(root, "yong-cao-shu", "v1", autreStyle);
     await addVariation(root, "yong-cao-shu", "v2", { script: "caoshu", status: "kept" });
@@ -69,7 +69,7 @@ describe("addVariation", () => {
     const root = await writeTree({});
     await createPiece(root, {
       title: "山居秋暝",
-      version: { date: "2026-10-16", format: "A4" },
+      version: { date: "2026-10-16", format: "[(1x1)]" },
       published: false,
     });
 

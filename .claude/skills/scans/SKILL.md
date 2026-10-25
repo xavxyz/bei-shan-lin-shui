@@ -56,7 +56,7 @@ Fini quand le calligraphe a répondu. Attendre sa réponse avant d'écrire.
 
    ```yaml
    piece: mo-xing-ji
-   version: v1 # ou { id: v2, date: 2026-02-11, format: 2x7, columns: [...], intention: ... }
+   version: v1 # ou { id: v2, date: 2026-02-11, format: "[(2x7)]", columns: [...], intention: ... }
    variation: { id: v1b, script: kaishu, status: kept } # ou v1a, si elle existe
    image:
      source: imports/scans/2026-10-11_01_01.jpeg

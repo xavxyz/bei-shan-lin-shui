@@ -51,7 +51,12 @@ describe("ce que les écrivains produisent, Prettier le laisse tel quel", () => 
       source: { author: "王維", work: "山居秋暝", dynasty: "唐", full_text: WIDE_COLUMNS.join("") },
       translation: LONG_LINE,
       projects: ["ge-zhi-yan-jiu"],
-      version: { date: "2026-10-16", format: "A4", columns: WIDE_COLUMNS, intention: LONG_LINE },
+      version: {
+        date: "2026-10-16",
+        format: "[(8x7)]",
+        columns: WIDE_COLUMNS,
+        intention: LONG_LINE,
+      },
       published: false,
     });
 
