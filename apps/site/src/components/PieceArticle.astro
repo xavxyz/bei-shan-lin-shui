@@ -1,6 +1,7 @@
 ---
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
 import EarlierVersions from "./EarlierVersions.astro";
+import Gloss from "./Gloss.astro";
 import Pinyin from "./Pinyin.astro";
 import VersionFacts from "./VersionFacts.astro";
 import VersionText from "./VersionText.astro";
@@ -56,13 +57,7 @@ const withWork = hasImage(version);
         <h2 class="piece__title" lang="zh-Hant">
           <Pinyin pinyin={piece.title.pinyin}>{piece.title.traditional}</Pinyin>
         </h2>
-        {
-          piece.gloss ? (
-            <p class="gloss" data-testid="gloss">
-              {piece.gloss}
-            </p>
-          ) : null
-        }
+        <Gloss gloss={piece.gloss} />
         {
           piece.published ? null : (
             <p>

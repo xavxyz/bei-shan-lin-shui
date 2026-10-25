@@ -1,0 +1,16 @@
+---
+type Props = {
+  /** La glose d'une pièce ou d'un projet ; absente, rien ne s'affiche. */
+  gloss: string | undefined;
+};
+
+const { gloss } = Astro.props;
+---
+
+{
+  gloss ? (
+    <p class="gloss" data-testid="gloss">
+      {gloss}
+    </p>
+  ) : null
+}

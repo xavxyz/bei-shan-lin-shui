@@ -1,5 +1,6 @@
 ---
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
+import Gloss from "./Gloss.astro";
 import Pinyin from "./Pinyin.astro";
 
 type Props = {
@@ -20,13 +21,7 @@ const cover = works[0];
         <Pinyin pinyin={project.title.pinyin}>{project.title.traditional}</Pinyin>
       </a>
     </h3>
-    {
-      project.gloss ? (
-        <p class="gloss" data-testid="gloss">
-          {project.gloss}
-        </p>
-      ) : null
-    }
+    <Gloss gloss={project.gloss} />
     <p class="project-row__count">{works.length} pièce{works.length > 1 ? "s" : ""}</p>
   </div>
   {project.presentation ? <p class="project-row__presentation">{project.presentation}</p> : null}
