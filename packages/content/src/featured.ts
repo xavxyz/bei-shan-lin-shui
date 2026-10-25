@@ -32,11 +32,16 @@ export function featuredVariation(variations: LoadedVariation[]): LoadedVariatio
   return [...kept, ...rest].find((variation) => variation.featuredImage);
 }
 
-/** Une pièce se montre par son travail le plus récent : dernière version d'abord. */
+/**
+ * Une pièce se montre par son travail le plus récent : la dernière version qui
+ * a une image, courante ou antérieure, porte l'image mise en avant.
+ */
+export function featuredVersion(versions: LoadedVersion[]): LoadedVersion | null {
+  return versions.findLast((version) => featuredVariation(version.variations)) ?? null;
+}
+
+/** La variation qui mène la version de l'image mise en avant. */
 export function pickFeaturedVariation(versions: LoadedVersion[]): LoadedVariation | null {
-  for (const version of [...versions].reverse()) {
-    const leading = featuredVariation(version.variations);
-    if (leading) return leading;
-  }
-  return null;
+  const version = featuredVersion(versions);
+  return (version && featuredVariation(version.variations)) ?? null;
 }

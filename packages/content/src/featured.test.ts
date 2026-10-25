@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { loadedImageSchema, loadedVariationSchema, type LoadedVariation } from "@bsls/schema";
-import { featuredVariation, pickFeaturedImage } from "@bsls/content/featured";
+import {
+  loadedImageSchema,
+  loadedVariationSchema,
+  loadedVersionSchema,
+  type LoadedVariation,
+  type LoadedVersion,
+} from "@bsls/schema";
+import { featuredVariation, featuredVersion, pickFeaturedImage } from "@bsls/content/featured";
 
 function variation(
   id: string,
@@ -53,6 +59,35 @@ describe("featuredVariation", () => {
 
   it("ne mène rien quand aucune variation n'a d'image", () => {
     expect(featuredVariation([variation("v1a", "kept", [])])).toBeUndefined();
+  });
+});
+
+function version(id: string, variations: LoadedVariation[]): LoadedVersion {
+  return loadedVersionSchema.parse({
+    id,
+    date: "2026-01-01",
+    chineseDate: "乙巳冬至",
+    chineseDateSimplified: "乙巳冬至",
+    format: "à préciser",
+    formatLabel: { readable: false },
+    columns: [],
+    variations,
+    hasImage: variations.some((variation) => variation.featuredImage !== null),
+  });
+}
+
+describe("featuredVersion", () => {
+  it("est la dernière version qui a une image, même quand la courante n'en a pas", () => {
+    const featured = featuredVersion([
+      version("v1", [variation("v1a", "kept", ["v1a.jpg"])]),
+      version("v2", [variation("v2a", "to-try", [])]),
+    ]);
+
+    expect(featured?.id).toBe("v1");
+  });
+
+  it("n'est aucune version quand aucune n'a d'image", () => {
+    expect(featuredVersion([version("v1", [variation("v1a", "kept", [])])])).toBeNull();
   });
 });
 
