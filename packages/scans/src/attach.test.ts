@@ -35,8 +35,7 @@ versions:
       - id: v1b # variation en régulier
         script: kaishu
         status: tried
-translation: |
-  Les 8 mouvements fondamentaux de l'éternité.
+gloss: Les 8 mouvements fondamentaux de l'éternité.
 published: true
 ---
 

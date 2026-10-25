@@ -31,8 +31,7 @@ export const YONG_V1 = `  - id: v1
             featured: true
 `;
 
-export const YONG_TAIL = `translation: |
-  Les 8 mouvements fondamentaux de l'éternité.
+export const YONG_TAIL = `gloss: Les 8 mouvements fondamentaux de l'éternité.
 published: true
 `;
 

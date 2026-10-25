@@ -149,6 +149,39 @@ describe("applyImport", () => {
     expect(piece?.featuredImage?.file).toBe("v2a.jpg");
   });
 
+  it("écrit la traduction d'une version, une ligne par colonne", async () => {
+    const root = await contentRoot();
+    const arbitrated = plan();
+    arbitrated.pieces[0]!.versions[0]!.translation = [
+      "La patience et la constance dans la progression.",
+      "La vivacité et la précision dans l'action.",
+    ];
+
+    const result = await applyImport(arbitrated, { contentRoot: root });
+
+    expect(result.ok).toBe(true);
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces[0]?.latestVersion.translation).toEqual([
+      "La patience et la constance dans la progression.",
+      "La vivacité et la précision dans l'action.",
+    ]);
+  });
+
+  it("refuse une traduction qui n'a pas une ligne par colonne, et n'écrit alors rien", async () => {
+    const root = await contentRoot();
+    const arbitrated = plan();
+    arbitrated.pieces[0]!.versions[0]!.translation = [
+      "La patience et la constance dans la progression.",
+    ];
+
+    const result = await applyImport(arbitrated, { contentRoot: root });
+
+    expect(result.ok).toBe(false);
+    expect(JSON.stringify(result)).toContain("versions.0.translation");
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
+  });
+
   it("garde le mode de capture d'une image, un scan à défaut", async () => {
     const root = await contentRoot();
     const [piece] = plan().pieces;

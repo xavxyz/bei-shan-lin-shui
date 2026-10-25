@@ -86,6 +86,11 @@ export const versionSchema = z.object({
   format: z.string().min(1),
   columns: z.array(z.string().min(1)).default([]),
   intention: prose.optional(),
+  /**
+   * Le français de la version, une ligne par colonne, 款 compris (voir GLOSSARY.md).
+   * Sa longueur est celle de `columns` : `pieceFrontmatterSchema` le vérifie.
+   */
+  translation: z.array(prose).optional(),
   variations: z.array(variationSchema).default([]),
 });
 
@@ -116,7 +121,15 @@ export const pieceFieldsSchema = z.object({
   status: z.enum(PIECE_STATUSES),
   source: sourceSchema.optional(),
   versions: z.array(versionSchema).min(1, "attendu : au moins une version"),
-  translation: prose.optional(),
+  /** La traduction se fait par version : une `translation` de pièce est refusée. */
+  translation: z
+    .undefined({
+      errorMap: () => ({
+        message:
+          "la traduction se fait par version : attendu versions[].translation, une ligne par colonne",
+      }),
+    })
+    .optional(),
   pinyin_overrides: pinyinOverridesSchema.default({}),
   published: z.boolean().default(false),
 });
@@ -132,6 +145,7 @@ export const pieceFrontmatterSchema = pieceFieldsSchema.superRefine((piece, ctx)
     ctx,
   );
   piece.versions.forEach((version, versionIndex) => {
+    reportTranslationLength(version, versionIndex, ctx);
     reportDuplicates(
       version.variations.map((variation) => variation.id),
       (index) => ["versions", versionIndex, "variations", index, "id"],
@@ -139,6 +153,22 @@ export const pieceFrontmatterSchema = pieceFieldsSchema.superRefine((piece, ctx)
     );
   });
 });
+
+/** Une traduction présente a exactement une ligne par colonne : jamais de tableau décalé. */
+function reportTranslationLength(
+  version: z.output<typeof versionSchema>,
+  versionIndex: number,
+  ctx: z.RefinementCtx,
+): void {
+  if (!version.translation) return;
+  const expected = version.columns.length;
+  if (version.translation.length === expected) return;
+  ctx.addIssue({
+    code: z.ZodIssueCode.custom,
+    path: ["versions", versionIndex, "translation"],
+    message: `attendu : une ligne de traduction par colonne, soit ${expected} ${expected > 1 ? "colonnes" : "colonne"} ; reçu ${version.translation.length} ${version.translation.length > 1 ? "lignes" : "ligne"}`,
+  });
+}
 
 function reportDuplicates(
   ids: string[],
