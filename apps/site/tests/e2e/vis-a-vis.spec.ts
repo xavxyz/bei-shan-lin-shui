@@ -153,10 +153,10 @@ test.describe("sur un écran large", () => {
     expect(image.right).toBeLessThan(text.left);
     expect(text.top).toBeLessThan(image.bottom);
 
-    await expect(earlier.getByTestId("version-text").getByRole("listitem")).toHaveText([
-      "莫性急平流缓进",
-      "墨行机兔起鹘落",
-    ]);
+    await expect(earlier.getByTestId("version-text").getByRole("listitem")).toHaveText(
+      ["莫性急平流缓进", "墨行机兔起鹘落"],
+      { useInnerText: true },
+    );
     const current = await box(page.getByTestId("version-text").first());
     expect((await box(earlier)).top).toBeGreaterThan(current.bottom);
   });

@@ -20,7 +20,10 @@ test("le pinyin d'une ligne se lit sur elle, et non plus en bloc à part", async
   const text = page.getByTestId("version-text").first();
   await expect(text).toContainText("莫性急平流缓进");
   await expect(page.getByText("Prononciation")).toHaveCount(0);
-  await expect(page.getByText("mò xìng jí píng liú huǎn jìn")).toBeHidden();
+  // Hors du popover, le pinyin ne vit que dans la description cachée de la ligne.
+  await expect(
+    page.getByText("mò xìng jí píng liú huǎn jìn").filter({ visible: true }),
+  ).toHaveCount(0);
 
   await text.getByText("莫性急平流缓进").hover();
   await expect(page.getByRole("tooltip")).toHaveText("mò xìng jí píng liú huǎn jìn");

@@ -4,7 +4,8 @@
  * Un déclencheur `[data-pinyin]` montre son popover au survol de la souris, au
  * focus et au toucher. Dans un lien, c'est le lien qui prend le focus, et le
  * premier toucher montre le pinyin au lieu de suivre le lien : le second le suit.
- * Échap, ou un toucher hors de tout déclencheur, ferme le popover.
+ * Échap, ou un toucher hors de tout déclencheur, ferme le popover. Le lien qui
+ * prend le focus est décrit, comme son déclencheur, par le pinyin.
  *
  * Les écouteurs du document sont posés une fois ; ceux des déclencheurs le sont
  * à chaque page (`astro:page-load`), le routeur client remplaçant le contenu.
@@ -44,10 +45,19 @@ function linkAround(trigger: Element): HTMLElement | null {
   return trigger.parentElement?.closest<HTMLElement>("a[href]") ?? null;
 }
 
+/** Le lien reprend la description du déclencheur, sans doublon d'une page à l'autre. */
+function describeLink(link: HTMLElement, trigger: HTMLElement): void {
+  const id = trigger.getAttribute("aria-describedby");
+  if (!id) return;
+  const ids = (link.getAttribute("aria-describedby") ?? "").split(" ").filter(Boolean);
+  if (!ids.includes(id)) link.setAttribute("aria-describedby", [...ids, id].join(" "));
+}
+
 function wire(trigger: HTMLElement): void {
   // Dans un lien, c'est le lien qui prend le focus : pas d'arrêt de plus au clavier.
   const focusTarget = linkAround(trigger) ?? trigger;
   if (focusTarget === trigger) trigger.tabIndex = 0;
+  else describeLink(focusTarget, trigger);
 
   trigger.addEventListener("pointerenter", (event) => {
     if (event.pointerType === "mouse") open(trigger);
