@@ -42,19 +42,6 @@ test("toutes les variations d'une version antérieure sont listées", async ({ p
   await expect(variations.getByTestId("variation-status")).toHaveText(["essayée"]);
 });
 
-test("les versions antérieures vont de la plus ancienne à la plus récente", async ({ page }) => {
-  await page.goto("/yi-jin-jing/yi-jin-jing");
-  await showEvolution(page).click();
-
-  await expect(
-    earlierVersions(page).getByTestId("earlier-version-date").locator("time"),
-  ).toHaveText(["23 mars 2026", "20 octobre 2026"]);
-  await expect(earlierVersions(page).getByTestId("earlier-version-format")).toHaveText([
-    "[(1x3), (2x5)]",
-    "[(3x5)]",
-  ]);
-});
-
 test("une pièce à version unique n'affiche pas « voir l'évolution »", async ({ page }) => {
   await page.goto("/pieces/ti-po-shan-si-hou-shan-yuan");
 

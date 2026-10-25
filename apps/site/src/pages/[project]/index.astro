@@ -4,6 +4,8 @@ import { getCollection } from "astro:content";
 import { pieceHref } from "@bsls/content";
 import Layout from "../../layouts/Layout.astro";
 import PieceCard from "../../components/PieceCard.astro";
+import UnscannedPieces from "../../components/UnscannedPieces.astro";
+import { hang } from "../../hang.js";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
@@ -19,6 +21,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { project, pieces } = Astro.props;
+const { wall, unscanned } = hang(pieces);
 ---
 
 <Layout title={project.title} theme={project.theme}>
@@ -26,7 +29,12 @@ const { project, pieces } = Astro.props;
   <h2>{project.title}</h2>
   <p class="reading__body">{project.presentation}</p>
 
-  <ul class="card-list">
-    {pieces.map((piece) => <PieceCard piece={piece} href={pieceHref(piece.slug, project.id)} />)}
-  </ul>
+  <section aria-labelledby="oeuvres">
+    <h3 id="oeuvres">Pièces · {wall.length}</h3>
+    <ul class="card-list">
+      {wall.map((piece) => <PieceCard piece={piece} href={pieceHref(piece.slug, project.id)} />)}
+    </ul>
+  </section>
+
+  <UnscannedPieces pieces={unscanned} level={3} projectId={project.id} />
 </Layout>

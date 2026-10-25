@@ -239,6 +239,29 @@ a:hover {
   color: var(--accent);
 }
 
+/* En mode admin, les pièces qui attendent leur scan : une rangée chacune. */
+.unscanned {
+  margin: 2.5rem 0;
+}
+
+.unscanned__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.unscanned__table th,
+.unscanned__table td {
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-weight: normal;
+}
+
+.unscanned__title {
+  font-family: var(--serif-cn);
+  letter-spacing: 0.08em;
+}
+
 /* Les métadonnées viennent après l'œuvre : c'est l'image qui prime. */
 .piece__tags {
   display: flex;
