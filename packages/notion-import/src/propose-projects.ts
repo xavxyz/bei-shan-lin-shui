@@ -73,7 +73,7 @@ export function toProjectProposal(hub: Hub): ProjectProposal {
     warnings: [
       {
         field: "presentation",
-        message: "à écrire : un projet sans présentation ne sera pas importé",
+        message: "facultative, à écrire ici ou plus tard ; laissée vide, le projet s'importe sans",
       },
     ],
   };

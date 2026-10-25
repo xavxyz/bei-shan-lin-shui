@@ -292,17 +292,21 @@ describe("applyImport", () => {
     expect(await readFile(join(root, "pieces/mo-xing-ji/piece.md"), "utf8")).toBe("déjà là");
   });
 
-  it("refuse un projet sans présentation, et n'écrit alors rien du tout", async () => {
+  it("importe un projet sans présentation, sans lui en écrire une", async () => {
     const root = await contentRoot();
-    const arbitrated = plan({
-      projects: [{ id: "zhong-he-ji", title: "中和集", presentation: "" }],
-    });
+    const arbitrated = plan({ projects: [{ id: "zhong-he-ji", title: "中和集" }] });
     arbitrated.pieces[0]!.projects = ["zhong-he-ji"];
 
     const result = await applyImport(arbitrated, { contentRoot: root });
 
-    expect(!result.ok && result.errors[0]?.path).toBe("projects.0.presentation");
-    await expect(readFile(join(root, "pieces/mo-xing-ji/piece.md"), "utf8")).rejects.toThrow();
+    expect(result).toMatchObject({ ok: true });
+    expect(await readFile(join(root, "projects/zhong-he-ji.yaml"), "utf8")).toBe("title: 中和集\n");
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.projects[0]).toMatchObject({
+      id: "zhong-he-ji",
+      pieceSlugs: ["mo-xing-ji"],
+    });
+    expect(loaded.ok && loaded.content.projects[0]).not.toHaveProperty("presentation");
   });
 
   it("refuse un classement vers un projet que rien ne décrit", async () => {
@@ -554,6 +558,23 @@ pieces:
     );
     expect(written).not.toContain("page retrouvée");
     expect(written).not.toContain("中和集");
+  });
+
+  it("tient pour absente la présentation que le calligraphe a laissée vide", async () => {
+    const root = await contentRoot();
+    const plan = `
+projects:
+  - id: zhong-he-ji
+    title: 中和集
+    presentation: ""
+pieces: []
+`;
+
+    const result = await applyText(plan, root);
+
+    expect(result).toMatchObject({ ok: true });
+    expect(await readFile(join(root, "projects/zhong-he-ji.yaml"), "utf8")).toBe("title: 中和集\n");
+    expect(await loadContent(root, { includeUnpublished: true })).toMatchObject({ ok: true });
   });
 
   it("garde en tête du fichier d'un projet le commentaire posé au-dessus de lui", async () => {
