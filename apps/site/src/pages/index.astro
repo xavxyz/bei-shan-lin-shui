@@ -5,6 +5,7 @@ import Wall from "../components/Wall.astro";
 import ProjectRow from "../components/ProjectRow.astro";
 import UnscannedPieces from "../components/UnscannedPieces.astro";
 import { hang } from "../hang.js";
+import { projectPieces } from "../project-pieces.js";
 
 const projects = (await getCollection("projects")).map((entry) => entry.data);
 const pieces = (await getCollection("pieces")).map((entry) => entry.data);
@@ -24,10 +25,7 @@ const { wall, unscanned } = hang(pieces);
     <ul class="project-rows">
       {
         projects.map((project) => (
-          <ProjectRow
-            project={project}
-            pieces={hang(pieces.filter((piece) => piece.projects.includes(project.id))).wall}
-          />
+          <ProjectRow project={project} pieces={hang(projectPieces(project, pieces)).wall} />
         ))
       }
     </ul>
