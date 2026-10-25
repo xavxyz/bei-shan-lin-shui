@@ -128,7 +128,7 @@ Traductions de travail, faites par des agents : la traduction qui accompagne une
 |  | 進破頂門神蛻也 | Il perce le sommet du crâne : l'esprit mue et s'en va. |
 |  | 與君同步謁三清 | Avec toi, d'un même pas, nous irons saluer les Trois Purs (三清). |
 
-- **野雲**, « Nuage sauvage », le dédicataire : un lettré de 穎川 (d'ordinaire 潁川) qui a quitté la carrière (急流勇退) pour la Voie, versé dans le Dao et le Bouddha. Le 中和集 n'en dit pas plus ; à relever ailleurs.
+- **野雲**, « Nuage sauvage », le dédicataire : un lettré de 穎川 (d'ordinaire 潁川) qui a quitté la carrière (急流勇退) pour la Voie, versé dans le Dao et le Bouddha. Le 中和集 n'en dit pas plus.
 - **翕** (6.1) n'a pas de sens, et la rime (通, 風) veut _-ong_ : on lit **翁**, « le vieil homme ». À relever dans le 清庵先生中和集 (ctext).
 - **道法法人人不肖** renverse le 《老子》 25 (道藏 道德真經, 名象章第二十五 : 人法地，地法天，天法道，道法自然) : la Voie prend l'homme pour modèle, l'homme ne lui ressemble pas ; 不肖, « ne pas ressembler » et « indigne ».
 - Les quatrains 2 à 4 font le catalogue des erreurs : l'alchimie externe (金石), et le corps lu à la lettre (玄牝 réduit à la bouche et au nez, 坎離 au cœur et aux reins).
