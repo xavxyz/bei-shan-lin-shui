@@ -1,10 +1,10 @@
 ---
 import type { LoadedPiece, LoadedProject } from "@bsls/schema";
 import { PIECE_STATUS_LABELS } from "@bsls/schema";
-import ChineseText from "./ChineseText.astro";
 import VersionVariations from "./VersionVariations.astro";
 import EarlierVersions from "./EarlierVersions.astro";
 import VersionDate from "./VersionDate.astro";
+import VersionText from "./VersionText.astro";
 
 type Props = {
   piece: LoadedPiece;
@@ -69,7 +69,7 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
   </p>
 
   <div class="piece__reading">
-    {version.columns.length > 0 ? <ChineseText columns={version.columns} /> : <div />}
+    {version.columns.length > 0 ? <VersionText version={version} /> : <div />}
 
     <div>
       {
@@ -78,28 +78,6 @@ const attribution = [source?.author, source?.work, source?.dynasty].filter(Boole
             <p class="reading__label">Prononciation</p>
             <p class="reading__body pinyin" data-testid="pinyin">
               {version.columns.map((column) => column.pinyin).join(" / ")}
-            </p>
-          </div>
-        ) : null
-      }
-
-      {
-        version.columns.length > 0 ? (
-          <div class="reading__block">
-            <p class="reading__label">Simplifié</p>
-            <p class="reading__body" lang="zh-Hans" data-testid="simplified">
-              {version.columns.map((column) => column.simplified).join(" / ")}
-            </p>
-          </div>
-        ) : null
-      }
-
-      {
-        piece.translation ? (
-          <div class="reading__block">
-            <p class="reading__label">Traduction</p>
-            <p class="reading__body" data-testid="translation">
-              {piece.translation}
             </p>
           </div>
         ) : null

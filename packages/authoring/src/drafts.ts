@@ -41,7 +41,7 @@ export const versionWithVariationsDraftSchema = versionDraftSchema.extend({
  * réponse du calligraphe, jamais un défaut : le brouillon qui la tait est refusé.
  */
 export const pieceDraftSchema = pieceFieldsSchema
-  .pick({ title: true, source: true, translation: true, projects: true, pinyin_overrides: true })
+  .pick({ title: true, source: true, projects: true, pinyin_overrides: true })
   .extend({
     version: versionDraftSchema,
     published: pieceFieldsSchema.shape.published.removeDefault(),
@@ -77,7 +77,10 @@ const unansweredQuestion: z.ZodErrorMap = (issue, context) =>
  */
 export function versionEntry(
   id: string,
-  version: Omit<z.output<typeof versionDraftSchema>, "date"> & { date: Date | string },
+  version: Omit<z.output<typeof versionDraftSchema>, "date"> & {
+    date: Date | string;
+    translation?: string[];
+  },
   variations: Record<string, unknown>[] = [],
 ): Record<string, unknown> {
   return compact({
@@ -86,6 +89,7 @@ export function versionEntry(
     format: version.format,
     columns: version.columns.length > 0 ? version.columns : undefined,
     intention: version.intention,
+    translation: version.translation,
     variations: variations.length > 0 ? variations : undefined,
   });
 }

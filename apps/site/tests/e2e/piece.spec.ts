@@ -14,15 +14,11 @@ test("la page de pièce affiche l'œuvre mise en avant en grand", async ({ page 
   expect(width).toBeGreaterThan(300);
 });
 
-test("la traduction française et le pinyin sont en regard du texte chinois", async ({ page }) => {
+test("le pinyin est en regard du texte chinois", async ({ page }) => {
   await page.goto(piecePath);
 
-  await expect(page.getByTestId("chinese-text")).toContainText("莫性急平流緩進");
-  await expect(page.getByTestId("translation")).toContainText(
-    "La patience et la constance dans la progression.",
-  );
+  await expect(page.getByTestId("version-text")).toContainText("莫性急平流缓进");
   await expect(page.getByTestId("pinyin")).toContainText("mò xìng jí píng liú huǎn jìn");
-  await expect(page.getByTestId("simplified")).toContainText("莫性急平流缓进");
 });
 
 test("la date chinoise de la version est affichée à côté de sa date", async ({ page }) => {
@@ -50,17 +46,6 @@ test("les styles d'écriture sont affichés en français, jamais en pinyin", asy
       script,
     );
   }
-});
-
-test("le texte chinois est vertical sur écran large et horizontal sous 768 px", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto(piecePath);
-  await expect(page.getByTestId("chinese-text")).toHaveCSS("writing-mode", "vertical-rl");
-
-  await page.setViewportSize({ width: 375, height: 800 });
-  await expect(page.getByTestId("chinese-text")).toHaveCSS("writing-mode", "horizontal-tb");
 });
 
 test("une pièce non publiée n'a aucune page et n'apparaît dans aucune liste", async ({

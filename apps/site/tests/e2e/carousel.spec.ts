@@ -86,7 +86,7 @@ test("le carrousel est sous le titre, avant le texte", async ({ page }) => {
     locator.evaluate((element) => element.getBoundingClientRect().top);
   const title = await top(page.getByRole("heading", { name: "墨寺㞢文刻" }));
   const image = await top(shown(page));
-  const text = await top(page.getByTestId("chinese-text"));
+  const text = await top(page.getByTestId("version-text"));
   expect(image).toBeGreaterThan(title);
   expect(text).toBeGreaterThan(image);
 });
@@ -230,6 +230,14 @@ test.describe("au clavier", () => {
   const evolution = (page: Page) => page.getByText("voir l'évolution", { exact: true });
   const earlier = (page: Page) => page.getByTestId("earlier-version").getByTestId("carousel");
   const position = (of: Locator) => of.getByTestId("carousel-position");
+  /**
+   * Une fenêtre de marge sous la page : ce qu'on vérifie, c'est le pilotage au
+   * défilement, pas la hauteur du texte de la pièce.
+   */
+  const roomToScroll = (page: Page) =>
+    page.evaluate(() => {
+      document.body.style.paddingBottom = "100vh";
+    });
 
   test("sans cliquer, la flèche droite avance le carrousel visible", async ({ page }) => {
     await page.goto(piecePath);
@@ -258,6 +266,7 @@ test.describe("au clavier", () => {
   test("un carrousel sorti de la fenêtre ne capte pas les flèches", async ({ page }) => {
     await page.goto(twoVersions);
     await mounted(page);
+    await roomToScroll(page);
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
     await expect(shown(page)).not.toBeInViewport();
 
@@ -280,6 +289,7 @@ test.describe("au clavier", () => {
     async function bothInView(page: Page) {
       await page.goto(twoVersions);
       await mounted(page);
+      await roomToScroll(page);
       await evolution(page).click();
       await expect(earlier(page).getByTestId("carousel-image")).toBeVisible();
       await shown(page).evaluate((image) => {

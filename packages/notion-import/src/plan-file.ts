@@ -44,7 +44,7 @@ const plannedVariationSchema = variationSchema
   });
 
 const plannedVersionSchema = versionSchema
-  .pick({ format: true, columns: true, intention: true })
+  .pick({ format: true, columns: true, intention: true, translation: true })
   .extend({
     id: versionIdSchema,
     /** Le schéma coerce la date ; le plan la garde lisible et corrigeable à la main. */

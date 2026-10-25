@@ -84,7 +84,7 @@ describe("addVariation", () => {
 
   it("donne sa première variation à une version écrite avec une liste vide", async () => {
     const root = await yongTree(
-      YONG.replace(/    variations:\n[\s\S]*?(?=translation)/, "    variations: []\n"),
+      YONG.replace(/    variations:\n[\s\S]*?(?=gloss)/, "    variations: []\n"),
     );
 
     const result = await addVariation(root, "yong-cao-shu", "v1", autreStyle);

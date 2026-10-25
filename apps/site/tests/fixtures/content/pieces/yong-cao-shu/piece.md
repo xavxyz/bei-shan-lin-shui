@@ -29,7 +29,5 @@ versions:
             kind: study
             capture: scan
             caption: Le caractère 永 repris sept fois en cursive.
-translation: |
-  Les 8 mouvements fondamentaux de l'éternité, exécutés au solstice d'été 2026.
 published: true
 ---

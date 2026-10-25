@@ -48,7 +48,12 @@ versions:
       - id: v2a
         script: kaishu
         status: kept
-translation: La patience et la constance dans la progression. La vivacité et la précision dans l'action.
+# à arbitrer (#76) — l'ancienne traduction de la pièce, écrite sur le scan 2026-10-11_01_01.jpeg
+# (celui de v2) : deux phrases pour deux colonnes, mais deux versions aux mêmes colonnes ;
+# à quelle version, ou aux deux, et coupée ainsi ?
+#   translation:
+#     - La patience et la constance dans la progression.
+#     - La vivacité et la précision dans l'action.
 published: true
 ---
 `;
