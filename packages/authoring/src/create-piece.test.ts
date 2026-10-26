@@ -47,13 +47,13 @@ describe("createPiece", () => {
     ]);
   });
 
-  it("écrit publiée la pièce dont la publication est demandée : le site la charge", async () => {
+  it("écrit publiée la pièce dont la publication est demandée : le site la montrera une fois scannée", async () => {
     const root = await writeTree({});
 
     const result = await createPiece(root, { ...draft, published: true });
 
     expect(result).toMatchObject({ ok: true });
-    const loaded = await loadContent(root);
+    const loaded = await loadContent(root, { includeUnpublished: true });
     expect(loaded.ok && loaded.content.pieces).toMatchObject([
       { slug: "shan-ju-qiu-ming", status: "idea", published: true, versions: [{ id: "v1" }] },
     ]);
@@ -106,6 +106,37 @@ describe("createPiece", () => {
     expect(await readPieceFile(root, "gong-fu-ri-yong")).toContain(
       `    columns:\n${long.map((column) => `      - ${column}\n`).join("")}`,
     );
+  });
+
+  it("écrit la glose de la pièce et la traduction de sa version, une ligne par colonne", async () => {
+    const root = await writeTree({});
+
+    const result = await createPiece(root, {
+      ...draft,
+      gloss: "Une glose écrite par le calligraphe.",
+      version: { ...draft.version, translation: ["Première ligne", "Seconde ligne"] },
+    });
+
+    expect(result).toMatchObject({ ok: true });
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces[0]).toMatchObject({
+      gloss: "Une glose écrite par le calligraphe.",
+      versions: [{ id: "v1", translation: ["Première ligne", "Seconde ligne"] }],
+    });
+  });
+
+  it("refuse sans rien écrire une traduction qui n'a pas une ligne par colonne", async () => {
+    const root = await writeTree({});
+
+    const result = await createPiece(root, {
+      ...draft,
+      version: { ...draft.version, translation: ["Une seule ligne pour deux colonnes"] },
+    });
+
+    expect(result).toMatchObject({ ok: false });
+    expect(!result.ok && result.message).toContain("translation");
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
   });
 
   it("dérive le slug du titre chinois en pinyin sans tons", async () => {

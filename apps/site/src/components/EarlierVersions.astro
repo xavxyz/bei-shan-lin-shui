@@ -1,7 +1,8 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
-import VersionDate from "./VersionDate.astro";
-import VersionVariations from "./VersionVariations.astro";
+import VersionFacts from "./VersionFacts.astro";
+import VersionVisAVis from "./VersionVisAVis.astro";
+import { versionTransitionName } from "../work-transition.js";
 
 type Props = {
   piece: LoadedPiece;
@@ -11,38 +12,28 @@ const { piece } = Astro.props;
 
 /** Toutes les versions sauf la courante, de la plus ancienne à la plus récente. */
 const earlier = piece.versions.filter((version) => version.id !== piece.latestVersion.id);
+const headingId = "versions-anterieures";
 ---
 
 {
   earlier.length > 0 ? (
-    <details class="evolution">
-      <summary class="evolution__toggle">voir l'évolution</summary>
+    <section class="evolution" aria-labelledby={headingId}>
+      <h3 class="evolution__heading" id={headingId}>
+        Versions antérieures
+      </h3>
       <ol class="evolution__list">
         {earlier.map((version) => (
-          <li class="evolution__version" data-testid="earlier-version">
-            <VersionVariations version={version} title={piece.title.traditional} />
-
-            <p class="evolution__tags">
-              <VersionDate version={version} testId="earlier-version-date" />
-              <span class="tag" data-testid="earlier-version-format">
-                {version.format}
-              </span>
-            </p>
-
-            {version.columns.length > 0 ? (
-              <p class="evolution__columns" lang="zh-Hant" data-testid="earlier-version-columns">
-                {version.columns.map((column) => column.traditional).join(" / ")}
-              </p>
-            ) : null}
-
-            {version.intention ? (
-              <p class="reading__body" data-testid="earlier-version-intention">
-                {version.intention.trim()}
-              </p>
-            ) : null}
-          </li>
+          <VersionVisAVis
+            version={version}
+            title={piece.title.traditional}
+            tag="li"
+            testIdPrefix="earlier-version"
+            transitionName={versionTransitionName(piece, version)}
+          >
+            <VersionFacts slot="facts" version={version} testIdPrefix="earlier-version" />
+          </VersionVisAVis>
         ))}
       </ol>
-    </details>
+    </section>
   ) : null
 }

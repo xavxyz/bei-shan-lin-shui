@@ -149,6 +149,39 @@ describe("applyImport", () => {
     expect(piece?.featuredImage?.file).toBe("v2a.jpg");
   });
 
+  it("écrit la traduction d'une version, une ligne par colonne", async () => {
+    const root = await contentRoot();
+    const arbitrated = plan();
+    arbitrated.pieces[0]!.versions[0]!.translation = [
+      "La patience et la constance dans la progression.",
+      "La vivacité et la précision dans l'action.",
+    ];
+
+    const result = await applyImport(arbitrated, { contentRoot: root });
+
+    expect(result.ok).toBe(true);
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces[0]?.latestVersion.translation).toEqual([
+      "La patience et la constance dans la progression.",
+      "La vivacité et la précision dans l'action.",
+    ]);
+  });
+
+  it("refuse une traduction qui n'a pas une ligne par colonne, et n'écrit alors rien", async () => {
+    const root = await contentRoot();
+    const arbitrated = plan();
+    arbitrated.pieces[0]!.versions[0]!.translation = [
+      "La patience et la constance dans la progression.",
+    ];
+
+    const result = await applyImport(arbitrated, { contentRoot: root });
+
+    expect(result.ok).toBe(false);
+    expect(JSON.stringify(result)).toContain("versions.0.translation");
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces).toEqual([]);
+  });
+
   it("garde le mode de capture d'une image, un scan à défaut", async () => {
     const root = await contentRoot();
     const [piece] = plan().pieces;
@@ -196,7 +229,6 @@ describe("applyImport", () => {
           id: "zhong-he-ji",
           title: "中和集",
           presentation: "Les pièces tirées du 中和集.",
-          theme: "jade",
         },
       ],
     });
@@ -208,6 +240,43 @@ describe("applyImport", () => {
     expect(loaded.ok && loaded.content.projects[0]).toMatchObject({
       id: "zhong-he-ji",
       pieceSlugs: ["mo-xing-ji"],
+    });
+  });
+
+  it("écrit la glose d'un projet", async () => {
+    const root = await contentRoot();
+    const arbitrated = plan({
+      projects: [
+        {
+          id: "zhong-he-ji",
+          title: "中和集",
+          gloss: "Une série tirée d'un même recueil.",
+          presentation: "Les pièces tirées du 中和集.",
+        },
+      ],
+    });
+
+    await applyImport(arbitrated, { contentRoot: root });
+
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.projects[0]).toMatchObject({
+      id: "zhong-he-ji",
+      gloss: "Une série tirée d'un même recueil.",
+    });
+  });
+
+  it("écrit la glose d'une pièce", async () => {
+    const root = await contentRoot();
+    const arbitrated = planFileSchema.parse({
+      pieces: [{ ...plan().pieces[0], gloss: "Une glose écrite au plan." }],
+    });
+
+    await applyImport(arbitrated, { contentRoot: root });
+
+    const loaded = await loadContent(root, { includeUnpublished: true });
+    expect(loaded.ok && loaded.content.pieces[0]).toMatchObject({
+      slug: "mo-xing-ji",
+      gloss: "Une glose écrite au plan.",
     });
   });
 
@@ -226,7 +295,7 @@ describe("applyImport", () => {
   it("refuse un projet sans présentation, et n'écrit alors rien du tout", async () => {
     const root = await contentRoot();
     const arbitrated = plan({
-      projects: [{ id: "zhong-he-ji", title: "中和集", presentation: "", theme: "jade" }],
+      projects: [{ id: "zhong-he-ji", title: "中和集", presentation: "" }],
     });
     arbitrated.pieces[0]!.projects = ["zhong-he-ji"];
 
@@ -494,12 +563,10 @@ projects:
   - id: zhong-he-ji
     title: 中和集
     presentation: Les pièces tirées du 中和集.
-    theme: ink
   # projet désigné par le calligraphe à l'arbitrage du scan 24
   - id: qi-gong
     title: 氣功
-    presentation: Lecture des ouvrages de Yang Jwing-Ming.
-    theme: ink # les thèmes attendront
+    presentation: Lecture des ouvrages de Yang Jwing-Ming. # à étoffer
 pieces: []
 `;
 
@@ -509,8 +576,7 @@ pieces: []
       [
         "# projet désigné par le calligraphe à l'arbitrage du scan 24",
         "title: 氣功",
-        "presentation: Lecture des ouvrages de Yang Jwing-Ming.",
-        "theme: ink # les thèmes attendront",
+        "presentation: Lecture des ouvrages de Yang Jwing-Ming. # à étoffer",
         "",
       ].join("\n"),
     );

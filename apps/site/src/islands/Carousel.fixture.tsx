@@ -6,6 +6,7 @@ import {
   type LoadedVariation,
 } from "@bsls/schema";
 import { featuredVariation, pickFeaturedImage } from "@bsls/content/featured";
+import { workTransitionName } from "../work-transition.js";
 import { Carousel } from "./Carousel.js";
 
 /**
@@ -77,13 +78,18 @@ const setAside = variation({
 
 const title = "山居秋暝";
 
-/** Le carrousel tel que `VersionVariations.astro` le monte : la règle du content layer choisit qui l'ouvre. */
-function carousel(variations: LoadedVariation[]) {
+/**
+ * Le carrousel tel que `VersionVariations.astro` le monte : la règle du content
+ * layer choisit qui l'ouvre ; `transitionName`, quand la page pièce le passe,
+ * lie l'image d'ouverture à la vignette du mur.
+ */
+function carousel(variations: LoadedVariation[], transitionName?: string) {
   return (
     <Carousel
       title={title}
       variations={variations}
       leadingVariation={featuredVariation(variations)?.id ?? null}
+      transitionName={transitionName}
     />
   );
 }
@@ -94,6 +100,8 @@ export default {
   ]),
 
   "plusieurs variations": carousel([kept, setAside]),
+
+  "ouverte depuis le mur": carousel([kept, setAside], workTransitionName("shan-ju-qiu-ming")),
 
   "une variation sans image": carousel([kept, withoutImage, setAside]),
 

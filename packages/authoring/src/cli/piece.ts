@@ -6,9 +6,11 @@ import { addVariation } from "../add-variation.js";
 import { addVersion } from "../add-version.js";
 import { attachToProject } from "../attach-to-project.js";
 import { availableSlug, createPiece } from "../create-piece.js";
+import { setPieceGloss, setProjectGloss } from "../gloss.js";
 import { describeOnHold } from "../on-hold.js";
 import type { Outcome } from "../piece-file.js";
 import { setPieceStatus, setVariationStatus } from "../statuses.js";
+import { setVersionTranslation } from "../translation.js";
 
 /**
  * Les écritures des skills de saisie. Chaque commande vérifie la pièce obtenue
@@ -22,6 +24,11 @@ const USAGE = `usage : piece <commande> [--content <racine>]
   version <slug>       < version.yaml    nouvelle version, à la suite
   variation <slug> <version> < variation.yaml
                                         nouvelle variation d'une version
+  glose <slug>         < glose.yaml      écrit la glose de la pièce (gloss: …)
+  glose-projet <projet> < glose.yaml     écrit la glose du projet (gloss: …)
+  traduction <slug> <version> < traduction.yaml
+                                        écrit la traduction de la version,
+                                        une ligne par colonne (translation: […])
   rattacher <slug> <projet>             ajoute un projet à la pièce
   statut <slug> <statut>                change le statut de la pièce
   statut-variation <slug> <variation> <statut>
@@ -51,6 +58,26 @@ async function main(argv: string[]): Promise<number> {
         await addVariation(root, rest[0]!, rest[1]!, await stdinYaml()),
         (r) => `variation ajoutée : ${r.id}`,
       );
+    case "glose/1":
+      return done(
+        await setPieceGloss(root, rest[0]!, (await stdinYaml<Answer>())?.gloss),
+        () => `glose écrite : ${rest[0]}`,
+      );
+    case "glose-projet/1":
+      return done(
+        await setProjectGloss(root, rest[0]!, (await stdinYaml<Answer>())?.gloss),
+        () => `glose écrite : projet ${rest[0]}`,
+      );
+    case "traduction/2":
+      return done(
+        await setVersionTranslation(
+          root,
+          rest[0]!,
+          rest[1]!,
+          (await stdinYaml<Answer>())?.translation,
+        ),
+        () => `traduction écrite : ${rest[0]} ${rest[1]}`,
+      );
     case "rattacher/2":
       return done(await attachToProject(root, rest[0]!, rest[1]!), () => `rattachée à ${rest[1]}`);
     case "statut/2":
@@ -70,6 +97,9 @@ async function main(argv: string[]): Promise<number> {
       return 2;
   }
 }
+
+/** Une réponse du calligraphe sur l'entrée standard : `gloss: …` ou `translation: […]`. */
+type Answer = { gloss?: unknown; translation?: unknown } | null;
 
 async function stdinYaml<T>(): Promise<T> {
   return parse(await text(process.stdin)) as T;

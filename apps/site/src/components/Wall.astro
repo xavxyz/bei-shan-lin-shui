@@ -1,0 +1,13 @@
+---
+import PieceCard from "./PieceCard.astro";
+import { linkedPieceHref, type PieceLinks } from "../piece-links.js";
+
+/** Les pièces du mur, dans l'ordre où `hang` les accroche. */
+type Props = PieceLinks;
+
+const { pieces, projectId } = Astro.props;
+---
+
+<ul class="wall">
+  {pieces.map((piece) => <PieceCard piece={piece} href={linkedPieceHref(piece, projectId)} />)}
+</ul>

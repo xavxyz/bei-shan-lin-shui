@@ -226,6 +226,7 @@ async function checkPlan(plan: ArbitratedPlan, root: string): Promise<ApplyError
 function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
   return {
     title: piece.title,
+    ...(piece.gloss ? { gloss: piece.gloss } : {}),
     slug: piece.slug,
     ...(piece.projects.length > 0 ? { projects: piece.projects } : {}),
     status: piece.status,
@@ -244,7 +245,6 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
         ),
       ),
     ),
-    ...(piece.translation ? { translation: piece.translation } : {}),
     published: piece.published,
   };
 }
@@ -252,8 +252,8 @@ function toFrontmatter(piece: PlannedPiece): Record<string, unknown> {
 function toProjectFile(project: PlannedProject): Record<string, unknown> {
   return {
     title: project.title,
+    ...(project.gloss ? { gloss: project.gloss } : {}),
     presentation: project.presentation,
-    theme: project.theme,
   };
 }
 

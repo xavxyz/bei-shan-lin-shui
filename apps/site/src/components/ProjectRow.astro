@@ -1,0 +1,39 @@
+---
+import { plural, type LoadedPiece, type LoadedProject } from "@bsls/schema";
+import Gloss from "./Gloss.astro";
+import Pinyin from "./Pinyin.astro";
+
+type Props = {
+  project: LoadedProject;
+  /** Les pièces du mur du projet, telles que `hang` les accroche : elles seules se comptent. */
+  pieces: LoadedPiece[];
+};
+
+const { project, pieces } = Astro.props;
+// La couverture : l'image de la pièce que le mur du projet accroche en premier, la plus récente.
+const cover = pieces[0];
+---
+
+<li class="project-row grid" data-testid="project-row">
+  <div class="project-row__head">
+    <h3 class="project-row__title" lang="zh-Hant">
+      <a href={project.href}>
+        <Pinyin pinyin={project.title.pinyin}>{project.title.traditional}</Pinyin>
+      </a>
+    </h3>
+    <Gloss gloss={project.gloss} />
+    <p class="project-row__count">{plural(pieces.length, "pièce")}</p>
+  </div>
+  {project.presentation ? <p class="project-row__presentation">{project.presentation}</p> : null}
+  {
+    cover?.featuredImage ? (
+      <img
+        class="project-row__cover"
+        src={cover.featuredImage.src}
+        alt={cover.title.traditional}
+        lang="zh-Hant"
+        loading="lazy"
+      />
+    ) : null
+  }
+</li>

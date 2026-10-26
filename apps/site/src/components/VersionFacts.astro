@@ -1,0 +1,68 @@
+---
+import type { ChineseText, LoadedVersion, PieceStatus } from "@bsls/schema";
+import { PIECE_STATUS_LABELS } from "@bsls/schema";
+import { frenchDate } from "../french-date.js";
+import VersionFormat from "./VersionFormat.astro";
+
+type Props = {
+  version: LoadedVersion;
+  /** Préfixe des repères de test : `version` pour la courante, `earlier-version` sinon. */
+  testIdPrefix: "version" | "earlier-version";
+  /** Le style d'écriture, nommé en français ; absent, la ligne ne s'affiche pas. */
+  scriptLabel?: string | null;
+  /** Le statut de la pièce ; absent, la ligne ne s'affiche pas. */
+  status?: PieceStatus;
+  /** L'attribution de la source ; absente, la ligne ne s'affiche pas. */
+  attribution?: ChineseText;
+};
+
+/*
+ * Les faits d'une version, en deux colonnes : ce qu'on cherche, puis ce qu'il en est.
+ * La date chinoise et l'attribution de la source se lisent en simplifié.
+ */
+const { version, testIdPrefix, scriptLabel, status, attribution } = Astro.props;
+---
+
+<dl class="facts">
+  <dt>Date</dt>
+  <dd data-testid={`${testIdPrefix}-date`}>
+    <time datetime={version.date}>{frenchDate(version.date)}</time>
+  </dd>
+
+  <dt>Date chinoise</dt>
+  <dd lang="zh-Hans" data-testid={`${testIdPrefix}-chinese-date`}>
+    {version.chineseDateSimplified}
+  </dd>
+
+  <dt>Format</dt>
+  <dd><VersionFormat version={version} testId={`${testIdPrefix}-format`} /></dd>
+
+  {
+    scriptLabel ? (
+      <>
+        <dt>Style</dt>
+        <dd data-testid={`${testIdPrefix}-script-label`}>{scriptLabel}</dd>
+      </>
+    ) : null
+  }
+
+  {
+    status ? (
+      <>
+        <dt>Statut</dt>
+        <dd data-testid="piece-status">{PIECE_STATUS_LABELS[status]}</dd>
+      </>
+    ) : null
+  }
+
+  {
+    attribution ? (
+      <>
+        <dt>Source</dt>
+        <dd lang="zh-Hans" data-testid="source">
+          {attribution.simplified}
+        </dd>
+      </>
+    ) : null
+  }
+</dl>

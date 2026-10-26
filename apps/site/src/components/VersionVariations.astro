@@ -8,9 +8,14 @@ type Props = {
   version: LoadedVersion;
   /** Titre de la pièce, pour décrire les images à qui ne les voit pas. */
   title: string;
+  /**
+   * Nom de transition de vue de l'œuvre : seule la version de l'image mise en avant le porte,
+   * deux éléments du même nom sur une page annulant la transition.
+   */
+  transitionName?: string;
 };
 
-const { version, title } = Astro.props;
+const { version, title, transitionName } = Astro.props;
 /** La variation qui ouvre le carrousel, selon la règle du content layer. */
 const leadingVariation = featuredVariation(version.variations)?.id ?? null;
 ---
@@ -21,5 +26,6 @@ const leadingVariation = featuredVariation(version.variations)?.id ?? null;
     variations={version.variations}
     leadingVariation={leadingVariation}
     title={title}
+    transitionName={transitionName}
   />
 </section>

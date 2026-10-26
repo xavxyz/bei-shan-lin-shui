@@ -6,9 +6,13 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **Pièce** : Une calligraphie identifiée par son texte, suivie de l'idée jusqu'à l'œuvre à travers ses versions. _À éviter_ : œuvre, page
 
-**Projet** : Une série de pièces conçues pour être montrées ensemble, avec une présentation et un thème. Une pièce peut rejoindre un projet longtemps après sa création, si elle est reprise pour lui ; rapprocher après coup des pièces écrites sans lui n'en fait pas un projet. _À éviter_ : collection, dossier, page-pôle
+**Projet** : Une série de pièces conçues pour être montrées ensemble, avec une présentation. Une pièce peut rejoindre un projet longtemps après sa création, si elle est reprise pour lui ; rapprocher après coup des pièces écrites sans lui n'en fait pas un projet. _À éviter_ : collection, dossier, page-pôle
+
+**Glose** : La courte phrase française qui accompagne le titre chinois d'une pièce ou d'un projet et dit de quoi il s'agit, sans le traduire mot à mot ; ainsi « Les 8 mouvements fondamentaux de l'éternité, exécutés au solstice d'été 2026 » pour 永草書. _À éviter_ : titre français, sous-titre, traduction
 
 **Version** : Une réalisation de la pièce, avec sa date, son format et son texte. Refaire une pièce dont une réalisation existe déjà, c'est en ouvrir une nouvelle version. _À éviter_ : reprise, édition
+
+**Traduction** : Le français d'une version, écrit à la main colonne par colonne, 款 compris : chaque colonne a sa ligne. _À éviter_ : glose
 
 **Variation** : Une écriture complète d'une version, dans un style donné. Les variations d'une version coexistent ; changer de style, c'est changer de variation. _À éviter_ : essai, déclinaison
 
@@ -69,6 +73,16 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 ## Lieux
 
 **NPL** : Narbonne-Plage : le studio et la terrasse de gong fu du calligraphe, face à la Méditerranée. Le sigle s'écrit sur le papier, près de la signature.
+
+## Le site
+
+**Cimaise** : La mise en page du site, retenue au prototype : un seul fond, le papier teinté ; un en-tête qui reste en place d'une page à l'autre, grand sur l'accueil avec 背山臨水 et sa devise, réduit à une ligne ailleurs ; sur l'accueil, le mur puis les rangées de projets.
+
+**Mur** : Les pièces qui ont une image, accrochées à la file de la plus récente à la plus ancienne selon leur dernière version, alignées sur leur pied, chacune à ses proportions sans jamais être recadrée, avec dessous son titre chinois et sa glose. L'accueil porte le mur de toutes les pièces, une page projet celui des siennes ; le compte « Pièces · N » ne compte que lui. En mode admin, une pièce scannée non publiée y est marquée « non publiée ».
+
+**Sans scan** : Se dit d'une pièce qui n'a encore aucune image. Le public ne la voit pas, même publiée ; le mode admin la range hors du mur, dans la section « Sans scan · N », entre le mur et les projets sur l'accueil et sous le mur sur la page projet, en une rangée : titre, glose, statut, date de la dernière version.
+
+**Vis-à-vis** : La page d'une pièce, l'œuvre d'un côté et son texte de l'autre : l'œuvre reste à gauche, réduite au besoin pour tenir entière à l'écran ; à droite défilent le titre, la glose, le texte de la version avec sa traduction, les faits et la prose. Chaque version antérieure suit dessous dans son propre vis-à-vis. Sur un écran étroit, il s'empile : titre, glose, œuvre, texte, faits, prose.
 
 ## Statuts d'une pièce
 

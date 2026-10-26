@@ -9,6 +9,8 @@ export {
   versionDraftSchema,
 } from "./drafts.js";
 export type { NewVersion, PieceDraft, VariationDraft, VersionDraft } from "./drafts.js";
+export { setPieceGloss, setProjectGloss } from "./gloss.js";
 export { describeOnHold } from "./on-hold.js";
 export type { Outcome } from "./piece-file.js";
 export { setPieceStatus, setVariationStatus } from "./statuses.js";
+export { setVersionTranslation } from "./translation.js";

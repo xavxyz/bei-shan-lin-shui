@@ -1,5 +1,4 @@
-import { mkdtemp, readFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -10,62 +9,51 @@ import { attachScan } from "./attach.js";
 
 /**
  * Les E2E montrent, sur un build réel, un scan rattaché par `attachScan` :
- * celui de `行行重行行` v3a dans les fixtures du site. Ce test établit que la
- * fixture est exactement ce que produit le rattachement, à partir de la pièce
- * telle qu'elle était avant lui.
+ * celui de `莫性急` v2a dans les fixtures du site, copie réduite de la pièce de
+ * `content/`. Ce test établit que la fixture est exactement ce que produit le
+ * rattachement, à partir de la pièce telle qu'elle était avant lui.
  */
 const SITE_FIXTURES = fileURLToPath(
   new URL("../../../apps/site/tests/fixtures/content", import.meta.url),
 );
-const SLUG = "xing-xing-zhong-xing-xing";
+const SLUG = "mo-xing-ji";
 
 const BEFORE = `---
-title: 行行重行行
-slug: xing-xing-zhong-xing-xing
-projects: []
-status: experiment
-source:
-  author: 佚名
-  work: 古詩十九首
-  dynasty: 漢
+# 緩 en traditionnel sur les deux scans (Notion : 缓)
+# traduction écrite à la main sur le scan 2026-10-11_01_01.jpeg
+title: 莫性急
+slug: mo-xing-ji
+status: made
 versions:
+  # date du papier : 3.1.26 (Notion disait 2025-12-22)
   - id: v1
-    date: 2026-04-09
-    format: Bande étroite
-    columns: [行行重行行, 與君生別離]
-    intention: |
-      Une seule bande, très étroite : la marche sans fin.
+    date: 2026-01-03
+    format: 2x7
+    columns: [莫性急平流緩進, 墨行機兔起鶻落]
     variations:
       - id: v1a
-        script: xingcao
+        script: kaishu
         status: tried
-        personal_note: |
-          Le premier 行 part trop haut.
+        images:
+          - file: v1a.jpg
+            kind: work
+            capture: scan
+  # scan 2026-10-11_01_01.jpeg, image mise en avant de la pièce
+  # date du papier : 戈 立春 (丙午) → 2026-02-11 ; format 2x7 + 蘇東坡 (苏 écrit en simplifié)
   - id: v2
-    date: 2026-04-23
-    format: Bande étroite
-    columns: [行行重行行]
-    intention: |
-      Une seule colonne : la marche, sans la séparation.
+    date: 2026-02-11
+    format: 2x7 + 蘇東坡
+    columns: [莫性急平流緩進, 墨行機兔起鶻落]
     variations:
       - id: v2a
-        script: caoshu
-        status: set-aside
-  - id: v3
-    date: 2026-05-02
-    format: Bande étroite
-    columns: [行行重行行, 與君生別離]
-    intention: |
-      Retour aux deux colonnes, la seconde plus basse.
-    variations:
-      - id: v3a
-        script: xingcao
-        status: to-try
-pinyin_overrides:
-  行行重行行: háng háng chóng háng háng
-translation: |
-  Marcher, marcher, et marcher encore,
-  vivant, me voici séparé de toi.
+        script: kaishu
+        status: kept
+# à arbitrer (#76) — l'ancienne traduction de la pièce, écrite sur le scan 2026-10-11_01_01.jpeg
+# (celui de v2) : deux phrases pour deux colonnes, mais deux versions aux mêmes colonnes ;
+# à quelle version, ou aux deux, et coupée ainsi ?
+#   translation:
+#     - La patience et la constance dans la progression.
+#     - La vivacité et la précision dans l'action.
 published: true
 ---
 `;
@@ -73,23 +61,20 @@ published: true
 /** Le rattachement qui a produit la fixture, tel que la skill `scans` l'écrirait. */
 const ATTACHMENT = {
   piece: SLUG,
-  version: "v3",
-  variation: "v3a",
-  image: { kind: "work", caption: "La bande entière, au scanner." },
+  version: "v2",
+  variation: "v2a",
+  image: { kind: "work", featured: true },
 };
 
-/** Le scan d'origine : une bande étroite, plus haute que l'A4 à 300 dpi. */
-async function bandScan(dir: string): Promise<string> {
-  const source = join(dir, "2026-05-02_01_01.jpeg");
-  await sharp({ create: { width: 900, height: 4200, channels: 3, background: "#f4efe4" } })
-    .jpeg()
-    .toFile(source);
-  return source;
-}
-
 it("la fixture du site est le rattachement d'un scan par attachScan, à l'octet près", async () => {
-  const root = await writeTree({ [pieceFile(SLUG)]: BEFORE });
-  const source = await bandScan(await mkdtemp(join(tmpdir(), "bsls-drive-")));
+  const v1a = pieceImageFile(SLUG, "v1a.jpg");
+  const root = await writeTree({
+    [pieceFile(SLUG)]: BEFORE,
+    [v1a]: await readFile(join(SITE_FIXTURES, v1a)),
+  });
+  // Le scan de la fixture est déjà réduit : le rattacher ne doit plus le redimensionner.
+  const image = pieceImageFile(SLUG, "v2a.jpg");
+  const source = join(SITE_FIXTURES, image);
 
   const result = await attachScan(
     { ...ATTACHMENT, image: { ...ATTACHMENT.image, source } },
@@ -100,9 +85,8 @@ it("la fixture du site est le rattachement d'un scan par attachScan, à l'octet 
   expect(await readFile(join(root, pieceFile(SLUG)), "utf8")).toBe(
     await readFile(join(SITE_FIXTURES, pieceFile(SLUG)), "utf8"),
   );
-  const image = pieceImageFile(SLUG, "v3a.jpg");
   const produced = await sharp(join(root, image)).metadata();
-  const committed = await sharp(join(SITE_FIXTURES, image)).metadata();
+  const committed = await sharp(source).metadata();
   expect({ format: committed.format, width: committed.width, height: committed.height }).toEqual({
     format: produced.format,
     width: produced.width,

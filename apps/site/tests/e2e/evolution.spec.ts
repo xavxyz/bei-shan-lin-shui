@@ -1,97 +1,46 @@
 import { expect, test, type Page } from "@playwright/test";
 
-const piecePath = "/montagnes/shan-ju-qiu-ming";
-
-function showEvolution(page: Page) {
-  return page.getByText("voir l'évolution", { exact: true });
-}
+const piecePath = "/pieces/mo-xing-ji";
 
 function earlierVersions(page: Page) {
   return page.getByTestId("earlier-version");
 }
 
-test("les versions antérieures sont repliées au chargement", async ({ page }) => {
+test("les versions antérieures suivent la version courante, sans repli", async ({ page }) => {
   await page.goto(piecePath);
 
-  await expect(showEvolution(page)).toBeVisible();
-  await expect(
-    page.getByText("Deux colonnes, encre grasse, beaucoup de blanc en bas."),
-  ).toBeHidden();
-  await expect(page.getByText("Trop sage, les liaisons manquent de tension.")).toBeHidden();
+  await expect(page.getByRole("region", { name: "Versions antérieures" })).toBeVisible();
+  await expect(earlierVersions(page)).toHaveCount(1);
+  await earlierVersions(page).scrollIntoViewIfNeeded();
+  await expect(earlierVersions(page)).toBeVisible();
 });
 
-test("voir l'évolution montre chaque version antérieure en entier", async ({ page }) => {
+test("chaque version antérieure montre ses faits et son texte en simplifié", async ({ page }) => {
   await page.goto(piecePath);
-  await showEvolution(page).click();
 
   const version = earlierVersions(page);
-  await expect(version).toHaveCount(1);
-  const date = version.getByTestId("earlier-version-date");
-  await expect(date).toContainText("4 mars 2026");
-  await expect(date).toContainText("丙午雨水");
-  await expect(version.getByTestId("earlier-version-format")).toHaveText("A4 vertical");
-  await expect(version.getByTestId("earlier-version-columns")).toHaveText(
-    "空山新雨後 / 天氣晚來秋",
-  );
-  await expect(version.getByTestId("earlier-version-intention")).toHaveText(
-    "Deux colonnes, encre grasse, beaucoup de blanc en bas.",
+  await expect(version.getByTestId("earlier-version-date")).toHaveText("3 janvier 2026");
+  await expect(version.getByTestId("earlier-version-chinese-date")).toHaveText("乙巳冬至");
+  await expect(version.getByTestId("earlier-version-format")).toHaveText("2x7");
+  await expect(version.getByTestId("version-text").getByRole("listitem")).toHaveText(
+    ["莫性急平流缓进", "墨行机兔起鹘落"],
+    { useInnerText: true },
   );
 });
 
-test("toutes les variations d'une version antérieure sont listées, avec leur commentaire", async ({
-  page,
-}) => {
+test("toutes les variations d'une version antérieure sont listées", async ({ page }) => {
   await page.goto(piecePath);
-  await showEvolution(page).click();
 
   const variations = earlierVersions(page).getByTestId("variation");
-  await expect(variations).toHaveCount(2);
-  await expect(variations.getByTestId("variation-script")).toHaveText(["courant", "régulier"]);
-  await expect(variations.getByTestId("variation-status")).toHaveText(["écartée", "essayée"]);
-
-  const setAside = variations.filter({ hasText: "écartée" });
-  await expect(setAside.getByTestId("variation-note")).toHaveText(
-    "Trop sage, les liaisons manquent de tension.",
-  );
-
-  const tried = variations.filter({ hasText: "essayée" });
-  await expect(tried.getByTestId("variation-note")).toHaveText(
-    "En régulier, pour poser la structure de 雨.",
-  );
+  await expect(variations).toHaveCount(1);
+  await expect(variations.getByTestId("variation-script")).toHaveText(["régulier"]);
+  await expect(variations.getByTestId("variation-status")).toHaveText(["essayée"]);
 });
 
-test("cliquer une variation d'une version antérieure amène son carrousel sur sa première image", async ({
-  page,
-}) => {
-  await page.goto(piecePath);
-  await showEvolution(page).click();
+test("une pièce à version unique n'a pas de versions antérieures", async ({ page }) => {
+  await page.goto("/pieces/ti-po-shan-si-hou-shan-yuan");
 
-  const carousel = earlierVersions(page).getByTestId("carousel");
-  await expect(carousel.getByRole("button", { name: "Image suivante" })).toBeVisible();
-  await carousel
-    .getByTestId("variation")
-    .filter({ hasText: "essayée" })
-    .getByRole("button")
-    .click();
-
-  await expect(carousel.getByTestId("carousel-image")).toHaveAttribute(
-    "src",
-    "/content-images/shan-ju-qiu-ming/v1b-01.jpg",
-  );
-});
-
-test("les versions antérieures vont de la plus ancienne à la plus récente", async ({ page }) => {
-  await page.goto("/pieces/xing-xing-zhong-xing-xing");
-  await showEvolution(page).click();
-
-  await expect(
-    earlierVersions(page).getByTestId("earlier-version-date").locator("time"),
-  ).toHaveText(["9 avril 2026", "23 avril 2026"]);
-});
-
-test("une pièce à version unique n'affiche pas « voir l'évolution »", async ({ page }) => {
-  await page.goto("/montagnes/deng-guan-que-lou");
-
-  await expect(page.getByRole("heading", { name: "登鸛雀樓" })).toBeVisible();
-  await expect(showEvolution(page)).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "題破山寺後禪院" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Versions antérieures" })).toHaveCount(0);
+  await expect(earlierVersions(page)).toHaveCount(0);
 });

@@ -1,9 +1,12 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import { pieceHref } from "@bsls/content";
 import Layout from "../../layouts/Layout.astro";
-import PieceCard from "../../components/PieceCard.astro";
+import Gloss from "../../components/Gloss.astro";
+import Pinyin from "../../components/Pinyin.astro";
+import Wall from "../../components/Wall.astro";
+import UnscannedPieces from "../../components/UnscannedPieces.astro";
+import { hang } from "../../hang.js";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
@@ -19,14 +22,30 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { project, pieces } = Astro.props;
+const { wall, unscanned } = hang(pieces);
 ---
 
-<Layout title={project.title} theme={project.theme}>
-  <nav class="breadcrumb"><a href="/">Accueil</a></nav>
-  <h2>{project.title}</h2>
-  <p class="reading__body">{project.presentation}</p>
+<Layout title={project.title.traditional}>
+  <div class="project grid">
+    <header class="project__intro">
+      <h2 class="project__title" lang="zh-Hant">
+        <Pinyin pinyin={project.title.pinyin}>{project.title.traditional}</Pinyin>
+      </h2>
+      <Gloss gloss={project.gloss} />
+      {
+        project.presentation ? (
+          <p class="project__presentation reading__body">{project.presentation}</p>
+        ) : null
+      }
+    </header>
 
-  <ul class="card-list">
-    {pieces.map((piece) => <PieceCard piece={piece} href={pieceHref(piece.slug, project.id)} />)}
-  </ul>
+    <div class="project__pieces">
+      <section aria-labelledby="mur">
+        <h3 id="mur">Pièces · {wall.length}</h3>
+        <Wall pieces={wall} projectId={project.id} />
+      </section>
+
+      <UnscannedPieces pieces={unscanned} level={3} projectId={project.id} />
+    </div>
+  </div>
 </Layout>

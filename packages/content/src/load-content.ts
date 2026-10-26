@@ -8,14 +8,17 @@ import {
   pieceFrontmatterSchema,
   projectFileSchema,
   toIsoDate,
+  type ChineseText,
   type LoadedPiece,
   type LoadedProject,
   type LoadedVariation,
   type LoadedVersion,
   type PieceFrontmatter,
+  type ProjectFile,
   type z,
 } from "@bsls/schema";
 import { deriveChineseDate, deriveChineseText } from "./derive.js";
+import { deriveFormatLabel } from "./format-label.js";
 import { pickFeaturedImage, pickFeaturedVariation } from "./featured.js";
 import {
   IMAGES_DIR,
@@ -46,7 +49,12 @@ export type Content = {
 export type LoadResult = { ok: true; content: Content } | { ok: false; errors: ContentError[] };
 
 export type LoadOptions = {
-  /** Par défaut le contenu chargé est celui du site : les brouillons en sont absents. */
+  /**
+   * Par défaut le contenu chargé est celui du site public : seules les pièces
+   * publiées qui ont une image mise en avant en font partie. Avec cette option,
+   * tout est rendu, comme en mode admin et à la validation : brouillons et
+   * pièces encore sans image compris.
+   */
   includeUnpublished?: boolean;
 };
 
@@ -66,20 +74,25 @@ export async function loadContent(root: string, options: LoadOptions = {}): Prom
 
   if (errors.length > 0) return { ok: false, errors };
 
-  const published = options.includeUnpublished ? pieces : pieces.filter((piece) => piece.published);
+  const visible = options.includeUnpublished ? pieces : pieces.filter(isPubliclyVisible);
 
   return {
     ok: true,
     content: {
       projects: projectFiles.map((project) => ({
         ...project,
-        pieceSlugs: published
+        pieceSlugs: visible
           .filter((piece) => piece.projects.includes(project.id))
           .map((piece) => piece.slug),
       })),
-      pieces: published,
+      pieces: visible,
     },
   };
+}
+
+/** Le public ne voit que ce qui est publié et a de quoi se montrer : jamais une case vide. */
+function isPubliclyVisible(piece: LoadedPiece): boolean {
+  return piece.published && piece.hasImage;
 }
 
 type ProjectWithoutPieces = Omit<LoadedProject, "pieceSlugs">;
@@ -108,8 +121,14 @@ async function readProjects(root: string, errors: ContentError[]): Promise<Proje
       });
       continue;
     }
+    if (!checkProjectOverridesApply(parsed.data, file, errors)) continue;
 
-    projects.push({ ...parsed.data, id, href: projectHref(id) });
+    projects.push({
+      ...parsed.data,
+      title: deriveChineseText(parsed.data.title, parsed.data.pinyin_overrides),
+      id,
+      href: projectHref(id),
+    });
   }
 
   return projects.sort((a, b) => a.id.localeCompare(b.id));
@@ -216,16 +235,30 @@ function checkOverridesApply(piece: PieceFrontmatter, file: string, errors: Cont
   }
 }
 
+/** Le seul texte chinois d'un projet est son titre : une surcharge ne peut viser que lui. */
+function checkProjectOverridesApply(
+  project: ProjectFile,
+  file: string,
+  errors: ContentError[],
+): boolean {
+  const strays = Object.keys(project.pinyin_overrides).filter((key) => key !== project.title);
+  for (const key of strays) {
+    errors.push({
+      file,
+      path: `pinyin_overrides.${key}`,
+      message: "attendu : le titre du projet, seul texte chinois qu'il porte",
+    });
+  }
+  return strays.length === 0;
+}
+
 function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
   const overrides = piece.pinyin_overrides;
   const versions = [...piece.versions]
     .sort((a, b) => a.date.getTime() - b.date.getTime())
-    .map((version): LoadedVersion => ({
-      ...version,
-      date: toIsoDate(version.date),
-      chineseDate: deriveChineseDate(toIsoDate(version.date)),
-      columns: version.columns.map((column) => deriveChineseText(column, overrides)),
-      variations: version.variations.map((variation): LoadedVariation => {
+    .map((version): LoadedVersion => {
+      const chineseDate = deriveChineseText(deriveChineseDate(toIsoDate(version.date)));
+      const variations = version.variations.map((variation): LoadedVariation => {
         const images = variation.images.map((image) => ({
           ...image,
           src: contentImageUrl(piece.slug, image.file),
@@ -236,8 +269,18 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
           images,
           featuredImage: pickFeaturedImage(images),
         };
-      }),
-    }));
+      });
+      return {
+        ...version,
+        date: toIsoDate(version.date),
+        chineseDate: chineseDate.traditional,
+        chineseDateSimplified: chineseDate.simplified,
+        formatLabel: deriveFormatLabel(version.format),
+        columns: version.columns.map((column) => deriveChineseText(column, overrides)),
+        variations,
+        hasImage: variations.some((variation) => variation.featuredImage !== null),
+      };
+    });
 
   const latestVersion = versions[versions.length - 1]!;
   const project = piece.projects[0];
@@ -251,13 +294,24 @@ function toLoadedPiece(piece: PieceFrontmatter): LoadedPiece {
       full_text: piece.source.full_text
         ? deriveChineseText(piece.source.full_text, overrides)
         : undefined,
+      attribution: deriveAttribution(piece.source, overrides),
     },
     versions,
     latestVersion,
     featuredImage: featured?.featuredImage ?? null,
+    hasImage: versions.some((version) => version.hasImage),
     featuredScriptLabel: featured?.scriptLabel ?? null,
     href: pieceHref(piece.slug, project),
   } satisfies LoadedPiece);
+}
+
+/** Auteur, œuvre puis dynastie, ce que la source en nomme. */
+function deriveAttribution(
+  source: NonNullable<PieceFrontmatter["source"]>,
+  overrides: Record<string, string>,
+): ChineseText | undefined {
+  const named = [source.author, source.work, source.dynasty].filter(Boolean);
+  return named.length > 0 ? deriveChineseText(named.join(" · "), overrides) : undefined;
 }
 
 function toContentErrors(file: string, error: z.ZodError): ContentError[] {

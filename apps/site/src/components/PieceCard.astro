@@ -1,7 +1,11 @@
 ---
 import type { LoadedPiece } from "@bsls/schema";
+import Gloss from "./Gloss.astro";
+import Pinyin from "./Pinyin.astro";
+import { workTransitionName } from "../work-transition.js";
 
 type Props = {
+  /** Une pièce du mur : elle a toujours une image (`hang`). */
   piece: LoadedPiece;
   href: string;
 };
@@ -9,15 +13,23 @@ type Props = {
 const { piece, href } = Astro.props;
 ---
 
-<li>
-  <a class="card" href={href} data-testid="piece-link">
+<li class="wall__item">
+  <a class="wall__piece" href={href} data-testid="piece-link">
     {
       piece.featuredImage ? (
-        <img class="card__thumbnail" src={piece.featuredImage.src} alt="" loading="lazy" />
+        <img
+          class="wall__image"
+          src={piece.featuredImage.src}
+          alt=""
+          loading="lazy"
+          style={`view-transition-name: ${workTransitionName(piece.slug)}`}
+        />
       ) : null
     }
-    <h3 class="card__title card__title--cn" lang="zh-Hant">{piece.title.traditional}</h3>
-    <p class="card__meta">{piece.title.pinyin}</p>
+    <h3 class="wall__title" lang="zh-Hant">
+      <Pinyin pinyin={piece.title.pinyin}>{piece.title.traditional}</Pinyin>
+    </h3>
+    <Gloss gloss={piece.gloss} />
     {piece.published ? null : <span class="tag tag--unpublished">non publiée</span>}
   </a>
 </li>

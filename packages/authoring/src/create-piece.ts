@@ -29,12 +29,12 @@ export async function createPiece(
   const frontmatter = toYaml(
     compact({
       title: draft.title,
+      gloss: draft.gloss,
       slug,
       status: "idea",
       projects: draft.projects,
       source: draft.source,
       versions: [versionEntry("v1", draft.version)],
-      translation: draft.translation,
       pinyin_overrides:
         Object.keys(draft.pinyin_overrides).length > 0 ? draft.pinyin_overrides : undefined,
       published: draft.published,

@@ -44,7 +44,7 @@ const plannedVariationSchema = variationSchema
   });
 
 const plannedVersionSchema = versionSchema
-  .pick({ format: true, columns: true, intention: true })
+  .pick({ format: true, columns: true, intention: true, translation: true })
   .extend({
     id: versionIdSchema,
     /** Le schéma coerce la date ; le plan la garde lisible et corrigeable à la main. */
@@ -56,6 +56,7 @@ const plannedPieceSchema = pieceFieldsSchema
   .pick({
     slug: true,
     title: true,
+    gloss: true,
     status: true,
     projects: true,
     source: true,
@@ -70,7 +71,8 @@ const plannedPieceSchema = pieceFieldsSchema
       .min(1, "attendu : au moins une version"),
   });
 
-const plannedProjectSchema = projectFileSchema.extend({
+/** Comme pour les pièces, les surcharges de pinyin s'écrivent après l'import. */
+const plannedProjectSchema = projectFileSchema.omit({ pinyin_overrides: true }).extend({
   id: slugSchema,
   /** Vide tant que le calligraphe ne l'a pas écrite ; `apply` la réclamera. */
   presentation: z.string(),

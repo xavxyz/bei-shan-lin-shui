@@ -1,6 +1,6 @@
 # Les polices du modèle
 
-Les 體 dans lesquels s'écrit le modèle des grilles (ADR 0003). Chaque fichier est la police d'origine, telle que téléchargée ; une grille n'en embarque que les caractères de sa pièce.
+Les 體 dans lesquels s'écrit le modèle des grilles (ADR 0003). Chaque fichier est la police d'origine, telle que téléchargée ; une grille n'en embarque que les caractères de sa pièce. Le site emprunte TW-Kai, réduite aux caractères publiés (ADR 0005), et 霞鶩文楷 TC comme police de secours pour ceux que TW-Kai ne dessine pas (ADR 0006) : ne les déplacez pas sans `packages/site-font`.
 
 | 體 | Fichier | Police | Licence |
 | --- | --- | --- | --- |

@@ -82,6 +82,15 @@ describe("plan d'import", () => {
     });
   });
 
+  it("rejette une traduction de pièce : elle se fait par version", () => {
+    const old = planFor().replace("status: made", "status: made\n    translation: Une phrase.");
+
+    const result = parsePlan(old);
+
+    expect(result.ok).toBe(false);
+    expect(!result.ok && result.errors[0]?.path).toBe("pieces.0.translation");
+  });
+
   it("rejette un YAML illisible", () => {
     const result = parsePlan("pieces: [\n");
 

@@ -1,16 +1,17 @@
 import { z } from "zod";
 import { checkFormat } from "./format.js";
+import { plural } from "./plural.js";
 import {
   CAPTURE_MODES,
   IMAGE_KINDS,
   PIECE_STATUSES,
   SCRIPTS,
-  THEMES,
   VARIATION_STATUSES,
 } from "./vocabulary.js";
 
 export * from "./vocabulary.js";
 export * from "./format.js";
+export * from "./plural.js";
 export { z };
 
 /**
@@ -87,6 +88,11 @@ export const versionSchema = z.object({
   format: z.string().min(1),
   columns: z.array(z.string().min(1)).default([]),
   intention: prose.optional(),
+  /**
+   * Le français de la version, une ligne par colonne, 款 compris (voir GLOSSARY.md).
+   * Sa longueur est celle de `columns` : `pieceFrontmatterSchema` le vérifie.
+   */
+  translation: z.array(prose).optional(),
   variations: z.array(variationSchema).default([]),
 });
 
@@ -110,12 +116,22 @@ export const pinyinOverridesSchema = z.record(z.string().min(1), z.string().min(
  */
 export const pieceFieldsSchema = z.object({
   title: z.string().min(1),
+  /** Courte phrase française qui dit de quoi parle la pièce (voir GLOSSARY.md). */
+  gloss: prose.optional(),
   slug: slugSchema,
   projects: z.array(slugSchema).default([]),
   status: z.enum(PIECE_STATUSES),
   source: sourceSchema.optional(),
   versions: z.array(versionSchema).min(1, "attendu : au moins une version"),
-  translation: prose.optional(),
+  /** La traduction se fait par version : une `translation` de pièce est refusée. */
+  translation: z
+    .undefined({
+      errorMap: () => ({
+        message:
+          "la traduction se fait par version : attendu versions[].translation, une ligne par colonne",
+      }),
+    })
+    .optional(),
   pinyin_overrides: pinyinOverridesSchema.default({}),
   published: z.boolean().default(false),
 });
@@ -131,6 +147,7 @@ export const pieceFrontmatterSchema = pieceFieldsSchema.superRefine((piece, ctx)
     ctx,
   );
   piece.versions.forEach((version, versionIndex) => {
+    reportTranslationLength(version, versionIndex, ctx);
     reportDuplicates(
       version.variations.map((variation) => variation.id),
       (index) => ["versions", versionIndex, "variations", index, "id"],
@@ -138,6 +155,22 @@ export const pieceFrontmatterSchema = pieceFieldsSchema.superRefine((piece, ctx)
     );
   });
 });
+
+/** Une traduction présente a exactement une ligne par colonne : jamais de tableau décalé. */
+function reportTranslationLength(
+  version: z.output<typeof versionSchema>,
+  versionIndex: number,
+  ctx: z.RefinementCtx,
+): void {
+  if (!version.translation) return;
+  const expected = version.columns.length;
+  if (version.translation.length === expected) return;
+  ctx.addIssue({
+    code: z.ZodIssueCode.custom,
+    path: ["versions", versionIndex, "translation"],
+    message: `attendu : une ligne de traduction par colonne, soit ${plural(expected, "colonne")} ; reçu ${plural(version.translation.length, "ligne")}`,
+  });
+}
 
 function reportDuplicates(
   ids: string[],
@@ -159,8 +192,17 @@ function reportDuplicates(
 
 export const projectFileSchema = z.object({
   title: z.string().min(1),
-  presentation: prose,
-  theme: z.enum(THEMES),
+  /** Courte phrase française qui dit de quoi parle le projet (voir GLOSSARY.md). */
+  gloss: prose.optional(),
+  /** Optionnelle : un projet peut attendre que le calligraphe l'écrive. */
+  presentation: prose.optional(),
+  /**
+   * Les thèmes de couleur sont abandonnés (#70) : un projet qui en porte encore
+   * un est refusé, plutôt que de voir le champ ignoré en silence.
+   */
+  theme: z.never({ message: "le thème de projet n'existe plus : retirez `theme`" }).optional(),
+  /** Comme pour une pièce : indexées par le texte traditionnel exact, ici le titre. */
+  pinyin_overrides: pinyinOverridesSchema.default({}),
 });
 
 export type PieceFrontmatter = z.infer<typeof pieceFrontmatterSchema>;
@@ -194,17 +236,41 @@ export const loadedVersionSchema = versionSchema.extend({
   date: z.string(),
   /** Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais stockés. */
   chineseDate: z.string(),
+  /** La même date chinoise en simplifié (`丙午处暑`), telle que le site l'affiche. */
+  chineseDateSimplified: z.string(),
+  /**
+   * Le format dit en français (`4 colonnes de 5 caractères`), dérivé de la
+   * notation, jamais stocké. Une notation illisible n'a pas de libellé : elle
+   * le dit, et le site montre la notation telle quelle.
+   */
+  formatLabel: z.discriminatedUnion("readable", [
+    z.object({ readable: z.literal(true), text: z.string() }),
+    z.object({ readable: z.literal(false) }),
+  ]),
   columns: z.array(chineseTextSchema),
   variations: z.array(loadedVariationSchema),
+  /** Une version a une image dès qu'une de ses variations en a une. */
+  hasImage: z.boolean(),
 });
 
 export const loadedPieceSchema = pieceFieldsSchema.extend({
   title: chineseTextSchema,
-  source: sourceSchema.extend({ full_text: chineseTextSchema.optional() }).optional(),
+  source: sourceSchema
+    .extend({
+      full_text: chineseTextSchema.optional(),
+      /**
+       * Auteur, œuvre puis dynastie, joints par « · », et leurs dérivations ;
+       * absente si la source n'en nomme aucun.
+       */
+      attribution: chineseTextSchema.optional(),
+    })
+    .optional(),
   versions: z.array(loadedVersionSchema),
   /** Versions triées du plus ancien au plus récent : la dernière est l'intention courante. */
   latestVersion: loadedVersionSchema,
   featuredImage: loadedImageSchema.nullable(),
+  /** Une pièce a une image dès qu'une de ses versions en a une. */
+  hasImage: z.boolean(),
   /** Style d'écriture de cette variation, nommé en français. */
   featuredScriptLabel: z.string().nullable(),
   /** URL canonique de la pièce sur le site. */
@@ -212,6 +278,7 @@ export const loadedPieceSchema = pieceFieldsSchema.extend({
 });
 
 export const loadedProjectSchema = projectFileSchema.extend({
+  title: chineseTextSchema,
   id: z.string(),
   href: z.string(),
   /** Slugs des pièces publiées rattachées à ce projet, dans l'ordre du disque. */
@@ -222,5 +289,6 @@ export type ChineseText = z.infer<typeof chineseTextSchema>;
 export type LoadedImage = z.infer<typeof loadedImageSchema>;
 export type LoadedVariation = z.infer<typeof loadedVariationSchema>;
 export type LoadedVersion = z.infer<typeof loadedVersionSchema>;
+export type FormatLabel = LoadedVersion["formatLabel"];
 export type LoadedPiece = z.infer<typeof loadedPieceSchema>;
 export type LoadedProject = z.infer<typeof loadedProjectSchema>;

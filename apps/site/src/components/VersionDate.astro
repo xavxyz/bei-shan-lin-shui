@@ -1,5 +1,6 @@
 ---
 import type { LoadedVersion } from "@bsls/schema";
+import { frenchDate } from "../french-date.js";
 
 type Props = {
   version: LoadedVersion;
@@ -7,18 +8,10 @@ type Props = {
 };
 
 const { version, testId } = Astro.props;
-
-/** `YYYY-MM-DD` lu comme un jour civil, sans glissement de fuseau. */
-const frenchDate = new Date(`${version.date}T00:00:00Z`).toLocaleDateString("fr-FR", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-});
 ---
 
 <span class="tag" data-testid={testId}>
-  <time datetime={version.date}>{frenchDate}</time>
+  <time datetime={version.date}>{frenchDate(version.date)}</time>
   {" · "}
-  <span lang="zh-Hant">{version.chineseDate}</span>
+  <span lang="zh-Hans">{version.chineseDateSimplified}</span>
 </span>
