@@ -136,12 +136,6 @@ async function checkPlan(plan: ArbitratedPlan, root: string): Promise<ApplyError
   const projectIds = new Set(plan.projects.map((project) => project.id));
 
   for (const [index, project] of plan.projects.entries()) {
-    if (project.presentation.trim() === "") {
-      errors.push({
-        path: `projects.${index}.presentation`,
-        message: "à écrire avant l'import : un projet se présente",
-      });
-    }
     if (project.id === RESERVED_PROJECT_ID) {
       errors.push({
         path: `projects.${index}.id`,
@@ -253,7 +247,7 @@ function toProjectFile(project: PlannedProject): Record<string, unknown> {
   return {
     title: project.title,
     ...(project.gloss ? { gloss: project.gloss } : {}),
-    presentation: project.presentation,
+    ...(project.presentation ? { presentation: project.presentation } : {}),
   };
 }
 

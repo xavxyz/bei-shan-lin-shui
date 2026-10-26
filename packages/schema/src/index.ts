@@ -42,7 +42,11 @@ export const variationIdSchema = localIdSchema.regex(
   "attendu : un identifiant de variation, par exemple v1a",
 );
 
-const prose = z.string().min(1);
+/**
+ * Un texte écrit à la main — glose, traduction, intention, présentation… : un
+ * texte blanc n'y dirait rien, il est refusé. La valeur est gardée telle quelle.
+ */
+const prose = z.string().regex(/\S/, "attendu : un texte, ni vide ni fait seulement d'espaces");
 
 /** `AAAA-MM-JJ`, la forme sous laquelle le calligraphe date ses versions. */
 export function toIsoDate(date: Date): string {
@@ -234,10 +238,12 @@ export const loadedVariationSchema = variationSchema.extend({
 export const loadedVersionSchema = versionSchema.extend({
   /** Date au format `YYYY-MM-DD`, sérialisable. */
   date: z.string(),
-  /** Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais stockés. */
-  chineseDate: z.string(),
-  /** La même date chinoise en simplifié (`丙午处暑`), telle que le site l'affiche. */
-  chineseDateSimplified: z.string(),
+  /**
+   * Année en tronc et branche et jieqi (`丙午立夏`), dérivés de la date, jamais
+   * stockés ; et, comme tout texte chinois, son simplifié (`丙午处暑`), tel que
+   * le site l'affiche.
+   */
+  chineseDate: chineseTextSchema,
   /**
    * Le format dit en français (`4 colonnes de 5 caractères`), dérivé de la
    * notation, jamais stocké. Une notation illisible n'a pas de libellé : elle
@@ -281,7 +287,11 @@ export const loadedProjectSchema = projectFileSchema.extend({
   title: chineseTextSchema,
   id: z.string(),
   href: z.string(),
-  /** Slugs des pièces publiées rattachées à ce projet, dans l'ordre du disque. */
+  /**
+   * Slugs des pièces rattachées à ce projet que le chargement rend, dans l'ordre
+   * du disque : en public, les pièces publiées qui ont une image ; en admin,
+   * toutes.
+   */
   pieceSlugs: z.array(z.string()),
 });
 

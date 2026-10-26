@@ -74,8 +74,14 @@ const plannedPieceSchema = pieceFieldsSchema
 /** Comme pour les pièces, les surcharges de pinyin s'écrivent après l'import. */
 const plannedProjectSchema = projectFileSchema.omit({ pinyin_overrides: true }).extend({
   id: slugSchema,
-  /** Vide tant que le calligraphe ne l'a pas écrite ; `apply` la réclamera. */
-  presentation: z.string(),
+  /**
+   * Celle du contenu. Le plan la propose vide, à écrire ou non : laissée vide
+   * ou blanche, elle est tenue pour absente.
+   */
+  presentation: z.preprocess(
+    (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
+    projectFileSchema.shape.presentation,
+  ),
 });
 
 export const planFileSchema = z.object({

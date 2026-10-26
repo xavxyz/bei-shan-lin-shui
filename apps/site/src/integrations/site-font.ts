@@ -18,7 +18,7 @@ const FONT_FACE_MODULE = "virtual:bsls/site-font-face";
 const RESOLVED_FONT_FACE_MODULE = `\0${FONT_FACE_MODULE}`;
 
 /** TW-Kai et sa secours réduites à ce que le site montre : le contenu, et le titre du site. */
-async function siteFontsFor(): Promise<SiteFonts> {
+async function subsetFontsToSiteTexts(): Promise<SiteFonts> {
   const content = await readContent();
   return subsetSiteFonts([
     ...publishedTexts(content),
@@ -49,7 +49,7 @@ export function siteFont(): AstroIntegration {
                   id === FONT_FACE_MODULE ? RESOLVED_FONT_FACE_MODULE : undefined,
                 async load(id) {
                   if (id !== RESOLVED_FONT_FACE_MODULE) return undefined;
-                  const fonts = built ?? (await siteFontsFor());
+                  const fonts = built ?? (await subsetFontsToSiteTexts());
                   return `export default ${JSON.stringify(siteFontFace(fonts.fallback?.characters))};`;
                 },
                 configureServer(server) {
@@ -62,7 +62,7 @@ export function siteFont(): AstroIntegration {
                   });
                   server.middlewares.use((req, res, next) => {
                     if (req.url !== SITE_FONT_URL && req.url !== FALLBACK_FONT_URL) return next();
-                    siteFontsFor().then(({ twKai, fallback }) => {
+                    subsetFontsToSiteTexts().then(({ twKai, fallback }) => {
                       const data = req.url === SITE_FONT_URL ? twKai : fallback?.font;
                       if (!data) return next();
                       res.setHeader("Content-Type", "font/woff2");
@@ -76,7 +76,7 @@ export function siteFont(): AstroIntegration {
         });
       },
       "astro:build:start": async () => {
-        built = await siteFontsFor();
+        built = await subsetFontsToSiteTexts();
       },
       "astro:build:done": async ({ dir }) => {
         const { twKai, fallback } = built!;

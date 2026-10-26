@@ -1,5 +1,6 @@
 import { pieceFieldsSchema, z } from "@bsls/schema";
 import { readDraft } from "./drafts.js";
+import type { ChangeOf } from "./edit-document.js";
 import { editPiece } from "./edit-piece.js";
 import { editProject } from "./edit-project.js";
 import type { Outcome } from "./piece-file.js";
@@ -17,13 +18,7 @@ export async function setPieceGloss(
   slug: string,
   gloss: unknown,
 ): Promise<Outcome<object>> {
-  const read = readDraft(glossDraftSchema, { gloss });
-  if (!read.ok) return read;
-
-  return editPiece(root, slug, (text, _data, piece) => ({
-    edit: setField(text, piece, "gloss", read.draft.gloss, { after: ["title"] }),
-    result: {},
-  }));
+  return setGloss(gloss, (change) => editPiece(root, slug, change));
 }
 
 /** Écrit la glose d'un projet, comme celle d'une pièce : sous le titre, le reste du fichier intact. */
@@ -32,11 +27,19 @@ export async function setProjectGloss(
   projectId: string,
   gloss: unknown,
 ): Promise<Outcome<object>> {
+  return setGloss(gloss, (change) => editProject(root, projectId, change));
+}
+
+/** Lit la glose, puis la fait écrire sous le titre du document par `editDocument`. */
+async function setGloss(
+  gloss: unknown,
+  editDocument: (change: ChangeOf<unknown, object>) => Promise<Outcome<object>>,
+): Promise<Outcome<object>> {
   const read = readDraft(glossDraftSchema, { gloss });
   if (!read.ok) return read;
 
-  return editProject(root, projectId, (text, _data, project) => ({
-    edit: setField(text, project, "gloss", read.draft.gloss, { after: ["title"] }),
+  return editDocument((text, _data, map) => ({
+    edit: setField(text, map, "gloss", read.draft.gloss, { after: ["title"] }),
     result: {},
   }));
 }

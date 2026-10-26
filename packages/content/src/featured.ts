@@ -34,10 +34,11 @@ export function featuredVariation(variations: LoadedVariation[]): LoadedVariatio
 
 /**
  * Une pièce se montre par son travail le plus récent : la dernière version qui
- * a une image, courante ou antérieure, porte l'image mise en avant.
+ * a une image (`hasImage`, dérivé au chargement), courante ou antérieure, porte
+ * l'image mise en avant.
  */
 export function featuredVersion(versions: LoadedVersion[]): LoadedVersion | null {
-  return versions.findLast((version) => featuredVariation(version.variations)) ?? null;
+  return versions.findLast((version) => version.hasImage) ?? null;
 }
 
 /** La variation qui mène la version de l'image mise en avant. */

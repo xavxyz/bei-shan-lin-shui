@@ -46,7 +46,7 @@ export function publishedTexts(content: Pick<Content, "pieces" | "projects">): P
       both(piece.title),
       ...piece.versions.flatMap((version) => [
         ...version.columns.map(both),
-        `${version.chineseDate}\n${version.chineseDateSimplified}`,
+        both(version.chineseDate),
       ]),
       ...(source?.full_text ? [both(source.full_text)] : []),
       ...(source?.attribution ? [both(source.attribution)] : []),
@@ -108,19 +108,22 @@ export async function subsetSiteFonts(texts: PublishedText[]): Promise<SiteFonts
     }
   }
 
-  const characters = new Set(texts.flatMap(({ text }) => charactersOf(text)));
-  const twKaiCharacters = [...characters].filter(twKai.draws).join("");
+  const publishedCharacters = new Set(texts.flatMap(({ text }) => charactersOf(text)));
+  const twKaiCharacters = [...publishedCharacters].filter(twKai.draws).join("");
   const twKaiSubset = await subsetFont(twKai.data, twKaiCharacters, { targetFormat: "woff2" });
   if (beyondTwKai.size === 0) return { twKai: twKaiSubset };
 
   const fallback = await openFont(FALLBACK);
   const undrawn = [...beyondTwKai]
     .map(
-      ([owner, characters]) => [owner, [...characters].filter((c) => !fallback.draws(c))] as const,
+      ([owner, beyondTwKaiOfOwner]) =>
+        [owner, [...beyondTwKaiOfOwner].filter((character) => !fallback.draws(character))] as const,
     )
-    .filter(([, characters]) => characters.length > 0);
+    .filter(([, undrawnOfOwner]) => undrawnOfOwner.length > 0);
   if (undrawn.length > 0) {
-    const lines = undrawn.map(([owner, characters]) => `  ${owner} : ${characters.join(" ")}`);
+    const lines = undrawn.map(
+      ([owner, undrawnOfOwner]) => `  ${owner} : ${undrawnOfOwner.join(" ")}`,
+    );
     throw new Error(
       `Ni TW-Kai ni sa police de secours (霞鶩文楷 TC) ne dessinent ces caractères :\n${lines.join("\n")}`,
     );

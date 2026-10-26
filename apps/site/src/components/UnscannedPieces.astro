@@ -28,7 +28,11 @@ const heading = `Sans scan · ${pieces.length}`;
               <td class="gloss">{piece.gloss ?? ""}</td>
               <td>{PIECE_STATUS_LABELS[piece.status]}</td>
               <td>
-                <VersionDate version={piece.latestVersion} testId="unscanned-date" />
+                <span class="tag" data-testid="unscanned-date">
+                  <VersionDate version={piece.latestVersion} calendar="french" />
+                  {" · "}
+                  <VersionDate version={piece.latestVersion} calendar="chinese" />
+                </span>
               </td>
             </tr>
           ))}

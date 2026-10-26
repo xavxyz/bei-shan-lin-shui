@@ -7,6 +7,7 @@ import Pinyin from "../../components/Pinyin.astro";
 import Wall from "../../components/Wall.astro";
 import UnscannedPieces from "../../components/UnscannedPieces.astro";
 import { hang } from "../../hang.js";
+import { projectPieces } from "../../project-pieces.js";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
@@ -16,7 +17,7 @@ export const getStaticPaths = (async () => {
     params: { project: entry.data.id },
     props: {
       project: entry.data,
-      pieces: pieces.filter((piece) => piece.projects.includes(entry.data.id)),
+      pieces: projectPieces(entry.data, pieces),
     },
   }));
 }) satisfies GetStaticPaths;

@@ -1,5 +1,6 @@
 ---
 import type { LoadedVersion } from "@bsls/schema";
+import type { VersionTestIdPrefix } from "../version-test-ids.js";
 import VersionText from "./VersionText.astro";
 import VersionVariations from "./VersionVariations.astro";
 
@@ -9,8 +10,7 @@ type Props = {
   title: string;
   /** L'élément qui porte la version : `li` dans la liste des versions antérieures. */
   tag: "div" | "li";
-  /** Préfixe des repères de test : `version` pour la courante, `earlier-version` sinon. */
-  testIdPrefix: "version" | "earlier-version";
+  testIdPrefix: VersionTestIdPrefix;
   /** Le nom de transition de l'œuvre, pour la version de l'image mise en avant. */
   transitionName?: string;
 };

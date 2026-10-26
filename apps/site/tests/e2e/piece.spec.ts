@@ -59,7 +59,7 @@ test("un format que la notation ne lit pas s'affiche tel quel", async ({ page })
 test("une pièce en expérimentation l'affiche en français", async ({ page }) => {
   await page.goto("/pieces/mo-si-wen-ke");
 
-  await expect(page.getByTestId("piece-status")).toHaveText("expérimentation");
+  await expect(page.getByTestId("version-status")).toHaveText("expérimentation");
 });
 
 test("les styles d'écriture sont affichés en français, jamais en pinyin", async ({ page }) => {

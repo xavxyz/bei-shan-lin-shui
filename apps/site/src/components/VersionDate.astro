@@ -2,16 +2,29 @@
 import type { LoadedVersion } from "@bsls/schema";
 import { frenchDate } from "../french-date.js";
 
-type Props = {
-  version: LoadedVersion;
-  testId: string;
-};
+/** La date en français, ou la date chinoise, qui se lit en simplifié. */
+type Props =
+  | { version: LoadedVersion; calendar: "french" }
+  | {
+      version: LoadedVersion;
+      calendar: "chinese";
+      /** L'élément qui porte la date chinoise : `dd` dans les faits d'une version. */
+      tag?: "span" | "dd";
+      /** Le repère de test de la date chinoise. */
+      testId?: string;
+    };
 
-const { version, testId } = Astro.props;
+/* Une date de version, l'une ou l'autre : la seule source de leur rendu. */
+const props = Astro.props;
+const Element = props.calendar === "chinese" ? (props.tag ?? "span") : "span";
 ---
 
-<span class="tag" data-testid={testId}>
-  <time datetime={version.date}>{frenchDate(version.date)}</time>
-  {" · "}
-  <span lang="zh-Hans">{version.chineseDateSimplified}</span>
-</span>
+{
+  props.calendar === "french" ? (
+    <time datetime={props.version.date}>{frenchDate(props.version.date)}</time>
+  ) : (
+    <Element lang="zh-Hans" data-testid={props.testId}>
+      {props.version.chineseDate.simplified}
+    </Element>
+  )
+}
