@@ -163,7 +163,7 @@ test("l'œuvre de couverture d'un projet garde ses proportions ; un projet sans 
   await expect(empty.getByRole("img")).toHaveCount(0);
 });
 
-/** Chaque œuvre du mur a la hauteur donnée, et la largeur que lui dictent ses proportions. */
+/** L'image de chaque pièce du mur a la hauteur donnée, et la largeur que lui dictent ses proportions. */
 async function expectHungUncropped(page: Page, height: number) {
   const works = wall(page, 9).getByTestId("piece-link").locator("img");
   await expect(works).toHaveCount(9);
@@ -186,7 +186,9 @@ async function expectHungUncropped(page: Page, height: number) {
   }
 }
 
-test("les œuvres du mur ont une hauteur fixe et gardent leurs proportions", async ({ page }) => {
+test("les images des pièces du mur ont une hauteur fixe et gardent leurs proportions", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
   await expectHungUncropped(page, 18 * 16);
@@ -195,7 +197,7 @@ test("les œuvres du mur ont une hauteur fixe et gardent leurs proportions", asy
   await expectHungUncropped(page, 13 * 16);
 });
 
-test("les œuvres du mur sont accrochées sur leur pied", async ({ page }) => {
+test("les pièces du mur sont accrochées sur leur pied", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
 
@@ -206,7 +208,7 @@ test("les œuvres du mur sont accrochées sur leur pied", async ({ page }) => {
   expect(second.x).toBeGreaterThan(first.x + first.width);
 });
 
-test("sous chaque œuvre du mur, son titre chinois puis sa glose, à la largeur de l'œuvre", async ({
+test("sous l'image de chaque pièce du mur, son titre chinois puis sa glose, à sa largeur", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 900 });

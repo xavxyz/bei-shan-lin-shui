@@ -74,6 +74,32 @@ describe("findBannedWords", () => {
     expect(await findBannedWords(root)).toEqual([]);
   });
 
+  it("signale une locution où l'homonyme dit une pièce : les œuvres du mur, les autres œuvres", async () => {
+    const root = await writeTree({
+      "GLOSSARY.md": `**Pièce** : Une calligraphie. _À éviter_ : œuvre, page\n`,
+      "apps/site/src/components/Wall.astro":
+        "<!-- Chaque œuvre du mur garde ses proportions. -->\n",
+      "apps/site/tests/e2e/cimaise.spec.ts":
+        'test("les autres Œuvres s\'effacent", () => {});\n// Les œuvres du projet.\n',
+    });
+
+    expect(await findBannedWords(root)).toEqual([
+      "apps/site/src/components/Wall.astro:1 — « œuvre du mur » : dire Pièce",
+      "apps/site/tests/e2e/cimaise.spec.ts:1 — « autres Œuvres » : dire Pièce",
+      "apps/site/tests/e2e/cimaise.spec.ts:2 — « œuvres du projet » : dire Pièce",
+    ]);
+  });
+
+  it("laisse l'homonyme hors de ces locutions : l'œuvre entière, l'œuvre d'un auteur", async () => {
+    const root = await writeTree({
+      "GLOSSARY.md": `**Pièce** : Une calligraphie. _À éviter_ : œuvre, page\n`,
+      "apps/site/tests/e2e/piece.spec.ts":
+        "// L'œuvre entière, puis l'auteur, l'œuvre et la dynastie de la source.\n",
+    });
+
+    expect(await findBannedWords(root)).toEqual([]);
+  });
+
   it("ne lit ni le glossaire, ni les ADR qui discutent les termes, ni les textes de référence", async () => {
     const root = await writeTree({
       "GLOSSARY.md": GLOSSARY,
