@@ -2,7 +2,7 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 
 // La Cimaise : l'accueil sur papier teinté, son en-tête, son mur et ses rangées de projets.
 
-const motto = "Soutenu par le maître, je suis les vagues";
+const mottoText = "Soutenu par le maître, je suis les vagues";
 
 async function fontSize(locator: Locator): Promise<number> {
   return locator.evaluate((element) => parseFloat(getComputedStyle(element).fontSize));
@@ -13,7 +13,7 @@ function siteHeader(page: Page) {
   return {
     banner,
     title: banner.getByRole("heading", { name: "背山臨水" }),
-    motto: banner.getByText(motto),
+    motto: banner.getByText(mottoText),
   };
 }
 
@@ -103,7 +103,7 @@ function projectRow(page: Page, title: string) {
     .filter({ has: page.getByRole("heading", { name: title, exact: true }) });
 }
 
-test("une rangée de projet montre sa tête, sa présentation, puis son œuvre de couverture", async ({
+test("une rangée de projet montre sa tête, sa présentation, puis l'image de la pièce qui le couvre", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
@@ -144,7 +144,7 @@ test("une rangée de projet montre sa glose sous son titre, et rien à la place 
   await expect(row.getByRole("paragraph")).toHaveText(["Explorations personnelles", "1 pièce"]);
 });
 
-test("l'œuvre de couverture d'un projet garde ses proportions ; un projet sans pièce visible n'en a pas", async ({
+test("l'image de la pièce qui couvre un projet garde ses proportions ; un projet sans pièce visible n'en a pas", async ({
   page,
 }) => {
   await page.goto("/");
@@ -163,7 +163,7 @@ test("l'œuvre de couverture d'un projet garde ses proportions ; un projet sans 
   await expect(empty.getByRole("img")).toHaveCount(0);
 });
 
-/** Chaque œuvre du mur a la hauteur donnée, et la largeur que lui dictent ses proportions. */
+/** L'image de chaque pièce du mur a la hauteur donnée, et la largeur que lui dictent ses proportions. */
 async function expectHungUncropped(page: Page, height: number) {
   const works = wall(page, 9).getByTestId("piece-link").locator("img");
   await expect(works).toHaveCount(9);
@@ -186,7 +186,9 @@ async function expectHungUncropped(page: Page, height: number) {
   }
 }
 
-test("les œuvres du mur ont une hauteur fixe et gardent leurs proportions", async ({ page }) => {
+test("les images des pièces du mur ont une hauteur fixe et gardent leurs proportions", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
   await expectHungUncropped(page, 18 * 16);
@@ -195,7 +197,7 @@ test("les œuvres du mur ont une hauteur fixe et gardent leurs proportions", asy
   await expectHungUncropped(page, 13 * 16);
 });
 
-test("les œuvres du mur sont accrochées sur leur pied", async ({ page }) => {
+test("les pièces du mur sont accrochées sur leur pied", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
 
@@ -206,7 +208,7 @@ test("les œuvres du mur sont accrochées sur leur pied", async ({ page }) => {
   expect(second.x).toBeGreaterThan(first.x + first.width);
 });
 
-test("sous chaque œuvre du mur, son titre chinois puis sa glose, à la largeur de l'œuvre", async ({
+test("sous l'image de chaque pièce du mur, son titre chinois puis sa glose, à sa largeur", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 900 });

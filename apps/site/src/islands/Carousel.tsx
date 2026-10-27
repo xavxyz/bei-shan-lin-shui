@@ -57,11 +57,11 @@ export function Carousel({ variations, leadingVariation, title, transitionName }
   const shown = slides[index];
   const navigable = mounted && slides.length > 1;
 
-  const count = slides.length;
+  const slideCount = slides.length;
   /** D'une image à l'autre, en boucle ; à jour même appelé depuis le clavier. */
   const move = useCallback(
-    (by: number) => setShownIndex((current) => (current + by + count) % count),
-    [count],
+    (by: number) => setShownIndex((current) => (current + by + slideCount) % slideCount),
+    [slideCount],
   );
 
   // Les flèches ← → pilotent le premier carrousel visible, sans qu'il ait le focus.

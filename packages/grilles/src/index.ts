@@ -93,7 +93,7 @@ export async function generateGrids(request: GridRequest): Promise<GridResult> {
  * modèle et ce qu'ils disent du texte, chaque remarque une seule fois.
  */
 export function summarize(candidates: Candidate[], models: Model[]): string {
-  const notes = models.flatMap((model) =>
+  const modelNotes = models.flatMap((model) =>
     model.notes.map((note) =>
       note.startsWith(model.label) || note.startsWith("aucun 體")
         ? note
@@ -111,7 +111,7 @@ export function summarize(candidates: Candidate[], models: Model[]): string {
     }),
     [
       `Modèle · ${models.map((model) => model.label).join(", ")}, ${MODELS[0].label} par défaut`,
-      ...[...new Set(notes)].map((note) => `  — ${note}`),
+      ...[...new Set(modelNotes)].map((note) => `  — ${note}`),
     ].join("\n"),
   ].join("\n");
 }

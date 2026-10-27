@@ -4,11 +4,15 @@ import { lineAt, repoFiles } from "./repo-files.js";
 
 /**
  * Les mots que `GLOSSARY.md` marque « _À éviter_ » ne s'écrivent ni dans les
- * skills, ni dans la doc des agents, ni sur le site. Le glossaire lui-même,
- * les ADR qui discutent les termes et les textes de référence ne sont pas lus.
+ * skills, ni dans la doc des agents, ni sur le site, ni dans ses tests. Le
+ * glossaire lui-même, les ADR qui discutent les termes et les textes de
+ * référence ne sont pas lus.
  */
 
-/** Où le vocabulaire du domaine s'impose. `AGENTS.md`, lien vers `CLAUDE.md`, est lu par lui. */
+/**
+ * Où le vocabulaire du domaine s'impose. `AGENTS.md`, lien vers `CLAUDE.md`, est
+ * lu par lui. Les fixtures du site sont du contenu, que la vérification ne lit pas.
+ */
 const CHECKED = [
   "CLAUDE.md",
   "CODING_STANDARDS.md",
@@ -16,6 +20,8 @@ const CHECKED = [
   ".claude/skills",
   "docs/agents",
   "apps/site/src",
+  "apps/site/tests/e2e",
+  "apps/site/tests/verify-invalid-build.ts",
 ];
 
 /**
@@ -36,6 +42,23 @@ const HOMONYMS: Record<string, string> = {
   finie: "une tâche finie",
   cadre: "le bord du papier",
   "le maître": "la devise du site, 背山",
+};
+
+/**
+ * Les locutions où un homonyme reprend le sens à éviter, signalées malgré lui :
+ * le mur accroche des pièces, un projet en réunit, et sa couverture est l'image
+ * de l'une d'elles.
+ */
+const DESPITE_HOMONYM: Record<string, string[]> = {
+  œuvre: [
+    "œuvre du mur",
+    "œuvres du mur",
+    "autres œuvres",
+    "œuvre du projet",
+    "œuvres du projet",
+    "œuvre de couverture",
+    "œuvres de couverture",
+  ],
 };
 
 type Banned = { word: string; term: string; pattern: RegExp };
@@ -67,7 +90,13 @@ function parseGlossary(glossary: string): Banned[] {
     for (const item of list!.split(",").map((word) => word.trim())) {
       // « variante (pour un format candidat) » : le sens visé ne se lit pas au mot.
       if (item.includes("(")) continue;
-      if (terms.has(lower(item)) || lower(item) in HOMONYMS) continue;
+      if (terms.has(lower(item))) continue;
+      if (lower(item) in HOMONYMS) {
+        for (const locution of DESPITE_HOMONYM[lower(item)] ?? []) {
+          banned.push({ word: locution, term: term!, pattern: wholeWord(locution) });
+        }
+        continue;
+      }
       banned.push({ word: item, term: term!, pattern: wholeWord(item) });
     }
   }

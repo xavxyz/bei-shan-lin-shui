@@ -201,12 +201,11 @@ export function layoutSheet(sheet: Sheet): SheetLayout {
     const { across } = extents[index]!;
     const groupCell = cell / group.scale;
     for (let i = 0; i < group.ranks; i++) {
-      const { length, orientation } = group;
       const [x, y] =
-        orientation === "v"
+        group.orientation === "v"
           ? [right - offset - (i + 1) * groupCell, top + hang * cell]
           : [right - offset - across * cell, top + i * groupCell];
-      ranks.push({ x, y, length, orientation, cell: groupCell });
+      ranks.push({ x, y, length: group.length, orientation: group.orientation, cell: groupCell });
     }
     offset += across * cell;
   });

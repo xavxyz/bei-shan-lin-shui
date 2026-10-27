@@ -86,9 +86,9 @@ function pairOf(parent: YAMLMap, key: string): Pair | undefined {
 }
 
 /** Fin de la valeur d'une paire, commentaire de fin de ligne exclu. */
-function valueEnd(pair: Pair, keyStart: number): number {
+function valueEnd(pair: Pair, pairStart: number): number {
   const value = pair.value as Node | null;
-  return value?.range ? value.range[1] : keyStart;
+  return value?.range ? value.range[1] : pairStart;
 }
 
 export function rootMap(doc: Document.Parsed): YAMLMap | undefined {
@@ -149,22 +149,22 @@ const PRINT_WIDTH = 100;
  * en ligne quand la ligne tient dans la largeur de Prettier, qui la replierait
  * sinon ; une colonne commentée garde la sienne.
  */
-function keepColumnsInline(node: unknown, column: number): void {
+function keepColumnsInline(node: unknown, startColumn: number): void {
   if (isMap(node)) {
     for (const pair of node.items) {
       const value = pair.value;
       if (isScalar(pair.key) && pair.key.value === "columns" && isSeq(value)) {
         const columns = value.items.map((item) => String(isScalar(item) ? item.value : item));
-        const width = column + displayWidth(`columns: [${columns.join(", ")}]`);
+        const width = startColumn + displayWidth(`columns: [${columns.join(", ")}]`);
         const commented = value.items.some(
           (item) => isNode(item) && (item.comment || item.commentBefore),
         );
         value.flow = !commented && width <= PRINT_WIDTH;
       }
-      keepColumnsInline(value, column + 2);
+      keepColumnsInline(value, startColumn + 2);
     }
   } else if (isSeq(node)) {
-    for (const item of node.items) keepColumnsInline(item, column + 2);
+    for (const item of node.items) keepColumnsInline(item, startColumn + 2);
   }
 }
 

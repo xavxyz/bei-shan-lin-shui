@@ -8,8 +8,8 @@ export type Played = { target: string; name: string; delay: number; duration: nu
  */
 export async function recordAnimations(page: Page) {
   await page.evaluate(() => {
-    const played = new Map<string, Played>();
-    (window as Window & { played?: Map<string, Played> }).played = played;
+    const recorded = new Map<string, Played>();
+    (window as Window & { played?: Map<string, Played> }).played = recorded;
     const sample = () => {
       for (const animation of document.getAnimations()) {
         const effect = animation.effect as KeyframeEffect | null;
@@ -21,7 +21,7 @@ export async function recordAnimations(page: Page) {
             : animation instanceof CSSTransition
               ? `transition ${animation.transitionProperty}`
               : "animation";
-        played.set(`${target} ${name}`, {
+        recorded.set(`${target} ${name}`, {
           target,
           name,
           delay: Number(timing?.delay ?? 0),

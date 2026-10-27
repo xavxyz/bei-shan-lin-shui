@@ -1,6 +1,6 @@
 # Standards du dépôt
 
-Les règles qu'une relecture applique, une à une, au code, aux skills et à la doc d'une PR. Les règles mécaniques sont vérifiées par `pnpm validate:*` et `pnpm test` : elles ne sont pas redites ici.
+Les règles qu'une relecture applique, une à une, au code, aux skills et à la doc d'une PR. Les règles mécaniques sont vérifiées par `pnpm validate:*`, `pnpm lint` et `pnpm test` : elles ne sont pas redites ici.
 
 ## Une PR
 
@@ -15,7 +15,7 @@ Les règles qu'une relecture applique, une à une, au code, aux skills et à la 
 - **Une valeur dérivée se calcule en un seul endroit**, que tout le reste appelle. Deux calculs du même fait finissent par diverger.
 - **Un champ qui change dans `packages/schema` change dans la même PR partout où il est lu ou écrit**, et chaque paquet en reprend la définition plutôt que de la redire. La relecture cherche le nom du champ dans tout le dépôt : un schéma local du champ, une exigence que le schéma a levée, ou un type propre là où le schéma en a déjà un, est un défaut.
 - **Un commentaire dit ce que fait le code qu'il précède.** Le code change, le commentaire change dans le même commit.
-- **Les noms se lisent comme le code qui les entoure** : même vocabulaire, même forme. Un nom local ne masque ni un import, ni un nom d'une portée englobante.
+- **Les noms se lisent comme le code qui les entoure** : même vocabulaire, même forme.
 - **Les tests observent un comportement de l'extérieur**, par l'interface publique du paquet : ce qui est retourné, écrit sur le disque, ou vu par le visiteur. La structure interne d'un module reste libre de changer sans casser un test.
 
 ## La langue

@@ -27,8 +27,8 @@ async function box(locator: Locator): Promise<Box> {
  */
 async function watchTransitions(page: Page) {
   await page.evaluate(() => {
-    const watched: Watched = { gestures: new Map(), fades: new Map() };
-    (window as Window & { vu?: Watched }).vu = watched;
+    const seen: Watched = { gestures: new Map(), fades: new Map() };
+    (window as Window & { vu?: Watched }).vu = seen;
     const px = (value: unknown) => parseFloat(String(value));
     const boxOf = (style: ComputedKeyframe | CSSStyleDeclaration | undefined): Box => {
       const { e, f } = new DOMMatrixReadOnly(String(style?.transform ?? "none"));
@@ -41,8 +41,8 @@ async function watchTransitions(page: Page) {
         if (!effect || !target) continue;
         const frames = effect.getKeyframes();
         const timing = effect.getTiming();
-        if (target.startsWith("::view-transition-group(") && !watched.gestures.has(target)) {
-          watched.gestures.set(target, {
+        if (target.startsWith("::view-transition-group(") && !seen.gestures.has(target)) {
+          seen.gestures.set(target, {
             from: boxOf(frames[0]),
             to: boxOf(frames.at(-1)),
             duration: Number(timing.duration),
@@ -52,12 +52,12 @@ async function watchTransitions(page: Page) {
         const opacities = frames.map((frame) => frame.opacity);
         if (image && opacities.every((opacity) => opacity !== undefined)) {
           const key = `${target} ${String(timing.delay)}`;
-          if (watched.fades.has(key)) continue;
+          if (seen.fades.has(key)) continue;
           const around = getComputedStyle(
             document.documentElement,
             `::view-transition-group(${image[2]})`,
           );
-          watched.fades.set(key, {
+          seen.fades.set(key, {
             box: boxOf(around),
             from: Number(opacities[0]),
             to: Number(opacities.at(-1)),

@@ -562,7 +562,7 @@ pieces:
 
   it("tient pour absente la présentation que le calligraphe a laissée vide", async () => {
     const root = await contentRoot();
-    const plan = `
+    const planText = `
 projects:
   - id: zhong-he-ji
     title: 中和集
@@ -573,7 +573,7 @@ projects:
 pieces: []
 `;
 
-    const result = await applyText(plan, root);
+    const result = await applyText(planText, root);
 
     expect(result).toMatchObject({ ok: true });
     expect(await readFile(join(root, "projects/zhong-he-ji.yaml"), "utf8")).toBe("title: 中和集\n");
@@ -583,7 +583,7 @@ pieces: []
 
   it("garde en tête du fichier d'un projet le commentaire posé au-dessus de lui", async () => {
     const root = await contentRoot();
-    const plan = `
+    const planText = `
 projects:
   - id: zhong-he-ji
     title: 中和集
@@ -595,7 +595,7 @@ projects:
 pieces: []
 `;
 
-    await applyText(plan, root);
+    await applyText(planText, root);
 
     expect(await readFile(join(root, "projects/qi-gong.yaml"), "utf8")).toBe(
       [
@@ -610,7 +610,7 @@ pieces: []
 
   it("écrit la source du texte que le plan attribue à la pièce", async () => {
     const root = await contentRoot();
-    const plan = `
+    const planText = `
 pieces:
   - slug: mo-xing-ji
     title: 莫性急
@@ -626,7 +626,7 @@ pieces:
         columns: [莫性急平流緩進, 墨行機兔起鶻落]
 `;
 
-    await applyText(plan, root);
+    await applyText(planText, root);
 
     const loaded = await loadContent(root, { includeUnpublished: true });
     expect(loaded.ok && loaded.content.pieces[0]?.source).toMatchObject({
