@@ -29,6 +29,9 @@ jobs:
       - name: Typage
         run: pnpm typecheck
 
+      - name: Noms masqués
+        run: pnpm lint
+
       - name: Contenu du dépôt
         run: pnpm validate:content
 

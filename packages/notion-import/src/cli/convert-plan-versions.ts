@@ -18,7 +18,7 @@ async function main(paths: string[]): Promise<number> {
   }
 
   let failed = false;
-  for (const path of paths.map((path) => resolve(path))) {
+  for (const path of paths.map((given) => resolve(given))) {
     const { text, converted } = convertPlanToVersions(await readFile(path, "utf8"));
     if (converted > 0) await writeFile(path, text, "utf8");
 

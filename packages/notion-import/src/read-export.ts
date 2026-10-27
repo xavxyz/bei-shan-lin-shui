@@ -170,8 +170,8 @@ function parseFrenchDate(raw: string): string | undefined {
   return `${match[3]}-${pad(month + 1)}-${pad(Number(match[1]))}`;
 }
 
-function pad(value: number): string {
-  return String(value).padStart(2, "0");
+function pad(part: number): string {
+  return String(part).padStart(2, "0");
 }
 
 /* -------------------------------------------------------------------------- */
@@ -223,11 +223,11 @@ function titleKey(name: string): string {
 }
 
 /** Les titres longs sont tronqués dans les noms de fichiers : le préfixe suffit. */
-function matches(fileKey: string, titleKey: string): boolean {
-  if (fileKey === "" || titleKey === "") return false;
-  return fileKey.length >= titleKey.length
-    ? fileKey.startsWith(titleKey)
-    : titleKey.startsWith(fileKey);
+function matches(fileKey: string, pageKey: string): boolean {
+  if (fileKey === "" || pageKey === "") return false;
+  return fileKey.length >= pageKey.length
+    ? fileKey.startsWith(pageKey)
+    : pageKey.startsWith(fileKey);
 }
 
 const PROPERTY_LINE = /^[^\n:]{1,60}:\s/;

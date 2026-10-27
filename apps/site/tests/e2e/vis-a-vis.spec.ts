@@ -68,8 +68,8 @@ test.describe("sur un écran large", () => {
     expect(image.bottom).toBeLessThanOrEqual(viewport.height);
 
     const natural = await work(page).evaluate((element) => {
-      const image = element as HTMLImageElement;
-      return image.naturalWidth / image.naturalHeight;
+      const { naturalWidth, naturalHeight } = element as HTMLImageElement;
+      return naturalWidth / naturalHeight;
     });
     expect(image.width / image.height).toBeCloseTo(natural, 1);
   });

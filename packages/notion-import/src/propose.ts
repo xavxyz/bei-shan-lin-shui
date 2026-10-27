@@ -128,11 +128,11 @@ function proposePiece(
   const slug = proposeSlug(title, taken, warnings);
   taken.add(slug);
 
-  const hub = hubs.find((candidate) => candidate.source === page.title);
-  if (hub) {
+  const pageHub = hubs.find((candidate) => candidate.source === page.title);
+  if (pageHub) {
     warnings.push({
       field: "projects",
-      message: `cette page en reliait ${hub.members.size} autres et devient le projet ${hub.id} : sans doute un échafaudage Notion plutôt qu'une pièce, à retirer`,
+      message: `cette page en reliait ${pageHub.members.size} autres et devient le projet ${pageHub.id} : sans doute un échafaudage Notion plutôt qu'une pièce, à retirer`,
     });
   }
 

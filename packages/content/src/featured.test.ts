@@ -71,7 +71,7 @@ function version(id: string, variations: LoadedVariation[]): LoadedVersion {
     formatLabel: { readable: false },
     columns: [],
     variations,
-    hasImage: variations.some((variation) => variation.featuredImage !== null),
+    hasImage: variations.some(({ featuredImage }) => featuredImage !== null),
   });
 }
 

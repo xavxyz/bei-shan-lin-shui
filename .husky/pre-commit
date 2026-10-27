@@ -1,4 +1,5 @@
 git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 -r pnpm exec prettier --check --ignore-unknown
+git diff --cached --name-only --diff-filter=ACMR -z -- "*.ts" "*.tsx" "*.astro" | xargs -0 -r pnpm exec eslint --no-warn-ignored
 pnpm validate:content
 pnpm validate:imports
 pnpm validate:repo
