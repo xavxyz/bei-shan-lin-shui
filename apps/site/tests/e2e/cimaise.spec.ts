@@ -2,7 +2,7 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 
 // La Cimaise : l'accueil sur papier teinté, son en-tête, son mur et ses rangées de projets.
 
-const MOTTO = "Soutenu par le maître, je suis les vagues";
+const mottoText = "Soutenu par le maître, je suis les vagues";
 
 async function fontSize(locator: Locator): Promise<number> {
   return locator.evaluate((element) => parseFloat(getComputedStyle(element).fontSize));
@@ -13,7 +13,7 @@ function siteHeader(page: Page) {
   return {
     banner,
     title: banner.getByRole("heading", { name: "背山臨水" }),
-    motto: banner.getByText(MOTTO),
+    motto: banner.getByText(mottoText),
   };
 }
 
