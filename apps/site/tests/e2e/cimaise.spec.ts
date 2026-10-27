@@ -103,7 +103,7 @@ function projectRow(page: Page, title: string) {
     .filter({ has: page.getByRole("heading", { name: title, exact: true }) });
 }
 
-test("une rangée de projet montre sa tête, sa présentation, puis son œuvre de couverture", async ({
+test("une rangée de projet montre sa tête, sa présentation, puis l'image de la pièce qui le couvre", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
@@ -144,7 +144,7 @@ test("une rangée de projet montre sa glose sous son titre, et rien à la place 
   await expect(row.getByRole("paragraph")).toHaveText(["Explorations personnelles", "1 pièce"]);
 });
 
-test("l'œuvre de couverture d'un projet garde ses proportions ; un projet sans pièce visible n'en a pas", async ({
+test("l'image de la pièce qui couvre un projet garde ses proportions ; un projet sans pièce visible n'en a pas", async ({
   page,
 }) => {
   await page.goto("/");

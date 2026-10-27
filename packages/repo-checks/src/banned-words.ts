@@ -46,10 +46,19 @@ const HOMONYMS: Record<string, string> = {
 
 /**
  * Les locutions où un homonyme reprend le sens à éviter, signalées malgré lui :
- * le mur accroche des pièces, et un projet en réunit.
+ * le mur accroche des pièces, un projet en réunit, et sa couverture est l'image
+ * de l'une d'elles.
  */
 const DESPITE_HOMONYM: Record<string, string[]> = {
-  œuvre: ["œuvre du mur", "œuvres du mur", "autres œuvres", "œuvre du projet", "œuvres du projet"],
+  œuvre: [
+    "œuvre du mur",
+    "œuvres du mur",
+    "autres œuvres",
+    "œuvre du projet",
+    "œuvres du projet",
+    "œuvre de couverture",
+    "œuvres de couverture",
+  ],
 };
 
 type Banned = { word: string; term: string; pattern: RegExp };

@@ -80,13 +80,14 @@ describe("findBannedWords", () => {
       "apps/site/src/components/Wall.astro":
         "<!-- Chaque œuvre du mur garde ses proportions. -->\n",
       "apps/site/tests/e2e/cimaise.spec.ts":
-        'test("les autres Œuvres s\'effacent", () => {});\n// Les œuvres du projet.\n',
+        'test("les autres Œuvres s\'effacent", () => {});\n// Les œuvres du projet.\n// Son œuvre de couverture.\n',
     });
 
     expect(await findBannedWords(root)).toEqual([
       "apps/site/src/components/Wall.astro:1 — « œuvre du mur » : dire Pièce",
       "apps/site/tests/e2e/cimaise.spec.ts:1 — « autres Œuvres » : dire Pièce",
       "apps/site/tests/e2e/cimaise.spec.ts:2 — « œuvres du projet » : dire Pièce",
+      "apps/site/tests/e2e/cimaise.spec.ts:3 — « œuvre de couverture » : dire Pièce",
     ]);
   });
 
