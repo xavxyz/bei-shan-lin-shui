@@ -74,3 +74,7 @@ Les cinq rôles canoniques, sous leurs noms par défaut (`needs-triage`, `needs-
 ### Domain docs
 
 Un seul contexte : `GLOSSARY.md` à la racine, ADR dans `docs/adr/`. Voir `docs/agents/domain.md`.
+
+### Code review
+
+Une revue porte sur un ticket, contre sa base ; celle d'une PR de plusieurs tickets ne cherche que leur cohérence. Avant de lancer `code-review`, voir `docs/agents/relecture.md`.
