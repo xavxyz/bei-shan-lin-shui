@@ -1,0 +1,56 @@
+---
+import type { LoadedManifesto } from "@bsls/schema";
+
+/**
+ * Le manifeste de 山山 sur l'accueil, en entier, cité tel qu'il est écrit, en
+ * simplifié (ADR 0007) : chaque paragraphe en regard de sa traduction, les
+ * premiers visibles, la suite à déplier. L'épigraphe, en traditionnel, se tient
+ * en colonne à côté du texte.
+ */
+type Props = { manifesto: LoadedManifesto };
+
+const { manifesto } = Astro.props;
+/** Les paragraphes lus d'emblée ; la suite attend que le visiteur l'ouvre. */
+const SHOWN = 3;
+const shown = manifesto.paragraphs.slice(0, SHOWN);
+const rest = manifesto.paragraphs.slice(SHOWN);
+---
+
+<section class="manifesto grid" aria-labelledby="manifeste">
+  <p class="manifesto__epigraph" lang="zh-Hant">{manifesto.epigraph}</p>
+  <div class="manifesto__text">
+    <h2 id="manifeste" class="manifesto__title">
+      <span lang="zh-Hans">{manifesto.title}</span>
+      <span class="manifesto__french-title">{manifesto.french_title}</span>
+    </h2>
+    <ol class="manifesto__paragraphs">
+      {
+        shown.map((paragraph) => (
+          <li>
+            <p lang="zh-Hans">{paragraph.zh}</p>
+            <p>{paragraph.fr}</p>
+          </li>
+        ))
+      }
+    </ol>
+    {
+      rest.length > 0 && (
+        <details class="manifesto__rest">
+          <summary>La suite du manifeste</summary>
+          <ol class="manifesto__paragraphs" start={SHOWN + 1}>
+            {rest.map((paragraph) => (
+              <li>
+                <p lang="zh-Hans">{paragraph.zh}</p>
+                <p>{paragraph.fr}</p>
+              </li>
+            ))}
+          </ol>
+        </details>
+      )
+    }
+    <p class="manifesto__signature" lang="zh-Hans">{manifesto.signature}</p>
+    <p class="manifesto__translator">
+      Traduction de <span lang="zh-Hans">{manifesto.translator}</span>
+    </p>
+  </div>
+</section>

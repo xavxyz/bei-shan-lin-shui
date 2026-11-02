@@ -4,15 +4,20 @@ import Layout from "../layouts/Layout.astro";
 import Wall from "../components/Wall.astro";
 import ProjectRow from "../components/ProjectRow.astro";
 import UnscannedPieces from "../components/UnscannedPieces.astro";
+import Manifesto from "../components/Manifesto.astro";
 import { hang } from "../hang.js";
 import { projectPieces } from "../project-pieces.js";
 
 const projects = (await getCollection("projects")).map((entry) => entry.data);
 const pieces = (await getCollection("pieces")).map((entry) => entry.data);
+// Au plus un manifeste ; sans lui, l'accueil commence au mur.
+const [manifesto] = (await getCollection("manifesto")).map((entry) => entry.data);
 const { wall, unscanned } = hang(pieces);
 ---
 
 <Layout title="Projets">
+  {manifesto && <Manifesto manifesto={manifesto} />}
+
   <section aria-labelledby="mur">
     <h2 id="mur">Pièces · {wall.length}</h2>
     <Wall pieces={wall} />

@@ -1,7 +1,7 @@
 import { defineCollection } from "astro:content";
 import type { Loader } from "astro/loaders";
 import type { Content } from "@bsls/content";
-import { loadedPieceSchema, loadedProjectSchema } from "@bsls/schema";
+import { loadedManifestoSchema, loadedPieceSchema, loadedProjectSchema } from "@bsls/schema";
 import { readContent } from "./read-content.js";
 
 /**
@@ -32,4 +32,12 @@ const pieces = defineCollection({
   schema: loadedPieceSchema.extend({ id: loadedPieceSchema.shape.slug }),
 });
 
-export const collections = { projects, pieces };
+/** Le manifeste, s'il y en a un : une collection d'au plus une entrée. */
+const manifesto = defineCollection({
+  loader: contentLoader("manifesto", (content) =>
+    content.manifesto ? [{ ...content.manifesto, id: "manifeste" }] : [],
+  ),
+  schema: loadedManifestoSchema,
+});
+
+export const collections = { projects, pieces, manifesto };

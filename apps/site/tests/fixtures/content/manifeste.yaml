@@ -1,0 +1,19 @@
+# Un manifeste court, pour les tests de bout en bout : quatre paragraphes, dont le dernier
+# se déplie, et des caractères que TW-Kai dessine.
+title: 自由书法
+french_title: La calligraphie libre
+author: 孙山山
+place: 于巴黎
+date: 2004 年 7 月
+translator: 山山
+source: Un texte écrit pour les tests.
+epigraph: 針尖上的舞蹈
+paragraphs:
+  - zh: 书法是写作的艺术。
+    fr: La calligraphie est l'art d'écrire.
+  - zh: 艺术是对未来的启示。
+    fr: L'art est une révélation du futur.
+  - zh: 古典书法只有一个形象。
+    fr: Il n'y a qu'une seule image en calligraphie classique.
+  - zh: 自由的书法是针尖上的舞蹈。
+    fr: La calligraphie libre est une danse sur la pointe d'une aiguille.

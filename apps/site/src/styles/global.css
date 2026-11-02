@@ -184,6 +184,121 @@ main > section + .unscanned {
   margin-top: 5rem;
 }
 
+/* Le manifeste, en tête de l'accueil : le texte en colonnes 1 à 9, chaque paragraphe
+   en regard de sa traduction ; l'épigraphe en colonne verticale, collante, en 11 à 12. */
+.manifesto {
+  align-items: start;
+}
+
+.manifesto__epigraph {
+  grid-column: 11 / -1;
+  grid-row: 1;
+  justify-self: center;
+  position: sticky;
+  top: 2rem;
+  margin: 0;
+  writing-mode: vertical-rl;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 0.3em;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.manifesto__text {
+  grid-column: 1 / span 9;
+  grid-row: 1;
+}
+
+.manifesto__title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0 0 1.5rem;
+  font-weight: normal;
+}
+
+.manifesto__title [lang] {
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  letter-spacing: 0.08em;
+}
+
+.manifesto__french-title {
+  color: var(--muted);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.manifesto__paragraphs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.manifesto__paragraphs li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--gutter);
+  padding: 1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.manifesto__paragraphs p {
+  margin: 0;
+}
+
+.manifesto__paragraphs [lang] {
+  font-size: 1.15rem;
+  line-height: 1.9;
+}
+
+.manifesto__rest summary {
+  cursor: pointer;
+  color: var(--accent);
+  padding: 1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.manifesto__signature {
+  margin: 1.5rem 0 0.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.manifesto__translator {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Sous 64 rem, l'épigraphe passe en ligne au-dessus du texte, qui prend toute la largeur. */
+@media (max-width: 64rem) {
+  .manifesto__epigraph {
+    grid-column: 1 / -1;
+    justify-self: start;
+    position: static;
+    margin-bottom: 1.5rem;
+    writing-mode: horizontal-tb;
+    font-size: clamp(2rem, 8vw, 3rem);
+    letter-spacing: 0.2em;
+  }
+
+  .manifesto__text {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+/* Sur téléphone, la traduction suit son paragraphe chinois. */
+@media (max-width: 40rem) {
+  .manifesto__paragraphs li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+}
+
 /* Les rangées de projets : la tête en colonnes 1 à 4, la présentation en 5 à 9,
    la couverture en 10 à 12. */
 .project-rows {
