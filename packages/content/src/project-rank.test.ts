@@ -8,7 +8,7 @@ async function loadIds(projects: Record<string, object>) {
   return result.content.projects.map((project) => project.id);
 }
 
-describe("l'ordre des projets", () => {
+describe("le rang des projets", () => {
   it("suit l'identifiant quand aucun projet n'a de rang", async () => {
     const ids = await loadIds({
       shan: { title: "山" },
