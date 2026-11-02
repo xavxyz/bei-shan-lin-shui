@@ -24,19 +24,38 @@ title: 牌樓聯
 slug: pai-lou-lian
 projects:
   - hong-lou-meng
-status: idea
+status: made
 versions:
   - id: v1
-    date: 2026-07-12
+    date: 2026-10-20 # aucune date sur le papier ; date des photos (Notion disait 2026-07-12)
     format: "[(1x7, 1x4h, 1x7), (1x7, 1x4h, 1x7), (1x10)]"
     # chaque arche dans l'ordre des groupes, de droite à gauche : 上聯, 橫批 au-dessus, 下聯
     columns:
-      - 假作真時真亦假 # feuille 1
-      - 太虛幻境
-      - 無為有處有還無
-      - 假去真來真勝假 # feuille 2 ; 胜 sur zh.wikisource, résidu de simplifié
+      - 假作真時真亦假 # feuille 1 ; 眞 sur le papier
+      - 太虛幻境 # 虛 dans une variante qui ne s'écrit pas au clavier
+      - 無為有處有還無 # 爲 sur le papier ; le second 有 écrit en style libre ; signature 戈 en cursive, hors grille, au bord gauche
+      - 假去真來真勝假 # feuille 2 ; 眞 sur le papier ; le dernier 假 écrit en style libre ; 勝 sur le papier (胜 sur zh.wikisource)
       - 真如福地
-      - 無原有是有非無
-      - 太虛幻境即是真如福地 # feuille 3
+      - 無原有是有非無 # le second 有 et le dernier 無 écrits en style libre
+      - 太虛幻境即是真如福地 # feuille 3 ; 虛 en variante ; 眞 sur le papier ; 真 et 如 écrits en style libre
+    variations:
+      - id: v1a
+        script: kaishu
+        status: kept
+        images:
+          - file: v1a.jpg
+            kind: work
+            capture: photo
+            featured: true
+          - file: v1a-02.jpg
+            kind: work
+            capture: photo
+          - file: v1a-03.jpg
+            kind: work
+            capture: photo
+          - file: v1a-04.jpg
+            kind: context
+            capture: photo
+            caption: Sur la table de travail, avec le 紅樓夢 dédicacé.
 published: true
 ---
