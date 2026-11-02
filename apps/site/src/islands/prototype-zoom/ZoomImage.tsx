@@ -227,30 +227,41 @@ function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: ()
 
 /* ───────────── B — Loupe ───────────── */
 
-const LENS = 224; // diamètre en px
+const LENS = 224; // diamètre en px, à la souris
+const LENS_TOUCH = 150; // au doigt, sur un écran étroit
+const LONG_PRESS = 250; // ms avant que la loupe n'apparaisse au doigt
+
+type Lens = { x: number; y: number; w: number; h: number; touch: boolean };
 
 function LoupeZoom({ imageRef, ...props }: VariantProps) {
-  const [lens, setLens] = useState<{
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-    touch: boolean;
-  } | null>(null);
+  const [lens, setLens] = useState<Lens | null>(null);
   const [power, setPower] = useState(3);
   const wrapper = useRef<HTMLSpanElement>(null);
+  const lensRef = useRef(lens);
+  lensRef.current = lens;
 
   useEffect(() => {
     reportState(
       lens
         ? {
-            loupe: "visible",
+            loupe: lens.touch ? "visible (doigt)" : "visible",
             grossissement: `${power}×`,
             point: `${Math.round(lens.x)}, ${Math.round(lens.y)}`,
           }
         : { loupe: "cachée", grossissement: `${power}×` },
     );
   }, [lens, power]);
+
+  function place(clientX: number, clientY: number, touch: boolean) {
+    const box = wrapper.current!.querySelector("img")!.getBoundingClientRect();
+    setLens({
+      x: clamp(clientX - box.left, 0, box.width),
+      y: clamp(clientY - box.top, 0, box.height),
+      w: box.width,
+      h: box.height,
+      touch,
+    });
+  }
 
   useEffect(() => {
     const element = wrapper.current!;
@@ -260,31 +271,62 @@ function LoupeZoom({ imageRef, ...props }: VariantProps) {
         clamp(Math.round((current - Math.sign(event.deltaY) * 0.5) * 2) / 2, 1.5, 8),
       );
     }
+
+    // Au doigt : un appui long fait venir la loupe ; un geste rapide reste à la
+    // page (défilement) et au carrousel (glissement).
+    let timer: number | undefined;
+    let start: { x: number; y: number } | null = null;
+    function onTouchStart(event: TouchEvent) {
+      if (event.touches.length !== 1) return;
+      const touch = event.touches[0]!;
+      start = { x: touch.clientX, y: touch.clientY };
+      timer = window.setTimeout(() => {
+        place(start!.x, start!.y, true);
+        navigator.vibrate?.(10);
+      }, LONG_PRESS);
+    }
+    function onTouchMove(event: TouchEvent) {
+      const touch = event.touches[0]!;
+      if (lensRef.current?.touch) {
+        event.preventDefault(); // la loupe tient le doigt : ni défilement, ni glissement
+        place(touch.clientX, touch.clientY, true);
+      } else if (start && Math.hypot(touch.clientX - start.x, touch.clientY - start.y) > 8) {
+        window.clearTimeout(timer); // c'était un geste, pas un appui
+      }
+    }
+    function onTouchEnd(event: TouchEvent) {
+      window.clearTimeout(timer);
+      start = null;
+      if (lensRef.current?.touch) {
+        event.preventDefault();
+        setLens(null);
+      }
+    }
     element.addEventListener("wheel", onWheel, { passive: false });
-    return () => element.removeEventListener("wheel", onWheel);
+    element.addEventListener("touchstart", onTouchStart, { passive: true });
+    element.addEventListener("touchmove", onTouchMove, { passive: false });
+    element.addEventListener("touchend", onTouchEnd, { passive: false });
+    element.addEventListener("touchcancel", onTouchEnd);
+    return () => {
+      element.removeEventListener("wheel", onWheel);
+      element.removeEventListener("touchstart", onTouchStart);
+      element.removeEventListener("touchmove", onTouchMove);
+      element.removeEventListener("touchend", onTouchEnd);
+      element.removeEventListener("touchcancel", onTouchEnd);
+    };
   }, []);
 
-  function place(event: ReactPointerEvent, touch: boolean) {
-    const box = wrapper.current!.querySelector("img")!.getBoundingClientRect();
-    setLens({
-      x: clamp(event.clientX - box.left, 0, box.width),
-      y: clamp(event.clientY - box.top, 0, box.height),
-      w: box.width,
-      h: box.height,
-      touch,
-    });
-  }
-
+  const size = lens?.touch ? LENS_TOUCH : LENS;
   const lensStyle: CSSProperties | undefined = lens
     ? {
-        width: LENS,
-        height: LENS,
-        left: lens.x - LENS / 2,
+        width: size,
+        height: size,
+        left: lens.x - size / 2,
         // Au doigt, la loupe passe au-dessus pour qu'il ne la cache pas.
-        top: lens.y - LENS / 2 - (lens.touch ? LENS * 0.75 : 0),
+        top: lens.y - size / 2 - (lens.touch ? size * 0.85 : 0),
         backgroundImage: `url("${props.src}")`,
         backgroundSize: `${lens.w * power}px ${lens.h * power}px`,
-        backgroundPosition: `${-(lens.x * power - LENS / 2)}px ${-(lens.y * power - LENS / 2)}px`,
+        backgroundPosition: `${-(lens.x * power - size / 2)}px ${-(lens.y * power - size / 2)}px`,
       }
     : undefined;
 
@@ -292,27 +334,25 @@ function LoupeZoom({ imageRef, ...props }: VariantProps) {
     <span
       ref={wrapper}
       className="pz-loupe"
+      data-active={lens ? "true" : undefined}
       onPointerMove={(event) => {
-        if (event.pointerType === "mouse" || lens?.touch)
-          place(event, event.pointerType !== "mouse");
+        if (event.pointerType === "mouse") place(event.clientX, event.clientY, false);
       }}
-      onPointerLeave={() => setLens(null)}
-      onPointerDown={(event) => {
-        if (event.pointerType === "mouse") return;
-        // Au doigt : la loupe tant que l'appui dure, sans tourner la page.
-        event.stopPropagation();
-        (event.currentTarget as Element).setPointerCapture(event.pointerId);
-        place(event, true);
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") setLens(null);
       }}
       onPointerUp={(event) => {
-        if (event.pointerType === "mouse") return;
-        event.stopPropagation();
-        setLens(null);
+        // Le carrousel ne compte pas comme glissement un appui à la loupe.
+        if (lensRef.current?.touch) event.stopPropagation();
       }}
+      onContextMenu={(event) => event.preventDefault()}
     >
       <img {...props} ref={imageRef} draggable={false} />
       {lens ? <span className="pz-loupe__lens" style={lensStyle} aria-hidden="true" /> : null}
-      <span className="pz-loupe__hint">loupe {power}× · molette pour régler</span>
+      <span className="pz-loupe__hint pz-loupe__hint--mouse">
+        loupe {power}× · molette pour régler
+      </span>
+      <span className="pz-loupe__hint pz-loupe__hint--touch">appui long pour la loupe</span>
     </span>
   );
 }
