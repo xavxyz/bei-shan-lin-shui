@@ -20,7 +20,7 @@ git log --first-parent --merges --format='%h %s' origin/main..origin/<intégrati
 
 Une fois la PR fusionnée, la branche d'intégration est le second parent du commit de fusion de la PR : `<fusion-PR>^1..<fusion-PR>^2`. Pour #87, `8e6739c^1..8e6739c^2` liste ses 24 fusions ; `7a22776 Le popover pinyin (#84)` se relit au point fixe `7a22776^1`, 12 fichiers.
 
-Chaque fusion se relit, une branche de correction comme un ticket du plan : cinq des sept écarts relevés sur #87 venaient de corrections fusionnées sans relecture. Seule une fusion d'`origin/main` dans la branche d'intégration n'apporte aucun ticket, et se passe.
+Chaque fusion se relit, une branche de correction comme un ticket du plan : cinq des sept écarts relevés sur #87 venaient de corrections fusionnées sans relecture. Deux fusions se passent de relecture : celle d'`origin/main` dans la branche d'intégration, qui n'apporte aucun ticket, et celle des corrections qu'une revue a demandées, que le calligraphe a déjà arbitrées.
 
 ## La PR entière
 
