@@ -1,0 +1,159 @@
+/* PROTOTYPE — à jeter. */
+.prototype-switcher {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font:
+    13px/1.3 ui-monospace,
+    monospace;
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 35%);
+}
+.prototype-switcher button {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 999px;
+  background: #333;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.prototype-switcher__label {
+  display: grid;
+  text-align: center;
+  min-width: 16rem;
+}
+.prototype-switcher__state {
+  color: #9c9;
+  font-size: 11px;
+}
+
+/* A — plein écran */
+.pz-zoomable {
+  cursor: zoom-in;
+}
+.pz-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: var(--paper, #f7f4ee);
+}
+.pz-lightbox__stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+}
+.pz-lightbox__image {
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+  transform-origin: center;
+  pointer-events: none;
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 12%);
+}
+.pz-lightbox__tools {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.3rem;
+  border: 1px solid var(--rule, #ddd);
+  border-radius: 999px;
+  background: var(--paper, #fff);
+  font-size: 0.85rem;
+}
+.pz-lightbox__tools button,
+.pz-lightbox__close {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--rule, #ddd);
+  border-radius: 999px;
+  background: var(--paper, #fff);
+  color: var(--ink, #222);
+  font: inherit;
+  cursor: pointer;
+}
+.pz-lightbox__scale {
+  min-width: 3.5rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.pz-lightbox__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.3rem;
+}
+
+/* B — loupe */
+.pz-loupe {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  cursor: crosshair;
+}
+.pz-loupe__lens {
+  position: absolute;
+  border-radius: 999px;
+  border: 2px solid var(--paper, #fff);
+  box-shadow:
+    0 0.5rem 1.5rem rgb(0 0 0 / 30%),
+    0 0 0 1px rgb(0 0 0 / 15%);
+  background-repeat: no-repeat;
+  background-color: var(--paper, #fff);
+  pointer-events: none;
+  z-index: 10;
+}
+.pz-loupe__hint {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  line-height: 1.4;
+  font-size: 0.75rem;
+  color: var(--muted, #666);
+  background: rgb(255 255 255 / 80%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.pz-loupe:hover .pz-loupe__hint {
+  opacity: 1;
+}
+
+/* C — zoom en place */
+.pz-inplace {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 0;
+  cursor: zoom-in;
+}
+.pz-inplace img {
+  transition: transform 0.25s ease;
+}
+.pz-inplace[data-zoomed="true"] {
+  cursor: zoom-out;
+  touch-action: none;
+}
+.pz-inplace[data-zoomed="true"] img {
+  transition:
+    transform 0.25s ease,
+    transform-origin 0.08s linear;
+  box-shadow: none;
+}

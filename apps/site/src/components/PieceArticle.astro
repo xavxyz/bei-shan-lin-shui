@@ -5,6 +5,7 @@ import Gloss from "./Gloss.astro";
 import Pinyin from "./Pinyin.astro";
 import VersionFacts from "./VersionFacts.astro";
 import VersionVisAVis from "./VersionVisAVis.astro";
+import PrototypeSwitcher from "../islands/prototype-zoom/PrototypeSwitcher.js";
 import { versionTransitionName } from "../work-transition.js";
 
 type Props = {
@@ -84,4 +85,6 @@ const source = piece.source;
   </VersionVisAVis>
 
   <EarlierVersions piece={piece} />
+  {/* PROTOTYPE zoom-image */}
+  {import.meta.env.DEV ? <PrototypeSwitcher client:only="react" /> : null}
 </article>

@@ -8,6 +8,7 @@ import {
 } from "@bsls/schema";
 import { pilotWithKeyboard } from "./keyboard-pilot.js";
 import "./Carousel.css";
+import { ZoomImage } from "./prototype-zoom/ZoomImage.js";
 
 export type CarouselProps = {
   /**
@@ -110,13 +111,13 @@ export function Carousel({ variations, leadingVariation, title, transitionName }
               onPointerUp={onPointerUp}
               onPointerCancel={() => (swipeStart.current = null)}
             >
-              <img
+              {/* PROTOTYPE zoom-image : l'image passe par ZoomImage. */}
+              <ZoomImage
                 className="carousel__image"
                 data-testid="carousel-image"
                 ref={image}
                 src={shown.image.src}
                 alt={describe(shown.image, title)}
-                draggable={false}
                 style={
                   transitionName && index === 0 ? { viewTransitionName: transitionName } : undefined
                 }
