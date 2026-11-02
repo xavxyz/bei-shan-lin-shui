@@ -47,7 +47,7 @@ Le **Rang** d'un projet (`GLOSSARY.md`) s'écrit à la main dans son YAML, champ
 - Une branche au nom inédit sur `origin`, créée avec le worktree : `git worktree add -b <branche> .claude/worktrees/<nom> origin/main` (`EnterWorktree` la renomme `worktree-…`).
 - Le hook pre-commit n'existe qu'après `pnpm install --frozen-lockfile --prefer-offline` : `.claude/settings.json` le lance au démarrage et après `EnterWorktree` ; dans un worktree de sous-agent, lance-le toi-même. `imports/scans`, gitignoré, reste dans le checkout principal.
 - Une préoccupation par branche.
-- Une branche se relit (`code-review`, point fixe : sa base) avant de fusionner dans une branche d'intégration, y compris celle qui corrige une revue.
+- Une branche se relit (`code-review`, point fixe : sa base) avant de fusionner dans une branche d'intégration. Les corrections qu'une revue a demandées, une fois arbitrées par le calligraphe, fusionnent sans nouvelle revue.
 - Chaque compte rendu nomme la branche et le numéro de PR.
 
 ## Importer depuis Notion
