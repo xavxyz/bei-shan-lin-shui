@@ -138,7 +138,7 @@ async function readProjects(root: string, errors: ContentError[]): Promise<Proje
     });
   }
 
-  return projects.sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
+  return projects.sort((a, b) => a.rank - b.rank || a.id.localeCompare(b.id));
 }
 
 async function readPieces(

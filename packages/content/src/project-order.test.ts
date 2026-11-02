@@ -21,9 +21,9 @@ describe("l'ordre des projets", () => {
 
   it("place après les autres un projet de rang positif, avant eux un projet de rang négatif", async () => {
     const ids = await loadIds({
-      feng: { title: "風", order: 1 },
+      feng: { title: "風", rank: 1 },
       shan: { title: "山" },
-      yue: { title: "月", order: -1 },
+      yue: { title: "月", rank: -1 },
       hua: { title: "花" },
     });
 
@@ -32,13 +32,13 @@ describe("l'ordre des projets", () => {
 
   it("refuse un rang qui n'est pas un entier", async () => {
     const result = await loadContent(
-      await writeFixtureTree({ projects: { feng: { title: "風", order: 1.5 } } }),
+      await writeFixtureTree({ projects: { feng: { title: "風", rank: 1.5 } } }),
     );
 
     expect(result.ok).toBe(false);
     expect(!result.ok && result.errors[0]).toMatchObject({
       file: "projects/feng.yaml",
-      path: "order",
+      path: "rank",
     });
   });
 });

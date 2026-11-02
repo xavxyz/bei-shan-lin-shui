@@ -39,6 +39,8 @@ Le format d'une version suit la notation de **Format** (`GLOSSARY.md`), lue par 
 
 La saisie passe par les skills `nouvelle-piece`, `version-ou-variation`, `veille` et `scans`, en conversation avec le calligraphe. Elles écrivent par `pnpm piece`, qui n'écrase aucune version et refuse ce que le schéma refuse, dont une traduction qui n'a pas une ligne par colonne. Glose et traduction viennent du calligraphe, colonne par colonne pour la traduction : une nouvelle version ne reprend jamais celle de la précédente.
 
+Le **Rang** d'un projet (`GLOSSARY.md`) s'écrit à la main dans son YAML, champ `rank`, quand le calligraphe déplace un projet dans la liste : `pnpm piece` ne le pose pas.
+
 ## Git
 
 - Chaque tâche dans son worktree, parti d'un `origin/main` tout juste récupéré ; le checkout principal reste tel que le calligraphe l'a laissé.
