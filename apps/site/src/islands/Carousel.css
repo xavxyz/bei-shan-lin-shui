@@ -32,8 +32,51 @@
   max-height: 80vh;
   width: auto;
   height: auto;
-  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 12%);
   background: var(--paper, #fff);
+}
+
+/* L'image affichée et sa loupe. Le cadre porte l'ombre et retient l'image
+   zoomée au doigt ; la loupe déborde de l'image, pas du cadre. */
+.zoomable {
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 0;
+}
+
+.zoomable__frame {
+  display: block;
+  overflow: hidden;
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 12%);
+}
+
+.zoomable__frame .carousel__image {
+  display: block;
+  transform-origin: 0 0;
+}
+
+/* Zoomée, l'image se parcourt au doigt : la page ne défile plus sous lui. */
+.zoomable__frame[data-zoomed="true"] {
+  touch-action: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .zoomable {
+    cursor: crosshair;
+  }
+}
+
+.zoomable__loupe {
+  position: absolute;
+  z-index: 1;
+  border: 2px solid var(--paper, #fff);
+  border-radius: 50%;
+  box-shadow:
+    0 0.5rem 1.5rem rgb(0 0 0 / 30%),
+    0 0 0 1px rgb(0 0 0 / 15%);
+  background-color: var(--paper, #fff);
+  background-repeat: no-repeat;
+  pointer-events: none;
 }
 
 .carousel__arrow {
