@@ -209,8 +209,36 @@ export const projectFileSchema = z.object({
   pinyin_overrides: pinyinOverridesSchema.default({}),
 });
 
+/** Un paragraphe du manifeste, en regard : le chinois tel qu'écrit, et sa traduction. */
+export const manifestoParagraphSchema = z.object({
+  zh: prose,
+  fr: prose,
+});
+
+/**
+ * Le manifeste de 山山 sur le style libre (voir GLOSSARY.md), cité tel qu'il est
+ * écrit, en simplifié : ni dérivé, ni transcrit (ADR 0007). Seule l'épigraphe,
+ * prise au texte, s'écrit en traditionnel, par choix du calligraphe.
+ */
+export const manifestoFileSchema = z.object({
+  title: prose,
+  french_title: prose,
+  author: prose,
+  /** Le lieu, tel qu'il est écrit à la fin du texte : `于巴黎`. */
+  place: prose,
+  /** La date, telle qu'elle est écrite à la fin du texte : `2004 年 7 月`, pas une date ISO. */
+  date: prose,
+  translator: prose,
+  /** D'où le texte, la signature et la traduction sont recopiés (ADR 0004). */
+  source: prose,
+  /** Un passage du texte, en traditionnel : le content layer vérifie qu'il y figure. */
+  epigraph: prose,
+  paragraphs: z.array(manifestoParagraphSchema).min(1, "attendu : au moins un paragraphe"),
+});
+
 export type PieceFrontmatter = z.infer<typeof pieceFrontmatterSchema>;
 export type ProjectFile = z.infer<typeof projectFileSchema>;
+export type ManifestoFile = z.infer<typeof manifestoFileSchema>;
 
 /* -------------------------------------------------------------------------- */
 /* Schéma du contenu chargé, dérivations comprises                             */
@@ -295,7 +323,13 @@ export const loadedProjectSchema = projectFileSchema.extend({
   pieceSlugs: z.array(z.string()),
 });
 
+export const loadedManifestoSchema = manifestoFileSchema.extend({
+  /** Auteur, lieu puis date, tels qu'écrits, joints par « · » : `孙山山 · 于巴黎 · 2004 年 7 月`. */
+  signature: z.string(),
+});
+
 export type ChineseText = z.infer<typeof chineseTextSchema>;
+export type LoadedManifesto = z.infer<typeof loadedManifestoSchema>;
 export type LoadedImage = z.infer<typeof loadedImageSchema>;
 export type LoadedVariation = z.infer<typeof loadedVariationSchema>;
 export type LoadedVersion = z.infer<typeof loadedVersionSchema>;

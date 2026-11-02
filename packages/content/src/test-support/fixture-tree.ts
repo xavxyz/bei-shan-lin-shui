@@ -2,7 +2,7 @@ import { mkdtemp, mkdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { stringify } from "yaml";
-import { pieceFile, projectFile } from "../locations.js";
+import { MANIFESTO_FILE, pieceFile, projectFile } from "../locations.js";
 
 /**
  * Écrit une vraie arborescence de contenu dans un répertoire temporaire.
@@ -13,6 +13,8 @@ export type FixtureTree = {
   projects?: Record<string, unknown>;
   /** Pièces, indexées par slug de dossier. Sérialisées en frontmatter YAML. */
   pieces?: Record<string, unknown>;
+  /** Le manifeste, sérialisé en YAML à la racine ; absent, il n'y a pas de fichier. */
+  manifesto?: unknown;
   /** Fichiers image à créer, en chemins relatifs à la racine du contenu. */
   files?: string[];
 };
@@ -25,6 +27,7 @@ export async function writeFixtureTree(tree: FixtureTree): Promise<string> {
   for (const [slug, piece] of Object.entries(tree.pieces ?? {})) {
     files[pieceFile(slug)] = `---\n${stringify(piece)}---\n`;
   }
+  if (tree.manifesto !== undefined) files[MANIFESTO_FILE] = stringify(tree.manifesto);
   for (const file of tree.files ?? []) files[file] = "";
   return writeTree(files);
 }

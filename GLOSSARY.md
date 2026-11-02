@@ -68,6 +68,8 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **Style libre** (自由) : Le sixième pas, créé par 山山 : l'écriture se transforme et reste lisible ; un caractère qui semble faux y est souvent seulement déplacé dans ses composantes. 山山 le définit dans 《山山自由书法：中国书法的第六体》 (Paris, juillet 2004, `docs/sources/shan-shan-zi-you-shu-fa.md`) : un style que ne bornent ni la forme des caractères ni les styles, qui va du « vide » au « plein » sous trois formes visibles, droit, plié, courbé (直、曲、弯) ; « une danse sur la pointe d'une aiguille » (针尖上的舞蹈).
 
+**Manifeste** : Le texte où 山山 définit le style libre, 《山山自由书法：中国书法的第六体》, avec sa traduction par 山山 : l'accueil du site le montre en entier avant le mur, chaque paragraphe chinois en regard de sa traduction, cité tel qu'il est écrit, en simplifié (ADR 0007). Il vit dans `content/manifeste.yaml`. _À éviter_ : essai, préface, avant-propos
+
 **方圓** : La méthode de 山山 : un caractère se place à la fois dans un carré et dans un rond. Pour la cursive, elle tient en cinq points, dont horizontaliser les verticaux et verticaliser les horizontaux (竪橫).
 
 ## Lieux
@@ -76,7 +78,7 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 ## Le site
 
-**Cimaise** : La mise en page du site, retenue au prototype : un seul fond, le papier teinté ; un en-tête qui reste en place d'une page à l'autre, grand sur l'accueil avec 背山臨水 et sa devise, réduit à une ligne ailleurs ; sur l'accueil, le mur puis les rangées de projets.
+**Cimaise** : La mise en page du site, retenue au prototype : un seul fond, le papier teinté ; un en-tête qui reste en place d'une page à l'autre, grand sur l'accueil avec 背山臨水 et sa devise, réduit à une ligne ailleurs ; sur l'accueil, le manifeste, le mur puis les rangées de projets.
 
 **Mur** : Les pièces qui ont une image, accrochées à la file de la plus récente à la plus ancienne selon leur dernière version, alignées sur leur pied, chacune à ses proportions sans jamais être recadrée, avec dessous son titre chinois et sa glose. L'accueil porte le mur de toutes les pièces, une page projet celui des siennes ; le compte « Pièces · N » ne compte que lui. En mode admin, une pièce scannée non publiée y est marquée « non publiée ».
 

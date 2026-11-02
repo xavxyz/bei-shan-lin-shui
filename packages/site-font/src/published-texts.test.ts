@@ -19,10 +19,26 @@ const piece = {
 
 const project = { title: "紅樓夢" };
 
-async function load(pieceOverrides: object = {}): Promise<Content> {
+const manifesto = {
+  title: "自由书法",
+  french_title: "La calligraphie libre",
+  author: "孙山山",
+  place: "于巴黎",
+  date: "2004 年 7 月",
+  translator: "山山",
+  source: "Le fichier fourni par le calligraphe.",
+  epigraph: "針尖上的舞蹈",
+  paragraphs: [
+    { zh: "书法是写作的艺术。", fr: "La calligraphie est l'art d'écrire." },
+    { zh: "自由的书法，针尖上的舞蹈。", fr: "La calligraphie libre, une danse sur une aiguille." },
+  ],
+};
+
+async function load(pieceOverrides: object = {}, manifestoOverrides?: object): Promise<Content> {
   const root = await writeFixtureTree({
     projects: { "hong-lou-meng": project },
     pieces: { "shuo-jian": { ...piece, ...pieceOverrides } },
+    manifesto: { ...manifesto, ...manifestoOverrides },
   });
   // La pièce n'a pas d'image : on charge tout, comme le mode admin.
   const result = await loadContent(root, { includeUnpublished: true });
@@ -66,6 +82,28 @@ describe("la police des textes publiés", () => {
     ).join("");
     expect(dates).not.toBe("");
     expect(undrawn(font, dates)).toEqual([]);
+  });
+
+  it("dessine le manifeste tel qu'il est écrit : titre, paragraphes, signature, traducteur, épigraphe", async () => {
+    const font = open((await subsetSiteFonts(publishedTexts(await load()))).twKai);
+
+    expect(undrawn(font, "自由书法")).toEqual([]); // titre
+    expect(undrawn(font, "写作的艺术。针尖上舞蹈，")).toEqual([]); // paragraphes
+    expect(undrawn(font, "孙山于巴黎·2004年7月")).toEqual([]); // signature et traducteur
+    expect(undrawn(font, "針尖上的舞蹈")).toEqual([]); // épigraphe, en traditionnel
+  });
+
+  it("casse sur un caractère du manifeste qu'aucune police ne dessine, en nommant le manifeste", async () => {
+    const content = await load(
+      {},
+      {
+        paragraphs: [{ zh: "困𮌖。针尖上的舞蹈", fr: "Un caractère hors des polices." }],
+      },
+    );
+
+    await expect(subsetSiteFonts(publishedTexts(content))).rejects.toThrow(
+      /manifeste\.yaml \(自由书法\).*𮌖/,
+    );
   });
 
   it("n'a pas de police de secours quand TW-Kai dessine tout", async () => {

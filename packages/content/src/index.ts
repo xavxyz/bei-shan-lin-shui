@@ -14,6 +14,7 @@ export { contentWarnings } from "./warnings.js";
 export {
   CONTENT_IMAGES_BASE,
   IMAGES_DIR,
+  MANIFESTO_FILE,
   PIECES_DIR,
   PROJECTS_DIR,
   contentImageDirectories,

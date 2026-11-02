@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import * as fontkit from "fontkit";
 import subsetFont from "subset-font";
-import { pieceFile, projectFile, type Content } from "@bsls/content";
+import { MANIFESTO_FILE, pieceFile, projectFile, type Content } from "@bsls/content";
 import type { ChineseText } from "@bsls/schema";
 
 /**
@@ -27,17 +27,23 @@ export const FALLBACK_LICENSE = fileURLToPath(
   new URL("../../grilles/fonts/LXGWWenKaiTC.OFL.txt", import.meta.url),
 );
 
-/** Un texte que le site montre, et ce qui le porte : le fichier d'une pièce, d'un projet, ou le site. */
+/**
+ * Un texte que le site montre, et ce qui le porte : le fichier d'une pièce, d'un
+ * projet, du manifeste, ou le site.
+ */
 export type PublishedText = { owner: string; text: string };
 
 /**
  * Les textes chinois que le site montre, chacun en traditionnel et en
  * simplifié, rattachés au fichier qui les porte : titres de pièce et de
  * projet, colonnes et date chinoise de chaque version, texte intégral et
- * attribution de la source. Ils sont pris tels que le content layer les
- * dérive, jamais redérivés ici.
+ * attribution de la source ; et du manifeste, tel qu'il est écrit, son titre,
+ * ses paragraphes, sa signature, son traducteur et son épigraphe. Ils sont pris
+ * tels que le content layer les dérive, jamais redérivés ici.
  */
-export function publishedTexts(content: Pick<Content, "pieces" | "projects">): PublishedText[] {
+export function publishedTexts(
+  content: Pick<Content, "pieces" | "projects" | "manifesto">,
+): PublishedText[] {
   const both = ({ traditional, simplified }: ChineseText) => `${traditional}\n${simplified}`;
 
   const pieces = content.pieces.map((piece) => {
@@ -60,7 +66,22 @@ export function publishedTexts(content: Pick<Content, "pieces" | "projects">): P
     owner: `${projectFile(project.id)} (${project.title.traditional})`,
     text: both(project.title),
   }));
-  return [...pieces, ...projects];
+  const manifesto = content.manifesto;
+  const manifestoTexts = manifesto
+    ? [
+        {
+          owner: `${MANIFESTO_FILE} (${manifesto.title})`,
+          text: [
+            manifesto.title,
+            ...manifesto.paragraphs.map((paragraph) => paragraph.zh),
+            manifesto.signature,
+            manifesto.translator,
+            manifesto.epigraph,
+          ].join("\n"),
+        },
+      ]
+    : [];
+  return [...pieces, ...projects, ...manifestoTexts];
 }
 
 /**

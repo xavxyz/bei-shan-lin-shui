@@ -68,8 +68,13 @@ test("en mode admin, l'accueil range entre le mur et les projets les pièces san
     page.getByRole("region", { name: "Pièces · 11" }).getByText("說到辛酸處"),
   ).toHaveCount(0);
 
-  const sections = await page.getByRole("heading", { level: 2 }).allTextContents();
-  expect(sections).toEqual(["Pièces · 11", "Sans scan · 3", "Projets"]);
+  // Le manifeste ouvre l'accueil ; « Sans scan » se range entre le mur et les projets.
+  await expect(page.getByRole("heading", { level: 2 })).toHaveText([
+    "自由书法 La calligraphie libre",
+    "Pièces · 11",
+    "Sans scan · 3",
+    "Projets",
+  ]);
 
   await row.getByRole("link", { name: "說到辛酸處" }).click();
   await expect(page).toHaveURL("/hong-lou-meng/shuo-dao-xin-suan-chu");

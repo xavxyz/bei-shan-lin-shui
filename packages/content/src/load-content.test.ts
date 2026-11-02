@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadContent } from "./load-content.js";
-import { writeFixtureTree } from "./test-support/fixture-tree.js";
+import { writeFixtureTree, writeTree } from "./test-support/fixture-tree.js";
 
 const shanJuQiuMing = {
   title: "山居秋暝",
@@ -680,3 +680,72 @@ function bareVersions() {
     },
   ];
 }
+
+const manifesto = {
+  title: "自由书法",
+  french_title: "La calligraphie libre",
+  author: "孙山山",
+  place: "于巴黎",
+  date: "2004 年 7 月",
+  translator: "山山",
+  source: "Le fichier fourni par le calligraphe.",
+  epigraph: "針尖上的舞蹈",
+  paragraphs: [
+    { zh: "书法是写作的艺术。", fr: "La calligraphie est l'art d'écrire." },
+    { zh: "自由的书法，针尖上的舞蹈。", fr: "La calligraphie libre, une danse sur une aiguille." },
+  ],
+};
+
+/** Charge, comme le site public, une arborescence qui ne porte que ce qui est donné. */
+async function loadManifestoTree(tree: Parameters<typeof writeFixtureTree>[0]) {
+  return loadContent(await writeFixtureTree(tree));
+}
+
+describe("le manifeste", () => {
+  it("est retourné tel qu'il est écrit, avec sa signature : auteur, lieu et date", async () => {
+    const result = await loadManifestoTree({ manifesto });
+
+    if (!result.ok) expect.unreachable(`chargement en échec : ${JSON.stringify(result.errors)}`);
+    const loaded = result.content.manifesto!;
+    expect(loaded.title).toBe("自由书法");
+    expect(loaded.epigraph).toBe("針尖上的舞蹈");
+    expect(loaded.paragraphs).toEqual(manifesto.paragraphs);
+    expect(loaded.signature).toBe("孙山山 · 于巴黎 · 2004 年 7 月");
+  });
+
+  it("est facultatif : sans fichier, le contenu reste valide, sans manifeste", async () => {
+    const result = await loadManifestoTree({});
+
+    expect(result).toEqual({ ok: true, content: { projects: [], pieces: [], manifesto: null } });
+  });
+
+  it("refuse un paragraphe sans traduction, en désignant le fichier et le champ", async () => {
+    const result = await loadManifestoTree({
+      manifesto: { ...manifesto, paragraphs: [{ zh: "书法是写作的艺术。" }] },
+    });
+
+    expect(result.ok).toBe(false);
+    if (result.ok) return;
+    expect(result.errors).toEqual([
+      expect.objectContaining({ file: "manifeste.yaml", path: "paragraphs.0.fr" }),
+    ]);
+  });
+
+  it("refuse une épigraphe qu'aucun paragraphe ne contient", async () => {
+    const result = await loadManifestoTree({ manifesto: { ...manifesto, epigraph: "水上行走" } });
+
+    expect(result.ok).toBe(false);
+    if (result.ok) return;
+    expect(result.errors).toEqual([
+      expect.objectContaining({ file: "manifeste.yaml", path: "epigraph" }),
+    ]);
+  });
+
+  it("refuse un YAML illisible, en désignant le fichier", async () => {
+    const result = await loadContent(await writeTree({ "manifeste.yaml": "title: [\n" }));
+
+    expect(result.ok).toBe(false);
+    if (result.ok) return;
+    expect(result.errors).toEqual([expect.objectContaining({ file: "manifeste.yaml", path: "" })]);
+  });
+});
