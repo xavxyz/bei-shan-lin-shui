@@ -38,6 +38,8 @@ const HOMONYMS: Record<string, string> = {
   œuvre: "l'œuvre d'un auteur cité, l'image `work`",
   édition: "l'édition d'un fichier, d'un texte source",
   reprise: "reprendre une pièce en veille",
+  ordre: "l'ordre des colonnes, des versions, des étapes",
+  position: "la position d'un caractère, d'une erreur de lecture",
   détail: "l'image `detail`",
   finie: "une tâche finie",
   cadre: "le bord du papier",

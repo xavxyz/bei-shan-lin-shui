@@ -8,7 +8,9 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **Projet** : Une série de pièces conçues pour être montrées ensemble, et, s'il y en a une, sa présentation. Une pièce peut rejoindre un projet longtemps après sa création, si elle est reprise pour lui ; rapprocher après coup des pièces écrites sans lui n'en fait pas un projet. _À éviter_ : collection, dossier, page-pôle
 
-**Glose** : La courte phrase française qui accompagne le titre chinois d'une pièce ou d'un projet et dit de quoi il s'agit, sans le traduire mot à mot ; ainsi « Les 8 mouvements fondamentaux de l'éternité, exécutés au solstice d'été 2026 » pour 永草書. _À éviter_ : titre français, sous-titre, traduction
+**Rang** : La place d'un projet dans la liste des projets, un entier, 0 s'il n'en porte pas : les projets se suivent par rang croissant, et à rang égal par identifiant. Un rang positif place un projet après ceux qui n'en ont pas, un rang négatif avant. _À éviter_ : ordre, position
+
+**Glose** : La courte phrase française qui accompagne le titre chinois d'une pièce ou d'un projet et dit de quoi il s'agit, sans le traduire mot à mot. _À éviter_ : titre français, sous-titre, traduction
 
 **Version** : Une réalisation de la pièce, avec sa date, son format et son texte. Refaire une pièce dont une réalisation existe déjà, c'est en ouvrir une nouvelle version. _À éviter_ : reprise, édition
 

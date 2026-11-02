@@ -71,8 +71,8 @@ const plannedPieceSchema = pieceFieldsSchema
       .min(1, "attendu : au moins une version"),
   });
 
-/** Comme pour les pièces, les surcharges de pinyin s'écrivent après l'import. */
-const plannedProjectSchema = projectFileSchema.omit({ pinyin_overrides: true }).extend({
+/** Comme pour les pièces, les surcharges de pinyin et le rang s'écrivent après l'import. */
+const plannedProjectSchema = projectFileSchema.omit({ pinyin_overrides: true, rank: true }).extend({
   id: slugSchema,
   /**
    * Celle du contenu. Le plan la propose vide, à écrire ou non : laissée vide

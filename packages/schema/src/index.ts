@@ -200,6 +200,8 @@ export const projectFileSchema = z.object({
   gloss: prose.optional(),
   /** Optionnelle : un projet peut attendre que le calligraphe l'écrive. */
   presentation: prose.optional(),
+  /** Voir **Rang** dans GLOSSARY.md. */
+  rank: z.number().int().default(0),
   /**
    * Les thèmes de couleur sont abandonnés (#70) : un projet qui en porte encore
    * un est refusé, plutôt que de voir le champ ignoré en silence.
