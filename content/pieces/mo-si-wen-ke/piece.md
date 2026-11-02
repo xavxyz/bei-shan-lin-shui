@@ -2,6 +2,7 @@
 # date du papier : 30.8.26, corrigée en rouge par 戈 sur 9.26 en noir (Notion disait 2026-04-05)
 # colonnes lues sur les scans 2026-10-11_33_01 et _09
 title: 墨寺㞢文刻
+gloss: L'enseigne du Black Temple Tattoo et le nom chinois de Luciano, son créateur.
 slug: mo-si-wen-ke
 status: experiment # 戈說 : à présenter à Luciano
 versions:
@@ -12,6 +13,10 @@ versions:
       - 墨寺㞢文刻 # 戈說 : 墨, le 土 glissé entre 里 et 灬, une sombre erreur innocente, 蒙
       - 血珠玄鋒
       - 路此岸 # nom chinois trouvé pour Luciano ; absente de Notion ; 岸 écrit 山 sur 厈, étiré
+    translation:
+      - Black Temple Tattoo
+      - Perle de sang, aiguille noire
+      - « Le chemin, sur cette rive »
     variations:
       - id: v1a
         script: kaishu
