@@ -238,6 +238,7 @@ export const manifestoFileSchema = z.object({
 
 export type PieceFrontmatter = z.infer<typeof pieceFrontmatterSchema>;
 export type ProjectFile = z.infer<typeof projectFileSchema>;
+export type ManifestoParagraph = z.infer<typeof manifestoParagraphSchema>;
 export type ManifestoFile = z.infer<typeof manifestoFileSchema>;
 
 /* -------------------------------------------------------------------------- */

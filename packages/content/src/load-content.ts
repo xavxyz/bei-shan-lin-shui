@@ -186,9 +186,10 @@ async function readManifesto(
   root: string,
   errors: ContentError[],
 ): Promise<LoadedManifesto | null> {
-  if (!(await isFile(join(root, MANIFESTO_FILE)))) return null;
+  const path = join(root, MANIFESTO_FILE);
+  if (!(await isFile(path))) return null;
 
-  const raw = await readYaml(join(root, MANIFESTO_FILE), MANIFESTO_FILE, errors);
+  const raw = await readYaml(path, MANIFESTO_FILE, errors);
   if (raw === undefined) return null;
 
   const parsed = manifestoFileSchema.safeParse(raw);
