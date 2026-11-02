@@ -696,17 +696,9 @@ const manifesto = {
   ],
 };
 
-/** Charge, comme le site public, une arborescence qui ne porte que ce qui est donné. */
-async function loadManifestoTree(tree: Parameters<typeof writeFixtureTree>[0]) {
-  return loadContent(await writeFixtureTree(tree));
-}
-
 describe("le manifeste", () => {
   it("est retourné tel qu'il est écrit, avec sa signature : auteur, lieu et date", async () => {
-    const result = await loadManifestoTree({ manifesto });
-
-    if (!result.ok) expect.unreachable(`chargement en échec : ${JSON.stringify(result.errors)}`);
-    const loaded = result.content.manifesto!;
+    const loaded = (await loadPublic({ manifesto })).manifesto!;
     expect(loaded.title).toBe("自由书法");
     expect(loaded.epigraph).toBe("針尖上的舞蹈");
     expect(loaded.paragraphs).toEqual(manifesto.paragraphs);
@@ -714,13 +706,11 @@ describe("le manifeste", () => {
   });
 
   it("est facultatif : sans fichier, le contenu reste valide, sans manifeste", async () => {
-    const result = await loadManifestoTree({});
-
-    expect(result).toEqual({ ok: true, content: { projects: [], pieces: [], manifesto: null } });
+    expect(await loadPublic({})).toEqual({ projects: [], pieces: [], manifesto: null });
   });
 
   it("refuse un paragraphe sans traduction, en désignant le fichier et le champ", async () => {
-    const result = await loadManifestoTree({
+    const result = await loadTree({
       manifesto: { ...manifesto, paragraphs: [{ zh: "书法是写作的艺术。" }] },
     });
 
@@ -732,7 +722,7 @@ describe("le manifeste", () => {
   });
 
   it("refuse une épigraphe qu'aucun paragraphe ne contient", async () => {
-    const result = await loadManifestoTree({ manifesto: { ...manifesto, epigraph: "水上行走" } });
+    const result = await loadTree({ manifesto: { ...manifesto, epigraph: "水上行走" } });
 
     expect(result.ok).toBe(false);
     if (result.ok) return;

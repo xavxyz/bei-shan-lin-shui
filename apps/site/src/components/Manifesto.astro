@@ -1,5 +1,6 @@
 ---
 import type { LoadedManifesto } from "@bsls/schema";
+import ManifestoParagraph from "./ManifestoParagraph.astro";
 
 /**
  * Le manifeste de 山山 sur l'accueil, en entier, cité tel qu'il est écrit, en
@@ -11,38 +12,29 @@ type Props = { manifesto: LoadedManifesto };
 
 const { manifesto } = Astro.props;
 /** Les paragraphes lus d'emblée ; la suite attend que le visiteur l'ouvre. */
-const SHOWN = 3;
-const shown = manifesto.paragraphs.slice(0, SHOWN);
-const rest = manifesto.paragraphs.slice(SHOWN);
+const PARAGRAPHS_SHOWN_FIRST = 3;
+const firstParagraphs = manifesto.paragraphs.slice(0, PARAGRAPHS_SHOWN_FIRST);
+const remainingParagraphs = manifesto.paragraphs.slice(PARAGRAPHS_SHOWN_FIRST);
 ---
 
 <section class="manifesto grid" aria-labelledby="manifeste">
-  <p class="manifesto__epigraph" lang="zh-Hant">{manifesto.epigraph}</p>
+  {/* Muette pour un lecteur d'écran : elle redit un passage du dernier paragraphe. */}
+  <p class="manifesto__epigraph" lang="zh-Hant" aria-hidden="true">{manifesto.epigraph}</p>
   <div class="manifesto__text">
     <h2 id="manifeste" class="manifesto__title">
       <span lang="zh-Hans">{manifesto.title}</span>
       <span class="manifesto__french-title">{manifesto.french_title}</span>
     </h2>
     <ol class="manifesto__paragraphs">
-      {
-        shown.map((paragraph) => (
-          <li>
-            <p lang="zh-Hans">{paragraph.zh}</p>
-            <p>{paragraph.fr}</p>
-          </li>
-        ))
-      }
+      {firstParagraphs.map((paragraph) => <ManifestoParagraph paragraph={paragraph} />)}
     </ol>
     {
-      rest.length > 0 && (
+      remainingParagraphs.length > 0 && (
         <details class="manifesto__rest">
           <summary>La suite du manifeste</summary>
-          <ol class="manifesto__paragraphs" start={SHOWN + 1}>
-            {rest.map((paragraph) => (
-              <li>
-                <p lang="zh-Hans">{paragraph.zh}</p>
-                <p>{paragraph.fr}</p>
-              </li>
+          <ol class="manifesto__paragraphs" start={PARAGRAPHS_SHOWN_FIRST + 1}>
+            {remainingParagraphs.map((paragraph) => (
+              <ManifestoParagraph paragraph={paragraph} />
             ))}
           </ol>
         </details>

@@ -35,7 +35,7 @@ const pieces = defineCollection({
 /** Le manifeste, s'il y en a un : une collection d'au plus une entrée. */
 const manifesto = defineCollection({
   loader: contentLoader("manifesto", (content) =>
-    content.manifesto ? [{ ...content.manifesto, id: "manifeste" }] : [],
+    content.manifesto ? [{ ...content.manifesto, id: "manifesto" }] : [],
   ),
   schema: loadedManifestoSchema,
 });

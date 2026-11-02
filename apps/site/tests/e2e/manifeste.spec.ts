@@ -70,6 +70,17 @@ test("l'épigraphe, en traditionnel, se tient en colonne verticale à côté du 
   expect(epigraphBox.left).toBeGreaterThan(textBox.right);
 });
 
+test("un lecteur d'écran entre dans le manifeste par son titre, sans l'épigraphe qui redit le texte", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const heard = await manifesto(page).ariaSnapshot();
+  expect(heard).not.toContain("針尖上的舞蹈");
+  // La région s'annonce, puis son premier contenu : le titre.
+  expect(heard).toMatch(/^- region .*\n\s+- heading .*自由书法/);
+});
+
 test("sur téléphone, l'épigraphe passe en ligne au-dessus du texte, et la traduction suit son paragraphe", async ({
   page,
 }) => {

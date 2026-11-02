@@ -6,7 +6,7 @@ La traduction française est celle qui accompagne le texte dans ce fichier, reco
 
 ## 《山山自由书法：中国书法的第六体》 · `ziyou`
 
-**Source :** 孙山山, signé « 于巴黎 », daté « 2004 年 7 月 » à la fin du texte. Écrit en caractères simplifiés, recopiés tels quels. Titre français du fichier : « Calligraphie libre de Shanshan : le sixième style de la calligraphie chinoise », « Écrit par Shanshan SUN ».
+**Source :** 孙山山, signé « 作者：孙山山 » en tête, daté « 2004 年 7 月 » et « 于巴黎 » à la fin du texte. Écrit en caractères simplifiés, recopiés tels quels. Titre français du fichier : « Calligraphie libre de Shanshan : le sixième style de la calligraphie chinoise », « Écrit par Shanshan SUN ».
 
 - **Le découpage.** Le chinois du fichier tient en cinq paragraphes, sa traduction en neuf : le manifeste suit la traduction, et coupe le chinois là où elle passe au paragraphe suivant, sans rien y changer d'autre.
 - **Les cinq styles du texte** (五体) sont 篆书、隶书、正书、行书、草书 : sceau, scribes, régulier, courant, cursif. Ce ne sont pas **les cinq pas** de `GLOSSARY.md` (régulier, courant, grand courant, cursif, cursive folle, enseignés par 鄧岱崑, selon le calligraphe) ; le texte range le 狂草 sous le 草书, comme une tendance esthétique et non un style.
