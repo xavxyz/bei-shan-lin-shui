@@ -71,18 +71,20 @@ const plannedPieceSchema = pieceFieldsSchema
       .min(1, "attendu : au moins une version"),
   });
 
-/** Comme pour les pièces, les surcharges de pinyin s'écrivent après l'import. */
-const plannedProjectSchema = projectFileSchema.omit({ pinyin_overrides: true }).extend({
-  id: slugSchema,
-  /**
-   * Celle du contenu. Le plan la propose vide, à écrire ou non : laissée vide
-   * ou blanche, elle est tenue pour absente.
-   */
-  presentation: z.preprocess(
-    (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
-    projectFileSchema.shape.presentation,
-  ),
-});
+/** Comme pour les pièces, les surcharges de pinyin et le rang s'écrivent après l'import. */
+const plannedProjectSchema = projectFileSchema
+  .omit({ pinyin_overrides: true, order: true })
+  .extend({
+    id: slugSchema,
+    /**
+     * Celle du contenu. Le plan la propose vide, à écrire ou non : laissée vide
+     * ou blanche, elle est tenue pour absente.
+     */
+    presentation: z.preprocess(
+      (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
+      projectFileSchema.shape.presentation,
+    ),
+  });
 
 export const planFileSchema = z.object({
   projects: z.array(plannedProjectSchema).default([]),
