@@ -1,0 +1,92 @@
+---
+/* PROTOTYPE — jetable. La barre qui change de variante ; montée en dev seulement. */
+type Props = { variants: { key: string; name: string }[] };
+const { variants } = Astro.props;
+---
+
+<nav
+  class="proto-switcher"
+  aria-label="Variantes du prototype"
+  data-variants={JSON.stringify(variants)}
+>
+  <button type="button" data-step="-1" aria-label="Variante précédente">‹</button>
+  <span data-label></span>
+  <button type="button" data-step="1" aria-label="Variante suivante">›</button>
+</nav>
+
+<script>
+  type Variant = { key: string; name: string };
+
+  function setUp() {
+    const bar = document.querySelector<HTMLElement>(".proto-switcher");
+    if (!bar || bar.dataset.ready) return;
+    bar.dataset.ready = "1";
+    const variants: Variant[] = JSON.parse(bar.dataset.variants!);
+    const label = bar.querySelector<HTMLElement>("[data-label]")!;
+
+    const show = (key: string) => {
+      const variant = variants.find((v) => v.key === key) ?? variants[0]!;
+      document.querySelectorAll<HTMLElement>("[data-proto-variant]").forEach((el) => {
+        el.hidden = el.dataset.protoVariant !== variant.key;
+      });
+      label.textContent = `${variant.key} · ${variant.name}`;
+      const url = new URL(location.href);
+      url.searchParams.set("variant", variant.key);
+      history.replaceState(history.state, "", url);
+      return variant.key;
+    };
+
+    let current = show(new URL(location.href).searchParams.get("variant") ?? "A");
+    const step = (delta: number) => {
+      const i = variants.findIndex((v) => v.key === current);
+      current = show(variants[(i + delta + variants.length) % variants.length]!.key);
+    };
+    bar.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
+      button.addEventListener("click", () => step(Number(button.dataset.step)));
+    });
+    document.addEventListener("keydown", (event) => {
+      if (!document.querySelector(".proto-switcher")) return;
+      const target = event.target as HTMLElement;
+      if (target.closest("input, textarea, [contenteditable]")) return;
+      if (event.key === "ArrowLeft") step(-1);
+      if (event.key === "ArrowRight") step(1);
+    });
+  }
+
+  document.addEventListener("astro:page-load", setUp);
+</script>
+
+<style>
+  .proto-switcher {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font:
+      600 0.85rem/1 system-ui,
+      sans-serif;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.3);
+  }
+  .proto-switcher button {
+    all: unset;
+    cursor: pointer;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-size: 1.1rem;
+  }
+  .proto-switcher button:hover {
+    background: #333;
+  }
+  [data-label] {
+    min-width: 11rem;
+    text-align: center;
+  }
+</style>

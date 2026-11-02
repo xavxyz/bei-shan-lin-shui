@@ -1,0 +1,299 @@
+---
+/*
+ * PROTOTYPE — jetable (branche prototype/style-libre-accueil, jamais sur main).
+ * Question : comment l'accueil présente le style libre, avant les pièces et
+ * les projets — le manifeste résumé, complet, ou les deux ?
+ * Trois variantes sur l'accueil, au choix par `?variant=A|B|C`.
+ *   A · Avant-propos : un résumé, et le manifeste entier sur sa propre route.
+ *   B · Le manifeste entier, ici, en regard chinois / français.
+ *   C · Les six pas : le sixième mis en avant, puis les pièces en style libre.
+ */
+import type { LoadedPiece } from "@bsls/schema";
+import Wall from "../components/Wall.astro";
+import { manifeste, PAS, SIGNATURE, TITRE_FR, TITRE_ZH } from "./manifeste.js";
+import PrototypeSwitcher from "./PrototypeSwitcher.astro";
+
+type Props = { wall: LoadedPiece[] };
+const { wall } = Astro.props;
+
+const paires = manifeste();
+const fin = paires.at(-1)!;
+const milleImages = paires[6]!;
+const enStyleLibre = wall.filter((piece) =>
+  piece.versions.some((version) => version.variations.some((v) => v.script === "ziyou")),
+);
+const VARIANTES = [
+  { key: "A", name: "Avant-propos" },
+  { key: "B", name: "Manifeste entier" },
+  { key: "C", name: "Les six pas" },
+];
+---
+
+<div class="proto-libre">
+  {/* A · Avant-propos : résumé sur l'accueil, le texte entier un clic plus loin. */}
+  <section data-proto-variant="A" class="libre-a grid" aria-labelledby="libre-a">
+    <header class="libre-a__tete">
+      <h2 id="libre-a">Le style libre <span lang="zh-Hant">自由</span></h2>
+      <p class="libre-a__signature" lang="zh-Hans">{SIGNATURE}</p>
+    </header>
+    <div class="libre-a__resume">
+      <p>
+        Le sixième pas, créé par 山山 après les cinq styles : une écriture que ne bornent ni la
+        forme des caractères, ni les styles. Elle va du vide au plein, sous trois formes visibles :
+        droit, plié, courbé.
+      </p>
+      <blockquote>
+        <p lang="zh-Hans" class="libre-zh">{milleImages.zh}</p>
+        <p>{milleImages.fr}</p>
+      </blockquote>
+    </div>
+    <p class="libre-a__lien">
+      <a href="/style-libre-prototype">Lire le manifeste en entier →</a>
+    </p>
+  </section>
+
+  {/* B · Le manifeste entier : l'épigraphe en colonne, le texte en regard. */}
+  <section data-proto-variant="B" class="libre-b grid" aria-labelledby="libre-b" hidden>
+    <p class="libre-b__epigraphe libre-zh" lang="zh-Hans" aria-hidden="true">针尖上的舞蹈</p>
+    <div class="libre-b__texte">
+      <h2 id="libre-b">
+        <span lang="zh-Hans" class="libre-zh">{TITRE_ZH}</span>
+        <span class="libre-b__titre-fr">{TITRE_FR}</span>
+      </h2>
+      <ol class="libre-b__paires">
+        {
+          paires.slice(0, 3).map((p) => (
+            <li>
+              <p lang="zh-Hans" class="libre-zh">
+                {p.zh}
+              </p>
+              <p>{p.fr}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <details>
+        <summary>La suite du manifeste</summary>
+        <ol class="libre-b__paires" start="4">
+          {
+            paires.slice(3).map((p) => (
+              <li>
+                <p lang="zh-Hans" class="libre-zh">
+                  {p.zh}
+                </p>
+                <p>{p.fr}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </details>
+      <p class="libre-a__signature" lang="zh-Hans">{SIGNATURE}</p>
+    </div>
+  </section>
+
+  {/* C · Les six pas, le sixième en avant ; puis ce qui en est écrit. */}
+  <section data-proto-variant="C" class="libre-c" aria-labelledby="libre-c" hidden>
+    <h2 id="libre-c" class="visually-hidden">Le style libre</h2>
+    <ol class="libre-c__pas">
+      {
+        PAS.map((pas, i) => (
+          <li class:list={{ "libre-c__sixieme": i === PAS.length - 1 }}>
+            <span lang="zh-Hant" class="libre-zh">
+              {pas.zh}
+            </span>
+            <span>{pas.fr}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="libre-c__formes">
+      <span><span lang="zh-Hans" class="libre-zh">直</span> droit</span>
+      <span><span lang="zh-Hans" class="libre-zh">曲</span> plié</span>
+      <span><span lang="zh-Hans" class="libre-zh">弯</span> courbé</span>
+    </p>
+    <blockquote class="libre-c__fin">
+      <p lang="zh-Hans" class="libre-zh">{fin.zh}</p>
+      <p>{fin.fr}</p>
+      <footer>
+        <span lang="zh-Hans">{SIGNATURE}</span> ·
+        <a href="/style-libre-prototype">le manifeste</a>
+      </footer>
+    </blockquote>
+    <h3>En style libre · {enStyleLibre.length}</h3>
+    <Wall pieces={enStyleLibre} />
+  </section>
+
+  {import.meta.env.DEV ? <PrototypeSwitcher variants={VARIANTES} /> : null}
+</div>
+
+<style is:global>
+  [data-proto-variant][hidden] {
+    display: none !important;
+  }
+  .libre-zh {
+    font-family: var(--serif-cn);
+  }
+  .proto-libre {
+    margin-bottom: 5rem;
+  }
+  .proto-libre h2 {
+    font-weight: normal;
+  }
+  .visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* A */
+  .libre-a {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 2.5rem 0;
+    align-items: start;
+  }
+  .libre-a__tete {
+    grid-column: 1 / 5;
+  }
+  .libre-a__tete h2 {
+    margin: 0;
+  }
+  .libre-a__signature {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .libre-a__resume {
+    grid-column: 5 / 10;
+    font-size: 1.1rem;
+  }
+  .libre-a__resume p:first-child {
+    margin-top: 0;
+  }
+  .libre-a__resume blockquote {
+    margin: 1.5rem 0 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+  }
+  .libre-a__lien {
+    grid-column: 10 / 13;
+    margin: 0;
+    text-align: right;
+  }
+
+  /* B */
+  .libre-b {
+    align-items: start;
+  }
+  .libre-b__epigraphe {
+    grid-column: 11 / 13;
+    grid-row: 1;
+    writing-mode: vertical-rl;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin: 0;
+    position: sticky;
+    top: 2rem;
+    justify-self: center;
+  }
+  .libre-b__texte {
+    grid-column: 1 / 10;
+    grid-row: 1;
+  }
+  .libre-b h2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0;
+  }
+  .libre-b__titre-fr {
+    font-size: 1rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .libre-b__paires {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .libre-b__paires li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gutter);
+    padding: 1rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .libre-b__paires li p {
+    margin: 0;
+  }
+  .libre-b__paires .libre-zh {
+    font-size: 1.15rem;
+    line-height: 1.9;
+  }
+  .libre-b details summary {
+    cursor: pointer;
+    color: var(--accent);
+    padding: 1rem 0;
+  }
+
+  /* C */
+  .libre-c__pas {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) 2.5fr;
+    align-items: end;
+    gap: var(--gutter);
+    text-align: center;
+    color: var(--muted);
+  }
+  .libre-c__pas li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.75rem;
+  }
+  .libre-c__pas .libre-zh {
+    font-size: 1.8rem;
+  }
+  .libre-c__sixieme {
+    color: var(--ink);
+    border-bottom: 3px solid var(--accent) !important;
+  }
+  .libre-c__sixieme .libre-zh {
+    font-size: clamp(4rem, 10vw, 7rem) !important;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .libre-c__formes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    color: var(--muted);
+  }
+  .libre-c__formes .libre-zh {
+    font-size: 1.6rem;
+    color: var(--ink);
+  }
+  .libre-c__fin {
+    max-width: 40rem;
+    margin: 3rem auto 4rem;
+    text-align: center;
+    font-size: 1.15rem;
+  }
+  .libre-c__fin .libre-zh {
+    font-size: 1.5rem;
+  }
+  .libre-c__fin footer {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .libre-c h3 {
+    font-weight: normal;
+  }
+</style>

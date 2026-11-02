@@ -11,6 +11,7 @@ import {
 } from "@bsls/site-font";
 import { contentRoot } from "../content-root.js";
 import { readContent } from "../read-content.js";
+import { manifeste, SIGNATURE, TITRE_ZH } from "../prototype-style-libre/manifeste.js";
 import { FALLBACK_FONT_URL, SITE_FONT_URL, SITE_TITLE, siteFontFace } from "../site.js";
 
 /** Le module que `Layout.astro` importe : les déclarations des polices du site. */
@@ -23,6 +24,13 @@ async function subsetFontsToSiteTexts(): Promise<SiteFonts> {
   return subsetSiteFonts([
     ...publishedTexts(content),
     { owner: "le titre du site (apps/site/src/site.ts)", text: SITE_TITLE },
+    // PROTOTYPE — jetable : le manifeste, pour le juger dans la police du site.
+    {
+      owner: "le manifeste (prototype)",
+      text: [TITRE_ZH, SIGNATURE, "楷書行書行草草書狂草自由", ...manifeste().map((p) => p.zh)].join(
+        "",
+      ),
+    },
   ]);
 }
 

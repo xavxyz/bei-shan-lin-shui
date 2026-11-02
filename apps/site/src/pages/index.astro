@@ -6,6 +6,7 @@ import ProjectRow from "../components/ProjectRow.astro";
 import UnscannedPieces from "../components/UnscannedPieces.astro";
 import { hang } from "../hang.js";
 import { projectPieces } from "../project-pieces.js";
+import StyleLibrePrototype from "../prototype-style-libre/StyleLibrePrototype.astro";
 
 const projects = (await getCollection("projects")).map((entry) => entry.data);
 const pieces = (await getCollection("pieces")).map((entry) => entry.data);
@@ -13,6 +14,8 @@ const { wall, unscanned } = hang(pieces);
 ---
 
 <Layout title="Projets">
+  <StyleLibrePrototype wall={wall} />
+
   <section aria-labelledby="mur">
     <h2 id="mur">Pièces · {wall.length}</h2>
     <Wall pieces={wall} />

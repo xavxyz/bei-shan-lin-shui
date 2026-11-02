@@ -1,0 +1,74 @@
+---
+/*
+ * PROTOTYPE — jetable. Le manifeste entier, cible du lien des variantes A et C :
+ * le chinois et le français en regard, paragraphe par paragraphe.
+ */
+import Layout from "../layouts/Layout.astro";
+import { manifeste, SIGNATURE, TITRE_FR, TITRE_ZH } from "../prototype-style-libre/manifeste.js";
+
+const paires = manifeste();
+---
+
+<Layout title="Le style libre">
+  <nav class="breadcrumb"><a href="/">Accueil</a></nav>
+  <article class="libre-plein">
+    <h2>
+      <span lang="zh-Hans" class="libre-zh">{TITRE_ZH}</span>
+      <span class="libre-plein__fr">{TITRE_FR}</span>
+    </h2>
+    <ol>
+      {
+        paires.map((p) => (
+          <li>
+            <p lang="zh-Hans" class="libre-zh">
+              {p.zh}
+            </p>
+            <p>{p.fr}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="libre-plein__signature" lang="zh-Hans">{SIGNATURE}</p>
+  </article>
+</Layout>
+
+<style>
+  .libre-plein {
+    max-width: 62rem;
+  }
+  h2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-weight: normal;
+    font-size: 2rem;
+  }
+  .libre-plein__fr {
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  ol {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gutter);
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  li p {
+    margin: 0;
+  }
+  .libre-zh {
+    font-family: var(--serif-cn);
+    font-size: 1.2rem;
+    line-height: 1.9;
+  }
+  .libre-plein__signature {
+    text-align: right;
+    color: var(--muted);
+  }
+</style>
