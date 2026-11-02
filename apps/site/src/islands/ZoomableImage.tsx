@@ -6,12 +6,16 @@ import {
   type PointerEvent,
   type RefObject,
 } from "react";
+import "./ZoomableImage.css";
 
 export type ZoomableImageProps = {
   src: string;
   alt: string;
-  /** L'image elle-même, que le pilote clavier du carrousel observe. */
+  /** L'image elle-même, que son hôte observe (le pilote clavier du carrousel). */
   imageRef: RefObject<HTMLImageElement>;
+  /** Classe de l'image, qui en fixe la taille dans son hôte. */
+  className?: string;
+  "data-testid"?: string;
   style?: CSSProperties;
 };
 
@@ -19,26 +23,59 @@ export type ZoomableImageProps = {
 const LOUPE_SIZE = 224;
 /** Grossissement de la loupe. */
 const LOUPE_POWER = 3;
-/** Zoom d'un double tap ; le pincement va jusqu'à la taille réelle du scan, au moins ×2. */
+/** Zoom d'un double tap. */
 const DOUBLE_TAP_SCALE = 2.5;
-/** Deux taps plus rapprochés que cela, dans le temps et l'espace, font un double tap. */
+/** Deux taps plus rapprochés que cela, en millisecondes et en pixels, font un double tap. */
 const DOUBLE_TAP_DELAY = 300;
 const DOUBLE_TAP_DISTANCE = 24;
+/** Un doigt qui bouge moins que cela, en pixels, tape encore. */
+const TAP_SLOP = 6;
 /** En deçà, un pincement relâché revient à l'image entière. */
 const SNAP_BACK = 1.05;
 
 type View = { scale: number; x: number; y: number };
 const WHOLE: View = { scale: 1, x: 0, y: 0 };
 type Point = { x: number; y: number };
+/** Deux doigts posés : leur écart et leur milieu. */
+type Span = { distance: number; middle: Point };
+/** Un pincement en cours : l'écart de départ, et la vue qu'il transforme. */
+type Pinch = Span & { from: View };
+/** Un tap : quand et où il a eu lieu. */
+type Tap = { at: number; point: Point };
+
+function isZoomed(view: View): boolean {
+  return view.scale > 1;
+}
+
+/** Un point de l'écran, dans le repère de `element`. */
+function pointIn(element: Element, at: { clientX: number; clientY: number }): Point {
+  const box = element.getBoundingClientRect();
+  return { x: at.clientX - box.left, y: at.clientY - box.top };
+}
+
+function spanOf(a: Point, b: Point): Span {
+  return {
+    distance: Math.hypot(a.x - b.x, a.y - b.y),
+    middle: { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 },
+  };
+}
 
 /**
  * L'image affichée du carrousel, à regarder de près. À la souris, une loupe
  * ronde suit le pointeur au survol. Au doigt, le pincement zoome l'image dans
- * son cadre autour du point pincé ; zoomée, elle se parcourt d'un doigt sans
- * changer d'image, et un double tap zoome ou revient à l'image entière. Une
- * autre image repart entière. La molette et le défilement restent à la page.
+ * son cadre autour du point pincé ; zoomée, elle se parcourt d'un doigt et
+ * retient le `pointerup` (le carrousel n'y voit pas de glissement), et un
+ * double tap zoome ou revient à l'image entière. Une autre image repart
+ * entière. La molette et le défilement restent à la page.
  */
-export function ZoomableImage({ src, alt, imageRef, style }: ZoomableImageProps) {
+export function ZoomableImage({
+  src,
+  alt,
+  imageRef,
+  className,
+  "data-testid": testId,
+  style,
+}: ZoomableImageProps) {
   const [loupe, setLoupe] = useState<Point | null>(null);
   const [view, setView] = useState<View>(WHOLE);
   const viewRef = useRef(view);
@@ -47,40 +84,40 @@ export function ZoomableImage({ src, alt, imageRef, style }: ZoomableImageProps)
   /** Un pincement a eu lieu depuis le premier doigt posé : ce geste n'est pas un glissement. */
   const pinched = useRef(false);
 
-  useEffect(() => {
+  // Une autre image repart entière, dès son premier rendu.
+  const [viewedSrc, setViewedSrc] = useState(src);
+  if (viewedSrc !== src) {
+    setViewedSrc(src);
     setView(WHOLE);
     setLoupe(null);
-  }, [src]);
+  }
 
   useEffect(() => {
     const element = frame.current;
     if (!element) return;
 
-    let pinch: { distance: number; middle: Point; from: View } | null = null;
+    let pinch: Pinch | null = null;
     let pan: Point | null = null;
-    let tap: { at: number; point: Point } | null = null;
-    let moved = false;
+    let tap: Tap | null = null;
+    /** Où le doigt s'est posé, tant qu'il peut encore taper. */
+    let tapStart: Point | null = null;
 
-    /** Un point de l'écran, dans le repère du cadre. */
-    function local(touch: Touch): Point {
-      const box = element!.getBoundingClientRect();
-      return { x: touch.clientX - box.left, y: touch.clientY - box.top };
-    }
+    const local = (touch: Touch) => pointIn(element, touch);
 
-    /** De l'image entière à la taille réelle du scan, au moins ×2. */
-    function boundedScale(scale: number): number {
-      const img = imageRef.current;
-      if (!img) return 1;
-      return Math.min(Math.max(scale, 1), Math.max(2, img.naturalWidth / img.offsetWidth));
+    /** Entre l'image entière et la taille réelle du scan, au moins ×2. */
+    function clampScale(scale: number): number {
+      const image = imageRef.current;
+      if (!image) return 1;
+      return Math.min(Math.max(scale, 1), Math.max(2, image.naturalWidth / image.offsetWidth));
     }
 
     /** L'image couvre toujours son cadre : ni plus petite, ni décollée d'un bord. */
-    function bounded(next: View): View {
-      const img = imageRef.current;
-      if (!img) return WHOLE;
-      const width = img.offsetWidth;
-      const height = img.offsetHeight;
-      const scale = boundedScale(next.scale);
+    function coveringFrame(next: View): View {
+      const image = imageRef.current;
+      if (!image) return WHOLE;
+      const width = image.offsetWidth;
+      const height = image.offsetHeight;
+      const scale = clampScale(next.scale);
       return {
         scale,
         x: Math.min(0, Math.max(width - width * scale, next.x)),
@@ -92,41 +129,43 @@ export function ZoomableImage({ src, alt, imageRef, style }: ZoomableImageProps)
     function zoomedAround(from: View, anchor: Point, point: Point, scale: number): View {
       const x = (anchor.x - from.x) / from.scale;
       const y = (anchor.y - from.y) / from.scale;
-      const to = boundedScale(scale);
-      return bounded({ scale: to, x: point.x - x * to, y: point.y - y * to });
+      const target = clampScale(scale);
+      return coveringFrame({ scale: target, x: point.x - x * target, y: point.y - y * target });
     }
 
     function onTouchStart(event: TouchEvent) {
-      moved = false;
       if (event.touches.length === 1) {
         pinched.current = false;
-        pan = viewRef.current.scale > 1 ? local(event.touches[0]!) : null;
+        tapStart = local(event.touches[0]!);
+        pan = isZoomed(viewRef.current) ? tapStart : null;
       } else if (event.touches.length === 2) {
-        const [a, b] = [local(event.touches[0]!), local(event.touches[1]!)];
         pinched.current = true;
+        tapStart = null;
         pan = null;
         pinch = {
-          distance: Math.hypot(a.x - b.x, a.y - b.y),
-          middle: { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 },
+          ...spanOf(local(event.touches[0]!), local(event.touches[1]!)),
           from: viewRef.current,
         };
       }
     }
 
     function onTouchMove(event: TouchEvent) {
-      moved = true;
+      const point = local(event.touches[0]!);
+      if (tapStart && Math.hypot(point.x - tapStart.x, point.y - tapStart.y) > TAP_SLOP)
+        tapStart = null;
+
+      // La page défile déjà sous le premier doigt : le pincement la laisse faire.
+      if (!event.cancelable) return;
+
       if (event.touches.length === 2 && pinch) {
         event.preventDefault();
-        const [a, b] = [local(event.touches[0]!), local(event.touches[1]!)];
-        const distance = Math.hypot(a.x - b.x, a.y - b.y);
-        const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+        const { distance, middle } = spanOf(point, local(event.touches[1]!));
         const scale = (pinch.from.scale * distance) / pinch.distance;
         setView(zoomedAround(pinch.from, pinch.middle, middle, scale));
-      } else if (event.touches.length === 1 && pan && viewRef.current.scale > 1) {
+      } else if (event.touches.length === 1 && pan && isZoomed(viewRef.current)) {
         event.preventDefault();
-        const point = local(event.touches[0]!);
         const { scale, x, y } = viewRef.current;
-        setView(bounded({ scale, x: x + point.x - pan.x, y: y + point.y - pan.y }));
+        setView(coveringFrame({ scale, x: x + point.x - pan.x, y: y + point.y - pan.y }));
         pan = point;
       }
     }
@@ -134,30 +173,32 @@ export function ZoomableImage({ src, alt, imageRef, style }: ZoomableImageProps)
     function onTouchEnd(event: TouchEvent) {
       if (event.touches.length < 2) pinch = null;
       // Un doigt reste après le pincement : il parcourt l'image.
-      if (event.touches.length === 1 && viewRef.current.scale > 1) pan = local(event.touches[0]!);
+      if (event.touches.length === 1 && isZoomed(viewRef.current)) pan = local(event.touches[0]!);
       if (event.touches.length > 0) return;
 
       pan = null;
       if (viewRef.current.scale < SNAP_BACK) setView(WHOLE);
-      if (pinched.current || moved || event.changedTouches.length !== 1) {
+      const tapped = tapStart && !pinched.current && event.changedTouches.length === 1;
+      tapStart = null;
+      if (!tapped) {
         tap = null;
         return;
       }
 
       const point = local(event.changedTouches[0]!);
       const now = event.timeStamp;
-      const twice =
+      const isDoubleTap =
         tap &&
         now - tap.at < DOUBLE_TAP_DELAY &&
         Math.hypot(point.x - tap.point.x, point.y - tap.point.y) < DOUBLE_TAP_DISTANCE;
-      if (!twice) {
+      if (!isDoubleTap) {
         tap = { at: now, point };
         return;
       }
       tap = null;
       event.preventDefault();
       setView(
-        viewRef.current.scale > 1
+        isZoomed(viewRef.current)
           ? WHOLE
           : zoomedAround(viewRef.current, point, point, DOUBLE_TAP_SCALE),
       );
@@ -175,57 +216,55 @@ export function ZoomableImage({ src, alt, imageRef, style }: ZoomableImageProps)
     };
   }, []);
 
-  function onPointerMove(event: PointerEvent) {
-    if (event.pointerType !== "mouse" || viewRef.current.scale > 1) return;
-    const box = event.currentTarget.getBoundingClientRect();
-    setLoupe({ x: event.clientX - box.left, y: event.clientY - box.top });
+  // La loupe suit la souris sur l'image même : elle s'en va dès que le pointeur en sort.
+  function onPointerMove(event: PointerEvent<HTMLImageElement>) {
+    if (event.pointerType !== "mouse" || isZoomed(viewRef.current)) return;
+    setLoupe(pointIn(event.currentTarget, event));
   }
 
   // Zoomée ou pincée, l'image retient le doigt : le carrousel n'y voit pas de glissement.
   function onPointerUp(event: PointerEvent) {
-    if (event.pointerType === "touch" && (pinched.current || viewRef.current.scale > 1))
+    if (event.pointerType === "touch" && (pinched.current || isZoomed(viewRef.current)))
       event.stopPropagation();
   }
 
-  const img = imageRef.current;
-  const isZoomed = view.scale > 1;
+  const image = imageRef.current;
+  const zoomed = isZoomed(view);
 
   return (
-    <span
-      className="zoomable"
-      onPointerMove={onPointerMove}
-      onPointerLeave={() => setLoupe(null)}
-      onPointerUp={onPointerUp}
-    >
-      <span className="zoomable__frame" ref={frame} data-zoomed={isZoomed ? "true" : undefined}>
+    <span className="zoomable" onPointerUp={onPointerUp}>
+      <span className="zoomable__frame" ref={frame} data-zoomed={zoomed ? "true" : undefined}>
         <img
-          className="carousel__image"
-          data-testid="carousel-image"
+          className={className}
+          data-testid={testId}
+          data-loupe={loupe ? "true" : undefined}
           ref={imageRef}
           src={src}
           alt={alt}
           draggable={false}
+          onPointerMove={onPointerMove}
+          onPointerLeave={() => setLoupe(null)}
           style={{
             ...style,
-            transform: isZoomed
+            transform: zoomed
               ? `translate(${view.x}px, ${view.y}px) scale(${view.scale})`
               : undefined,
           }}
         />
       </span>
 
-      {loupe && img ? (
+      {loupe && image ? (
         <span
           className="zoomable__loupe"
-          data-testid="carousel-loupe"
+          data-testid="loupe"
           aria-hidden="true"
           style={{
             width: LOUPE_SIZE,
             height: LOUPE_SIZE,
-            left: loupe.x - LOUPE_SIZE / 2,
-            top: loupe.y - LOUPE_SIZE / 2,
+            left: image.offsetLeft + loupe.x - LOUPE_SIZE / 2,
+            top: image.offsetTop + loupe.y - LOUPE_SIZE / 2,
             backgroundImage: `url("${src}")`,
-            backgroundSize: `${img.offsetWidth * LOUPE_POWER}px ${img.offsetHeight * LOUPE_POWER}px`,
+            backgroundSize: `${image.offsetWidth * LOUPE_POWER}px ${image.offsetHeight * LOUPE_POWER}px`,
             backgroundPosition: `${LOUPE_SIZE / 2 - loupe.x * LOUPE_POWER}px ${LOUPE_SIZE / 2 - loupe.y * LOUPE_POWER}px`,
           }}
         />

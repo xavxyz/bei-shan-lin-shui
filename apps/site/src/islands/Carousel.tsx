@@ -44,7 +44,8 @@ const SWIPE_THRESHOLD = 40;
  * premier carrousel visible.
  *
  * L'image affichée se regarde de près : loupe à la souris, pincement au doigt
- * (`ZoomableImage`).
+ * (`ZoomableImage`). Zoomée ou pincée, elle retient le `pointerup` du doigt :
+ * le glissement du carrousel ne change alors pas d'image.
  *
  * Sans JavaScript, il montre la première image et la liste ; flèches,
  * vignettes et points n'apparaissent qu'une fois l'îlot monté.
@@ -115,6 +116,8 @@ export function Carousel({ variations, leadingVariation, title, transitionName }
               onPointerCancel={() => (swipeStart.current = null)}
             >
               <ZoomableImage
+                className="carousel__image"
+                data-testid="carousel-image"
                 imageRef={image}
                 src={shown.image.src}
                 alt={describe(shown.image, title)}

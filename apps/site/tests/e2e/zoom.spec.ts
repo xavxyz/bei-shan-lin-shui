@@ -1,4 +1,5 @@
 import { expect, test, type CDPSession, type Locator, type Page } from "@playwright/test";
+import { carousel, mounted, shown } from "./carousel.js";
 
 /**
  * L'œuvre se regarde de près : loupe à la souris, pincement au doigt (#103).
@@ -7,20 +8,12 @@ import { expect, test, type CDPSession, type Locator, type Page } from "@playwri
  */
 const piecePath = "/pieces/mo-si-wen-ke";
 
-function carousel(page: Page) {
-  return page.getByTestId("carousel").first();
-}
-
-function shown(page: Page) {
-  return carousel(page).getByTestId("carousel-image");
-}
-
 function position(page: Page) {
   return carousel(page).getByTestId("carousel-position");
 }
 
-async function mounted(page: Page) {
-  await expect(carousel(page).getByRole("button", { name: "Image suivante" })).toBeVisible();
+function loupeOf(page: Page) {
+  return carousel(page).getByTestId("loupe");
 }
 
 async function box(locator: Locator) {
@@ -34,7 +27,7 @@ test.describe("à la souris", () => {
     await page.goto(piecePath);
     await mounted(page);
     const image = await box(shown(page));
-    const loupe = carousel(page).getByTestId("carousel-loupe");
+    const loupe = loupeOf(page);
 
     await expect(loupe).toHaveCount(0);
 
@@ -49,8 +42,23 @@ test.describe("à la souris", () => {
     await page.mouse.move(image.x + image.width * 0.7, y);
     expect((await box(loupe)).x).toBeGreaterThan(lens.x);
 
-    await page.mouse.move(image.x + image.width + 200, y);
+    // Juste à côté de l'image, encore au-dessus de la scène du carrousel.
+    await page.mouse.move(image.x + image.width + 4, y);
     await expect(loupe).toHaveCount(0);
+  });
+
+  test("la loupe grossit trois fois ce qui est dessous", async ({ page }) => {
+    await page.goto(piecePath);
+    await mounted(page);
+    const image = await box(shown(page));
+
+    await page.mouse.move(image.x + image.width / 2, image.y + image.height / 2);
+
+    const [width, height] = await loupeOf(page).evaluate((loupe) =>
+      getComputedStyle(loupe).backgroundSize.split(" ").map(parseFloat),
+    );
+    expect(width).toBeCloseTo(image.width * 3, 0);
+    expect(height).toBeCloseTo(image.height * 3, 0);
   });
 
   test("la molette au-dessus de l'œuvre fait toujours défiler la page", async ({ page }) => {
@@ -125,7 +133,7 @@ test.describe("au doigt", () => {
       .poll(async () => (await box(shown(page))).width)
       .toBeGreaterThan(whole.width * 1.5);
     await expect(position(page)).toHaveText("1 / 10");
-    await expect(carousel(page).getByTestId("carousel-loupe")).toHaveCount(0);
+    await expect(loupeOf(page)).toHaveCount(0);
   });
 
   test("zoomée, l'œuvre se parcourt d'un doigt au lieu de changer d'image", async ({ page }) => {
@@ -148,10 +156,44 @@ test.describe("au doigt", () => {
     await expect
       .poll(async () => (await box(shown(page))).width)
       .toBeGreaterThan(whole.width * 1.5);
+    await expect(loupeOf(page)).toHaveCount(0);
 
     await tap(cdp, center);
     await tap(cdp, center);
     await expect.poll(async () => (await box(shown(page))).width).toBeCloseTo(whole.width, 0);
+  });
+
+  // Chrome tait les mouvements d'un doigt sous une quinzaine de pixels ; Safari
+  // les transmet. Les taps sont donc envoyés tels que Safari les livre à la page.
+  test("un doigt qui bouge de quelques pixels tape encore : le double tap zoome", async ({
+    page,
+  }) => {
+    const { whole, center } = await setUp(page);
+
+    await shown(page).evaluate(async (image, at) => {
+      const touchAt = (x: number, y: number) =>
+        new Touch({ identifier: 0, target: image, clientX: x, clientY: y });
+      const send = (type: string, touches: Touch[], changed: Touch[]) =>
+        image.dispatchEvent(
+          new TouchEvent(type, {
+            bubbles: true,
+            cancelable: true,
+            touches,
+            targetTouches: touches,
+            changedTouches: changed,
+          }),
+        );
+      for (let twice = 0; twice < 2; twice++) {
+        send("touchstart", [touchAt(at.x, at.y)], [touchAt(at.x, at.y)]);
+        send("touchmove", [touchAt(at.x + 3, at.y + 2)], [touchAt(at.x + 3, at.y + 2)]);
+        send("touchend", [], [touchAt(at.x + 3, at.y + 2)]);
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
+    }, center);
+
+    await expect
+      .poll(async () => (await box(shown(page))).width)
+      .toBeGreaterThan(whole.width * 1.5);
   });
 
   test("non zoomée, glisser change toujours d'image", async ({ page }) => {
@@ -166,18 +208,55 @@ test.describe("au doigt", () => {
     await expect(position(page)).toHaveText("2 / 10");
   });
 
-  test("l'image suivante s'ouvre entière", async ({ page }) => {
+  test("non zoomée, l'œuvre laisse le doigt faire défiler la page", async ({ page }) => {
     const { cdp, whole, center } = await setUp(page);
-    await pinch(cdp, center, 20, 100);
-    await expect
-      .poll(async () => (await box(shown(page))).width)
-      .toBeGreaterThan(whole.width * 1.5);
+    const before = await page.evaluate(() => window.scrollY);
 
-    await carousel(page).getByTestId("carousel-dots").getByRole("button").nth(1).click();
+    await drag(
+      cdp,
+      { x: center.x, y: whole.y + whole.height * 0.8 },
+      { x: center.x, y: whole.y + whole.height * 0.2 },
+    );
 
-    await expect(position(page)).toHaveText("2 / 10");
-    await expect
-      .poll(async () => (await box(shown(page))).width)
-      .toBeLessThanOrEqual(whole.width + 1);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(before);
+    await expect(position(page)).toHaveText("1 / 10");
+  });
+
+  const otherImage: Record<string, (page: Page) => Promise<void>> = {
+    "un point": (page) =>
+      carousel(page).getByTestId("carousel-dots").getByRole("button").nth(1).click(),
+    "la flèche": (page) => carousel(page).getByRole("button", { name: "Image suivante" }).click(),
+    "le clavier": (page) => page.keyboard.press("ArrowRight"),
+  };
+
+  for (const [by, open] of Object.entries(otherImage)) {
+    test(`l'image suivante s'ouvre entière, par ${by}`, async ({ page }) => {
+      const { cdp, whole, center } = await setUp(page);
+      await pinch(cdp, center, 20, 100);
+      await expect
+        .poll(async () => (await box(shown(page))).width)
+        .toBeGreaterThan(whole.width * 1.5);
+
+      await open(page);
+
+      await expect(position(page)).toHaveText("2 / 10");
+      await expect
+        .poll(async () => (await box(shown(page))).width)
+        .toBeLessThanOrEqual(whole.width + 1);
+    });
+  }
+});
+
+test.describe("sans JavaScript", () => {
+  test.use({ javaScriptEnabled: false });
+
+  test("l'œuvre s'affiche entière, sans loupe au survol", async ({ page }) => {
+    await page.goto(piecePath);
+    const image = await box(shown(page));
+
+    await page.mouse.move(image.x + image.width / 2, image.y + image.height / 2);
+
+    await expect(shown(page)).toBeVisible();
+    await expect(loupeOf(page)).toHaveCount(0);
   });
 });
