@@ -2,7 +2,7 @@
 
 Le texte où 山山 définit le style libre (`ziyou`, 自由), sixième style après les cinq. Il ne sert aucune pièce par son texte : il est la source de l'entrée **Style libre** de `GLOSSARY.md`. Texte et traduction recopiés du fichier que le calligraphe a fourni le 2 novembre 2026 (`~/Dropbox/_deploy/04.07.xy • Calligraphie libre de 山山.md`).
 
-La traduction française est celle qui accompagne le texte dans ce fichier, recopiée telle quelle ; son traducteur n'y est pas nommé.
+La traduction française est celle qui accompagne le texte dans ce fichier, recopiée telle quelle. Elle est de 山山 (le calligraphe, 2 novembre 2026).
 
 ## 《山山自由书法：中国书法的第六体》 · `ziyou`
 
