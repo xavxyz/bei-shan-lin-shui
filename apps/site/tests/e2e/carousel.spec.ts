@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import { carousel, mounted, shown } from "./carousel.js";
 
 /**
  * Playwright vérifie que le carrousel est monté et navigue dans une page
@@ -20,20 +21,6 @@ const current = [
   "v1a-09.jpg",
   "v1b.jpg",
 ];
-
-/** Le carrousel de la version courante : le premier de la page, avant l'évolution. */
-function carousel(page: Page) {
-  return page.getByTestId("carousel").first();
-}
-
-function shown(page: Page) {
-  return carousel(page).getByTestId("carousel-image");
-}
-
-/** Les flèches n'apparaissent qu'une fois l'îlot monté. */
-async function mounted(page: Page) {
-  await expect(carousel(page).getByRole("button", { name: "Image suivante" })).toBeVisible();
-}
 
 test("chaque image de la version courante apparaît exactement une fois sur la page", async ({
   page,

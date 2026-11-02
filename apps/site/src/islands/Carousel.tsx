@@ -7,6 +7,7 @@ import {
   type LoadedVariation,
 } from "@bsls/schema";
 import { pilotWithKeyboard } from "./keyboard-pilot.js";
+import { ZoomableImage } from "./ZoomableImage.js";
 import "./Carousel.css";
 
 export type CarouselProps = {
@@ -41,6 +42,10 @@ const SWIPE_THRESHOLD = 40;
  * Une fois monté, il s'inscrit auprès du pilote clavier de la page
  * (`keyboard-pilot.ts`), qui lui transmet les flèches ← → quand il est le
  * premier carrousel visible.
+ *
+ * L'image affichée se regarde de près : loupe à la souris, pincement au doigt
+ * (`ZoomableImage`). Zoomée ou pincée, elle retient le `pointerup` du doigt :
+ * le glissement du carrousel ne change alors pas d'image.
  *
  * Sans JavaScript, il montre la première image et la liste ; flèches,
  * vignettes et points n'apparaissent qu'une fois l'îlot monté.
@@ -110,13 +115,12 @@ export function Carousel({ variations, leadingVariation, title, transitionName }
               onPointerUp={onPointerUp}
               onPointerCancel={() => (swipeStart.current = null)}
             >
-              <img
+              <ZoomableImage
                 className="carousel__image"
                 data-testid="carousel-image"
-                ref={image}
+                imageRef={image}
                 src={shown.image.src}
                 alt={describe(shown.image, title)}
-                draggable={false}
                 style={
                   transitionName && index === 0 ? { viewTransitionName: transitionName } : undefined
                 }

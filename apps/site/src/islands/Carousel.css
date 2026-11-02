@@ -32,7 +32,6 @@
   max-height: 80vh;
   width: auto;
   height: auto;
-  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 12%);
   background: var(--paper, #fff);
 }
 
