@@ -186,15 +186,14 @@ async function readManifesto(
   root: string,
   errors: ContentError[],
 ): Promise<LoadedManifesto | null> {
-  const file = MANIFESTO_FILE;
-  if (!(await isFile(join(root, file)))) return null;
+  if (!(await isFile(join(root, MANIFESTO_FILE)))) return null;
 
-  const raw = await readYaml(join(root, file), file, errors);
+  const raw = await readYaml(join(root, MANIFESTO_FILE), MANIFESTO_FILE, errors);
   if (raw === undefined) return null;
 
   const parsed = manifestoFileSchema.safeParse(raw);
   if (!parsed.success) {
-    errors.push(...toContentErrors(file, parsed.error));
+    errors.push(...toContentErrors(MANIFESTO_FILE, parsed.error));
     return null;
   }
 
@@ -203,7 +202,7 @@ async function readManifesto(
   const epigraph = deriveChineseText(manifesto.epigraph).simplified;
   if (!manifesto.paragraphs.some((paragraph) => paragraph.zh.includes(epigraph))) {
     errors.push({
-      file,
+      file: MANIFESTO_FILE,
       path: "epigraph",
       message: `attendu : un passage du texte, or ${epigraph} n'est dans aucun paragraphe`,
     });

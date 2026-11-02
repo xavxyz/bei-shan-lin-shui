@@ -66,7 +66,7 @@ Le suivi et la publication des calligraphies d'un calligraphe : ce qui a été �
 
 **Les cinq pas** : Les cinq styles d'écriture enseignés par 鄧岱崑, du plus posé au plus libre : régulier (楷書), courant (行書), grand courant (行草), cursif (草書), cursive folle (狂草).
 
-**Style libre** (自由) : Le sixième pas, créé par 山山 : l'écriture se transforme et reste lisible ; un caractère qui semble faux y est souvent seulement déplacé dans ses composantes. 山山 le définit dans 《山山自由书法：中国书法的第六体》 (Paris, juillet 2004, `docs/sources/shan-shan-zi-you-shu-fa.md`) : un style que ne bornent ni la forme des caractères ni les styles, qui va du « vide » au « plein » sous trois formes visibles, droit, plié, courbé (直、曲、弯) ; « une danse sur la pointe d'une aiguille » (针尖上的舞蹈).
+**Style libre** (自由) : Le sixième pas, créé par 山山 : l'écriture se transforme et reste lisible ; un caractère qui semble faux y est souvent seulement déplacé dans ses composantes. 山山 le définit dans 《山山自由书法：中国书法的第六体》 (Paris, juillet 2004 ; le texte dans `content/manifeste.yaml`, sa source et ses notes dans `docs/sources/shan-shan-zi-you-shu-fa.md`) : un style que ne bornent ni la forme des caractères ni les styles, qui va du « vide » au « plein » sous trois formes visibles, droit, plié, courbé (直、曲、弯) ; « une danse sur la pointe d'une aiguille » (针尖上的舞蹈).
 
 **Manifeste** : Le texte où 山山 définit le style libre, 《山山自由书法：中国书法的第六体》, avec sa traduction par 山山 : l'accueil du site le montre en entier avant le mur, chaque paragraphe chinois en regard de sa traduction, cité tel qu'il est écrit, en simplifié (ADR 0007). Il vit dans `content/manifeste.yaml`. _À éviter_ : essai, préface, avant-propos
 

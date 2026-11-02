@@ -1,0 +1,13 @@
+---
+import type { LoadedManifesto } from "@bsls/schema";
+
+/** Un paragraphe du manifeste, tel qu'il est écrit, en regard de sa traduction. */
+type Props = { paragraph: LoadedManifesto["paragraphs"][number] };
+
+const { paragraph } = Astro.props;
+---
+
+<li>
+  <p lang="zh-Hans">{paragraph.zh}</p>
+  <p>{paragraph.fr}</p>
+</li>
