@@ -11,6 +11,8 @@ export const PIECES_DIR = "pieces";
 export const PROJECTS_DIR = "projects";
 export const PIECE_FILE = "piece.md";
 export const IMAGES_DIR = "images";
+/** Le manifeste de 山山, facultatif, à la racine du contenu. */
+export const MANIFESTO_FILE = "manifeste.yaml";
 
 /** Préfixe d'URL sous lequel les images du contenu sont servies. */
 export const CONTENT_IMAGES_BASE = "/content-images";

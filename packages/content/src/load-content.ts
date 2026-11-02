@@ -5,10 +5,12 @@ import {
   RESERVED_PROJECT_ID,
   SCRIPT_LABELS,
   loadedPieceSchema,
+  manifestoFileSchema,
   pieceFrontmatterSchema,
   projectFileSchema,
   toIsoDate,
   type ChineseText,
+  type LoadedManifesto,
   type LoadedPiece,
   type LoadedProject,
   type LoadedVariation,
@@ -22,6 +24,7 @@ import { deriveFormatLabel } from "./format-label.js";
 import { pickFeaturedImage, pickFeaturedVariation } from "./featured.js";
 import {
   IMAGES_DIR,
+  MANIFESTO_FILE,
   PROJECTS_DIR,
   PIECE_FILE,
   PIECES_DIR,
@@ -44,6 +47,8 @@ export type ContentError = {
 export type Content = {
   projects: LoadedProject[];
   pieces: LoadedPiece[];
+  /** Le manifeste de 山山, s'il y en a un : un contenu sans manifeste reste valide. */
+  manifesto: LoadedManifesto | null;
 };
 
 export type LoadResult = { ok: true; content: Content } | { ok: false; errors: ContentError[] };
@@ -59,7 +64,7 @@ export type LoadOptions = {
 };
 
 /**
- * Charge projets et pièces depuis la racine du contenu.
+ * Charge projets, pièces et manifeste depuis la racine du contenu.
  *
  * Seul point d'entrée du site vers le contenu, et pure vis-à-vis du disque :
  * elle lit, elle n'écrit jamais. Tout ce qui est retourné est validé et typé ;
@@ -71,6 +76,7 @@ export async function loadContent(root: string, options: LoadOptions = {}): Prom
 
   const projectFiles = await readProjects(root, errors);
   const pieces = await readPieces(root, projectFiles, errors);
+  const manifesto = await readManifesto(root, errors);
 
   if (errors.length > 0) return { ok: false, errors };
 
@@ -86,6 +92,7 @@ export async function loadContent(root: string, options: LoadOptions = {}): Prom
           .map((piece) => piece.slug),
       })),
       pieces: visible,
+      manifesto,
     },
   };
 }
@@ -172,6 +179,41 @@ async function readPieces(
   }
 
   return pieces.sort((a, b) => a.slug.localeCompare(b.slug));
+}
+
+/** Le manifeste est facultatif : sans fichier, il n'y en a pas, et ce n'est pas une erreur. */
+async function readManifesto(
+  root: string,
+  errors: ContentError[],
+): Promise<LoadedManifesto | null> {
+  const file = MANIFESTO_FILE;
+  if (!(await isFile(join(root, file)))) return null;
+
+  const raw = await readYaml(join(root, file), file, errors);
+  if (raw === undefined) return null;
+
+  const parsed = manifestoFileSchema.safeParse(raw);
+  if (!parsed.success) {
+    errors.push(...toContentErrors(file, parsed.error));
+    return null;
+  }
+
+  const manifesto = parsed.data;
+  // L'épigraphe s'écrit en traditionnel ; le texte, en simplifié (ADR 0007).
+  const epigraph = deriveChineseText(manifesto.epigraph).simplified;
+  if (!manifesto.paragraphs.some((paragraph) => paragraph.zh.includes(epigraph))) {
+    errors.push({
+      file,
+      path: "epigraph",
+      message: `attendu : un passage du texte, or ${epigraph} n'est dans aucun paragraphe`,
+    });
+    return null;
+  }
+
+  return {
+    ...manifesto,
+    signature: [manifesto.author, manifesto.place, manifesto.date].join(" · "),
+  };
 }
 
 function checkProjectsExist(

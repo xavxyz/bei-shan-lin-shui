@@ -6,7 +6,7 @@ Réponds au calligraphe en français.
 
 ## Où vivent les choses
 
-- `content/` — le contenu réel. Projets en YAML, pièces en Markdown à frontmatter YAML, images à côté de leur pièce.
+- `content/` — le contenu réel. Projets en YAML, pièces en Markdown à frontmatter YAML, images à côté de leur pièce ; et `manifeste.yaml`, le manifeste de 山山 que l'accueil montre en entier, en simplifié tel qu'il est écrit (ADR 0007).
 - `packages/schema` — **la** définition du format, en Zod. Tout le reste s'y branche ; rien ne redéfinit la forme du contenu ailleurs.
 - `packages/content` — le content layer : prend une racine de contenu, retourne projets et pièces validés et typés, ou des erreurs localisées.
 - `packages/notion-import` — l'import de l'existant depuis Notion : lit un export, propose un classement, applique le plan arbitré ; ses images passent par la normalisation de `packages/scans`.
