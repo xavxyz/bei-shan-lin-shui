@@ -31,5 +31,7 @@ versions:
             kind: work
             capture: photo
             featured: true
+pinyin_overrides:
+  以訟為鬆: yǐ sòng wéi sōng # 以…為… : 為 se lit wéi
 published: true
 ---

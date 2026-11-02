@@ -1,8 +1,8 @@
 ---
-# textes d'appui : 禮記·經解 (君子慎始，差若豪釐，繆以千里) ; 摩訶止觀 de Zhiyi (介爾有心，即具三千), cité par Ouyi ; vérifiés dans le projet d'origine du calligraphe
+# textes d'appui : 禮記·經解 : 易曰：「君子慎始。差若豪氂，繆以千里。」 (zh.wikisource, 禮記/經解, consulté le 2026-11-02) ; 摩訶止觀 de Zhiyi : 介爾有心，即具三千 (CBETA T46n1911, p. 0054a08–a09), cité par Ouyi
 title: 慎於介爾
 gloss: Veiller à l'origine infime de chaque pensée, sur la pointe d'une aiguille.
-slug: shen-wu-jie-er
+slug: shen-yu-jie-er
 status: made
 projects:
   - qi-yan-he-jiu

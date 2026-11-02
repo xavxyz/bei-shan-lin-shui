@@ -1,4 +1,5 @@
 ---
+# composition du calligraphe ; le 起 sur le modèle de cursive folle de 懷素, d'après le cours de 山山
 title: 起
 gloss: "Le frontispice : un seul commencement, et les trois pièces qui en découlent."
 slug: qi
@@ -13,7 +14,7 @@ versions:
     format: "[(1x6/4, 1x1, 1x8/3, 1x6/4)]"
     columns:
       - 閒仙師父清賞 # 上款 ; 仙閒師父清當 sur le papier, lapsus du calligraphe
-      - 起 # 題字, sur le modèle de cursive folle de 懷素
+      - 起 # 題字
       - 即一鬆即三千即合
       - 丙午季秋戈書 # 季 et 秋 écrits en style libre ; le point de 戈 en rouge
     intention: |

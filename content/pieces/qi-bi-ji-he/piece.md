@@ -1,5 +1,5 @@
 ---
-# textes d'appui : 周易禪解 d'Ouyi Zhixu, hexagramme 訟 (CBETA J20nB096, p. 0406c–0407a) ; 禮記·經解 (君子慎始，差若豪釐，繆以千里) ; 摩訶止觀 de Zhiyi (介爾有心，即具三千) ; vérifiés dans le projet d'origine du calligraphe
+# textes d'appui : 周易禪解 d'Ouyi Zhixu, hexagramme 訟 (CBETA J20nB096, p. 0406c–0407a), vérifié dans le projet d'origine du calligraphe ; 禮記·經解 : 易曰：「君子慎始。差若豪氂，繆以千里。」 (zh.wikisource, 禮記/經解, consulté le 2026-11-02) ; 摩訶止觀 de Zhiyi : 介爾有心，即具三千 (CBETA T46n1911, p. 0054a08–a09)
 title: 起筆即合
 gloss: Le lettré, le bouddhiste et le taoïste réunis dans le premier contact du pinceau.
 slug: qi-bi-ji-he
