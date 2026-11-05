@@ -25,6 +25,16 @@ export type RenderInput = {
 
 const ORIENTATIONS = { portrait: "portrait", landscape: "paysage" } as const;
 
+/**
+ * Les repères à cocher. Ceux que `shown` montre à l'ouverture sont cochés, et
+ * posés sur le `<body>` : ils s'affichent sans attendre le script, et sans lui.
+ */
+const MARKS = [
+  { key: "grille", label: "grille", shown: true },
+  { key: "jiugong", label: "九宮格", shown: false },
+  { key: "cotes", label: "cotes", shown: false },
+] as const;
+
 /** `A · [(13x7)]` : le nom d'un format candidat, dans la commande et sur la page. */
 export const candidateLabel = (candidate: Candidate) => `${candidate.key} · ${candidate.format}`;
 
@@ -247,7 +257,9 @@ export function renderPage(input: RenderInput): string {
 <title>${escape(`${input.title} — Grilles`)}</title>
 <style>${modelStyle(input.models)}${STYLE}</style>
 </head>
-<body data-characters="affiches" data-model="${MODELS[0].key}" data-grille>
+<body data-characters="affiches" data-model="${MODELS[0].key}"${MARKS.filter((mark) => mark.shown)
+    .map((mark) => ` data-${mark.key}`)
+    .join("")}>
   <header class="controls">
     <h1>${escape(input.title)}</h1>
     <p>${escape(`${input.slug} · version ${input.version} · ${input.origin}`)}</p>
@@ -271,10 +283,10 @@ export function renderPage(input: RenderInput): string {
       )
       .join("")}
     <fieldset>
-      <legend>Repères</legend>
-      <label><input type="checkbox" name="marks" value="grille" checked> grille</label>
-      <label><input type="checkbox" name="marks" value="jiugong"> 九宮格</label>
-      <label><input type="checkbox" name="marks" value="cotes"> cotes</label>
+      <legend>Repères</legend>${MARKS.map(
+        (mark) =>
+          `\n      <label><input type="checkbox" name="marks" value="${mark.key}"${mark.shown ? " checked" : ""}> ${mark.label}</label>`,
+      ).join("")}
     </fieldset>
     <p class="hint">Imprimer : une feuille par page, A4, échelle 100 %, marges « aucune ». Les caractères et les repères s'impriment comme ils sont affichés.</p>
   </header>
@@ -391,7 +403,7 @@ document.querySelectorAll('input[name="characters"]').forEach((input) =>
   input.addEventListener("change", () => { setCharacters(input.value); sync(); }));
 const markInputs = [...document.querySelectorAll('input[name="marks"]')];
 const marks = markInputs.map((input) => input.value);
-/** Cochée dans la page, la grille ; à cocher, le 九宮格 et les cotes. L'URL ne garde que ce qui s'en écarte. */
+/** L'URL ne garde que ce qui s'écarte de ces repères cochés à l'ouverture. */
 const marksByDefault = Object.fromEntries(markInputs.map((input) => [input.value, input.defaultChecked]));
 function setMark(mark, on) {
   if (on) document.body.dataset[mark] = "";
@@ -400,7 +412,7 @@ function setMark(mark, on) {
 }
 for (const mark of marks)
   setMark(mark, params.has(mark) ? params.get(mark) === "1" : marksByDefault[mark]);
-document.querySelectorAll('input[name="marks"]').forEach((input) =>
+markInputs.forEach((input) =>
   input.addEventListener("change", () => { setMark(input.value, input.checked); sync(); }));
 document.querySelectorAll(".switcher button").forEach((b) =>
   b.addEventListener("click", () => step(Number(b.dataset.step))));
