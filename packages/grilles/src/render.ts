@@ -25,6 +25,16 @@ export type RenderInput = {
 
 const ORIENTATIONS = { portrait: "portrait", landscape: "paysage" } as const;
 
+/**
+ * Les repères à cocher. Ceux que `shown` montre à l'ouverture sont cochés, et
+ * posés sur le `<body>` : ils s'affichent sans attendre le script, et sans lui.
+ */
+const MARKS = [
+  { key: "grille", label: "grille", shown: true },
+  { key: "jiugong", label: "九宮格", shown: false },
+  { key: "cotes", label: "cotes", shown: false },
+] as const;
+
 /** `A · [(13x7)]` : le nom d'un format candidat, dans la commande et sur la page. */
 export const candidateLabel = (candidate: Candidate) => `${candidate.key} · ${candidate.format}`;
 
@@ -247,7 +257,9 @@ export function renderPage(input: RenderInput): string {
 <title>${escape(`${input.title} — Grilles`)}</title>
 <style>${modelStyle(input.models)}${STYLE}</style>
 </head>
-<body data-characters="affiches" data-model="${MODELS[0].key}">
+<body data-characters="affiches" data-model="${MODELS[0].key}"${MARKS.filter((mark) => mark.shown)
+    .map((mark) => ` data-${mark.key}`)
+    .join("")}>
   <header class="controls">
     <h1>${escape(input.title)}</h1>
     <p>${escape(`${input.slug} · version ${input.version} · ${input.origin}`)}</p>
@@ -271,9 +283,10 @@ export function renderPage(input: RenderInput): string {
       )
       .join("")}
     <fieldset>
-      <legend>Repères</legend>
-      <label><input type="checkbox" name="marks" value="jiugong"> 九宮格</label>
-      <label><input type="checkbox" name="marks" value="cotes"> cotes</label>
+      <legend>Repères</legend>${MARKS.map(
+        (mark) =>
+          `\n      <label><input type="checkbox" name="marks" value="${mark.key}"${mark.shown ? " checked" : ""}> ${mark.label}</label>`,
+      ).join("")}
     </fieldset>
     <p class="hint">Imprimer : une feuille par page, A4, échelle 100 %, marges « aucune ». Les caractères et les repères s'impriment comme ils sont affichés.</p>
   </header>
@@ -324,7 +337,7 @@ body[data-characters="masques"] .characters { display: none; }
 .jiugong { fill: none; stroke: #c98f8f; stroke-width: 0.2; stroke-dasharray: 1 1; }
 .cotes { stroke: #2c5d8a; stroke-width: 0.2; }
 .cotes text { stroke: none; fill: #2c5d8a; text-anchor: middle; font-family: system-ui, sans-serif; }
-body:not([data-jiugong]) .jiugong, body:not([data-cotes]) .cotes, body:not([data-cotes]) .measures { display: none; }
+body:not([data-grille]) .grid, body:not([data-jiugong]) .jiugong, body:not([data-cotes]) .cotes, body:not([data-cotes]) .measures { display: none; }
 .measures { color: #2c5d8a; }
 .model-notes { margin: 4px 0; color: #8a2c2c; font-size: 14px; }
 .model-notes:empty { display: none; }
@@ -360,8 +373,9 @@ function sync() {
   url.searchParams.set("caracteres", document.body.dataset.characters);
   url.searchParams.set("modele", document.body.dataset.model);
   for (const mark of marks) {
-    if (mark in document.body.dataset) url.searchParams.set(mark, "1");
-    else url.searchParams.delete(mark);
+    const on = mark in document.body.dataset;
+    if (on === marksByDefault[mark]) url.searchParams.delete(mark);
+    else url.searchParams.set(mark, on ? "1" : "0");
   }
   history.replaceState(null, "", url);
 }
@@ -387,14 +401,18 @@ function setCharacters(mode) {
 setCharacters(modes.includes(params.get("caracteres")) ? params.get("caracteres") : "affiches");
 document.querySelectorAll('input[name="characters"]').forEach((input) =>
   input.addEventListener("change", () => { setCharacters(input.value); sync(); }));
-const marks = ["jiugong", "cotes"];
+const markInputs = [...document.querySelectorAll('input[name="marks"]')];
+const marks = markInputs.map((input) => input.value);
+/** L'URL ne garde que ce qui s'écarte de ces repères cochés à l'ouverture. */
+const marksByDefault = Object.fromEntries(markInputs.map((input) => [input.value, input.defaultChecked]));
 function setMark(mark, on) {
   if (on) document.body.dataset[mark] = "";
   else delete document.body.dataset[mark];
   document.querySelector('input[name="marks"][value="' + mark + '"]').checked = on;
 }
-for (const mark of marks) setMark(mark, params.get(mark) === "1");
-document.querySelectorAll('input[name="marks"]').forEach((input) =>
+for (const mark of marks)
+  setMark(mark, params.has(mark) ? params.get(mark) === "1" : marksByDefault[mark]);
+markInputs.forEach((input) =>
   input.addEventListener("change", () => { setMark(input.value, input.checked); sync(); }));
 document.querySelectorAll(".switcher button").forEach((b) =>
   b.addEventListener("click", () => step(Number(b.dataset.step))));

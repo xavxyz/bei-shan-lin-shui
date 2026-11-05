@@ -617,3 +617,35 @@ describe("le modèle", () => {
     }
   });
 });
+
+/** Les repères que la page propose à cocher, et ceux qu'elle coche à l'ouverture. */
+const marks = (html: string) =>
+  [
+    ...html.matchAll(
+      /<input type="checkbox" name="marks" value="(\w+)"( checked)?> ([^<]+)<\/label>/g,
+    ),
+  ].map(([, key, checked, label]) => ({ key: key!, label, checked: Boolean(checked) }));
+
+describe("les repères", () => {
+  it("proposent la grille cochée, le 九宮格 et les cotes à cocher", async () => {
+    const { html } = await grids(piece("[(2x5)]", ["空山新雨後", "天氣晚來秋"]), {
+      slug: "shan-ju",
+    });
+    expect(marks(html)).toEqual([
+      { key: "grille", label: "grille", checked: true },
+      { key: "jiugong", label: "九宮格", checked: false },
+      { key: "cotes", label: "cotes", checked: false },
+    ]);
+  });
+
+  it("montrent sans script ceux qui sont cochés, et seulement eux", async () => {
+    const { html } = await grids(piece("[(2x5)]", ["空山新雨後", "天氣晚來秋"]), {
+      slug: "shan-ju",
+    });
+    const body = /<body([^>]*)>/.exec(html)![1]!;
+    for (const { key, checked } of marks(html)) {
+      expect(new RegExp(`\\sdata-${key}(?=[\\s=]|$)`).test(body), key).toBe(checked);
+    }
+    expect(html).toMatch(/body:not\(\[data-grille\]\) \.grid[,\s{]/);
+  });
+});
