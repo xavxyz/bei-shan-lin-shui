@@ -617,3 +617,21 @@ describe("le modèle", () => {
     }
   });
 });
+
+describe("les repères", () => {
+  it("montrent la grille par défaut, le 九宮格 et les cotes à cocher", async () => {
+    const { html } = await grids(piece("[(2x5)]", ["空山新雨後", "天氣晚來秋"]), {
+      slug: "shan-ju",
+    });
+    const choices = [
+      ...html.matchAll(
+        /<input type="checkbox" name="marks" value="(\w+)"( checked)?> ([^<]+)<\/label>/g,
+      ),
+    ].map(([, key, checked, label]) => ({ key, label, checked: Boolean(checked) }));
+    expect(choices).toEqual([
+      { key: "grille", label: "grille", checked: true },
+      { key: "jiugong", label: "九宮格", checked: false },
+      { key: "cotes", label: "cotes", checked: false },
+    ]);
+  });
+});
