@@ -1,0 +1,162 @@
+---
+/*
+ * PROTOTYPE — jetable. B, « Les passe-partout » : chaque pièce sur un fond de la
+ * couleur de son style, entière ; une grille régulière qu'on filtre par style, et
+ * les projets en panneaux image et texte.
+ */
+import type { LoadedManifesto, LoadedPiece, LoadedProject } from "@bsls/schema";
+import { plural, SCRIPTS, SCRIPT_LABELS } from "@bsls/schema";
+import Gloss from "../components/Gloss.astro";
+import Manifesto from "../components/Manifesto.astro";
+import Pinyin from "../components/Pinyin.astro";
+import UnscannedPieces from "../components/UnscannedPieces.astro";
+import { SITE_TITLE } from "../site.js";
+import { workTransitionName } from "../work-transition.js";
+
+type Props = {
+  manifesto: LoadedManifesto | undefined;
+  wall: LoadedPiece[];
+  unscanned: LoadedPiece[];
+  rows: { project: LoadedProject; wall: LoadedPiece[] }[];
+};
+
+const { manifesto, wall, unscanned, rows } = Astro.props;
+const lead = wall[0];
+const scripts = SCRIPTS.map((script) => ({
+  script,
+  label: SCRIPT_LABELS[script],
+  count: wall.filter((piece) => piece.featuredScriptLabel === SCRIPT_LABELS[script]).length,
+})).filter(({ count }) => count > 0);
+const scriptOf = (piece: LoadedPiece) =>
+  SCRIPTS.find((script) => SCRIPT_LABELS[script] === piece.featuredScriptLabel) ?? "none";
+---
+
+<section class="kb-hero">
+  <div class="kb-hero__panel">
+    {
+      manifesto && (
+        <p class="kb-hero__epigraph" lang="zh-Hant" aria-hidden="true">
+          {manifesto.epigraph}
+        </p>
+      )
+    }
+    <div>
+      <p class="kb-hero__zh" lang="zh-Hant">{SITE_TITLE}</p>
+      <p class="kb-hero__motto">Soutenu par le maître, je suis les vagues</p>
+      <a class="k-button k-button--light" href="#B-pieces">Voir les pièces · {wall.length}</a>
+    </div>
+  </div>
+  {
+    lead && (
+      <a class="kb-hero__mat" data-script={scriptOf(lead)} href={lead.href}>
+        <img src={lead.featuredImage?.src} alt={lead.title.traditional} lang="zh-Hant" />
+      </a>
+    )
+  }
+</section>
+
+<div id="B-manifeste" class="k-wrap kb-manifesto">
+  {manifesto && <Manifesto manifesto={manifesto} />}
+</div>
+
+<section id="B-pieces" class="k-wrap kb-wall">
+  <div class="kb-wall__head">
+    <h2>Pièces · <span data-kb-count>{wall.length}</span></h2>
+    <div class="kb-filter" data-kb-filter role="group" aria-label="Filtrer par style">
+      <button type="button" class="is-on" data-filter="all">Tous</button>
+      {
+        scripts.map(({ script, label, count }) => (
+          <button type="button" data-filter={script} data-script={script}>
+            {label} · {count}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+  <ul class="kb-grid">
+    {
+      wall.map((piece) => (
+        <li data-kb-item={scriptOf(piece)}>
+          <a class="kb-card" href={piece.href}>
+            <span class="kb-card__mat" data-script={scriptOf(piece)}>
+              <img
+                src={piece.featuredImage?.src}
+                alt=""
+                loading="lazy"
+                style={`view-transition-name: B-${workTransitionName(piece.slug)}`}
+              />
+            </span>
+            <h3 class="kb-card__title" lang="zh-Hant">
+              <Pinyin pinyin={piece.title.pinyin}>{piece.title.traditional}</Pinyin>
+            </h3>
+            <Gloss gloss={piece.gloss} />
+            {piece.featuredScriptLabel ? (
+              <p class="kb-card__script">{piece.featuredScriptLabel}</p>
+            ) : null}
+            {piece.published ? null : <span class="tag tag--unpublished">non publiée</span>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <UnscannedPieces pieces={unscanned} level={2} />
+</section>
+
+<section id="B-projets" class="k-wrap kb-projects">
+  <h2>Projets</h2>
+  <ul class="kb-panels">
+    {
+      rows.map(({ project, wall: pieces }) => (
+        <li class="kb-panel">
+          <a
+            class="kb-panel__mat"
+            href={project.href}
+            data-script={pieces[0] ? scriptOf(pieces[0]) : "none"}
+          >
+            {pieces[0] ? (
+              <img
+                src={pieces[0].featuredImage?.src}
+                alt={pieces[0].title.traditional}
+                lang="zh-Hant"
+                loading="lazy"
+              />
+            ) : null}
+          </a>
+          <div class="kb-panel__text">
+            <h3 lang="zh-Hant">
+              <a href={project.href}>
+                <Pinyin pinyin={project.title.pinyin}>{project.title.traditional}</Pinyin>
+              </a>
+            </h3>
+            <Gloss gloss={project.gloss} />
+            {project.presentation ? <p>{project.presentation}</p> : null}
+            <p class="kb-card__script">{plural(pieces.length, "pièce")}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const filter = document.querySelector<HTMLElement>("[data-kb-filter]");
+    if (!filter) return;
+    const items = [...document.querySelectorAll<HTMLElement>("[data-kb-item]")];
+    const count = document.querySelector<HTMLElement>("[data-kb-count]")!;
+    const buttons = [...filter.querySelectorAll<HTMLButtonElement>("button")];
+    buttons.forEach((button) => {
+      button.onclick = () => {
+        const wanted = button.dataset.filter!;
+        buttons.forEach((other) => other.classList.toggle("is-on", other === button));
+        let shown = 0;
+        items.forEach((item) => {
+          const match = wanted === "all" || item.dataset.kbItem === wanted;
+          item.hidden = !match;
+          if (match) shown += 1;
+        });
+        count.textContent = String(shown);
+      };
+    });
+  });
+</script>

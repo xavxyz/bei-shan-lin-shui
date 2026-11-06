@@ -1,0 +1,121 @@
+---
+/*
+ * PROTOTYPE — jetable. A, « Le panneau » : des pièces suspendues en plein cadre,
+ * une bande de titre sur filets, et les projets en colonnes verticales qu'on ouvre,
+ * lues de droite à gauche.
+ */
+import type { LoadedManifesto, LoadedPiece, LoadedProject } from "@bsls/schema";
+import { plural } from "@bsls/schema";
+import Gloss from "../components/Gloss.astro";
+import Manifesto from "../components/Manifesto.astro";
+import Pinyin from "../components/Pinyin.astro";
+import UnscannedPieces from "../components/UnscannedPieces.astro";
+import Wall from "../components/Wall.astro";
+import { SITE_TITLE } from "../site.js";
+
+type Props = {
+  manifesto: LoadedManifesto | undefined;
+  wall: LoadedPiece[];
+  unscanned: LoadedPiece[];
+  rows: { project: LoadedProject; wall: LoadedPiece[] }[];
+};
+
+const { manifesto, wall, unscanned, rows } = Astro.props;
+const HUNG = 4;
+const hung = wall.slice(0, HUNG);
+const THUMBNAILS = 6;
+---
+
+<section class="ka-hero">
+  <div class="ka-hero__hang">
+    {
+      hung.map((piece) => (
+        <a href={piece.href} class="ka-hero__work">
+          <span class="ka-hero__cord" />
+          <img src={piece.featuredImage?.src} alt={piece.title.traditional} lang="zh-Hant" />
+        </a>
+      ))
+    }
+  </div>
+  <div class="ka-hero__band">
+    <div class="ka-hero__cell">
+      <a href="#A-pieces">Pièces · {wall.length}</a>
+      <a href="#A-projets">Projets · {rows.length}</a>
+    </div>
+    <div class="ka-hero__title">
+      <p class="ka-hero__zh" lang="zh-Hant">{SITE_TITLE}</p>
+      <p class="ka-hero__motto">Soutenu par le maître, je suis les vagues</p>
+    </div>
+  </div>
+</section>
+
+<div id="A-manifeste" class="k-wrap ka-manifesto">
+  {manifesto && <Manifesto manifesto={manifesto} />}
+</div>
+
+<section id="A-projets" class="k-wrap ka-projects">
+  <h2>Projets</h2>
+  <ul class="ka-cols" data-ka-cols>
+    {
+      rows.map(({ project, wall: pieces }, index) => (
+        <li class:list={["ka-col", { "is-open": index === 0 }]}>
+          <button type="button" class="ka-col__tab" aria-expanded={index === 0 ? "true" : "false"}>
+            <span class="ka-col__name" lang="zh-Hant">
+              {project.title.traditional}
+            </span>
+          </button>
+          <div class="ka-col__panel">
+            <h3 class="ka-col__title" lang="zh-Hant">
+              <a href={project.href}>
+                <Pinyin pinyin={project.title.pinyin}>{project.title.traditional}</Pinyin>
+              </a>
+            </h3>
+            <Gloss gloss={project.gloss} />
+            {project.presentation ? <p class="ka-col__text">{project.presentation}</p> : null}
+            <ul class="ka-col__thumbs">
+              {pieces.slice(0, THUMBNAILS).map((piece) => (
+                <li>
+                  <a href={piece.href}>
+                    <img
+                      src={piece.featuredImage?.src}
+                      alt={piece.title.traditional}
+                      lang="zh-Hant"
+                      loading="lazy"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a class="k-button" href={project.href}>
+              Voir le projet · {plural(pieces.length, "pièce")}
+            </a>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<section id="A-pieces" class="k-wrap ka-wall">
+  <h2>Pièces · {wall.length}</h2>
+  <Wall pieces={wall} />
+  <UnscannedPieces pieces={unscanned} level={2} />
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll<HTMLElement>("[data-ka-cols]").forEach((list) => {
+      const items = [...list.querySelectorAll<HTMLElement>(":scope > .ka-col")];
+      items.forEach((item) => {
+        const tab = item.querySelector<HTMLButtonElement>(".ka-col__tab")!;
+        tab.onclick = () => {
+          items.forEach((other) => {
+            const open = other === item;
+            other.classList.toggle("is-open", open);
+            other.querySelector(".ka-col__tab")!.setAttribute("aria-expanded", String(open));
+          });
+        };
+      });
+    });
+  });
+</script>

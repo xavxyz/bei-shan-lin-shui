@@ -1,0 +1,45 @@
+---
+/*
+ * PROTOTYPE — jetable. Le site entier sous trois variantes inspirées de koshi.fr,
+ * plus l'actuel pour comparer : `?variant=0|A|B|C` sur toutes les routes, en dev
+ * seulement. Instrument Sans vient de Google le temps du prototype ; Libertinus Sans de sa
+ * publication officielle (v7.051, OFL), car celle de Google laisse è et ë vides.
+ */
+import "./prototype.css";
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap"
+/>
+<script is:inline>
+  (function () {
+    var KEY = "bsls-proto-koshi";
+    var KEYS = ["0", "A", "B", "C"];
+    function read() {
+      var fromUrl = new URL(location.href).searchParams.get("variant");
+      var stored = null;
+      try {
+        stored = sessionStorage.getItem(KEY);
+      } catch (e) {}
+      var key = fromUrl || stored || "A";
+      return KEYS.indexOf(key) < 0 ? "A" : key;
+    }
+    function mark(root, key) {
+      root.setAttribute("data-proto", key);
+      if (key === "0") root.removeAttribute("data-koshi");
+      else root.setAttribute("data-koshi", "");
+    }
+    window.__proto = { KEY: KEY, read: read, mark: mark };
+    mark(document.documentElement, read());
+    if (!window.__protoBound) {
+      window.__protoBound = true;
+      // Le routeur client recopie les attributs de la nouvelle page : on les marque avant.
+      document.addEventListener("astro:before-swap", function (event) {
+        mark(event.newDocument.documentElement, read());
+      });
+    }
+  })();
+</script>

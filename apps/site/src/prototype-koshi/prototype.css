@@ -1,0 +1,1029 @@
+/*
+ * PROTOTYPE — jetable. Trois variantes inspirées de koshi.fr : A, B, C ; 0 est l'actuel.
+ * Une règle tenue partout : une calligraphie n'est jamais arrondie ni recadrée ;
+ * seuls ses fonds le sont.
+ */
+
+@font-face {
+  font-family: "Libertinus Sans";
+  src: url("/prototype-koshi/LibertinusSans-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Libertinus Sans";
+  src: url("/prototype-koshi/LibertinusSans-Italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Le commutateur. */
+html[data-proto] [data-proto-variant] {
+  display: none;
+}
+html[data-proto="0"] [data-proto-variant="0"],
+html[data-proto="A"] [data-proto-variant="A"],
+html[data-proto="B"] [data-proto-variant="B"],
+html[data-proto="C"] [data-proto-variant="C"] {
+  display: block;
+}
+/* L'enveloppe du prototype ne doit pas priver l'actuel de ses marges. */
+[data-proto-variant="0"] > section + section,
+[data-proto-variant="0"] > section + .unscanned {
+  margin-top: 5rem;
+}
+html[data-proto="0"] .k-footer,
+html[data-proto="0"] .k-nav {
+  display: none;
+}
+
+/* ———— Socle commun des variantes ———— */
+html[data-koshi] {
+  --paper: #f3f0e5;
+  --card: #fffcf4;
+  --ink: #322a22;
+  --muted: #6f6557;
+  --accent: #a4493d;
+  --rule: #cfc6b2;
+  --dark: #2e2720;
+  --sage: #819e87;
+  --sage-soft: #dee4dc;
+  --serif: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --display: "Libertinus Sans", Candara, sans-serif;
+  --pad: clamp(1rem, 5.5vw, 5rem);
+}
+html[data-koshi] body {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+html[data-koshi] .page {
+  max-width: none;
+  padding: 0;
+}
+html[data-koshi] main[data-page="inner"] {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 3rem var(--pad) 6rem;
+}
+html[data-koshi] h2:not([lang]),
+html[data-koshi] h3:not([lang]) {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+html[data-koshi] main h2:not([lang]):not(.manifesto__title):not(.kc-sr) {
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
+  line-height: 1.15;
+  margin: 0 0 2rem;
+}
+html[data-koshi] .gloss,
+html[data-koshi] .site-header__motto,
+html[data-koshi] .manifesto__french-title {
+  font-family: var(--display);
+}
+html[data-koshi] .gloss {
+  font-size: 1.02rem;
+}
+html[data-koshi] .breadcrumb,
+html[data-koshi] .facts dt,
+html[data-koshi] .reading__label,
+html[data-koshi] .version-text th,
+html[data-koshi] .evolution__heading,
+html[data-koshi] .project-row__count {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+html[data-koshi] .breadcrumb [lang] {
+  letter-spacing: 0.08em;
+}
+html[data-koshi] .k-wrap {
+  max-width: 96rem;
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+/* L'en-tête à filets : le nom, un filet, la devise, puis la navigation. */
+html[data-koshi] .site-header,
+html[data-koshi] .page:has(> main[data-page="home"]) > .site-header {
+  position: relative;
+  z-index: 20;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  min-height: 4.75rem;
+  margin: 0;
+  padding: 0 var(--pad);
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+}
+html[data-koshi] .site-header .site-header__title,
+html[data-koshi] .page:has(> main[data-page="home"]) > .site-header .site-header__title {
+  display: flex;
+  align-items: center;
+  font-size: 1.55rem;
+  letter-spacing: 0.14em;
+  padding-inline: 0 2rem;
+  border-right: 1px solid var(--rule);
+  white-space: nowrap;
+}
+html[data-koshi] .site-header .site-header__motto,
+html[data-koshi] .page:has(> main[data-page="home"]) > .site-header .site-header__motto {
+  display: flex;
+  align-items: center;
+  padding-inline: 2rem;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+}
+.k-nav {
+  display: none;
+}
+html[data-koshi] .k-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-inline-start: auto;
+  padding-inline-start: 2rem;
+  border-left: 1px solid var(--rule);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+html[data-koshi] .k-nav a {
+  text-decoration: none;
+}
+
+/* Sur téléphone, l'en-tête garde le nom et la navigation ; la devise reste sur la page. */
+@media (max-width: 48rem) {
+  html[data-koshi] .site-header .site-header__motto,
+  html[data-koshi] .page:has(> main[data-page="home"]) > .site-header .site-header__motto {
+    display: none;
+  }
+  html[data-koshi] .site-header .site-header__title,
+  html[data-koshi] .page:has(> main[data-page="home"]) > .site-header .site-header__title {
+    font-size: 1.15rem;
+    padding-inline-end: 0.75rem;
+  }
+  html[data-koshi] .k-nav {
+    gap: 0.75rem;
+    padding-inline-start: 0.75rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* Le bouton : petites capitales, angle à peine adouci. */
+.k-button {
+  display: inline-block;
+  padding: 0.65rem 1rem;
+  border-radius: 0.3rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s ease;
+}
+.k-button:hover {
+  background: #683431;
+  color: #fff;
+}
+.k-button--light {
+  background: var(--card);
+  color: var(--ink);
+}
+
+/* Le pied sombre. */
+.k-footer {
+  margin-top: 7rem;
+  padding: 4.5rem var(--pad) 6.5rem;
+  background: var(--dark);
+  color: var(--card);
+}
+.k-footer__top {
+  display: flex;
+  gap: clamp(3rem, 12vw, 12rem);
+  flex-wrap: wrap;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.18);
+}
+.k-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.k-footer__projects ul {
+  grid-template-columns: repeat(3, auto);
+  column-gap: 3rem;
+  font-family: var(--serif-cn);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+}
+.k-footer a {
+  text-decoration: none;
+}
+.k-footer a:hover {
+  color: var(--sage-soft);
+}
+.k-footer__label {
+  margin: 0 0 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.k-footer__name {
+  margin: 2.5rem 0 0.5rem;
+  font-family: var(--serif-cn);
+  font-size: clamp(4.5rem, 19vw, 19rem);
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+}
+.k-footer__motto {
+  margin: 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* ———— A · Le panneau ———— */
+html[data-proto="A"] .page:has(> main[data-page="home"]) > .site-header {
+  position: absolute;
+  inset: 0 0 auto;
+  color: var(--card);
+  border-color: rgb(255 255 255 / 0.22);
+}
+html[data-proto="A"] .page:has(> main[data-page="home"]) > .site-header * {
+  color: inherit;
+  border-color: rgb(255 255 255 / 0.22);
+}
+.ka-hero {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 4.75rem;
+  background:
+    radial-gradient(90% 70% at 70% 15%, rgb(164 73 61 / 0.45), transparent 70%),
+    linear-gradient(180deg, #4a382b, var(--dark));
+  color: var(--card);
+}
+.ka-hero__hang {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-items: center;
+  align-items: start;
+  gap: clamp(1rem, 3vw, 3rem);
+  padding-inline: var(--pad);
+  min-height: 0;
+}
+.ka-hero__work {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.ka-hero__work:hover {
+  transform: translateY(0.5rem);
+}
+.ka-hero__cord {
+  width: 1px;
+  height: 2.5rem;
+  background: rgb(255 255 255 / 0.55);
+}
+.ka-hero__work:nth-child(even) .ka-hero__cord {
+  height: 4.5rem;
+}
+/* Entière, toujours : la pièce rétrécit plutôt que de sortir du cadre. */
+.ka-hero__work img {
+  display: block;
+  max-width: 100%;
+  max-height: 50vh;
+  width: auto;
+  height: auto;
+  box-shadow: 0 1.2rem 2.5rem rgb(0 0 0 / 0.4);
+}
+@media (max-width: 40rem) {
+  .ka-hero__hang {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ka-hero__work:nth-child(n + 3) {
+    display: none;
+  }
+}
+.ka-hero__band {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) 3fr;
+  margin: 2rem var(--pad) 0;
+  border-top: 1px solid rgb(255 255 255 / 0.3);
+}
+.ka-hero__cell {
+  display: grid;
+  align-content: center;
+  gap: 0.35rem;
+  padding: 1.5rem 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ka-hero__cell a {
+  text-decoration: none;
+}
+.ka-hero__title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.5rem;
+  padding: 1.25rem 0 1.75rem 2rem;
+  border-left: 1px solid rgb(255 255 255 / 0.3);
+}
+.ka-hero__zh {
+  margin: 0;
+  font-family: var(--serif-cn);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  letter-spacing: 0.16em;
+  line-height: 1.1;
+}
+.ka-hero__motto {
+  margin: 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+}
+.ka-manifesto {
+  margin-top: 6rem;
+}
+.ka-projects {
+  margin-top: 6rem;
+}
+.ka-wall {
+  margin-top: 6rem;
+}
+
+/* Les colonnes : on lit de droite à gauche, la colonne ouverte prend la place. */
+.ka-cols {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  height: min(46rem, 88vh);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.ka-col {
+  display: flex;
+  flex-direction: row-reverse;
+  flex: 0 0 auto;
+  min-width: 0;
+  border-left: 1px solid var(--rule);
+}
+.ka-col:last-child {
+  border-left: 0;
+}
+.ka-col.is-open {
+  flex: 1 1 0;
+}
+.ka-col__tab {
+  all: unset;
+  cursor: pointer;
+  flex: 0 0 auto;
+  width: 3.4rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 1.75rem;
+  transition: background 0.3s cubic-bezier(0, 0, 0.58, 1);
+}
+.ka-col__tab:hover,
+.ka-col__tab:focus-visible {
+  background: var(--sage-soft);
+}
+.ka-col.is-open .ka-col__tab {
+  color: var(--accent);
+}
+.ka-col__name {
+  writing-mode: vertical-rl;
+  font-family: var(--serif-cn);
+  font-size: 1.3rem;
+  letter-spacing: 0.22em;
+}
+.ka-col__panel {
+  display: none;
+  flex: 1;
+  min-width: 0;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  overflow-y: auto;
+  border-right: 1px solid var(--rule);
+}
+.ka-col.is-open .ka-col__panel {
+  display: block;
+  animation: entree 0.5s ease-out;
+}
+.ka-col__title {
+  margin: 0 0 0.5rem;
+  font-family: var(--serif-cn);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+.ka-col__title a {
+  text-decoration: none;
+}
+.ka-col__text {
+  max-width: 44rem;
+  margin: 1rem 0 0;
+}
+.ka-col__thumbs {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 0;
+}
+.ka-col__thumbs img {
+  display: block;
+  height: 11rem;
+  width: auto;
+}
+@media (max-width: 64rem) {
+  .ka-cols {
+    flex-direction: column;
+    height: auto;
+  }
+  .ka-col {
+    flex-direction: column;
+    border-left: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ka-col__tab {
+    width: auto;
+    padding: 1rem 1.25rem;
+    justify-content: flex-start;
+  }
+  .ka-col__name {
+    writing-mode: horizontal-tb;
+  }
+  .ka-col__panel {
+    border-right: 0;
+    border-top: 1px solid var(--rule);
+  }
+}
+
+/* A sur une pièce : l'œuvre tient sur une scène sombre en plein cadre. */
+html[data-proto="A"] main[data-page="inner"]:has(.piece) {
+  max-width: none;
+  padding: 0;
+}
+html[data-proto="A"] .piece {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 0;
+}
+html[data-proto="A"] .piece__work {
+  grid-column: 1;
+  top: 0;
+  min-height: 100vh;
+  padding: 2rem;
+  display: grid;
+  align-items: center;
+  background:
+    radial-gradient(90% 70% at 50% 15%, rgb(164 73 61 / 0.35), transparent 70%),
+    linear-gradient(180deg, #4a382b, var(--dark));
+  color: var(--card);
+}
+html[data-proto="A"] .piece__text {
+  grid-column: 2;
+  padding: 3rem var(--pad) 4rem clamp(1.5rem, 4vw, 4rem);
+}
+html[data-proto="A"] .evolution {
+  margin-inline: var(--pad);
+}
+@media (max-width: 64rem) {
+  html[data-proto="A"] .piece {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  html[data-proto="A"] .piece__work {
+    grid-column: auto;
+    min-height: 0;
+    position: static;
+  }
+  html[data-proto="A"] .piece__text {
+    padding: 0;
+  }
+  html[data-proto="A"] .piece__header,
+  html[data-proto="A"] .piece > .piece__text > :not(.piece__header) {
+    margin-inline: var(--pad);
+  }
+}
+
+/* ———— B · Les passe-partout ———— */
+[data-script="ziyou"] {
+  --mat: #b5624f;
+  --mat-deep: #7c3a2e;
+}
+[data-script="kaishu"] {
+  --mat: #93ac96;
+  --mat-deep: #5d7a63;
+}
+[data-script="xingshu"] {
+  --mat: #d3b980;
+  --mat-deep: #a07f45;
+}
+[data-script="xingcao"] {
+  --mat: #c79a6b;
+  --mat-deep: #8d6238;
+}
+[data-script="caoshu"] {
+  --mat: #7f9fb1;
+  --mat-deep: #47697e;
+}
+[data-script="kuangcao"] {
+  --mat: #6f4a5b;
+  --mat-deep: #41293a;
+}
+[data-script="none"] {
+  --mat: #d9cfbb;
+  --mat-deep: #b4a78c;
+}
+html[data-proto="B"] .site-header {
+  background: var(--card);
+}
+.kb-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 1rem;
+  min-height: calc(100vh - 7rem);
+  margin: 1rem var(--pad) 0;
+}
+.kb-hero__panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  border-radius: 1rem;
+  background: var(--dark);
+  color: var(--card);
+  flex-direction: row-reverse;
+}
+.kb-hero__panel > div {
+  align-self: flex-end;
+}
+.kb-hero__epigraph {
+  margin: 0;
+  writing-mode: vertical-rl;
+  font-family: var(--serif-cn);
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  letter-spacing: 0.3em;
+  color: #d8a596;
+}
+.kb-hero__zh {
+  margin: 0 0 0.5rem;
+  font-family: var(--serif-cn);
+  font-size: clamp(2.8rem, 5.4vw, 5.2rem);
+  letter-spacing: 0.12em;
+  line-height: 1.15;
+}
+.kb-hero__motto {
+  margin: 0 0 1.75rem;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.25rem;
+}
+.kb-hero__mat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  border-radius: 1rem;
+  min-height: 0;
+  background: linear-gradient(180deg, var(--mat), var(--mat-deep));
+}
+.kb-hero__mat img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 14rem);
+  width: auto;
+  height: auto;
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 0.3);
+}
+.kb-manifesto {
+  margin-top: 1rem;
+  padding-block: clamp(2rem, 4vw, 4rem);
+  background: var(--sage-soft);
+  max-width: none;
+}
+.kb-manifesto .manifesto {
+  max-width: 88rem;
+  margin-inline: auto;
+}
+.kb-wall {
+  margin-top: 5rem;
+}
+.kb-wall__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+.kb-wall__head h2 {
+  margin: 0 !important;
+}
+.kb-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.kb-filter button {
+  all: unset;
+  cursor: pointer;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  transition: background 0.2s ease;
+}
+.kb-filter button:hover {
+  background: var(--card);
+}
+.kb-filter button:focus-visible {
+  outline: 1px solid var(--accent);
+}
+.kb-filter button.is-on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+}
+.kb-filter button[data-script].is-on {
+  background: var(--mat-deep);
+  border-color: var(--mat-deep);
+}
+.kb-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.5rem 1rem;
+}
+.kb-grid [hidden] {
+  display: none;
+}
+.kb-card {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+}
+.kb-card__mat {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  aspect-ratio: 4 / 5;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, var(--mat), var(--mat-deep));
+  margin-bottom: 1rem;
+}
+.kb-card__mat img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  box-shadow: 0 0.6rem 1.5rem rgb(0 0 0 / 0.28);
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.kb-card:hover .kb-card__mat img {
+  transform: translateY(-0.35rem);
+}
+.kb-card__title {
+  margin: 0 0 0.25rem;
+  font-family: var(--serif-cn);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+.kb-card__script {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.kb-projects {
+  margin-top: 6rem;
+}
+.kb-panels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.kb-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  background: var(--card);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.kb-panel__mat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  min-height: 19rem;
+  background: linear-gradient(180deg, var(--mat), var(--mat-deep));
+}
+.kb-panel__mat img {
+  display: block;
+  max-width: 100%;
+  max-height: 17rem;
+  width: auto;
+  height: auto;
+  box-shadow: 0 0.6rem 1.5rem rgb(0 0 0 / 0.28);
+}
+.kb-panel__text {
+  padding: 1.75rem;
+}
+.kb-panel__text h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--serif-cn);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+}
+.kb-panel__text h3 a {
+  text-decoration: none;
+}
+.kb-panel__text p:not(.gloss):not(.kb-card__script) {
+  font-size: 0.95rem;
+}
+@media (max-width: 64rem) {
+  .kb-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kb-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .kb-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* B sur une pièce : l'œuvre sur son fond, le texte en cartes. */
+html[data-proto="B"] .piece__work {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--sage-soft);
+}
+html[data-proto="B"] .piece__header {
+  padding: 0.5rem 0 0;
+}
+html[data-proto="B"] .piece__text > table,
+html[data-proto="B"] .piece__text > ol,
+html[data-proto="B"] .piece__text > .facts,
+html[data-proto="B"] .piece__prose {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--card);
+}
+html[data-proto="B"] .piece__text > table {
+  display: block;
+}
+/* B sur le mur d'un projet : chaque image garde sa largeur, sur un même fond. */
+html[data-proto="B"] .wall__image {
+  box-sizing: content-box;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: var(--sage-soft);
+}
+
+/* ———— C · Le rouleau ———— */
+.kc-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.kc-open {
+  display: flex;
+  flex-direction: row-reverse;
+  border-bottom: 1px solid var(--rule);
+}
+.kc-open__name {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row-reverse;
+  align-self: flex-start;
+  position: sticky;
+  top: 0;
+  gap: 1.5rem;
+  padding: 3rem var(--pad) 3rem 2rem;
+}
+.kc-open__zh {
+  margin: 0;
+  writing-mode: vertical-rl;
+  font-family: var(--serif-cn);
+  font-size: clamp(3.5rem, 7.5vw, 7.5rem);
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+.kc-open__motto {
+  margin: 0;
+  writing-mode: vertical-rl;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+.kc-open__text {
+  flex: 1;
+  min-width: 0;
+  padding: 3rem clamp(1.5rem, 3vw, 3rem) 3rem var(--pad);
+  border-right: 1px solid var(--rule);
+}
+.kc-rail {
+  display: flex;
+  flex-direction: row-reverse;
+  border-bottom: 1px solid var(--rule);
+}
+.kc-rail__head {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1.25rem;
+  width: clamp(14rem, 24vw, 22rem);
+  padding: 2.25rem var(--pad) 2.25rem 1.5rem;
+  border-left: 1px solid var(--rule);
+}
+.kc-rail__head h3,
+.kc-rail__head h2 {
+  margin: 0 !important;
+  writing-mode: vertical-rl;
+  font-family: var(--serif-cn);
+  font-size: 1.7rem !important;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  line-height: 1.2;
+}
+.kc-rail__head h2 {
+  font-family: var(--display) !important;
+  letter-spacing: 0.06em;
+}
+.kc-rail__head a {
+  text-decoration: none;
+}
+.kc-rail__count {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: right;
+}
+.kc-rail__meta {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+}
+.kc-rail__strip {
+  direction: rtl;
+  flex: 1;
+  min-width: 0;
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 0;
+  padding: 2.25rem clamp(1.5rem, 3vw, 3rem);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+.kc-rail__strip li {
+  direction: ltr;
+  flex: 0 0 auto;
+}
+.kc-rail__strip a {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+}
+.kc-rail__strip img {
+  display: block;
+  height: 19rem;
+  width: auto;
+}
+.kc-rail__title {
+  display: block;
+  margin-top: 0.75rem;
+  max-width: 13rem;
+  margin-inline: auto;
+  font-family: var(--serif-cn);
+  letter-spacing: 0.12em;
+}
+@media (max-width: 64rem) {
+  .kc-open {
+    flex-direction: column;
+  }
+  .kc-open__name {
+    position: static;
+    align-self: flex-end;
+  }
+  .kc-open__text {
+    border-right: 0;
+    padding-inline: var(--pad);
+  }
+  .kc-rail {
+    flex-direction: column;
+  }
+  .kc-rail__head {
+    width: auto;
+    border-left: 0;
+    padding-bottom: 0;
+  }
+  .kc-rail__strip img {
+    height: 13rem;
+  }
+}
+
+/* C sur une pièce : on entre par la droite, le titre en colonne à côté de l'œuvre. */
+html[data-proto="C"] .piece__work {
+  grid-column: 6 / -1;
+  grid-row: 1;
+}
+html[data-proto="C"] .piece__text {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+}
+html[data-proto="C"] .piece--textual .piece__text {
+  grid-column: 3 / span 8;
+}
+html[data-proto="C"] .facts {
+  gap: 0;
+}
+html[data-proto="C"] .facts dt,
+html[data-proto="C"] .facts dd {
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+html[data-proto="C"] .version-text td,
+html[data-proto="C"] .version-text--lines li {
+  border-top: 1px solid var(--rule);
+}
+/* C sur un projet : la présentation à droite, le titre debout. */
+html[data-proto="C"] .project__intro {
+  grid-column: 9 / -1;
+  grid-row: 1;
+  padding-left: 2rem;
+  border-left: 1px solid var(--rule);
+}
+html[data-proto="C"] .project__title {
+  writing-mode: vertical-rl;
+  margin-bottom: 1.5rem;
+}
+html[data-proto="C"] .project__pieces {
+  grid-column: 1 / span 8;
+  grid-row: 1;
+}
+@media (max-width: 64rem) {
+  html[data-proto="C"] .piece__work,
+  html[data-proto="C"] .piece__text {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  html[data-proto="C"] .piece__text {
+    display: contents;
+  }
+  html[data-proto="C"] .project__intro,
+  html[data-proto="C"] .project__pieces {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  html[data-proto="C"] .project__intro {
+    padding-left: 0;
+    border-left: 0;
+  }
+}

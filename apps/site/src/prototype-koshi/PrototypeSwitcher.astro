@@ -1,0 +1,115 @@
+---
+/* PROTOTYPE — jetable. La barre qui change de variante ; montée en dev seulement. */
+const variants = [
+  { key: "0", name: "L'actuel" },
+  { key: "A", name: "Le panneau" },
+  { key: "B", name: "Les passe-partout" },
+  { key: "C", name: "Le rouleau" },
+];
+---
+
+<nav
+  class="proto-switcher"
+  aria-label="Variantes du prototype"
+  data-variants={JSON.stringify(variants)}
+>
+  <button type="button" data-step="-1" aria-label="Variante précédente">‹</button>
+  <span data-label></span>
+  <button type="button" data-step="1" aria-label="Variante suivante">›</button>
+</nav>
+
+<script>
+  type Variant = { key: string; name: string };
+  type Proto = {
+    KEY: string;
+    read: () => string;
+    mark: (root: Element, key: string) => void;
+  };
+  const proto = (window as unknown as { __proto: Proto }).__proto;
+
+  function bar() {
+    return document.querySelector<HTMLElement>(".proto-switcher");
+  }
+
+  function show(key: string) {
+    const element = bar();
+    if (!element) return;
+    const variants: Variant[] = JSON.parse(element.dataset.variants!);
+    const variant = variants.find((v) => v.key === key) ?? variants[0]!;
+    proto.mark(document.documentElement, variant.key);
+    sessionStorage.setItem(proto.KEY, variant.key);
+    element.querySelector("[data-label]")!.textContent = `${variant.key} · ${variant.name}`;
+    const url = new URL(location.href);
+    url.searchParams.set("variant", variant.key);
+    history.replaceState(history.state, "", url);
+    // Chaque variante a ses ancres : la navigation de l'en-tête vise les siennes.
+    document.querySelectorAll<HTMLAnchorElement>("a[data-proto-anchor]").forEach((link) => {
+      link.href = `/#${variant.key}-${link.dataset.protoAnchor}`;
+    });
+  }
+
+  function step(delta: number) {
+    const element = bar();
+    if (!element) return;
+    const variants: Variant[] = JSON.parse(element.dataset.variants!);
+    const index = variants.findIndex((v) => v.key === proto.read());
+    const next = variants[(index + delta + variants.length) % variants.length]!;
+    const url = new URL(location.href);
+    url.searchParams.set("variant", next.key);
+    history.replaceState(history.state, "", url);
+    show(next.key);
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    const element = bar();
+    if (!element) return;
+    show(proto.read());
+    element.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
+      button.onclick = () => step(Number(button.dataset.step));
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    const target = event.target as HTMLElement;
+    if (target.closest("input, textarea, [contenteditable]")) return;
+    // Sur une pièce, les flèches pilotent le carrousel : la barre garde ses boutons.
+    if (document.querySelector(".carousel")) return;
+    if (event.key === "ArrowLeft") step(-1);
+    if (event.key === "ArrowRight") step(1);
+  });
+</script>
+
+<style>
+  .proto-switcher {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font:
+      600 0.85rem/1 system-ui,
+      sans-serif;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.3);
+  }
+  .proto-switcher button {
+    all: unset;
+    cursor: pointer;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-size: 1.1rem;
+  }
+  .proto-switcher button:hover {
+    background: #333;
+  }
+  [data-label] {
+    min-width: 11rem;
+    text-align: center;
+  }
+</style>

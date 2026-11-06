@@ -7,32 +7,58 @@ import UnscannedPieces from "../components/UnscannedPieces.astro";
 import Manifesto from "../components/Manifesto.astro";
 import { hang } from "../hang.js";
 import { projectPieces } from "../project-pieces.js";
+import HomeA from "../prototype-koshi/HomeA.astro";
+import HomeB from "../prototype-koshi/HomeB.astro";
+import HomeC from "../prototype-koshi/HomeC.astro";
 
 const projects = (await getCollection("projects")).map((entry) => entry.data);
 const pieces = (await getCollection("pieces")).map((entry) => entry.data);
 // Au plus un manifeste ; sans lui, l'accueil commence au mur.
 const [manifesto] = (await getCollection("manifesto")).map((entry) => entry.data);
 const { wall, unscanned } = hang(pieces);
+// PROTOTYPE — jetable : les variantes ne se montent qu'en dev.
+const rows = projects.map((project) => ({
+  project,
+  wall: hang(projectPieces(project, pieces)).wall,
+}));
+const home = { manifesto, wall, unscanned, rows };
 ---
 
 <Layout title="Projets">
-  {manifesto && <Manifesto manifesto={manifesto} />}
+  <div data-proto-variant="0">
+    {manifesto && <Manifesto manifesto={manifesto} />}
 
-  <section aria-labelledby="mur">
-    <h2 id="mur">Pièces · {wall.length}</h2>
-    <Wall pieces={wall} />
-  </section>
+    <section aria-labelledby="mur">
+      <h2 id="mur">Pièces · {wall.length}</h2>
+      <Wall pieces={wall} />
+    </section>
 
-  <UnscannedPieces pieces={unscanned} level={2} />
+    <UnscannedPieces pieces={unscanned} level={2} />
 
-  <section aria-labelledby="projets">
-    <h2 id="projets">Projets</h2>
-    <ul class="project-rows">
-      {
-        projects.map((project) => (
-          <ProjectRow project={project} pieces={hang(projectPieces(project, pieces)).wall} />
-        ))
-      }
-    </ul>
-  </section>
+    <section aria-labelledby="projets">
+      <h2 id="projets">Projets</h2>
+      <ul class="project-rows">
+        {
+          projects.map((project) => (
+            <ProjectRow project={project} pieces={hang(projectPieces(project, pieces)).wall} />
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+  {
+    import.meta.env.DEV && (
+      <>
+        <div data-proto-variant="A">
+          <HomeA {...home} />
+        </div>
+        <div data-proto-variant="B">
+          <HomeB {...home} />
+        </div>
+        <div data-proto-variant="C">
+          <HomeC {...home} />
+        </div>
+      </>
+    )
+  }
 </Layout>

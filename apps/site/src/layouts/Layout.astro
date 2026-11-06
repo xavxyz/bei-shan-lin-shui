@@ -5,6 +5,9 @@ import { ClientRouter } from "astro:transitions";
 import SiteHeader from "../components/SiteHeader.astro";
 import siteFontFace from "virtual:bsls/site-font-face";
 import { SITE_FONT_URL, SITE_TITLE } from "../site.js";
+import ProtoHead from "../prototype-koshi/ProtoHead.astro";
+import ProtoFooter from "../prototype-koshi/ProtoFooter.astro";
+import PrototypeSwitcher from "../prototype-koshi/PrototypeSwitcher.astro";
 
 type Props = {
   title: string;
@@ -36,6 +39,7 @@ const pageFade = { forwards: fade, backwards: fade };
     <style is:inline set:html={siteFontFace}></style>
     {/* Sans View Transitions, le repli `swap` change la page d'un coup, sans fondus. */}
     <ClientRouter fallback="swap" />
+    {import.meta.env.DEV && <ProtoHead />}
   </head>
   <body>
     <div class="page">
@@ -50,6 +54,14 @@ const pageFade = { forwards: fade, backwards: fade };
         <slot />
       </main>
     </div>
+    {
+      import.meta.env.DEV && (
+        <>
+          <ProtoFooter />
+          <PrototypeSwitcher />
+        </>
+      )
+    }
     <script>
       // Après une navigation sans rechargement, le focus reprend au début du
       // nouveau contenu, comme au chargement d'une page. `astro:after-swap` ne

@@ -1,0 +1,95 @@
+---
+/*
+ * PROTOTYPE — jetable. C, « Le rouleau » : l'accueil se lit comme un rouleau, de
+ * droite à gauche. Le nom en colonne, puis une bande horizontale par projet ; le
+ * chinois garde sa verticale, les filets font tout le décor.
+ */
+import type { LoadedManifesto, LoadedPiece, LoadedProject } from "@bsls/schema";
+import { plural } from "@bsls/schema";
+import Gloss from "../components/Gloss.astro";
+import Manifesto from "../components/Manifesto.astro";
+import Pinyin from "../components/Pinyin.astro";
+import UnscannedPieces from "../components/UnscannedPieces.astro";
+import { SITE_TITLE } from "../site.js";
+
+type Props = {
+  manifesto: LoadedManifesto | undefined;
+  wall: LoadedPiece[];
+  unscanned: LoadedPiece[];
+  rows: { project: LoadedProject; wall: LoadedPiece[] }[];
+};
+
+const { manifesto, wall, unscanned, rows } = Astro.props;
+---
+
+<section id="C-manifeste" class="kc-open">
+  <div class="kc-open__name">
+    <p class="kc-open__zh" lang="zh-Hant">{SITE_TITLE}</p>
+    <p class="kc-open__motto">Soutenu par le maître, je suis les vagues</p>
+  </div>
+  <div class="kc-open__text">
+    {manifesto && <Manifesto manifesto={manifesto} />}
+  </div>
+</section>
+
+<section id="C-projets" class="kc-rails">
+  <h2 class="kc-sr">Projets</h2>
+  {
+    rows.map(({ project, wall: pieces }) => (
+      <article class="kc-rail">
+        <header class="kc-rail__head">
+          <h3 lang="zh-Hant">
+            <a href={project.href}>
+              <Pinyin pinyin={project.title.pinyin}>{project.title.traditional}</Pinyin>
+            </a>
+          </h3>
+          <div class="kc-rail__meta">
+            <p class="kc-rail__count">{plural(pieces.length, "pièce")}</p>
+            <Gloss gloss={project.gloss} />
+          </div>
+        </header>
+        <ul class="kc-rail__strip">
+          {pieces.map((piece) => (
+            <li>
+              <a href={piece.href}>
+                <img src={piece.featuredImage?.src} alt="" loading="lazy" />
+                <span class="kc-rail__title" lang="zh-Hant">
+                  {piece.title.traditional}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))
+  }
+</section>
+
+<section id="C-pieces" class="kc-rails">
+  <article class="kc-rail">
+    <header class="kc-rail__head kc-rail__head--all">
+      <h2>Pièces</h2>
+      <div class="kc-rail__meta">
+        <p class="kc-rail__count">{wall.length}</p>
+      </div>
+    </header>
+    <ul class="kc-rail__strip">
+      {
+        wall.map((piece) => (
+          <li>
+            <a href={piece.href}>
+              <img src={piece.featuredImage?.src} alt="" loading="lazy" />
+              <span class="kc-rail__title" lang="zh-Hant">
+                {piece.title.traditional}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </article>
+</section>
+
+<div class="k-wrap">
+  <UnscannedPieces pieces={unscanned} level={2} />
+</div>
