@@ -1,4 +1,6 @@
 ---
+# 《古書隱樓藏書》第五冊 (閔一得), 《藏外道書》第十冊, 回光活法章第七 : docs/sources/tai-yi-jin-hua-zong-zhi.md ;
+# extrait abrégé, sans 能刻刻, 一毫 ni 便是 ; 太一 selon la préface et le corps du texte, le titre en tête portant un signe proche de 乙
 title: 日用間
 gloss: clarté au quotidien
 slug: ri-yong-jian
