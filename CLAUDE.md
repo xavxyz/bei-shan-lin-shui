@@ -80,3 +80,7 @@ Un seul contexte : `GLOSSARY.md` à la racine, ADR dans `docs/adr/`. Voir `docs/
 ### Code review
 
 Une revue porte sur un ticket, contre sa base ; celle d'une PR de plusieurs tickets ne cherche que leur cohérence. Avant de lancer `code-review`, voir `docs/agents/relecture.md`.
+
+### Revue d'architecture
+
+Avant de lancer `improve-codebase-architecture`, voir `docs/agents/architecture.md`.
