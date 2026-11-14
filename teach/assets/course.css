@@ -1,13 +1,19 @@
 /* La feuille de style commune des leçons et des références de teach/ :
    le papier teinté et l'encre du site, une colonne de lecture et des notes en marge. */
 
+/* Les polices réduites par `pnpm build:teach` (fonts/), sur le site publié ;
+   en lecture locale, sans build, les polices entières du dépôt. */
 @font-face {
   font-family: "TW-Kai";
-  src: url("../../packages/grilles/fonts/TW-Kai-98_1.ttf") format("truetype");
+  src:
+    url("fonts/tw-kai.woff2") format("woff2"),
+    url("../../packages/grilles/fonts/TW-Kai-98_1.ttf") format("truetype");
 }
 @font-face {
   font-family: "LXGW WenKai TC";
-  src: url("../../packages/grilles/fonts/LXGWWenKaiTC-Regular.ttf") format("truetype");
+  src:
+    url("fonts/lxgw-wenkai-tc.woff2") format("woff2"),
+    url("../../packages/grilles/fonts/LXGWWenKaiTC-Regular.ttf") format("truetype");
 }
 
 :root {
