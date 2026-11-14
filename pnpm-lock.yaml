@@ -236,6 +236,12 @@ importers:
         specifier: ^2.0.9
         version: 2.0.9
 
+  packages/teach-site:
+    dependencies:
+      '@bsls/site-font':
+        specifier: workspace:*
+        version: link:../site-font
+
 packages:
 
   '@astrojs/check@0.9.10':

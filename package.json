@@ -19,6 +19,7 @@
     "attach:scan": "tsx packages/scans/src/cli/attach-scan.ts",
     "piece": "tsx packages/authoring/src/cli/piece.ts",
     "grilles": "tsx packages/grilles/src/cli/grilles.ts",
+    "build:teach": "tsx packages/teach-site/src/cli/build.ts teach teach/dist",
     "cosmos": "pnpm --filter @bsls/site cosmos",
     "prepare": "husky"
   },

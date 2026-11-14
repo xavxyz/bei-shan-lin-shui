@@ -1,0 +1,10 @@
+# Le site de l'espace d'apprentissage, distinct du site des pièces : un second
+# site Netlify, sur ce dépôt, dont le « package directory » est `teach`. Le build
+# tourne à la racine du dépôt, d'où les chemins (docs Netlify, « Monorepos »).
+[build]
+  command = "pnpm build:teach"
+  publish = "teach/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "11"
