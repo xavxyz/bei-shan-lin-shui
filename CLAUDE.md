@@ -17,7 +17,7 @@ Réponds au calligraphe en français.
 - `packages/site-font` — les polices du site : TW-Kai, empruntée à `packages/grilles/fonts/` et réduite au build aux caractères que le site montre, et 霞鶩文楷 TC en secours, réduite à ceux que TW-Kai ne dessine pas. Un caractère qu'aucune ne dessine casse le build (ADR 0005, ADR 0006).
 - `apps/site` — le site Astro, ses îlots React, et les tests de bout en bout.
 - `teach/` — l'espace d'apprentissage du calligraphe (skill `teach`) : mission, ressources, leçons, références et acquis. Il ne lit ni n'écrit `content/`.
-- `packages/teach-site` — le site statique de `teach/` (`pnpm build:teach`, dans `teach/dist`) : leçons, références et ressources, sans la mission, les notes ni les acquis, avec TW-Kai réduite par `packages/site-font`. Netlify le publie comme un second site, de « package directory » `teach` (`teach/netlify.toml`).
+- `packages/teach-site` — le site statique de `teach/` (`pnpm build:teach`, dans `teach/dist`) : l'accueil `teach/index.html`, écrit à la main et qui doit lier chaque leçon et référence, les leçons, références et ressources, sans la mission, les notes ni les acquis, avec TW-Kai réduite par `packages/site-font`. Netlify le publie comme un second site, de « package directory » `teach` (`teach/netlify.toml`).
 - `docs/sources/` — les textes de référence, traduits vers par vers pour choisir l'étendue des pièces. Ils survivent au plan d'import, mais n'arbitrent rien : l'étendue retenue vit dans la pièce (ADR 0002).
 
 ## Règles qui tiennent le système

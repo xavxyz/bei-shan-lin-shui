@@ -221,6 +221,61 @@ th {
   color: var(--muted);
 }
 
+/* L'accueil : la liste des leçons, numérotées, celles à venir en retrait. */
+ol.lessons {
+  counter-reset: lesson;
+  list-style: none;
+  padding: 0;
+}
+ol.lessons > li {
+  counter-increment: lesson;
+  position: relative;
+  padding: 0.8rem 0 0.8rem 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+ol.lessons > li::before {
+  content: counter(lesson);
+  position: absolute;
+  left: 0;
+  top: 0.65rem;
+  font-size: 1.6rem;
+  color: var(--accent);
+}
+ol.lessons > li.soon::before {
+  color: var(--rule);
+}
+ol.lessons a {
+  display: block;
+  text-decoration: none;
+}
+ol.lessons .title {
+  display: block;
+  font-size: 1.2rem;
+}
+ol.lessons a .title {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+ol.lessons .gist {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+ol.lessons > li.soon {
+  color: var(--muted);
+}
+ol.lessons > li.soon .title::after {
+  content: " · à venir";
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.note-inline {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+}
+
 nav.course {
   font-size: 0.9rem;
   color: var(--muted);
