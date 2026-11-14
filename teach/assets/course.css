@@ -1,0 +1,265 @@
+/* La feuille de style commune des leçons et des références de teach/ :
+   le papier teinté et l'encre du site, une colonne de lecture et des notes en marge. */
+
+@font-face {
+  font-family: "TW-Kai";
+  src: url("../../packages/grilles/fonts/TW-Kai-98_1.ttf") format("truetype");
+}
+@font-face {
+  font-family: "LXGW WenKai TC";
+  src: url("../../packages/grilles/fonts/LXGWWenKaiTC-Regular.ttf") format("truetype");
+}
+
+:root {
+  --paper: #f7f4ee;
+  --ink: #23201c;
+  --muted: #6d675e;
+  --accent: #8a2c2c;
+  --rule: #ddd6c8;
+  --good: #3f6b3a;
+  --serif-cn: "TW-Kai", "LXGW WenKai TC", serif;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --measure: 36rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+main {
+  max-width: calc(var(--measure) + 16rem);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+main > * {
+  max-width: var(--measure);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  color: var(--accent);
+}
+
+/* En-tête de leçon : numéro, titre, ce qu'on y gagne. */
+.kicker {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+h1 {
+  font-weight: normal;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin: 0.3rem 0 0.5rem;
+}
+h2 {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 1.4rem;
+  margin: 2.5rem 0 0.5rem;
+}
+h3 {
+  font-weight: normal;
+  font-size: 1.1rem;
+  margin: 1.8rem 0 0.4rem;
+}
+.win {
+  color: var(--muted);
+  font-style: italic;
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+}
+
+.cn {
+  font-family: var(--serif-cn);
+}
+
+/* Une citation classique : le chinois en grand, la source, la traduction. */
+.citation {
+  margin: 1.8rem 0;
+  padding: 0;
+}
+.citation .zh {
+  font-family: var(--serif-cn);
+  font-size: 1.6rem;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+.citation .fr {
+  margin: 0.4rem 0 0;
+}
+.citation figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+/* Notes en marge (Tufte) : à droite sur grand écran, en ligne sinon. */
+.note {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0.5rem 0;
+}
+@media (min-width: 60rem) {
+  main > p,
+  main > figure,
+  main > ol,
+  main > ul {
+    position: relative;
+  }
+  .note {
+    float: right;
+    clear: right;
+    width: 13rem;
+    margin-right: -15rem;
+    margin-top: 0.2rem;
+  }
+}
+
+/* Gestes à faire au pinceau. */
+.steps {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+}
+.steps > li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.4rem;
+  margin: 0.9rem 0;
+}
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+.box {
+  border: 1px solid var(--rule);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  background: #fbf9f4;
+}
+.box > :first-child {
+  margin-top: 0;
+}
+.box > :last-child {
+  margin-bottom: 0;
+}
+.box.source::before {
+  content: "Source principale";
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+.box.ask::before {
+  content: "Une question ?";
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+
+/* Tableaux de référence. */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
+  margin: 1rem 0;
+}
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+th {
+  font-weight: normal;
+  font-style: italic;
+  color: var(--muted);
+}
+
+nav.course {
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  margin-top: 3rem;
+  padding-top: 1rem;
+}
+
+/* Impression : A4, sans ce qui n'a de sens qu'à l'écran. */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+  body {
+    background: white;
+    font-size: 10.5pt;
+  }
+  main {
+    max-width: none;
+    padding: 0;
+  }
+  main > * {
+    max-width: none;
+  }
+  .note {
+    float: none;
+    width: auto;
+    margin: 0.3rem 0;
+  }
+  .quiz button,
+  nav.course,
+  .box.ask {
+    display: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  figure,
+  .box,
+  tr {
+    break-inside: avoid;
+  }
+}
